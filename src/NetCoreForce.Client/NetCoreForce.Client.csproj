@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.props))\build.props" />
+
+  <PropertyGroup>
+    <AssemblyName>NetCoreForce.Client</AssemblyName>
+    <Product>NetCoreForce.Client</Product>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <VersionPrefix>$(VersionPrefix)</VersionPrefix>
+    <VersionSuffix>$(VersionSuffix)</VersionSuffix>
+
+    <NoWarn>CS1591</NoWarn><!--Missing XML comment for publicly visible type or member-->
+
+    <!--NuGet-->
+    <Authors>$(Authors)</Authors>
+    <Copyright>$(Copyright)</Copyright>
+    <Description>A .NET Standard and .NET Core Salesforce REST API toolkit and API wrapper</Description>
+    <IsPackable>true</IsPackable>
+    <PackageId>NetCoreForce.Client</PackageId>
+    <PackageLicenseUrl>$(PackageLicenseUrl)</PackageLicenseUrl>
+    <PackageProjectUrl>$(PackageProjectUrl)</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>$(PackageRequireLicenseAcceptance)</PackageRequireLicenseAcceptance>
+    <PackageTags>$(PackageTags)</PackageTags>
+    <RepositoryType>$(RepositoryType)</RepositoryType>
+    <RepositoryUrl>$(RepositoryUrl)</RepositoryUrl>
+    <!--<GenerateDocumentationFile>true</GenerateDocumentationFile>-->
+    <!--<DocumentationFile>$(OutputPath)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>-->
+    <!--<PackageReleaseNotes>Release Notes
+Release Notes</PackageReleaseNotes>-->
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <NoWarn>CS1591</NoWarn><!--Missing XML comment for publicly visible type or member-->
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <PostBuildEvent>dotnet pack $(MSBuildThisFileDirectory)/NetCoreForce.Client.csproj -o $(SolutionDir)/packages --no-build</PostBuildEvent>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="1.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
+  </ItemGroup>
+  
+</Project>

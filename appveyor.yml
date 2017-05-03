@@ -1,0 +1,12 @@
+version: 0.1.{build}
+image: Visual Studio 2017
+configuration: Release
+before_build:
+- ps: >-
+    dotnet --info
+
+    dotnet restore
+build_script:
+- ps: dotnet build
+test_script:
+- ps: dotnet test ./src/NetCoreForce.Client.Tests/NetCoreForce.Client.Tests.csproj

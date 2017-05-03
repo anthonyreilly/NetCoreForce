@@ -1,0 +1,36 @@
+{
+    "version": "0.2.0",
+    "configurations": [        
+        {
+            "name": "SampleConsole",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceRoot}/src/SampleConsole/bin/Debug/netcoreapp1.1/SampleConsole.dll",
+            "args": [],
+            "cwd": "${workspaceRoot}/src/SampleConsole",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart",
+            "logging": {
+                "exceptions": true,
+                "moduleLoad": false,
+                "programOutput": true,
+                "engineLogging": false,
+                "browserStdOut": false
+            }
+        },
+        {
+            "name": "ModelGenerator",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceRoot}/src/NetCoreForce.ModelGenerator/bin/Debug/netcoreapp1.1/NetCoreForce.ModelGenerator.dll",
+            "args": [],
+            "cwd": "${workspaceRoot}/src/NetCoreForce.ModelGenerator",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+<Project>
+  <PropertyGroup>
+    <!--Versioning-->
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <VersionSuffix>Beta1</VersionSuffix>
+
+    <!--NuGet-->
+    <Authors>Anthony Reilly</Authors>
+    <Copyright>2017 Anthony Reilly</Copyright>    
+    <PackageLicenseUrl>https://github.com/anthonyreilly/NetCoreForce/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/anthonyreilly/NetCoreForce</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageTags>salesforce,api,forcedotcom,netstandard,netcore</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/anthonyreilly/NetCoreForce</RepositoryUrl>
+
+    <!--Project Root-->
+    <SolutionDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), *.sln))</SolutionDir>
+  </PropertyGroup>
+</Project>

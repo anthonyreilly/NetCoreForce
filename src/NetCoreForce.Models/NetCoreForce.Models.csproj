@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.props))\build.props" />
+  
+  <PropertyGroup>
+    <AssemblyName>NetCoreForce.Models</AssemblyName>
+    <Product>NetCoreForce.Models</Product>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <VersionPrefix>$(VersionPrefix)</VersionPrefix>
+    <VersionSuffix>$(VersionSuffix)</VersionSuffix>
+
+    <!--NuGet-->
+    <Authors>$(Authors)</Authors>
+    <Copyright>$(Copyright)</Copyright>
+    <Description>NetCoreForce standard obect models package</Description>
+    <IsPackable>true</IsPackable>
+    <PackageId>NetCoreForce.Models</PackageId>
+    <PackageLicenseUrl>$(PackageLicenseUrl)</PackageLicenseUrl>
+    <PackageProjectUrl>$(PackageProjectUrl)</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>$(PackageRequireLicenseAcceptance)</PackageRequireLicenseAcceptance>
+    <PackageTags>$(PackageTags)</PackageTags>
+    <RepositoryType>$(RepositoryType)</RepositoryType>
+    <RepositoryUrl>$(RepositoryUrl)</RepositoryUrl>
+    <!--<PackageReleaseNotes>Release Notes
+Release Notes</PackageReleaseNotes>-->
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <PostBuildEvent>dotnet pack $(MSBuildThisFileDirectory)/NetCoreForce.Models.csproj -o $(SolutionDir)/packages --no-build</PostBuildEvent>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NetCoreForce.Client\NetCoreForce.Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
+  </ItemGroup>
+
+</Project>
