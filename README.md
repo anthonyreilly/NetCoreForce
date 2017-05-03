@@ -16,7 +16,7 @@ Currently targeting [.NET Standard 1.3](https://docs.microsoft.com/en-us/dotnet/
 [NetCoreForce.Client.Tests](src/NetCoreForce.Client.Tests) - Unit tests (offline/mocked)  
 [NetCoreForce.FunctionalTests](src/NetCoreForce.FunctionalTests) - Online Unit tests (Needs valid login credentials)  
 [NetCoreForce.ModelGenerator](src/NetCoreForce.ModelGenerator) - Optional tool for code generation of custom objects/fields.  
-[NetCoreForce.Models](src/NetCoreForce.Models) [(README)](NetCoreForce.Models/README.md) - Optional library with a set of pre-generated standard models  
+[NetCoreForce.Models](src/NetCoreForce.Models) [(ReadMe)](src/NetCoreForce.Models/README.md) - Optional library with a set of pre-generated standard models  
 [SampleConsole](src/SampleConsole) - A simple .NET Core console app to demonstrate the library.
 
 ### Minimal project dependencies:  
