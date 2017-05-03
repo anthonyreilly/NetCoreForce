@@ -8,6 +8,7 @@ configuration: Release
 before_build:
 - ps: >-
     dotnet --info
+
     dotnet restore
 build_script:
 - ps: dotnet build

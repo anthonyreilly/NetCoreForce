@@ -6,8 +6,8 @@
 New features are being added. [(Changelog)](CHANGELOG.md)  
 There is a possibilty of breaking changes in upcoming releases, although they should be minor if they do happen.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/sum0prwnfgnv8e7s/branch/master?svg=true&passingText=master&failingText=master&pendingText=master)](https://ci.appveyor.com/project/anthonyreilly/netcoreforce/branch/master)
-[![Build status](https://ci.appveyor.com/api/projects/status/sum0prwnfgnv8e7s/branch/dev?svg=true&passingText=dev&failingText=dev&pendingText=dev)](https://ci.appveyor.com/project/anthonyreilly/netcoreforce/branch/dev)
+[![Build status](https://ci.appveyor.com/api/projects/status/sum0prwnfgnv8e7s/branch/master?svg=true&passingText=master&failingText=master&pendingText=master%20pending)](https://ci.appveyor.com/project/anthonyreilly/netcoreforce/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/sum0prwnfgnv8e7s/branch/dev?svg=true&passingText=dev&failingText=dev&pendingText=dev%20pending)](https://ci.appveyor.com/project/anthonyreilly/netcoreforce/branch/dev)
 
 Currently targeting [.NET Standard 1.3](https://docs.microsoft.com/en-us/dotnet/articles/standard/library)
 
