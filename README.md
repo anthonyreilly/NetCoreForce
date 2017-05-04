@@ -1,6 +1,7 @@
 # NetCoreForce 
 
 ## A .NET Standard and .NET Core Salesforce REST API toolkit and API wrapper
+*This project is not offered, sponsored or endorsed by Salesforce.*
 
 ## This project is in Beta.
 New features are being added. [(Changelog)](CHANGELOG.md)  
@@ -12,23 +13,30 @@ There is a possibilty of breaking changes in upcoming releases, although they sh
 Currently targeting [.NET Standard 1.3](https://docs.microsoft.com/en-us/dotnet/articles/standard/library)
 
 ### Projects in this solution:
-[NetCoreForce.Client](src/NetCoreForce.Client) - Main library  
-[NetCoreForce.Client.Tests](src/NetCoreForce.Client.Tests) - Unit tests (offline/mocked)  
-[NetCoreForce.FunctionalTests](src/NetCoreForce.FunctionalTests) - Online Unit tests (Needs valid login credentials)  
-[NetCoreForce.ModelGenerator](src/NetCoreForce.ModelGenerator) - Optional tool for code generation of custom objects/fields.  
-[NetCoreForce.Models](src/NetCoreForce.Models) [(ReadMe)](src/NetCoreForce.Models/README.md) - Optional library with a set of pre-generated standard models  
-[SampleConsole](src/SampleConsole) - A simple .NET Core console app to demonstrate the library.
+* [NetCoreForce.Client](src/NetCoreForce.Client) - Main library  
+* [NetCoreForce.Client.Tests](src/NetCoreForce.Client.Tests) - Unit tests (offline/mocked)  
+* [NetCoreForce.FunctionalTests](src/NetCoreForce.FunctionalTests) - Online Unit tests (Needs valid login credentials)  
+* [NetCoreForce.ModelGenerator](src/NetCoreForce.ModelGenerator) - Optional custom dotnet-cli tool for code generation of custom objects/fields.  
+* [NetCoreForce.Models](src/NetCoreForce.Models) [(ReadMe)](src/NetCoreForce.Models/README.md) - Optional library with a set of pre-generated standard models  
+* [SampleConsole](src/SampleConsole) - A simple .NET Core console app to demonstrate the library.
 
-### Minimal project dependencies:  
-[Json.NET](https://www.nuget.org/packages/Newtonsoft.Json)  
-[xUnit.net](https://www.nuget.org/packages/xunit)  
+### NuGet Packages
+* [NetCoreForce.Client](https://www.nuget.org/packages/NetCoreForce.Client/)
+* [NetCoreForce.Models](https://www.nuget.org/packages/NetCoreForce.Models/)
+* [NetCoreForce.ModelGenerator](https://www.nuget.org/packages/NetCoreForce.ModelGenerator/)
+
+### Client library has minimal dependencies:
+* [NETStandard.Library](https://www.nuget.org/packages/NETStandard.Library/)
+* [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
+* [Microsoft.AspNetCore.WebUtilities](https://www.nuget.org/packages/Microsoft.AspNetCore.WebUtilities/)
 
 Using [semantic versioning](http://semver.org)
 
 Feedback and suggestions welcome.
 
 Licensed under the MIT license.
-This project is not offered, sponsored or endorsed by Salesforce.
+
+
 
 ### Basic Usage Example
 
