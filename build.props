@@ -13,6 +13,7 @@
     <PackageTags>salesforce,api,forcedotcom,netstandard,netcore</PackageTags>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/anthonyreilly/NetCoreForce</RepositoryUrl>
+    <PackageReleaseNotes>Release notes and documentation can be found on the project site: https://github.com/anthonyreilly/NetCoreForce</PackageReleaseNotes>
 
     <!--Project Root-->
     <SolutionDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), *.sln))</SolutionDir>

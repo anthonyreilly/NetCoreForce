@@ -22,8 +22,7 @@
     <PackageTags>$(PackageTags)</PackageTags>
     <RepositoryType>$(RepositoryType)</RepositoryType>
     <RepositoryUrl>$(RepositoryUrl)</RepositoryUrl>
-    <!--<PackageReleaseNotes>Release Notes
-Release Notes</PackageReleaseNotes>-->
+    <PackageReleaseNotes>$(PackageReleaseNotes)</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">

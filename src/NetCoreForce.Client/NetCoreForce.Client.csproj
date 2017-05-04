@@ -24,10 +24,9 @@
     <PackageTags>$(PackageTags)</PackageTags>
     <RepositoryType>$(RepositoryType)</RepositoryType>
     <RepositoryUrl>$(RepositoryUrl)</RepositoryUrl>
+    <PackageReleaseNotes>$(PackageReleaseNotes)</PackageReleaseNotes>
     <!--<GenerateDocumentationFile>true</GenerateDocumentationFile>-->
-    <!--<DocumentationFile>$(OutputPath)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>-->
-    <!--<PackageReleaseNotes>Release Notes
-Release Notes</PackageReleaseNotes>-->
+    <!--<DocumentationFile>$(OutputPath)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>-->    
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
