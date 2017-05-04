@@ -1,7 +1,7 @@
 using System;
 using NetCoreForce.Client.Models;
 
-namespace NetCoreForce.Client
+namespace NetCoreForce.ModelGenerator
 {
     public static class SfTypeConverter
     {

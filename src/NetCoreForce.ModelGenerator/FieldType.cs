@@ -1,4 +1,4 @@
-namespace NetCoreForce.Client.Models
+namespace NetCoreForce.ModelGenerator
 {
     /// <summary>
     /// Primitive and field data types
