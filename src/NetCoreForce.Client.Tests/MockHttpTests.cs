@@ -9,7 +9,7 @@ using NetCoreForce.Models;
 
 namespace NetCoreForce.Client.Tests
 {
-    public class HttpTests
+    public class MockHttpTests
     {
         //test with empty response content
 

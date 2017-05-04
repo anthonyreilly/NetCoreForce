@@ -81,6 +81,5 @@ namespace NetCoreForce.Client.Tests
         }
 
         //TODO: test deserialize
-        //TODO: test date formatting
     }
 }
