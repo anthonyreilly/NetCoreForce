@@ -6,6 +6,7 @@ Current transactions supported:
 * Delete object
 * Get SOQL Query results
 * Get object by Id
+* SOSL Search
 
 Metadata:
 * Org Limits
