@@ -8,24 +8,18 @@ namespace NetCoreForce.Client.Models
     /// <summary>
     /// A generic SObject, with ID and audit fields
     /// </summary>
-    public abstract class SObjectGeneric//: ISObject
+    public class SObjectGeneric : SObject
     {
 
-        [JsonIgnore]
-        public string SObjectTypeName { get; set; }
+        // [JsonIgnore]
+        // public string SObjectTypeName { get; set; }
 
-        public SObjectGeneric(string sObjectTypeName)
-        {
-            if (string.IsNullOrEmpty(sObjectTypeName)) throw new ArgumentNullException("sObjectTypeName");
+        // public SObjectGeneric(string sObjectTypeName)
+        // {
+        //     if (string.IsNullOrEmpty(sObjectTypeName)) throw new ArgumentNullException("sObjectTypeName");
 
-            this.SObjectTypeName = sObjectTypeName;
-        }
-
-        /// <summary>
-        /// Contains the type and url of the object, included in batch create responses
-        /// </summary>
-        [JsonProperty(PropertyName = "attributes")]
-        public SObjectAttributes Attributes { get; set; }
+        //     this.SObjectTypeName = sObjectTypeName;
+        // }
 
         /// <summary>
         /// Name: Id
