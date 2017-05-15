@@ -123,7 +123,13 @@ namespace NetCoreForce.Client
 
         }
 
-        public async Task<T> Search<T>(string searchString)
+        /// <summary>
+        /// Executes a SOSL search, returning a type T, e.g. when using "RETURNING Account" in the SOSL query.
+        /// <para>Not properly matching the return type T and the RETURNING clause of the SOSL query may return unexpected results</para>
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns>SearchResult{T}</returns>
+        public async Task<SearchResult<T>> Search<T>(string searchString)
         {
             try
             {
@@ -131,7 +137,31 @@ namespace NetCoreForce.Client
 
                 JsonClient client = new JsonClient(AccessToken, _httpClient);
 
-                T searchResult = await client.HttpGetAsync<T>(uri);
+                SearchResult<T> searchResult = await client.HttpGetAsync<SearchResult<T>>(uri);
+
+                return searchResult;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error searching: " + ex.Message);
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Executes a SOSL search, returning a simple generic object in the results collection that primarly results in a list of object IDs
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns>SearchResult{SObjectGeneric}</returns>
+        public async Task<SearchResult<SObjectGeneric>> Search(string searchString)
+        {
+            try
+            {
+                var uri = UriFormatter.Search(InstanceUrl, ApiVersion, searchString);
+
+                JsonClient client = new JsonClient(AccessToken, _httpClient);
+
+                SearchResult<SObjectGeneric> searchResult = await client.HttpGetAsync<SearchResult<SObjectGeneric>>(uri);
 
                 return searchResult;
             }
