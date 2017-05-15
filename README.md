@@ -25,7 +25,7 @@ Currently targeting [.NET Standard 1.3](https://docs.microsoft.com/en-us/dotnet/
 * [NetCoreForce.Models](https://www.nuget.org/packages/NetCoreForce.Models/)
 * [NetCoreForce.ModelGenerator](https://www.nuget.org/packages/NetCoreForce.ModelGenerator/)
 
-### Client library has minimal dependencies:
+### Client library has no unusual dependencies:
 * [NETStandard.Library](https://www.nuget.org/packages/NETStandard.Library/)
 * [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
 * [Microsoft.AspNetCore.WebUtilities](https://www.nuget.org/packages/Microsoft.AspNetCore.WebUtilities/)
@@ -35,7 +35,6 @@ Using [semantic versioning](http://semver.org)
 Feedback and suggestions welcome.
 
 Licensed under the MIT license.
-
 
 
 ### Basic Usage Example

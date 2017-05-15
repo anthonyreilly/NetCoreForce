@@ -157,13 +157,6 @@ namespace NetCoreForce.Client
             return await client.HttpGetAsync<T>(uri);
         }
 
-        // public async Task<T> GetObjectFieldValues<T>(string sObjectTypeName, string objectId, List<string> fields)
-        // {
-        //     string url = UriFormatter.SObjectRows(InstanceUrl, ApiVersion, sObjectTypeName, objectId, fields);
-
-        //     throw new NotImplementedException();
-        // }
-
         /// <summary>
         /// Create a new record
         /// </summary>
