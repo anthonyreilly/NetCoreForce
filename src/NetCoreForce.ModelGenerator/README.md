@@ -41,7 +41,7 @@ Options:
 
  ## Example usage
   ```
-  dotnet modelgenerator generate --p Sf -r -c -n MyProject.Models -d ~/git/myproject.models 
+  dotnet modelgenerator generate -p Sf -r -c -n MyProject.Models -d ~/git/myproject.models 
   ```
   * Prefix classes with "Sf"
   * Include referenced objects
