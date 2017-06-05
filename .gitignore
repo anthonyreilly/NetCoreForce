@@ -1,7 +1,8 @@
 ## Project-specific
-credentials.json
-credentials_dev.json
-credentials_prod.json
+*credentials*.json
+!*credentials_example.json
+*config*.json
+!*config_example.json
 scratch/
 clean.sh
 
