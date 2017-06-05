@@ -16,6 +16,7 @@ namespace NetCoreForce.ModelGenerator
 {
     class Program
     {
+        const string defaultConfigFilename = "modelgenerator_config.json";
 
         static void Main(string[] args)
         {
@@ -34,12 +35,41 @@ namespace NetCoreForce.ModelGenerator
                 return string.Format("Version {0}", Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion);
             });
 
-
             app.Command("generate", (command) =>
             {
-                command.Description = "Generate SObject models";
+                command.Description = "Generate SObject models.";
                 command.HelpOption("-?|-h|--help");
 
+                command.ExtendedHelpText = Environment.NewLine +
+                "You can supply the API credentials either in the config file, the command parameters, or wait to be prompted for that information." + Environment.NewLine +
+                "If you choose to save the config file, be careful with it as it may contain your API credentials.";
+
+                //Authentication
+                var clientIdOption = command.Option("--client-id",
+                    "API Client ID, a.k.a. Consumer Key",
+                    CommandOptionType.SingleValue);
+
+                var clientSecretOption = command.Option("--client-secret",
+                    "API Client Secret, a.k.a. Consumer Secret",
+                    CommandOptionType.SingleValue);
+
+                var usernameOption = command.Option("--username",
+                    "API Username",
+                    CommandOptionType.SingleValue);
+
+                var passwordOption = command.Option("--password",
+                    "API Password",
+                    CommandOptionType.SingleValue);
+
+                var configFileOption = command.Option("--config-file",
+                    "Config file path",
+                    CommandOptionType.SingleValue);
+
+                var saveConfigOption = command.Option("--save-config",
+                    "Save options to config file, uses filename from --config-file option",
+                    CommandOptionType.NoValue);
+
+                //generation options
                 var includeOption = command.Option("-o|--objects <objects>",
                     "Object models to generate, if omitted all objects will be generated",
                     CommandOptionType.MultipleValue);
@@ -70,16 +100,32 @@ namespace NetCoreForce.ModelGenerator
 
                 command.OnExecute(() =>
                 {
-                    GenConfig config = new GenConfig()
+                    GenConfig config = LoadConfig(configFileOption.Value());
+
+                    if(config == null)
                     {
-                        IncludeCustom = customOption.HasValue(),
-                        Objects = includeOption.Values,
-                        ClassPrefix = prefixOption.Value(),
-                        ClassSuffix = suffixOption.Value(),
-                        ClassNamespace = namespaceName.Value(),
-                        OutputDirectory = outputDirectory.Value(),
-                        IncludeReferences = includeReferences.HasValue()
-                    };
+                        config = new GenConfig();
+                    }
+
+                    config.AuthInfo.ClientId = clientIdOption.Value();
+                    config.AuthInfo.ClientSecret = clientSecretOption.Value();
+                    config.AuthInfo.Username = usernameOption.Value();
+                    config.AuthInfo.Password = passwordOption.Value();
+
+                    config.IncludeCustom = customOption.HasValue();
+                    config.Objects = includeOption.Values;
+                    config.ClassPrefix = prefixOption.Value();
+                    config.ClassSuffix = suffixOption.Value();
+                    config.ClassNamespace = namespaceName.Value();
+                    config.OutputDirectory = outputDirectory.Value();
+                    config.IncludeReferences = includeReferences.HasValue();
+
+                    config = CheckOptions(config);
+
+                    if(saveConfigOption.HasValue())
+                    {
+                        SaveConfig(config, configFileOption.Value());
+                    }
 
                     Console.Write("Generate models for " + string.Join(", ", includeOption.Values));
 
@@ -109,41 +155,141 @@ namespace NetCoreForce.ModelGenerator
             {
                 Console.WriteLine("Unable to execute application: {0}", ex.Message);
             }
+        }        
+
+        /// <summary>
+        /// Checks that the minimum required options are supplied, otherwise prompts user to enter them immediately
+        /// </summary>
+        private static GenConfig CheckOptions(GenConfig config)
+        {
+            //check required auth options
+            while (string.IsNullOrEmpty(config.AuthInfo.ClientId))
+            {
+                Console.WriteLine("Enter API Client ID:");
+                config.AuthInfo.ClientId = Console.ReadLine();
+                Console.WriteLine();
+            }
+
+            while (string.IsNullOrEmpty(config.AuthInfo.ClientSecret))
+            {
+                Console.WriteLine("Enter API Client Secret:");
+                config.AuthInfo.ClientSecret = Console.ReadLine();
+                Console.WriteLine();
+            }
+
+            while (string.IsNullOrEmpty(config.AuthInfo.Username))
+            {
+                Console.WriteLine("Enter API username:");
+                config.AuthInfo.Username = Console.ReadLine();
+                Console.WriteLine();
+            }
+
+            while (string.IsNullOrEmpty(config.AuthInfo.Password))
+            {
+                Console.WriteLine("Enter API password:");
+                config.AuthInfo.Password = Console.ReadLine();
+                Console.WriteLine();
+            }
+
+            //object to generate
+            if(config.Objects == null)
+            {
+                config.Objects = new List<string>();
+            }
+            while (config.Objects.Count < 1)
+            {
+                Console.WriteLine("Enter an object to generate:");
+                config.Objects.Add(Console.ReadLine());
+                Console.WriteLine();
+            }
+
+            while (string.IsNullOrEmpty(config.ClassNamespace))
+            {
+                Console.WriteLine("Enter namespace for generated class(es):");
+                config.ClassNamespace = Console.ReadLine();
+                Console.WriteLine();
+            }
+
+            return config;
         }
 
-        private static AuthInfo GetAuthInfo(string filePath = null)
+        private static bool SaveConfig(GenConfig config, string filePath = null)
         {
             try
-            {
+            {                
                 if (string.IsNullOrEmpty(filePath))
                 {
+                    filePath = defaultConfigFilename;                    
+                }
+                
+                //if using the default filename, or just a filename was given, set the path to the current directory
+                if (System.IO.Path.IsPathRooted(filePath))
+                {
                     string executabledirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-                    string fileName = "credentials.json";
-                    filePath = Path.Combine(executabledirectory, fileName);
+                    filePath = Path.Combine(executabledirectory, filePath);
                 }
 
-                Console.WriteLine("Reading credentials file {0}", filePath);
+                Console.WriteLine($"Saving config file to {filePath}");
 
-                string contents = File.ReadAllText(filePath);
-                AuthInfo info = JsonConvert.DeserializeObject<AuthInfo>(contents);
-                return info;
+                string contents = JsonConvert.SerializeObject(config, Formatting.Indented);
+
+                File.WriteAllText(filePath, contents, Encoding.Unicode);
+
+                return true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error reading credentials file: " + ex.Message);
-                throw ex;
+                Console.WriteLine("Error saving config file: " + ex.Message);
+                return false;
             }
         }
 
-        private static async Task<ForceClient> Login()
+        private static GenConfig LoadConfig(string filePath = null)
         {
-            AuthInfo authInfo = GetAuthInfo();
+            try
+            {                
+                if (string.IsNullOrEmpty(filePath))
+                {
+                    filePath = defaultConfigFilename;                    
+                }
+                
+                //if using the default filename, or just a filename was given, set the path to the current directory
+                if (System.IO.Path.IsPathRooted(filePath))
+                {
+                    string executabledirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+                    filePath = Path.Combine(executabledirectory, filePath);
+                }
+
+                if(!File.Exists(filePath))
+                {
+                    Console.WriteLine($"No config file found at {filePath}");
+                    return null;
+                }
+
+                Console.WriteLine($"Loading config file {filePath}");
+
+                string contents = File.ReadAllText(filePath);
+
+                GenConfig config = JsonConvert.DeserializeObject<GenConfig>(contents);                
+
+                return config;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error loading config file: " + ex.Message);
+                return null;
+            }
+        }
+
+        private static async Task<ForceClient> Login(GenConfig config)
+        {
 
             AuthenticationClient auth = new AuthenticationClient();
             try
             {
-                await auth.UsernamePasswordAsync(authInfo.ClientId, authInfo.ClientSecret,
-                    authInfo.Username, authInfo.Password, authInfo.TokenRequestEndpoint);
+                await auth.UsernamePasswordAsync(config.AuthInfo.ClientId, config.AuthInfo.ClientSecret,
+                    config.AuthInfo.Username, config.AuthInfo.Password, config.AuthInfo.TokenRequestEndpoint);
+
                 Console.WriteLine("Connected to Salesforce");
             }
             catch (ForceAuthException ex)
@@ -159,9 +305,9 @@ namespace NetCoreForce.ModelGenerator
 
         private static async Task GenModels(GenConfig config)
         {
-            ForceClient client = await Login();
+            ForceClient client = await Login(config);
 
-            config.ApiVersion = client.ApiVersion;
+            //config.ApiVersion = client.ApiVersion;
 
             //should we keep the __c on custom objects/fields?
 
@@ -237,10 +383,8 @@ namespace NetCoreForce.ModelGenerator
 
             StringBuilder gen = new StringBuilder();
 
-            
-
             //gen.AppendLine("// Model generated on " + DateTime.Now.ToString("yyyy-MM-dd"));
-            gen.AppendLine("// SF API version " + config.ApiVersion);
+            gen.AppendLine("// SF API version " + config.AuthInfo.ApiVersion);
             gen.AppendLine("// Custom fields included: " + config.IncludeCustom.ToString());
             gen.AppendLine("// Relationship objects included: " + config.IncludeReferences.ToString());
             gen.AppendLine();
@@ -292,18 +436,18 @@ namespace NetCoreForce.ModelGenerator
                     gen.AppendLine("\t\t/// " + field.Label);
                     gen.AppendLine("\t\t/// <para>Name: " + field.Name + "</para>");
                     gen.AppendLine("\t\t/// <para>SF Type: " + field.Type + "</para>");
-                    if(field.AutoNumber)
+                    if (field.AutoNumber)
                     {
                         gen.AppendLine("\t\t/// <para>AutoNumber field</para>");
                     }
                     //gen.AppendLine("\t\t/// <para>Custom: " + field.Custom.ToString() + "</para>");
-                    if(field.Custom)
+                    if (field.Custom)
                     {
                         gen.AppendLine("\t\t/// <para>Custom field</para>");
                     }
-                    
+
                     gen.AppendLine("\t\t/// <para>Nillable: " + field.Nillable.ToString() + "</para>");
-                    
+
                     gen.AppendLine("\t\t///</summary>");
 
                     gen.AppendLine(string.Format("\t\t[JsonProperty(PropertyName = \"{0}\")]", JsonName(field.Name)));
