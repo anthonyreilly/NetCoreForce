@@ -200,7 +200,7 @@ namespace NetCoreForce.ModelGenerator
             {
                 Console.WriteLine("Unable to execute application: {0}", ex.Message);
             }
-        }        
+        }
 
         /// <summary>
         /// Checks that the minimum required options are supplied, otherwise prompts user to enter them immediately
@@ -237,7 +237,7 @@ namespace NetCoreForce.ModelGenerator
             }
 
             //object to generate
-            if(config.Objects == null)
+            if (config.Objects == null)
             {
                 config.Objects = new List<string>();
             }
@@ -261,12 +261,12 @@ namespace NetCoreForce.ModelGenerator
         private static bool SaveConfig(GenConfig config, string filePath = null)
         {
             try
-            {                
+            {
                 if (string.IsNullOrEmpty(filePath))
                 {
-                    filePath = defaultConfigFilename;                    
+                    filePath = defaultConfigFilename;
                 }
-                
+
                 //if using the default filename, or just a filename was given, set the path to the current directory
                 if (System.IO.Path.IsPathRooted(filePath))
                 {
@@ -292,12 +292,12 @@ namespace NetCoreForce.ModelGenerator
         private static GenConfig LoadConfig(string filePath = null)
         {
             try
-            {                
+            {
                 if (string.IsNullOrEmpty(filePath))
                 {
-                    filePath = defaultConfigFilename;                    
+                    filePath = defaultConfigFilename;
                 }
-                
+
                 //if using the default filename, or just a filename was given, set the path to the current directory
                 if (System.IO.Path.IsPathRooted(filePath))
                 {
@@ -305,7 +305,7 @@ namespace NetCoreForce.ModelGenerator
                     filePath = Path.Combine(executabledirectory, filePath);
                 }
 
-                if(!File.Exists(filePath))
+                if (!File.Exists(filePath))
                 {
                     Console.WriteLine($"No config file found at {filePath}");
                     return null;
@@ -315,7 +315,7 @@ namespace NetCoreForce.ModelGenerator
 
                 string contents = File.ReadAllText(filePath);
 
-                GenConfig config = JsonConvert.DeserializeObject<GenConfig>(contents);                
+                GenConfig config = JsonConvert.DeserializeObject<GenConfig>(contents);
 
                 return config;
             }
