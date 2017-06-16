@@ -28,7 +28,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
-    <PostBuildEvent>dotnet pack $(MSBuildThisFileDirectory)/NetCoreForce.ModelGenerator.csproj -o $(SolutionDir)/packages --no-build</PostBuildEvent>
+    <PostBuildEvent>dotnet pack $(MSBuildThisFileDirectory)/NetCoreForce.ModelGenerator.csproj -o $(SolutionDir)/packages -c Release --no-build </PostBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>
