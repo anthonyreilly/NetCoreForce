@@ -1,5 +1,10 @@
 # Changelog
 
+### 2017-06-16 v0.4.0-Beta
+Updates to Model Generator CLI tool
+* No longer removing "__c" suffix from custom object names and field names
+* Properly merge config file options with command line arguments when both are supplied
+
 ### 2017-06-05 v0.3.0-Beta
 Updates to Model Generator CLI tool - existing config scheme was unfriendly, esp. when getting the package from NuGet.
 * Local json file for config info is now optional.

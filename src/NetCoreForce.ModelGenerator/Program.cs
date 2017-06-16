@@ -352,10 +352,6 @@ namespace NetCoreForce.ModelGenerator
         {
             ForceClient client = await Login(config);
 
-            //config.ApiVersion = client.ApiVersion;
-
-            //should we keep the __c on custom objects/fields?
-
 #if DEBUG
             //basic set of objects with complete referential integrity
             // if (config.Objects == null || config.Objects.Count == 0)
@@ -376,10 +372,12 @@ namespace NetCoreForce.ModelGenerator
 
             foreach (var obj in global.SObjects)
             {
-                //dont include non queryable?
+                //TODO: verify if we should skip all non queryable?
                 if (!obj.Queryable)
                 {
-                    //Console.WriteLine("Skipping " + obj.Name);
+#if DEBUG
+                    Console.WriteLine("Skipping non-queryable object " + obj.Name);
+#endif
                     continue;
                 }
 
@@ -393,12 +391,9 @@ namespace NetCoreForce.ModelGenerator
                     }
                 }
 
-                // Name and Domain non-queryable objects cause compiler errors due to name/member dupe
+                //TODO: verify Name and Domain non-queryable objects cause compiler errors due to name/member dupe
 
                 Console.Write("Generating model for {0} - ", obj.Name);
-
-                //TODO: see if there is a better way to clean up object nameing (or if it should be done at all)
-                //string className = obj.Name.Replace("__c", "");
 
                 string className = obj.Name;
 
@@ -532,7 +527,7 @@ namespace NetCoreForce.ModelGenerator
                         csTypeName += "?";
                     }
 
-                    gen.AppendLine(string.Format("\t\tpublic {0} {1} {{ get; set; }}", csTypeName, field.Name.Replace("__c", "")));
+                    gen.AppendLine(string.Format("\t\tpublic {0} {1} {{ get; set; }}", csTypeName, field.Name));
                     gen.AppendLine();
 
                     if (field.Type == "reference" && config.IncludeReferences)
