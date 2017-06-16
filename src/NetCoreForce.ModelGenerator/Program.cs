@@ -397,13 +397,14 @@ namespace NetCoreForce.ModelGenerator
 
                 Console.Write("Generating model for {0} - ", obj.Name);
 
-                string className = obj.Name.Replace("__c", "");
+                //TODO: see if there is a better way to clean up object nameing (or if it should be done at all)
+                //string className = obj.Name.Replace("__c", "");
+
+                string className = obj.Name;
+
                 className = string.Format("{0}{1}{2}", config.ClassPrefix ?? string.Empty, className, config.ClassSuffix ?? string.Empty);
 
                 await CreateModel(client, obj.Name, className, config);
-
-                //Console.WriteLine("Generated model for " + obj.Name);
-
             }
         }
 
