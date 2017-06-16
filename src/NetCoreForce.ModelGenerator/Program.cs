@@ -100,34 +100,79 @@ namespace NetCoreForce.ModelGenerator
 
                 command.OnExecute(() =>
                 {
+                    //load config file, if available
                     GenConfig config = LoadConfig(configFileOption.Value());
 
-                    if(config == null)
+                    if (config == null)
                     {
                         config = new GenConfig();
                     }
 
-                    config.AuthInfo.ClientId = clientIdOption.Value();
-                    config.AuthInfo.ClientSecret = clientSecretOption.Value();
-                    config.AuthInfo.Username = usernameOption.Value();
-                    config.AuthInfo.Password = passwordOption.Value();
+                    //only override config file option if option is manually specified
+                    if (clientIdOption.HasValue())
+                    {
+                        config.AuthInfo.ClientId = clientIdOption.Value();
+                    }
 
-                    config.IncludeCustom = customOption.HasValue();
-                    config.Objects = includeOption.Values;
-                    config.ClassPrefix = prefixOption.Value();
-                    config.ClassSuffix = suffixOption.Value();
-                    config.ClassNamespace = namespaceName.Value();
-                    config.OutputDirectory = outputDirectory.Value();
-                    config.IncludeReferences = includeReferences.HasValue();
+                    if (clientSecretOption.HasValue())
+                    {
+                        config.AuthInfo.ClientSecret = clientSecretOption.Value();
+                    }
 
+                    if (usernameOption.HasValue())
+                    {
+                        config.AuthInfo.Username = usernameOption.Value();
+                    }
+
+                    if (passwordOption.HasValue())
+                    {
+                        config.AuthInfo.Password = passwordOption.Value();
+                    }
+
+                    if (customOption.HasValue())
+                    {
+                        config.IncludeCustom = customOption.HasValue();
+                    }
+
+                    if (includeOption.HasValue())
+                    {
+                        config.Objects = includeOption.Values;
+                    }
+
+                    if (prefixOption.HasValue())
+                    {
+                        config.ClassPrefix = prefixOption.Value();
+                    }
+
+                    if (suffixOption.HasValue())
+                    {
+                        config.ClassSuffix = suffixOption.Value();
+                    }
+
+                    if (suffixOption.HasValue())
+                    {
+                        config.ClassNamespace = namespaceName.Value();
+                    }
+
+                    if (outputDirectory.HasValue())
+                    {
+                        config.OutputDirectory = outputDirectory.Value();
+                    }
+
+                    if (includeReferences.HasValue())
+                    {
+                        config.IncludeReferences = includeReferences.HasValue();
+                    }
+
+                    //check for minimum needed options and prompt if necessary
                     config = CheckOptions(config);
 
-                    if(saveConfigOption.HasValue())
+                    if (saveConfigOption.HasValue())
                     {
                         SaveConfig(config, configFileOption.Value());
                     }
 
-                    Console.Write("Generate models for " + string.Join(", ", includeOption.Values));
+                    Console.Write("Generate models for " + string.Join(", ", config.Objects));
 
                     if (customOption.HasValue())
                     {
