@@ -58,3 +58,30 @@ No configuration file is required, however you can indlude the --save-config opt
   * Include custom objects
   * Use the "MyProject.Models" namespace
   * Place the generated classes in ~/git/myproject.models
+
+### Example config file
+```json
+{
+  "comment": "Example config file - Make a copy of this file named modegenerator_config.json with your login info",
+  "AuthInfo": {    
+    "clientId": "your_client_id",
+    "clientSecret": "your_client_secret",
+    "username": "username",
+    "password": "password",
+    "apiVersion": "v39.0",
+    "authorizationEndpoint": "https://login.salesforce.com/services/oauth2/authorize",
+    "tokenRequestEndpoint": "https://login.salesforce.com/services/oauth2/token",
+    "tokenRevocationEndpoint": "https://login.salesforce.com/services/oauth2/revoke"
+  },
+  "OutputDirectory": null,
+  "Objects": [
+    "Account",
+    "Contact"
+  ],
+  "ClassPrefix": "Sf",
+  "ClassSuffix": null,
+  "ClassNamespace": "NetCoreForce.Models",
+  "IncludeCustom": true,
+  "IncludeReferences": true
+}
+```
