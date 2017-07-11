@@ -104,8 +104,17 @@ namespace NetCoreForce.Client
 
                     results.AddRange(qr.Records);
 
-                    nextRecordsUrl = qr.NextRecordsUrl;
                     done = qr.Done;
+                    
+                    nextRecordsUrl = qr.NextRecordsUrl;
+
+                    if(!done && string.IsNullOrEmpty(nextRecordsUrl))
+                    {
+                        //Normally if query has remaining batches, NextRecordsUrl will have a value, and Done will be false.
+                        //In case of some unforseen error, flag the result as done if we're missing the NextRecordsUrl
+                        //In this situation we'll just get the previous set again and be stuck in a loop.
+                        done = true;
+                    }
 
                 } while (!done);
 
