@@ -1,5 +1,8 @@
 # Changelog
 
+### 2017-07-11 v0.5.0-Beta
+* Fixed issue with processing large query results - client was incorrectly processing the NextRecordsUrl 
+
 ### 2017-06-16 v0.4.0-Beta
 Updates to Model Generator CLI tool
 * No longer removing "__c" suffix from custom object names and field names

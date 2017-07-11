@@ -77,25 +77,25 @@ namespace NetCoreForce.Client
 #endif
             try
             {
-                var uri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString, queryAll);
+                var queryUri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString, queryAll);
 
                 JsonClient client = new JsonClient(AccessToken, _httpClient);
 
                 List<T> results = new List<T>();
 
                 bool done = false;
-                string next = string.Empty;
+                string nextRecordsUrl = string.Empty;
 
                 //larger result sets will be split into batches (sized according to system and account settings)
                 //if additional batches are indicated retrieve the rest and append to the result set.
                 do
                 {
-                    if (!string.IsNullOrEmpty(next))
+                    if (!string.IsNullOrEmpty(nextRecordsUrl))
                     {
-                        uri = new Uri(next);
+                        queryUri = new Uri(new Uri(InstanceUrl), nextRecordsUrl);
                     }
 
-                    QueryResult<T> qr = await client.HttpGetAsync<QueryResult<T>>(uri);
+                    QueryResult<T> qr = await client.HttpGetAsync<QueryResult<T>>(queryUri);
 
 #if DEBUG
                     Debug.WriteLine(string.Format("Got query resuts, {0} totalSize, {1} in this batch, final batch: {2}",
@@ -104,6 +104,7 @@ namespace NetCoreForce.Client
 
                     results.AddRange(qr.Records);
 
+                    nextRecordsUrl = qr.NextRecordsUrl;
                     done = qr.Done;
 
                 } while (!done);
