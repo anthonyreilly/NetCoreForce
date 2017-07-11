@@ -85,3 +85,5 @@ No configuration file is required, however you can indlude the --save-config opt
   "IncludeReferences": true
 }
 ```
+
+Note: if you use the -r/--include-references option, you may run into compile errors with missing classes. For instance, the Salesforce "User" object appears on many objects - if you didnt include this in your list of models to generate, you will either need to include it, or manually remove those properties from the generated classes.
