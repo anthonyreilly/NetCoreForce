@@ -1,5 +1,8 @@
 # Changelog
 
+### 2017-07-11 v0.5.1-Beta
+* Rebuild to troubleshoot NuGet issue, no code changes 
+
 ### 2017-07-11 v0.5.0-Beta
 * Fixed issue with processing large query results - client was incorrectly processing the NextRecordsUrl 
 
