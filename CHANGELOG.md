@@ -1,5 +1,8 @@
 # Changelog
 
+### 2017-08-30 v1.0.0
+* Initial release
+
 ### 2017-07-11 v0.5.1-Beta
 * Rebuild to troubleshoot NuGet issue, no code changes 
 

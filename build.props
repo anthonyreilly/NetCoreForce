@@ -1,8 +1,8 @@
 <Project>
   <PropertyGroup>
     <!--Versioning-->
-    <VersionPrefix>0.5.1</VersionPrefix>
-    <VersionSuffix>Beta</VersionSuffix>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <VersionSuffix></VersionSuffix>
 
     <!--NuGet-->
     <Authors>Anthony Reilly</Authors>
