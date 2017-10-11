@@ -25,7 +25,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/src/NetCoreForce.ModelGenerator/bin/Debug/netcoreapp1.0/dotnet-modelgenerator.dll",
+            "program": "${workspaceRoot}/src/NetCoreForce.ModelGenerator/bin/Debug/netcoreapp1.1/dotnet-modelgenerator.dll",
             "args": ["generate"],
             "cwd": "${workspaceRoot}/src/NetCoreForce.ModelGenerator",
             "console": "internalConsole",

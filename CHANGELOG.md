@@ -1,5 +1,8 @@
 # Changelog
 
+### 2017-10-11 v1.1.0
+* Update ModelGenerator from netcoreapp1.0 to netcoreapp1.1, fixes crash with 1.0 runtime on MacOS 10.13
+
 ### 2017-08-30 v1.0.0
 * Initial release
 
