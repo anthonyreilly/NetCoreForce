@@ -36,18 +36,18 @@ Options:
   -c|--include-custom                Include custom objects and fields
   -r|--include-references            Include referenced objects as properties
 
-You can supply the API credentials either in the config file, the command parameters, or wait to be prompted for that information.
+You can supply the API credentials either in the config file, the command parameters, or wait to be interactively prompted for that information.
 If you choose to save the config file, be careful with it as it may contain your API credentials.
 ```
 
   There are a few SObjects that either have reserved names (e.g. Namespace, Domain), or may otherwise cause confustion with other C# objects (e.g. Task).
   To avoid this, the prefix/suffix option can append a prefix/suffix to the class names, e.g use a "Sf" prefix to end up with SfTask instead of Task.
   Using the prefix is recommended - it is safer, and it makes intellisense easier since you can start with "Sf" to filter the SF object models.
-  the triple-slash Summary documentation tags on the generated classes will specify the original SObject name, exposed by the static SObjectTypeName property.
+  the triple-slash Summary documentation tags on the generated classes will specify the original SObject name, and is exposed by the static SObjectTypeName property.
 
 ## Configuration
 
-No configuration file is required, however you can indlude the --save-config option with an optional filename or file path to save the API credentials and generation options to. the filename will default to modelgenerator-config.json in the local directory for saving and loading if not otherwise specified.
+No configuration file is required, however you can include the --save-config option with an optional filename or file path to save the API credentials and generation options to. the filename will default to modelgenerator-config.json in the local directory for saving and loading if not otherwise specified.
 
 ## Example usage
   ```
