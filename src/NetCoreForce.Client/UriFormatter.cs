@@ -136,7 +136,7 @@ namespace NetCoreForce.Client
         /// Used for: Update, Delete, Field values
         /// </summary>
         /// <param name="instanceUrl">SFDC instance URL, e.g. "https://na99.salesforce.com"</param>
-        /// <param name="apiVersion">SFDC API version, e.g. "v39.0"</param>
+        /// <param name="apiVersion">SFDC API version, e.g. "v41.0"</param>
         /// <param name="sObjectName">SObject name, e.g. "Account"</param>
         /// <param name="objectId">SObject ID</param>
         /// <param name="fields">(optional) "fields" parameter, a list of object fields for GET requests</param>

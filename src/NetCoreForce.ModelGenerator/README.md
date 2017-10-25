@@ -68,7 +68,7 @@ No configuration file is required, however you can include the --save-config opt
     "clientSecret": "your_client_secret",
     "username": "username",
     "password": "password",
-    "apiVersion": "v39.0",
+    "apiVersion": "v41.0",
     "authorizationEndpoint": "https://login.salesforce.com/services/oauth2/authorize",
     "tokenRequestEndpoint": "https://login.salesforce.com/services/oauth2/token",
     "tokenRevocationEndpoint": "https://login.salesforce.com/services/oauth2/revoke"
