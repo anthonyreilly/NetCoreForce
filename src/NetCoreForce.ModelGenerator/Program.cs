@@ -241,11 +241,16 @@ namespace NetCoreForce.ModelGenerator
             {
                 config.Objects = new List<string>();
             }
-            while (config.Objects.Count < 1)
+
+            while (config.Objects.Count == 0)
             {
-                Console.WriteLine("Enter an object to generate:");
-                config.Objects.Add(Console.ReadLine());
-                Console.WriteLine();
+                Console.WriteLine("Enter an object name to generate, or enter \"all\" to generate all objects");
+                string objectName = Console.ReadLine();
+                if (!string.IsNullOrEmpty(objectName))
+                {
+                    config.Objects.Add(objectName);
+                    Console.WriteLine();
+                }
             }
 
             while (string.IsNullOrEmpty(config.ClassNamespace))
@@ -352,13 +357,16 @@ namespace NetCoreForce.ModelGenerator
         {
             ForceClient client = await Login(config);
 
-#if DEBUG
-            //basic set of objects with complete referential integrity
-            // if (config.Objects == null || config.Objects.Count == 0)
-            // {
-            //     config.Objects = new List<string>() { "User", "UserLicense", "UserRole", "Profile", "BusinessHours", "RecordType", "Account", "Contact", "Asset", "Case", "Product2"};
-            // }
-#endif
+            if (config.Objects == null || config.Objects.Count == 0)
+            {
+                Console.WriteLine("Configured list of objects to generate is empty, nothing will be generated");
+                return;
+            }
+
+            if(string.IsNullOrEmpty(config.AuthInfo.ApiVersion))
+            {
+                config.AuthInfo.ApiVersion = client.ApiVersion;
+            }
 
             var global = await client.DescribeGlobal();
 
@@ -368,7 +376,21 @@ namespace NetCoreForce.ModelGenerator
             }
 
             Console.WriteLine("Output directory: " + config.OutputDirectory);
-            Console.WriteLine("included: " + string.Join(", ", config.Objects));
+
+
+            bool generateAll = false;
+            if (config.Objects != null && config.Objects.Count > 0)
+            {
+                if (config.Objects[0].ToLower() == "all")
+                {
+                    generateAll = true;
+                    Console.WriteLine("Including all objects");
+                }
+                else
+                {
+                    Console.WriteLine("Included: " + string.Join(", ", config.Objects));
+                }
+            }
 
             foreach (var obj in global.SObjects)
             {
@@ -381,13 +403,18 @@ namespace NetCoreForce.ModelGenerator
                     continue;
                 }
 
-                if (config.Objects != null && config.Objects.Count > 0)
+                if (!generateAll)
                 {
-                    bool incl = config.Objects.Where(o => o.ToLowerInvariant() == obj.Name.ToLowerInvariant()).Count() > 0;
-                    if (!incl)
+                    if (config.Objects != null && config.Objects.Count > 0)
                     {
-                        //Console.WriteLine("Skipping " + obj.Name);
-                        continue;
+                        bool incl = config.Objects.Where(o => o.ToLowerInvariant() == obj.Name.ToLowerInvariant()).Count() > 0;
+                        if (!incl)
+                        {
+#if DEBUG
+                            Console.WriteLine("Skipping " + obj.Name);
+#endif
+                            continue;
+                        }
                     }
                 }
 
