@@ -1,5 +1,12 @@
 # Changelog
 
+### 2017-10-25 v1.2.0
+
+* ModelGenerator: Fixed ability to generate all objects at once, and clarified option in console prompts - specifying "all" as the object name will include all available objects in the output.
+* Client: Update default client SFDC API version to v41.0
+* Models: Regenerated sample models againt SFDC API v41.0
+* Update SFDC API references in test cases and documentation to v41.0
+
 ### 2017-10-11 v1.1.0
 * Update ModelGenerator from netcoreapp1.0 to netcoreapp1.1, fixes crash with 1.0 runtime on MacOS 10.13
 

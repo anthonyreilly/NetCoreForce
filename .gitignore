@@ -5,6 +5,7 @@
 !*config_example.json
 scratch/
 clean.sh
+TestOutput
 
 # NuGet package output
 packages/
