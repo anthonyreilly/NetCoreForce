@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -301,6 +301,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "distributionPublicUrl")]
 		[Updateable(false), Createable(false)]
 		public string DistributionPublicUrl { get; set; }
+
+		///<summary>
+		/// File Download Link
+		/// <para>Name: ContentDownloadUrl</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "contentDownloadUrl")]
+		[Updateable(false), Createable(false)]
+		public string ContentDownloadUrl { get; set; }
+
+		///<summary>
+		/// PDF Download Link
+		/// <para>Name: PdfDownloadUrl</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "pdfDownloadUrl")]
+		[Updateable(false), Createable(false)]
+		public string PdfDownloadUrl { get; set; }
 
 	}
 }

@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -39,7 +39,6 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "name")]
-		[Updateable(false), Createable(false)]
 		public string Name { get; set; }
 
 		///<summary>
@@ -49,7 +48,6 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "description")]
-		[Updateable(false), Createable(false)]
 		public string Description { get; set; }
 
 		///<summary>
@@ -169,6 +167,16 @@ namespace NetCoreForce.Models
 		public string WorkspaceType { get; set; }
 
 		///<summary>
+		/// Add Creator Membership
+		/// <para>Name: ShouldAddCreatorMembership</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "shouldAddCreatorMembership")]
+		[Updateable(false), Createable(true)]
+		public bool? ShouldAddCreatorMembership { get; set; }
+
+		///<summary>
 		/// Last Activity
 		/// <para>Name: LastWorkspaceActivityDate</para>
 		/// <para>SF Type: datetime</para>
@@ -205,7 +213,6 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "developerName")]
-		[Updateable(false), Createable(false)]
 		public string DeveloperName { get; set; }
 
 	}

@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -479,6 +479,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isSubtype")]
 		[Updateable(false), Createable(false)]
 		public bool? IsSubtype { get; set; }
+
+		///<summary>
+		/// Is Einstein Activity Capture Enabled?
+		/// <para>Name: IsAutoActivityCaptureEnabled</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isAutoActivityCaptureEnabled")]
+		[Updateable(false), Createable(false)]
+		public bool? IsAutoActivityCaptureEnabled { get; set; }
+
+		///<summary>
+		/// Data Steward ID
+		/// <para>Name: DataStewardId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "dataStewardId")]
+		[Updateable(false), Createable(false)]
+		public string DataStewardId { get; set; }
 
 	}
 }

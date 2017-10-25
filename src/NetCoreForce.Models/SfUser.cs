@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -1265,6 +1265,42 @@ namespace NetCoreForce.Models
 		public bool? UserPreferencesFavoritesWTShown { get; set; }
 
 		///<summary>
+		/// RecordHomeSectionCollapseWTShown
+		/// <para>Name: UserPreferencesRecordHomeSectionCollapseWTShown</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesRecordHomeSectionCollapseWTShown")]
+		public bool? UserPreferencesRecordHomeSectionCollapseWTShown { get; set; }
+
+		///<summary>
+		/// RecordHomeReservedWTShown
+		/// <para>Name: UserPreferencesRecordHomeReservedWTShown</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesRecordHomeReservedWTShown")]
+		public bool? UserPreferencesRecordHomeReservedWTShown { get; set; }
+
+		///<summary>
+		/// FavoritesShowTopFavorites
+		/// <para>Name: UserPreferencesFavoritesShowTopFavorites</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesFavoritesShowTopFavorites")]
+		public bool? UserPreferencesFavoritesShowTopFavorites { get; set; }
+
+		///<summary>
+		/// ExcludeMailAppAttachments
+		/// <para>Name: UserPreferencesExcludeMailAppAttachments</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesExcludeMailAppAttachments")]
+		public bool? UserPreferencesExcludeMailAppAttachments { get; set; }
+
+		///<summary>
 		/// Contact ID
 		/// <para>Name: ContactId</para>
 		/// <para>SF Type: reference</para>
@@ -1355,6 +1391,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "smallPhotoUrl")]
 		[Updateable(false), Createable(false)]
 		public string SmallPhotoUrl { get; set; }
+
+		///<summary>
+		/// Show external indicator
+		/// <para>Name: IsExtIndicatorVisible</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isExtIndicatorVisible")]
+		[Updateable(false), Createable(false)]
+		public bool? IsExtIndicatorVisible { get; set; }
+
+		///<summary>
+		/// Out of office message
+		/// <para>Name: OutOfOfficeMessage</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "outOfOfficeMessage")]
+		[Updateable(false), Createable(false)]
+		public string OutOfOfficeMessage { get; set; }
 
 		///<summary>
 		/// Url for medium profile photo

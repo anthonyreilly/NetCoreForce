@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -131,6 +131,24 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "whoId")]
 		[Updateable(false), Createable(true)]
 		public string WhoId { get; set; }
+
+		///<summary>
+		/// Email Template ID
+		/// <para>Name: EmailTemplateId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "emailTemplateId")]
+		[Updateable(false), Createable(true)]
+		public string EmailTemplateId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: EmailTemplate
+		/// <para>RelationshipName: EmailTemplate</para>
+		///</summary>
+		[JsonProperty(PropertyName = "emailTemplate")]
+		[Updateable(false), Createable(false)]
+		public SfEmailTemplate EmailTemplate { get; set; }
 
 	}
 }

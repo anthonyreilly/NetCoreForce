@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -299,6 +299,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "relatedListRecordId")]
 		[Updateable(false), Createable(false)]
 		public string RelatedListRecordId { get; set; }
+
+		///<summary>
+		/// Target URL
+		/// <para>Name: TargetUrl</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "targetUrl")]
+		[Updateable(false), Createable(false)]
+		public string TargetUrl { get; set; }
+
+		///<summary>
+		/// Target Object
+		/// <para>Name: TargetObject</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "targetObject")]
+		[Updateable(false), Createable(false)]
+		public string TargetObject { get; set; }
 
 	}
 }

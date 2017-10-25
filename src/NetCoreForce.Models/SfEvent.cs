@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -21,6 +21,24 @@ namespace NetCoreForce.Models
 		{
 			get { return "Event"; }
 		}
+
+		///<summary>
+		/// Activity Extension ID
+		/// <para>Name: ActivityExtensionId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "activityExtensionId")]
+		[Updateable(false), Createable(false)]
+		public string ActivityExtensionId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: ActivityExtension
+		/// <para>RelationshipName: ActivityExtension</para>
+		///</summary>
+		[JsonProperty(PropertyName = "activityExtension")]
+		[Updateable(false), Createable(false)]
+		public SfActivityExtension ActivityExtension { get; set; }
 
 		///<summary>
 		/// Activity ID

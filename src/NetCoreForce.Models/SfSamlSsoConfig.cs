@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -323,6 +323,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "requestSignatureMethod")]
 		[Updateable(false), Createable(false)]
 		public string RequestSignatureMethod { get; set; }
+
+		///<summary>
+		/// Identity Provider Single Logout URL
+		/// <para>Name: SingleLogoutUrl</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "singleLogoutUrl")]
+		[Updateable(false), Createable(false)]
+		public string SingleLogoutUrl { get; set; }
+
+		///<summary>
+		/// Single Logout Request Binding
+		/// <para>Name: SingleLogoutBinding</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "singleLogoutBinding")]
+		[Updateable(false), Createable(false)]
+		public string SingleLogoutBinding { get; set; }
 
 	}
 }

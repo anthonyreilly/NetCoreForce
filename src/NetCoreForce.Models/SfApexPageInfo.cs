@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -111,6 +111,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "masterLabel")]
 		[Updateable(false), Createable(false)]
 		public string MasterLabel { get; set; }
+
+		///<summary>
+		/// Show Header
+		/// <para>Name: IsShowHeader</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isShowHeader")]
+		[Updateable(false), Createable(false)]
+		public string IsShowHeader { get; set; }
 
 	}
 }

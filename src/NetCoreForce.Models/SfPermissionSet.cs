@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -160,6 +160,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "permissionsManageUsers")]
 		public bool? PermissionsManageUsers { get; set; }
+
+		///<summary>
+		/// Manage Public List Views
+		/// <para>Name: PermissionsEditPublicFilters</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsEditPublicFilters")]
+		public bool? PermissionsEditPublicFilters { get; set; }
 
 		///<summary>
 		/// Manage Public Templates
@@ -585,7 +594,7 @@ namespace NetCoreForce.Models
 		public bool? PermissionsManageDataIntegrations { get; set; }
 
 		///<summary>
-		/// Deliver Uploaded Files and Personal Content
+		/// Create Content Deliveries
 		/// <para>Name: PermissionsDistributeFromPersWksp</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -711,7 +720,7 @@ namespace NetCoreForce.Models
 		public bool? PermissionsManageContentTypes { get; set; }
 
 		///<summary>
-		/// Manage Exchange Configurations
+		/// Manage Lightning Sync
 		/// <para>Name: PermissionsManageExchangeConfig</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -864,7 +873,7 @@ namespace NetCoreForce.Models
 		public bool? PermissionsAllowEmailIC { get; set; }
 
 		///<summary>
-		/// Create and Share Content Deliveries for Salesforce Files
+		/// Create Public Links
 		/// <para>Name: PermissionsChatterFileLink</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -1044,6 +1053,15 @@ namespace NetCoreForce.Models
 		public bool? PermissionsAllowViewKnowledge { get; set; }
 
 		///<summary>
+		/// Access Libraries
+		/// <para>Name: PermissionsContentWorkspaces</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsContentWorkspaces")]
+		public bool? PermissionsContentWorkspaces { get; set; }
+
+		///<summary>
 		/// Manage Promoted Search Terms
 		/// <para>Name: PermissionsManageSearchPromotionRules</para>
 		/// <para>SF Type: boolean</para>
@@ -1150,6 +1168,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "permissionsManageCustomPermissions")]
 		public bool? PermissionsManageCustomPermissions { get; set; }
+
+		///<summary>
+		/// Verify Answers to Chatter Questions
+		/// <para>Name: PermissionsCanVerifyComment</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsCanVerifyComment")]
+		public bool? PermissionsCanVerifyComment { get; set; }
 
 		///<summary>
 		/// Manage Unlisted Groups
@@ -1341,6 +1368,15 @@ namespace NetCoreForce.Models
 		public bool? PermissionsManagePvtRptsAndDashbds { get; set; }
 
 		///<summary>
+		/// Lightning Login User
+		/// <para>Name: PermissionsAllowLightningLogin</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsAllowLightningLogin")]
+		public bool? PermissionsAllowLightningLogin { get; set; }
+
+		///<summary>
 		/// Campaign Influence
 		/// <para>Name: PermissionsCampaignInfluence2</para>
 		/// <para>SF Type: boolean</para>
@@ -1350,6 +1386,24 @@ namespace NetCoreForce.Models
 		public bool? PermissionsCampaignInfluence2 { get; set; }
 
 		///<summary>
+		/// Access to view Data Assessment
+		/// <para>Name: PermissionsViewDataAssessment</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewDataAssessment")]
+		public bool? PermissionsViewDataAssessment { get; set; }
+
+		///<summary>
+		/// Remove People from Direct Messages
+		/// <para>Name: PermissionsRemoveDirectMessageMembers</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsRemoveDirectMessageMembers")]
+		public bool? PermissionsRemoveDirectMessageMembers { get; set; }
+
+		///<summary>
 		/// Can Approve Feed Post and Comment
 		/// <para>Name: PermissionsCanApproveFeedPost</para>
 		/// <para>SF Type: boolean</para>
@@ -1357,6 +1411,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "permissionsCanApproveFeedPost")]
 		public bool? PermissionsCanApproveFeedPost { get; set; }
+
+		///<summary>
+		/// Add People to Direct Messages
+		/// <para>Name: PermissionsAddDirectMessageMembers</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsAddDirectMessageMembers")]
+		public bool? PermissionsAddDirectMessageMembers { get; set; }
 
 		///<summary>
 		/// View and Edit Converted Leads
@@ -1404,6 +1467,78 @@ namespace NetCoreForce.Models
 		public bool? PermissionsManageHealthCheck { get; set; }
 
 		///<summary>
+		/// Create and Update Second-Generation Packages
+		/// <para>Name: PermissionsPackaging2</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsPackaging2")]
+		public bool? PermissionsPackaging2 { get; set; }
+
+		///<summary>
+		/// Manage Certificates
+		/// <para>Name: PermissionsManageCertificates</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsManageCertificates")]
+		public bool? PermissionsManageCertificates { get; set; }
+
+		///<summary>
+		/// Hide Option to Switch to Salesforce Classic
+		/// <para>Name: PermissionsPreventClassicExperience</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsPreventClassicExperience")]
+		public bool? PermissionsPreventClassicExperience { get; set; }
+
+		///<summary>
+		/// Hide the Seen By List
+		/// <para>Name: PermissionsHideReadByList</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsHideReadByList")]
+		public bool? PermissionsHideReadByList { get; set; }
+
+		///<summary>
+		/// Allow sending of List Emails
+		/// <para>Name: PermissionsListEmailSend</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsListEmailSend")]
+		public bool? PermissionsListEmailSend { get; set; }
+
+		///<summary>
+		/// Pin Posts in Feeds
+		/// <para>Name: PermissionsFeedPinning</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsFeedPinning")]
+		public bool? PermissionsFeedPinning { get; set; }
+
+		///<summary>
+		/// IoT User
+		/// <para>Name: PermissionsIotUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsIotUser")]
+		public bool? PermissionsIotUser { get; set; }
+
+		///<summary>
+		/// Allow WebLink access via the Tooling API
+		/// <para>Name: PermissionsUseWebLink</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsUseWebLink")]
+		public bool? PermissionsUseWebLink { get; set; }
+
+		///<summary>
 		/// View All Activities
 		/// <para>Name: PermissionsViewAllActivities</para>
 		/// <para>SF Type: boolean</para>
@@ -1411,6 +1546,24 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "permissionsViewAllActivities")]
 		public bool? PermissionsViewAllActivities { get; set; }
+
+		///<summary>
+		/// Lightning Console User
+		/// <para>Name: PermissionsLightningConsoleAllowedForUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsLightningConsoleAllowedForUser")]
+		public bool? PermissionsLightningConsoleAllowedForUser { get; set; }
+
+		///<summary>
+		/// Show App Launcher in Communities
+		/// <para>Name: PermissionsEnableCommunityAppLauncher</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsEnableCommunityAppLauncher")]
+		public bool? PermissionsEnableCommunityAppLauncher { get; set; }
 
 		///<summary>
 		/// Description

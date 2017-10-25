@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -154,6 +154,26 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "description")]
 		public string Description { get; set; }
+
+		///<summary>
+		/// Supports Classic
+		/// <para>Name: IsAlohaSupported</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isAlohaSupported")]
+		[Updateable(false), Createable(false)]
+		public bool? IsAlohaSupported { get; set; }
+
+		///<summary>
+		/// Apply To
+		/// <para>Name: StartingContext</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "startingContext")]
+		[Updateable(false), Createable(true)]
+		public string StartingContext { get; set; }
 
 	}
 }

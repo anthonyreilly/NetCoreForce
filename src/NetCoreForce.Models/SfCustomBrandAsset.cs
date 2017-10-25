@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -68,13 +68,13 @@ namespace NetCoreForce.Models
 		public string TextAsset { get; set; }
 
 		///<summary>
-		/// Foreign key asset ID
-		/// <para>Name: ForeignKeyAssetId</para>
+		/// Asset source ID
+		/// <para>Name: AssetSourceId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "foreignKeyAssetId")]
-		public string ForeignKeyAssetId { get; set; }
+		[JsonProperty(PropertyName = "assetSourceId")]
+		public string AssetSourceId { get; set; }
 
 		///<summary>
 		/// Created By ID

@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -153,6 +153,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "baseline")]
 		public string Baseline { get; set; }
+
+		///<summary>
+		/// Is Default Baseline
+		/// <para>Name: IsDefault</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isDefault")]
+		public bool? IsDefault { get; set; }
 
 	}
 }

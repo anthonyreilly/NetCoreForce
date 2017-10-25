@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -85,7 +85,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "product2Id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Createable(true)]
 		public string Product2Id { get; set; }
 
 		///<summary>

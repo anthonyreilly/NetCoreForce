@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -43,6 +43,46 @@ namespace NetCoreForce.Models
 		public string LicenseDefinitionKey { get; set; }
 
 		///<summary>
+		/// Total Licenses
+		/// <para>Name: TotalLicenses</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "totalLicenses")]
+		[Updateable(false), Createable(false)]
+		public int? TotalLicenses { get; set; }
+
+		///<summary>
+		/// Status
+		/// <para>Name: Status</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "status")]
+		[Updateable(false), Createable(false)]
+		public string Status { get; set; }
+
+		///<summary>
+		/// Used Licenses
+		/// <para>Name: UsedLicenses</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "usedLicenses")]
+		[Updateable(false), Createable(false)]
+		public int? UsedLicenses { get; set; }
+
+		///<summary>
+		/// Used Licenses Last Updated
+		/// <para>Name: UsedLicensesLastUpdated</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "usedLicensesLastUpdated")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? UsedLicensesLastUpdated { get; set; }
+
+		///<summary>
 		/// Name
 		/// <para>Name: Name</para>
 		/// <para>SF Type: string</para>
@@ -51,6 +91,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "name")]
 		[Updateable(false), Createable(false)]
 		public string Name { get; set; }
+
+		///<summary>
+		/// Master Label
+		/// <para>Name: MasterLabel</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "masterLabel")]
+		[Updateable(false), Createable(false)]
+		public string MasterLabel { get; set; }
 
 		///<summary>
 		/// Monthly Logins Used
@@ -71,6 +121,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "monthlyLoginsEntitlement")]
 		[Updateable(false), Createable(false)]
 		public int? MonthlyLoginsEntitlement { get; set; }
+
+		///<summary>
+		/// Created Date
+		/// <para>Name: CreatedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "createdDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? CreatedDate { get; set; }
+
+		///<summary>
+		/// Last Modified Date
+		/// <para>Name: LastModifiedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastModifiedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastModifiedDate { get; set; }
 
 		///<summary>
 		/// System Modstamp

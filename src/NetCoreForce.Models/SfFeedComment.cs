@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -185,6 +185,16 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "isRichText")]
 		public bool? IsRichText { get; set; }
+
+		///<summary>
+		/// Is a Verified Comment
+		/// <para>Name: IsVerified</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isVerified")]
+		[Updateable(false), Createable(false)]
+		public bool? IsVerified { get; set; }
 
 		///<summary>
 		/// Status

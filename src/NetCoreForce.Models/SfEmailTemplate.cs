@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -93,7 +93,6 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "brandTemplateId")]
-		[Updateable(false), Createable(true)]
 		public string BrandTemplateId { get; set; }
 
 		///<summary>
@@ -278,10 +277,9 @@ namespace NetCoreForce.Models
 		/// UI Type
 		/// <para>Name: UiType</para>
 		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "uiType")]
-		[Updateable(false), Createable(true)]
 		public string UiType { get; set; }
 
 		///<summary>
@@ -291,7 +289,6 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "relatedEntityType")]
-		[Updateable(false), Createable(true)]
 		public string RelatedEntityType { get; set; }
 
 	}

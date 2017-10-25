@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -197,6 +197,46 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "optionsAllowStandardPortalPages")]
 		[Updateable(false), Createable(false)]
 		public bool? OptionsAllowStandardPortalPages { get; set; }
+
+		///<summary>
+		/// Upgrade all requests to HTTPS
+		/// <para>Name: OptionsCspUpgradeInsecureRequests</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsCspUpgradeInsecureRequests")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsCspUpgradeInsecureRequests { get; set; }
+
+		///<summary>
+		/// Enable Content Sniffing Protection
+		/// <para>Name: OptionsContentSniffingProtection</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsContentSniffingProtection")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsContentSniffingProtection { get; set; }
+
+		///<summary>
+		/// Enable Browser Cross Site Scripting Protection
+		/// <para>Name: OptionsBrowserXssProtection</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsBrowserXssProtection")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsBrowserXssProtection { get; set; }
+
+		///<summary>
+		/// Referrer URL Protection
+		/// <para>Name: OptionsReferrerPolicyOriginWhenCrossOrigin</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsReferrerPolicyOriginWhenCrossOrigin")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsReferrerPolicyOriginWhenCrossOrigin { get; set; }
 
 		///<summary>
 		/// Site Description

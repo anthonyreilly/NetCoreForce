@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -97,7 +97,7 @@ namespace NetCoreForce.Models
 		public string ControllerKey { get; set; }
 
 		///<summary>
-		/// Available for Salesforce mobile apps and Lightning Pages
+		/// Available for Lightning Experience, Salesforce1, and Lightning Communities
 		/// <para>Name: IsAvailableInTouch</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>

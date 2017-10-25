@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -419,6 +419,66 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isCompound")]
 		[Updateable(false), Createable(false)]
 		public bool? IsCompound { get; set; }
+
+		///<summary>
+		/// Is Field Search Prefilterable?
+		/// <para>Name: IsSearchPrefilterable</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isSearchPrefilterable")]
+		[Updateable(false), Createable(false)]
+		public bool? IsSearchPrefilterable { get; set; }
+
+		///<summary>
+		/// Is ForeignKey Polymorphic?
+		/// <para>Name: IsPolymorphicForeignKey</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isPolymorphicForeignKey")]
+		[Updateable(false), Createable(false)]
+		public bool? IsPolymorphicForeignKey { get; set; }
+
+		///<summary>
+		/// Business Owner ID
+		/// <para>Name: BusinessOwnerId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "businessOwnerId")]
+		[Updateable(false), Createable(false)]
+		public string BusinessOwnerId { get; set; }
+
+		///<summary>
+		/// Business Status
+		/// <para>Name: BusinessStatus</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "businessStatus")]
+		[Updateable(false), Createable(false)]
+		public string BusinessStatus { get; set; }
+
+		///<summary>
+		/// Security Classification
+		/// <para>Name: SecurityClassification</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "securityClassification")]
+		[Updateable(false), Createable(false)]
+		public string SecurityClassification { get; set; }
+
+		///<summary>
+		/// Description
+		/// <para>Name: Description</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "description")]
+		[Updateable(false), Createable(false)]
+		public string Description { get; set; }
 
 	}
 }

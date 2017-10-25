@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -70,6 +70,25 @@ namespace NetCoreForce.Models
 		public string ContentUrl { get; set; }
 
 		///<summary>
+		/// Content Body ID
+		/// <para>Name: ContentBodyId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "contentBodyId")]
+		[Updateable(false), Createable(true)]
+		public string ContentBodyId { get; set; }
+
+		// Commenting out since its not directly queryable
+		///<summary>
+		/// ReferenceTo: ContentBody
+		/// <para>RelationshipName: ContentBody</para>
+		///</summary>
+		// [JsonProperty(PropertyName = "contentBody")]
+		// [Updateable(false), Createable(false)]
+		// public SfContentBody ContentBody { get; set; }		
+
+		///<summary>
 		/// Version Number
 		/// <para>Name: VersionNumber</para>
 		/// <para>SF Type: string</para>
@@ -114,6 +133,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "sharingOption")]
 		public string SharingOption { get; set; }
+
+		///<summary>
+		/// File Privacy on Records
+		/// <para>Name: SharingPrivacy</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "sharingPrivacy")]
+		public string SharingPrivacy { get; set; }
 
 		///<summary>
 		/// Path On Client

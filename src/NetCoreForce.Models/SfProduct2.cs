@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -208,6 +208,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "lastReferencedDate")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? LastReferencedDate { get; set; }
+
+		///<summary>
+		/// Product SKU
+		/// <para>Name: StockKeepingUnit</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "stockKeepingUnit")]
+		public string StockKeepingUnit { get; set; }
 
 	}
 }

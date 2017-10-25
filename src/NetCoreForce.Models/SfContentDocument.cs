@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -273,6 +273,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "sharingOption")]
 		[Updateable(true), Createable(false)]
 		public string SharingOption { get; set; }
+
+		///<summary>
+		/// File Privacy on Records
+		/// <para>Name: SharingPrivacy</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "sharingPrivacy")]
+		[Updateable(true), Createable(false)]
+		public string SharingPrivacy { get; set; }
 
 		///<summary>
 		/// Content Modified Date

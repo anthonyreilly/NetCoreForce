@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -259,6 +259,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "lastModifiedBy")]
 		[Updateable(false), Createable(false)]
 		public SfUser LastModifiedBy { get; set; }
+
+		///<summary>
+		/// Last Viewed Date
+		/// <para>Name: LastViewedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastViewedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastViewedDate { get; set; }
 
 	}
 }

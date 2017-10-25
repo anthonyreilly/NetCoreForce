@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -272,6 +272,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "hasFeedEntity")]
 		[Updateable(false), Createable(false)]
 		public bool? HasFeedEntity { get; set; }
+
+		///<summary>
+		/// Has Verified Comment
+		/// <para>Name: HasVerifiedComment</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "hasVerifiedComment")]
+		[Updateable(false), Createable(false)]
+		public bool? HasVerifiedComment { get; set; }
 
 		///<summary>
 		/// Status

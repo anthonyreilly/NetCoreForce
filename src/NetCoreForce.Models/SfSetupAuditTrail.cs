@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -99,6 +99,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "delegateUser")]
 		[Updateable(false), Createable(false)]
 		public string DelegateUser { get; set; }
+
+		///<summary>
+		/// Source Namespace Prefix
+		/// <para>Name: ResponsibleNamespacePrefix</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "responsibleNamespacePrefix")]
+		[Updateable(false), Createable(false)]
+		public string ResponsibleNamespacePrefix { get; set; }
 
 	}
 }

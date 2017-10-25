@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -243,14 +243,24 @@ namespace NetCoreForce.Models
 		public bool? PreferencesTerminateOldestSession { get; set; }
 
 		///<summary>
-		/// ActivityAnalyticsEnabled
-		/// <para>Name: PreferencesActivityAnalyticsEnabled</para>
+		/// LightningLoginEnabled
+		/// <para>Name: PreferencesLightningLoginEnabled</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "preferencesActivityAnalyticsEnabled")]
+		[JsonProperty(PropertyName = "preferencesLightningLoginEnabled")]
 		[Updateable(true), Createable(false)]
-		public bool? PreferencesActivityAnalyticsEnabled { get; set; }
+		public bool? PreferencesLightningLoginEnabled { get; set; }
+
+		///<summary>
+		/// OnlyLLPermUserAllowed
+		/// <para>Name: PreferencesOnlyLLPermUserAllowed</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "preferencesOnlyLLPermUserAllowed")]
+		[Updateable(true), Createable(false)]
+		public bool? PreferencesOnlyLLPermUserAllowed { get; set; }
 
 		///<summary>
 		/// Fiscal Year Starts In
@@ -401,6 +411,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "trialExpirationDate")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? TrialExpirationDate { get; set; }
+
+		///<summary>
+		/// Knowledge Licenses
+		/// <para>Name: NumKnowledgeService</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "numKnowledgeService")]
+		[Updateable(false), Createable(false)]
+		public int? NumKnowledgeService { get; set; }
 
 		///<summary>
 		/// Edition

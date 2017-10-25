@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -310,6 +310,16 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "threadIdentifier")]
 		public string ThreadIdentifier { get; set; }
+
+		///<summary>
+		/// Is Client Managed
+		/// <para>Name: IsClientManaged</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isClientManaged")]
+		[Updateable(false), Createable(true)]
+		public bool? IsClientManaged { get; set; }
 
 		///<summary>
 		/// Related To ID

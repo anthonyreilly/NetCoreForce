@@ -1,4 +1,4 @@
-// SF API version v39.0
+// SF API version v41.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Snap-in Detail
+	/// Snap-ins
 	///<para>SObject Name: EmbeddedServiceDetail</para>
 	///<para>Custom Object: False</para>
 	///</summary>
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// Snap-in Detail ID
+		/// Snap-ins ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -33,7 +33,7 @@ namespace NetCoreForce.Models
 		public string Id { get; set; }
 
 		///<summary>
-		/// Snap-in Detail Durable ID
+		/// Snap-ins Durable ID
 		/// <para>Name: DurableId</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -111,6 +111,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "font")]
 		[Updateable(false), Createable(false)]
 		public string Font { get; set; }
+
+		///<summary>
+		/// Appointment Booking Flow Name Flow Definition
+		/// <para>Name: FlowDeveloperName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "flowDeveloperName")]
+		[Updateable(false), Createable(false)]
+		public string FlowDeveloperName { get; set; }
 
 	}
 }
