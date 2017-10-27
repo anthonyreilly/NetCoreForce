@@ -1,5 +1,9 @@
 # Changelog
 
+### 2017-10-27 v1.2.2
+* Added **QuerySingle<T>** convienience method when only a single record is expected from a SOQL query. Will throw an exception if multiple records are returned, to avoid risk of ignoring unknown query results.
+* Added additional mocked and functional query tests
+
 ### 2017-10-27 v1.2.1
 * Enabled XML Documentation/Intellisense support in build output
 

@@ -134,6 +134,29 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
+        /// Retrieve a single record using a SOQL query.
+        /// <para>Will throw an exception if multiple rows are retrieved by the query - if you are note sure of a single result, use Query{T} instead.</para>
+        /// </summary>
+        /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
+        /// <param name="queryAll">True if deleted records are to be included</param>
+        /// <returns>result object</returns>
+        public async Task<T> QuerySingle<T>(string queryString, bool queryAll = false)
+        {
+            List<T> results = await Query<T>(queryString, queryAll);
+            
+            if(results != null && results.Count > 1)
+            {
+                throw new Exception("Multiple records were returned by query passed into QuerySingle - query must retrieve zero or one record.");
+            }
+
+            if(results != null && results.Count == 1){
+                return results[0];
+            }
+
+            return default(T);
+        }
+
+        /// <summary>
         /// Executes a SOSL search, returning a type T, e.g. when using "RETURNING Account" in the SOSL query.
         /// <para>Not properly matching the return type T and the RETURNING clause of the SOSL query may return unexpected results</para>
         /// </summary>
