@@ -1,7 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.props))\build.props" />
-
   <PropertyGroup>
     <AssemblyName>dotnet-modelgenerator</AssemblyName>
     <Product>NetCoreForce.ModelGenerator</Product>
@@ -9,8 +7,6 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <VersionPrefix>$(VersionPrefix)</VersionPrefix>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
-    <!--<RuntimeIdentifiers>win10-x64;osx.10.12-x64</RuntimeIdentifiers>-->
-
     <!--NuGet-->
     <Authors>$(Authors)</Authors>
     <Copyright>$(Copyright)</Copyright>
@@ -26,24 +22,27 @@
     <RepositoryUrl>$(RepositoryUrl)</RepositoryUrl>
     <PackageReleaseNotes>$(PackageReleaseNotes)</PackageReleaseNotes>
   </PropertyGroup>
-
+  <PropertyGroup>
+    <!-- Documentation -->
+    <!-- <GenerateDocumentationFile>true</GenerateDocumentationFile> -->
+    <!-- <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile> -->
+    <!-- warning CS1591: Missing XML comment for publicly visible type or member -->
+    <!-- warning CS1701: Assuming assembly reference 'System.Runtime [...] 4.0/4.1 mismatch when enabling doc output-->
+    <!-- <NoWarn>CS1591,CS1701</NoWarn> -->
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <PostBuildEvent>dotnet pack $(MSBuildThisFileDirectory)/NetCoreForce.ModelGenerator.csproj -o $(SolutionDir)/packages -c Release --no-build</PostBuildEvent>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\NetCoreForce.Client\NetCoreForce.Client.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.CommandLineUtils" Version="1.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="credentials.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
 </Project>

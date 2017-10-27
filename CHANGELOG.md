@@ -1,7 +1,9 @@
 # Changelog
 
-### 2017-10-25 v1.2.0
+### 2017-10-27 v1.2.1
+* Enabled XML Documentation/Intellisense support in build output
 
+### 2017-10-25 v1.2.0
 * ModelGenerator: Fixed ability to generate all objects at once, and clarified option in console prompts - specifying "all" as the object name will include all available objects in the output.
 * Client: Update default client SFDC API version to v41.0
 * Models: Regenerated sample models againt SFDC API v41.0

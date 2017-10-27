@@ -1,7 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.props))\build.props" />
-  
   <PropertyGroup>
     <AssemblyName>NetCoreForce.Models</AssemblyName>
     <Product>NetCoreForce.Models</Product>
@@ -9,7 +7,6 @@
     <TargetFramework>netstandard1.3</TargetFramework>
     <VersionPrefix>$(VersionPrefix)</VersionPrefix>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
-
     <!--NuGet-->
     <Authors>$(Authors)</Authors>
     <Copyright>$(Copyright)</Copyright>
@@ -24,17 +21,21 @@
     <RepositoryUrl>$(RepositoryUrl)</RepositoryUrl>
     <PackageReleaseNotes>$(PackageReleaseNotes)</PackageReleaseNotes>
   </PropertyGroup>
-
+  <PropertyGroup>
+    <!-- Documentation -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <!-- warning CS1591: Missing XML comment for publicly visible type or member -->
+    <!-- warning CS1587: XML comment is not placed on a valid language element -->
+    <NoWarn>CS1591,CS1587</NoWarn>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <PostBuildEvent>dotnet pack $(MSBuildThisFileDirectory)/NetCoreForce.Models.csproj -o $(SolutionDir)/packages -c Release --no-build</PostBuildEvent>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\NetCoreForce.Client\NetCoreForce.Client.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
   </ItemGroup>
-
 </Project>
