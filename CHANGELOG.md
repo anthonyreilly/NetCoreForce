@@ -1,5 +1,8 @@
 # Changelog
 
+### 2017-12-11 v1.2.3
+* Fixed incorrect type mapping in ModelGenerator: SFDC "Date" now creates nullable DateTime? model object properties - was previously creating string properties.
+
 ### 2017-10-27 v1.2.2
 * Added **QuerySingle<T>** convenience method when only a single record is expected from a SOQL query. Will throw an exception if multiple records are returned, to avoid risk of ignoring unknown query results.
 * Added additional mocked and functional query tests

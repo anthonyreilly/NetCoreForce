@@ -549,7 +549,7 @@ namespace NetCoreForce.ModelGenerator
                     }
 
                     //we want all nullable types in the model, so that they are not serialized/initialized with default values
-                    if (csTypeName == "bool" || csTypeName == "DateTimeOffset" || csTypeName == "int" || csTypeName == "double" || csTypeName == "decimal")
+                    if (csTypeName == "bool" || csTypeName == "DateTimeOffset" || csTypeName == "DateTime" || csTypeName == "int" || csTypeName == "double" || csTypeName == "decimal")
                     {
                         csTypeName += "?";
                     }

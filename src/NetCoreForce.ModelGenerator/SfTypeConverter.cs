@@ -27,6 +27,9 @@ namespace NetCoreForce.ModelGenerator
                 case FieldType.datetime_sf:
                     type = typeof(DateTimeOffset);
                     break;
+                case FieldType.date_sf:
+                    type = typeof(DateTime);
+                    break;
                 case FieldType.double_sf:
                     type = typeof(double);
                     break;
