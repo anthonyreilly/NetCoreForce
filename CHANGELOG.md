@@ -1,5 +1,11 @@
 # Changelog
 
+### 2017-12-12 v1.3.0
+* Regenerate generic models against new default SFDC dev org
+* ModelGenerator: HTML escape field labels in case of reserved characters, e.g. "&";
+* ModelGenerator: add exception to ignore ContentBody non-queryable, non-serializable type in reference fields
+* Add basic test for SOQL nested subqueries
+
 ### 2017-12-11 v1.2.3
 * Fixed incorrect type mapping in ModelGenerator: SFDC "Date" now creates nullable DateTime? model object properties - was previously creating string properties.
 
