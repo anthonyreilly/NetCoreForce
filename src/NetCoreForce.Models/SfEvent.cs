@@ -111,7 +111,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "activityDate")]
-		public string ActivityDate { get; set; }
+		public DateTime? ActivityDate { get; set; }
 
 		///<summary>
 		/// Duration
@@ -354,7 +354,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "recurrenceEndDateOnly")]
-		public string RecurrenceEndDateOnly { get; set; }
+		public DateTime? RecurrenceEndDateOnly { get; set; }
 
 		///<summary>
 		/// Recurrence Time Zone

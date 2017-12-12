@@ -179,7 +179,7 @@ namespace NetCoreForce.Models
 		public bool? OptionsSendClientCredentialsInHeader { get; set; }
 
 		///<summary>
-		/// Include identity organization's organization ID for third-party account linkage
+		/// Include identity organization&#39;s organization ID for third-party account linkage
 		/// <para>Name: OptionsIncludeOrgIdInId</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>

@@ -139,7 +139,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "closeDate")]
-		public string CloseDate { get; set; }
+		public DateTime? CloseDate { get; set; }
 
 		///<summary>
 		/// Opportunity Type
@@ -342,7 +342,7 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "lastActivityDate")]
 		[Updateable(false), Createable(false)]
-		public string LastActivityDate { get; set; }
+		public DateTime? LastActivityDate { get; set; }
 
 		///<summary>
 		/// Fiscal Quarter

@@ -50,7 +50,7 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "startDate")]
 		[Updateable(false), Createable(false)]
-		public string StartDate { get; set; }
+		public DateTime? StartDate { get; set; }
 
 		///<summary>
 		/// End Date
@@ -60,7 +60,7 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "endDate")]
 		[Updateable(false), Createable(false)]
-		public string EndDate { get; set; }
+		public DateTime? EndDate { get; set; }
 
 		///<summary>
 		/// Name

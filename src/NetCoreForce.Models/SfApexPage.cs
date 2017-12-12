@@ -97,7 +97,7 @@ namespace NetCoreForce.Models
 		public string ControllerKey { get; set; }
 
 		///<summary>
-		/// Available for Lightning Experience, Salesforce1, and Lightning Communities
+		/// Available for Lightning Experience, Lightning Communities, and the mobile app
 		/// <para>Name: IsAvailableInTouch</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>

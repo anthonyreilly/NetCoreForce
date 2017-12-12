@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Approval
-	///<para>SObject Name: Approval</para>
+	/// User Provisioning Mock Target
+	///<para>SObject Name: UserProvMockTarget</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfApproval : SObject
+	public class SfUserProvMockTarget : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "Approval"; }
+			get { return "UserProvMockTarget"; }
 		}
 
 		///<summary>
-		/// Approval ID
+		/// UserProvMockTarget ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -43,40 +43,13 @@ namespace NetCoreForce.Models
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
-		/// Parent ID
-		/// <para>Name: ParentId</para>
-		/// <para>SF Type: reference</para>
+		/// Name
+		/// <para>Name: Name</para>
+		/// <para>SF Type: string</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "parentId")]
-		[Updateable(false), Createable(false)]
-		public string ParentId { get; set; }
-
-		///<summary>
-		/// ReferenceTo: Contract
-		/// <para>RelationshipName: Parent</para>
-		///</summary>
-		[JsonProperty(PropertyName = "parent")]
-		[Updateable(false), Createable(false)]
-		public SfContract Parent { get; set; }
-
-		///<summary>
-		/// Owner ID
-		/// <para>Name: OwnerId</para>
-		/// <para>SF Type: reference</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "ownerId")]
-		[Updateable(false), Createable(false)]
-		public string OwnerId { get; set; }
-
-		///<summary>
-		/// ReferenceTo: User
-		/// <para>RelationshipName: Owner</para>
-		///</summary>
-		[JsonProperty(PropertyName = "owner")]
-		[Updateable(false), Createable(false)]
-		public SfUser Owner { get; set; }
+		[JsonProperty(PropertyName = "name")]
+		public string Name { get; set; }
 
 		///<summary>
 		/// Created Date
@@ -135,36 +108,6 @@ namespace NetCoreForce.Models
 		public SfUser LastModifiedBy { get; set; }
 
 		///<summary>
-		/// Status
-		/// <para>Name: Status</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "status")]
-		[Updateable(false), Createable(false)]
-		public string Status { get; set; }
-
-		///<summary>
-		/// Request Comment
-		/// <para>Name: RequestComment</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "requestComment")]
-		[Updateable(false), Createable(false)]
-		public string RequestComment { get; set; }
-
-		///<summary>
-		/// Approve/Reject Comment
-		/// <para>Name: ApproveComment</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "approveComment")]
-		[Updateable(false), Createable(false)]
-		public string ApproveComment { get; set; }
-
-		///<summary>
 		/// System Modstamp
 		/// <para>Name: SystemModstamp</para>
 		/// <para>SF Type: datetime</para>
@@ -173,6 +116,51 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "systemModstamp")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? SystemModstamp { get; set; }
+
+		///<summary>
+		/// External User Id
+		/// <para>Name: ExternalUserId</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "externalUserId")]
+		public string ExternalUserId { get; set; }
+
+		///<summary>
+		/// External Username
+		/// <para>Name: ExternalUsername</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "externalUsername")]
+		public string ExternalUsername { get; set; }
+
+		///<summary>
+		/// External Email
+		/// <para>Name: ExternalEmail</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "externalEmail")]
+		public string ExternalEmail { get; set; }
+
+		///<summary>
+		/// External First Name
+		/// <para>Name: ExternalFirstName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "externalFirstName")]
+		public string ExternalFirstName { get; set; }
+
+		///<summary>
+		/// External Last Name
+		/// <para>Name: ExternalLastName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "externalLastName")]
+		public string ExternalLastName { get; set; }
 
 	}
 }

@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// SearchActivity
-	///<para>SObject Name: SearchActivity</para>
+	/// Data.com Usage
+	///<para>SObject Name: DatacloudPurchaseUsage</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfSearchActivity : SObject
+	public class SfDatacloudPurchaseUsage : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "SearchActivity"; }
+			get { return "DatacloudPurchaseUsage"; }
 		}
 
 		///<summary>
-		/// Search Activity Id
+		/// Data.com Usage ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -43,7 +43,7 @@ namespace NetCoreForce.Models
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
-		/// Search Activity Name
+		/// Sequence ID
 		/// <para>Name: Name</para>
 		/// <para>SF Type: string</para>
 		/// <para>AutoNumber field</para>
@@ -120,104 +120,72 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Search Term
-		/// <para>Name: SearchTerm</para>
-		/// <para>SF Type: string</para>
+		/// User ID
+		/// <para>Name: UserId</para>
+		/// <para>SF Type: reference</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "searchTerm")]
+		[JsonProperty(PropertyName = "userId")]
 		[Updateable(false), Createable(false)]
-		public string SearchTerm { get; set; }
+		public string UserId { get; set; }
 
 		///<summary>
-		/// Search Date
-		/// <para>Name: QueryDate</para>
-		/// <para>SF Type: date</para>
+		/// ReferenceTo: User
+		/// <para>RelationshipName: User</para>
+		///</summary>
+		[JsonProperty(PropertyName = "user")]
+		[Updateable(false), Createable(false)]
+		public SfUser User { get; set; }
+
+		///<summary>
+		/// Data.com Usage Type
+		/// <para>Name: UserType</para>
+		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "queryDate")]
+		[JsonProperty(PropertyName = "userType")]
 		[Updateable(false), Createable(false)]
-		public DateTime? QueryDate { get; set; }
+		public string UserType { get; set; }
 
 		///<summary>
-		/// Number of Searches
-		/// <para>Name: CountQueries</para>
-		/// <para>SF Type: int</para>
+		/// Data.com Purchase Type
+		/// <para>Name: PurchaseType</para>
+		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "countQueries")]
+		[JsonProperty(PropertyName = "purchaseType")]
 		[Updateable(false), Createable(false)]
-		public int? CountQueries { get; set; }
+		public string PurchaseType { get; set; }
 
 		///<summary>
-		/// Number of Users
-		/// <para>Name: CountUsers</para>
-		/// <para>SF Type: int</para>
+		/// Data.com Object Type
+		/// <para>Name: DatacloudEntityType</para>
+		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "countUsers")]
+		[JsonProperty(PropertyName = "datacloudEntityType")]
 		[Updateable(false), Createable(false)]
-		public int? CountUsers { get; set; }
+		public string DatacloudEntityType { get; set; }
 
 		///<summary>
-		/// Number of Results
-		/// <para>Name: AvgNumResults</para>
+		/// Purchase Count
+		/// <para>Name: Usage</para>
 		/// <para>SF Type: double</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "avgNumResults")]
+		[JsonProperty(PropertyName = "usage")]
 		[Updateable(false), Createable(false)]
-		public double? AvgNumResults { get; set; }
+		public double? Usage { get; set; }
 
 		///<summary>
-		/// Channel
-		/// <para>Name: KbChannel</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "kbChannel")]
-		[Updateable(false), Createable(false)]
-		public string KbChannel { get; set; }
-
-		///<summary>
-		/// Duration
-		/// <para>Name: Period</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "period")]
-		[Updateable(false), Createable(false)]
-		public string Period { get; set; }
-
-		///<summary>
-		/// Average Click Rank
-		/// <para>Name: ClickRank</para>
-		/// <para>SF Type: double</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "clickRank")]
-		[Updateable(false), Createable(false)]
-		public double? ClickRank { get; set; }
-
-		///<summary>
-		/// Language
-		/// <para>Name: QueryLanguage</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "queryLanguage")]
-		[Updateable(false), Createable(false)]
-		public string QueryLanguage { get; set; }
-
-		///<summary>
-		/// Clicked Article Title
-		/// <para>Name: ClickedRecordName</para>
+		/// Description
+		/// <para>Name: Description</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "clickedRecordName")]
+		[JsonProperty(PropertyName = "description")]
 		[Updateable(false), Createable(false)]
-		public string ClickedRecordName { get; set; }
+		public string Description { get; set; }
 
 	}
 }

@@ -297,6 +297,15 @@ namespace NetCoreForce.Models
 		public bool? PermissionsActivateContract { get; set; }
 
 		///<summary>
+		/// Activate Orders
+		/// <para>Name: PermissionsActivateOrder</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsActivateOrder")]
+		public bool? PermissionsActivateOrder { get; set; }
+
+		///<summary>
 		/// Import Leads
 		/// <para>Name: PermissionsImportLeads</para>
 		/// <para>SF Type: boolean</para>
@@ -378,13 +387,13 @@ namespace NetCoreForce.Models
 		public bool? PermissionsChatterInternalUser { get; set; }
 
 		///<summary>
-		/// Manage Dashboards
-		/// <para>Name: PermissionsManageDashboards</para>
+		/// Manage Encryption Keys
+		/// <para>Name: PermissionsManageEncryptionKeys</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "permissionsManageDashboards")]
-		public bool? PermissionsManageDashboards { get; set; }
+		[JsonProperty(PropertyName = "permissionsManageEncryptionKeys")]
+		public bool? PermissionsManageEncryptionKeys { get; set; }
 
 		///<summary>
 		/// Delete Activated Contracts
@@ -468,6 +477,15 @@ namespace NetCoreForce.Models
 		public bool? PermissionsUseTeamReassignWizards { get; set; }
 
 		///<summary>
+		/// Edit Activated Orders
+		/// <para>Name: PermissionsEditActivatedOrders</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsEditActivatedOrders")]
+		public bool? PermissionsEditActivatedOrders { get; set; }
+
+		///<summary>
 		/// Download AppExchange Packages
 		/// <para>Name: PermissionsInstallPackaging</para>
 		/// <para>SF Type: boolean</para>
@@ -538,15 +556,6 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "permissionsManageCallCenters")]
 		public bool? PermissionsManageCallCenters { get; set; }
-
-		///<summary>
-		/// Create and Customize Reports
-		/// <para>Name: PermissionsEditReports</para>
-		/// <para>SF Type: boolean</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "permissionsEditReports")]
-		public bool? PermissionsEditReports { get; set; }
 
 		///<summary>
 		/// Manage Synonyms
@@ -783,7 +792,7 @@ namespace NetCoreForce.Models
 		public bool? PermissionsManageInteraction { get; set; }
 
 		///<summary>
-		/// View My Team's Dashboards
+		/// View My Team&#39;s Dashboards
 		/// <para>Name: PermissionsViewMyTeamsDashboards</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -927,6 +936,96 @@ namespace NetCoreForce.Models
 		public bool? PermissionsRunFlow { get; set; }
 
 		///<summary>
+		/// Create and Customize Dashboards
+		/// <para>Name: PermissionsCreateCustomizeDashboards</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsCreateCustomizeDashboards")]
+		public bool? PermissionsCreateCustomizeDashboards { get; set; }
+
+		///<summary>
+		/// Create Dashboard Folders
+		/// <para>Name: PermissionsCreateDashboardFolders</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsCreateDashboardFolders")]
+		public bool? PermissionsCreateDashboardFolders { get; set; }
+
+		///<summary>
+		/// View Dashboards in Public Folders
+		/// <para>Name: PermissionsViewPublicDashboards</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewPublicDashboards")]
+		public bool? PermissionsViewPublicDashboards { get; set; }
+
+		///<summary>
+		/// Manage Dashboards in Public Folders
+		/// <para>Name: PermissionsManageDashbdsInPubFolders</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsManageDashbdsInPubFolders")]
+		public bool? PermissionsManageDashbdsInPubFolders { get; set; }
+
+		///<summary>
+		/// Create and Customize Reports
+		/// <para>Name: PermissionsCreateCustomizeReports</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsCreateCustomizeReports")]
+		public bool? PermissionsCreateCustomizeReports { get; set; }
+
+		///<summary>
+		/// Create Report Folders
+		/// <para>Name: PermissionsCreateReportFolders</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsCreateReportFolders")]
+		public bool? PermissionsCreateReportFolders { get; set; }
+
+		///<summary>
+		/// View Reports in Public Folders
+		/// <para>Name: PermissionsViewPublicReports</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewPublicReports")]
+		public bool? PermissionsViewPublicReports { get; set; }
+
+		///<summary>
+		/// Manage Reports in Public Folders
+		/// <para>Name: PermissionsManageReportsInPubFolders</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsManageReportsInPubFolders")]
+		public bool? PermissionsManageReportsInPubFolders { get; set; }
+
+		///<summary>
+		/// Edit My Dashboards
+		/// <para>Name: PermissionsEditMyDashboards</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsEditMyDashboards")]
+		public bool? PermissionsEditMyDashboards { get; set; }
+
+		///<summary>
+		/// Edit My Reports
+		/// <para>Name: PermissionsEditMyReports</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsEditMyReports")]
+		public bool? PermissionsEditMyReports { get; set; }
+
+		///<summary>
 		/// View All Users
 		/// <para>Name: PermissionsViewAllUsers</para>
 		/// <para>SF Type: boolean</para>
@@ -954,6 +1053,15 @@ namespace NetCoreForce.Models
 		public bool? PermissionsConnectOrgToEnvironmentHub { get; set; }
 
 		///<summary>
+		/// Enable Work.com Calibration
+		/// <para>Name: PermissionsWorkCalibrationUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsWorkCalibrationUser")]
+		public bool? PermissionsWorkCalibrationUser { get; set; }
+
+		///<summary>
 		/// Create and Customize List Views
 		/// <para>Name: PermissionsCreateCustomizeFilters</para>
 		/// <para>SF Type: boolean</para>
@@ -961,6 +1069,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "permissionsCreateCustomizeFilters")]
 		public bool? PermissionsCreateCustomizeFilters { get; set; }
+
+		///<summary>
+		/// Enable Work.com
+		/// <para>Name: PermissionsWorkDotComUserPerm</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsWorkDotComUserPerm")]
+		public bool? PermissionsWorkDotComUserPerm { get; set; }
 
 		///<summary>
 		/// Manage Communities
@@ -1233,7 +1350,7 @@ namespace NetCoreForce.Models
 		public bool? PermissionsConfigCustomRecs { get; set; }
 
 		///<summary>
-		/// Manage Macros Users Can't Undo
+		/// Manage Macros Users Can&#39;t Undo
 		/// <para>Name: PermissionsSubmitMacrosAllowed</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -1485,6 +1602,15 @@ namespace NetCoreForce.Models
 		public bool? PermissionsManageCertificates { get; set; }
 
 		///<summary>
+		/// Report Builder (Lightning Experience)
+		/// <para>Name: PermissionsCreateReportInLightning</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsCreateReportInLightning")]
+		public bool? PermissionsCreateReportInLightning { get; set; }
+
+		///<summary>
 		/// Hide Option to Switch to Salesforce Classic
 		/// <para>Name: PermissionsPreventClassicExperience</para>
 		/// <para>SF Type: boolean</para>
@@ -1548,6 +1674,15 @@ namespace NetCoreForce.Models
 		public bool? PermissionsViewAllActivities { get; set; }
 
 		///<summary>
+		/// Subscribe to Reports: Add Recipients
+		/// <para>Name: PermissionsSubscribeReportToOtherUsers</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsSubscribeReportToOtherUsers")]
+		public bool? PermissionsSubscribeReportToOtherUsers { get; set; }
+
+		///<summary>
 		/// Lightning Console User
 		/// <para>Name: PermissionsLightningConsoleAllowedForUser</para>
 		/// <para>SF Type: boolean</para>
@@ -1555,6 +1690,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "permissionsLightningConsoleAllowedForUser")]
 		public bool? PermissionsLightningConsoleAllowedForUser { get; set; }
+
+		///<summary>
+		/// Subscribe to Reports: Set Running User
+		/// <para>Name: PermissionsSubscribeReportsRunAsUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsSubscribeReportsRunAsUser")]
+		public bool? PermissionsSubscribeReportsRunAsUser { get; set; }
 
 		///<summary>
 		/// Show App Launcher in Communities

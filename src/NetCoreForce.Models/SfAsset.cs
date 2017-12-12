@@ -119,6 +119,16 @@ namespace NetCoreForce.Models
 		public SfProduct2 Product2 { get; set; }
 
 		///<summary>
+		/// Product Code
+		/// <para>Name: ProductCode</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "productCode")]
+		[Updateable(false), Createable(false)]
+		public string ProductCode { get; set; }
+
+		///<summary>
 		/// Competitor Asset
 		/// <para>Name: IsCompetitorProduct</para>
 		/// <para>SF Type: boolean</para>
@@ -228,7 +238,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "installDate")]
-		public string InstallDate { get; set; }
+		public DateTime? InstallDate { get; set; }
 
 		///<summary>
 		/// Purchase Date
@@ -237,7 +247,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "purchaseDate")]
-		public string PurchaseDate { get; set; }
+		public DateTime? PurchaseDate { get; set; }
 
 		///<summary>
 		/// Usage End Date
@@ -246,7 +256,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "usageEndDate")]
-		public string UsageEndDate { get; set; }
+		public DateTime? UsageEndDate { get; set; }
 
 		///<summary>
 		/// Status
@@ -283,6 +293,76 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "description")]
 		public string Description { get; set; }
+
+		///<summary>
+		/// Owner ID
+		/// <para>Name: OwnerId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "ownerId")]
+		public string OwnerId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: User
+		/// <para>RelationshipName: Owner</para>
+		///</summary>
+		[JsonProperty(PropertyName = "owner")]
+		[Updateable(false), Createable(false)]
+		public SfUser Owner { get; set; }
+
+		///<summary>
+		/// Asset Provided By ID
+		/// <para>Name: AssetProvidedById</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "assetProvidedById")]
+		public string AssetProvidedById { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Account
+		/// <para>RelationshipName: AssetProvidedBy</para>
+		///</summary>
+		[JsonProperty(PropertyName = "assetProvidedBy")]
+		[Updateable(false), Createable(false)]
+		public SfAccount AssetProvidedBy { get; set; }
+
+		///<summary>
+		/// Asset Serviced By ID
+		/// <para>Name: AssetServicedById</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "assetServicedById")]
+		public string AssetServicedById { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Account
+		/// <para>RelationshipName: AssetServicedBy</para>
+		///</summary>
+		[JsonProperty(PropertyName = "assetServicedBy")]
+		[Updateable(false), Createable(false)]
+		public SfAccount AssetServicedBy { get; set; }
+
+		///<summary>
+		/// Internal Asset
+		/// <para>Name: IsInternal</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isInternal")]
+		public bool? IsInternal { get; set; }
+
+		///<summary>
+		/// Asset Level
+		/// <para>Name: AssetLevel</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "assetLevel")]
+		[Updateable(false), Createable(false)]
+		public int? AssetLevel { get; set; }
 
 		///<summary>
 		/// Product SKU

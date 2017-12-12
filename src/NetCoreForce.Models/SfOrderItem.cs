@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Opportunity Product
-	///<para>SObject Name: OpportunityLineItem</para>
+	/// Order Product
+	///<para>SObject Name: OrderItem</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfOpportunityLineItem : SObject
+	public class SfOrderItem : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "OpportunityLineItem"; }
+			get { return "OrderItem"; }
 		}
 
 		///<summary>
-		/// Line Item ID
+		/// Order Product ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -31,52 +31,6 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "id")]
 		[Updateable(false), Createable(false)]
 		public string Id { get; set; }
-
-		///<summary>
-		/// Opportunity ID
-		/// <para>Name: OpportunityId</para>
-		/// <para>SF Type: reference</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "opportunityId")]
-		[Updateable(false), Createable(true)]
-		public string OpportunityId { get; set; }
-
-		///<summary>
-		/// ReferenceTo: Opportunity
-		/// <para>RelationshipName: Opportunity</para>
-		///</summary>
-		[JsonProperty(PropertyName = "opportunity")]
-		[Updateable(false), Createable(false)]
-		public SfOpportunity Opportunity { get; set; }
-
-		///<summary>
-		/// Sort Order
-		/// <para>Name: SortOrder</para>
-		/// <para>SF Type: int</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "sortOrder")]
-		[Updateable(false), Createable(false)]
-		public int? SortOrder { get; set; }
-
-		///<summary>
-		/// Price Book Entry ID
-		/// <para>Name: PricebookEntryId</para>
-		/// <para>SF Type: reference</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "pricebookEntryId")]
-		[Updateable(false), Createable(true)]
-		public string PricebookEntryId { get; set; }
-
-		///<summary>
-		/// ReferenceTo: PricebookEntry
-		/// <para>RelationshipName: PricebookEntry</para>
-		///</summary>
-		[JsonProperty(PropertyName = "pricebookEntry")]
-		[Updateable(false), Createable(false)]
-		public SfPricebookEntry PricebookEntry { get; set; }
 
 		///<summary>
 		/// Product ID
@@ -97,24 +51,78 @@ namespace NetCoreForce.Models
 		public SfProduct2 Product2 { get; set; }
 
 		///<summary>
-		/// Product Code
-		/// <para>Name: ProductCode</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
+		/// Deleted
+		/// <para>Name: IsDeleted</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "productCode")]
+		[JsonProperty(PropertyName = "isDeleted")]
 		[Updateable(false), Createable(false)]
-		public string ProductCode { get; set; }
+		public bool? IsDeleted { get; set; }
 
 		///<summary>
-		/// Opportunity Product Name
-		/// <para>Name: Name</para>
-		/// <para>SF Type: string</para>
+		/// Order ID
+		/// <para>Name: OrderId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "orderId")]
+		[Updateable(false), Createable(true)]
+		public string OrderId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Order
+		/// <para>RelationshipName: Order</para>
+		///</summary>
+		[JsonProperty(PropertyName = "order")]
+		[Updateable(false), Createable(false)]
+		public SfOrder Order { get; set; }
+
+		///<summary>
+		/// Price Book Entry ID
+		/// <para>Name: PricebookEntryId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "pricebookEntryId")]
+		[Updateable(false), Createable(true)]
+		public string PricebookEntryId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: PricebookEntry
+		/// <para>RelationshipName: PricebookEntry</para>
+		///</summary>
+		[JsonProperty(PropertyName = "pricebookEntry")]
+		[Updateable(false), Createable(false)]
+		public SfPricebookEntry PricebookEntry { get; set; }
+
+		///<summary>
+		/// Original Order Item ID
+		/// <para>Name: OriginalOrderItemId</para>
+		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "name")]
+		[JsonProperty(PropertyName = "originalOrderItemId")]
+		[Updateable(false), Createable(true)]
+		public string OriginalOrderItemId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: OrderItem
+		/// <para>RelationshipName: OriginalOrderItem</para>
+		///</summary>
+		[JsonProperty(PropertyName = "originalOrderItem")]
 		[Updateable(false), Createable(false)]
-		public string Name { get; set; }
+		public SfOrderItem OriginalOrderItem { get; set; }
+
+		///<summary>
+		/// Available Quantity
+		/// <para>Name: AvailableQuantity</para>
+		/// <para>SF Type: double</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "availableQuantity")]
+		[Updateable(false), Createable(false)]
+		public double? AvailableQuantity { get; set; }
 
 		///<summary>
 		/// Quantity
@@ -126,16 +134,7 @@ namespace NetCoreForce.Models
 		public double? Quantity { get; set; }
 
 		///<summary>
-		/// Total Price
-		/// <para>Name: TotalPrice</para>
-		/// <para>SF Type: currency</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "totalPrice")]
-		public decimal? TotalPrice { get; set; }
-
-		///<summary>
-		/// Sales Price
+		/// Unit Price
 		/// <para>Name: UnitPrice</para>
 		/// <para>SF Type: currency</para>
 		/// <para>Nillable: True</para>
@@ -154,13 +153,32 @@ namespace NetCoreForce.Models
 		public decimal? ListPrice { get; set; }
 
 		///<summary>
-		/// Date
+		/// Total Price
+		/// <para>Name: TotalPrice</para>
+		/// <para>SF Type: currency</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "totalPrice")]
+		[Updateable(false), Createable(false)]
+		public decimal? TotalPrice { get; set; }
+
+		///<summary>
+		/// Start Date
 		/// <para>Name: ServiceDate</para>
 		/// <para>SF Type: date</para>
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "serviceDate")]
 		public DateTime? ServiceDate { get; set; }
+
+		///<summary>
+		/// End Date
+		/// <para>Name: EndDate</para>
+		/// <para>SF Type: date</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "endDate")]
+		public DateTime? EndDate { get; set; }
 
 		///<summary>
 		/// Line Description
@@ -238,14 +256,15 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Deleted
-		/// <para>Name: IsDeleted</para>
-		/// <para>SF Type: boolean</para>
+		/// Order Product Number
+		/// <para>Name: OrderItemNumber</para>
+		/// <para>SF Type: string</para>
+		/// <para>AutoNumber field</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "isDeleted")]
+		[JsonProperty(PropertyName = "orderItemNumber")]
 		[Updateable(false), Createable(false)]
-		public bool? IsDeleted { get; set; }
+		public string OrderItemNumber { get; set; }
 
 	}
 }

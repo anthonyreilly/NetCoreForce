@@ -40,7 +40,7 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "metricsDate")]
 		[Updateable(false), Createable(false)]
-		public string MetricsDate { get; set; }
+		public DateTime? MetricsDate { get; set; }
 
 		///<summary>
 		/// Page ID

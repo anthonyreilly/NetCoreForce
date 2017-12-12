@@ -50,6 +50,23 @@ namespace NetCoreForce.Models
 		public SfAccount Account { get; set; }
 
 		///<summary>
+		/// Price Book ID
+		/// <para>Name: Pricebook2Id</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "pricebook2Id")]
+		public string Pricebook2Id { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Pricebook2
+		/// <para>RelationshipName: Pricebook2</para>
+		///</summary>
+		[JsonProperty(PropertyName = "pricebook2")]
+		[Updateable(false), Createable(false)]
+		public SfPricebook2 Pricebook2 { get; set; }
+
+		///<summary>
 		/// Owner Expiration Notice
 		/// <para>Name: OwnerExpirationNotice</para>
 		/// <para>SF Type: picklist</para>
@@ -65,7 +82,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "startDate")]
-		public string StartDate { get; set; }
+		public DateTime? StartDate { get; set; }
 
 		///<summary>
 		/// Contract End Date
@@ -75,7 +92,7 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "endDate")]
 		[Updateable(false), Createable(false)]
-		public string EndDate { get; set; }
+		public DateTime? EndDate { get; set; }
 
 		///<summary>
 		/// Billing Street
@@ -218,7 +235,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "companySignedDate")]
-		public string CompanySignedDate { get; set; }
+		public DateTime? CompanySignedDate { get; set; }
 
 		///<summary>
 		/// Customer Signed By ID
@@ -253,7 +270,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "customerSignedDate")]
-		public string CustomerSignedDate { get; set; }
+		public DateTime? CustomerSignedDate { get; set; }
 
 		///<summary>
 		/// Special Terms
@@ -416,7 +433,7 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "lastActivityDate")]
 		[Updateable(false), Createable(false)]
-		public string LastActivityDate { get; set; }
+		public DateTime? LastActivityDate { get; set; }
 
 		///<summary>
 		/// Last Viewed Date

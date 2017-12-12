@@ -79,15 +79,6 @@ namespace NetCoreForce.Models
 		[Updateable(false), Createable(true)]
 		public string ContentBodyId { get; set; }
 
-		// Commenting out since its not directly queryable
-		///<summary>
-		/// ReferenceTo: ContentBody
-		/// <para>RelationshipName: ContentBody</para>
-		///</summary>
-		// [JsonProperty(PropertyName = "contentBody")]
-		// [Updateable(false), Createable(false)]
-		// public SfContentBody ContentBody { get; set; }		
-
 		///<summary>
 		/// Version Number
 		/// <para>Name: VersionNumber</para>
@@ -239,7 +230,7 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "featuredContentDate")]
 		[Updateable(false), Createable(false)]
-		public string FeaturedContentDate { get; set; }
+		public DateTime? FeaturedContentDate { get; set; }
 
 		///<summary>
 		/// Owner ID

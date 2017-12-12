@@ -116,7 +116,7 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "archivedDate")]
 		[Updateable(false), Createable(false)]
-		public string ArchivedDate { get; set; }
+		public DateTime? ArchivedDate { get; set; }
 
 		///<summary>
 		/// Is Deleted

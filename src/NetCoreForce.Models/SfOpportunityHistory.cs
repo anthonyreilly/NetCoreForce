@@ -116,7 +116,7 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "closeDate")]
 		[Updateable(false), Createable(false)]
-		public string CloseDate { get; set; }
+		public DateTime? CloseDate { get; set; }
 
 		///<summary>
 		/// Probability

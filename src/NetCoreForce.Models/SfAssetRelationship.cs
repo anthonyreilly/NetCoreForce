@@ -192,5 +192,14 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "toDate")]
 		public DateTimeOffset? ToDate { get; set; }
 
+		///<summary>
+		/// Relationship Type
+		/// <para>Name: RelationshipType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "relationshipType")]
+		public string RelationshipType { get; set; }
+
 	}
 }

@@ -377,7 +377,7 @@ namespace NetCoreForce.Models
 		public string Department { get; set; }
 
 		///<summary>
-		/// Assistant's Name
+		/// Assistant&#39;s Name
 		/// <para>Name: AssistantName</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -401,7 +401,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "birthdate")]
-		public string Birthdate { get; set; }
+		public DateTime? Birthdate { get; set; }
 
 		///<summary>
 		/// Contact Description
@@ -503,7 +503,7 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "lastActivityDate")]
 		[Updateable(false), Createable(false)]
-		public string LastActivityDate { get; set; }
+		public DateTime? LastActivityDate { get; set; }
 
 		///<summary>
 		/// Last Stay-in-Touch Request Date
@@ -601,6 +601,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "jigsawContactId")]
 		[Updateable(false), Createable(false)]
 		public string JigsawContactId { get; set; }
+
+		///<summary>
+		/// Clean Status
+		/// <para>Name: CleanStatus</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "cleanStatus")]
+		public string CleanStatus { get; set; }
 
 	}
 }

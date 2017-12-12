@@ -137,7 +137,7 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "queryDate")]
 		[Updateable(false), Createable(false)]
-		public string QueryDate { get; set; }
+		public DateTime? QueryDate { get; set; }
 
 		///<summary>
 		/// Number of Searches

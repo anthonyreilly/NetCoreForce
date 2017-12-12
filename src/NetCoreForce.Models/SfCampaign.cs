@@ -93,7 +93,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "startDate")]
-		public string StartDate { get; set; }
+		public DateTime? StartDate { get; set; }
 
 		///<summary>
 		/// End Date
@@ -102,7 +102,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "endDate")]
-		public string EndDate { get; set; }
+		public DateTime? EndDate { get; set; }
 
 		///<summary>
 		/// Expected Revenue in Campaign
@@ -338,7 +338,7 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "lastActivityDate")]
 		[Updateable(false), Createable(false)]
-		public string LastActivityDate { get; set; }
+		public DateTime? LastActivityDate { get; set; }
 
 		///<summary>
 		/// Last Viewed Date

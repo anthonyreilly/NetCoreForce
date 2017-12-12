@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// SearchActivity
-	///<para>SObject Name: SearchActivity</para>
+	/// User Provisioning Account
+	///<para>SObject Name: UserProvAccount</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfSearchActivity : SObject
+	public class SfUserProvAccount : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "SearchActivity"; }
+			get { return "UserProvAccount"; }
 		}
 
 		///<summary>
-		/// Search Activity Id
+		/// User Provisioning Account ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -43,7 +43,7 @@ namespace NetCoreForce.Models
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
-		/// Search Activity Name
+		/// Name
 		/// <para>Name: Name</para>
 		/// <para>SF Type: string</para>
 		/// <para>AutoNumber field</para>
@@ -120,104 +120,119 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Search Term
-		/// <para>Name: SearchTerm</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "searchTerm")]
-		[Updateable(false), Createable(false)]
-		public string SearchTerm { get; set; }
-
-		///<summary>
-		/// Search Date
-		/// <para>Name: QueryDate</para>
-		/// <para>SF Type: date</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "queryDate")]
-		[Updateable(false), Createable(false)]
-		public DateTime? QueryDate { get; set; }
-
-		///<summary>
-		/// Number of Searches
-		/// <para>Name: CountQueries</para>
-		/// <para>SF Type: int</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "countQueries")]
-		[Updateable(false), Createable(false)]
-		public int? CountQueries { get; set; }
-
-		///<summary>
-		/// Number of Users
-		/// <para>Name: CountUsers</para>
-		/// <para>SF Type: int</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "countUsers")]
-		[Updateable(false), Createable(false)]
-		public int? CountUsers { get; set; }
-
-		///<summary>
-		/// Number of Results
-		/// <para>Name: AvgNumResults</para>
-		/// <para>SF Type: double</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "avgNumResults")]
-		[Updateable(false), Createable(false)]
-		public double? AvgNumResults { get; set; }
-
-		///<summary>
-		/// Channel
-		/// <para>Name: KbChannel</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "kbChannel")]
-		[Updateable(false), Createable(false)]
-		public string KbChannel { get; set; }
-
-		///<summary>
-		/// Duration
-		/// <para>Name: Period</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "period")]
-		[Updateable(false), Createable(false)]
-		public string Period { get; set; }
-
-		///<summary>
-		/// Average Click Rank
-		/// <para>Name: ClickRank</para>
-		/// <para>SF Type: double</para>
+		/// User ID
+		/// <para>Name: SalesforceUserId</para>
+		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "clickRank")]
-		[Updateable(false), Createable(false)]
-		public double? ClickRank { get; set; }
+		[JsonProperty(PropertyName = "salesforceUserId")]
+		public string SalesforceUserId { get; set; }
 
 		///<summary>
-		/// Language
-		/// <para>Name: QueryLanguage</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
+		/// ReferenceTo: User
+		/// <para>RelationshipName: SalesforceUser</para>
 		///</summary>
-		[JsonProperty(PropertyName = "queryLanguage")]
+		[JsonProperty(PropertyName = "salesforceUser")]
 		[Updateable(false), Createable(false)]
-		public string QueryLanguage { get; set; }
+		public SfUser SalesforceUser { get; set; }
 
 		///<summary>
-		/// Clicked Article Title
-		/// <para>Name: ClickedRecordName</para>
+		/// Connected App ID
+		/// <para>Name: ConnectedAppId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "connectedAppId")]
+		public string ConnectedAppId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: ConnectedApplication
+		/// <para>RelationshipName: ConnectedApp</para>
+		///</summary>
+		[JsonProperty(PropertyName = "connectedApp")]
+		[Updateable(false), Createable(false)]
+		public SfConnectedApplication ConnectedApp { get; set; }
+
+		///<summary>
+		/// External User Id
+		/// <para>Name: ExternalUserId</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "clickedRecordName")]
-		[Updateable(false), Createable(false)]
-		public string ClickedRecordName { get; set; }
+		[JsonProperty(PropertyName = "externalUserId")]
+		public string ExternalUserId { get; set; }
+
+		///<summary>
+		/// External Username
+		/// <para>Name: ExternalUsername</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "externalUsername")]
+		public string ExternalUsername { get; set; }
+
+		///<summary>
+		/// External Email
+		/// <para>Name: ExternalEmail</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "externalEmail")]
+		public string ExternalEmail { get; set; }
+
+		///<summary>
+		/// External First Name
+		/// <para>Name: ExternalFirstName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "externalFirstName")]
+		public string ExternalFirstName { get; set; }
+
+		///<summary>
+		/// External Last Name
+		/// <para>Name: ExternalLastName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "externalLastName")]
+		public string ExternalLastName { get; set; }
+
+		///<summary>
+		/// Link State
+		/// <para>Name: LinkState</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "linkState")]
+		public string LinkState { get; set; }
+
+		///<summary>
+		/// Status
+		/// <para>Name: Status</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "status")]
+		public string Status { get; set; }
+
+		///<summary>
+		/// Deleted Date
+		/// <para>Name: DeletedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "deletedDate")]
+		public DateTimeOffset? DeletedDate { get; set; }
+
+		///<summary>
+		/// Manual Override
+		/// <para>Name: IsKnownLink</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isKnownLink")]
+		public bool? IsKnownLink { get; set; }
 
 	}
 }

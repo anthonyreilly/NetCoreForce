@@ -166,6 +166,16 @@ namespace NetCoreForce.Models
 		public bool? IsAlohaSupported { get; set; }
 
 		///<summary>
+		/// Supports Lightning
+		/// <para>Name: IsLightningSupported</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isLightningSupported")]
+		[Updateable(false), Createable(false)]
+		public bool? IsLightningSupported { get; set; }
+
+		///<summary>
 		/// Apply To
 		/// <para>Name: StartingContext</para>
 		/// <para>SF Type: picklist</para>

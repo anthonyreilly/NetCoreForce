@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// List Email
-	///<para>SObject Name: ListEmail</para>
+	/// User Provisioning Config
+	///<para>SObject Name: UserProvisioningConfig</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfListEmail : SObject
+	public class SfUserProvisioningConfig : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "ListEmail"; }
+			get { return "UserProvisioningConfig"; }
 		}
 
 		///<summary>
-		/// List Email ID
+		/// UserProvisioningConfig ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -31,15 +31,6 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "id")]
 		[Updateable(false), Createable(false)]
 		public string Id { get; set; }
-
-		///<summary>
-		/// Owner ID
-		/// <para>Name: OwnerId</para>
-		/// <para>SF Type: reference</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "ownerId")]
-		public string OwnerId { get; set; }
 
 		///<summary>
 		/// Deleted
@@ -53,12 +44,40 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Name
-		/// <para>Name: Name</para>
+		/// <para>Name: DeveloperName</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "name")]
-		public string Name { get; set; }
+		[JsonProperty(PropertyName = "developerName")]
+		public string DeveloperName { get; set; }
+
+		///<summary>
+		/// Master Language
+		/// <para>Name: Language</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "language")]
+		public string Language { get; set; }
+
+		///<summary>
+		/// Label
+		/// <para>Name: MasterLabel</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "masterLabel")]
+		public string MasterLabel { get; set; }
+
+		///<summary>
+		/// Namespace Prefix
+		/// <para>Name: NamespacePrefix</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "namespacePrefix")]
+		[Updateable(false), Createable(false)]
+		public string NamespacePrefix { get; set; }
 
 		///<summary>
 		/// Created Date
@@ -127,108 +146,110 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Last Viewed Date
-		/// <para>Name: LastViewedDate</para>
-		/// <para>SF Type: datetime</para>
+		/// Connected App ID
+		/// <para>Name: ConnectedAppId</para>
+		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "lastViewedDate")]
+		[JsonProperty(PropertyName = "connectedAppId")]
+		public string ConnectedAppId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: ConnectedApplication
+		/// <para>RelationshipName: ConnectedApp</para>
+		///</summary>
+		[JsonProperty(PropertyName = "connectedApp")]
 		[Updateable(false), Createable(false)]
-		public DateTimeOffset? LastViewedDate { get; set; }
+		public SfConnectedApplication ConnectedApp { get; set; }
 
 		///<summary>
-		/// Last Referenced Date
-		/// <para>Name: LastReferencedDate</para>
-		/// <para>SF Type: datetime</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "lastReferencedDate")]
-		[Updateable(false), Createable(false)]
-		public DateTimeOffset? LastReferencedDate { get; set; }
-
-		///<summary>
-		/// Subject
-		/// <para>Name: Subject</para>
+		/// Notes
+		/// <para>Name: Notes</para>
 		/// <para>SF Type: textarea</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "subject")]
-		public string Subject { get; set; }
+		[JsonProperty(PropertyName = "notes")]
+		public string Notes { get; set; }
 
 		///<summary>
-		/// Html Body
-		/// <para>Name: HtmlBody</para>
-		/// <para>SF Type: textarea</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "htmlBody")]
-		public string HtmlBody { get; set; }
-
-		///<summary>
-		/// Text Body
-		/// <para>Name: TextBody</para>
-		/// <para>SF Type: textarea</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "textBody")]
-		public string TextBody { get; set; }
-
-		///<summary>
-		/// From Name
-		/// <para>Name: FromName</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "fromName")]
-		public string FromName { get; set; }
-
-		///<summary>
-		/// From Address
-		/// <para>Name: FromAddress</para>
-		/// <para>SF Type: textarea</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "fromAddress")]
-		public string FromAddress { get; set; }
-
-		///<summary>
-		/// Status
-		/// <para>Name: Status</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "status")]
-		public string Status { get; set; }
-
-		///<summary>
-		/// Has Attachment
-		/// <para>Name: HasAttachment</para>
+		/// Enabled
+		/// <para>Name: Enabled</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "hasAttachment")]
-		[Updateable(false), Createable(false)]
-		public bool? HasAttachment { get; set; }
+		[JsonProperty(PropertyName = "enabled")]
+		public bool? Enabled { get; set; }
 
 		///<summary>
-		/// Scheduled Date
-		/// <para>Name: ScheduledDate</para>
+		/// Approval Required
+		/// <para>Name: ApprovalRequired</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "approvalRequired")]
+		public string ApprovalRequired { get; set; }
+
+		///<summary>
+		/// User Account Mapping
+		/// <para>Name: UserAccountMapping</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userAccountMapping")]
+		public string UserAccountMapping { get; set; }
+
+		///<summary>
+		/// Enabled Operations
+		/// <para>Name: EnabledOperations</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "enabledOperations")]
+		public string EnabledOperations { get; set; }
+
+		///<summary>
+		/// On Update Attributes
+		/// <para>Name: OnUpdateAttributes</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "onUpdateAttributes")]
+		public string OnUpdateAttributes { get; set; }
+
+		///<summary>
+		/// Last Recon Date
+		/// <para>Name: LastReconDateTime</para>
 		/// <para>SF Type: datetime</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "scheduledDate")]
-		[Updateable(false), Createable(false)]
-		public DateTimeOffset? ScheduledDate { get; set; }
+		[JsonProperty(PropertyName = "lastReconDateTime")]
+		public DateTimeOffset? LastReconDateTime { get; set; }
 
 		///<summary>
-		/// Total Sent
-		/// <para>Name: TotalSent</para>
-		/// <para>SF Type: int</para>
+		/// Named Credential ID
+		/// <para>Name: NamedCredentialId</para>
+		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "totalSent")]
+		[JsonProperty(PropertyName = "namedCredentialId")]
+		public string NamedCredentialId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: NamedCredential
+		/// <para>RelationshipName: NamedCredential</para>
+		///</summary>
+		[JsonProperty(PropertyName = "namedCredential")]
 		[Updateable(false), Createable(false)]
-		public int? TotalSent { get; set; }
+		public SfNamedCredential NamedCredential { get; set; }
+
+		///<summary>
+		/// Recon Filter
+		/// <para>Name: ReconFilter</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "reconFilter")]
+		public string ReconFilter { get; set; }
 
 	}
 }

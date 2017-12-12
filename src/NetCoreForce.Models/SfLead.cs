@@ -342,7 +342,7 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "convertedDate")]
 		[Updateable(false), Createable(false)]
-		public string ConvertedDate { get; set; }
+		public DateTime? ConvertedDate { get; set; }
 
 		///<summary>
 		/// Converted Account ID
@@ -481,7 +481,7 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "lastActivityDate")]
 		[Updateable(false), Createable(false)]
-		public string LastActivityDate { get; set; }
+		public DateTime? LastActivityDate { get; set; }
 
 		///<summary>
 		/// Last Viewed Date
@@ -521,6 +521,41 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "jigsawContactId")]
 		[Updateable(false), Createable(false)]
 		public string JigsawContactId { get; set; }
+
+		///<summary>
+		/// Clean Status
+		/// <para>Name: CleanStatus</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "cleanStatus")]
+		public string CleanStatus { get; set; }
+
+		///<summary>
+		/// Company D-U-N-S Number
+		/// <para>Name: CompanyDunsNumber</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "companyDunsNumber")]
+		public string CompanyDunsNumber { get; set; }
+
+		///<summary>
+		/// D&amp;B Company ID
+		/// <para>Name: DandbCompanyId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "dandbCompanyId")]
+		public string DandbCompanyId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: DandBCompany
+		/// <para>RelationshipName: DandbCompany</para>
+		///</summary>
+		[JsonProperty(PropertyName = "dandbCompany")]
+		[Updateable(false), Createable(false)]
+		public SfDandBCompany DandbCompany { get; set; }
 
 		///<summary>
 		/// Email Bounced Reason

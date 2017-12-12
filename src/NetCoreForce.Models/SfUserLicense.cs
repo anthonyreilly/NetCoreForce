@@ -103,26 +103,6 @@ namespace NetCoreForce.Models
 		public string MasterLabel { get; set; }
 
 		///<summary>
-		/// Monthly Logins Used
-		/// <para>Name: MonthlyLoginsUsed</para>
-		/// <para>SF Type: int</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "monthlyLoginsUsed")]
-		[Updateable(false), Createable(false)]
-		public int? MonthlyLoginsUsed { get; set; }
-
-		///<summary>
-		/// Monthly Logins Allotted
-		/// <para>Name: MonthlyLoginsEntitlement</para>
-		/// <para>SF Type: int</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "monthlyLoginsEntitlement")]
-		[Updateable(false), Createable(false)]
-		public int? MonthlyLoginsEntitlement { get; set; }
-
-		///<summary>
 		/// Created Date
 		/// <para>Name: CreatedDate</para>
 		/// <para>SF Type: datetime</para>

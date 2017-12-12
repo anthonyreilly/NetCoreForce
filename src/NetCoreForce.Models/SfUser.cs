@@ -653,6 +653,15 @@ namespace NetCoreForce.Models
 		public bool? UserPermissionsSupportUser { get; set; }
 
 		///<summary>
+		/// Data.com User
+		/// <para>Name: UserPermissionsJigsawProspectingUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPermissionsJigsawProspectingUser")]
+		public bool? UserPermissionsJigsawProspectingUser { get; set; }
+
+		///<summary>
 		/// Site.com Contributor User
 		/// <para>Name: UserPermissionsSiteforceContributorUser</para>
 		/// <para>SF Type: boolean</para>
@@ -671,13 +680,13 @@ namespace NetCoreForce.Models
 		public bool? UserPermissionsSiteforcePublisherUser { get; set; }
 
 		///<summary>
-		/// Chatter Answers User
-		/// <para>Name: UserPermissionsChatterAnswersUser</para>
+		/// Work.com User
+		/// <para>Name: UserPermissionsWorkDotComUserFeature</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "userPermissionsChatterAnswersUser")]
-		public bool? UserPermissionsChatterAnswersUser { get; set; }
+		[JsonProperty(PropertyName = "userPermissionsWorkDotComUserFeature")]
+		public bool? UserPermissionsWorkDotComUserFeature { get; set; }
 
 		///<summary>
 		/// Allow Forecasting
@@ -896,6 +905,15 @@ namespace NetCoreForce.Models
 		public bool? UserPreferencesDisableMessageEmail { get; set; }
 
 		///<summary>
+		/// JigsawListUser
+		/// <para>Name: UserPreferencesJigsawListUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesJigsawListUser")]
+		public bool? UserPreferencesJigsawListUser { get; set; }
+
+		///<summary>
 		/// DisableBookmarkEmail
 		/// <para>Name: UserPreferencesDisableBookmarkEmail</para>
 		/// <para>SF Type: boolean</para>
@@ -1083,6 +1101,24 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "userPreferencesShowCountryToGuestUsers")]
 		public bool? UserPreferencesShowCountryToGuestUsers { get; set; }
+
+		///<summary>
+		/// DisableFeedbackEmail
+		/// <para>Name: UserPreferencesDisableFeedbackEmail</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesDisableFeedbackEmail")]
+		public bool? UserPreferencesDisableFeedbackEmail { get; set; }
+
+		///<summary>
+		/// DisableWorkEmail
+		/// <para>Name: UserPreferencesDisableWorkEmail</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesDisableWorkEmail")]
+		public bool? UserPreferencesDisableWorkEmail { get; set; }
 
 		///<summary>
 		/// HideS1BrowserUI
@@ -1439,6 +1475,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "defaultGroupNotificationFrequency")]
 		public string DefaultGroupNotificationFrequency { get; set; }
+
+		///<summary>
+		/// Data.com Monthly Addition Limit
+		/// <para>Name: JigsawImportLimitOverride</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "jigsawImportLimitOverride")]
+		public int? JigsawImportLimitOverride { get; set; }
 
 		///<summary>
 		/// Last Viewed Date

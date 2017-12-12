@@ -189,7 +189,7 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "firstRespondedDate")]
 		[Updateable(false), Createable(false)]
-		public string FirstRespondedDate { get; set; }
+		public DateTime? FirstRespondedDate { get; set; }
 
 		///<summary>
 		/// Salutation

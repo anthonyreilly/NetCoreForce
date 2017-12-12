@@ -176,7 +176,7 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "expirationDate")]
 		[Updateable(false), Createable(false)]
-		public string ExpirationDate { get; set; }
+		public DateTime? ExpirationDate { get; set; }
 
 		///<summary>
 		/// Send Email
@@ -399,6 +399,16 @@ namespace NetCoreForce.Models
 		public bool? MaximumPermissionsActivateContract { get; set; }
 
 		///<summary>
+		/// Activate Orders
+		/// <para>Name: MaximumPermissionsActivateOrder</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsActivateOrder")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsActivateOrder { get; set; }
+
+		///<summary>
 		/// Import Leads
 		/// <para>Name: MaximumPermissionsImportLeads</para>
 		/// <para>SF Type: boolean</para>
@@ -489,14 +499,14 @@ namespace NetCoreForce.Models
 		public bool? MaximumPermissionsChatterInternalUser { get; set; }
 
 		///<summary>
-		/// Manage Dashboards
-		/// <para>Name: MaximumPermissionsManageDashboards</para>
+		/// Manage Encryption Keys
+		/// <para>Name: MaximumPermissionsManageEncryptionKeys</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "maximumPermissionsManageDashboards")]
+		[JsonProperty(PropertyName = "maximumPermissionsManageEncryptionKeys")]
 		[Updateable(false), Createable(false)]
-		public bool? MaximumPermissionsManageDashboards { get; set; }
+		public bool? MaximumPermissionsManageEncryptionKeys { get; set; }
 
 		///<summary>
 		/// Delete Activated Contracts
@@ -589,6 +599,16 @@ namespace NetCoreForce.Models
 		public bool? MaximumPermissionsUseTeamReassignWizards { get; set; }
 
 		///<summary>
+		/// Edit Activated Orders
+		/// <para>Name: MaximumPermissionsEditActivatedOrders</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsEditActivatedOrders")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsEditActivatedOrders { get; set; }
+
+		///<summary>
 		/// Download AppExchange Packages
 		/// <para>Name: MaximumPermissionsInstallPackaging</para>
 		/// <para>SF Type: boolean</para>
@@ -667,16 +687,6 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "maximumPermissionsManageCallCenters")]
 		[Updateable(false), Createable(false)]
 		public bool? MaximumPermissionsManageCallCenters { get; set; }
-
-		///<summary>
-		/// Create and Customize Reports
-		/// <para>Name: MaximumPermissionsEditReports</para>
-		/// <para>SF Type: boolean</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "maximumPermissionsEditReports")]
-		[Updateable(false), Createable(false)]
-		public bool? MaximumPermissionsEditReports { get; set; }
 
 		///<summary>
 		/// Manage Synonyms
@@ -939,7 +949,7 @@ namespace NetCoreForce.Models
 		public bool? MaximumPermissionsManageInteraction { get; set; }
 
 		///<summary>
-		/// View My Team's Dashboards
+		/// View My Team&#39;s Dashboards
 		/// <para>Name: MaximumPermissionsViewMyTeamsDashboards</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -1099,6 +1109,106 @@ namespace NetCoreForce.Models
 		public bool? MaximumPermissionsRunFlow { get; set; }
 
 		///<summary>
+		/// Create and Customize Dashboards
+		/// <para>Name: MaximumPermissionsCreateCustomizeDashboards</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsCreateCustomizeDashboards")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsCreateCustomizeDashboards { get; set; }
+
+		///<summary>
+		/// Create Dashboard Folders
+		/// <para>Name: MaximumPermissionsCreateDashboardFolders</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsCreateDashboardFolders")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsCreateDashboardFolders { get; set; }
+
+		///<summary>
+		/// View Dashboards in Public Folders
+		/// <para>Name: MaximumPermissionsViewPublicDashboards</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewPublicDashboards")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewPublicDashboards { get; set; }
+
+		///<summary>
+		/// Manage Dashboards in Public Folders
+		/// <para>Name: MaximumPermissionsManageDashbdsInPubFolders</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsManageDashbdsInPubFolders")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsManageDashbdsInPubFolders { get; set; }
+
+		///<summary>
+		/// Create and Customize Reports
+		/// <para>Name: MaximumPermissionsCreateCustomizeReports</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsCreateCustomizeReports")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsCreateCustomizeReports { get; set; }
+
+		///<summary>
+		/// Create Report Folders
+		/// <para>Name: MaximumPermissionsCreateReportFolders</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsCreateReportFolders")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsCreateReportFolders { get; set; }
+
+		///<summary>
+		/// View Reports in Public Folders
+		/// <para>Name: MaximumPermissionsViewPublicReports</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewPublicReports")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewPublicReports { get; set; }
+
+		///<summary>
+		/// Manage Reports in Public Folders
+		/// <para>Name: MaximumPermissionsManageReportsInPubFolders</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsManageReportsInPubFolders")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsManageReportsInPubFolders { get; set; }
+
+		///<summary>
+		/// Edit My Dashboards
+		/// <para>Name: MaximumPermissionsEditMyDashboards</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsEditMyDashboards")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsEditMyDashboards { get; set; }
+
+		///<summary>
+		/// Edit My Reports
+		/// <para>Name: MaximumPermissionsEditMyReports</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsEditMyReports")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsEditMyReports { get; set; }
+
+		///<summary>
 		/// View All Users
 		/// <para>Name: MaximumPermissionsViewAllUsers</para>
 		/// <para>SF Type: boolean</para>
@@ -1129,6 +1239,16 @@ namespace NetCoreForce.Models
 		public bool? MaximumPermissionsConnectOrgToEnvironmentHub { get; set; }
 
 		///<summary>
+		/// Enable Work.com Calibration
+		/// <para>Name: MaximumPermissionsWorkCalibrationUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsWorkCalibrationUser")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsWorkCalibrationUser { get; set; }
+
+		///<summary>
 		/// Create and Customize List Views
 		/// <para>Name: MaximumPermissionsCreateCustomizeFilters</para>
 		/// <para>SF Type: boolean</para>
@@ -1137,6 +1257,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "maximumPermissionsCreateCustomizeFilters")]
 		[Updateable(false), Createable(false)]
 		public bool? MaximumPermissionsCreateCustomizeFilters { get; set; }
+
+		///<summary>
+		/// Enable Work.com
+		/// <para>Name: MaximumPermissionsWorkDotComUserPerm</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsWorkDotComUserPerm")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsWorkDotComUserPerm { get; set; }
 
 		///<summary>
 		/// Manage Communities
@@ -1439,7 +1569,7 @@ namespace NetCoreForce.Models
 		public bool? MaximumPermissionsConfigCustomRecs { get; set; }
 
 		///<summary>
-		/// Manage Macros Users Can't Undo
+		/// Manage Macros Users Can&#39;t Undo
 		/// <para>Name: MaximumPermissionsSubmitMacrosAllowed</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -1719,6 +1849,16 @@ namespace NetCoreForce.Models
 		public bool? MaximumPermissionsManageCertificates { get; set; }
 
 		///<summary>
+		/// Report Builder (Lightning Experience)
+		/// <para>Name: MaximumPermissionsCreateReportInLightning</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsCreateReportInLightning")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsCreateReportInLightning { get; set; }
+
+		///<summary>
 		/// Hide Option to Switch to Salesforce Classic
 		/// <para>Name: MaximumPermissionsPreventClassicExperience</para>
 		/// <para>SF Type: boolean</para>
@@ -1789,6 +1929,16 @@ namespace NetCoreForce.Models
 		public bool? MaximumPermissionsViewAllActivities { get; set; }
 
 		///<summary>
+		/// Subscribe to Reports: Add Recipients
+		/// <para>Name: MaximumPermissionsSubscribeReportToOtherUsers</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsSubscribeReportToOtherUsers")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsSubscribeReportToOtherUsers { get; set; }
+
+		///<summary>
 		/// Lightning Console User
 		/// <para>Name: MaximumPermissionsLightningConsoleAllowedForUser</para>
 		/// <para>SF Type: boolean</para>
@@ -1797,6 +1947,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "maximumPermissionsLightningConsoleAllowedForUser")]
 		[Updateable(false), Createable(false)]
 		public bool? MaximumPermissionsLightningConsoleAllowedForUser { get; set; }
+
+		///<summary>
+		/// Subscribe to Reports: Set Running User
+		/// <para>Name: MaximumPermissionsSubscribeReportsRunAsUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsSubscribeReportsRunAsUser")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsSubscribeReportsRunAsUser { get; set; }
 
 		///<summary>
 		/// Show App Launcher in Communities

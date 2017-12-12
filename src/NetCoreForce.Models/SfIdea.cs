@@ -297,7 +297,7 @@ namespace NetCoreForce.Models
 		public bool? IsMerged { get; set; }
 
 		///<summary>
-		/// Url of Creator's Profile Photo
+		/// Url of Creator&#39;s Profile Photo
 		/// <para>Name: CreatorFullPhotoUrl</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -307,7 +307,7 @@ namespace NetCoreForce.Models
 		public string CreatorFullPhotoUrl { get; set; }
 
 		///<summary>
-		/// Url of Creator's Thumbnail Photo
+		/// Url of Creator&#39;s Thumbnail Photo
 		/// <para>Name: CreatorSmallPhotoUrl</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>

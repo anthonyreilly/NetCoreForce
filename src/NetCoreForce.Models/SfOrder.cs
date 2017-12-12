@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Account
-	///<para>SObject Name: Account</para>
+	/// Order
+	///<para>SObject Name: Order</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfAccount : SObject
+	public class SfOrder : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "Account"; }
+			get { return "Order"; }
 		}
 
 		///<summary>
-		/// Account ID
+		/// Order ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -33,67 +33,189 @@ namespace NetCoreForce.Models
 		public string Id { get; set; }
 
 		///<summary>
-		/// Deleted
-		/// <para>Name: IsDeleted</para>
-		/// <para>SF Type: boolean</para>
+		/// Owner ID
+		/// <para>Name: OwnerId</para>
+		/// <para>SF Type: reference</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "isDeleted")]
-		[Updateable(false), Createable(false)]
-		public bool? IsDeleted { get; set; }
+		[JsonProperty(PropertyName = "ownerId")]
+		public string OwnerId { get; set; }
 
 		///<summary>
-		/// Master Record ID
-		/// <para>Name: MasterRecordId</para>
+		/// Contract ID
+		/// <para>Name: ContractId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "masterRecordId")]
+		[JsonProperty(PropertyName = "contractId")]
+		public string ContractId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Contract
+		/// <para>RelationshipName: Contract</para>
+		///</summary>
+		[JsonProperty(PropertyName = "contract")]
 		[Updateable(false), Createable(false)]
-		public string MasterRecordId { get; set; }
+		public SfContract Contract { get; set; }
+
+		///<summary>
+		/// Account ID
+		/// <para>Name: AccountId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "accountId")]
+		public string AccountId { get; set; }
 
 		///<summary>
 		/// ReferenceTo: Account
-		/// <para>RelationshipName: MasterRecord</para>
+		/// <para>RelationshipName: Account</para>
 		///</summary>
-		[JsonProperty(PropertyName = "masterRecord")]
+		[JsonProperty(PropertyName = "account")]
 		[Updateable(false), Createable(false)]
-		public SfAccount MasterRecord { get; set; }
+		public SfAccount Account { get; set; }
 
 		///<summary>
-		/// Account Name
-		/// <para>Name: Name</para>
-		/// <para>SF Type: string</para>
+		/// Price Book ID
+		/// <para>Name: Pricebook2Id</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "pricebook2Id")]
+		public string Pricebook2Id { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Pricebook2
+		/// <para>RelationshipName: Pricebook2</para>
+		///</summary>
+		[JsonProperty(PropertyName = "pricebook2")]
+		[Updateable(false), Createable(false)]
+		public SfPricebook2 Pricebook2 { get; set; }
+
+		///<summary>
+		/// Order ID
+		/// <para>Name: OriginalOrderId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "originalOrderId")]
+		[Updateable(false), Createable(true)]
+		public string OriginalOrderId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Order
+		/// <para>RelationshipName: OriginalOrder</para>
+		///</summary>
+		[JsonProperty(PropertyName = "originalOrder")]
+		[Updateable(false), Createable(false)]
+		public SfOrder OriginalOrder { get; set; }
+
+		///<summary>
+		/// Order Start Date
+		/// <para>Name: EffectiveDate</para>
+		/// <para>SF Type: date</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "name")]
-		public string Name { get; set; }
+		[JsonProperty(PropertyName = "effectiveDate")]
+		public DateTime? EffectiveDate { get; set; }
 
 		///<summary>
-		/// Account Type
+		/// Order End Date
+		/// <para>Name: EndDate</para>
+		/// <para>SF Type: date</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "endDate")]
+		public DateTime? EndDate { get; set; }
+
+		///<summary>
+		/// Reduction Order
+		/// <para>Name: IsReductionOrder</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isReductionOrder")]
+		[Updateable(false), Createable(true)]
+		public bool? IsReductionOrder { get; set; }
+
+		///<summary>
+		/// Status
+		/// <para>Name: Status</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "status")]
+		public string Status { get; set; }
+
+		///<summary>
+		/// Internal Comments
+		/// <para>Name: Description</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "description")]
+		public string Description { get; set; }
+
+		///<summary>
+		/// Customer Authorized By ID
+		/// <para>Name: CustomerAuthorizedById</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "customerAuthorizedById")]
+		public string CustomerAuthorizedById { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Contact
+		/// <para>RelationshipName: CustomerAuthorizedBy</para>
+		///</summary>
+		[JsonProperty(PropertyName = "customerAuthorizedBy")]
+		[Updateable(false), Createable(false)]
+		public SfContact CustomerAuthorizedBy { get; set; }
+
+		///<summary>
+		/// Customer Authorized Date
+		/// <para>Name: CustomerAuthorizedDate</para>
+		/// <para>SF Type: date</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "customerAuthorizedDate")]
+		public DateTime? CustomerAuthorizedDate { get; set; }
+
+		///<summary>
+		/// Company Authorized By ID
+		/// <para>Name: CompanyAuthorizedById</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "companyAuthorizedById")]
+		public string CompanyAuthorizedById { get; set; }
+
+		///<summary>
+		/// ReferenceTo: User
+		/// <para>RelationshipName: CompanyAuthorizedBy</para>
+		///</summary>
+		[JsonProperty(PropertyName = "companyAuthorizedBy")]
+		[Updateable(false), Createable(false)]
+		public SfUser CompanyAuthorizedBy { get; set; }
+
+		///<summary>
+		/// Company Authorized Date
+		/// <para>Name: CompanyAuthorizedDate</para>
+		/// <para>SF Type: date</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "companyAuthorizedDate")]
+		public DateTime? CompanyAuthorizedDate { get; set; }
+
+		///<summary>
+		/// Order Type
 		/// <para>Name: Type</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "type")]
 		public string Type { get; set; }
-
-		///<summary>
-		/// Parent Account ID
-		/// <para>Name: ParentId</para>
-		/// <para>SF Type: reference</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "parentId")]
-		public string ParentId { get; set; }
-
-		///<summary>
-		/// ReferenceTo: Account
-		/// <para>RelationshipName: Parent</para>
-		///</summary>
-		[JsonProperty(PropertyName = "parent")]
-		[Updateable(false), Createable(false)]
-		public SfAccount Parent { get; set; }
 
 		///<summary>
 		/// Billing Street
@@ -260,148 +382,133 @@ namespace NetCoreForce.Models
 		public Address ShippingAddress { get; set; }
 
 		///<summary>
-		/// Account Phone
-		/// <para>Name: Phone</para>
-		/// <para>SF Type: phone</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "phone")]
-		public string Phone { get; set; }
-
-		///<summary>
-		/// Account Fax
-		/// <para>Name: Fax</para>
-		/// <para>SF Type: phone</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "fax")]
-		public string Fax { get; set; }
-
-		///<summary>
-		/// Account Number
-		/// <para>Name: AccountNumber</para>
+		/// Order Name
+		/// <para>Name: Name</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "accountNumber")]
-		public string AccountNumber { get; set; }
+		[JsonProperty(PropertyName = "name")]
+		public string Name { get; set; }
 
 		///<summary>
-		/// Website
-		/// <para>Name: Website</para>
-		/// <para>SF Type: url</para>
+		/// PO Date
+		/// <para>Name: PoDate</para>
+		/// <para>SF Type: date</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "website")]
-		public string Website { get; set; }
+		[JsonProperty(PropertyName = "poDate")]
+		public DateTime? PoDate { get; set; }
 
 		///<summary>
-		/// Photo URL
-		/// <para>Name: PhotoUrl</para>
-		/// <para>SF Type: url</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "photoUrl")]
-		[Updateable(false), Createable(false)]
-		public string PhotoUrl { get; set; }
-
-		///<summary>
-		/// SIC Code
-		/// <para>Name: Sic</para>
+		/// PO Number
+		/// <para>Name: PoNumber</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "sic")]
-		public string Sic { get; set; }
+		[JsonProperty(PropertyName = "poNumber")]
+		public string PoNumber { get; set; }
 
 		///<summary>
-		/// Industry
-		/// <para>Name: Industry</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "industry")]
-		public string Industry { get; set; }
-
-		///<summary>
-		/// Annual Revenue
-		/// <para>Name: AnnualRevenue</para>
-		/// <para>SF Type: currency</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "annualRevenue")]
-		public decimal? AnnualRevenue { get; set; }
-
-		///<summary>
-		/// Employees
-		/// <para>Name: NumberOfEmployees</para>
-		/// <para>SF Type: int</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "numberOfEmployees")]
-		public int? NumberOfEmployees { get; set; }
-
-		///<summary>
-		/// Ownership
-		/// <para>Name: Ownership</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "ownership")]
-		public string Ownership { get; set; }
-
-		///<summary>
-		/// Ticker Symbol
-		/// <para>Name: TickerSymbol</para>
+		/// Order Reference Number
+		/// <para>Name: OrderReferenceNumber</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "tickerSymbol")]
-		public string TickerSymbol { get; set; }
+		[JsonProperty(PropertyName = "orderReferenceNumber")]
+		public string OrderReferenceNumber { get; set; }
 
 		///<summary>
-		/// Account Description
-		/// <para>Name: Description</para>
-		/// <para>SF Type: textarea</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "description")]
-		public string Description { get; set; }
-
-		///<summary>
-		/// Account Rating
-		/// <para>Name: Rating</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "rating")]
-		public string Rating { get; set; }
-
-		///<summary>
-		/// Account Site
-		/// <para>Name: Site</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "site")]
-		public string Site { get; set; }
-
-		///<summary>
-		/// Owner ID
-		/// <para>Name: OwnerId</para>
+		/// Bill To Contact ID
+		/// <para>Name: BillToContactId</para>
 		/// <para>SF Type: reference</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "ownerId")]
-		public string OwnerId { get; set; }
+		[JsonProperty(PropertyName = "billToContactId")]
+		public string BillToContactId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Contact
+		/// <para>RelationshipName: BillToContact</para>
+		///</summary>
+		[JsonProperty(PropertyName = "billToContact")]
+		[Updateable(false), Createable(false)]
+		public SfContact BillToContact { get; set; }
+
+		///<summary>
+		/// Ship To Contact ID
+		/// <para>Name: ShipToContactId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "shipToContactId")]
+		public string ShipToContactId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Contact
+		/// <para>RelationshipName: ShipToContact</para>
+		///</summary>
+		[JsonProperty(PropertyName = "shipToContact")]
+		[Updateable(false), Createable(false)]
+		public SfContact ShipToContact { get; set; }
+
+		///<summary>
+		/// Activated Date
+		/// <para>Name: ActivatedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "activatedDate")]
+		[Updateable(true), Createable(false)]
+		public DateTimeOffset? ActivatedDate { get; set; }
+
+		///<summary>
+		/// Activated By ID
+		/// <para>Name: ActivatedById</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "activatedById")]
+		[Updateable(true), Createable(false)]
+		public string ActivatedById { get; set; }
 
 		///<summary>
 		/// ReferenceTo: User
-		/// <para>RelationshipName: Owner</para>
+		/// <para>RelationshipName: ActivatedBy</para>
 		///</summary>
-		[JsonProperty(PropertyName = "owner")]
+		[JsonProperty(PropertyName = "activatedBy")]
 		[Updateable(false), Createable(false)]
-		public SfUser Owner { get; set; }
+		public SfUser ActivatedBy { get; set; }
+
+		///<summary>
+		/// Status Category
+		/// <para>Name: StatusCode</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "statusCode")]
+		[Updateable(true), Createable(false)]
+		public string StatusCode { get; set; }
+
+		///<summary>
+		/// Order Number
+		/// <para>Name: OrderNumber</para>
+		/// <para>SF Type: string</para>
+		/// <para>AutoNumber field</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "orderNumber")]
+		[Updateable(false), Createable(false)]
+		public string OrderNumber { get; set; }
+
+		///<summary>
+		/// Order Amount
+		/// <para>Name: TotalAmount</para>
+		/// <para>SF Type: currency</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "totalAmount")]
+		[Updateable(false), Createable(false)]
+		public decimal? TotalAmount { get; set; }
 
 		///<summary>
 		/// Created Date
@@ -460,6 +567,16 @@ namespace NetCoreForce.Models
 		public SfUser LastModifiedBy { get; set; }
 
 		///<summary>
+		/// Deleted
+		/// <para>Name: IsDeleted</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isDeleted")]
+		[Updateable(false), Createable(false)]
+		public bool? IsDeleted { get; set; }
+
+		///<summary>
 		/// System Modstamp
 		/// <para>Name: SystemModstamp</para>
 		/// <para>SF Type: datetime</para>
@@ -468,16 +585,6 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "systemModstamp")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? SystemModstamp { get; set; }
-
-		///<summary>
-		/// Last Activity
-		/// <para>Name: LastActivityDate</para>
-		/// <para>SF Type: date</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "lastActivityDate")]
-		[Updateable(false), Createable(false)]
-		public DateTime? LastActivityDate { get; set; }
 
 		///<summary>
 		/// Last Viewed Date
@@ -498,114 +605,6 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "lastReferencedDate")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? LastReferencedDate { get; set; }
-
-		///<summary>
-		/// Data.com Key
-		/// <para>Name: Jigsaw</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "jigsaw")]
-		public string Jigsaw { get; set; }
-
-		///<summary>
-		/// Jigsaw Company ID
-		/// <para>Name: JigsawCompanyId</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "jigsawCompanyId")]
-		[Updateable(false), Createable(false)]
-		public string JigsawCompanyId { get; set; }
-
-		///<summary>
-		/// Clean Status
-		/// <para>Name: CleanStatus</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "cleanStatus")]
-		public string CleanStatus { get; set; }
-
-		///<summary>
-		/// Account Source
-		/// <para>Name: AccountSource</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "accountSource")]
-		public string AccountSource { get; set; }
-
-		///<summary>
-		/// D-U-N-S Number
-		/// <para>Name: DunsNumber</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "dunsNumber")]
-		public string DunsNumber { get; set; }
-
-		///<summary>
-		/// Tradestyle
-		/// <para>Name: Tradestyle</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "tradestyle")]
-		public string Tradestyle { get; set; }
-
-		///<summary>
-		/// NAICS Code
-		/// <para>Name: NaicsCode</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "naicsCode")]
-		public string NaicsCode { get; set; }
-
-		///<summary>
-		/// NAICS Description
-		/// <para>Name: NaicsDesc</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "naicsDesc")]
-		public string NaicsDesc { get; set; }
-
-		///<summary>
-		/// Year Started
-		/// <para>Name: YearStarted</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "yearStarted")]
-		public string YearStarted { get; set; }
-
-		///<summary>
-		/// SIC Description
-		/// <para>Name: SicDesc</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "sicDesc")]
-		public string SicDesc { get; set; }
-
-		///<summary>
-		/// D&amp;B Company ID
-		/// <para>Name: DandbCompanyId</para>
-		/// <para>SF Type: reference</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "dandbCompanyId")]
-		public string DandbCompanyId { get; set; }
-
-		///<summary>
-		/// ReferenceTo: DandBCompany
-		/// <para>RelationshipName: DandbCompany</para>
-		///</summary>
-		[JsonProperty(PropertyName = "dandbCompany")]
-		[Updateable(false), Createable(false)]
-		public SfDandBCompany DandbCompany { get; set; }
 
 	}
 }

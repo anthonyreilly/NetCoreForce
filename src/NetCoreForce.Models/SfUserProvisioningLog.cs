@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// SearchActivity
-	///<para>SObject Name: SearchActivity</para>
+	/// User Provisioning Log
+	///<para>SObject Name: UserProvisioningLog</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfSearchActivity : SObject
+	public class SfUserProvisioningLog : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "SearchActivity"; }
+			get { return "UserProvisioningLog"; }
 		}
 
 		///<summary>
-		/// Search Activity Id
+		/// UserProvisioningLog ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -43,7 +43,7 @@ namespace NetCoreForce.Models
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
-		/// Search Activity Name
+		/// Name
 		/// <para>Name: Name</para>
 		/// <para>SF Type: string</para>
 		/// <para>AutoNumber field</para>
@@ -120,104 +120,74 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Search Term
-		/// <para>Name: SearchTerm</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "searchTerm")]
-		[Updateable(false), Createable(false)]
-		public string SearchTerm { get; set; }
-
-		///<summary>
-		/// Search Date
-		/// <para>Name: QueryDate</para>
-		/// <para>SF Type: date</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "queryDate")]
-		[Updateable(false), Createable(false)]
-		public DateTime? QueryDate { get; set; }
-
-		///<summary>
-		/// Number of Searches
-		/// <para>Name: CountQueries</para>
-		/// <para>SF Type: int</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "countQueries")]
-		[Updateable(false), Createable(false)]
-		public int? CountQueries { get; set; }
-
-		///<summary>
-		/// Number of Users
-		/// <para>Name: CountUsers</para>
-		/// <para>SF Type: int</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "countUsers")]
-		[Updateable(false), Createable(false)]
-		public int? CountUsers { get; set; }
-
-		///<summary>
-		/// Number of Results
-		/// <para>Name: AvgNumResults</para>
-		/// <para>SF Type: double</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "avgNumResults")]
-		[Updateable(false), Createable(false)]
-		public double? AvgNumResults { get; set; }
-
-		///<summary>
-		/// Channel
-		/// <para>Name: KbChannel</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "kbChannel")]
-		[Updateable(false), Createable(false)]
-		public string KbChannel { get; set; }
-
-		///<summary>
-		/// Duration
-		/// <para>Name: Period</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "period")]
-		[Updateable(false), Createable(false)]
-		public string Period { get; set; }
-
-		///<summary>
-		/// Average Click Rank
-		/// <para>Name: ClickRank</para>
-		/// <para>SF Type: double</para>
+		/// UserProvisioningRequest ID
+		/// <para>Name: UserProvisioningRequestId</para>
+		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "clickRank")]
-		[Updateable(false), Createable(false)]
-		public double? ClickRank { get; set; }
+		[JsonProperty(PropertyName = "userProvisioningRequestId")]
+		public string UserProvisioningRequestId { get; set; }
 
 		///<summary>
-		/// Language
-		/// <para>Name: QueryLanguage</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
+		/// ReferenceTo: UserProvisioningRequest
+		/// <para>RelationshipName: UserProvisioningRequest</para>
 		///</summary>
-		[JsonProperty(PropertyName = "queryLanguage")]
+		[JsonProperty(PropertyName = "userProvisioningRequest")]
 		[Updateable(false), Createable(false)]
-		public string QueryLanguage { get; set; }
+		public SfUserProvisioningRequest UserProvisioningRequest { get; set; }
 
 		///<summary>
-		/// Clicked Article Title
-		/// <para>Name: ClickedRecordName</para>
+		/// External User Id
+		/// <para>Name: ExternalUserId</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "clickedRecordName")]
+		[JsonProperty(PropertyName = "externalUserId")]
+		public string ExternalUserId { get; set; }
+
+		///<summary>
+		/// External Username
+		/// <para>Name: ExternalUsername</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "externalUsername")]
+		public string ExternalUsername { get; set; }
+
+		///<summary>
+		/// User ID
+		/// <para>Name: UserId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userId")]
+		public string UserId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: User
+		/// <para>RelationshipName: User</para>
+		///</summary>
+		[JsonProperty(PropertyName = "user")]
 		[Updateable(false), Createable(false)]
-		public string ClickedRecordName { get; set; }
+		public SfUser User { get; set; }
+
+		///<summary>
+		/// Status
+		/// <para>Name: Status</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "status")]
+		public string Status { get; set; }
+
+		///<summary>
+		/// Details
+		/// <para>Name: Details</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "details")]
+		public string Details { get; set; }
 
 	}
 }

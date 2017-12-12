@@ -285,6 +285,16 @@ namespace NetCoreForce.Models
 		public SfAnnouncement Announcement { get; set; }
 
 		///<summary>
+		/// Group Email
+		/// <para>Name: GroupEmail</para>
+		/// <para>SF Type: email</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "groupEmail")]
+		[Updateable(false), Createable(false)]
+		public string GroupEmail { get; set; }
+
+		///<summary>
 		/// Banner Photo Url
 		/// <para>Name: BannerPhotoUrl</para>
 		/// <para>SF Type: url</para>

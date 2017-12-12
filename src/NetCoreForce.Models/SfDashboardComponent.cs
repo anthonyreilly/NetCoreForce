@@ -60,5 +60,15 @@ namespace NetCoreForce.Models
 		[Updateable(false), Createable(false)]
 		public SfDashboard Dashboard { get; set; }
 
+		///<summary>
+		/// Report ID
+		/// <para>Name: CustomReportId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "customReportId")]
+		[Updateable(false), Createable(false)]
+		public string CustomReportId { get; set; }
+
 	}
 }
