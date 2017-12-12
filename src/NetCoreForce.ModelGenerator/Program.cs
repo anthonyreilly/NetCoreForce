@@ -5,6 +5,7 @@ using System.Dynamic;
 using System.Reflection;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.CommandLineUtils;
@@ -472,7 +473,7 @@ namespace NetCoreForce.ModelGenerator
                 gen.AppendLine("{");
             }
             gen.AppendLine("\t///<summary>");
-            gen.AppendLine($"\t/// {data.Label}");
+            gen.AppendLine($"\t/// {WebUtility.HtmlEncode(data.Label)}");
             gen.AppendLine($"\t///<para>SObject Name: {data.Name}</para>");
             gen.AppendLine($"\t///<para>Custom Object: {data.Custom.ToString()}</para>");
             gen.AppendLine("\t///</summary>");
@@ -498,10 +499,10 @@ namespace NetCoreForce.ModelGenerator
                     if (field.Custom && !config.IncludeCustom)
                     {
                         continue;
-                    }
+                    }                    
 
                     gen.AppendLine("\t\t///<summary>");
-                    gen.AppendLine("\t\t/// " + field.Label);
+                    gen.AppendLine("\t\t/// " + WebUtility.HtmlEncode(field.Label));
                     gen.AppendLine("\t\t/// <para>Name: " + field.Name + "</para>");
                     gen.AppendLine("\t\t/// <para>SF Type: " + field.Type + "</para>");
                     if (field.AutoNumber)
@@ -562,6 +563,12 @@ namespace NetCoreForce.ModelGenerator
                         if (string.IsNullOrEmpty(field.RelationshipName) || field.ReferenceTo.Count > 1)
                         {
                             //only do single-object relationships
+                            continue;
+                        }
+
+                        if(field.RelationshipName == "ContentBody")
+                        {
+                            //exception for non-serializable type
                             continue;
                         }
 
