@@ -39,28 +39,19 @@ namespace NetCoreForce.FunctionalTests
             }
         }
 
-        // public async Task<AuthenticationClient> GetAuthClient()
-        // {
-        //     AuthenticationClient auth = new AuthenticationClient();
-        //     await auth.UsernamePasswordAsync(AuthInfo.ClientId, AuthInfo.ClientSecret,
-        //             AuthInfo.Username, AuthInfo.Password, AuthInfo.TokenRequestEndpoint);
-        //     return auth;            
-        // }
-
-        // public async Task<AccessTokenResponse> GetAccessTokenResponse()
-        // {
-        //     AuthenticationClient auth = new AuthenticationClient();
-        //     await auth.UsernamePasswordAsync(AuthInfo.ClientId, AuthInfo.ClientSecret,
-        //             AuthInfo.Username, AuthInfo.Password, AuthInfo.TokenRequestEndpoint);
-        //     return auth.AccessInfo;            
-        // }
-
-        public async Task<ForceClient> GetForceClient()
+        public async Task<ForceClient> GetForceClient(string proxyUrl = null)
         {
+            System.Net.Http.HttpClient proxyClient = null;
+
+            if(!string.IsNullOrEmpty(proxyUrl))
+            {
+                proxyClient  = HttpClientFactory.CreateHttpClient(true, proxyUrl);
+            }
+
             AuthenticationClient auth = new AuthenticationClient();
             await auth.UsernamePasswordAsync(AuthInfo.ClientId, AuthInfo.ClientSecret,
                     AuthInfo.Username, AuthInfo.Password, AuthInfo.TokenRequestEndpoint);
-            ForceClient client = new ForceClient(auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken);
+            ForceClient client = new ForceClient(auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken, proxyClient);
             return client;
         }
 
