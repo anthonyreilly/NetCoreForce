@@ -32,7 +32,7 @@
     <PostBuildEvent>dotnet pack $(MSBuildThisFileDirectory)/NetCoreForce.Client.csproj -o $(SolutionDir)/packages -c Release --no-build</PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="1.1.1" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="4.4.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
   </ItemGroup>
 </Project>
