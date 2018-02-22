@@ -1,5 +1,19 @@
 # Changelog
 
+### 2018-02-22 v2.0.0
+
+#### This release is to update the build targets and adjust dependencies.
+#### Breaking Change: Will no longer be compatible with .NET Standard 1.3 projects, now supporting 1.6 and 2.0
+
+* Updated .netstandard1.3 targets to .netstandard1.6
+* Added multi-targeted build & nuget packaging for .netstandard1.6 and .netstandard2.0
+* Updated .netcoreapp1.1 targets to .netcoreapp2.0 for non-published assemblies:
+    - NetCoreForce.Client.Tests
+    - NetCoreForce.FunctionalTests
+    - NetCoreForce.SampleConsole
+* Removed dependency on Microsoft.AspNetCore.WebUtilities by including QueryHelpers class directly in project from ASP.NET Core source. Replaced with a reference to System.Text.Encodings.Web, which is a much lighter dependency for projects not already referencing ASP.NET Core.
+* Otherwise no functional changes from v1.3.0
+
 ### 2017-12-12 v1.3.0
 * Regenerate generic models against new default SFDC dev org
 * ModelGenerator: HTML escape field labels in case of reserved characters, e.g. "&";
