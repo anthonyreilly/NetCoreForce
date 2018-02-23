@@ -1,6 +1,6 @@
 # Changelog
 
-### 2018-02-22 v2.0.0
+### 2018-02-23 v2.0.0-rc1
 
 #### This release is to update the build targets and adjust dependencies.
 #### Breaking Change: Will no longer be compatible with .NET Standard 1.3 projects, now supporting 1.6 and 2.0
