@@ -29,7 +29,8 @@
     <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
-    <PostBuildEvent>dotnet pack $(MSBuildThisFileDirectory)/NetCoreForce.Client.csproj -o $(SolutionDir)/packages -c Release --no-build</PostBuildEvent>
+    <GeneratePackageOnBuild >true</GeneratePackageOnBuild>
+    <PackageOutputPath>$(SolutionDir)/packages</PackageOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Text.Encodings.Web" Version="4.4.0" />

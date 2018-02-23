@@ -30,7 +30,8 @@
     <NoWarn>CS1591,CS1587</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
-    <PostBuildEvent>dotnet pack $(MSBuildThisFileDirectory)/NetCoreForce.Models.csproj -o $(SolutionDir)/packages -c Release --no-build</PostBuildEvent>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageOutputPath>$(SolutionDir)/packages</PackageOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\NetCoreForce.Client\NetCoreForce.Client.csproj" />
