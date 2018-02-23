@@ -1,7 +1,7 @@
 # NetCoreForce 
 
 ## A .NET Standard and .NET Core Salesforce REST API toolkit and API wrapper
-*This project is not offered, sponsored or endorsed by Salesforce.*
+*This project is not offered, sponsored, or endorsed by Salesforce.*
 
 ### [Changelog](CHANGELOG.md)  
 
