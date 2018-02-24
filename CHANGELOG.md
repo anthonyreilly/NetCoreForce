@@ -1,5 +1,10 @@
 # Changelog
 
+### 2018-02-24 v2.0.0-rc2
+
+* Fix incorrect build target for ModelGenerator
+* Migrate ModelGenerator from deprecated Microsoft.Extensions.CommandLineUtils package to McMaster.Extensions.CommandLineUtils.
+
 ### 2018-02-23 v2.0.0-rc1
 
 #### This release is to update the build targets and adjust dependencies.
