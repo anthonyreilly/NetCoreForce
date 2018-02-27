@@ -11,7 +11,7 @@ namespace NetCoreForce.Client
 {
     public class AuthenticationClient : IDisposable
     {
-        private string DefaultApiVersion { get { return "v41.0";} }
+        private string DefaultApiVersion { get { return "v41.0"; } }
         public string ApiVersion { get; set; }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace NetCoreForce.Client
 
         private const string UserAgent = "netcoreforce-client";
         private const string TokenRequestEndpointUrl = "https://login.salesforce.com/services/oauth2/token";
-        private readonly HttpClient _httpClient;                
+        private readonly HttpClient _httpClient;
 
 
         /// <summary>
@@ -37,16 +37,61 @@ namespace NetCoreForce.Client
         /// <param name="apiVersion">Target Salesforce API version</param>
         public AuthenticationClient(string apiVersion)
         {
-            if(!string.IsNullOrEmpty(apiVersion))
+            if (!string.IsNullOrEmpty(apiVersion))
             {
                 ApiVersion = apiVersion;
             }
-            else 
+            else
             {
                 ApiVersion = DefaultApiVersion;
             }
 
             _httpClient = new HttpClient();
+        }
+
+        /// <summary>
+        /// Authenticate using the "Username and Password" auth flow, synchronously
+        /// <para>Uses a default Token request endpoint URL: https://login.salesforce.com/services/oauth2/token</para>
+        /// </summary>
+        /// <param name="clientId">Client ID, a.k.a. Consumer Key</param>
+        /// <param name="clientSecret">Client Secret, a.k.a. Consumer Secret</param>
+        /// <param name="username">Username</param>
+        /// <param name="password">Password</param>
+        /// <exception cref="ForceAuthException">Thrown if the authentication fails</exception>
+        public void UsernamePassword(string clientId, string clientSecret, string username, string password)
+        {
+            UsernamePassword(clientId, clientSecret, username, password, TokenRequestEndpointUrl);
+        }
+
+        /// <summary>
+        /// Authenticate using the "Username and Password" auth flow, synchronously
+        /// <para>Uses a default Token request endpoint URL: https://login.salesforce.com/services/oauth2/token</para>
+        /// </summary>
+        /// <param name="clientId">Client ID, a.k.a. Consumer Key</param>
+        /// <param name="clientSecret">Client Secret, a.k.a. Consumer Secret</param>
+        /// <param name="username">Username</param>
+        /// <param name="password">Password</param>
+        /// <param name="tokenRequestEndpointUrl">Token request endpoint URL, e.g. https://login.salesforce.com/services/oauth2/token</param>
+        /// <exception cref="ForceAuthException">Thrown if the authentication fails</exception>
+        public void UsernamePassword(string clientId, string clientSecret, string username, string password, string tokenRequestEndpointUrl)
+        {
+            try
+            {
+                var task = UsernamePasswordAsync(clientId, clientSecret, username, password, tokenRequestEndpointUrl);
+                task.Wait();
+            }
+            catch (AggregateException ex)
+            {
+                // Will typically be a single ForceAuthException exception - unwrap and throw
+                if(ex.InnerException != null && ex.InnerExceptions != null && ex.InnerExceptions.Count == 1)
+                {
+                    throw ex.InnerException;
+                }
+
+                //otherwise throw the original AggregateException as-is
+                throw ex;
+            }
+
         }
 
         /// <summary>
@@ -200,7 +245,7 @@ namespace NetCoreForce.Client
             var uri = UriFormatter.RefreshTokenUrl(
                 tokenRequestEndpointUrl,
                 refreshToken,
-                clientId,                
+                clientId,
                 clientSecret);
 
             var request = new HttpRequestMessage

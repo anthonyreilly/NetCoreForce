@@ -2,7 +2,7 @@
   <PropertyGroup>
     <!--Versioning-->
     <VersionPrefix>2.0.0</VersionPrefix>
-    <VersionSuffix>rc2</VersionSuffix>
+    <VersionSuffix>rc3</VersionSuffix>
 
     <!--NuGet-->
     <Authors>Anthony Reilly</Authors>

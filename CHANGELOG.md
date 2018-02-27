@@ -1,5 +1,9 @@
 # Changelog
 
+### 2018-02-27 v2.0.0-rc3
+
+* Added synchronous Username and Password login flow to AuthenticationClient
+
 ### 2018-02-24 v2.0.0-rc2
 
 * Fix incorrect build target for ModelGenerator
