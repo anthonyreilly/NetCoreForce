@@ -26,7 +26,6 @@ Currently targeting [.NET Standard 1.6 and 2.0](https://docs.microsoft.com/en-us
 ### Client library has no unusual dependencies:
 * [NETStandard.Library](https://www.nuget.org/packages/NETStandard.Library/)
 * [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
-* [Microsoft.AspNetCore.WebUtilities](https://www.nuget.org/packages/Microsoft.AspNetCore.WebUtilities/)
 
 Using [semantic versioning](http://semver.org)
 
