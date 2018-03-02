@@ -1,19 +1,28 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreForce.Models", "src\NetCoreForce.Models\NetCoreForce.Models.csproj", "{CF9E2ECA-E820-474C-9481-E783E17175FF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreForce.Client", "src\NetCoreForce.Client\NetCoreForce.Client.csproj", "{61B7C421-3CB3-465B-8A1F-F31C551B27AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreForce.ModelGenerator", "src\NetCoreForce.ModelGenerator\NetCoreForce.ModelGenerator.csproj", "{1118E22A-57F6-4445-A893-265CAA351EE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreForce.ModelGenerator", "src\NetCoreForce.ModelGenerator\NetCoreForce.ModelGenerator.csproj", "{1118E22A-57F6-4445-A893-265CAA351EE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreForce.Client.Tests", "src\NetCoreForce.Client.Tests\NetCoreForce.Client.Tests.csproj", "{4F0B5BBE-C49F-481A-AB80-E139768CEA8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreForce.Client.Tests", "src\NetCoreForce.Client.Tests\NetCoreForce.Client.Tests.csproj", "{4F0B5BBE-C49F-481A-AB80-E139768CEA8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreForce.FunctionalTests", "src\NetCoreForce.FunctionalTests\NetCoreForce.FunctionalTests.csproj", "{B1B27588-2FE8-4866-85F6-259F3525021B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreForce.FunctionalTests", "src\NetCoreForce.FunctionalTests\NetCoreForce.FunctionalTests.csproj", "{B1B27588-2FE8-4866-85F6-259F3525021B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleConsole", "src\SampleConsole\SampleConsole.csproj", "{DECD46B3-1DE6-4029-91E0-18C1D6AFEC60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleConsole", "src\SampleConsole\SampleConsole.csproj", "{DECD46B3-1DE6-4029-91E0-18C1D6AFEC60}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreForce.Linq", "src\NetCoreForce.Linq\NetCoreForce.Linq.csproj", "{BA04D23B-53D0-4E77-A9A4-1CB846040E42}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreForce.Linq.Tests", "src\NetCoreForce.Linq.Tests\NetCoreForce.Linq.Tests.csproj", "{84413F18-83EC-4E24-BE63-71642686521E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4D5EF834-368F-45F7-86EF-00E253494FAD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CCCC6D0F-894A-4DA5-A5A7-CFBBDD54E2C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{1DE216AF-BE16-4005-A712-A1DC66BAD7B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,8 +54,29 @@ Global
 		{DECD46B3-1DE6-4029-91E0-18C1D6AFEC60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DECD46B3-1DE6-4029-91E0-18C1D6AFEC60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DECD46B3-1DE6-4029-91E0-18C1D6AFEC60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA04D23B-53D0-4E77-A9A4-1CB846040E42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA04D23B-53D0-4E77-A9A4-1CB846040E42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA04D23B-53D0-4E77-A9A4-1CB846040E42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA04D23B-53D0-4E77-A9A4-1CB846040E42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84413F18-83EC-4E24-BE63-71642686521E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84413F18-83EC-4E24-BE63-71642686521E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84413F18-83EC-4E24-BE63-71642686521E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84413F18-83EC-4E24-BE63-71642686521E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CF9E2ECA-E820-474C-9481-E783E17175FF} = {4D5EF834-368F-45F7-86EF-00E253494FAD}
+		{61B7C421-3CB3-465B-8A1F-F31C551B27AD} = {4D5EF834-368F-45F7-86EF-00E253494FAD}
+		{1118E22A-57F6-4445-A893-265CAA351EE0} = {4D5EF834-368F-45F7-86EF-00E253494FAD}
+		{4F0B5BBE-C49F-481A-AB80-E139768CEA8C} = {CCCC6D0F-894A-4DA5-A5A7-CFBBDD54E2C3}
+		{B1B27588-2FE8-4866-85F6-259F3525021B} = {CCCC6D0F-894A-4DA5-A5A7-CFBBDD54E2C3}
+		{DECD46B3-1DE6-4029-91E0-18C1D6AFEC60} = {1DE216AF-BE16-4005-A712-A1DC66BAD7B8}
+		{BA04D23B-53D0-4E77-A9A4-1CB846040E42} = {4D5EF834-368F-45F7-86EF-00E253494FAD}
+		{84413F18-83EC-4E24-BE63-71642686521E} = {CCCC6D0F-894A-4DA5-A5A7-CFBBDD54E2C3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8608E7DE-0444-4E04-887A-586CDB3A0A73}
 	EndGlobalSection
 EndGlobal

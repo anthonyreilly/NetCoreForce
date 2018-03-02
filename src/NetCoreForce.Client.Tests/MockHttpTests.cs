@@ -55,7 +55,7 @@ namespace NetCoreForce.Client.Tests
             ForceClient client = new ForceClient("https://na15.salesforce.com", "v41.0", "dummyToken", httpClient);
 
             List<SfCase> cases = await client
-                .Query<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case")
+                .CreateQueryAsyncEnumerable<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case")
                 .ToList();
 
             SfCase firstCase = cases[0];
@@ -83,7 +83,7 @@ namespace NetCoreForce.Client.Tests
             ForceClient client = new ForceClient("https://na15.salesforce.com", "v41.0", "dummyToken", httpClient);
 
             SfCase singleCase = await client
-                    .Query<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case WHERE CaseNumber = '00001000'")
+                    .CreateQueryAsyncEnumerable<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case WHERE CaseNumber = '00001000'")
                     .Single();
 
             Assert.False(singleCase == null);
@@ -109,7 +109,7 @@ namespace NetCoreForce.Client.Tests
 
             Exception ex = await Assert.ThrowsAsync<InvalidOperationException>(
                 async () => await client
-                    .Query<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case WHERE CaseNumber LIKE '0000%'")
+                    .CreateQueryAsyncEnumerable<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case WHERE CaseNumber LIKE '0000%'")
                     .Single()
             );
 
