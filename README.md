@@ -23,10 +23,11 @@ Currently targeting [.NET Standard 1.6 and 2.0](https://docs.microsoft.com/en-us
 * [NetCoreForce.Models](https://www.nuget.org/packages/NetCoreForce.Models/)
 * [NetCoreForce.ModelGenerator](https://www.nuget.org/packages/NetCoreForce.ModelGenerator/)
 
-### Client library has no unusual dependencies:
+### An effort is made to minimize the dependencies:
 * [NETStandard.Library](https://www.nuget.org/packages/NETStandard.Library/) (For 1.x)
-* [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
-* [System.Text.Encodings.Web](https://www.nuget.org/packages/System.Text.Encodings.Web)
+* [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json) (JSON Serialization)
+* [System.Text.Encodings.Web](https://www.nuget.org/packages/System.Text.Encodings.Web) (URL formatting)
+* [System.Interactive.Async](https://www.nuget.org/packages/System.Interactive.Async/) (Asynchronous query batch result processing)
 
 Using [semantic versioning](http://semver.org)
 
@@ -79,5 +80,28 @@ Nested queries are not fully supported - the subquery results will not be comple
 ```
 // *NOT* fully supported
 "SELECT Id,CaseNumber, (Select Contact.Name from Account) FROM Case"
+```
+
+### Asynchronous Batch Processing
+
+Query<T> method will retrieve the full result set before returning. By default, results are returned in batches of 2000.
+In cases where you are working with large result sets, you may want to retrieve the batches asynchronously for better performance.
+
+```csharp
+// First create the async enumerable. At this point, no query has been executed.
+// batchSize can be omitted to use the default (usually 2000), or given a custom value between 200 and 2000.
+IAsyncEnumerable<SfContact> contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id, Name FROM Contact ", batchSize: 200);
+
+// Get the enumerator, in a using block for proper disposal
+using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+{
+    // MoveNext() will execute the query and get the first batch of results.
+    // Once the inital result batch has been exhausted, the remaining batches, if any, will be retrieved.
+    while (await contactsEnumerator.MoveNext())
+    {
+        SfContact contact = contactsEnumerator.Current;
+        // process your results
+    }
+}
 ```
 

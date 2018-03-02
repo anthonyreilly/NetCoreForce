@@ -1,9 +1,11 @@
 ﻿using System;
-using System.Net.Http;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using NetCoreForce.Client.Models;
-using System.Diagnostics;
 
 namespace NetCoreForce.Client
 {
@@ -155,6 +157,92 @@ namespace NetCoreForce.Client
             }
 
             return default(T);
+        }
+
+        /// <summary>
+        /// Retrieve a <see cref="IAsyncEnumerable{T}"/> using a SOQL query. Batches will be retrieved asynchronously.
+        /// <para>When using the iterator, the initial result batch will be returned as soon as it is received. The additional result batches will be retrieved only as needed.</para>
+        /// </summary>
+        /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
+        /// <param name="queryAll">True if deleted records are to be included</param>
+        /// <param name="batchSize"></param>
+        /// <returns><see cref="IAsyncEnumerable{T}"/> of results</returns>
+        public IAsyncEnumerable<T> QueryAsync<T>(string queryString, bool queryAll = false, int? batchSize = null)
+        {
+            return AsyncEnumerable.CreateEnumerable(() => CreateQueryAsyncEnumerator<T>(queryString, queryAll, batchSize));
+        }
+
+        private IAsyncEnumerator<T> CreateQueryAsyncEnumerator<T>(string queryString, bool queryAll = false, int? batchSize = null)
+        {
+            Dictionary<string, string> customHeaders = null;
+            if (batchSize.HasValue)
+            {
+                customHeaders = HeaderFormatter.SforceQueryOptions(batchSize.Value);
+            }
+
+            var jsonClient = new JsonClient(AccessToken, _httpClient);
+
+            // Enumerator on the current batch items
+            IEnumerator<T> currentBatchEnumerator = null;
+            var done = false;
+            var nextRecordsUri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString, queryAll);
+
+            return AsyncEnumerable.CreateEnumerator(MoveNextAsync, Current, Dispose);
+
+            async Task<bool> MoveNextAsync(CancellationToken token)
+            {
+                if(token.IsCancellationRequested)
+                {
+                    return false;
+                }
+
+                // If items remain in the current Batch enumerator, go to next item
+                if (currentBatchEnumerator?.MoveNext() == true)
+                {
+                    return true;
+                }
+
+                // if done, no more items.
+                if (done)
+                {
+                    return false;
+                }
+
+                // else : no enumerator or currentBatchEnumerator ended
+                // so get the next batch
+                var qr = await jsonClient.HttpGetAsync<QueryResult<T>>(nextRecordsUri, customHeaders);
+
+#if DEBUG
+                Debug.WriteLine($"Got query resuts, {qr.TotalSize} totalSize, {qr.Records.Count} in this batch, final batch: {qr.Done}");
+#endif
+
+                currentBatchEnumerator = qr.Records.GetEnumerator();
+
+                if (!string.IsNullOrEmpty(qr.NextRecordsUrl))
+                {
+                    nextRecordsUri = new Uri(new Uri(InstanceUrl), qr.NextRecordsUrl);
+                    done = false;
+                }
+                else
+                {
+                    //Normally if query has remaining batches, NextRecordsUrl will have a value, and Done will be false.
+                    //In case of some unforseen error, flag the result as done if we're missing the NextRecordsURL
+                    done = true;
+                }
+
+                return currentBatchEnumerator.MoveNext();
+            }
+
+            T Current()
+            {
+                return currentBatchEnumerator == null ? default(T) : currentBatchEnumerator.Current;
+            }
+
+            void Dispose()
+            {
+                currentBatchEnumerator?.Dispose();
+                jsonClient.Dispose();
+            }
         }
 
         /// <summary>

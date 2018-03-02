@@ -65,6 +65,26 @@ namespace SampleConsole
                 dynoObject.Description = "Test Account description";
                 CreateResponse resp = await client.CreateRecord<dynamic>("Account", dynoObject);
 
+                // Asynchronous large result sets and batching:
+                // Query<T> method will retrieve the full result set before returning.
+                // In cases where you are working with large result sets, you may want to retrieve the batches asynchronously for better performance.
+
+                // First create the async enumerable. At this point, no query has been executed.
+                // batchSize can be omitted to use the default (usually 2000), or given a custom value between 200 and 2000.
+                IAsyncEnumerable<SfContact> contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id, Name FROM Contact ", batchSize: 200);
+
+                // Get the enumerator, in a using block for proper disposal
+                using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+                {
+                    // MoveNext() will execute the query and get the first batch of results.
+                    // Once the inital result batch has been exhausted, the remaining batches, if any, will be retrieved.
+                    while (await contactsEnumerator.MoveNext())
+                    {
+                        SfContact contact = contactsEnumerator.Current;
+                        // process your results
+                    }
+                }
+
             }
             catch (ForceApiException ex)
             {
