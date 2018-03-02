@@ -27,7 +27,7 @@ namespace NetCoreForce.FunctionalTests
             ForceClient client = await forceClientFixture.GetForceClient();
 
             SfCase singleCase = await client
-                .Query<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case LIMIT 1")
+                .CreateQueryAsyncEnumerable<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case LIMIT 1")
                 .Single();
 
             Assert.False(singleCase == null);
@@ -40,7 +40,7 @@ namespace NetCoreForce.FunctionalTests
             ForceClient client = await forceClientFixture.GetForceClient();
 
             SfCase singleCase = await client
-                .Query<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case WHERE CaseNumber = '999999'")
+                .CreateQueryAsyncEnumerable<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case WHERE CaseNumber = '999999'")
                 .SingleOrDefault();
 
             Assert.True(singleCase == null);
@@ -52,7 +52,7 @@ namespace NetCoreForce.FunctionalTests
             ForceClient client = await forceClientFixture.GetForceClient();
             
             List<SfCase> cases = await client
-                .Query<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case")
+                .CreateQueryAsyncEnumerable<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case")
                 .ToList();
 
             SfCase firstCase = cases[0];
@@ -68,7 +68,7 @@ namespace NetCoreForce.FunctionalTests
             ForceClient client = await forceClientFixture.GetForceClient();
             
             List<SfCase> cases = await client
-                .Query<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case WHERE CaseNumber = '999999'")
+                .CreateQueryAsyncEnumerable<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case WHERE CaseNumber = '999999'")
                 .ToList();
 
             Assert.False(cases == null);
@@ -89,7 +89,7 @@ namespace NetCoreForce.FunctionalTests
             ForceClient client = await forceClientFixture.GetForceClient();
             
             List<AccountWithContactsSub> accounts = await client
-                .Query<AccountWithContactsSub>("SELECT Account.Name, (Select Contact.Name from Contacts) FROM Account")
+                .CreateQueryAsyncEnumerable<AccountWithContactsSub>("SELECT Account.Name, (Select Contact.Name from Contacts) FROM Account")
                 .ToList();
 
             Assert.NotNull(accounts);

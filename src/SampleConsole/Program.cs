@@ -57,11 +57,11 @@ namespace SampleConsole
                 ForceClient client = new ForceClient(auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken);
 
                 List<SfContact> contacts = await client
-                    .Query<SfContact>("SELECT Id, Name, SystemModstamp, Account.Id, Account.Name, Account.SystemModstamp FROM Contact", queryAll: false)
+                    .CreateQueryAsyncEnumerable<SfContact>("SELECT Id, Name, SystemModstamp, Account.Id, Account.Name, Account.SystemModstamp FROM Contact", queryAll: false)
                     .ToList();
 
                 List<CustomAccount> customAccounts = await client
-                    .Query<CustomAccount>("SELECT Id, CustomerPriority__c FROM Account", queryAll: false)
+                    .CreateQueryAsyncEnumerable<CustomAccount>("SELECT Id, CustomerPriority__c FROM Account", queryAll: false)
                     .ToList();
 
                 //Using a dynamic object
