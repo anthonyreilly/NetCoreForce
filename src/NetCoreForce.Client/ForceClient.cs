@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Net.Http;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using NetCoreForce.Client.Models;
 using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
 
 namespace NetCoreForce.Client
 {
@@ -60,100 +65,100 @@ namespace NetCoreForce.Client
         public bool TestConnection()
         {
             throw new NotImplementedException();
-        }        
-
-        /// <summary>
-        /// Retrieve records using a SOQL query.
-        /// <para>Will automatically retrieve the complete result set if split into batches. If you want to limit results, use the LIMIT operator in your query.</para>
-        /// </summary>
-        /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
-        /// <param name="queryAll">True if deleted records are to be included</param>
-        /// <returns>List{T} of results</returns>
-        public async Task<List<T>> Query<T>(string queryString, bool queryAll = false)
-        {
-#if DEBUG
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-#endif
-            try
-            {
-                var queryUri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString, queryAll);
-
-                JsonClient client = new JsonClient(AccessToken, _httpClient);
-
-                List<T> results = new List<T>();
-
-                bool done = false;
-                string nextRecordsUrl = string.Empty;
-
-                //larger result sets will be split into batches (sized according to system and account settings)
-                //if additional batches are indicated retrieve the rest and append to the result set.
-                do
-                {
-                    if (!string.IsNullOrEmpty(nextRecordsUrl))
-                    {
-                        queryUri = new Uri(new Uri(InstanceUrl), nextRecordsUrl);
-                    }
-
-                    QueryResult<T> qr = await client.HttpGetAsync<QueryResult<T>>(queryUri);
-
-#if DEBUG
-                    Debug.WriteLine(string.Format("Got query resuts, {0} totalSize, {1} in this batch, final batch: {2}",
-                        qr.TotalSize, qr.Records.Count.ToString(), qr.Done.ToString()));
-#endif
-
-                    results.AddRange(qr.Records);
-
-                    done = qr.Done;
-                    
-                    nextRecordsUrl = qr.NextRecordsUrl;
-
-                    if(!done && string.IsNullOrEmpty(nextRecordsUrl))
-                    {
-                        //Normally if query has remaining batches, NextRecordsUrl will have a value, and Done will be false.
-                        //In case of some unforseen error, flag the result as done if we're missing the NextRecordsUrl
-                        //In this situation we'll just get the previous set again and be stuck in a loop.
-                        done = true;
-                    }
-
-                } while (!done);
-
-#if DEBUG
-                sw.Stop();
-                Debug.WriteLine(string.Format("Query results retrieved in {0}ms", sw.ElapsedMilliseconds.ToString()));
-#endif
-
-                return results;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Error querying: " + ex.Message);
-                throw ex;
-            }
-
         }
 
         /// <summary>
-        /// Retrieve a single record using a SOQL query.
-        /// <para>Will throw an exception if multiple rows are retrieved by the query - if you are note sure of a single result, use Query{T} instead.</para>
+        /// Retrieve a <see cref="IAsyncEnumerable{T}"/> using a SOQL query.
+        /// <para>Will automatically retrieve the complete result set if split into batches. If you wan tto limit results, use the LIMIT operator in your query.</para>
         /// </summary>
         /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
         /// <param name="queryAll">True if deleted records are to be included</param>
-        /// <returns>result object</returns>
-        public async Task<T> QuerySingle<T>(string queryString, bool queryAll = false)
+        /// <returns><see cref="IAsyncEnumerable{T}"/> of results</returns>
+        public IAsyncEnumerable<T> CreateQueryAsyncEnumerable<T>(string queryString, bool queryAll = false)
         {
-            List<T> results = await Query<T>(queryString, queryAll);
+            return AsyncEnumerable.CreateEnumerable(() => CreateQueryAsyncEnumerator<T>(queryString, queryAll));
+        }
+
+        /// <summary>
+        /// Async count using a SOQL query.
+        /// </summary>
+        /// <param name="queryString">SOQL COUNT() query string, without any URL escaping/encoding</param>
+        /// <param name="queryAll">True if deleted records are to be included</param>
+        /// <returns>The <see cref="Task{Int}"/> returning the count</returns>
+        public async Task<int> CountQueryAsync(string queryString, bool queryAll = false)
+        {
+            var jsonClient = new JsonClient(AccessToken, new HttpClient());
+            var uri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString);
+            var qr = await jsonClient.HttpGetAsync<QueryResult<object>>(uri);
+
+            return qr.TotalSize;
+        }
+
+        /// <summary>
+        /// Retrieve a <see cref="IAsyncEnumerator{T}"/> using a SOQL query.
+        /// <para>Will automatically retrieve the complete result set if split into batches. If you wan tto limit results, use the LIMIT operator in your query.</para>
+        /// </summary>
+        /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
+        /// <param name="queryAll">True if deleted records are to be included</param>
+        /// <returns><see cref="IAsyncEnumerator{T}"/> of results</returns>
+        public IAsyncEnumerator<T> CreateQueryAsyncEnumerator<T>(string queryString, bool queryAll = false)
+        {
+
+            var jsonClient = new JsonClient(AccessToken, _httpClient);
             
-            if(results != null && results.Count > 1)
+            // Enumerator on the current batch items
+            IEnumerator<T> currentBatchEnumerator = null;
+            var done = false;
+            var nextRecordsUri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString, queryAll);
+
+            return AsyncEnumerable.CreateEnumerator(MoveNextAsync, Current, Dispose);
+            
+            async Task<bool> MoveNextAsync(CancellationToken token)
             {
-                throw new Exception("Multiple records were returned by query passed into QuerySingle - query must retrieve zero or one record.");
+                // if it remains items in the current Batch enumerator ... go to next item
+                if (currentBatchEnumerator?.MoveNext() == true)
+                    return true;
+
+                // if done, no more items.
+                if (done)
+                    return false;
+
+                // else : no enumerator or currentBatchEnumerator ended
+                // so get the next batch
+                var qr = await jsonClient.HttpGetAsync<QueryResult<T>>(nextRecordsUri);
+
+#if DEBUG
+                Debug.WriteLine($"Got query resuts, {qr.TotalSize} totalSize, {qr.Records.Count} in this batch, final batch: {qr.Done}");
+#endif
+
+                currentBatchEnumerator = qr.Records.GetEnumerator();
+                    
+                if (!string.IsNullOrEmpty(qr.NextRecordsUrl))
+                {
+                    nextRecordsUri = new Uri(new Uri(InstanceUrl), qr.NextRecordsUrl);
+                    done = false;
+                }
+                else
+                {
+                    //Normally if query has remaining batches, NextRecordsUrl will have a value, and Done will be false.
+                    //In case of some unforseen error, flag the result as done if we're missing the NextRecordsU
+
+                    done = true;
+                }
+
+                return currentBatchEnumerator.MoveNext();
             }
 
-            if(results != null && results.Count == 1){
-                return results[0];
+            T Current()
+            {
+                return currentBatchEnumerator == null ? default(T) : currentBatchEnumerator.Current;
             }
 
-            return default(T);
+            void Dispose()
+            {
+                currentBatchEnumerator?.Dispose();
+                jsonClient.Dispose();
+            }
         }
 
         /// <summary>

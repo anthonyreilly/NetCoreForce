@@ -6,7 +6,6 @@ using Xunit;
 using NetCoreForce.Client;
 using NetCoreForce.Client.Models;
 using NetCoreForce.Models;
-using Newtonsoft.Json;
 
 namespace NetCoreForce.FunctionalTests
 {

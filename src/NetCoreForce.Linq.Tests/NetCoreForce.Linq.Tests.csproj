@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
-    <PackageReference Include="System.Interactive.Async.Providers" Version="3.1.1" />
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
@@ -17,15 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NetCoreForce.Client\NetCoreForce.Client.csproj" />
     <ProjectReference Include="..\NetCoreForce.Linq\NetCoreForce.Linq.csproj" />
-    <ProjectReference Include="..\NetCoreForce.Models\NetCoreForce.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="credentials_dev.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\NetCoreForce.Models\NetCoreForce.Models.csproj" />
   </ItemGroup>
 
 </Project>

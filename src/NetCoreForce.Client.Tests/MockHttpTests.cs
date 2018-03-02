@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using NetCoreForce.Client;
 using Xunit;
@@ -53,7 +54,9 @@ namespace NetCoreForce.Client.Tests
 
             ForceClient client = new ForceClient("https://na15.salesforce.com", "v41.0", "dummyToken", httpClient);
 
-            List<SfCase> cases = await client.Query<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case");
+            List<SfCase> cases = await client
+                .CreateQueryAsyncEnumerable<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case")
+                .ToList();
 
             SfCase firstCase = cases[0];
 
@@ -79,7 +82,9 @@ namespace NetCoreForce.Client.Tests
 
             ForceClient client = new ForceClient("https://na15.salesforce.com", "v41.0", "dummyToken", httpClient);
 
-            SfCase singleCase = await client.QuerySingle<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case WHERE CaseNumber = '00001000'");
+            SfCase singleCase = await client
+                    .CreateQueryAsyncEnumerable<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case WHERE CaseNumber = '00001000'")
+                    .Single();
 
             Assert.False(singleCase == null);
             Assert.Equal("00001000", singleCase.CaseNumber);
@@ -102,8 +107,10 @@ namespace NetCoreForce.Client.Tests
 
             ForceClient client = new ForceClient("https://na15.salesforce.com", "v41.0", "dummyToken", httpClient);
 
-            Exception ex = await Assert.ThrowsAsync<Exception>(
-                async () => await client.QuerySingle<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case WHERE CaseNumber LIKE '0000%'")
+            Exception ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await client
+                    .CreateQueryAsyncEnumerable<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case WHERE CaseNumber LIKE '0000%'")
+                    .Single()
             );
 
             Assert.NotNull(ex);

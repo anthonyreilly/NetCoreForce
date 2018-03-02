@@ -10,6 +10,7 @@ using NetCoreForce.Client.Models;
 using NetCoreForce.Models;
 using System.Dynamic;
 using System.Diagnostics;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace SampleConsole
@@ -55,9 +56,13 @@ namespace SampleConsole
             {
                 ForceClient client = new ForceClient(auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken);
 
-                List<SfContact> contacts = await client.Query<SfContact>("SELECT Id, Name, SystemModstamp, Account.Id, Account.Name, Account.SystemModstamp FROM Contact", false);
+                List<SfContact> contacts = await client
+                    .CreateQueryAsyncEnumerable<SfContact>("SELECT Id, Name, SystemModstamp, Account.Id, Account.Name, Account.SystemModstamp FROM Contact", queryAll: false)
+                    .ToList();
 
-                List<CustomAccount> customAccounts = await client.Query<CustomAccount>("SELECT Id, CustomerPriority__c FROM Account", false);
+                List<CustomAccount> customAccounts = await client
+                    .CreateQueryAsyncEnumerable<CustomAccount>("SELECT Id, CustomerPriority__c FROM Account", queryAll: false)
+                    .ToList();
 
                 //Using a dynamic object
                 dynamic dynoObject = new ExpandoObject();
@@ -69,13 +74,19 @@ namespace SampleConsole
             catch (ForceApiException ex)
             {
                 Console.WriteLine("ForceApiException: " + ex.Message);
-                return;
+
+                foreach (var error in ex.Errors)
+                    Console.WriteLine("\t - " + error.Message.Replace("\n", "\n\t"));
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine("General Exception: " + ex.Message);
                 return;
             }
+
+            Console.WriteLine("Press a key to quit");
+            Console.ReadKey(true);
 
             return;
         }
