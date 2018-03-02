@@ -3,6 +3,9 @@
   <PropertyGroup>    
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsPackable>false</IsPackable>
+
+    <!-- Ignore warnings about referencing obsolete methods -->
+    <NoWarn>CS0618</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
