@@ -24,8 +24,9 @@ Currently targeting [.NET Standard 1.6 and 2.0](https://docs.microsoft.com/en-us
 * [NetCoreForce.ModelGenerator](https://www.nuget.org/packages/NetCoreForce.ModelGenerator/)
 
 ### Client library has no unusual dependencies:
-* [NETStandard.Library](https://www.nuget.org/packages/NETStandard.Library/)
+* [NETStandard.Library](https://www.nuget.org/packages/NETStandard.Library/) (For 1.x)
 * [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
+* [System.Text.Encodings.Web](https://www.nuget.org/packages/System.Text.Encodings.Web)
 
 Using [semantic versioning](http://semver.org)
 

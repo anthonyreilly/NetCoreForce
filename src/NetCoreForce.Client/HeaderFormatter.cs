@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace NetCoreForce.Client
 {
@@ -13,15 +14,18 @@ namespace NetCoreForce.Client
         /// Use the Describe Global resource and the If-Modified-Since HTTP header to determine if an object’s metadata has changed.
         /// </summary>
         /// <param name="startDate">Start date after which to look for changed object metadata</param>
-        /// <returns>Key of "If-Modified-Since" with date value in the RFC1123 Pattern</returns>
-        public static KeyValuePair<string, string> IfModifiedSince(DateTimeOffset startDate)
+        /// <returns>Single entry dictionary of "If-Modified-Since" with date value in the RFC1123 Pattern</returns>
+        public static Dictionary<string, string> IfModifiedSince(DateTimeOffset startDate)
         {
             //example: "If-Modified-Since: Tue, 23 Mar 2015 00:00:00 GMT"
             const string headerName = "If-Modified-Since";
 
-            string dateString = startDate.ToString("r"); //RFC1123 Pattern
+            string dateString = startDate.ToString("r", CultureInfo.InvariantCulture); //RFC1123 Pattern
 
-            return new KeyValuePair<string, string>(headerName, dateString);
+            var customHeaders = new Dictionary<string, string>(1);
+            customHeaders.Add(headerName, dateString);
+
+            return customHeaders;
         }
 
         /// <summary>
@@ -31,8 +35,8 @@ namespace NetCoreForce.Client
         /// applied. If the header is not provided with a request, REST API defaults to using the active assignment rules.</para>
         /// </summary>
         /// <param name="autoAssign">Active assignment rules are applied for created or updated Cases or Leads</param>
-        /// <returns>Key of "Sforce-Auto-Assign" with TRUE/FALSE value</returns>
-        public static KeyValuePair<string, string> SforceAutoAssign(bool autoAssign)
+        /// <returns>Single entry dictionary of "Sforce-Auto-Assign" with TRUE/FALSE value</returns>
+        public static Dictionary<string, string> SforceAutoAssign(bool autoAssign)
         {
             //TODO: support field: Valid AssignmentRule ID. The given AssignmentRule is applied for created Cases or Leads.
             //https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/headers_autoassign.htm
@@ -44,7 +48,10 @@ namespace NetCoreForce.Client
 
             string valueString = autoAssign.ToString().ToUpper();
 
-            return new KeyValuePair<string, string>(headerName, valueString);
+            var customHeaders = new Dictionary<string, string>(1);
+            customHeaders.Add(headerName, valueString);
+
+            return customHeaders;
         }
 
         /// <summary>
@@ -55,15 +62,28 @@ namespace NetCoreForce.Client
         /// actual batch size. Changes are made as necessary to maximize performance.</remarks>
         /// </summary>
         /// <param name="batchSize">the number of records returned for a query request</param>
-        /// <returns>Key of "Sforce-Query-Options" with value of batchSize={batchSize}</returns>
-        public static KeyValuePair<string, string> SforceQueryOptions(int batchSize)
+        /// <returns>Single entry dictionary of "Sforce-Query-Options" with value of batchSize={batchSize}</returns>
+        public static Dictionary<string, string> SforceQueryOptions(int batchSize)
         {
+            if(batchSize > 2000)
+            {
+                throw new ArgumentException("Batch size can not exceed 2000", "batchSize");
+            }
+
+            if(batchSize < 200)
+            {
+                throw new ArgumentException("Batch size minimum is 200", "batchSize");
+            }
+
             //example: "Sforce-Query-Options: batchSize=1000"
             const string headerName = "Sforce-Query-Options";
 
-            string valueString = string.Format("batchSize={0}", batchSize.ToString());
+            string valueString = string.Format("batchSize={0}", batchSize.ToString(CultureInfo.InvariantCulture));
 
-            return new KeyValuePair<string, string>(headerName, valueString);
+            var customHeaders = new Dictionary<string, string>(1);
+            customHeaders.Add(headerName, valueString);
+
+            return customHeaders;
         }
     }
 }
