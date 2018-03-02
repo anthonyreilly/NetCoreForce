@@ -139,6 +139,7 @@ namespace NetCoreForce.Client
         /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
         /// <param name="queryAll">True if deleted records are to be included</param>
         /// <returns>result object</returns>
+        [Obsolete("QuerySingle is redundant and will be removed in a future version, use Query with .Single() LINQ function instead.")]
         public async Task<T> QuerySingle<T>(string queryString, bool queryAll = false)
         {
             List<T> results = await Query<T>(queryString, queryAll);
