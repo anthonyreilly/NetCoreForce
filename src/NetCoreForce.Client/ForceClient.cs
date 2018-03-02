@@ -33,7 +33,7 @@ namespace NetCoreForce.Client
             {
                 throw ex;
             }
-        }        
+        }
 
         public ForceClient(string instanceUrl, string apiVersion, string accessToken, HttpClient httpClient = null)
         {
@@ -60,7 +60,7 @@ namespace NetCoreForce.Client
         public bool TestConnection()
         {
             throw new NotImplementedException();
-        }        
+        }
 
         /// <summary>
         /// Retrieve records using a SOQL query.
@@ -105,10 +105,10 @@ namespace NetCoreForce.Client
                     results.AddRange(qr.Records);
 
                     done = qr.Done;
-                    
+
                     nextRecordsUrl = qr.NextRecordsUrl;
 
-                    if(!done && string.IsNullOrEmpty(nextRecordsUrl))
+                    if (!done && string.IsNullOrEmpty(nextRecordsUrl))
                     {
                         //Normally if query has remaining batches, NextRecordsUrl will have a value, and Done will be false.
                         //In case of some unforseen error, flag the result as done if we're missing the NextRecordsUrl
@@ -130,7 +130,6 @@ namespace NetCoreForce.Client
                 Debug.WriteLine("Error querying: " + ex.Message);
                 throw ex;
             }
-
         }
 
         /// <summary>
@@ -143,13 +142,14 @@ namespace NetCoreForce.Client
         public async Task<T> QuerySingle<T>(string queryString, bool queryAll = false)
         {
             List<T> results = await Query<T>(queryString, queryAll);
-            
-            if(results != null && results.Count > 1)
+
+            if (results != null && results.Count > 1)
             {
                 throw new Exception("Multiple records were returned by query passed into QuerySingle - query must retrieve zero or one record.");
             }
 
-            if(results != null && results.Count == 1){
+            if (results != null && results.Count == 1)
+            {
                 return results[0];
             }
 
@@ -273,7 +273,7 @@ namespace NetCoreForce.Client
             return;
         }
 
-#region metadata
+        #region metadata
 
         /// <summary>
         /// Lists information about limits in your org.
@@ -345,7 +345,7 @@ namespace NetCoreForce.Client
             return await client.HttpGetAsync<DescribeGlobal>(uri);
         }
 
-#endregion
+        #endregion
 
     }
 }
