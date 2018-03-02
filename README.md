@@ -75,3 +75,9 @@ string caseAccountName = firstCase.Account.Name;
 string caseContactName = firstCase.Contact.Name;
 ```
 
+Nested queries are not fully supported - the subquery results will not be complete if they exceed the batch size as the NextRecordsUrl in the subquery results is not being acted upon. Instead use the relationship syntax in the example above.
+```
+// *NOT* fully supported
+"SELECT Id,CaseNumber, (Select Contact.Name from Account) FROM Case"
+```
+
