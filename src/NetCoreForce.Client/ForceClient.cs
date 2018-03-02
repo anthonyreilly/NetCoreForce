@@ -64,7 +64,7 @@ namespace NetCoreForce.Client
 
         /// <summary>
         /// Retrieve records using a SOQL query.
-        /// <para>Will automatically retrieve the complete result set if split into batches. If you wan tto limit results, use the LIMIT operator in your query.</para>
+        /// <para>Will automatically retrieve the complete result set if split into batches. If you want to limit results, use the LIMIT operator in your query.</para>
         /// </summary>
         /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
         /// <param name="queryAll">True if deleted records are to be included</param>
