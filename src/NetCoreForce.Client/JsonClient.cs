@@ -65,16 +65,9 @@ namespace NetCoreForce.Client
 
         public async Task<T> HttpGetAsync<T>(Uri uri, Dictionary<string, string> customHeaders = null)
         {
-            //can handle T = string?
-            //request.Headers.Add("Sforce-Auto-Assign", "FALSE");
+            //TODO: can this handle T = string?
             try
             {
-                // HttpRequestMessage request = new HttpRequestMessage();
-                // request.Headers.Authorization = _authHeaderValue;
-                // request.RequestUri = new Uri(url);
-                // request.Method = HttpMethod.Get;
-                // return await GetResponse<T>(request, customHeaders);
-
                 return await HttpAsync<T>(uri, HttpMethod.Get, null, customHeaders);
             }
             catch (Exception ex)
@@ -108,37 +101,18 @@ namespace NetCoreForce.Client
 
         public async Task<T> HttpPatchAsync<T>(object inputObject, Uri uri, Dictionary<string, string> customHeaders = null)
         {
-            // var json = JsonSerializer.SerializeForUpdate(inputObject);
-
-            // try
-            // {
-            //     var content = new StringContent(json, Encoding.UTF8, JsonMimeType);
-
-            //     HttpRequestMessage request = new HttpRequestMessage();
-            //     request.Headers.Authorization = _authHeaderValue;
-            //     request.RequestUri = uri;
-            //     request.Method = new HttpMethod("PATCH");
-            //     request.Content = content;
-
-            //     return await GetResponse<T>(request, customHeaders);
-            // }
-            // catch (Exception ex)
-            // {
-            //     throw ex;
-            // }            
-
             try
             {
                 var json = JsonSerializer.SerializeForUpdate(inputObject);
                 var content = new StringContent(json, Encoding.UTF8, JsonMimeType);
-                
+
                 return await HttpAsync<T>(uri, new HttpMethod("PATCH"), content, customHeaders);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-        }        
+        }
 
         public async Task<T> HttpDeleteAsync<T>(Uri uri, Dictionary<string, string> customHeaders = null)
         {
@@ -165,7 +139,7 @@ namespace NetCoreForce.Client
                 request.Headers.Authorization = _authHeaderValue;
                 request.RequestUri = uri;
                 request.Method = httpMethod;
-                if(content != null)
+                if (content != null)
                 {
                     request.Content = content;
                 }
@@ -195,10 +169,10 @@ namespace NetCoreForce.Client
             {
                 responseMessage = await SharedHttpClient.SendAsync(request).ConfigureAwait(false);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string errMsg = "Error sending HTTP request:" + ex.Message;
-                if(ex.InnerException != null && !string.IsNullOrEmpty(ex.InnerException.Message))
+                if (ex.InnerException != null && !string.IsNullOrEmpty(ex.InnerException.Message))
                 {
                     errMsg += " " + ex.InnerException.Message;
                 }
@@ -210,8 +184,8 @@ namespace NetCoreForce.Client
             //API usage response header
             //e.g. "Sforce-Limit-Info: api-usage=90/15000"
             const string SforceLimitInfoHeaderName = "Sforce-Limit-Info";
-            IEnumerable<string> limitValues = GetHeaderValues(responseMessage.Headers, SforceLimitInfoHeaderName);            
-            if(limitValues != null)
+            IEnumerable<string> limitValues = GetHeaderValues(responseMessage.Headers, SforceLimitInfoHeaderName);
+            if (limitValues != null)
             {
                 Debug.WriteLine(string.Format("{0}: {1}", SforceLimitInfoHeaderName, limitValues.FirstOrDefault() ?? "none"));
             }
@@ -254,7 +228,7 @@ namespace NetCoreForce.Client
         private IEnumerable<string> GetHeaderValues(HttpHeaders headers, string headerName)
         {
             if (headers != null)
-            {                
+            {
                 IEnumerable<string> values;
                 if (headers.TryGetValues(headerName, out values))
                 {
@@ -272,7 +246,7 @@ namespace NetCoreForce.Client
         public void Dispose()
         {
             //only dispose instance member, if any
-            if(_httpClient != null)
+            if (_httpClient != null)
             {
                 _httpClient.Dispose();
             }
