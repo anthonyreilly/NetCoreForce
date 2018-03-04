@@ -27,7 +27,7 @@
     <None Update="credentials_dev.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="responses/*">
+    <None Update="responses/**/*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
