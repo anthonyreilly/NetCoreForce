@@ -198,25 +198,31 @@ namespace NetCoreForce.Client
 
             if (responseMessage.Content != null)
             {
-                //TODO need trycatch here
-                string responseContent = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    string responseContent = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-                if (responseMessage.IsSuccessStatusCode)
-                {
-                    if (string.IsNullOrEmpty(responseContent))
+                    if (responseMessage.IsSuccessStatusCode)
                     {
-                        throw new ForceApiException("Response content was empty");
+                        if (string.IsNullOrEmpty(responseContent))
+                        {
+                            throw new ForceApiException("Response content was empty");
+                        }
+                        return JsonConvert.DeserializeObject<T>(responseContent);
                     }
-                    return JsonConvert.DeserializeObject<T>(responseContent);
+                    else
+                    {
+                        var errors = JsonConvert.DeserializeObject<List<ErrorResponse>>(responseContent);
+                        throw new ForceApiException(string.Format("Salesforce API returned {0}, see Errors for details.", responseMessage.StatusCode.ToString()), errors, responseMessage.StatusCode);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    var errors = JsonConvert.DeserializeObject<List<ErrorResponse>>(responseContent);
-                    throw new ForceApiException(string.Format("Salesforce API returned {0}, see Errors for details.", responseMessage.StatusCode.ToString()), errors, responseMessage.StatusCode);
+                    throw new ForceApiException(string.Format("Error parsing response content: {0}", ex.Message));
                 }
             }
 
-            throw new ForceApiException("Error processing reponse content");
+            throw new ForceApiException(string.Format("Error processing response: returned {0} for {1}", responseMessage.ReasonPhrase, request.RequestUri.ToString()));
         }
 
         /// <summary>
