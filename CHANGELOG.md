@@ -1,6 +1,10 @@
 # Changelog
 
-### 2018-02-27 v2.0.0-rc4
+### 2018-03-05 v2.0.0
+
+* v2.0.0 release
+
+### 2018-03-02 v2.0.0-rc4
 
 * Added asynchronous query batch processing (QueryAsync<T>) based on IAsyncEnumerable/Ix.NET extensions. Modified from [PR #1](https://github.com/anthonyreilly/NetCoreForce/pull/1)
 * Marked QuerySingle<T> as obsolete: should use standard LINQ Single() instead.
