@@ -1,16 +1,14 @@
 {
-    "version": "0.1.0",
-    "command": "dotnet",
-    "isShellCommand": true,
-    "args": [],
+    "version": "2.0.0",
     "tasks": [
         {
-            "taskName": "build",
+            "label": "build",
+            "command": "dotnet",
             "args": [
+                "build",
                 "${workspaceRoot}/NetCoreForce.sln"
             ],
-            "isBuildCommand": true,
             "problemMatcher": "$msCompile"
-        }        
+        }
     ]
 }
