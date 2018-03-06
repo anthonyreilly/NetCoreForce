@@ -41,5 +41,20 @@ namespace NetCoreForce.Client.Tests
 
             Assert.Equal(_expectedDate, convertedDate);
         }
+
+        [Fact]
+        public void DateTimeAndDateTimeOffset()
+        {
+            DateTimeOffset dto = DateTimeOffset.Now;
+            DateTime dt = DateTime.Now;
+            DateTimeOffset dtoConverted = dt;
+
+            string convertedDateTimeOffset = dto.ToString(DateFormats.FullDateFormatString);
+            string convertedDateTime = dt.ToString(DateFormats.FullDateFormatString);
+            string convertedDateTimeOffsetConverted = dt.ToString(DateFormats.FullDateFormatString);
+
+            Assert.Equal(convertedDateTimeOffset, convertedDateTime);
+            Assert.Equal(convertedDateTimeOffset, convertedDateTimeOffsetConverted);
+        }
     }
 }
