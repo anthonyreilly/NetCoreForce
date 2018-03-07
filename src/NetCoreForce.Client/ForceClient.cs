@@ -172,7 +172,7 @@ namespace NetCoreForce.Client
             return AsyncEnumerable.CreateEnumerable(() => CreateQueryAsyncEnumerator<T>(queryString, queryAll, batchSize));
         }
 
-        private IAsyncEnumerator<T> CreateQueryAsyncEnumerator<T>(string queryString, bool queryAll = false, int? batchSize = null)
+        public IAsyncEnumerator<T> CreateQueryAsyncEnumerator<T>(string queryString, bool queryAll = false, int? batchSize = null)
         {
             Dictionary<string, string> customHeaders = null;
             if (batchSize.HasValue)
@@ -243,6 +243,24 @@ namespace NetCoreForce.Client
                 currentBatchEnumerator?.Dispose();
                 jsonClient.Dispose();
             }
+        }
+
+        /// <summary>
+        /// Async count using a SOQL query.
+        /// </summary>
+        /// <param name="queryString">SOQL COUNT() query string, without any URL escaping/encoding</param>
+        /// <param name="queryAll">True if deleted records are to be included</param>
+        /// <returns>The <see cref="Task{Int}"/> returning the count</returns>
+        public async Task<int> CountQueryAsync(string queryString, bool queryAll = false)
+        {
+            //TODO: This probably doesnt work
+            throw new NotImplementedException();
+
+            var jsonClient = new JsonClient(AccessToken, new HttpClient());
+            var uri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString);
+            var qr = await jsonClient.HttpGetAsync<QueryResult<object>>(uri);
+
+            return qr.TotalSize;
         }
 
         /// <summary>
