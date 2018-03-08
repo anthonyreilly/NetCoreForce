@@ -270,7 +270,7 @@ namespace NetCoreForce.Client
                 throw new ForceApiException("CountQueryAsync may only be used with a query starting with SELECT COUNT() FROM");
             }
 
-            var jsonClient = new JsonClient(AccessToken, new HttpClient());
+            var jsonClient = new JsonClient(AccessToken, _httpClient);
             var uri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString);
             var qr = await jsonClient.HttpGetAsync<QueryResult<object>>(uri);
 
