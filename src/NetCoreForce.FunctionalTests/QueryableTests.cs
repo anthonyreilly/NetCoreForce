@@ -137,27 +137,5 @@ namespace NetCoreForce.FunctionalTests
             Assert.False(cases == null);
             Assert.True(cases.Count == 0);
         }
-
-        public class AccountWithContactsSub : SfAccount 
-        {
-            [JsonProperty(PropertyName = "contacts")]
-            [Updateable(false), Createable(false)]
-            public QueryResult<SfContact> Contacts { get; set; }
-        }
-
-        [Fact(Skip = "Not yet implemented")]
-        public async Task QueryRelationship()
-        {
-            //This isn't fully supported yet - this wont query all if there are NextRecordsUrl values in the subqueries
-            var client = await forceClientFixture.GetForceClient();
-
-            var accounts = await client
-                .QueryAsync<AccountWithContactsSub>("SELECT Account.Name, (Select Contact.Name from Contacts) FROM Account")
-                .ToList();
-
-            Assert.NotNull(accounts);
-            Assert.True(accounts[0].Contacts.Done);
-            Assert.NotNull(accounts[0].Contacts.Records[0].Name);
-        }
     }
 }
