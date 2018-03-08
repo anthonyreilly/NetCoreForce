@@ -212,8 +212,32 @@ namespace NetCoreForce.Client
                     }
                     else
                     {
-                        var errors = JsonConvert.DeserializeObject<List<ErrorResponse>>(responseContent);
-                        throw new ForceApiException(string.Format("Salesforce API returned {0}, see Errors for details.", responseMessage.StatusCode.ToString()), errors, responseMessage.StatusCode);
+                        string msg = string.Format("Unable to complete request, Salesforce API returned {0}.", responseMessage.StatusCode.ToString());
+
+                        List<ErrorResponse> errors = null;
+
+                        try
+                        {
+                            errors = JsonConvert.DeserializeObject<List<ErrorResponse>>(responseContent);
+
+                            // There will often only be one error code - append this to the message
+                            if (errors != null && errors.Count > 0)
+                            {
+                                msg += string.Format(" ErrorCode {0}: {1}.", errors[0].ErrorCode, errors[0].Message);
+                            }
+
+                            // inform if there are multiple errors that need to be checked
+                            if (errors != null && errors.Count > 1)
+                            {
+                                msg += " Additional errors returned, see Errors for complete list.";
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            msg += string.Format(" Unable to parse error details: {0}" + ex.Message);
+                        }
+
+                        throw new ForceApiException(msg, errors, responseMessage.StatusCode);
                     }
                 }
                 catch (Exception ex)
