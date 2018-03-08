@@ -17,13 +17,12 @@ namespace NetCoreForce.Linq.Providers
 
         protected override Task<int> ProduceCountAsync(string cmd)
         {
-            throw new System.NotImplementedException();
-            return ForceClient.CountQueryAsync(cmd, queryAll:false);
+            return ForceClient.CountQuery(cmd, queryAll:false);
         }
 
         protected override IAsyncEnumerator<T> ProduceAsyncEnumerator(string cmd)
         {
-            return this.ForceClient.CreateQueryAsyncEnumerator<T>(cmd, queryAll:false);
+            return this.ForceClient.QueryAsyncEnumerator<T>(cmd, queryAll:false);
         }
     }
 }

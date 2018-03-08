@@ -164,15 +164,23 @@ namespace NetCoreForce.Client
         /// <para>When using the iterator, the initial result batch will be returned as soon as it is received. The additional result batches will be retrieved only as needed.</para>
         /// </summary>
         /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
-        /// <param name="queryAll">True if deleted records are to be included</param>
-        /// <param name="batchSize"></param>
+        /// <param name="queryAll">Optional. True if deleted records are to be included.await Defaults to false.</param>
+        /// <param name="batchSize">Optional. Size of result batches between 200 and 2000</param>
         /// <returns><see cref="IAsyncEnumerable{T}"/> of results</returns>
         public IAsyncEnumerable<T> QueryAsync<T>(string queryString, bool queryAll = false, int? batchSize = null)
         {
-            return AsyncEnumerable.CreateEnumerable(() => CreateQueryAsyncEnumerator<T>(queryString, queryAll, batchSize));
+            return AsyncEnumerable.CreateEnumerable(() => QueryAsyncEnumerator<T>(queryString, queryAll, batchSize));
         }
 
-        public IAsyncEnumerator<T> CreateQueryAsyncEnumerator<T>(string queryString, bool queryAll = false, int? batchSize = null)
+        /// <summary>
+        /// Retrieve a <see cref="IAsyncEnumerator{T}"/> using a SOQL query. Batches will be retrieved asynchronously.
+        /// <para>When using the iterator, the initial result batch will be returned as soon as it is received. The additional result batches will be retrieved only as needed.</para>
+        /// </summary>
+        /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
+        /// <param name="queryAll">Optional. True if deleted records are to be included.await Defaults to false.</param>
+        /// <param name="batchSize">Optional. Size of result batches between 200 and 2000</param>
+        /// <returns><see cref="IAsyncEnumerator{T}"/> of results</returns>
+        public IAsyncEnumerator<T> QueryAsyncEnumerator<T>(string queryString, bool queryAll = false, int? batchSize = null)
         {
             Dictionary<string, string> customHeaders = null;
             if (batchSize.HasValue)
@@ -246,15 +254,21 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
-        /// Async count using a SOQL query.
+        /// Get a basic SOQL COUNT() query result
+        /// <para>The query must start with SELECT COUNT() FROM, with no named field in the count clause. COUNT() must be the only element in the SELECT list.</para>
         /// </summary>
-        /// <param name="queryString">SOQL COUNT() query string, without any URL escaping/encoding</param>
+        /// <param name="queryString">SOQL query string starting with SELECT COUNT() FROM</param>
         /// <param name="queryAll">True if deleted records are to be included</param>
         /// <returns>The <see cref="Task{Int}"/> returning the count</returns>
-        public async Task<int> CountQueryAsync(string queryString, bool queryAll = false)
+        public async Task<int> CountQuery(string queryString, bool queryAll = false)
         {
-            //TODO: This probably doesnt work
-            throw new NotImplementedException();
+            // https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql_select_count.htm
+            // COUNT() must be the only element in the SELECT list.
+
+            if(!queryString.Replace(" ", "").ToLower().StartsWith("selectcount()from"))
+            {
+                throw new ForceApiException("CountQueryAsync may only be used with a query starting with SELECT COUNT() FROM");
+            }
 
             var jsonClient = new JsonClient(AccessToken, new HttpClient());
             var uri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString);
