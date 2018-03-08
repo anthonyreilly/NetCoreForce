@@ -85,5 +85,15 @@ namespace NetCoreForce.FunctionalTests
             Assert.True(accounts[0].Contacts.Done);
             Assert.NotNull(accounts[0].Contacts.Records[0].Name);
         }
+
+        [Fact]
+        public async Task CountQuery()
+        {
+            ForceClient client = await forceClientFixture.GetForceClient();
+            
+            int count = await client.CountQuery("SELECT COUNT() FROM Case");
+
+            Assert.True(count > 1);
+        }
     }
 }

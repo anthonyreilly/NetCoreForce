@@ -109,5 +109,33 @@ namespace NetCoreForce.Client.Tests
             Assert.NotNull(ex);
         }
 
+        [Fact]
+        public async void CountQuery()
+        {
+            var mockHandler = new MockHttpClientHandler();
+
+            HttpResponseMessage respMsg = MockResponse.GetResponse("count_query.json", HttpStatusCode.OK);
+        
+            Uri requestUri = new Uri(@"https://na15.salesforce.comX/services/data/v41.0/query?q=SELECT%20COUNT()%20FROM%20Case");
+
+            mockHandler.AddMockResponse(requestUri, respMsg);
+
+            HttpClient httpClient = new HttpClient(mockHandler);
+
+            ForceClient client = new ForceClient("https://na15.salesforce.comX", "v41.0", "dummyToken", httpClient);
+
+            int count = await client.CountQuery("SELECT COUNT() FROM Case");
+
+            await Assert.ThrowsAsync<ForceApiException>(
+                async () => await client.CountQuery("SELECT COUNT(Id) FROM Case")
+            );
+
+            await Assert.ThrowsAsync<ForceApiException>(
+                async () => await client.CountQuery("SELECT COUNT(Id) CaseCount FROM Case")
+            );
+
+            Assert.Equal(26, count);
+        }
+
     }
 }
