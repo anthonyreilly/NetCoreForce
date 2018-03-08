@@ -82,10 +82,65 @@ No configuration file is required, however you can include the --save-config opt
   "ClassSuffix": null,
   "ClassNamespace": "NetCoreForce.Models",
   "IncludeCustom": true,
-  "IncludeReferences": true
+  "IncludeReferences": true,
+  "AddNetCoreForceModelsUsings": true, 
 }
 ```
 
 **Generating all objects at once:** If you wish to generate all queryable objects in the generated output, add "all" as the first or only item in the "Objects" array in the config file, or enter "all" (without quotes) when prompted in the console.
 
 **Note:** if you use the -r/--include-references option, you may run into compile errors with missing classes. For instance, the Salesforce "User" object appears on many objects - if you didnt include this in your list of models to generate, you will either need to include it, or manually remove those properties from the generated classes.
+
+
+## Mappings configuration
+
+Features :
+ - Rename a class
+ - Ignore a class generation (and all its referencing relationships)
+ - Rename a field in a class
+ - Ignore a field in a class
+ - Ignore all fields matching a regex in a class
+
+### Example config file
+
+```json
+{
+  /// ...
+
+  //Optional
+  "Mappings": {
+    
+    //Rename Object_Name to ObjectName
+    "object_name": {
+      "Name": "ObjectName"  
+    },
+
+    //Ignore Object_Name_To_Ignore type generation
+    // (+ ignore all relationships to this Object_Name_To_Ignore)
+    "Object_Name_To_Ignore": {
+      "Ignore": true 
+    },
+
+    //Configure object fields
+    "Object_name_config_fields": {
+      "Fields": {
+
+        // rename field during generation
+        "old_name": {
+          "Name": "NewName" 
+        },
+
+        // ignore field
+        "field_to_ignore": {
+          "Ignore": true 
+        },
+
+        // ignore multile fields matching a regex (eg: starting with 'billing')
+        "billing.*": {
+           "Ignore": true 
+        }
+      } 
+    } 
+  }
+
+}```
