@@ -18,6 +18,10 @@ Currently targeting [.NET Standard 1.6 and 2.0](https://docs.microsoft.com/en-us
 * [NetCoreForce.Models](src/NetCoreForce.Models) [(ReadMe)](src/NetCoreForce.Models/README.md) - Optional library with a set of pre-generated standard models  
 * [SampleConsole](src/SampleConsole) - A simple .NET Core console app to demonstrate the library.
 
+### Pre-Release Projects:
+* [NetCoreForce.Linq](src/NetCoreForce.Linq) - an experimental LINQ-to-SOQL query provider
+* [NetCoreForce.Linq.Tests](src/NetCoreForce.Linq.Tests) - LINQ Unit tests (offline/mocked) 
+
 ### NuGet Packages
 * [NetCoreForce.Client](https://www.nuget.org/packages/NetCoreForce.Client/)
 * [NetCoreForce.Models](https://www.nuget.org/packages/NetCoreForce.Models/)

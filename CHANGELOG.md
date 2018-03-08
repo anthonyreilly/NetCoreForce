@@ -1,5 +1,11 @@
 # Changelog
 
+### 2018-03-08 v2.1.0
+
+* Exposed ForceClient.QueryAsyncEnumerator that returns IAsyncEnumerator<T>
+* Added ForceClient.CountQuery - executes a "SELECT COUNT() FROM ..." query that returns the number of rows that match the filtering conditions. Note that COUNT() returns its result in the query results totalSize value, and this method will not work with a query that uses COUNT(fieldName), since those queries return their results in typical recordsets.
+* Added an alpha release of NetCoreForce.Linq, a LINQ-to-SOQL query provider
+
 ### 2018-03-05 v2.0.0
 
 * v2.0.0 release
