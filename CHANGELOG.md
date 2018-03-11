@@ -1,5 +1,9 @@
 # Changelog
 
+### 2018-03-02 v2.2.0
+
+* Keeping QuerySingle<T>, no longer marked as obsolete: replaced logic with standard Enumerable.Single
+
 ### 2018-03-08 v2.1.0
 
 * Exposed ForceClient.QueryAsyncEnumerator that returns IAsyncEnumerator<T>
