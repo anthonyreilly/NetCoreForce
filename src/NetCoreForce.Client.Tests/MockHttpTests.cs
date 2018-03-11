@@ -11,24 +11,37 @@ namespace NetCoreForce.Client.Tests
 {
     public class MockHttpTests
     {
-        //test with empty response content
+        private ForceClient CreateMockClient(
+            string instanceUrl,
+            string apiVersion,
+            string requestUrl,
+            string responseFilename,
+            HttpStatusCode responseCode)
+        {
+            var mockHandler = new MockHttpClientHandler();
+
+            HttpResponseMessage respMsg = MockResponse.GetResponse(responseFilename, responseCode);
+
+            Uri requestUri = new Uri(requestUrl);
+
+            mockHandler.AddMockResponse(requestUri, respMsg);
+
+            var httpClient = new HttpClient(mockHandler);
+
+            return new ForceClient(instanceUrl, apiVersion, "dummyToken", httpClient);
+        }
 
         [Fact]
         public async void ObjectById()
         {
-            var mockHandler = new MockHttpClientHandler();
-
-            HttpResponseMessage respMsg = MockResponse.GetResponse("account.json", HttpStatusCode.OK);
+            ForceClient client = CreateMockClient(
+                "https://na15.salesforce.com",
+                "v41.0",
+                "https://na15.salesforce.com/services/data/v41.0/sobjects/Account/001i000002C8QTIAA3",
+                "account.json",
+                HttpStatusCode.OK);
 
             const string objectId = "001i000002C8QTIAA3";
-        
-            Uri requestUri = new Uri("https://na15.salesforce.com/services/data/v41.0/sobjects/Account/001i000002C8QTIAA3");
-
-            mockHandler.AddMockResponse(requestUri, respMsg);
-
-            HttpClient httpClient = new HttpClient(mockHandler);
-
-            ForceClient client = new ForceClient("https://na15.salesforce.com", "v41.0", "dummyToken", httpClient);
 
             SfAccount acct = await client.GetObjectById<SfAccount>("Account", objectId);
 
@@ -41,17 +54,12 @@ namespace NetCoreForce.Client.Tests
         [Fact]
         public async void QueryNestedObjects()
         {
-            var mockHandler = new MockHttpClientHandler();
-
-            HttpResponseMessage respMsg = MockResponse.GetResponse("query_case_result.json", HttpStatusCode.OK);
-        
-            Uri requestUri = new Uri(@"https://na15.salesforce.com/services/data/v41.0/query?q=SELECT%20Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp%20FROM%20Case");
-
-            mockHandler.AddMockResponse(requestUri, respMsg);
-
-            HttpClient httpClient = new HttpClient(mockHandler);
-
-            ForceClient client = new ForceClient("https://na15.salesforce.com", "v41.0", "dummyToken", httpClient);
+            ForceClient client = CreateMockClient(
+                "https://na15.salesforce.com",
+                "v41.0",
+                "https://na15.salesforce.com/services/data/v41.0/query?q=SELECT%20Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp%20FROM%20Case",
+                "query_case_result.json",
+                HttpStatusCode.OK);
 
             List<SfCase> cases = await client.Query<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case");
 
@@ -65,19 +73,30 @@ namespace NetCoreForce.Client.Tests
         }
 
         [Fact]
+        public async void QueryNoResults()
+        {
+            ForceClient client = CreateMockClient(
+                "https://na15.salesforce.com",
+                "v41.0",
+                "https://na15.salesforce.com/services/data/v41.0/query?q=SELECT%20Id%20FROM%20Case",
+                "query_empty_result.json",
+                HttpStatusCode.OK);
+
+            List<SfCase> cases = await client.Query<SfCase>("SELECT Id FROM Case");
+
+            Assert.NotNull(cases);
+            Assert.Empty(cases);
+        }
+
+        [Fact]
         public async void QuerySingleObject()
         {
-            var mockHandler = new MockHttpClientHandler();
-
-            HttpResponseMessage respMsg = MockResponse.GetResponse("query_case_single_result.json", HttpStatusCode.OK);
-        
-            Uri requestUri = new Uri(@"https://na15.salesforce.com/services/data/v41.0/query?q=SELECT%20Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp%20FROM%20Case%20WHERE%20CaseNumber%20%3D%20%2700001000%27");
-
-            mockHandler.AddMockResponse(requestUri, respMsg);
-
-            HttpClient httpClient = new HttpClient(mockHandler);
-
-            ForceClient client = new ForceClient("https://na15.salesforce.com", "v41.0", "dummyToken", httpClient);
+            ForceClient client = CreateMockClient(
+                "https://na15.salesforce.com",
+                "v41.0",
+                "https://na15.salesforce.com/services/data/v41.0/query?q=SELECT%20Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp%20FROM%20Case%20WHERE%20CaseNumber%20%3D%20%2700001000%27",
+                "query_case_single_result.json",
+                HttpStatusCode.OK);
 
             SfCase singleCase = await client.QuerySingle<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case WHERE CaseNumber = '00001000'");
 
@@ -90,20 +109,32 @@ namespace NetCoreForce.Client.Tests
         [Fact]
         public async void QuerySingleObjectFail()
         {
-            var mockHandler = new MockHttpClientHandler();
+            ForceClient client = CreateMockClient(
+                "https://na15.salesforce.com",
+                "v41.0",
+                "https://na15.salesforce.com/services/data/v41.0/query?q=SELECT%20Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp%20FROM%20Case%20WHERE%20CaseNumber%20LIKE%20%270000%25%27",
+                "query_case_result.json",
+                HttpStatusCode.OK);
 
-            HttpResponseMessage respMsg = MockResponse.GetResponse("query_case_result.json", HttpStatusCode.OK);
-        
-            Uri requestUri = new Uri(@"https://na15.salesforce.com/services/data/v41.0/query?q=SELECT%20Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp%20FROM%20Case%20WHERE%20CaseNumber%20LIKE%20%270000%25%27");
-
-            mockHandler.AddMockResponse(requestUri, respMsg);
-
-            HttpClient httpClient = new HttpClient(mockHandler);
-
-            ForceClient client = new ForceClient("https://na15.salesforce.com", "v41.0", "dummyToken", httpClient);
-
-            Exception ex = await Assert.ThrowsAsync<Exception>(
+            Exception ex = await Assert.ThrowsAsync<InvalidOperationException>(
                 async () => await client.QuerySingle<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case WHERE CaseNumber LIKE '0000%'")
+            );
+
+            Assert.NotNull(ex);
+        }
+
+        [Fact]
+        public async void QuerySingleObjectNoResults()
+        {
+            ForceClient client = CreateMockClient(
+                "https://na15.salesforce.com",
+                "v41.0",
+                "https://na15.salesforce.com/services/data/v41.0/query?q=SELECT%20Id%20FROM%20Case%20WHERE%20CaseNumber%20LIKE%20%270000%25%27",
+                "query_empty_result.json",
+                HttpStatusCode.OK);
+
+            Exception ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await client.QuerySingle<SfCase>("SELECT Id FROM Case WHERE CaseNumber LIKE '0000%'")
             );
 
             Assert.NotNull(ex);
@@ -112,17 +143,12 @@ namespace NetCoreForce.Client.Tests
         [Fact]
         public async void CountQuery()
         {
-            var mockHandler = new MockHttpClientHandler();
-
-            HttpResponseMessage respMsg = MockResponse.GetResponse("count_query.json", HttpStatusCode.OK);
-        
-            Uri requestUri = new Uri(@"https://na15.salesforce.comX/services/data/v41.0/query?q=SELECT%20COUNT()%20FROM%20Case");
-
-            mockHandler.AddMockResponse(requestUri, respMsg);
-
-            HttpClient httpClient = new HttpClient(mockHandler);
-
-            ForceClient client = new ForceClient("https://na15.salesforce.comX", "v41.0", "dummyToken", httpClient);
+            ForceClient client = CreateMockClient(
+                "https://na15.salesforce.com",
+                "v41.0",
+                "https://na15.salesforce.com/services/data/v41.0/query?q=SELECT%20COUNT()%20FROM%20Case",
+                "count_query.json",
+                HttpStatusCode.OK);
 
             int count = await client.CountQuery("SELECT COUNT() FROM Case");
 
