@@ -116,7 +116,7 @@ namespace NetCoreForce.Client.Tests
                 "query_case_result.json",
                 HttpStatusCode.OK);
 
-            Exception ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            Exception ex = await Assert.ThrowsAsync<Exception>(
                 async () => await client.QuerySingle<SfCase>("SELECT Id,CaseNumber,SystemModstamp,Account.Name,Account.SystemModstamp,Contact.Name,Contact.SystemModstamp FROM Case WHERE CaseNumber LIKE '0000%'")
             );
 
@@ -133,11 +133,9 @@ namespace NetCoreForce.Client.Tests
                 "query_empty_result.json",
                 HttpStatusCode.OK);
 
-            Exception ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await client.QuerySingle<SfCase>("SELECT Id FROM Case WHERE CaseNumber LIKE '0000%'")
-            );
+            var c = await client.QuerySingle<SfCase>("SELECT Id FROM Case WHERE CaseNumber LIKE '0000%'");
 
-            Assert.NotNull(ex);
+            Assert.Null(c);
         }
 
         [Fact]

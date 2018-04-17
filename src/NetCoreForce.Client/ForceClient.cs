@@ -136,17 +136,26 @@ namespace NetCoreForce.Client
 
         /// <summary>
         /// Retrieve a single record using a SOQL query.
-        /// <para>Will throw an exception if results count is other than one - if you are note sure of a single result, use Query{T} instead.</para>
+        /// <para>Will throw an exception if multiple rows are retrieved by the query - if you are note sure of a single result, use Query{T} instead.</para>
         /// </summary>
         /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
         /// <param name="queryAll">True if deleted records are to be included</param>
-        /// <exception cref="System.InvalidOperationException">Thrown when more than one record is returned by query</exception>
-        /// <exception cref="System.InvalidOperationException">Thrown when query returns no results</exception>
-        /// <returns>Task{T}</returns>
+        /// <returns>result object</returns>
         public async Task<T> QuerySingle<T>(string queryString, bool queryAll = false)
         {
             List<T> results = await Query<T>(queryString, queryAll);
-            return results.Single();
+
+            if (results != null && results.Count > 1)
+            {
+                throw new Exception("Multiple records were returned by query passed into QuerySingle - query must retrieve zero or one record.");
+            }
+
+            if (results != null && results.Count == 1)
+            {
+                return results[0];
+            }
+
+            return default(T);
         }
 
         /// <summary>
