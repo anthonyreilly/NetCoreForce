@@ -345,15 +345,16 @@ namespace NetCoreForce.Client
         /// </summary>
         /// <param name="sObjectTypeName">SObject name, e.g. "Account"</param>
         /// <param name="sObject">Object to create</param>
+        /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
         /// <returns>CreateResponse object, includes new object's ID</returns>
         /// <exception cref="ForceApiException">Thrown when creation fails</exception>
-        public async Task<CreateResponse> CreateRecord<T>(string sObjectTypeName, T sObject)
+        public async Task<CreateResponse> CreateRecord<T>(string sObjectTypeName, T sObject, Dictionary<string, string> customHeaders = null)
         {
             var uri = UriFormatter.SObjectBasicInformation(InstanceUrl, ApiVersion, sObjectTypeName);
 
             JsonClient client = new JsonClient(AccessToken, _httpClient);
 
-            return await client.HttpPostAsync<CreateResponse>(sObject, uri);
+            return await client.HttpPostAsync<CreateResponse>(sObject, uri, customHeaders);
         }
 
         /// <summary>
@@ -362,15 +363,16 @@ namespace NetCoreForce.Client
         /// <param name="sObjectTypeName">SObject name, e.g. "Account"</param>
         /// <param name="objectId">Id of Object to update</param>
         /// <param name="sObject">Object to update</param>
+        /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
         /// <returns>void, API returns 204/NoContent</returns>
         /// <exception cref="ForceApiException">Thrown when update fails</exception>
-        public async Task UpdateRecord<T>(string sObjectTypeName, string objectId, T sObject) //where T : ISObject
+        public async Task UpdateRecord<T>(string sObjectTypeName, string objectId, T sObject, Dictionary<string, string> customHeaders = null)
         {
             var uri = UriFormatter.SObjectRows(InstanceUrl, ApiVersion, sObjectTypeName, objectId);
 
             JsonClient client = new JsonClient(AccessToken, _httpClient);
 
-            await client.HttpPatchAsync<object>(sObject, uri);
+            await client.HttpPatchAsync<object>(sObject, uri, customHeaders);
 
             return;
         }
