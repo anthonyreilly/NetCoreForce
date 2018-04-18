@@ -27,6 +27,8 @@ namespace NetCoreForce.FunctionalTests
 
             await auth.UsernamePasswordAsync(authInfo.ClientId, authInfo.ClientSecret,
                     authInfo.Username, authInfo.Password, authInfo.TokenRequestEndpoint);
+            
+            ForceClient client = new ForceClient(auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken);
 
             Assert.True(!string.IsNullOrEmpty(auth.AccessInfo.AccessToken)); //check for access token
             Assert.True(string.IsNullOrEmpty(auth.AccessInfo.RefreshToken)); //this flow should not return a refresh token
@@ -41,6 +43,8 @@ namespace NetCoreForce.FunctionalTests
 
             auth.UsernamePassword(authInfo.ClientId, authInfo.ClientSecret,
                     authInfo.Username, authInfo.Password, authInfo.TokenRequestEndpoint);
+
+            ForceClient client = new ForceClient(auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken);
 
             Assert.True(!string.IsNullOrEmpty(auth.AccessInfo.AccessToken)); //check for access token
             Assert.True(string.IsNullOrEmpty(auth.AccessInfo.RefreshToken)); //this flow should not return a refresh token
