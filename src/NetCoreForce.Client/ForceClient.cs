@@ -15,6 +15,12 @@ namespace NetCoreForce.Client
         public string InstanceUrl { get; private set; }
         public string AccessToken { get; private set; }
 
+        /// <summary>
+        /// The Access Token Response data received after a successful login
+        /// May not be available if the client was initialized with a pre-existing access token
+        /// </summary>
+        public AccessTokenResponse AccessInfo { get; set; }
+
         private HttpClient _httpClient;
 
         public ForceClient(AuthInfo authInfo)
@@ -39,7 +45,7 @@ namespace NetCoreForce.Client
 
         public ForceClient(string instanceUrl, string apiVersion, string accessToken, HttpClient httpClient = null)
         {
-            Initialize(instanceUrl, apiVersion, accessToken, httpClient);
+            Initialize(instanceUrl, apiVersion, accessToken, httpClient, null);
         }
 
         private async Task Login(string clientId, string clientSecret, string username, string password, string tokenRequestEndpoint, string apiVersion = null, HttpClient httpClient = null)
@@ -47,14 +53,15 @@ namespace NetCoreForce.Client
             AuthenticationClient authClient = new AuthenticationClient(apiVersion);
             await authClient.UsernamePasswordAsync(clientId, clientSecret, username, password, tokenRequestEndpoint);
 
-            Initialize(authClient.AccessInfo.InstanceUrl, authClient.ApiVersion, authClient.AccessInfo.AccessToken, httpClient);
+            Initialize(authClient.AccessInfo.InstanceUrl, authClient.ApiVersion, authClient.AccessInfo.AccessToken, httpClient, authClient.AccessInfo);
         }
 
-        private void Initialize(string instanceUrl, string apiVersion, string accessToken, HttpClient httpClient = null)
+        private void Initialize(string instanceUrl, string apiVersion, string accessToken, HttpClient httpClient = null, AccessTokenResponse accessInfo = null)
         {
             this.ApiVersion = apiVersion;
             this.InstanceUrl = instanceUrl;
             this.AccessToken = accessToken;
+            this.AccessInfo = accessInfo;
 
             _httpClient = httpClient;
         }
