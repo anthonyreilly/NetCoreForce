@@ -10,6 +10,7 @@ namespace NetCoreForce.Client
     public static class DateFormats
     {
         const string _FullFormat = "yyyy-MM-ddTHH:mm:sszzz";
+        const string _FullFormatZulu = "yyyy-MM-ddTHH:mm:ssZ";
         const string _DateOnlyFormat = "yyyy-MM-dd";
 
         /// <summary>
@@ -38,6 +39,17 @@ namespace NetCoreForce.Client
         {
             return dto.ToString(_FullFormat);
         }
+
+        /// <summary>
+        /// Converts the given DateTime to a SFDC compatible string.await Caution should be used here, since the output may contain a time zone offset.
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static string FullDateString(DateTime dt)
+        {
+            return dt.ToUniversalTime().ToString(_FullFormat);
+        }
+
         public static string FullDateString(DateTime dt, TimeSpan offset)
         {
             DateTimeOffset dto = new DateTimeOffset(dt, offset);

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using NetCoreForce.Client;
+using NetCoreForce.Client.Models;
 using Xunit;
 
 namespace NetCoreForce.Client.Tests
@@ -40,6 +41,21 @@ namespace NetCoreForce.Client.Tests
             string convertedDate = _dto.ToString(DateFormats.FullDateFormatString);
 
             Assert.Equal(_expectedDate, convertedDate);
+        }
+
+        [Fact]
+        public void FullDateFormatFromDateTime()
+        {
+            var dt = new DateTime(2018,1,1);
+
+            DateTimeOffset dto = new DateTimeOffset(dt);
+            int offset = dto.Offset.Hours;
+
+            string convertedDate = DateFormats.FullDateString(dt);
+
+            string expected = "2018-01-01T00:00:00-05:00";
+
+            Assert.Equal(expected, convertedDate);
         }
 
         [Fact]
