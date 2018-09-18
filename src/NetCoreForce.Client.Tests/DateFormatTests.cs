@@ -46,14 +46,11 @@ namespace NetCoreForce.Client.Tests
         [Fact]
         public void FullDateFormatFromDateTime()
         {
-            var dt = new DateTime(2018,1,1);
-
-            DateTimeOffset dto = new DateTimeOffset(dt);
-            int offset = dto.Offset.Hours;
+            var dt = new DateTime(2018,1,1,0,0,0, DateTimeKind.Utc);
 
             string convertedDate = DateFormats.FullDateString(dt);
 
-            string expected = "2018-01-01T05:00:00+00:00";
+            string expected = "2018-01-01T00:00:00+00:00";
 
             Assert.Equal(expected, convertedDate);
         }
