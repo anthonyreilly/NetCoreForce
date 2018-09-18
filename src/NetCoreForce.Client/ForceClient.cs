@@ -376,6 +376,27 @@ namespace NetCoreForce.Client
 
             return;
         }
+        
+        /// <summary>
+        /// Inserts or Updates a records based on external id
+        /// </summary>
+        /// <param name="sObjectTypeName">SObject name, e.g. "Account"</param>
+        /// <param name="fieldName">External ID field name</param>
+        /// <param name="fieldValue">External ID field value</param>
+        /// <param name="sObject">Object to update</param>
+        /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
+        /// <returns>void, API returns 204/NoContent</returns>
+        /// <exception cref="ForceApiException">Thrown when request fails</exception>
+        public async Task InsertOrUpdateRecord<T>(string sObjectTypeName, string fieldName, string fieldValue, T sObject, Dictionary<string, string> customHeaders = null)
+        {
+            var uri = UriFormatter.SObjectRowsByExternalId(InstanceUrl, ApiVersion, sObjectTypeName, fieldName, fieldValue);
+
+            JsonClient client = new JsonClient(AccessToken, _httpClient);
+
+            await client.HttpPatchAsync<object>(sObject, uri, customHeaders);
+
+            return;
+        }
 
         /// <summary>
         /// Delete record
