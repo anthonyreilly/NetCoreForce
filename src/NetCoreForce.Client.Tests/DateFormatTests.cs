@@ -53,7 +53,7 @@ namespace NetCoreForce.Client.Tests
 
             string convertedDate = DateFormats.FullDateString(dt);
 
-            string expected = "2018-01-01T00:00:00-05:00";
+            string expected = "2018-01-01T05:00:00+00:00";
 
             Assert.Equal(expected, convertedDate);
         }
@@ -79,7 +79,7 @@ namespace NetCoreForce.Client.Tests
             AccessTokenResponse token = new AccessTokenResponse();
             token.IssuedAt = 1530216542;
 
-            var expected = new DateTime(2018, 6, 28, 20, 9, 2);
+            var expected = new DateTime(2018, 6, 28, 20, 9, 2, DateTimeKind.Utc);
 
             Assert.Equal(expected, token.IssuedAtDateTime);
         }

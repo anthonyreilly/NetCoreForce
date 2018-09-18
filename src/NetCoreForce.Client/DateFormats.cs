@@ -41,7 +41,8 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
-        /// Converts the given DateTime to a SFDC compatible string.await Caution should be used here, since the output may contain a time zone offset.
+        /// Converts the given DateTime to a SFDC compatible string.
+        /// Result includes a time zone offset.
         /// </summary>
         /// <param name="dt"></param>
         /// <returns></returns>
