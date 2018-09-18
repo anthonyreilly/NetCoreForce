@@ -74,12 +74,23 @@ namespace NetCoreForce.Client.Tests
         }
 
         [Fact]
-        public void AccessTokenTimetampConversion()
+        public void AccessTokenTimetampConversionSeconds()
         {
             AccessTokenResponse token = new AccessTokenResponse();
             token.IssuedAt = 1530216542;
 
             var expected = new DateTime(2018, 6, 28, 20, 9, 2, DateTimeKind.Utc);
+
+            Assert.Equal(expected, token.IssuedAtDateTime);
+        }
+
+        [Fact]
+        public void AccessTokenTimetampConversionMilliseconds()
+        {
+            AccessTokenResponse token = new AccessTokenResponse();
+            token.IssuedAt = 1537283732843;
+
+            var expected = new DateTime(2018, 9, 18, 15, 15, 32, 843, DateTimeKind.Utc);
 
             Assert.Equal(expected, token.IssuedAtDateTime);
         }

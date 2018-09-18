@@ -83,7 +83,7 @@ namespace NetCoreForce.Client
             catch (AggregateException ex)
             {
                 // Will typically be a single ForceAuthException exception - unwrap and throw
-                if(ex.InnerException != null && ex.InnerExceptions != null && ex.InnerExceptions.Count == 1)
+                if (ex.InnerException != null && ex.InnerExceptions != null && ex.InnerExceptions.Count == 1)
                 {
                     throw ex.InnerException;
                 }

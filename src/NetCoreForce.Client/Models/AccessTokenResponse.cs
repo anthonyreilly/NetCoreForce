@@ -64,7 +64,7 @@ namespace NetCoreForce.Client.Models
         /// When the signature was created, represented as the number of seconds since the Unix epoch (00:00:00 UTC on 1 January 1970).
         /// </summary>
         [JsonProperty(PropertyName = "issued_at")]
-        public int? IssuedAt { get; set; }
+        public long? IssuedAt { get; set; }
 
         /// <summary>
         /// Issued At value converted to DateTime
@@ -75,8 +75,14 @@ namespace NetCoreForce.Client.Models
         {
             get
             {
-                if(this.IssuedAt.HasValue && this.IssuedAt > 0)
+                if(this.IssuedAt.HasValue && this.IssuedAt > 9999999999)
                 {
+                    // timestamp includes milliseconds
+                    return DateTimeOffset.FromUnixTimeMilliseconds(this.IssuedAt.Value);
+                }
+                else if(this.IssuedAt.HasValue && this.IssuedAt > 0)
+                {
+                    // timestamp in seconds
                     return DateTimeOffset.FromUnixTimeSeconds(this.IssuedAt.Value);
                 }
                 else
