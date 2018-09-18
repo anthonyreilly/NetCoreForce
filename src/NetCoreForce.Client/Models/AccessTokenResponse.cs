@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace NetCoreForce.Client.Models
 {
@@ -63,6 +64,26 @@ namespace NetCoreForce.Client.Models
         /// When the signature was created, represented as the number of seconds since the Unix epoch (00:00:00 UTC on 1 January 1970).
         /// </summary>
         [JsonProperty(PropertyName = "issued_at")]
-        public string IssuedAt { get; set; }     
+        public int? IssuedAt { get; set; }
+
+        /// <summary>
+        /// Issued At value converted to DateTime
+        /// </summary>
+        /// <returns></returns>
+        [JsonIgnore]
+        public DateTimeOffset? IssuedAtDateTime
+        {
+            get
+            {
+                if(this.IssuedAt.HasValue && this.IssuedAt > 0)
+                {
+                    return DateTimeOffset.FromUnixTimeSeconds(this.IssuedAt.Value);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

@@ -72,5 +72,16 @@ namespace NetCoreForce.Client.Tests
             Assert.Equal(convertedDateTimeOffset, convertedDateTime);
             Assert.Equal(convertedDateTimeOffset, convertedDateTimeOffsetConverted);
         }
+
+        [Fact]
+        public void AccessTokenTimetampConversion()
+        {
+            AccessTokenResponse token = new AccessTokenResponse();
+            token.IssuedAt = 1530216542;
+
+            var expected = new DateTime(2018, 6, 28, 20, 9, 2);
+
+            Assert.Equal(expected, token.IssuedAtDateTime);
+        }
     }
 }
