@@ -392,7 +392,7 @@ namespace NetCoreForce.Client
         /// <param name="fieldValue">External ID field value</param>
         /// <param name="sObject">Object to update</param>
         /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
-        /// <returns>void, API returns 204/NoContent</returns>
+        /// <returns>CreateResponse object, includes new object's ID if record was created and no value if object was updated</returns>
         /// <exception cref="ForceApiException">Thrown when request fails</exception>
         public async Task<CreateResponse> InsertOrUpdateRecord<T>(string sObjectTypeName, string fieldName, string fieldValue, T sObject, Dictionary<string, string> customHeaders = null)
         {
