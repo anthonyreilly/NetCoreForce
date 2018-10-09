@@ -1,5 +1,9 @@
 # Changelog
 
+### 2018-10-09 v2.4.0
+
+* Update InsertOrUpdateRecord<T> operation to return a CreateReponse object to indicate if a new object was created, or an existing object was updated.
+
 ### 2018-09-18 v2.3.0
 
 * Add "Insert or Update (Upsert) a Record Using an External ID" operation, using the SObject Rows by External ID resource. For details on usage see https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_upsert.htm
