@@ -87,10 +87,28 @@ namespace NetCoreForce.Client
 
             _httpClient = httpClient;
         }
-
-        public bool TestConnection()
+        
+        /// <summary>
+        /// Does a basic test of the client's connection to the current Salesforce instance, and that the API is responding to requests.
+        /// <para>This does not validate authentication.</para>
+        /// <para>Makes a call to the Versions resource, since it requires no authentication or permissions.</para>
+        /// </summary>
+        /// <param name="currentInstanceUrl">Instance URL. Defaults to the client's current instance, this would typically only need to be specified if it is needed to test the connection to a different SFDC instance.</param>
+        /// <returns>True or false. Does not throw exceptions, only false in case of any errors.</returns>
+        public bool TestConnection(string currentInstanceUrl = null)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //Makes a call to the Versions resource, since it requires no authentication or permissions.
+                //Should serve as an adequate test that the instance is physically reachable and that the API is responding
+                GetAvailableRestApiVersions(currentInstanceUrl, deserializeResponse: false).Wait();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine("TestConnection() failed with exception: " + ex.Message);
+                return false;
+            }
         }
 
         /// <summary>
