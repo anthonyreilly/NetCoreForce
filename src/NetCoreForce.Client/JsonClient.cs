@@ -63,12 +63,12 @@ namespace NetCoreForce.Client
             }
         }
 
-        public async Task<T> HttpGetAsync<T>(Uri uri, Dictionary<string, string> customHeaders = null)
+        public async Task<T> HttpGetAsync<T>(Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
             //TODO: can this handle T = string?
             try
             {
-                return await HttpAsync<T>(uri, HttpMethod.Get, null, customHeaders);
+                return await HttpAsync<T>(uri, HttpMethod.Get, null, customHeaders, deserializeResponse);
             }
             catch (Exception ex)
             {
@@ -76,7 +76,7 @@ namespace NetCoreForce.Client
             }
         }
 
-        public async Task<T> HttpPostAsync<T>(object inputObject, Uri uri, Dictionary<string, string> customHeaders = null)
+        public async Task<T> HttpPostAsync<T>(object inputObject, Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
             var json = JsonSerializer.SerializeForCreate(inputObject);
 
@@ -90,7 +90,7 @@ namespace NetCoreForce.Client
                 request.Method = HttpMethod.Post;
                 request.Content = content;
 
-                return await GetResponse<T>(request, customHeaders);
+                return await GetResponse<T>(request, customHeaders, deserializeResponse);
 
             }
             catch (Exception ex)
@@ -99,14 +99,14 @@ namespace NetCoreForce.Client
             }
         }
 
-        public async Task<T> HttpPatchAsync<T>(object inputObject, Uri uri, Dictionary<string, string> customHeaders = null)
+        public async Task<T> HttpPatchAsync<T>(object inputObject, Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
             try
             {
                 var json = JsonSerializer.SerializeForUpdate(inputObject);
                 var content = new StringContent(json, Encoding.UTF8, JsonMimeType);
 
-                return await HttpAsync<T>(uri, new HttpMethod("PATCH"), content, customHeaders);
+                return await HttpAsync<T>(uri, new HttpMethod("PATCH"), content, customHeaders, deserializeResponse);
             }
             catch (Exception ex)
             {
@@ -114,7 +114,7 @@ namespace NetCoreForce.Client
             }
         }
 
-        public async Task<T> HttpDeleteAsync<T>(Uri uri, Dictionary<string, string> customHeaders = null)
+        public async Task<T> HttpDeleteAsync<T>(Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
             try
             {
@@ -123,7 +123,7 @@ namespace NetCoreForce.Client
                 request.RequestUri = uri;
                 request.Method = HttpMethod.Delete;
 
-                return await GetResponse<T>(request, customHeaders);
+                return await GetResponse<T>(request, customHeaders, deserializeResponse);
             }
             catch (Exception ex)
             {
@@ -131,7 +131,7 @@ namespace NetCoreForce.Client
             }
         }
 
-        private async Task<T> HttpAsync<T>(Uri uri, HttpMethod httpMethod, HttpContent content = null, Dictionary<string, string> customHeaders = null)
+        private async Task<T> HttpAsync<T>(Uri uri, HttpMethod httpMethod, HttpContent content = null, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
             try
             {
@@ -144,7 +144,7 @@ namespace NetCoreForce.Client
                     request.Content = content;
                 }
 
-                return await GetResponse<T>(request, customHeaders);
+                return await GetResponse<T>(request, customHeaders, deserializeResponse);
             }
             catch (Exception ex)
             {
@@ -152,10 +152,18 @@ namespace NetCoreForce.Client
             }
         }
 
-        private async Task<T> GetResponse<T>(HttpRequestMessage request, Dictionary<string, string> customHeaders = null)
+        /// <summary>
+        /// Get a http client reponse
+        /// </summary>
+        /// <param name="request">HttpRequestMessage containing the request details</param>
+        /// <param name="customHeaders">Custom headers, if any</param>
+        /// <param name="deserializeResponse">Should the response be deserialized for successful (HTTP 2xx) requests. Default is true/yes.
+        /// If false/no, this effectively ignores the content of any 2xx type response.
+        /// Errors will still be deserialized.</param>
+        /// <typeparam name="T">Type used to deserialize the reponse content</typeparam>
+        /// <returns></returns>
+        private async Task<T> GetResponse<T>(HttpRequestMessage request, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
-            //const string ContentEncoding = "Content-Encoding";
-
             if (customHeaders != null && customHeaders.Count > 0)
             {
                 foreach (KeyValuePair<string, string> header in customHeaders)
@@ -196,6 +204,12 @@ namespace NetCoreForce.Client
                 return JsonConvert.DeserializeObject<T>(string.Empty);
             }
 
+            //sucessful response, skip deserialization of response content
+            if (responseMessage.IsSuccessStatusCode && !deserializeResponse)
+            {
+                return JsonConvert.DeserializeObject<T>(string.Empty);
+            }
+
             if (responseMessage.Content != null)
             {
                 try
@@ -208,6 +222,7 @@ namespace NetCoreForce.Client
                         {
                             throw new ForceApiException("Response content was empty");
                         }
+                        
                         return JsonConvert.DeserializeObject<T>(responseContent);
                     }
                     else
