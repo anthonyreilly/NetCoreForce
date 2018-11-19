@@ -23,10 +23,24 @@ namespace NetCoreForce.Client
 
         private HttpClient _httpClient;
 
+        /// <summary>
+        /// Login to Salesforce using the username-password authentication flow, and initialize the client
+        /// </summary>
+        /// <param name="authInfo"></param>
         public ForceClient(AuthInfo authInfo)
         : this(authInfo.ClientId, authInfo.ClientSecret, authInfo.Username, authInfo.Password, authInfo.TokenRequestEndpoint, authInfo.ApiVersion)
         { }
 
+        /// <summary>
+        /// Login to Salesforce using the username-password authentication flow, and initialize the client
+        /// </summary>
+        /// <param name="clientId">Client ID, a.k.a. Consumer Key</param>
+        /// <param name="clientSecret">Client Secret, a.k.a. Consumer Secret</param>
+        /// <param name="username">Salesforce username</param>
+        /// <param name="password">Salesforce password</param>
+        /// <param name="tokenRequestEndpoint">Token request endpoint <para>e.g. https://login.salesforce.com/services/oauth2/token</para></param>
+        /// <param name="apiVersion">Salesforce API version</param>
+        /// <param name="httpClient">Optional HttpClient object. Defaults to a shared static instance for best performance, but a custom HttpClient can be specified when custom properties are needed e.g. proxy settings.</param>
         public ForceClient(string clientId, string clientSecret, string username, string password, string tokenRequestEndpoint, string apiVersion = null, HttpClient httpClient = null)
         {
             try
@@ -43,9 +57,17 @@ namespace NetCoreForce.Client
             }
         }
 
-        public ForceClient(string instanceUrl, string apiVersion, string accessToken, HttpClient httpClient = null)
+        /// <summary>
+        /// Initialize the client using previously obtained access token and instance url, if using the AuthenticationClient separately.
+        /// </summary>
+        /// <param name="instanceUrl">Identifies the Salesforce instance to which API calls should be sent.</param>
+        /// <param name="apiVersion">Salesforce API version</param>
+        /// <param name="accessToken">Access token</param>
+        /// <param name="httpClient">Optional HttpClient object. Defaults to a shared static instance for best performance, but a custom HttpClient can be specified when custom properties are needed e.g. proxy settings.</param>
+        /// <param name="accessInfo">AccessTokenResponse object, to store all of the OAuth details received via the AuthenticationClient</param>
+        public ForceClient(string instanceUrl, string apiVersion, string accessToken, HttpClient httpClient = null, AccessTokenResponse accessInfo = null)
         {
-            Initialize(instanceUrl, apiVersion, accessToken, httpClient, null);
+            Initialize(instanceUrl, apiVersion, accessToken, httpClient, accessInfo);
         }
 
         private async Task Login(string clientId, string clientSecret, string username, string password, string tokenRequestEndpoint, string apiVersion = null, HttpClient httpClient = null)
