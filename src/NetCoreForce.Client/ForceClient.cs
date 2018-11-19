@@ -437,6 +437,41 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
+        /// List summary information about each REST API version currently available, including the version, label, and a link to each version's root.
+        /// You do not need authentication to retrieve the list of versions. 
+        /// </summary>
+        /// <param name="currentInstanceUrl">Current instance URL. If the client has been initialized, the parameter is optional and the client's current instance URL will be used</param>
+        /// <returns>List of SalesforceVersion objects</returns>
+        public async Task<List<SalesforceVersion>> GetAvailableRestApiVersions(string currentInstanceUrl = null)
+        {
+            return await GetAvailableRestApiVersions(currentInstanceUrl, true);
+        }
+
+        private async Task<List<SalesforceVersion>> GetAvailableRestApiVersions(string currentInstanceUrl = null, bool deserializeResponse = true)
+        {
+            if(string.IsNullOrEmpty(currentInstanceUrl))
+            {
+                if(string.IsNullOrEmpty(this.InstanceUrl))
+                {
+                    throw new ForceApiException("currentInstanceUrl must be specified since the client's instance URL has not been initialized.");
+
+                }
+                currentInstanceUrl = this.InstanceUrl;
+            }
+
+            if(!Uri.IsWellFormedUriString(currentInstanceUrl, UriKind.Absolute))
+            {
+                throw new ForceApiException("Specified currentInstanceUrl is not a well formed URI");
+            }
+
+            var uri = UriFormatter.Versions(currentInstanceUrl);
+
+            JsonClient client = new JsonClient(AccessToken, _httpClient);
+
+            return await client.HttpGetAsync<List<SalesforceVersion>>(uri: uri, deserializeResponse: deserializeResponse);
+        }
+
+        /// <summary>
         /// Get current user's info via Identity URL
         /// <para>https://developer.salesforce.com/docs/atlas.en-us.mobile_sdk.meta/mobile_sdk/oauth_using_identity_urls.htm</para>
         /// </summary>
