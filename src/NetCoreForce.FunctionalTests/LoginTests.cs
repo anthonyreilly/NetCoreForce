@@ -19,7 +19,7 @@ namespace NetCoreForce.FunctionalTests
         }
 
         [Fact]
-        public async Task UsernamePasswordLoginAsync()
+        public async Task UsernamePasswordLoginAuthenticationClientAsync()
         {
             AuthInfo authInfo = forceClientFixture.AuthInfo;
 
@@ -32,6 +32,17 @@ namespace NetCoreForce.FunctionalTests
 
             Assert.True(!string.IsNullOrEmpty(auth.AccessInfo.AccessToken)); //check for access token
             Assert.True(string.IsNullOrEmpty(auth.AccessInfo.RefreshToken)); //this flow should not return a refresh token
+        }
+
+        [Fact]
+        public void UsernamePasswordLoginAuthInfo()
+        {
+            AuthInfo authInfo = forceClientFixture.AuthInfo;
+            
+            ForceClient client = new ForceClient(authInfo);
+
+            Assert.True(!string.IsNullOrEmpty(client.AccessInfo.AccessToken)); //check for access token
+            Assert.True(string.IsNullOrEmpty(client.AccessInfo.RefreshToken)); //this flow should not return a refresh token
         }
 
         [Fact]
@@ -78,6 +89,6 @@ namespace NetCoreForce.FunctionalTests
 
             Assert.Equal("invalid_grant", ex.ErrorCode);
             Assert.Equal("authentication failure", ex.Message);
-        }
+        }        
     }
 }
