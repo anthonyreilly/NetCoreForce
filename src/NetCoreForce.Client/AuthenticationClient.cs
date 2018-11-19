@@ -123,12 +123,12 @@ namespace NetCoreForce.Client
             Stopwatch sw = new Stopwatch();
             sw.Start();
 #endif
-            if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException("clientId");
-            if (string.IsNullOrEmpty(clientSecret)) throw new ArgumentNullException("clientSecret");
-            if (string.IsNullOrEmpty(username)) throw new ArgumentNullException("username");
-            if (string.IsNullOrEmpty(password)) throw new ArgumentNullException("password");
-            if (string.IsNullOrEmpty(tokenRequestEndpointUrl)) throw new ArgumentNullException("tokenRequestEndpointUrl");
-            if (!Uri.IsWellFormedUriString(tokenRequestEndpointUrl, UriKind.Absolute)) throw new FormatException("tokenRequestEndpointUrl");
+            if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException("clientId", "Client ID is null or empty");
+            if (string.IsNullOrEmpty(clientSecret)) throw new ArgumentNullException("clientSecret", "Client Secret is null or empty");
+            if (string.IsNullOrEmpty(username)) throw new ArgumentNullException("username", "Username is null or empty");
+            if (string.IsNullOrEmpty(password)) throw new ArgumentNullException("password", "Password is null or empty");
+            if (string.IsNullOrEmpty(tokenRequestEndpointUrl)) throw new ArgumentNullException("tokenRequestEndpointUrl", "Token Request Endpoint is null or empty");
+            if (!Uri.IsWellFormedUriString(tokenRequestEndpointUrl, UriKind.Absolute)) throw new FormatException("Invalid tokenRequestEndpointUrl");
 
             var content = new FormUrlEncodedContent(new[]
                 {
