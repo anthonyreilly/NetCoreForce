@@ -1,5 +1,13 @@
 # Changelog
 
+### 2018-11-18 v2.5.0
+
+* Fix: Implemeneted missing ForceClient.TestConnection() functionality. Now does a simple call to an instance's Versions resource to test connectivity and that the API is responding.
+* Minor breaking change: Removed SalesforceVersions model object, since it did not match array of versions objects returned by the Versions resource. Use List<SalesforceVersion> instead.
+* Client: Added ForceClient.GetAvailableRestApiVersions() to retrieve the available REST API versions on the current instance using the Versions resource.
+* Client (internal): Added the deserializeResponse option to the JsonClient, to optionally deserialize response content. Primarily for testing purposes or cases where the returned content can be ignored for performance reasons.
+* Update default API version to v44.0
+
 ### 2018-10-09 v2.4.0
 
 * Update InsertOrUpdateRecord<T> operation to return a CreateReponse object to indicate if a new object was created, or an existing object was updated.
