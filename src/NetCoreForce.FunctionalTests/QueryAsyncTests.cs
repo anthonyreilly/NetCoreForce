@@ -28,15 +28,52 @@ namespace NetCoreForce.FunctionalTests
 
             var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 3000");
 
+            int count = 0;
             SfContact contact = null;
             using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
             {
                 while (await contactsEnumerator.MoveNext())
                 {
                     contact = contactsEnumerator.Current;
+                    count++;
                 }
             }
 
+            // recordcount needs be greater than 2000 to ensure that more than one batch was retrieved
+            // and that the async retrieval occurred.
+            Assert.True(count > 2000);
+            Assert.NotNull(contact.Id);
+        }
+
+        [Fact]
+        public async Task QueryAsyncEnumeratorSmallBatch()
+        {
+            ForceClient client = await forceClientFixture.GetForceClient();
+
+            var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 1000", batchSize: 200);
+
+            int count = 0;
+            SfContact contact = null;
+            using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+            {
+                // Assert.NotNull(contactsEnumerator);
+
+                while (await contactsEnumerator.MoveNext())
+                {
+                    contact = contactsEnumerator.Current;
+                    count++;
+#if DEBUG
+                    if (count % 200 == 0)
+                    {
+                        Console.WriteLine("QueryAsyncEnumeratorSmallBatch: processed {0} records", count.ToString());
+                    }
+#endif
+                }
+            }
+
+            // recordcount needs be greater than 200 to ensure that more than one batch was retrieved
+            // and that the async retrieval occurred.
+            Assert.True(count > 200);
             Assert.NotNull(contact.Id);
         }
 
@@ -79,7 +116,7 @@ namespace NetCoreForce.FunctionalTests
 #if DEBUG                    
                     if (count % 1000 == 0)
                     {
-                        Console.WriteLine("processed {0} records", count.ToString());
+                        Console.WriteLine("QueryAsyncEnumeratorLarge: processed {0} records", count.ToString());
                     }
 #endif
                 }
@@ -114,10 +151,11 @@ namespace NetCoreForce.FunctionalTests
             ForceClient client = await forceClientFixture.GetForceClient();
 
             var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 1000", batchSize: 100);
-            
-            Assert.Throws<ArgumentException>(() => {
+
+            Assert.Throws<ArgumentException>(() =>
+            {
                 IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator();
-            });            
+            });
 
             await Assert.ThrowsAsync<ArgumentException>(async () =>
             {
