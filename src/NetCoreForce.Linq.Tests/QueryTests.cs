@@ -204,5 +204,27 @@ namespace NetCoreForce.Linq.Tests
 
             Assert.Equal("SELECT id FROM Case SKIP 10", soql);
         }
+
+        [Fact]
+        public void OrderQuery()
+        {
+            var soql =
+                Query<SfCase>(SelectTypeEnum.SelectIdAndUseAttachModel, out var provider)
+                    .OrderBy(x => x.Subject)
+                    .ToString();
+
+            Assert.Equal("SELECT id FROM Case ORDER BY subject", soql);
+        }
+
+        [Fact]
+        public void OrderDescendingQuery()
+        {
+            var soql =
+                Query<SfCase>(SelectTypeEnum.SelectIdAndUseAttachModel, out var provider)
+                    .OrderByDescending(x => x.Subject)
+                    .ToString();
+
+            Assert.Equal("SELECT id FROM Case ORDER BY subject DESC", soql);
+        }
     }
 }
