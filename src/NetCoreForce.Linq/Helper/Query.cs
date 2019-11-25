@@ -14,7 +14,7 @@ namespace NetCoreForce.Linq.Helper
     /// <summary>
     /// A default implementation of IQueryable for use with QueryProvider
     /// </summary>
-    public class Query<T> : IAsyncQueryable<T>
+    public class Query<T> : IAsyncQueryable<T>, IOrderedAsyncQueryable<T>
     {
         public Query(IAsyncQueryProvider provider)
             : this(provider, (Type)null)

@@ -6,7 +6,7 @@ using NetCoreForce.Linq.Helper;
 
 namespace NetCoreForce.Linq
 {
-    public class SalesforceQuery<T> : Query<T>, IAsyncQueryable, IAsyncQueryable<T>, IAsyncEnumerable<T>
+    public class SalesforceQuery<T> : Query<T>, IAsyncQueryable, IAsyncQueryable<T>, IAsyncEnumerable<T>, IOrderedAsyncQueryable<T>, IOrderedAsyncQueryable
     {
         public SalesforceQuery(IAsyncQueryProvider provider) : base(provider) { }
         public SalesforceQuery(IAsyncQueryProvider provider, Type staticType) : base(provider, staticType) { }
