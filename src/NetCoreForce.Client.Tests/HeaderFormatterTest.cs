@@ -57,6 +57,48 @@ namespace NetCoreForce.Client.Tests
         }
 
         [Fact]
+        public void CallOptionsHeaderWithDefaultParameters()
+        {
+            Dictionary<string, string> customHeaders = HeaderFormatter.SforceCallOptions();
+
+            Assert.Equal(1, customHeaders.Count);
+
+            var header = customHeaders.First();
+
+            string result = string.Format("{0}: {1}", header.Key, header.Value);
+
+            Assert.Equal("Sforce-Call-Options: client=ForceClient", result);
+        }
+
+        [Fact]
+        public void CallOptionsHeaderWithClientParameter()
+        {
+            Dictionary<string, string> customHeaders = HeaderFormatter.SforceCallOptions("Test");
+
+            Assert.Equal(1, customHeaders.Count);
+
+            var header = customHeaders.First();
+
+            string result = string.Format("{0}: {1}", header.Key, header.Value);
+
+            Assert.Equal("Sforce-Call-Options: client=Test", result);
+        }
+
+        [Fact]
+        public void CallOptionsHeaderWithDefaultNamespaceParameter()
+        {
+            Dictionary<string, string> customHeaders = HeaderFormatter.SforceCallOptions(defaultNamespace: "Test");
+
+            Assert.Equal(1, customHeaders.Count);
+
+            var header = customHeaders.First();
+
+            string result = string.Format("{0}: {1}", header.Key, header.Value);
+
+            Assert.Equal("Sforce-Call-Options: client=ForceClient, defaultNamespace=Test", result);
+        }
+
+        [Fact]
         public void AutoAssignHeader()
         {
             Dictionary<string, string> customHeaders = HeaderFormatter.SforceAutoAssign(false);

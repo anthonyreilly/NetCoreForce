@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 
 namespace NetCoreForce.Client
 {
@@ -79,6 +80,35 @@ namespace NetCoreForce.Client
             const string headerName = "Sforce-Query-Options";
 
             string valueString = string.Format("batchSize={0}", batchSize.ToString(CultureInfo.InvariantCulture));
+
+            var customHeaders = new Dictionary<string, string>(1);
+            customHeaders.Add(headerName, valueString);
+
+            return customHeaders;
+        }
+
+        /// <summary>
+        /// Call Options Header
+        /// <para>Specifies the client-specific options when accessing REST API resources. For example, you can write client code that ignores namespace prefixes by specifying the prefix in the call options header.</para>
+        /// <remarks>The Call Options header can be used with SObject Basic Information, SObject Rows, Query, QueryAll, Search, and SObject Rows by External ID.</remarks>
+        /// </summary>
+        /// <param name="client">A string that identifies a client.</param>
+        /// <param name="defaultNamespace">A string that identifies a developer namespace prefix. Resolve field names in managed packages without having to specify the namespace everywhere.</param>
+        /// <returns>Single entry dictionary of "Sforce-Call-Options" with value of client={client}, defaultNamespace={defaultNamespace}</returns>
+        public static Dictionary<string, string> SforceCallOptions(string client = "ForceClient",
+                                                                   string defaultNamespace = null)
+        {
+            //example: "Sforce-Call-Options: client=ForceClient, defaultNamespace=Test"
+            const string headerName = "Sforce-Call-Options";
+            List<string> values = new List<string>();
+
+            if (!string.IsNullOrEmpty(client))
+            { values.Add(string.Format("client={0}", client)); }
+
+            if (!string.IsNullOrEmpty(defaultNamespace))
+            { values.Add(string.Format("defaultNamespace={0}", defaultNamespace)); }
+
+            string valueString = string.Join(", ", values);
 
             var customHeaders = new Dictionary<string, string>(1);
             customHeaders.Add(headerName, valueString);
