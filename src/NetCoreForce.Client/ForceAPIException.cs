@@ -13,6 +13,12 @@ namespace NetCoreForce.Client
         // public string ErrorCode { get; private set; }
         public HttpStatusCode HttpStatusCode { get; private set; }
 
+        /// <summary>
+        /// Returned when an external ID exists in more than one record
+        /// Lists matching objects in object url format, e.g. "/services/data/v44.0/sobjects/Account/001XXXXXXXXXXXXXXX"
+        /// </summary>
+        public List<string> ObjectUrls { get; set; }
+
         public ForceApiException(string message)
             : this(message, new List<ErrorResponse>(), new HttpStatusCode())
         {

@@ -225,6 +225,25 @@ namespace NetCoreForce.Client
                         
                         return JsonConvert.DeserializeObject<T>(responseContent);
                     }
+                    if (responseMessage.StatusCode == HttpStatusCode.MultipleChoices)
+                    {
+                        // Returned when an external ID exists in more than one record
+                        // https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_upsert.htm
+                        // If the external ID value isn't unique, an HTTP status code 300 is returned, plus a list of the records that matched the query.
+
+                        if (string.IsNullOrEmpty(responseContent))
+                        {
+                            throw new ForceApiException("Response content was empty");
+                        }
+
+                        var results = JsonConvert.DeserializeObject<List<string>>(responseContent);
+
+                        var fex = new ForceApiException("Multiple matches for External ID value, see ObjectUrls");
+
+                        fex.ObjectUrls = results;
+                        
+                        throw fex;
+                    }
                     else
                     {
                         string msg = string.Format("Unable to complete request, Salesforce API returned {0}.", responseMessage.StatusCode.ToString());
