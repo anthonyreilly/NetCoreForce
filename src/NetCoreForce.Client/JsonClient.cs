@@ -255,6 +255,10 @@ namespace NetCoreForce.Client
                         throw new ForceApiException(msg, errors, responseMessage.StatusCode);
                     }
                 }
+                catch(ForceApiException ex)
+                {
+                    throw ex;
+                }
                 catch (Exception ex)
                 {
                     throw new ForceApiException(string.Format("Error parsing response content: {0}", ex.Message));
