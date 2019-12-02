@@ -34,18 +34,5 @@ namespace NetCoreForce.Client
             Errors = errors;
             HttpStatusCode = httpStatusCode;
         }
-
-        // public ForceApiException(List<ErrorResponse> errors, HttpStatusCode httpStatusCode)
-        //     : base()
-        // {
-        //     Errors = errors;
-        //     HttpStatusCode = httpStatusCode;
-        // }
-
-        // private static Error ParseError(string error)
-        // {
-        //     Error value;
-        //     return Enum.TryParse(error.Replace("_", ""), true, out value) ? value : Error.Unknown;
-        // }
     }
 }

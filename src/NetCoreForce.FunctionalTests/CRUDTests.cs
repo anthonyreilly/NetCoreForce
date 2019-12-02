@@ -53,19 +53,5 @@ namespace NetCoreForce.FunctionalTests
 
             //use queryall to find deleted record
         }
-
-        // public async Task CreateAndDelete()
-        // {
-        //     ForceClient client = await forceClientFixture.GetForceClient();
-
-        //     SfAccount newAccount = new SfAccount();
-        //     string accountName = string.Format("Test Account {0}", Guid.NewGuid().ToString());
-
-        //     CreateResponse createResp = await client.CreateRecord<SfAccount>(SfAccount.SObjectTypeName, newAccount);
-
-        //     Assert.True(!string.IsNullOrEmpty(createResp.Id), "Failed to create new object");
-
-        //     await client.DeleteRecord(SfAccount.SObjectTypeName, createResp.Id);
-        // }
     }
 }
