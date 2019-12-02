@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace NetCoreForce.Client
 {
@@ -42,6 +43,15 @@ namespace NetCoreForce.Client
                 return new string(array);
             }
             return value;
+        }
+
+        /// <summary>
+        /// Add all key pairs from another dictionary
+        /// </summary>
+        public static void AddRange<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, Dictionary<TKey, TValue> range)
+        {
+            foreach (TKey key in range.Keys)
+            { dictionary.Add(key, range[key]); }
         }
     }
 }
