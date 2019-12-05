@@ -80,16 +80,18 @@ namespace NetCoreForce.Client.Tests
         [Fact]
         public void WebServerAuthenticationUrl()
         {
-            //dummy client id
-            //const string clientId = "3MVG9lKcPoNINVBIPJjdw1J9LLM82HnFVVX19KY1uA5mu0QqEWhqKpoW3svG3XHrXDiCQjK1mdgAvhCscA9GE";
+            // With Uri.ToString() Colon ":" is escaped to %3A on Windows platforms, but not on MacOS. May also affect space " " and asterisk "*"
+            // Uri.AbsoluteUri.ToString() appears to normalize this behavior.
+            // Specs seem to say that it should be escaped, e.g. RFC 3986
+            // May need to verify if any downstream users will need to avoid Uri.ToString() when using the URIs
 
-            string result = UriFormatter.WebServerAuthenticationUrl("https://login.salesforce.com/services/oauth2/authorize", "CLIENTID", "https://www.theredirectpage.com/callback").ToString();
+            string result = UriFormatter.WebServerAuthenticationUrl("https://login.salesforce.com/services/oauth2/authorize", "CLIENTID", "https://www.theredirectpage.com/callback").AbsoluteUri.ToString();
 
-            Assert.Equal("https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=CLIENTID&redirect_uri=https:%2F%2Fwww.theredirectpage.com%2Fcallback&display=page&immediate=false", result);
+            Assert.Equal("https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=CLIENTID&redirect_uri=https%3A%2F%2Fwww.theredirectpage.com%2Fcallback&display=page&immediate=false", result);
 
-            result = UriFormatter.WebServerAuthenticationUrl("https://login.salesforce.com/services/oauth2/authorize", "CLIENTID", "https://www.theredirectpage.com/callback", DisplayTypes.Popup, true, "refresh_token").ToString();
+            result = UriFormatter.WebServerAuthenticationUrl("https://login.salesforce.com/services/oauth2/authorize", "CLIENTID", "https://www.theredirectpage.com/callback", DisplayTypes.Popup, true, "refresh_token").AbsoluteUri.ToString();
 
-            Assert.Equal("https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=CLIENTID&redirect_uri=https:%2F%2Fwww.theredirectpage.com%2Fcallback&display=popup&immediate=true&scope=refresh_token", result);
+            Assert.Equal("https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=CLIENTID&redirect_uri=https%3A%2F%2Fwww.theredirectpage.com%2Fcallback&display=popup&immediate=true&scope=refresh_token", result);
 
             //TODO: test with url-encoded state parameter
         }

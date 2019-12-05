@@ -1,16 +1,13 @@
 version: 2.0.0.{build}
-image: Visual Studio 2017
 branches:
   only:
   - master
   - dev
+image: Visual Studio 2019
 configuration: Release
 before_build:
-- ps: >-
-    dotnet --info
-
-    dotnet restore
-build_script:
-- ps: dotnet build
+- ps: dotnet restore
+build:
+  verbosity: minimal
 test_script:
 - ps: dotnet test ./src/NetCoreForce.Client.Tests/NetCoreForce.Client.Tests.csproj
