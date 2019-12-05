@@ -1,5 +1,15 @@
 # Changelog
 
+### 2019-12-05 v2.6.0
+
+* Fix: Failure to handle/parse HTTP 300 - multiple choices response when update finds multiple external IDs
+* Fix: Error message formatting in JsonClient - was prepending "unable to parse" message on all ForceApiExceptions
+* Client: Added SObjectUri model object to parse returned object URIs
+* Client: Added Sforce-Call-Options header support
+* Linq: Added IOrderedAsyncQueryable to SalesforceQuery
+* Linq: Fixed broken OrderBy/OrderByDescending by adding required interfaces; Added unit tests for OrderBy/OrderByDescending
+* Linq: Added missing SelectType parameter in force client extension
+
 ### 2018-11-18 v2.5.0
 
 * Fix: Implemeneted missing ForceClient.TestConnection() functionality. Now does a simple call to an instance's Versions resource to test connectivity and that the API is responding.
