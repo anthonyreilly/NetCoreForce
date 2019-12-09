@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using NetCoreForce.Linq.Conventions.Naming;
 using NetCoreForce.Linq.Entity;
+using NetCoreForce.Linq.Extensions;
 
 namespace NetCoreForce.Linq
 {
@@ -244,6 +245,29 @@ namespace NetCoreForce.Linq
                             (this.Visit(m.Object) as ConstantExpression).Value.ToString(),
                             (this.Visit(m.Arguments[0]) as ConstantExpression).Value.ToString().Trim('\'').Replace("%", "\\%"));
                         
+                        return Expression.Constant(result);
+                    }
+                }
+            }
+
+            else if (m.Method.DeclaringType == typeof(StringExtensions))
+            {
+                switch (m.Method.Name)
+                {
+                    case nameof(StringExtensions.Includes):
+                    {
+                        var result = string.Format("({0} INCLUDES('{1}'))",
+                            (this.Visit(m.Arguments[0]) as ConstantExpression).Value.ToString(),
+                            (this.Visit(m.Arguments[1]) as ConstantExpression).Value.ToString().Trim('\'').Replace("%", "\\%"));
+
+                        return Expression.Constant(result);
+                    }
+                    case nameof(StringExtensions.Excludes):
+                    {
+                        var result = string.Format("({0} EXCLUDES('{1}'))",
+                            (this.Visit(m.Arguments[0]) as ConstantExpression).Value.ToString(),
+                            (this.Visit(m.Arguments[1]) as ConstantExpression).Value.ToString().Trim('\'').Replace("%", "\\%"));
+
                         return Expression.Constant(result);
                     }
                 }
