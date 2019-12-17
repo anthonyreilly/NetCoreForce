@@ -13,7 +13,7 @@
     <Description>A .NET Standard and .NET Core Salesforce REST API toolkit and API wrapper</Description>
     <IsPackable>true</IsPackable>
     <PackageId>NetCoreForce.Client</PackageId>
-    <PackageLicenseUrl>$(PackageLicenseUrl)</PackageLicenseUrl>
+    <PackageLicenseExpression>$(PackageLicenseExpression)</PackageLicenseExpression>
     <PackageProjectUrl>$(PackageProjectUrl)</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>$(PackageRequireLicenseAcceptance)</PackageRequireLicenseAcceptance>
     <PackageTags>$(PackageTags)</PackageTags>

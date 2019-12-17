@@ -13,7 +13,7 @@
     <Description>NetCoreForce ModelGenerator tool to generate object models against a live Salesforce org.</Description>
     <IsPackable>true</IsPackable>
     <PackageId>NetCoreForce.ModelGenerator</PackageId>
-    <PackageLicenseUrl>$(PackageLicenseUrl)</PackageLicenseUrl>
+    <PackageLicenseExpression>$(PackageLicenseExpression)</PackageLicenseExpression>
     <PackageProjectUrl>$(PackageProjectUrl)</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>$(PackageRequireLicenseAcceptance)</PackageRequireLicenseAcceptance>
     <PackageTags>$(PackageTags)</PackageTags>

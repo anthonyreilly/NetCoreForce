@@ -13,7 +13,7 @@
     <Description>A .NET Standard and .NET Core Salesforce Linq query writer</Description>
     <IsPackable>true</IsPackable>
     <PackageId>NetCoreForce.Linq</PackageId>
-    <PackageLicenseUrl>$(PackageLicenseUrl)</PackageLicenseUrl>
+    <PackageLicenseExpression>$(PackageLicenseExpression)</PackageLicenseExpression>
     <PackageProjectUrl>$(PackageProjectUrl)</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>$(PackageRequireLicenseAcceptance)</PackageRequireLicenseAcceptance>
     <PackageTags>$(PackageTags)</PackageTags>
