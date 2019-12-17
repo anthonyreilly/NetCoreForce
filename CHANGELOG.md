@@ -1,6 +1,6 @@
 # Changelog
 
-### 2019-12-05 v2.6.0
+### 2019-12-17 v2.6.0
 
 * Fix: Failure to handle/parse HTTP 300 - multiple choices response when update finds multiple external IDs
 * Fix: Error message formatting in JsonClient - was prepending "unable to parse" message on all ForceApiExceptions
@@ -9,6 +9,7 @@
 * Linq: Added IOrderedAsyncQueryable to SalesforceQuery
 * Linq: Fixed broken OrderBy/OrderByDescending by adding required interfaces; Added unit tests for OrderBy/OrderByDescending
 * Linq: Added missing SelectType parameter in force client extension
+* Linq: Added include/exclude for multi-picklist support
 
 ### 2018-11-18 v2.5.0
 
