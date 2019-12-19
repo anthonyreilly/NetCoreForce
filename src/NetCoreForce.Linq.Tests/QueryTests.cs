@@ -1,9 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NetCoreForce.Linq.Conventions.Naming;
 using NetCoreForce.Linq.Entity;
-using NetCoreForce.Linq.Extensions;
 using NetCoreForce.Models;
 using Xunit;
 
@@ -139,6 +139,16 @@ namespace NetCoreForce.Linq.Tests
             Assert.Equal("SELECT " +
                          "id,caseNumber,account.id,account.description,account.createdBy.id,account.createdBy.aboutMe " +
                          "FROM Case", soql);
+        }
+
+        [Fact]
+        public void WhereBoolQuery()
+        {
+            var soql =
+                Query<SfCase>(SelectTypeEnum.SelectIdAndUseAttachModel, out var provider)
+                    .Where(x => x.IsClosed == true)
+                    .ToString();
+            Assert.Equal("SELECT id FROM Case WHERE (isClosed = TRUE)", soql);
         }
 
         [Fact]
