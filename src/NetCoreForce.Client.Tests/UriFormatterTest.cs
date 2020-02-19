@@ -42,6 +42,14 @@ namespace NetCoreForce.Client.Tests
         }
 
         [Fact]
+        public void SObjectsComposite()
+        {
+            string result = UriFormatter.SObjectsComposite("https://xxx.salesforce.com", "v41.0").AbsoluteUri;
+
+            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/composite/sobjects", result);
+        }
+
+        [Fact]
         public void SObjectBasicInformation()
         {
             string result = UriFormatter.SObjectBasicInformation("https://xxx.salesforce.com", "v41.0", "Account").AbsoluteUri;

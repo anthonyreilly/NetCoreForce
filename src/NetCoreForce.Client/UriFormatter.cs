@@ -161,7 +161,26 @@ namespace NetCoreForce.Client
             }
 
             return uri;
-        }        
+        }
+
+        /// <summary>
+        /// SObject Composite
+        /// Used for: Update multiple
+        /// </summary>
+        /// <param name="instanceUrl">SFDC instance URL, e.g. "https://na99.salesforce.com"</param>
+        /// <param name="apiVersion">SFDC API version, e.g. "v41.0"</param>
+        /// <returns></returns>
+        public static Uri SObjectsComposite(string instanceUrl, string apiVersion)
+        {
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+
+            //format: /vXX.X/composite/sobjects
+
+            Uri uri = new Uri(new Uri(instanceUrl), string.Format("{0}/{1}/composite/sobjects", BaseUriSegment, apiVersion));
+
+            return uri;
+        }
 
         /// <summary>
         /// SObject Rows by External ID

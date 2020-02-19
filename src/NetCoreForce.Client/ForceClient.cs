@@ -463,6 +463,39 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
+        /// Updates
+        /// </summary>
+        /// <param name="sfObjects">Objects to update</param>
+        /// <param name="allOrNone">Rollback if all updates were not successful</param>
+        /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
+        /// <returns>List of UpdateMultipleResponse objects, includes response for each object (id, success, errors)</returns>
+        /// <exception cref="ArgumentException">Thrown when missing required information</exception>
+        /// <exception cref="ForceApiException">Thrown when update fails</exception>
+        public async Task<List<UpdateMultipleResponse>> UpdateRecords(List<object> sfObjects, bool allOrNone = false, Dictionary<string, string> customHeaders = null)
+        {
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+
+            //Add call options
+            Dictionary<string, string> callOptions = HeaderFormatter.SforceCallOptions(ClientName);
+            headers.AddRange(callOptions);
+
+            //Add custom headers if specified
+            if (customHeaders != null)
+            {
+                headers.AddRange(customHeaders);
+            }
+
+            var uri = UriFormatter.SObjectsComposite(InstanceUrl, ApiVersion);
+
+            JsonClient client = new JsonClient(AccessToken, _httpClient);
+
+            UpdateMultipleRequest updateMultipleRequest = new UpdateMultipleRequest(sfObjects, allOrNone);
+
+            return await client.HttpPatchAsync<List<UpdateMultipleResponse>>(updateMultipleRequest, uri, headers, true, true);
+            
+        }
+
+        /// <summary>
         /// Inserts or Updates a records based on external id
         /// </summary>
         /// <param name="sObjectTypeName">SObject name, e.g. "Account"</param>
