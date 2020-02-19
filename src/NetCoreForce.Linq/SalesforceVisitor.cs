@@ -140,12 +140,18 @@ namespace NetCoreForce.Linq
                         Skip = (int) ((m.Arguments[1] as ConstantExpression).Value);
                         this.Visit(m.Arguments[0]);
                         break;
-
+#if NETSTANDARD2_1
+                    case nameof(AsyncQueryable.FirstAsync):
+                    case nameof(AsyncQueryable.FirstOrDefaultAsync):
+                    case nameof(AsyncQueryable.SingleAsync):
+                    case nameof(AsyncQueryable.SingleOrDefaultAsync):
+#else
                     case nameof(AsyncQueryable.First):
                     case nameof(AsyncQueryable.FirstOrDefault):
                     case nameof(AsyncQueryable.Single):
                     case nameof(AsyncQueryable.SingleOrDefault):
-                        
+#endif
+
                         QueryType = (QueryTypeEnum) Enum.Parse(typeof(QueryTypeEnum), methodName);
                         Take = 2;
                         if (m.Arguments.Count > 1)
@@ -155,7 +161,17 @@ namespace NetCoreForce.Linq
 
                         this.Visit(m.Arguments[0]);
                         break;
-                        
+#if NETSTANDARD2_1
+                    case nameof(AsyncQueryable.ToListAsync):
+                        QueryType = QueryTypeEnum.List;
+
+                        this.Visit(m.Arguments[0]);
+
+                        break;
+
+                    case nameof(AsyncQueryable.AnyAsync):
+                    case nameof(AsyncQueryable.CountAsync):
+#else
                     case nameof(AsyncQueryable.ToList):
                         QueryType = QueryTypeEnum.List;
 
@@ -165,6 +181,7 @@ namespace NetCoreForce.Linq
 
                     case nameof(AsyncQueryable.Any):
                     case nameof(AsyncQueryable.Count):
+#endif
                         QueryType = (QueryTypeEnum) Enum.Parse(typeof(QueryTypeEnum), methodName);
                         if (m.Arguments.Count > 1)
                         {
