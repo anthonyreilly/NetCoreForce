@@ -27,19 +27,19 @@ namespace NetCoreForce.Linq
             var cmd = visitor.Translate(PartialEvaluator.Eval(expression));
             switch (visitor.QueryType)
             {
-                case QueryTypeEnum.FirstOrDefault:
+                case QueryTypeEnum.FirstOrDefaultAsync:
                     return ProduceAsyncEnumerable(cmd).FirstOrDefaultAsync();
-                case QueryTypeEnum.First:
+                case QueryTypeEnum.FirstAsync:
                     return ProduceAsyncEnumerable(cmd).FirstAsync();
-                case QueryTypeEnum.Single:
+                case QueryTypeEnum.SingleAsync:
                     return ProduceAsyncEnumerable(cmd).SingleAsync();
-                case QueryTypeEnum.SingleOrDefault:
+                case QueryTypeEnum.SingleOrDefaultAsync:
                     return ProduceAsyncEnumerable(cmd).SingleOrDefaultAsync();
-                case QueryTypeEnum.Count:
-                    return ProduceCountAsync(cmd);
-                case QueryTypeEnum.Any:
-                    return ProduceCountAsync(cmd).ContinueWith(task => task.Result > 0);
-                case QueryTypeEnum.List:
+                case QueryTypeEnum.CountAsync:
+                    return new ValueTask<int>(ProduceCountAsync(cmd));
+                case QueryTypeEnum.AnyAsync:
+                    return new ValueTask<bool>(ProduceCountAsync(cmd).ContinueWith(task => task.Result > 0));
+                case QueryTypeEnum.ListAsync:
                     return ProduceAsyncEnumerable(cmd).ToListAsync();
                 //                    var argument = typeof(TResult).GetGenericArguments()[0];
                 //
@@ -148,7 +148,6 @@ namespace NetCoreForce.Linq
         }
 #endif
 
-
         protected abstract Task<int> ProduceCountAsync(string cmd);
 
 #if NETSTANDARD2_1
@@ -185,7 +184,7 @@ namespace NetCoreForce.Linq
         public Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken token) 
         {
             var result = Execute(expression);
-            return (Task<TResult>) result;
+            return (Task<TResult>)result;
         }
 #endif
 
