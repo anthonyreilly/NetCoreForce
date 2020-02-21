@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Text;
 using NetCoreForce.Linq.Conventions.Naming;
 using NetCoreForce.Linq.Entity;
-using NetCoreForce.Linq.Extensions;
 
 namespace NetCoreForce.Linq
 {
@@ -250,11 +249,11 @@ namespace NetCoreForce.Linq
                 }
             }
 
-            else if (m.Method.DeclaringType == typeof(StringExtensions))
+            else if (m.Method.DeclaringType == typeof(NetCoreForceStringExtensions))
             {
                 switch (m.Method.Name)
                 {
-                    case nameof(StringExtensions.Includes):
+                    case nameof(NetCoreForceStringExtensions.Includes):
                     {
                         var result = string.Format("({0} INCLUDES('{1}'))",
                             (this.Visit(m.Arguments[0]) as ConstantExpression).Value.ToString(),
@@ -262,7 +261,7 @@ namespace NetCoreForce.Linq
 
                         return Expression.Constant(result);
                     }
-                    case nameof(StringExtensions.Excludes):
+                    case nameof(NetCoreForceStringExtensions.Excludes):
                     {
                         var result = string.Format("({0} EXCLUDES('{1}'))",
                             (this.Visit(m.Arguments[0]) as ConstantExpression).Value.ToString(),
@@ -359,6 +358,9 @@ namespace NetCoreForce.Linq
                                 .Replace("'", "\\\'");
 
                     return Expression.Constant($"'{escapedString}'");
+
+                case bool boolean:
+                    return Expression.Constant(boolean ? "TRUE" : "FALSE");
 
                 case null:
                     return Expression.Constant("NULL");
