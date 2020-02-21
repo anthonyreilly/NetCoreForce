@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace NetCoreForce.Linq.Helper
 {
-   
+
     /// <summary>
     /// A default implementation of IQueryable for use with QueryProvider
     /// </summary>
@@ -57,7 +57,13 @@ namespace NetCoreForce.Linq.Helper
         {
             return Provider.ExecuteAsync<IAsyncEnumerator<T>>(Expression, CancellationToken.None).GetAwaiter().GetResult();
         }
-        
+
+#if NETSTANDARD2_1
+        public IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken token)
+        {
+            return Provider.ExecuteAsync<IAsyncEnumerator<T>>(Expression, token).GetAwaiter().GetResult();
+        }
+#endif
 
         public override string ToString()
         {

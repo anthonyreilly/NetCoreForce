@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using NetCoreForce.Linq.Conventions.Naming;
 using NetCoreForce.Linq.Entity;
 
@@ -57,10 +58,17 @@ namespace NetCoreForce.Linq
             var sb = new StringBuilder();
             string selectString;
 
+#if NETSTANDARD2_1
+            if (QueryType == QueryTypeEnum.AnyAsync || QueryType == QueryTypeEnum.CountAsync)
+            {
+                selectString = "COUNT()";
+            }
+#else
             if (QueryType == QueryTypeEnum.Any || QueryType == QueryTypeEnum.Count)
             {
                 selectString = "COUNT()";
             }
+#endif
             else
             {
                 TranslateSelect();
@@ -139,22 +147,42 @@ namespace NetCoreForce.Linq
                         Skip = (int) ((m.Arguments[1] as ConstantExpression).Value);
                         this.Visit(m.Arguments[0]);
                         break;
-
+#if NETSTANDARD2_1
+                    case nameof(AsyncQueryable.FirstAsync):
+                    case nameof(AsyncQueryable.FirstOrDefaultAsync):
+                    case nameof(AsyncQueryable.SingleAsync):
+                    case nameof(AsyncQueryable.SingleOrDefaultAsync):
+#else
                     case nameof(AsyncQueryable.First):
                     case nameof(AsyncQueryable.FirstOrDefault):
                     case nameof(AsyncQueryable.Single):
                     case nameof(AsyncQueryable.SingleOrDefault):
-                        
+#endif
+
                         QueryType = (QueryTypeEnum) Enum.Parse(typeof(QueryTypeEnum), methodName);
                         Take = 2;
                         if (m.Arguments.Count > 1)
                         {
-                            WhereExpression.Insert(0, (this.Visit(m.Arguments[1]) as ConstantExpression).Value.ToString());
+                            ConstantExpression ce = this.Visit(m.Arguments[1]) as ConstantExpression;
+                            if (ce?.Value != null)
+                            {
+                                WhereExpression.Insert(0, ce.Value.ToString());
+                            }
                         }
 
                         this.Visit(m.Arguments[0]);
                         break;
-                        
+#if NETSTANDARD2_1
+                    case nameof(AsyncQueryable.ToListAsync):
+                        QueryType = QueryTypeEnum.ListAsync;
+
+                        this.Visit(m.Arguments[0]);
+
+                        break;
+
+                    case nameof(AsyncQueryable.AnyAsync):
+                    case nameof(AsyncQueryable.CountAsync):
+#else
                     case nameof(AsyncQueryable.ToList):
                         QueryType = QueryTypeEnum.List;
 
@@ -164,10 +192,15 @@ namespace NetCoreForce.Linq
 
                     case nameof(AsyncQueryable.Any):
                     case nameof(AsyncQueryable.Count):
+#endif
                         QueryType = (QueryTypeEnum) Enum.Parse(typeof(QueryTypeEnum), methodName);
                         if (m.Arguments.Count > 1)
                         {
-                            WhereExpression.Insert(0, (this.Visit(m.Arguments[1]) as ConstantExpression).Value.ToString());
+                            ConstantExpression ce = this.Visit(m.Arguments[1]) as ConstantExpression;
+                            if (ce?.Value != null)
+                            {
+                                WhereExpression.Insert(0, ce.Value.ToString());
+                            }
                         }
 
                         this.Visit(m.Arguments[0]);
@@ -179,15 +212,22 @@ namespace NetCoreForce.Linq
                         break;
 
                     case nameof(AsyncQueryable.Where):
-                        WhereExpression.Insert(0, (this.Visit(m.Arguments[1]) as ConstantExpression).Value.ToString());
+                        if (m.Arguments.Count > 1)
+                        {
+                            ConstantExpression ce = this.Visit(m.Arguments[1]) as ConstantExpression;
+                            if (ce?.Value != null)
+                            {
+                                WhereExpression.Insert(0, ce.Value.ToString());
+                            }
+                        }
                         this.Visit(m.Arguments[0]);
                         break;
 
                     case nameof(AsyncQueryable.OrderBy):
                     {
-                        if (this.Visit(m.Arguments[1]) is ConstantExpression constantExpression)
+                        if (this.Visit(m.Arguments[1]) is ConstantExpression ce && ce.Value != null)
                         {
-                            OrderByExpression.Insert(0, constantExpression.Value.ToString());
+                            OrderByExpression.Insert(0, ce.Value.ToString());
                         }
 
                         this.Visit(m.Arguments[0]);
@@ -196,11 +236,10 @@ namespace NetCoreForce.Linq
 
                     case nameof(AsyncQueryable.OrderByDescending):
                     {
-                        if (this.Visit(m.Arguments[1]) is ConstantExpression constantExpression)
+                        if (this.Visit(m.Arguments[1]) is ConstantExpression ce && ce.Value != null)
                         {
-                            OrderByExpression.Insert(0, constantExpression.Value.ToString() + " DESC");
+                            OrderByExpression.Insert(0, ce.Value.ToString() + " DESC");
                         }
-
                         this.Visit(m.Arguments[0]);
                         break;
                     }
@@ -381,9 +420,12 @@ namespace NetCoreForce.Linq
                 case DateTimeOffset dateTimeOffset:
                     return Expression.Constant(dateTimeOffset.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.ffffZ"));
 
+                case CancellationToken ct:
+                    //Ignore
+                    return null;
                 case object o:
                     throw new NotSupportedException($"The constant for '{o}' ({o.GetType().Name}) is not supported");
-                
+
                 default:
                     return Expression.Constant(c.Value.ToString());
             }
