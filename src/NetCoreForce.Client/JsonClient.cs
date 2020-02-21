@@ -99,11 +99,14 @@ namespace NetCoreForce.Client
             }
         }
 
-        public async Task<T> HttpPatchAsync<T>(object inputObject, Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
+        public async Task<T> HttpPatchAsync<T>(object inputObject, Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true, bool serializeComplete = false)
         {
             try
             {
-                var json = JsonSerializer.SerializeForUpdate(inputObject);
+                var json = serializeComplete ?
+                    JsonSerializer.SerializeComplete(inputObject, false) :
+                    JsonSerializer.SerializeForUpdate(inputObject);
+
                 var content = new StringContent(json, Encoding.UTF8, JsonMimeType);
 
                 return await HttpAsync<T>(uri, new HttpMethod("PATCH"), content, customHeaders, deserializeResponse);
