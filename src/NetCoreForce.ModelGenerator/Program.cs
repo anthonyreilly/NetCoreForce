@@ -378,6 +378,13 @@ namespace NetCoreForce.ModelGenerator
 
             Console.WriteLine("Output directory: " + config.OutputDirectory);
 
+            if (!Directory.Exists(config.OutputDirectory))
+            {
+                Directory.CreateDirectory(config.OutputDirectory);
+
+                Console.WriteLine("Output directory created : " + config.OutputDirectory);
+            }
+
 
             bool generateAll = false;
             if (config.Objects != null && config.Objects.Count > 0)
@@ -408,7 +415,7 @@ namespace NetCoreForce.ModelGenerator
                 {
                     if (config.Objects != null && config.Objects.Count > 0)
                     {
-                        bool incl = config.Objects.Where(o => o.ToLowerInvariant() == obj.Name.ToLowerInvariant()).Count() > 0;
+                        bool incl = config.Objects.Any(o => o.ToLowerInvariant() == obj.Name.ToLowerInvariant());
                         if (!incl)
                         {
 #if DEBUG
@@ -423,7 +430,8 @@ namespace NetCoreForce.ModelGenerator
 
                 Console.Write("Generating model for {0} - ", obj.Name);
 
-                string className = obj.Name;
+                var classMapping = config.Mapping(obj.Name);
+                var className = classMapping.Name ?? obj.Name;
 
                 className = string.Format("{0}{1}{2}", config.ClassPrefix ?? string.Empty, className, config.ClassSuffix ?? string.Empty);
 
@@ -463,20 +471,30 @@ namespace NetCoreForce.ModelGenerator
             string newline = Environment.NewLine;
 
             gen.AppendLine("using System;");
+            gen.AppendLine("using System.CodeDom.Compiler;");
             gen.AppendLine("using NetCoreForce.Client.Models;");
             gen.AppendLine("using NetCoreForce.Client.Attributes;");
+
+            if (config.AddNetCoreForceModelsUsings)
+                gen.AppendLine("using NetCoreForce.Models;");
+
             gen.AppendLine("using Newtonsoft.Json;");
+            
             gen.AppendLine();
             if (!string.IsNullOrEmpty(config.ClassNamespace))
             {
                 gen.AppendLine("namespace " + config.ClassNamespace);
                 gen.AppendLine("{");
             }
+
+            var assembly = Assembly.GetEntryAssembly().GetName();
+
             gen.AppendLine("\t///<summary>");
             gen.AppendLine($"\t/// {WebUtility.HtmlEncode(data.Label)}");
             gen.AppendLine($"\t///<para>SObject Name: {data.Name}</para>");
             gen.AppendLine($"\t///<para>Custom Object: {data.Custom.ToString()}</para>");
             gen.AppendLine("\t///</summary>");
+            gen.AppendLine($"\t[GeneratedCodeAttribute(\"{typeof(Program).Namespace}\", \"{assembly.Version}\")]");
             gen.AppendLine($"\tpublic class {className} : SObject");
             gen.AppendLine("\t{");
 
@@ -492,14 +510,16 @@ namespace NetCoreForce.ModelGenerator
             // gen.AppendLine("\t\t{}");
             // gen.AppendLine();
 
+            var classMapping = config.Mapping(objectName);
+
             foreach (var field in data.Fields)
             {
                 try
                 {
-                    if (field.Custom && !config.IncludeCustom)
-                    {
+                    var fieldMapping = classMapping.Field(field.Name);
+
+                    if (field.Custom && !config.IncludeCustom || fieldMapping.Ignore)
                         continue;
-                    }                    
 
                     gen.AppendLine("\t\t///<summary>");
                     gen.AppendLine("\t\t/// " + WebUtility.HtmlEncode(field.Label));
@@ -519,7 +539,8 @@ namespace NetCoreForce.ModelGenerator
 
                     gen.AppendLine("\t\t///</summary>");
 
-                    gen.AppendLine(string.Format("\t\t[JsonProperty(PropertyName = \"{0}\")]", JsonName(field.Name)));
+                    var jsonName = JsonName(field.Name);
+                    gen.AppendLine(string.Format("\t\t[JsonProperty(PropertyName = \"{0}\")]", jsonName));
 
                     if (!field.Creatable || !field.Updateable)
                     {
@@ -555,12 +576,14 @@ namespace NetCoreForce.ModelGenerator
                         csTypeName += "?";
                     }
 
-                    gen.AppendLine(string.Format("\t\tpublic {0} {1} {{ get; set; }}", csTypeName, field.Name));
+                    gen.AppendLine(string.Format("\t\tpublic {0} {1} {{ get; set; }}", csTypeName, fieldMapping.Name ?? field.Name));
                     gen.AppendLine();
 
                     if (field.Type == "reference" && config.IncludeReferences)
                     {
-                        if (string.IsNullOrEmpty(field.RelationshipName) || field.ReferenceTo.Count > 1)
+                        var relationshipfieldMapping = classMapping.Field(field.RelationshipName);
+
+                        if (string.IsNullOrEmpty(field.RelationshipName) || field.ReferenceTo.Count > 1 || relationshipfieldMapping.Ignore)
                         {
                             //only do single-object relationships
                             continue;
@@ -572,6 +595,16 @@ namespace NetCoreForce.ModelGenerator
                             continue;
                         }
 
+                        var targetMapping = config.Mapping(field.ReferenceTo[0]);
+
+                        if (targetMapping.Ignore) // if we ignore the target class --> ignore the relationship
+                            continue;
+
+                        string referenceClass = GetPrefixedSuffixed(config, targetMapping.Name ?? field.ReferenceTo[0]);
+
+                        if (!string.IsNullOrEmpty(config.ClassNamespace) && config.AddNetCoreForceModelsUsings)
+                            referenceClass = config.ClassNamespace + "." + referenceClass;
+
                         gen.AppendLine("\t\t///<summary>");
                         gen.AppendLine("\t\t/// ReferenceTo: " + field.ReferenceTo[0]);
                         gen.AppendLine("\t\t/// <para>RelationshipName: " + field.RelationshipName + "</para>");
@@ -579,9 +612,9 @@ namespace NetCoreForce.ModelGenerator
                         gen.AppendLine(string.Format("\t\t[JsonProperty(PropertyName = \"{0}\")]", JsonName(field.RelationshipName)));
                         gen.AppendLine("\t\t[Updateable(false), Createable(false)]");
 
-                        string referenceClass = GetPrefixedSuffixed(config, field.ReferenceTo[0]);
+                        
 
-                        gen.AppendLine(string.Format("\t\tpublic {0} {1} {{ get; set; }}", referenceClass, field.RelationshipName));
+                        gen.AppendLine(string.Format("\t\tpublic {0} {1} {{ get; set; }}", referenceClass, relationshipfieldMapping.Name ?? field.RelationshipName));
                         gen.AppendLine();
                     }
                 }
