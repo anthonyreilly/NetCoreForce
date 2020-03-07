@@ -1,5 +1,3 @@
-
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace NetCoreForce.Client.Models
@@ -21,7 +19,7 @@ namespace NetCoreForce.Client.Models
         [JsonProperty(PropertyName = "activateable")]
         public bool Activateable { get; set; }
 
-        [JsonProperty(PropertyName = "createable")]
+        [JsonProperty(PropertyName = "creatable")]
         public bool Creatable { get; set; }
 
         [JsonProperty(PropertyName = "custom")]

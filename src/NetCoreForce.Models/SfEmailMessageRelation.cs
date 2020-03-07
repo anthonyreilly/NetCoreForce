@@ -29,7 +29,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Id { get; set; }
 
 		///<summary>
@@ -39,7 +39,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "emailMessageId")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string EmailMessageId { get; set; }
 
 		///<summary>
@@ -47,7 +47,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: EmailMessage</para>
 		///</summary>
 		[JsonProperty(PropertyName = "emailMessage")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfEmailMessage EmailMessage { get; set; }
 
 		///<summary>
@@ -66,7 +66,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "relationType")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string RelationType { get; set; }
 
 		///<summary>
@@ -76,7 +76,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "relationAddress")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string RelationAddress { get; set; }
 
 		///<summary>
@@ -86,7 +86,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "relationObjectType")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string RelationObjectType { get; set; }
 
 		///<summary>
@@ -96,7 +96,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? CreatedDate { get; set; }
 
 		///<summary>
@@ -106,7 +106,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdById")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string CreatedById { get; set; }
 
 		///<summary>
@@ -114,7 +114,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: CreatedBy</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdBy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser CreatedBy { get; set; }
 
 		///<summary>
@@ -124,7 +124,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "systemModstamp")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
@@ -134,7 +134,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDeleted")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDeleted { get; set; }
 
 	}

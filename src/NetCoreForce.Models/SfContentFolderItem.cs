@@ -29,7 +29,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Id { get; set; }
 
 		///<summary>
@@ -39,7 +39,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDeleted")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
@@ -49,7 +49,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isFolder")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsFolder { get; set; }
 
 		///<summary>
@@ -59,7 +59,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "parentContentFolderId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ParentContentFolderId { get; set; }
 
 		///<summary>
@@ -67,7 +67,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: ParentContentFolder</para>
 		///</summary>
 		[JsonProperty(PropertyName = "parentContentFolder")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfContentFolder ParentContentFolder { get; set; }
 
 		///<summary>
@@ -77,7 +77,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "title")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Title { get; set; }
 
 		///<summary>
@@ -87,7 +87,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "fileType")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string FileType { get; set; }
 
 		///<summary>
@@ -97,7 +97,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "contentSize")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public int? ContentSize { get; set; }
 
 		///<summary>
@@ -107,7 +107,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "fileExtension")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string FileExtension { get; set; }
 
 		///<summary>
@@ -117,7 +117,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? CreatedDate { get; set; }
 
 		///<summary>
@@ -127,7 +127,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdById")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string CreatedById { get; set; }
 
 		///<summary>
@@ -135,7 +135,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: CreatedBy</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdBy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser CreatedBy { get; set; }
 
 		///<summary>
@@ -145,7 +145,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? LastModifiedDate { get; set; }
 
 		///<summary>
@@ -155,7 +155,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedById")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string LastModifiedById { get; set; }
 
 		///<summary>
@@ -163,7 +163,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: LastModifiedBy</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedBy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser LastModifiedBy { get; set; }
 
 		///<summary>
@@ -173,7 +173,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "systemModstamp")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 	}

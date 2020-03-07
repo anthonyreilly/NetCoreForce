@@ -29,7 +29,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Id { get; set; }
 
 		///<summary>
@@ -39,7 +39,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "durableId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string DurableId { get; set; }
 
 		///<summary>
@@ -49,7 +49,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "qualifiedApiName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string QualifiedApiName { get; set; }
 
 		///<summary>
@@ -59,7 +59,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "entityDefinitionId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string EntityDefinitionId { get; set; }
 
 		///<summary>
@@ -69,7 +69,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "namespacePrefix")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string NamespacePrefix { get; set; }
 
 		///<summary>
@@ -79,7 +79,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "developerName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string DeveloperName { get; set; }
 
 		///<summary>
@@ -89,7 +89,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "masterLabel")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string MasterLabel { get; set; }
 
 		///<summary>
@@ -99,7 +99,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "label")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Label { get; set; }
 
 		///<summary>
@@ -109,7 +109,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "length")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public int? Length { get; set; }
 
 		///<summary>
@@ -119,7 +119,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "dataType")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string DataType { get; set; }
 
 		///<summary>
@@ -129,7 +129,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "serviceDataTypeId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ServiceDataTypeId { get; set; }
 
 		///<summary>
@@ -139,7 +139,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "valueTypeId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ValueTypeId { get; set; }
 
 		///<summary>
@@ -149,7 +149,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "extraTypeInfo")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ExtraTypeInfo { get; set; }
 
 		///<summary>
@@ -159,7 +159,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isCalculated")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsCalculated { get; set; }
 
 		///<summary>
@@ -169,7 +169,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isHighScaleNumber")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsHighScaleNumber { get; set; }
 
 		///<summary>
@@ -179,7 +179,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isHtmlFormatted")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsHtmlFormatted { get; set; }
 
 		///<summary>
@@ -189,7 +189,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isNameField")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsNameField { get; set; }
 
 		///<summary>
@@ -199,7 +199,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isNillable")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsNillable { get; set; }
 
 		///<summary>
@@ -209,7 +209,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isWorkflowFilterable")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsWorkflowFilterable { get; set; }
 
 		///<summary>
@@ -219,7 +219,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isCompactLayoutable")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsCompactLayoutable { get; set; }
 
 		///<summary>
@@ -229,7 +229,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "precision")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public int? Precision { get; set; }
 
 		///<summary>
@@ -239,7 +239,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "scale")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public int? Scale { get; set; }
 
 		///<summary>
@@ -249,7 +249,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isFieldHistoryTracked")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsFieldHistoryTracked { get; set; }
 
 		///<summary>
@@ -259,7 +259,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isIndexed")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsIndexed { get; set; }
 
 		///<summary>
@@ -269,7 +269,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isApiFilterable")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsApiFilterable { get; set; }
 
 		///<summary>
@@ -279,7 +279,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isApiSortable")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsApiSortable { get; set; }
 
 		///<summary>
@@ -289,7 +289,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isListFilterable")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsListFilterable { get; set; }
 
 		///<summary>
@@ -299,7 +299,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isListSortable")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsListSortable { get; set; }
 
 		///<summary>
@@ -309,7 +309,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isApiGroupable")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsApiGroupable { get; set; }
 
 		///<summary>
@@ -319,7 +319,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isListVisible")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsListVisible { get; set; }
 
 		///<summary>
@@ -329,7 +329,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "controllingFieldDefinitionId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ControllingFieldDefinitionId { get; set; }
 
 		///<summary>
@@ -339,7 +339,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? LastModifiedDate { get; set; }
 
 		///<summary>
@@ -349,7 +349,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedById")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string LastModifiedById { get; set; }
 
 		///<summary>
@@ -357,7 +357,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: LastModifiedBy</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedBy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser LastModifiedBy { get; set; }
 
 		///<summary>
@@ -367,7 +367,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "publisherId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string PublisherId { get; set; }
 
 		///<summary>
@@ -377,7 +377,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "runningUserFieldAccessId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string RunningUserFieldAccessId { get; set; }
 
 		///<summary>
@@ -387,7 +387,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "relationshipName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string RelationshipName { get; set; }
 
 		///<summary>
@@ -397,7 +397,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "referenceTo")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ReferenceTo { get; set; }
 
 		///<summary>
@@ -407,7 +407,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "referenceTargetField")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ReferenceTargetField { get; set; }
 
 		///<summary>
@@ -417,7 +417,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isCompound")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsCompound { get; set; }
 
 		///<summary>
@@ -427,7 +427,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isSearchPrefilterable")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsSearchPrefilterable { get; set; }
 
 		///<summary>
@@ -437,7 +437,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isPolymorphicForeignKey")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsPolymorphicForeignKey { get; set; }
 
 		///<summary>
@@ -447,7 +447,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "businessOwnerId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string BusinessOwnerId { get; set; }
 
 		///<summary>
@@ -457,7 +457,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "businessStatus")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string BusinessStatus { get; set; }
 
 		///<summary>
@@ -467,7 +467,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "securityClassification")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string SecurityClassification { get; set; }
 
 		///<summary>
@@ -477,7 +477,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "description")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Description { get; set; }
 
 	}

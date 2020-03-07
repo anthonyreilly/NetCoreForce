@@ -29,7 +29,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Id { get; set; }
 
 		///<summary>
@@ -39,7 +39,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDeleted")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
@@ -49,7 +49,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "contactId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ContactId { get; set; }
 
 		///<summary>
@@ -57,7 +57,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: Contact</para>
 		///</summary>
 		[JsonProperty(PropertyName = "contact")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfContact Contact { get; set; }
 
 		///<summary>
@@ -67,7 +67,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdById")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string CreatedById { get; set; }
 
 		///<summary>
@@ -75,7 +75,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: CreatedBy</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdBy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser CreatedBy { get; set; }
 
 		///<summary>
@@ -85,7 +85,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? CreatedDate { get; set; }
 
 		///<summary>
@@ -95,7 +95,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "field")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Field { get; set; }
 
 		///<summary>
@@ -105,7 +105,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "oldValue")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string OldValue { get; set; }
 
 		///<summary>
@@ -115,7 +115,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "newValue")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string NewValue { get; set; }
 
 	}

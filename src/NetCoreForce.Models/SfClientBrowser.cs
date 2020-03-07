@@ -29,7 +29,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Id { get; set; }
 
 		///<summary>
@@ -39,7 +39,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "usersId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string UsersId { get; set; }
 
 		///<summary>
@@ -47,7 +47,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: Users</para>
 		///</summary>
 		[JsonProperty(PropertyName = "users")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser Users { get; set; }
 
 		///<summary>
@@ -57,7 +57,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "fullUserAgent")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string FullUserAgent { get; set; }
 
 		///<summary>
@@ -67,7 +67,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "proxyInfo")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ProxyInfo { get; set; }
 
 		///<summary>
@@ -77,7 +77,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastUpdate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? LastUpdate { get; set; }
 
 		///<summary>
@@ -87,7 +87,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? CreatedDate { get; set; }
 
 	}

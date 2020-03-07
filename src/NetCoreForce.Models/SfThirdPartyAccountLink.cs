@@ -2,7 +2,6 @@
 // Custom fields included: False
 // Relationship objects included: True
 
-using System;
 using NetCoreForce.Client.Models;
 using NetCoreForce.Client.Attributes;
 using Newtonsoft.Json;
@@ -29,7 +28,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Id { get; set; }
 
 		///<summary>
@@ -39,7 +38,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "thirdPartyAccountLinkKey")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ThirdPartyAccountLinkKey { get; set; }
 
 		///<summary>
@@ -49,7 +48,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "userId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string UserId { get; set; }
 
 		///<summary>
@@ -57,7 +56,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: User</para>
 		///</summary>
 		[JsonProperty(PropertyName = "user")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser User { get; set; }
 
 		///<summary>
@@ -67,7 +66,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "ssoProviderId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string SsoProviderId { get; set; }
 
 		///<summary>
@@ -75,7 +74,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: SsoProvider</para>
 		///</summary>
 		[JsonProperty(PropertyName = "ssoProvider")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfAuthProvider SsoProvider { get; set; }
 
 		///<summary>
@@ -85,7 +84,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "handle")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Handle { get; set; }
 
 		///<summary>
@@ -95,7 +94,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "remoteIdentifier")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string RemoteIdentifier { get; set; }
 
 		///<summary>
@@ -105,7 +104,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "provider")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Provider { get; set; }
 
 		///<summary>
@@ -115,7 +114,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "ssoProviderName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string SsoProviderName { get; set; }
 
 		///<summary>
@@ -125,7 +124,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isNotSsoUsable")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsNotSsoUsable { get; set; }
 
 	}

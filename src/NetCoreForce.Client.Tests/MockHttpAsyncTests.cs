@@ -2,8 +2,8 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
-using NetCoreForce.Client;
 using Xunit;
 using NetCoreForce.Models;
 
@@ -21,9 +21,9 @@ namespace NetCoreForce.Client.Tests
 
             ArgumentException ex = await Assert.ThrowsAsync<ArgumentException>(async () =>
             {
-                using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+                await using (var contactsEnumerator = contactsEnumerable.GetAsyncEnumerator(CancellationToken.None))
                 {
-                    while (await contactsEnumerator.MoveNext())
+                    while (await contactsEnumerator.MoveNextAsync(CancellationToken.None))
                     {
                         var result = contactsEnumerator.Current;
                     }
@@ -31,7 +31,7 @@ namespace NetCoreForce.Client.Tests
             });
 
             // Check that the error message mentions 200 as the minimum value
-            Assert.True(ex.Message.Contains("200"));
+            Assert.Contains("200", ex.Message);
         }
 
         [Fact]
@@ -62,9 +62,9 @@ namespace NetCoreForce.Client.Tests
             var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 800", batchSize: 200);
 
             List<SfContact> contacts = new List<SfContact>(800);
-            using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+            await using (var contactsEnumerator = contactsEnumerable.GetAsyncEnumerator(CancellationToken.None))
             {
-                while (await contactsEnumerator.MoveNext())
+                while (await contactsEnumerator.MoveNextAsync(CancellationToken.None))
                 {
                     contacts.Add(contactsEnumerator.Current);
                 }

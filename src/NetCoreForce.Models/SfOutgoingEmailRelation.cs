@@ -2,7 +2,6 @@
 // Custom fields included: False
 // Relationship objects included: True
 
-using System;
 using NetCoreForce.Client.Models;
 using NetCoreForce.Client.Attributes;
 using Newtonsoft.Json;
@@ -29,7 +28,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Id { get; set; }
 
 		///<summary>
@@ -39,7 +38,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "externalId")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string ExternalId { get; set; }
 
 		///<summary>
@@ -49,7 +48,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "outgoingEmailId")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string OutgoingEmailId { get; set; }
 
 		///<summary>
@@ -59,7 +58,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "relationId")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string RelationId { get; set; }
 
 		///<summary>
@@ -69,7 +68,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "relationAddress")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string RelationAddress { get; set; }
 
 	}

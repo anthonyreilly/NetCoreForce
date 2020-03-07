@@ -2,7 +2,6 @@
 // Custom fields included: False
 // Relationship objects included: True
 
-using System;
 using NetCoreForce.Client.Models;
 using NetCoreForce.Client.Attributes;
 using Newtonsoft.Json;
@@ -29,7 +28,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Id { get; set; }
 
 		///<summary>
@@ -39,7 +38,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "flexQueueItemId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string FlexQueueItemId { get; set; }
 
 		///<summary>
@@ -49,7 +48,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "jobType")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string JobType { get; set; }
 
 		///<summary>
@@ -59,7 +58,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "asyncApexJobId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string AsyncApexJobId { get; set; }
 
 		///<summary>
@@ -67,7 +66,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: AsyncApexJob</para>
 		///</summary>
 		[JsonProperty(PropertyName = "asyncApexJob")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfAsyncApexJob AsyncApexJob { get; set; }
 
 		///<summary>
@@ -77,7 +76,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "jobPosition")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public int? JobPosition { get; set; }
 
 	}

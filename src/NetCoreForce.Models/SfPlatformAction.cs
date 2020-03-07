@@ -29,7 +29,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Id { get; set; }
 
 		///<summary>
@@ -39,7 +39,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "externalId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ExternalId { get; set; }
 
 		///<summary>
@@ -49,7 +49,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? LastModifiedDate { get; set; }
 
 		///<summary>
@@ -59,7 +59,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "label")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Label { get; set; }
 
 		///<summary>
@@ -69,7 +69,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "type")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Type { get; set; }
 
 		///<summary>
@@ -79,7 +79,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "subtype")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Subtype { get; set; }
 
 		///<summary>
@@ -89,7 +89,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "apiName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ApiName { get; set; }
 
 		///<summary>
@@ -99,7 +99,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "actionTarget")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ActionTarget { get; set; }
 
 		///<summary>
@@ -109,7 +109,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "actionTargetType")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ActionTargetType { get; set; }
 
 		///<summary>
@@ -119,7 +119,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "confirmationMessage")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ConfirmationMessage { get; set; }
 
 		///<summary>
@@ -129,7 +129,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "groupId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string GroupId { get; set; }
 
 		///<summary>
@@ -139,7 +139,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isGroupDefault")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsGroupDefault { get; set; }
 
 		///<summary>
@@ -149,7 +149,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "category")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Category { get; set; }
 
 		///<summary>
@@ -159,7 +159,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "invocationStatus")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string InvocationStatus { get; set; }
 
 		///<summary>
@@ -169,7 +169,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "invokedByUserId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string InvokedByUserId { get; set; }
 
 		///<summary>
@@ -177,7 +177,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: InvokedByUser</para>
 		///</summary>
 		[JsonProperty(PropertyName = "invokedByUser")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser InvokedByUser { get; set; }
 
 		///<summary>
@@ -187,7 +187,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "sourceEntity")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string SourceEntity { get; set; }
 
 		///<summary>
@@ -197,7 +197,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "actionListContext")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ActionListContext { get; set; }
 
 		///<summary>
@@ -207,7 +207,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "deviceFormat")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string DeviceFormat { get; set; }
 
 		///<summary>
@@ -217,7 +217,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "iconContentType")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string IconContentType { get; set; }
 
 		///<summary>
@@ -227,7 +227,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "iconHeight")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public int? IconHeight { get; set; }
 
 		///<summary>
@@ -237,7 +237,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "iconWidth")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public int? IconWidth { get; set; }
 
 		///<summary>
@@ -247,7 +247,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "iconUrl")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string IconUrl { get; set; }
 
 		///<summary>
@@ -257,7 +257,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isMassAction")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsMassAction { get; set; }
 
 		///<summary>
@@ -267,7 +267,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "primaryColor")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string PrimaryColor { get; set; }
 
 		///<summary>
@@ -277,7 +277,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "relatedSourceEntity")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string RelatedSourceEntity { get; set; }
 
 		///<summary>
@@ -287,7 +287,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "section")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Section { get; set; }
 
 		///<summary>
@@ -297,7 +297,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "relatedListRecordId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string RelatedListRecordId { get; set; }
 
 		///<summary>
@@ -307,7 +307,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "targetUrl")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string TargetUrl { get; set; }
 
 		///<summary>
@@ -317,7 +317,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "targetObject")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string TargetObject { get; set; }
 
 	}

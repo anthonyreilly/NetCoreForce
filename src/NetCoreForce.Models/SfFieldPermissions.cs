@@ -29,7 +29,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Id { get; set; }
 
 		///<summary>
@@ -39,7 +39,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "parentId")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string ParentId { get; set; }
 
 		///<summary>
@@ -47,7 +47,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: Parent</para>
 		///</summary>
 		[JsonProperty(PropertyName = "parent")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfPermissionSet Parent { get; set; }
 
 		///<summary>
@@ -57,7 +57,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "sobjectType")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string SobjectType { get; set; }
 
 		///<summary>
@@ -67,7 +67,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "field")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string Field { get; set; }
 
 		///<summary>
@@ -95,7 +95,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "systemModstamp")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 	}

@@ -29,7 +29,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Id { get; set; }
 
 		///<summary>
@@ -55,7 +55,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: Contract</para>
 		///</summary>
 		[JsonProperty(PropertyName = "contract")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfContract Contract { get; set; }
 
 		///<summary>
@@ -72,7 +72,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: Account</para>
 		///</summary>
 		[JsonProperty(PropertyName = "account")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfAccount Account { get; set; }
 
 		///<summary>
@@ -89,7 +89,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: Pricebook2</para>
 		///</summary>
 		[JsonProperty(PropertyName = "pricebook2")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfPricebook2 Pricebook2 { get; set; }
 
 		///<summary>
@@ -99,7 +99,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "originalOrderId")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string OriginalOrderId { get; set; }
 
 		///<summary>
@@ -107,7 +107,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: OriginalOrder</para>
 		///</summary>
 		[JsonProperty(PropertyName = "originalOrder")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfOrder OriginalOrder { get; set; }
 
 		///<summary>
@@ -135,7 +135,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isReductionOrder")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public bool? IsReductionOrder { get; set; }
 
 		///<summary>
@@ -170,7 +170,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: CustomerAuthorizedBy</para>
 		///</summary>
 		[JsonProperty(PropertyName = "customerAuthorizedBy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfContact CustomerAuthorizedBy { get; set; }
 
 		///<summary>
@@ -196,7 +196,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: CompanyAuthorizedBy</para>
 		///</summary>
 		[JsonProperty(PropertyName = "companyAuthorizedBy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser CompanyAuthorizedBy { get; set; }
 
 		///<summary>
@@ -296,7 +296,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "billingAddress")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public Address BillingAddress { get; set; }
 
 		///<summary>
@@ -378,7 +378,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "shippingAddress")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public Address ShippingAddress { get; set; }
 
 		///<summary>
@@ -431,7 +431,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: BillToContact</para>
 		///</summary>
 		[JsonProperty(PropertyName = "billToContact")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfContact BillToContact { get; set; }
 
 		///<summary>
@@ -448,7 +448,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: ShipToContact</para>
 		///</summary>
 		[JsonProperty(PropertyName = "shipToContact")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfContact ShipToContact { get; set; }
 
 		///<summary>
@@ -458,7 +458,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "activatedDate")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public DateTimeOffset? ActivatedDate { get; set; }
 
 		///<summary>
@@ -468,7 +468,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "activatedById")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public string ActivatedById { get; set; }
 
 		///<summary>
@@ -476,7 +476,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: ActivatedBy</para>
 		///</summary>
 		[JsonProperty(PropertyName = "activatedBy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser ActivatedBy { get; set; }
 
 		///<summary>
@@ -486,7 +486,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "statusCode")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public string StatusCode { get; set; }
 
 		///<summary>
@@ -497,7 +497,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "orderNumber")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string OrderNumber { get; set; }
 
 		///<summary>
@@ -507,7 +507,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "totalAmount")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public decimal? TotalAmount { get; set; }
 
 		///<summary>
@@ -517,7 +517,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? CreatedDate { get; set; }
 
 		///<summary>
@@ -527,7 +527,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdById")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string CreatedById { get; set; }
 
 		///<summary>
@@ -535,7 +535,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: CreatedBy</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdBy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser CreatedBy { get; set; }
 
 		///<summary>
@@ -545,7 +545,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? LastModifiedDate { get; set; }
 
 		///<summary>
@@ -555,7 +555,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedById")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string LastModifiedById { get; set; }
 
 		///<summary>
@@ -563,7 +563,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: LastModifiedBy</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedBy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser LastModifiedBy { get; set; }
 
 		///<summary>
@@ -573,7 +573,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDeleted")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
@@ -583,7 +583,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "systemModstamp")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
@@ -593,7 +593,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastViewedDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? LastViewedDate { get; set; }
 
 		///<summary>
@@ -603,7 +603,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastReferencedDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? LastReferencedDate { get; set; }
 
 	}

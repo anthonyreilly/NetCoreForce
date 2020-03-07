@@ -10,11 +10,10 @@ using System.Threading;
 
 namespace NetCoreForce.Linq.Helper
 {
-   
     /// <summary>
     /// A default implementation of IQueryable for use with QueryProvider
     /// </summary>
-    public class Query<T> : IAsyncQueryable<T>, IOrderedAsyncQueryable<T>
+    public class Query<T> : IOrderedAsyncQueryable<T>
     {
         public Query(IAsyncQueryProvider provider)
             : this(provider, (Type)null)
@@ -27,7 +26,6 @@ namespace NetCoreForce.Linq.Helper
             this.Expression = staticType != null ? Expression.Constant(this, staticType) : Expression.Constant(this);
         }
 
-
         /// <summary>
         /// This constructor is called by Provider.CreateQuery().
         /// </summary>
@@ -39,10 +37,12 @@ namespace NetCoreForce.Linq.Helper
             {
                 throw new ArgumentNullException(nameof(expression));
             }
+
             if (!typeof(IAsyncQueryable<T>).GetTypeInfo().IsAssignableFrom(expression.Type))
             {
                 throw new ArgumentOutOfRangeException(nameof(expression));
             }
+
             this.Provider = provider ?? throw new ArgumentNullException(nameof(provider));
             this.Expression = expression;
         }
@@ -53,23 +53,16 @@ namespace NetCoreForce.Linq.Helper
 
         public IAsyncQueryProvider Provider { get; }
 
-        public IAsyncEnumerator<T> GetEnumerator()
+        public IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = new CancellationToken())
         {
-            return Provider.ExecuteAsync<IAsyncEnumerator<T>>(Expression, CancellationToken.None).GetAwaiter().GetResult();
+            return Provider.ExecuteAsync<IAsyncEnumerator<T>>(Expression, cancellationToken).GetAwaiter().GetResult();
         }
-        
 
         public override string ToString()
         {
-            if (Provider is SalesforceProviderBase<T>)
-            {
-                return (Provider as SalesforceProviderBase<T>).ToString(Expression);
-            }
-            else
-            {
-                return this.Expression.ToString();
-            }
+            return Provider is SalesforceProviderBase<T> providerBase
+                ? providerBase.ToString(Expression)
+                : Expression.ToString();
         }
-    
     }
 }

@@ -29,8 +29,10 @@ namespace NetCoreForce.Client
         /// </summary>
         /// <param name="authInfo"></param>
         public ForceClient(AuthInfo authInfo)
-        : this(authInfo.ClientId, authInfo.ClientSecret, authInfo.Username, authInfo.Password, authInfo.TokenRequestEndpoint, authInfo.ApiVersion)
-        { }
+            : this(authInfo.ClientId, authInfo.ClientSecret, authInfo.Username, authInfo.Password,
+                authInfo.TokenRequestEndpoint, authInfo.ApiVersion)
+        {
+        }
 
         /// <summary>
         /// Login to Salesforce using the username-password authentication flow, and initialize the client
@@ -52,10 +54,6 @@ namespace NetCoreForce.Client
             {
                 throw ax.InnerException;
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
 
         /// <summary>
@@ -73,7 +71,7 @@ namespace NetCoreForce.Client
 
         private async Task Login(string clientId, string clientSecret, string username, string password, string tokenRequestEndpoint, string apiVersion = null, HttpClient httpClient = null)
         {
-            AuthenticationClient authClient = new AuthenticationClient(apiVersion);
+            var authClient = new AuthenticationClient(apiVersion);
             await authClient.UsernamePasswordAsync(clientId, clientSecret, username, password, tokenRequestEndpoint);
 
             Initialize(authClient.AccessInfo.InstanceUrl, authClient.ApiVersion, authClient.AccessInfo.AccessToken, httpClient, authClient.AccessInfo);
@@ -122,20 +120,20 @@ namespace NetCoreForce.Client
         public async Task<List<T>> Query<T>(string queryString, bool queryAll = false)
         {
 #if DEBUG
-            Stopwatch sw = new Stopwatch();
+            var sw = new Stopwatch();
             sw.Start();
 #endif
             try
             {
-                Dictionary<string, string> headers = HeaderFormatter.SforceCallOptions(ClientName);
+                var headers = HeaderFormatter.SforceCallOptions(ClientName);
                 var queryUri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString, queryAll);
 
-                JsonClient client = new JsonClient(AccessToken, _httpClient);
+                var client = new JsonClient(AccessToken, _httpClient);
 
-                List<T> results = new List<T>();
+                var results = new List<T>();
 
-                bool done = false;
-                string nextRecordsUrl = string.Empty;
+                var done = false;
+                var nextRecordsUrl = string.Empty;
 
                 //larger result sets will be split into batches (sized according to system and account settings)
                 //if additional batches are indicated retrieve the rest and append to the result set.
@@ -146,11 +144,11 @@ namespace NetCoreForce.Client
                         queryUri = new Uri(new Uri(InstanceUrl), nextRecordsUrl);
                     }
 
-                    QueryResult<T> qr = await client.HttpGetAsync<QueryResult<T>>(queryUri, headers);
+                    var qr = await client.HttpGetAsync<QueryResult<T>>(queryUri, headers);
 
 #if DEBUG
-                    Debug.WriteLine(string.Format("Got query resuts, {0} totalSize, {1} in this batch, final batch: {2}",
-                        qr.TotalSize, qr.Records.Count.ToString(), qr.Done.ToString()));
+                    Debug.WriteLine(
+                        $"Got query resuts, {qr.TotalSize} totalSize, {qr.Records.Count.ToString()} in this batch, final batch: {qr.Done.ToString()}");
 #endif
 
                     results.AddRange(qr.Records);
@@ -171,7 +169,7 @@ namespace NetCoreForce.Client
 
 #if DEBUG
                 sw.Stop();
-                Debug.WriteLine(string.Format("Query results retrieved in {0}ms", sw.ElapsedMilliseconds.ToString()));
+                Debug.WriteLine($"Query results retrieved in {sw.ElapsedMilliseconds.ToString()}ms");
 #endif
 
                 return results;
@@ -192,7 +190,7 @@ namespace NetCoreForce.Client
         /// <returns>result object</returns>
         public async Task<T> QuerySingle<T>(string queryString, bool queryAll = false)
         {
-            List<T> results = await Query<T>(queryString, queryAll);
+            var results = await Query<T>(queryString, queryAll);
 
             if (results != null && results.Count > 1)
             {
@@ -217,7 +215,7 @@ namespace NetCoreForce.Client
         /// <returns><see cref="IAsyncEnumerable{T}"/> of results</returns>
         public IAsyncEnumerable<T> QueryAsync<T>(string queryString, bool queryAll = false, int? batchSize = null)
         {
-            return AsyncEnumerable.CreateEnumerable(() => QueryAsyncEnumerator<T>(queryString, queryAll, batchSize));
+            return AsyncEnumerable.Create(token => QueryAsyncEnumerator<T>(queryString, queryAll, batchSize, token));
         }
 
         /// <summary>
@@ -227,19 +225,21 @@ namespace NetCoreForce.Client
         /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
         /// <param name="queryAll">Optional. True if deleted records are to be included.await Defaults to false.</param>
         /// <param name="batchSize">Optional. Size of result batches between 200 and 2000</param>
+        /// <param name="token">Cancellation token to reject</param>
         /// <returns><see cref="IAsyncEnumerator{T}"/> of results</returns>
-        public IAsyncEnumerator<T> QueryAsyncEnumerator<T>(string queryString, bool queryAll = false, int? batchSize = null)
+        public IAsyncEnumerator<T> QueryAsyncEnumerator<T>(string queryString, bool queryAll = false, int? batchSize = null, 
+            CancellationToken token = default)
         {
-            Dictionary<string, string> headers = new Dictionary<string, string>();
+            var headers = new Dictionary<string, string>();
 
             //Add call options
-            Dictionary<string, string> callOptions = HeaderFormatter.SforceCallOptions(ClientName);
+            var callOptions = HeaderFormatter.SforceCallOptions(ClientName);
             headers.AddRange(callOptions);
 
             //Add query options headers if batch size specified
             if (batchSize.HasValue)
             {
-                Dictionary<string, string> queryOptions = HeaderFormatter.SforceQueryOptions(batchSize.Value);
+                var queryOptions = HeaderFormatter.SforceQueryOptions(batchSize.Value);
                 headers.AddRange(queryOptions);
             }
 
@@ -250,9 +250,9 @@ namespace NetCoreForce.Client
             var done = false;
             var nextRecordsUri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString, queryAll);
 
-            return AsyncEnumerable.CreateEnumerator(MoveNextAsync, Current, Dispose);
+            return AsyncEnumerator.Create(MoveNextAsync, Current, Dispose);
 
-            async Task<bool> MoveNextAsync(CancellationToken token)
+            async ValueTask<bool> MoveNextAsync()
             {
                 if (token.IsCancellationRequested)
                 {
@@ -298,13 +298,14 @@ namespace NetCoreForce.Client
 
             T Current()
             {
-                return currentBatchEnumerator == null ? default(T) : currentBatchEnumerator.Current;
+                return currentBatchEnumerator == null ? default : currentBatchEnumerator.Current;
             }
 
-            void Dispose()
+            ValueTask Dispose()
             {
                 currentBatchEnumerator?.Dispose();
                 jsonClient.Dispose();
+                return default;
             }
         }
 
@@ -315,12 +316,12 @@ namespace NetCoreForce.Client
         /// <param name="queryString">SOQL query string starting with SELECT COUNT() FROM</param>
         /// <param name="queryAll">True if deleted records are to be included</param>
         /// <returns>The <see cref="Task{Int}"/> returning the count</returns>
-        public async Task<int> CountQuery(string queryString, bool queryAll = false)
+        public async ValueTask<int> CountQuery(string queryString, bool queryAll = false)
         {
             // https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql_select_count.htm
             // COUNT() must be the only element in the SELECT list.
 
-            Dictionary<string, string> headers = HeaderFormatter.SforceCallOptions(ClientName);
+            var headers = HeaderFormatter.SforceCallOptions(ClientName);
 
             if (!queryString.Replace(" ", "").ToLower().StartsWith("selectcount()from"))
             {
@@ -344,18 +345,20 @@ namespace NetCoreForce.Client
         {
             try
             {
-                Dictionary<string, string> headers = HeaderFormatter.SforceCallOptions(ClientName);
+                var headers = HeaderFormatter.SforceCallOptions(ClientName);
                 var uri = UriFormatter.Search(InstanceUrl, ApiVersion, searchString);
 
-                JsonClient client = new JsonClient(AccessToken, _httpClient);
+                var client = new JsonClient(AccessToken, _httpClient);
 
-                SearchResult<T> searchResult = await client.HttpGetAsync<SearchResult<T>>(uri, headers);
+                var searchResult = await client.HttpGetAsync<SearchResult<T>>(uri, headers);
 
                 return searchResult;
             }
             catch (Exception ex)
             {
+#if DEBUG
                 Debug.WriteLine("Error searching: " + ex.Message);
+#endif
                 throw ex;
             }
         }
@@ -369,18 +372,20 @@ namespace NetCoreForce.Client
         {
             try
             {
-                Dictionary<string, string> headers = HeaderFormatter.SforceCallOptions(ClientName);
+                var headers = HeaderFormatter.SforceCallOptions(ClientName);
                 var uri = UriFormatter.Search(InstanceUrl, ApiVersion, searchString);
 
-                JsonClient client = new JsonClient(AccessToken, _httpClient);
+                var client = new JsonClient(AccessToken, _httpClient);
 
-                SearchResult<SObjectGeneric> searchResult = await client.HttpGetAsync<SearchResult<SObjectGeneric>>(uri, headers);
+                var searchResult = await client.HttpGetAsync<SearchResult<SObjectGeneric>>(uri, headers);
 
                 return searchResult;
             }
             catch (Exception ex)
             {
+#if DEBUG
                 Debug.WriteLine("Error searching: " + ex.Message);
+#endif
                 throw ex;
             }
         }
@@ -393,10 +398,26 @@ namespace NetCoreForce.Client
         /// <param name="fields">(optional) List of fields to retrieve, if not supplied, all fields are retrieved.</param>
         public async Task<T> GetObjectById<T>(string sObjectTypeName, string objectId, List<string> fields = null)
         {
-            Dictionary<string, string> headers = HeaderFormatter.SforceCallOptions(ClientName);
+            var headers = HeaderFormatter.SforceCallOptions(ClientName);
             var uri = UriFormatter.SObjectRows(InstanceUrl, ApiVersion, sObjectTypeName, objectId, fields);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            var client = new JsonClient(AccessToken, _httpClient);
+
+            return await client.HttpGetAsync<T>(uri, headers);
+        }
+
+        /// <summary>
+        /// Get SObject by External ID
+        /// </summary>
+        /// <param name="sObjectTypeName">SObject name, e.g. "Account"</param>
+        /// <param name="objectId">SObject ID</param>
+        /// <param name="fieldName">External ID name</param>
+        public async Task<T> GetObjectExternalId<T>(string sObjectTypeName, string objectId, string fieldName)
+        {
+            var headers = HeaderFormatter.SforceCallOptions(ClientName);
+            var uri = UriFormatter.SObjectRowsByExternalId(InstanceUrl, ApiVersion, sObjectTypeName, fieldName, objectId);
+
+            var client = new JsonClient(AccessToken, _httpClient);
 
             return await client.HttpGetAsync<T>(uri, headers);
         }
@@ -411,10 +432,10 @@ namespace NetCoreForce.Client
         /// <exception cref="ForceApiException">Thrown when creation fails</exception>
         public async Task<CreateResponse> CreateRecord<T>(string sObjectTypeName, T sObject, Dictionary<string, string> customHeaders = null)
         {
-            Dictionary<string, string> headers = new Dictionary<string, string>();
+            var headers = new Dictionary<string, string>();
 
             //Add call options
-            Dictionary<string, string> callOptions = HeaderFormatter.SforceCallOptions(ClientName);
+            var callOptions = HeaderFormatter.SforceCallOptions(ClientName);
             headers.AddRange(callOptions);
 
             //Add custom headers if specified
@@ -425,7 +446,7 @@ namespace NetCoreForce.Client
 
             var uri = UriFormatter.SObjectBasicInformation(InstanceUrl, ApiVersion, sObjectTypeName);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            var client = new JsonClient(AccessToken, _httpClient);
 
             return await client.HttpPostAsync<CreateResponse>(sObject, uri, headers);
         }
@@ -441,10 +462,10 @@ namespace NetCoreForce.Client
         /// <exception cref="ForceApiException">Thrown when update fails</exception>
         public async Task UpdateRecord<T>(string sObjectTypeName, string objectId, T sObject, Dictionary<string, string> customHeaders = null)
         {
-            Dictionary<string, string> headers = new Dictionary<string, string>();
+            var headers = new Dictionary<string, string>();
 
             //Add call options
-            Dictionary<string, string> callOptions = HeaderFormatter.SforceCallOptions(ClientName);
+            var callOptions = HeaderFormatter.SforceCallOptions(ClientName);
             headers.AddRange(callOptions);
 
             //Add custom headers if specified
@@ -455,11 +476,9 @@ namespace NetCoreForce.Client
 
             var uri = UriFormatter.SObjectRows(InstanceUrl, ApiVersion, sObjectTypeName, objectId);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            var client = new JsonClient(AccessToken, _httpClient);
 
             await client.HttpPatchAsync<object>(sObject, uri, headers);
-
-            return;
         }
 
         /// <summary>
@@ -474,10 +493,10 @@ namespace NetCoreForce.Client
         /// <exception cref="ForceApiException">Thrown when request fails</exception>
         public async Task<CreateResponse> InsertOrUpdateRecord<T>(string sObjectTypeName, string fieldName, string fieldValue, T sObject, Dictionary<string, string> customHeaders = null)
         {
-            Dictionary<string, string> headers = new Dictionary<string, string>();
+            var headers = new Dictionary<string, string>();
 
             //Add call options
-            Dictionary<string, string> callOptions = HeaderFormatter.SforceCallOptions(ClientName);
+            var callOptions = HeaderFormatter.SforceCallOptions(ClientName);
             headers.AddRange(callOptions);
 
             //Add custom headers if specified
@@ -488,7 +507,7 @@ namespace NetCoreForce.Client
 
             var uri = UriFormatter.SObjectRowsByExternalId(InstanceUrl, ApiVersion, sObjectTypeName, fieldName, fieldValue);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            var client = new JsonClient(AccessToken, _httpClient);
 
             return await client.HttpPatchAsync<CreateResponse>(sObject, uri, headers);
         }
@@ -502,14 +521,12 @@ namespace NetCoreForce.Client
         /// <exception cref="ForceApiException">Thrown when update fails</exception>
         public async Task DeleteRecord(string sObjectTypeName, string objectId)
         {
-            Dictionary<string, string> headers = HeaderFormatter.SforceCallOptions(ClientName);
+            var headers = HeaderFormatter.SforceCallOptions(ClientName);
             var uri = UriFormatter.SObjectRows(InstanceUrl, ApiVersion, sObjectTypeName, objectId);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            var client = new JsonClient(AccessToken, _httpClient);
 
             await client.HttpDeleteAsync<object>(uri, headers);
-
-            return;
         }
 
         #region metadata
@@ -522,7 +539,7 @@ namespace NetCoreForce.Client
         {
             var uri = UriFormatter.Limits(InstanceUrl, ApiVersion);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            var client = new JsonClient(AccessToken, _httpClient);
 
             return await client.HttpGetAsync<OrganizationLimits>(uri);
         }
@@ -557,7 +574,7 @@ namespace NetCoreForce.Client
 
             var uri = UriFormatter.Versions(currentInstanceUrl);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            var client = new JsonClient(AccessToken, _httpClient);
 
             return await client.HttpGetAsync<List<SalesforceVersion>>(uri: uri, deserializeResponse: deserializeResponse);
         }
@@ -570,7 +587,7 @@ namespace NetCoreForce.Client
         /// <returns>UserInfo</returns>
         public async Task<UserInfo> GetUserInfo(string identityUrl)
         {
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            var client = new JsonClient(AccessToken, _httpClient);
 
             return await client.HttpGetAsync<UserInfo>(new Uri(identityUrl));
         }
@@ -583,10 +600,10 @@ namespace NetCoreForce.Client
         /// <returns>Returns SObjectMetadataBasic with basic object metadata and a list of recently created items.</returns>
         public async Task<SObjectBasicInfo> GetObjectBasicInfo(string objectTypeName)
         {
-            Dictionary<string, string> headers = HeaderFormatter.SforceCallOptions(ClientName);
+            var headers = HeaderFormatter.SforceCallOptions(ClientName);
             var uri = UriFormatter.SObjectBasicInformation(InstanceUrl, ApiVersion, objectTypeName);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            var client = new JsonClient(AccessToken, _httpClient);
 
             return await client.HttpGetAsync<SObjectBasicInfo>(uri, headers);
         }
@@ -601,7 +618,7 @@ namespace NetCoreForce.Client
         {
             var uri = UriFormatter.SObjectDescribe(InstanceUrl, ApiVersion, objectTypeName);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            var client = new JsonClient(AccessToken, _httpClient);
 
             return await client.HttpGetAsync<SObjectDescribeFull>(uri);
         }
@@ -615,12 +632,11 @@ namespace NetCoreForce.Client
         {
             var uri = UriFormatter.DescribeGlobal(InstanceUrl, ApiVersion);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            var client = new JsonClient(AccessToken, _httpClient);
 
             return await client.HttpGetAsync<DescribeGlobal>(uri);
         }
 
         #endregion
-
     }
 }

@@ -2,7 +2,6 @@
 // Custom fields included: False
 // Relationship objects included: True
 
-using System;
 using NetCoreForce.Client.Models;
 using NetCoreForce.Client.Attributes;
 using Newtonsoft.Json;
@@ -29,7 +28,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Id { get; set; }
 
 		///<summary>
@@ -39,7 +38,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "durableId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string DurableId { get; set; }
 
 		///<summary>
@@ -49,7 +48,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "site")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Site { get; set; }
 
 		///<summary>
@@ -59,7 +58,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isPrechatEnabled")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsPrechatEnabled { get; set; }
 
 		///<summary>
@@ -69,7 +68,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "primaryColor")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string PrimaryColor { get; set; }
 
 		///<summary>
@@ -79,7 +78,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "secondaryColor")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string SecondaryColor { get; set; }
 
 		///<summary>
@@ -89,7 +88,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "contrastPrimaryColor")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ContrastPrimaryColor { get; set; }
 
 		///<summary>
@@ -99,7 +98,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "navBarColor")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string NavBarColor { get; set; }
 
 		///<summary>
@@ -109,7 +108,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "font")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Font { get; set; }
 
 		///<summary>
@@ -119,7 +118,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "flowDeveloperName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string FlowDeveloperName { get; set; }
 
 	}

@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Net;
-using System.Net.Http;
 using System.IO;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using NetCoreForce.Client;
 using NetCoreForce.Client.Models;
 using NetCoreForce.Models;
 using System.Dynamic;
-using System.Diagnostics;
+using System.Reflection;
+using System.Threading;
 using Newtonsoft.Json;
 
 namespace SampleConsole
@@ -74,17 +72,13 @@ namespace SampleConsole
                 IAsyncEnumerable<SfContact> contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id, Name FROM Contact ", batchSize: 200);
 
                 // Get the enumerator, in a using block for proper disposal
-                using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
-                {
-                    // MoveNext() will execute the query and get the first batch of results.
-                    // Once the inital result batch has been exhausted, the remaining batches, if any, will be retrieved.
-                    while (await contactsEnumerator.MoveNext())
-                    {
-                        SfContact contact = contactsEnumerator.Current;
-                        // process your results
-                    }
-                }
+                var contactsEnumerator = contactsEnumerable.GetAsyncEnumerator(CancellationToken.None);
 
+                while (await contactsEnumerator.MoveNextAsync(CancellationToken.None))
+                {
+                    SfContact contact = contactsEnumerator.Current;
+                    // process your results
+                }
             }
             catch (ForceApiException ex)
             {
@@ -111,7 +105,7 @@ namespace SampleConsole
             {
                 if (string.IsNullOrEmpty(filePath))
                 {
-                    string executabledirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+                    string executabledirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
                     string fileName = "credentials_dev.json";
                     filePath = Path.Combine(executabledirectory, fileName);
                 }

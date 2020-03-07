@@ -1,5 +1,4 @@
 using System;
-using System.Dynamic;
 using Newtonsoft.Json;
 using NetCoreForce.Client.Attributes;
 
@@ -27,7 +26,7 @@ namespace NetCoreForce.Client.Models
         /// Custom: False
         /// </summary>
         [JsonProperty(PropertyName = "id")]
-        [Updateable(false), Createable(false)]
+        [Updateable(false), Creatable(false)]
         public string Id { get; set; }
 
 
@@ -39,7 +38,7 @@ namespace NetCoreForce.Client.Models
         /// </summary>
         /// <returns></returns>
         [JsonProperty(PropertyName = "createdById")]
-        [Updateable(false), Createable(false)]
+        [Updateable(false), Creatable(false)]
         public string CreatedById { get; set; }
 
         /// <summary>
@@ -47,7 +46,7 @@ namespace NetCoreForce.Client.Models
         /// SF Type: datetime
         /// </summary> 
         [JsonProperty(PropertyName = "createdDate")]
-        [Updateable(false), Createable(false)]
+        [Updateable(false), Creatable(false)]
         public DateTimeOffset? CreatedDate { get; set; }
 
         /// <summary>
@@ -56,7 +55,7 @@ namespace NetCoreForce.Client.Models
         /// </summary>
         /// <returns></returns>
         [JsonProperty(PropertyName = "lastModifiedById")]
-        [Updateable(false), Createable(false)]
+        [Updateable(false), Creatable(false)]
         public string LastModifiedById { get; set; }
 
         /// <summary>
@@ -64,7 +63,7 @@ namespace NetCoreForce.Client.Models
         /// SF Type: datetime
         /// </summary> 
         [JsonProperty(PropertyName = "lastModifiedDate")]
-        [Updateable(false), Createable(false)]
+        [Updateable(false), Creatable(false)]
         public DateTimeOffset? LastModifiedDate { get; set; }
 
         /// <summary>
@@ -72,7 +71,7 @@ namespace NetCoreForce.Client.Models
         /// SF Type: datetime
         /// </summary> 
         [JsonProperty(PropertyName = "systemModstamp")]
-        [Updateable(false), Createable(false)]
+        [Updateable(false), Creatable(false)]
         public DateTimeOffset? SystemModstamp { get; set; }
 
         

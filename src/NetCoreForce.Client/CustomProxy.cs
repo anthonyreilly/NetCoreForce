@@ -8,26 +8,16 @@ namespace NetCoreForce.Client
     /// </summary>
     public class CustomProxy : IWebProxy
     {
-        private Uri _proxyUri;
+        private readonly Uri _proxyUri;
 
-        public Uri GetProxy(Uri destination)
-        {
-            return _proxyUri;
-        }
-        public bool IsBypassed(Uri host)
-        {
-            return false;
-        }
+        public CustomProxy(string proxyUrl) => _proxyUri = new Uri(proxyUrl);
+
+        public CustomProxy(Uri proxyUri) => _proxyUri = proxyUri;
+
         public ICredentials Credentials { get; set; }
 
-        public CustomProxy(string proxyUrl)
-        {
-            this._proxyUri = new Uri(proxyUrl);
-        }
+        public bool IsBypassed(Uri host) => false;
 
-        public CustomProxy(Uri proxyUri)
-        {
-            this._proxyUri = proxyUri;
-        }
+        public Uri GetProxy(Uri destination) => _proxyUri;
     }
 }

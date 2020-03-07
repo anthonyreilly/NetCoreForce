@@ -24,7 +24,7 @@ namespace NetCoreForce.Client
         {
             if (value.Length > 0)
             {
-                char[] array = value.ToCharArray();
+                var array = value.ToCharArray();
                 array[0] = char.ToUpper(array[0]);
                 return new string(array);
             }
@@ -38,7 +38,7 @@ namespace NetCoreForce.Client
         {
             if (value.Length > 0)
             {
-                char[] array = value.ToCharArray();
+                var array = value.ToCharArray();
                 array[0] = char.ToLower(array[0]);
                 return new string(array);
             }
@@ -50,7 +50,7 @@ namespace NetCoreForce.Client
         /// </summary>
         public static void AddRange<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, Dictionary<TKey, TValue> range)
         {
-            foreach (TKey key in range.Keys)
+            foreach (var key in range.Keys)
             { dictionary.Add(key, range[key]); }
         }
     }

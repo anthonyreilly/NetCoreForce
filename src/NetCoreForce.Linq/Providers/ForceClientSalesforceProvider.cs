@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using NetCoreForce.Client;
 using NetCoreForce.Linq.Conventions.Naming;
@@ -15,14 +16,14 @@ namespace NetCoreForce.Linq.Providers
 
         public ForceClient ForceClient { get; }
 
-        protected override Task<int> ProduceCountAsync(string cmd)
+        protected override ValueTask<int> ProduceCountAsync(string cmd)
         {
             return ForceClient.CountQuery(cmd, queryAll:false);
         }
 
-        protected override IAsyncEnumerator<T> ProduceAsyncEnumerator(string cmd)
+        protected override IAsyncEnumerator<T> ProduceAsyncEnumerator(string cmd, CancellationToken token)
         {
-            return this.ForceClient.QueryAsyncEnumerator<T>(cmd, queryAll:false);
+            return this.ForceClient.QueryAsyncEnumerator<T>(cmd, queryAll:false, token: token);
         }
     }
 }

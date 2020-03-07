@@ -1,18 +1,6 @@
-using System;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NetCoreForce.Client.Serializer;
-using NetCoreForce.Client.Models;
 
 namespace NetCoreForce.Client
 {
@@ -29,12 +17,12 @@ namespace NetCoreForce.Client
                 handler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
             }
 
-            if(!string.IsNullOrEmpty(proxyUrl))
+            if (!string.IsNullOrEmpty(proxyUrl))
             {
                 handler.Proxy = new CustomProxy(proxyUrl);
             }
 
-            HttpClient httpClient = new HttpClient(handler);
+            var httpClient = new HttpClient(handler);
 
             if (useCompression && handler.SupportsAutomaticDecompression)
             {

@@ -75,20 +75,19 @@ namespace NetCoreForce.Client.Models
         {
             get
             {
-                if(this.IssuedAt.HasValue && this.IssuedAt > 9999999999)
+                if (this.IssuedAt.HasValue && this.IssuedAt > 9999999999)
                 {
                     // timestamp includes milliseconds
                     return DateTimeOffset.FromUnixTimeMilliseconds(this.IssuedAt.Value);
                 }
-                else if(this.IssuedAt.HasValue && this.IssuedAt > 0)
+
+                if (this.IssuedAt.HasValue && this.IssuedAt > 0)
                 {
                     // timestamp in seconds
                     return DateTimeOffset.FromUnixTimeSeconds(this.IssuedAt.Value);
                 }
-                else
-                {
-                    return null;
-                }
+
+                return null;
             }
         }
     }

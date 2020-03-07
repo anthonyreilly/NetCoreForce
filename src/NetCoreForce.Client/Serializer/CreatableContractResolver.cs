@@ -5,16 +5,16 @@ using NetCoreForce.Client.Attributes;
 
 namespace NetCoreForce.Client.Serializer
 {
-    public class CreateableContractResolver : DefaultContractResolver
+    public class CreatableContractResolver : DefaultContractResolver
     {
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization serialization)
         {
             var property = base.CreateProperty(member, serialization);
 
-            var createableAttribute = member.GetCustomAttribute<CreateableAttribute>();
-            if (createableAttribute != null)
+            var creatableAttribute = member.GetCustomAttribute<CreatableAttribute>();
+            if (creatableAttribute != null)
             {
-                    property.ShouldSerialize = x => createableAttribute.Createable;
+                property.ShouldSerialize = x => creatableAttribute.Creatable;
             }
 
             return property;

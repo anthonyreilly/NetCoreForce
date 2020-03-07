@@ -2,7 +2,6 @@
 // Custom fields included: False
 // Relationship objects included: True
 
-using System;
 using NetCoreForce.Client.Models;
 using NetCoreForce.Client.Attributes;
 using Newtonsoft.Json;
@@ -29,7 +28,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Id { get; set; }
 
 		///<summary>
@@ -39,7 +38,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "externalId")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string ExternalId { get; set; }
 
 		///<summary>
@@ -49,7 +48,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "validatedFromAddress")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string ValidatedFromAddress { get; set; }
 
 		///<summary>
@@ -59,7 +58,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "toAddress")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string ToAddress { get; set; }
 
 		///<summary>
@@ -69,7 +68,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "ccAddress")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string CcAddress { get; set; }
 
 		///<summary>
@@ -79,7 +78,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "bccAddress")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string BccAddress { get; set; }
 
 		///<summary>
@@ -89,7 +88,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "subject")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string Subject { get; set; }
 
 		///<summary>
@@ -99,7 +98,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "textBody")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string TextBody { get; set; }
 
 		///<summary>
@@ -109,7 +108,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "htmlBody")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string HtmlBody { get; set; }
 
 		///<summary>
@@ -119,7 +118,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "relatedToId")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string RelatedToId { get; set; }
 
 		///<summary>
@@ -129,7 +128,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "whoId")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string WhoId { get; set; }
 
 		///<summary>
@@ -139,7 +138,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "emailTemplateId")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string EmailTemplateId { get; set; }
 
 		///<summary>
@@ -147,7 +146,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: EmailTemplate</para>
 		///</summary>
 		[JsonProperty(PropertyName = "emailTemplate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfEmailTemplate EmailTemplate { get; set; }
 
 	}

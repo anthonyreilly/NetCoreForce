@@ -29,7 +29,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Id { get; set; }
 
 		///<summary>
@@ -39,7 +39,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDeleted")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
@@ -49,7 +49,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "name")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public string Name { get; set; }
 
 		///<summary>
@@ -59,7 +59,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? CreatedDate { get; set; }
 
 		///<summary>
@@ -69,7 +69,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdById")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string CreatedById { get; set; }
 
 		///<summary>
@@ -77,7 +77,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: CreatedBy</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdBy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser CreatedBy { get; set; }
 
 		///<summary>
@@ -87,7 +87,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? LastModifiedDate { get; set; }
 
 		///<summary>
@@ -97,7 +97,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedById")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string LastModifiedById { get; set; }
 
 		///<summary>
@@ -105,7 +105,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: LastModifiedBy</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedBy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser LastModifiedBy { get; set; }
 
 		///<summary>
@@ -115,7 +115,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "systemModstamp")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
@@ -125,7 +125,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "leadId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string LeadId { get; set; }
 
 		///<summary>
@@ -133,7 +133,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: Lead</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lead")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfLead Lead { get; set; }
 
 		///<summary>
@@ -143,7 +143,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastMatchedDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? LastMatchedDate { get; set; }
 
 		///<summary>
@@ -153,7 +153,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastStatusChangedDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? LastStatusChangedDate { get; set; }
 
 		///<summary>
@@ -163,7 +163,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastStatusChangedById")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string LastStatusChangedById { get; set; }
 
 		///<summary>
@@ -171,7 +171,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: LastStatusChangedBy</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastStatusChangedBy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser LastStatusChangedBy { get; set; }
 
 		///<summary>
@@ -181,7 +181,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isInactive")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsInactive { get; set; }
 
 		///<summary>
@@ -191,7 +191,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "firstName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string FirstName { get; set; }
 
 		///<summary>
@@ -201,7 +201,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string LastName { get; set; }
 
 		///<summary>
@@ -211,7 +211,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "email")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Email { get; set; }
 
 		///<summary>
@@ -221,7 +221,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "phone")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Phone { get; set; }
 
 		///<summary>
@@ -231,7 +231,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "street")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Street { get; set; }
 
 		///<summary>
@@ -241,7 +241,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "city")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string City { get; set; }
 
 		///<summary>
@@ -251,7 +251,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "state")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string State { get; set; }
 
 		///<summary>
@@ -261,7 +261,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "postalCode")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string PostalCode { get; set; }
 
 		///<summary>
@@ -271,7 +271,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "country")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Country { get; set; }
 
 		///<summary>
@@ -281,7 +281,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "latitude")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public double? Latitude { get; set; }
 
 		///<summary>
@@ -291,7 +291,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "longitude")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public double? Longitude { get; set; }
 
 		///<summary>
@@ -301,7 +301,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "geocodeAccuracy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string GeocodeAccuracy { get; set; }
 
 		///<summary>
@@ -311,7 +311,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "address")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public Address Address { get; set; }
 
 		///<summary>
@@ -321,7 +321,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "title")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Title { get; set; }
 
 		///<summary>
@@ -331,7 +331,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "annualRevenue")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public decimal? AnnualRevenue { get; set; }
 
 		///<summary>
@@ -341,7 +341,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "numberOfEmployees")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public int? NumberOfEmployees { get; set; }
 
 		///<summary>
@@ -351,7 +351,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "industry")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Industry { get; set; }
 
 		///<summary>
@@ -361,7 +361,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "companyName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string CompanyName { get; set; }
 
 		///<summary>
@@ -371,7 +371,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "companyDunsNumber")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string CompanyDunsNumber { get; set; }
 
 		///<summary>
@@ -381,7 +381,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "contactStatusDataDotCom")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string ContactStatusDataDotCom { get; set; }
 
 		///<summary>
@@ -391,7 +391,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isReviewedName")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsReviewedName { get; set; }
 
 		///<summary>
@@ -401,7 +401,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isReviewedEmail")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsReviewedEmail { get; set; }
 
 		///<summary>
@@ -411,7 +411,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isReviewedPhone")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsReviewedPhone { get; set; }
 
 		///<summary>
@@ -421,7 +421,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isReviewedAddress")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsReviewedAddress { get; set; }
 
 		///<summary>
@@ -431,7 +431,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isReviewedTitle")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsReviewedTitle { get; set; }
 
 		///<summary>
@@ -441,7 +441,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isReviewedAnnualRevenue")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsReviewedAnnualRevenue { get; set; }
 
 		///<summary>
@@ -451,7 +451,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isReviewedNumberOfEmployees")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsReviewedNumberOfEmployees { get; set; }
 
 		///<summary>
@@ -461,7 +461,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isReviewedIndustry")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsReviewedIndustry { get; set; }
 
 		///<summary>
@@ -471,7 +471,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isReviewedCompanyName")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsReviewedCompanyName { get; set; }
 
 		///<summary>
@@ -481,7 +481,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isReviewedCompanyDunsNumber")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsReviewedCompanyDunsNumber { get; set; }
 
 		///<summary>
@@ -491,7 +491,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isReviewedDandBCompanyDunsNumber")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsReviewedDandBCompanyDunsNumber { get; set; }
 
 		///<summary>
@@ -501,7 +501,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentFirstName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentFirstName { get; set; }
 
 		///<summary>
@@ -511,7 +511,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentLastName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentLastName { get; set; }
 
 		///<summary>
@@ -521,7 +521,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentEmail")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentEmail { get; set; }
 
 		///<summary>
@@ -531,7 +531,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentPhone")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentPhone { get; set; }
 
 		///<summary>
@@ -541,7 +541,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentStreet")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentStreet { get; set; }
 
 		///<summary>
@@ -551,7 +551,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentCity")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentCity { get; set; }
 
 		///<summary>
@@ -561,7 +561,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentState")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentState { get; set; }
 
 		///<summary>
@@ -571,7 +571,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentPostalCode")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentPostalCode { get; set; }
 
 		///<summary>
@@ -581,7 +581,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentCountry")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentCountry { get; set; }
 
 		///<summary>
@@ -591,7 +591,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentTitle")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentTitle { get; set; }
 
 		///<summary>
@@ -601,7 +601,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentAnnualRevenue")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentAnnualRevenue { get; set; }
 
 		///<summary>
@@ -611,7 +611,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentNumberOfEmployees")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentNumberOfEmployees { get; set; }
 
 		///<summary>
@@ -621,7 +621,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentIndustry")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentIndustry { get; set; }
 
 		///<summary>
@@ -631,7 +631,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentCompanyName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentCompanyName { get; set; }
 
 		///<summary>
@@ -641,7 +641,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentCompanyDunsNumber")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentCompanyDunsNumber { get; set; }
 
 		///<summary>
@@ -651,7 +651,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentDandBCompanyDunsNumber")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentDandBCompanyDunsNumber { get; set; }
 
 		///<summary>
@@ -661,7 +661,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentStateCode")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentStateCode { get; set; }
 
 		///<summary>
@@ -671,7 +671,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDifferentCountryCode")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDifferentCountryCode { get; set; }
 
 		///<summary>
@@ -681,7 +681,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "cleanedByJob")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? CleanedByJob { get; set; }
 
 		///<summary>
@@ -691,7 +691,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "cleanedByUser")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? CleanedByUser { get; set; }
 
 		///<summary>
@@ -701,7 +701,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "dandBCompanyDunsNumber")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string DandBCompanyDunsNumber { get; set; }
 
 		///<summary>
@@ -711,7 +711,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "dataDotComCompanyId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string DataDotComCompanyId { get; set; }
 
 		///<summary>
@@ -721,7 +721,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isFlaggedWrongName")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsFlaggedWrongName { get; set; }
 
 		///<summary>
@@ -731,7 +731,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isFlaggedWrongEmail")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsFlaggedWrongEmail { get; set; }
 
 		///<summary>
@@ -741,7 +741,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isFlaggedWrongPhone")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsFlaggedWrongPhone { get; set; }
 
 		///<summary>
@@ -751,7 +751,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isFlaggedWrongAddress")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsFlaggedWrongAddress { get; set; }
 
 		///<summary>
@@ -761,7 +761,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isFlaggedWrongTitle")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsFlaggedWrongTitle { get; set; }
 
 		///<summary>
@@ -771,7 +771,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isFlaggedWrongAnnualRevenue")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsFlaggedWrongAnnualRevenue { get; set; }
 
 		///<summary>
@@ -781,7 +781,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isFlaggedWrongNumberOfEmployees")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsFlaggedWrongNumberOfEmployees { get; set; }
 
 		///<summary>
@@ -791,7 +791,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isFlaggedWrongIndustry")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsFlaggedWrongIndustry { get; set; }
 
 		///<summary>
@@ -801,7 +801,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isFlaggedWrongCompanyName")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsFlaggedWrongCompanyName { get; set; }
 
 		///<summary>
@@ -811,7 +811,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isFlaggedWrongCompanyDunsNumber")]
-		[Updateable(true), Createable(false)]
+		[Updateable(true), Creatable(false)]
 		public bool? IsFlaggedWrongCompanyDunsNumber { get; set; }
 
 		///<summary>
@@ -821,7 +821,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "dataDotComId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string DataDotComId { get; set; }
 
 	}

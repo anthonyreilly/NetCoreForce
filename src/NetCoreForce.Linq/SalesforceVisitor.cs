@@ -58,7 +58,7 @@ namespace NetCoreForce.Linq
             var sb = new StringBuilder();
             string selectString;
 
-            if (QueryType == QueryTypeEnum.Any || QueryType == QueryTypeEnum.Count)
+            if (QueryType == QueryTypeEnum.AnyAsync || QueryType == QueryTypeEnum.CountAsync)
             {
                 selectString = "COUNT()";
             }
@@ -132,43 +132,43 @@ namespace NetCoreForce.Linq
                 switch (methodName)
                 {
                     case nameof(AsyncQueryable.Take):
-                        Take = (int) ((m.Arguments[1] as ConstantExpression).Value);
+                        Take = (int) (((ConstantExpression) m.Arguments[1]).Value);
                         this.Visit(m.Arguments[0]);
                         break;
 
                     case nameof(AsyncQueryable.Skip):
-                        Skip = (int) ((m.Arguments[1] as ConstantExpression).Value);
+                        Skip = (int) (((ConstantExpression) m.Arguments[1]).Value);
                         this.Visit(m.Arguments[0]);
                         break;
 
-                    case nameof(AsyncQueryable.First):
-                    case nameof(AsyncQueryable.FirstOrDefault):
-                    case nameof(AsyncQueryable.Single):
-                    case nameof(AsyncQueryable.SingleOrDefault):
-                        
+                    case nameof(AsyncQueryable.FirstAsync):
+                    case nameof(AsyncQueryable.FirstOrDefaultAsync):
+                    case nameof(AsyncQueryable.SingleAsync):
+                    case nameof(AsyncQueryable.SingleOrDefaultAsync):
                         QueryType = (QueryTypeEnum) Enum.Parse(typeof(QueryTypeEnum), methodName);
                         Take = 2;
-                        if (m.Arguments.Count > 1)
+                        
+                        if (m.Arguments.Count > 2)
                         {
-                            WhereExpression.Insert(0, (this.Visit(m.Arguments[1]) as ConstantExpression).Value.ToString());
+                            WhereExpression.Insert(0, ((ConstantExpression) this.Visit(m.Arguments[1])).Value.ToString());
                         }
 
                         this.Visit(m.Arguments[0]);
                         break;
                         
-                    case nameof(AsyncQueryable.ToList):
-                        QueryType = QueryTypeEnum.List;
+                    case nameof(AsyncQueryable.ToListAsync):
+                        QueryType = QueryTypeEnum.ListAsync;
 
                         this.Visit(m.Arguments[0]);
 
                         break;
 
-                    case nameof(AsyncQueryable.Any):
-                    case nameof(AsyncQueryable.Count):
+                    case nameof(AsyncQueryable.AnyAsync):
+                    case nameof(AsyncQueryable.CountAsync):
                         QueryType = (QueryTypeEnum) Enum.Parse(typeof(QueryTypeEnum), methodName);
-                        if (m.Arguments.Count > 1)
+                        if (m.Arguments.Count > 2)
                         {
-                            WhereExpression.Insert(0, (this.Visit(m.Arguments[1]) as ConstantExpression).Value.ToString());
+                            WhereExpression.Insert(0, ((ConstantExpression) this.Visit(m.Arguments[0])).Value.ToString());
                         }
 
                         this.Visit(m.Arguments[0]);
@@ -180,7 +180,7 @@ namespace NetCoreForce.Linq
                         break;
 
                     case nameof(AsyncQueryable.Where):
-                        WhereExpression.Insert(0, (this.Visit(m.Arguments[1]) as ConstantExpression).Value.ToString());
+                        WhereExpression.Insert(0, ((ConstantExpression) this.Visit(m.Arguments[1])).Value.ToString());
                         this.Visit(m.Arguments[0]);
                         break;
 
@@ -285,9 +285,9 @@ namespace NetCoreForce.Linq
                 case ExpressionType.Quote:
                     return this.Visit(u.Operand);
                 case ExpressionType.Not:
-                    return Expression.Constant((this.Visit(u.Operand) as ConstantExpression).Value + " = false");
+                    return Expression.Constant(((ConstantExpression) this.Visit(u.Operand)).Value + " = false");
                 default:
-                    throw new NotSupportedException(string.Format("The unary operator '{0}' is not supported", u.NodeType));
+                    throw new NotSupportedException($"The unary operator '{u.NodeType}' is not supported");
             }
         }
 

@@ -29,7 +29,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Id { get; set; }
 
 		///<summary>
@@ -66,7 +66,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "name")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Name { get; set; }
 
 		///<summary>
@@ -184,7 +184,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "address")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public Address Address { get; set; }
 
 		///<summary>
@@ -329,7 +329,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "badgeText")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string BadgeText { get; set; }
 
 		///<summary>
@@ -364,7 +364,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: UserRole</para>
 		///</summary>
 		[JsonProperty(PropertyName = "userRole")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUserRole UserRole { get; set; }
 
 		///<summary>
@@ -417,7 +417,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: Profile</para>
 		///</summary>
 		[JsonProperty(PropertyName = "profile")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfProfile Profile { get; set; }
 
 		///<summary>
@@ -427,7 +427,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "userType")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string UserType { get; set; }
 
 		///<summary>
@@ -471,7 +471,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: Manager</para>
 		///</summary>
 		[JsonProperty(PropertyName = "manager")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser Manager { get; set; }
 
 		///<summary>
@@ -481,7 +481,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastLoginDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? LastLoginDate { get; set; }
 
 		///<summary>
@@ -491,7 +491,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastPasswordChangeDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? LastPasswordChangeDate { get; set; }
 
 		///<summary>
@@ -501,7 +501,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? CreatedDate { get; set; }
 
 		///<summary>
@@ -511,7 +511,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdById")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string CreatedById { get; set; }
 
 		///<summary>
@@ -519,7 +519,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: CreatedBy</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdBy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser CreatedBy { get; set; }
 
 		///<summary>
@@ -529,7 +529,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? LastModifiedDate { get; set; }
 
 		///<summary>
@@ -539,7 +539,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedById")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string LastModifiedById { get; set; }
 
 		///<summary>
@@ -547,7 +547,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: LastModifiedBy</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedBy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser LastModifiedBy { get; set; }
 
 		///<summary>
@@ -557,7 +557,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "systemModstamp")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
@@ -567,7 +567,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "offlineTrialExpirationDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? OfflineTrialExpirationDate { get; set; }
 
 		///<summary>
@@ -577,7 +577,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "offlinePdaTrialExpirationDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? OfflinePdaTrialExpirationDate { get; set; }
 
 		///<summary>
@@ -1343,7 +1343,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "contactId")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Creatable(true)]
 		public string ContactId { get; set; }
 
 		///<summary>
@@ -1351,7 +1351,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: Contact</para>
 		///</summary>
 		[JsonProperty(PropertyName = "contact")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfContact Contact { get; set; }
 
 		///<summary>
@@ -1361,7 +1361,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "accountId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string AccountId { get; set; }
 
 		///<summary>
@@ -1369,7 +1369,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: Account</para>
 		///</summary>
 		[JsonProperty(PropertyName = "account")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfAccount Account { get; set; }
 
 		///<summary>
@@ -1415,7 +1415,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "fullPhotoUrl")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string FullPhotoUrl { get; set; }
 
 		///<summary>
@@ -1425,7 +1425,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "smallPhotoUrl")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string SmallPhotoUrl { get; set; }
 
 		///<summary>
@@ -1435,7 +1435,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isExtIndicatorVisible")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsExtIndicatorVisible { get; set; }
 
 		///<summary>
@@ -1445,7 +1445,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "outOfOfficeMessage")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string OutOfOfficeMessage { get; set; }
 
 		///<summary>
@@ -1455,7 +1455,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "mediumPhotoUrl")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string MediumPhotoUrl { get; set; }
 
 		///<summary>
@@ -1492,7 +1492,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastViewedDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? LastViewedDate { get; set; }
 
 		///<summary>
@@ -1502,7 +1502,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastReferencedDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? LastReferencedDate { get; set; }
 
 		///<summary>
@@ -1512,7 +1512,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "bannerPhotoUrl")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string BannerPhotoUrl { get; set; }
 
 		///<summary>
@@ -1522,7 +1522,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "smallBannerPhotoUrl")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string SmallBannerPhotoUrl { get; set; }
 
 		///<summary>
@@ -1532,7 +1532,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "mediumBannerPhotoUrl")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string MediumBannerPhotoUrl { get; set; }
 
 		///<summary>
@@ -1542,7 +1542,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isProfilePhotoActive")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsProfilePhotoActive { get; set; }
 
 	}

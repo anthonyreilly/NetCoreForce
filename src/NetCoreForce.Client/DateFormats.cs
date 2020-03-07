@@ -9,31 +9,19 @@ namespace NetCoreForce.Client
     /// </summary>
     public static class DateFormats
     {
-        const string _FullFormat = "yyyy-MM-ddTHH:mm:sszzz";
-        const string _FullFormatZulu = "yyyy-MM-ddTHH:mm:ssZ";
-        const string _DateOnlyFormat = "yyyy-MM-dd";
+        private const string _FullFormat = "yyyy-MM-ddTHH:mm:sszzz";
+        private const string _FullFormatZulu = "yyyy-MM-ddTHH:mm:ssZ";
+        private const string _DateOnlyFormat = "yyyy-MM-dd";
 
         /// <summary>
         /// Date, time, and time zone offset
         /// </summary>
-        public static string FullDateFormatString
-        {
-            get
-            {
-                return _FullFormat;
-            }
-        }
+        public static string FullDateFormatString => _FullFormat;
 
         /// <summary>
         /// Date only
         /// </summary>
-        public static string DateOnlyFormatString
-        {
-            get
-            {
-                return _DateOnlyFormat;
-            }
-        }
+        public static string DateOnlyFormatString => _DateOnlyFormat;
 
         public static string FullDateString(DateTimeOffset dto)
         {
@@ -53,7 +41,7 @@ namespace NetCoreForce.Client
 
         public static string FullDateString(DateTime dt, TimeSpan offset)
         {
-            DateTimeOffset dto = new DateTimeOffset(dt, offset);
+            var dto = new DateTimeOffset(dt, offset);
             return dto.ToString(_FullFormat);
         }
 
@@ -67,6 +55,4 @@ namespace NetCoreForce.Client
             return dt.ToString(_DateOnlyFormat);
         }
     }
-
-
 }

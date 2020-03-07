@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Client.Models
 {
     /// <summary>
-    ///  SObject Describe resource reponse, for all sobject metadata
+    ///  SObject Describe resource response, for all sobject metadata
     /// </summary>
     public class SObjectDescribeFull : SObjectDescribeBasic
     {
@@ -47,15 +47,14 @@ namespace NetCoreForce.Client.Models
         /// <returns>Returns empty list if none found</returns>
         public List<PickListValue> GetPicklistValues(string fieldName)
         {
-            List<PickListValue> values = new List<PickListValue>();
+            var values = new List<PickListValue>();
 
-            if(Fields != null && Fields.Count > 0)
+            if (Fields != null && Fields.Count > 0)
             {
                 values =  Fields.Where(f => f.Name == fieldName).Select(f => f.PicklistValues).SingleOrDefault();
             }
 
             return values;
         }
-
     }
 }

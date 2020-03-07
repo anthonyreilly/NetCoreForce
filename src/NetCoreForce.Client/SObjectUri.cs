@@ -1,20 +1,21 @@
 using System;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Collections.Generic;
-using NetCoreForce.Client.Models;
 
 namespace NetCoreForce.Client
 {
-
     public class SObjectUri
     {
         public string UriString { get; private set; }
+
         public string ApiVersion { get; private set; }
+
         public string SObjectName { get; private set; }
+
         public string SObjectId { get; private set; }
 
-        public SObjectUri() { }
+        public SObjectUri()
+        {
+        }
 
         public SObjectUri(string uriString)
         {
@@ -22,14 +23,11 @@ namespace NetCoreForce.Client
             ParseUriString(uriString);
         }
 
-        public override string ToString()
-        {
-            return this.UriString;
-        }
+        public override string ToString() => UriString;
 
         private void ParseUriString(string uriString)
         {
-            Regex rx = new Regex(@"\/services\/data\/(.+)\/.+\/(.+)\/(.+)", RegexOptions.Compiled);
+            var rx = new Regex(@"\/services\/data\/(.+)\/.+\/(.+)\/(.+)", RegexOptions.Compiled);
             var match = rx.Match(uriString);
 
             this.ApiVersion = match.Groups[1].Value;
@@ -46,14 +44,14 @@ namespace NetCoreForce.Client
         /// <returns></returns>
         private static string SObjectRows(string apiVersion, string sObjectName, string objectId)
         {
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
-            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
-            if (string.IsNullOrEmpty(objectId)) throw new ArgumentNullException("objectId");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
+            if (string.IsNullOrEmpty(objectId)) throw new ArgumentNullException(nameof(objectId));
 
             // format: /vXX.X/sobjects/SObjectName/id/
             // example with field parameter: services/data/v20.0/sobjects/Account/001D000000INjVe 
 
-            return string.Format("services/data/{0}/sobjects/{1}/{2}", apiVersion, sObjectName, objectId);
+            return $"services/data/{apiVersion}/sobjects/{sObjectName}/{objectId}";
         }
     }
 }

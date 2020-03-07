@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Dynamic;
 using System.Reflection;
 using System.IO;
 using System.Linq;
@@ -33,7 +31,8 @@ namespace NetCoreForce.ModelGenerator
 
             app.VersionOption("-v|--version", () =>
             {
-                return string.Format("Version {0}", Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion);
+                return
+                    $"Version {Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}";
             });
 
             app.Command("generate", (command) =>
@@ -364,7 +363,7 @@ namespace NetCoreForce.ModelGenerator
                 return;
             }
 
-            if(string.IsNullOrEmpty(config.AuthInfo.ApiVersion))
+            if (string.IsNullOrEmpty(config.AuthInfo.ApiVersion))
             {
                 config.AuthInfo.ApiVersion = client.ApiVersion;
             }
@@ -408,7 +407,7 @@ namespace NetCoreForce.ModelGenerator
                 {
                     if (config.Objects != null && config.Objects.Count > 0)
                     {
-                        bool incl = config.Objects.Where(o => o.ToLowerInvariant() == obj.Name.ToLowerInvariant()).Count() > 0;
+                        bool incl = config.Objects.Any(o => o.ToLowerInvariant() == obj.Name.ToLowerInvariant());
                         if (!incl)
                         {
 #if DEBUG
@@ -425,7 +424,7 @@ namespace NetCoreForce.ModelGenerator
 
                 string className = obj.Name;
 
-                className = string.Format("{0}{1}{2}", config.ClassPrefix ?? string.Empty, className, config.ClassSuffix ?? string.Empty);
+                className = $"{config.ClassPrefix ?? string.Empty}{className}{config.ClassSuffix ?? string.Empty}";
 
                 await CreateModel(client, obj.Name, className, config);
             }
@@ -435,7 +434,7 @@ namespace NetCoreForce.ModelGenerator
         {
             string model = await GenClass(client, objectName, className, config);
 
-            string fileName = fileName = string.Format("{0}.cs", className);
+            string fileName = fileName = $"{className}.cs";
 
             string filePath = Path.Combine(config.OutputDirectory, fileName);
 
@@ -519,11 +518,11 @@ namespace NetCoreForce.ModelGenerator
 
                     gen.AppendLine("\t\t///</summary>");
 
-                    gen.AppendLine(string.Format("\t\t[JsonProperty(PropertyName = \"{0}\")]", JsonName(field.Name)));
+                    gen.AppendLine($"\t\t[JsonProperty(PropertyName = \"{JsonName(field.Name)}\")]");
 
                     if (!field.Creatable || !field.Updateable)
                     {
-                        gen.AppendLine(string.Format("\t\t[Updateable({0}), Createable({1})]", field.Updateable.ToString().ToLower(), field.Creatable.ToString().ToLower()));
+                        gen.AppendLine($"\t\t[Updateable({field.Updateable.ToString().ToLower()}), Creatable({field.Creatable.ToString().ToLower()})]");
                     }
 
                     string csTypeName = SfTypeConverter.GetTypeName(field.Type);
@@ -550,12 +549,13 @@ namespace NetCoreForce.ModelGenerator
                     }
 
                     //we want all nullable types in the model, so that they are not serialized/initialized with default values
-                    if (csTypeName == "bool" || csTypeName == "DateTimeOffset" || csTypeName == "DateTime" || csTypeName == "int" || csTypeName == "double" || csTypeName == "decimal")
+                    if (csTypeName == "bool" || csTypeName == "DateTimeOffset" || csTypeName == "DateTime" ||
+                        csTypeName == "int" || csTypeName == "double" || csTypeName == "decimal")
                     {
                         csTypeName += "?";
                     }
 
-                    gen.AppendLine(string.Format("\t\tpublic {0} {1} {{ get; set; }}", csTypeName, field.Name));
+                    gen.AppendLine($"\t\tpublic {csTypeName} {field.Name} {{ get; set; }}");
                     gen.AppendLine();
 
                     if (field.Type == "reference" && config.IncludeReferences)
@@ -566,7 +566,7 @@ namespace NetCoreForce.ModelGenerator
                             continue;
                         }
 
-                        if(field.RelationshipName == "ContentBody")
+                        if (field.RelationshipName == "ContentBody")
                         {
                             //exception for non-serializable type
                             continue;
@@ -576,12 +576,12 @@ namespace NetCoreForce.ModelGenerator
                         gen.AppendLine("\t\t/// ReferenceTo: " + field.ReferenceTo[0]);
                         gen.AppendLine("\t\t/// <para>RelationshipName: " + field.RelationshipName + "</para>");
                         gen.AppendLine("\t\t///</summary>");
-                        gen.AppendLine(string.Format("\t\t[JsonProperty(PropertyName = \"{0}\")]", JsonName(field.RelationshipName)));
-                        gen.AppendLine("\t\t[Updateable(false), Createable(false)]");
+                        gen.AppendLine($"\t\t[JsonProperty(PropertyName = \"{JsonName(field.RelationshipName)}\")]");
+                        gen.AppendLine("\t\t[Updateable(false), Creatable(false)]");
 
                         string referenceClass = GetPrefixedSuffixed(config, field.ReferenceTo[0]);
 
-                        gen.AppendLine(string.Format("\t\tpublic {0} {1} {{ get; set; }}", referenceClass, field.RelationshipName));
+                        gen.AppendLine($"\t\tpublic {referenceClass} {field.RelationshipName} {{ get; set; }}");
                         gen.AppendLine();
                     }
                 }
@@ -605,7 +605,7 @@ namespace NetCoreForce.ModelGenerator
 
         private static string GetPrefixedSuffixed(GenConfig config, string name)
         {
-            return string.Format("{0}{1}{2}", config.ClassPrefix ?? string.Empty, name, config.ClassSuffix ?? string.Empty);
+            return $"{config.ClassPrefix ?? string.Empty}{name}{config.ClassSuffix ?? string.Empty}";
         }
 
         private static string JsonName(string fieldName)

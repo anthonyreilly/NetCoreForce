@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Net;
-//using NetCoreForce.Client.Models;
 
 namespace NetCoreForce.Client
 {
     public class ForceAuthException : Exception
     {
         public string ErrorCode { get; private set; }
+
         public HttpStatusCode HttpStatusCode { get; private set; }
 
         public ForceAuthException(string errorCode, string message)

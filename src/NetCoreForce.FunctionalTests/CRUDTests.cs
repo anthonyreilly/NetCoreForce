@@ -1,12 +1,9 @@
 using System;
-using System.IO;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 using NetCoreForce.Client;
 using NetCoreForce.Client.Models;
 using NetCoreForce.Models;
-using Newtonsoft.Json;
 
 namespace NetCoreForce.FunctionalTests
 {

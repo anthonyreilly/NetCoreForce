@@ -20,7 +20,7 @@ namespace NetCoreForce.Client
         public static Uri BaseUri(string instanceUrl)
         {
             // e.g. https://na99.salesforce.com/services/data
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             return new Uri(new Uri(instanceUrl), BaseUriSegment);
         }
 
@@ -30,12 +30,11 @@ namespace NetCoreForce.Client
         /// <param name="instanceUrl"></param>
         public static Uri Versions(string instanceUrl)
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
 
             // format: /
 
-            Uri uri = new Uri(new Uri(instanceUrl), BaseUriSegment);
-
+            var uri = new Uri(new Uri(instanceUrl), BaseUriSegment);
             return uri;
         }
 
@@ -47,15 +46,14 @@ namespace NetCoreForce.Client
         /// </summary>
         public static Uri Limits(string instanceUrl, string apiVersion)
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
 
             //format: /vXX.X/limits/
 
             // return new Uri(new Uri(instanceUrl), string.Format("services/data/{0}/limits", apiVersion));
 
             return new Uri(BaseUri(instanceUrl), LimitsResource(apiVersion));
-
         }
 
         //split off full URL formatter and resource relative url formatters?
@@ -68,9 +66,9 @@ namespace NetCoreForce.Client
         /// </summary>
         public static Uri LimitsResource(string apiVersion)
         {
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
 
-            return new Uri(string.Format("/{0}/limits/", apiVersion), UriKind.Relative);
+            return new Uri($"/{apiVersion}/limits/", UriKind.Relative);
         }
 
         /// <summary>
@@ -80,12 +78,12 @@ namespace NetCoreForce.Client
         /// </summary>
         public static Uri DescribeGlobal(string instanceUrl, string apiVersion)
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
 
             //format: /vXX.X/sobjects/
 
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("{0}/{1}/sobjects", BaseUriSegment, apiVersion));
+            var uri = new Uri(new Uri(instanceUrl), $"{BaseUriSegment}/{apiVersion}/sobjects");
 
             return uri;
         }
@@ -96,13 +94,13 @@ namespace NetCoreForce.Client
         /// </summary>
         public static Uri SObjectBasicInformation(string instanceUrl, string apiVersion, string sObjectName)
         {
-            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
 
             //format: /vXX.X/sobjects/SObjectName/
 
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("{0}/{1}/sobjects/{2}", BaseUriSegment, apiVersion, sObjectName));
+            var uri = new Uri(new Uri(instanceUrl), $"{BaseUriSegment}/{apiVersion}/sobjects/{sObjectName}");
 
             return uri;
         }
@@ -113,13 +111,13 @@ namespace NetCoreForce.Client
         /// </summary>
         public static Uri SObjectDescribe(string instanceUrl, string apiVersion, string sObjectName)
         {
-            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
 
             //format: /vXX.X/sobjects/SObjectName/describe/
 
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("services/data/{0}/sobjects/{1}/describe", apiVersion, sObjectName));
+            var uri = new Uri(new Uri(instanceUrl), $"services/data/{apiVersion}/sobjects/{sObjectName}/describe");
 
             return uri;
         }
@@ -142,21 +140,21 @@ namespace NetCoreForce.Client
         /// <returns></returns>
         public static Uri SObjectRows(string instanceUrl, string apiVersion, string sObjectName, string objectId, List<string> fields = null)
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
-            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
-            if (string.IsNullOrEmpty(objectId)) throw new ArgumentNullException("objectId");
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
+            if (string.IsNullOrEmpty(objectId)) throw new ArgumentNullException(nameof(objectId));
 
             //https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_retrieve.htm
 
             // format: /vXX.X/sobjects/SObjectName/id/
             // example with field parameter: services/data/v20.0/sobjects/Account/001D000000INjVe?fields=AccountNumber,BillingPostalCode            
 
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("services/data/{0}/sobjects/{1}/{2}", apiVersion, sObjectName, objectId));
+            var uri = new Uri(new Uri(instanceUrl), $"services/data/{apiVersion}/sobjects/{sObjectName}/{objectId}");
 
             if (fields != null && fields.Count > 0)
             {
-                string fieldList = string.Join(",", fields);
+                var fieldList = string.Join(",", fields);
                 uri = new Uri(QueryHelpers.AddQueryString(uri.ToString(), "fields", fieldList));
             }
 
@@ -171,8 +169,8 @@ namespace NetCoreForce.Client
         {
             //format: /vXX.X/sobjects/SObjectName/fieldName/fieldValue
 
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("services/data/{0}/sobjects/{1}/{2}/{3}", apiVersion, sObjectName, fieldName, fieldValue));
-
+            var uri = new Uri(new Uri(instanceUrl),
+                $"services/data/{apiVersion}/sobjects/{sObjectName}/{fieldName}/{fieldValue}");
             return uri;
         }
 
@@ -186,19 +184,19 @@ namespace NetCoreForce.Client
         /// </summary>
         public static Uri SObjectBlobRetrieve(string instanceUrl, string apiVersion, string sObjectName, string objectId, string blobField = "body")
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
-            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
-            if (string.IsNullOrEmpty(objectId)) throw new ArgumentNullException("objectId");
-            if (string.IsNullOrEmpty(blobField)) throw new ArgumentNullException("blobField");
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
+            if (string.IsNullOrEmpty(objectId)) throw new ArgumentNullException(nameof(objectId));
+            if (string.IsNullOrEmpty(blobField)) throw new ArgumentNullException(nameof(blobField));
 
             //format: /vXX.X/sobjects/SObjectName/id/
 
             // https://yourInstance.salesforce.com/services/data/v20.0/sobjects/Attachment/001D000000INjVe/body
             // https://yourInstance.salesforce.com/services/data/v20.0/sobjects/Document/015D0000000NdJOIA0/body
 
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("services/data/{0}/sobjects/{1}/{2}/{3}", apiVersion, sObjectName, objectId, blobField));
-
+            var uri = new Uri(new Uri(instanceUrl),
+                $"services/data/{apiVersion}/sobjects/{sObjectName}/{objectId}/{blobField}");
             return uri;
         }        
 
@@ -207,7 +205,7 @@ namespace NetCoreForce.Client
         /// </summary>
         public static Uri Query(string instanceUrl, string apiVersion, string query, bool queryAll = false)
         {
-            string queryType = "query";
+            var queryType = "query";
             if (queryAll)
             {
                 queryType = "queryAll";
@@ -215,8 +213,8 @@ namespace NetCoreForce.Client
 
             //Uri uri = new Uri(new Uri(instanceUrl), string.Format("/services/data/{0}/{1}/?q={2}", apiVersion, queryType, query));
 
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("/services/data/{0}/{1}", apiVersion, queryType));
-            string queryUri = QueryHelpers.AddQueryString(uri.ToString(), "q", query);
+            var uri = new Uri(new Uri(instanceUrl), $"/services/data/{apiVersion}/{queryType}");
+            var queryUri = QueryHelpers.AddQueryString(uri.ToString(), "q", query);
 
             return new Uri(queryUri);
         }
@@ -226,9 +224,8 @@ namespace NetCoreForce.Client
         /// </summary>
         public static Uri Search(string instanceUrl, string apiVersion, string query)
         {
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("/services/data/{0}/search", apiVersion));
-            string searchUri = QueryHelpers.AddQueryString(uri.ToString(), "q", query);
-
+            var uri = new Uri(new Uri(instanceUrl), $"/services/data/{apiVersion}/search");
+            var searchUri = QueryHelpers.AddQueryString(uri.ToString(), "q", query);
             return new Uri(searchUri);
         }
 
@@ -239,13 +236,12 @@ namespace NetCoreForce.Client
         /// <param name="apiVersion"></param>
         public static Uri Batch(string instanceUrl, string apiVersion)
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
 
             //format: /vXX.X/composite/batch
 
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("services/data/{0}/composite/batch", apiVersion));
-
+            var uri = new Uri(new Uri(instanceUrl), $"services/data/{apiVersion}/composite/batch");
             return uri;
         }
 
@@ -266,30 +262,31 @@ namespace NetCoreForce.Client
             string state = "",
             string scope = "")
         {
-            if (string.IsNullOrEmpty(loginUrl)) throw new ArgumentNullException("loginUrl");
-            if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException("clientId");
-            if (string.IsNullOrEmpty(redirectUrl)) throw new ArgumentNullException("redirectUrl");
+            if (string.IsNullOrEmpty(loginUrl)) throw new ArgumentNullException(nameof(loginUrl));
+            if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException(nameof(clientId));
+            if (string.IsNullOrEmpty(redirectUrl)) throw new ArgumentNullException(nameof(redirectUrl));
 
             const ResponseTypes responseType = ResponseTypes.Token;
 
-            Dictionary<string, string> prms = new Dictionary<string, string>();
-            prms.Add("response_type", responseType.ToString().ToLower());
-            prms.Add("client_id", clientId);
-            prms.Add("redirect_uri", redirectUrl);
-            prms.Add("display", display.ToString().ToLower());
+            var permissions = new Dictionary<string, string>
+            {
+                {"response_type", responseType.ToString().ToLower()},
+                {"client_id", clientId},
+                {"redirect_uri", redirectUrl},
+                {"display", display.ToString().ToLower()}
+            };
 
             if (!string.IsNullOrEmpty(scope))
             {
-                prms.Add("scope", scope);
+                permissions.Add("scope", scope);
             }
 
             if (!string.IsNullOrEmpty(state))
             {
-                prms.Add("state", state);
+                permissions.Add("state", state);
             }            
 
-            string url = QueryHelpers.AddQueryString(loginUrl, prms);
-
+            var url = QueryHelpers.AddQueryString(loginUrl, permissions);
             return new Uri(url);
         }
 
@@ -312,36 +309,36 @@ namespace NetCoreForce.Client
             DisplayTypes display = DisplayTypes.Page,
             bool immediate = false,
             string scope = "",
-            string state = ""
-            )
+            string state = "")
         {
-            if (string.IsNullOrEmpty(loginUrl)) throw new ArgumentNullException("loginUrl");
-            if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException("clientId");
-            if (string.IsNullOrEmpty(redirectUrl)) throw new ArgumentNullException("redirectUrl");
+            if (string.IsNullOrEmpty(loginUrl)) throw new ArgumentNullException(nameof(loginUrl));
+            if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException(nameof(clientId));
+            if (string.IsNullOrEmpty(redirectUrl)) throw new ArgumentNullException(nameof(redirectUrl));
 
             //TODO: code_challenge, login_hint, nonce, prompt params
 
             const ResponseTypes responseType = ResponseTypes.Code;
 
-            Dictionary<string, string> prms = new Dictionary<string, string>();
-            prms.Add("response_type", responseType.ToString().ToLower());
-            prms.Add("client_id", clientId);
-            prms.Add("redirect_uri", redirectUrl);
-            prms.Add("display", display.ToString().ToLower());
-            prms.Add("immediate", immediate.ToString().ToLower());
+            var permissions = new Dictionary<string, string>
+            {
+                {"response_type", responseType.ToString().ToLower()},
+                {"client_id", clientId},
+                {"redirect_uri", redirectUrl},
+                {"display", display.ToString().ToLower()},
+                {"immediate", immediate.ToString().ToLower()}
+            };
 
             if (!string.IsNullOrEmpty(scope))
             {
-                prms.Add("scope", scope);
+                permissions.Add("scope", scope);
             }
 
             if (!string.IsNullOrEmpty(state))
             {
-                prms.Add("state", state);
+                permissions.Add("state", state);
             }            
 
-            string url = QueryHelpers.AddQueryString(loginUrl, prms);
-
+            var url = QueryHelpers.AddQueryString(loginUrl, permissions);
             return new Uri(url);
         }
 
@@ -359,22 +356,24 @@ namespace NetCoreForce.Client
             string clientId,            
             string clientSecret = "")
         {
-            if (tokenRefreshUrl == null) throw new ArgumentNullException("tokenRefreshUrl");
-            if (refreshToken == null) throw new ArgumentNullException("refreshToken");
-            if (clientId == null) throw new ArgumentNullException("clientId");            
+            if (tokenRefreshUrl == null) throw new ArgumentNullException(nameof(tokenRefreshUrl));
+            if (refreshToken == null) throw new ArgumentNullException(nameof(refreshToken));
+            if (clientId == null) throw new ArgumentNullException(nameof(clientId));
 
-            Dictionary<string, string> prms = new Dictionary<string, string>();
-            prms.Add("grant_type", "refresh_token");
-            prms.Add("refresh_token", refreshToken);
-            prms.Add("client_id", clientId);
-            if(!string.IsNullOrEmpty(clientSecret))
+            var permissions = new Dictionary<string, string>
             {
-                prms.Add("client_secret", clientSecret);
+                {"grant_type", "refresh_token"}, 
+                {"refresh_token", refreshToken}, 
+                {"client_id", clientId}
+            };
+
+            if (!string.IsNullOrEmpty(clientSecret))
+            {
+                permissions.Add("client_secret", clientSecret);
             }            
-            prms.Add("format", "json");
+            permissions.Add("format", "json");
 
-            string url = QueryHelpers.AddQueryString(tokenRefreshUrl, prms);
-
+            var url = QueryHelpers.AddQueryString(tokenRefreshUrl, permissions);
             return new Uri(url);
         }
     }

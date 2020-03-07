@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using Newtonsoft.Json;
-
 namespace NetCoreForce.Client.Models
 {
     public class LimitInfo

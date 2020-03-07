@@ -1,14 +1,11 @@
 using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 using NetCoreForce.Client;
-using NetCoreForce.Client.Attributes;
-using NetCoreForce.Client.Models;
 using NetCoreForce.Models;
-using Newtonsoft.Json;
 
 namespace NetCoreForce.FunctionalTests
 {
@@ -30,13 +27,11 @@ namespace NetCoreForce.FunctionalTests
 
             int count = 0;
             SfContact contact = null;
-            using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+            var contactsEnumerator = contactsEnumerable.GetAsyncEnumerator(CancellationToken.None);
+            while (await contactsEnumerator.MoveNextAsync(CancellationToken.None))
             {
-                while (await contactsEnumerator.MoveNext())
-                {
-                    contact = contactsEnumerator.Current;
-                    count++;
-                }
+                contact = contactsEnumerator.Current;
+                count++;
             }
 
             // recordcount needs be greater than 2000 to ensure that more than one batch was retrieved
@@ -54,21 +49,18 @@ namespace NetCoreForce.FunctionalTests
 
             int count = 0;
             SfContact contact = null;
-            using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
-            {
-                // Assert.NotNull(contactsEnumerator);
+            var contactsEnumerator = contactsEnumerable.GetAsyncEnumerator(CancellationToken.None);
 
-                while (await contactsEnumerator.MoveNext())
-                {
-                    contact = contactsEnumerator.Current;
-                    count++;
+            while (await contactsEnumerator.MoveNextAsync(CancellationToken.None))
+            {
+                contact = contactsEnumerator.Current;
+                count++;
 #if DEBUG
-                    if (count % 200 == 0)
-                    {
-                        Console.WriteLine("QueryAsyncEnumeratorSmallBatch: processed {0} records", count.ToString());
-                    }
-#endif
+                if (count % 200 == 0)
+                {
+                    Console.WriteLine("QueryAsyncEnumeratorSmallBatch: processed {0} records", count.ToString());
                 }
+#endif
             }
 
             // recordcount needs be greater than 200 to ensure that more than one batch was retrieved
@@ -86,13 +78,11 @@ namespace NetCoreForce.FunctionalTests
 
             int count = 0;
             SfContact contact = null;
-            using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+            var contactsEnumerator = contactsEnumerable.GetAsyncEnumerator(CancellationToken.None);
+            while (await contactsEnumerator.MoveNextAsync(CancellationToken.None))
             {
-                while (await contactsEnumerator.MoveNext())
-                {
-                    contact = contactsEnumerator.Current;
-                    count++;
-                }
+                contact = contactsEnumerator.Current;
+                count++;
             }
 
             Assert.Equal(1, count);
@@ -107,19 +97,17 @@ namespace NetCoreForce.FunctionalTests
             var enumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact");
 
             int count = 0;
-            using (var enumerator = enumerable.GetEnumerator())
+            var enumerator = enumerable.GetAsyncEnumerator(CancellationToken.None);
+            while (await enumerator.MoveNextAsync(CancellationToken.None))
             {
-                while (await enumerator.MoveNext())
-                {
-                    var currentItem = enumerator.Current;
-                    count++;
+                var currentItem = enumerator.Current;
+                count++;
 #if DEBUG                    
-                    if (count % 1000 == 0)
-                    {
-                        Console.WriteLine("QueryAsyncEnumeratorLarge: processed {0} records", count.ToString());
-                    }
-#endif
+                if (count % 1000 == 0)
+                {
+                    Console.WriteLine("QueryAsyncEnumeratorLarge: processed {0} records", count.ToString());
                 }
+#endif
             }
 
             Assert.True(count > 0);
@@ -133,13 +121,11 @@ namespace NetCoreForce.FunctionalTests
             var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 3000", batchSize: 200);
 
             int count = 0;
-            using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+            var contactsEnumerator = contactsEnumerable.GetAsyncEnumerator(CancellationToken.None);
+            while (await contactsEnumerator.MoveNextAsync(CancellationToken.None))
             {
-                while (await contactsEnumerator.MoveNext())
-                {
-                    SfContact contact = contactsEnumerator.Current;
-                    count++;
-                }
+                SfContact contact = contactsEnumerator.Current;
+                count++;
             }
 
             Assert.True(count > 0);
@@ -154,15 +140,13 @@ namespace NetCoreForce.FunctionalTests
 
             Assert.Throws<ArgumentException>(() =>
             {
-                IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator();
+                var contactsEnumerator = contactsEnumerable.GetAsyncEnumerator(CancellationToken.None);
             });
 
             await Assert.ThrowsAsync<ArgumentException>(async () =>
             {
-                using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
-                {
-                    await contactsEnumerator.MoveNext();
-                }
+                var contactsEnumerator = contactsEnumerable.GetAsyncEnumerator(CancellationToken.None);
+                await contactsEnumerator.MoveNextAsync(CancellationToken.None);
             });
         }
 
@@ -174,22 +158,21 @@ namespace NetCoreForce.FunctionalTests
             var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact WHERE Name='xyz123foobar'");
 
             SfContact contact = null;
-            using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+            var contactsEnumerator = contactsEnumerable.GetAsyncEnumerator(CancellationToken.None);
+            while (await contactsEnumerator.MoveNextAsync(CancellationToken.None))
             {
-                while (await contactsEnumerator.MoveNext())
-                {
-                    contact = contactsEnumerator.Current;
-                }
+                contact = contactsEnumerator.Current;
             }
 
             Assert.Null(contact);
         }
 
+        [Fact]
         public async Task QueryAsyncToList()
         {
             ForceClient client = await forceClientFixture.GetForceClient();
 
-            List<SfContact> contacts = await client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 1000", batchSize: 200).ToList();
+            List<SfContact> contacts = await client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 1000", batchSize: 200).ToListAsync();
 
             Assert.NotNull(contacts);
             Assert.NotEmpty(contacts);

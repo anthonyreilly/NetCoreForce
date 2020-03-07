@@ -1,8 +1,6 @@
 using System;
 using System.IO;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Xunit;
 using NetCoreForce.Client;
 using NetCoreForce.Client.Models;
 using Newtonsoft.Json;
@@ -12,7 +10,6 @@ namespace NetCoreForce.FunctionalTests
     public class ForceClientFixture : IDisposable
     {
         public AuthInfo AuthInfo { get; private set; }
-
         public ForceClientFixture()
         {
             string filePath = null;
@@ -20,7 +17,7 @@ namespace NetCoreForce.FunctionalTests
             {
                 if (string.IsNullOrEmpty(filePath))
                 {
-                    string executabledirectory = System.IO.Directory.GetCurrentDirectory();
+                    string executabledirectory = Directory.GetCurrentDirectory();
                     string fileName = "credentials_dev.json";
                     filePath = Path.Combine(executabledirectory, fileName);
                 }
@@ -43,21 +40,20 @@ namespace NetCoreForce.FunctionalTests
         {
             System.Net.Http.HttpClient proxyClient = null;
 
-            if(!string.IsNullOrEmpty(proxyUrl))
+            if (!string.IsNullOrEmpty(proxyUrl))
             {
                 proxyClient  = HttpClientFactory.CreateHttpClient(true, proxyUrl);
             }
 
-            AuthenticationClient auth = new AuthenticationClient();
+            var auth = new AuthenticationClient();
             await auth.UsernamePasswordAsync(AuthInfo.ClientId, AuthInfo.ClientSecret,
                     AuthInfo.Username, AuthInfo.Password, AuthInfo.TokenRequestEndpoint);
-            ForceClient client = new ForceClient(auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken, proxyClient);
+            var client = new ForceClient(auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken, proxyClient);
             return client;
         }
 
         public void Dispose()
         {
         }
-
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NetCoreForce.Client;
 using Xunit;
 
 namespace NetCoreForce.Client.Tests

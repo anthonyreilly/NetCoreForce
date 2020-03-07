@@ -29,7 +29,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Id { get; set; }
 
 		///<summary>
@@ -39,7 +39,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isDeleted")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
@@ -49,7 +49,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "developerName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string DeveloperName { get; set; }
 
 		///<summary>
@@ -59,7 +59,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "language")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Language { get; set; }
 
 		///<summary>
@@ -69,7 +69,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "masterLabel")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string MasterLabel { get; set; }
 
 		///<summary>
@@ -79,7 +79,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? CreatedDate { get; set; }
 
 		///<summary>
@@ -89,7 +89,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdById")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string CreatedById { get; set; }
 
 		///<summary>
@@ -97,7 +97,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: CreatedBy</para>
 		///</summary>
 		[JsonProperty(PropertyName = "createdBy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser CreatedBy { get; set; }
 
 		///<summary>
@@ -107,7 +107,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? LastModifiedDate { get; set; }
 
 		///<summary>
@@ -117,7 +117,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedById")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string LastModifiedById { get; set; }
 
 		///<summary>
@@ -125,7 +125,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: LastModifiedBy</para>
 		///</summary>
 		[JsonProperty(PropertyName = "lastModifiedBy")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfUser LastModifiedBy { get; set; }
 
 		///<summary>
@@ -135,7 +135,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "systemModstamp")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
@@ -145,7 +145,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "permissionSetLicenseKey")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string PermissionSetLicenseKey { get; set; }
 
 		///<summary>
@@ -155,7 +155,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "totalLicenses")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public int? TotalLicenses { get; set; }
 
 		///<summary>
@@ -165,7 +165,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "status")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Status { get; set; }
 
 		///<summary>
@@ -175,7 +175,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "expirationDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTime? ExpirationDate { get; set; }
 
 		///<summary>
@@ -185,7 +185,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEmailSingle")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEmailSingle { get; set; }
 
 		///<summary>
@@ -195,7 +195,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEmailMass")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEmailMass { get; set; }
 
 		///<summary>
@@ -205,7 +205,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEditTask")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEditTask { get; set; }
 
 		///<summary>
@@ -215,7 +215,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEditEvent")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEditEvent { get; set; }
 
 		///<summary>
@@ -225,7 +225,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsExportReport")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsExportReport { get; set; }
 
 		///<summary>
@@ -235,7 +235,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsImportPersonal")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsImportPersonal { get; set; }
 
 		///<summary>
@@ -245,7 +245,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageUsers")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageUsers { get; set; }
 
 		///<summary>
@@ -255,7 +255,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEditPublicFilters")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEditPublicFilters { get; set; }
 
 		///<summary>
@@ -265,7 +265,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEditPublicTemplates")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEditPublicTemplates { get; set; }
 
 		///<summary>
@@ -275,7 +275,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsModifyAllData")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsModifyAllData { get; set; }
 
 		///<summary>
@@ -285,7 +285,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageCases")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageCases { get; set; }
 
 		///<summary>
@@ -295,7 +295,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsMassInlineEdit")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsMassInlineEdit { get; set; }
 
 		///<summary>
@@ -305,7 +305,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEditKnowledge")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEditKnowledge { get; set; }
 
 		///<summary>
@@ -315,7 +315,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageKnowledge")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageKnowledge { get; set; }
 
 		///<summary>
@@ -325,7 +325,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageSolutions")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageSolutions { get; set; }
 
 		///<summary>
@@ -335,7 +335,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsCustomizeApplication")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsCustomizeApplication { get; set; }
 
 		///<summary>
@@ -345,7 +345,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEditReadonlyFields")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEditReadonlyFields { get; set; }
 
 		///<summary>
@@ -355,7 +355,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsRunReports")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsRunReports { get; set; }
 
 		///<summary>
@@ -365,7 +365,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsViewSetup")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsViewSetup { get; set; }
 
 		///<summary>
@@ -375,7 +375,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsTransferAnyEntity")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsTransferAnyEntity { get; set; }
 
 		///<summary>
@@ -385,7 +385,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsNewReportBuilder")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsNewReportBuilder { get; set; }
 
 		///<summary>
@@ -395,7 +395,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsActivateContract")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsActivateContract { get; set; }
 
 		///<summary>
@@ -405,7 +405,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsActivateOrder")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsActivateOrder { get; set; }
 
 		///<summary>
@@ -415,7 +415,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsImportLeads")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsImportLeads { get; set; }
 
 		///<summary>
@@ -425,7 +425,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageLeads")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageLeads { get; set; }
 
 		///<summary>
@@ -435,7 +435,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsTransferAnyLead")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsTransferAnyLead { get; set; }
 
 		///<summary>
@@ -445,7 +445,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsViewAllData")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsViewAllData { get; set; }
 
 		///<summary>
@@ -455,7 +455,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEditPublicDocuments")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEditPublicDocuments { get; set; }
 
 		///<summary>
@@ -465,7 +465,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsViewEncryptedData")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsViewEncryptedData { get; set; }
 
 		///<summary>
@@ -475,7 +475,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEditBrandTemplates")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEditBrandTemplates { get; set; }
 
 		///<summary>
@@ -485,7 +485,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEditHtmlTemplates")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEditHtmlTemplates { get; set; }
 
 		///<summary>
@@ -495,7 +495,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsChatterInternalUser")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsChatterInternalUser { get; set; }
 
 		///<summary>
@@ -505,7 +505,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageEncryptionKeys")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageEncryptionKeys { get; set; }
 
 		///<summary>
@@ -515,7 +515,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsDeleteActivatedContract")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsDeleteActivatedContract { get; set; }
 
 		///<summary>
@@ -525,7 +525,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsChatterInviteExternalUsers")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsChatterInviteExternalUsers { get; set; }
 
 		///<summary>
@@ -535,7 +535,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsSendSitRequests")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsSendSitRequests { get; set; }
 
 		///<summary>
@@ -545,7 +545,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageRemoteAccess")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageRemoteAccess { get; set; }
 
 		///<summary>
@@ -555,7 +555,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsCanUseNewDashboardBuilder")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsCanUseNewDashboardBuilder { get; set; }
 
 		///<summary>
@@ -565,7 +565,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageCategories")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageCategories { get; set; }
 
 		///<summary>
@@ -575,7 +575,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsConvertLeads")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsConvertLeads { get; set; }
 
 		///<summary>
@@ -585,7 +585,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsPasswordNeverExpires")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsPasswordNeverExpires { get; set; }
 
 		///<summary>
@@ -595,7 +595,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsUseTeamReassignWizards")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsUseTeamReassignWizards { get; set; }
 
 		///<summary>
@@ -605,7 +605,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEditActivatedOrders")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEditActivatedOrders { get; set; }
 
 		///<summary>
@@ -615,7 +615,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsInstallPackaging")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsInstallPackaging { get; set; }
 
 		///<summary>
@@ -625,7 +625,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsPublishPackaging")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsPublishPackaging { get; set; }
 
 		///<summary>
@@ -635,7 +635,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsChatterOwnGroups")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsChatterOwnGroups { get; set; }
 
 		///<summary>
@@ -645,7 +645,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEditOppLineItemUnitPrice")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEditOppLineItemUnitPrice { get; set; }
 
 		///<summary>
@@ -655,7 +655,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsCreatePackaging")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsCreatePackaging { get; set; }
 
 		///<summary>
@@ -665,7 +665,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsBulkApiHardDelete")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsBulkApiHardDelete { get; set; }
 
 		///<summary>
@@ -675,7 +675,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsSolutionImport")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsSolutionImport { get; set; }
 
 		///<summary>
@@ -685,7 +685,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageCallCenters")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageCallCenters { get; set; }
 
 		///<summary>
@@ -695,7 +695,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageSynonyms")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageSynonyms { get; set; }
 
 		///<summary>
@@ -705,7 +705,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsViewContent")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsViewContent { get; set; }
 
 		///<summary>
@@ -715,7 +715,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageEmailClientConfig")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageEmailClientConfig { get; set; }
 
 		///<summary>
@@ -725,7 +725,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEnableNotifications")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEnableNotifications { get; set; }
 
 		///<summary>
@@ -735,7 +735,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageDataIntegrations")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageDataIntegrations { get; set; }
 
 		///<summary>
@@ -745,7 +745,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsDistributeFromPersWksp")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsDistributeFromPersWksp { get; set; }
 
 		///<summary>
@@ -755,7 +755,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsViewDataCategories")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsViewDataCategories { get; set; }
 
 		///<summary>
@@ -765,7 +765,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageDataCategories")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageDataCategories { get; set; }
 
 		///<summary>
@@ -775,7 +775,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsAuthorApex")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsAuthorApex { get; set; }
 
 		///<summary>
@@ -785,7 +785,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageMobile")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageMobile { get; set; }
 
 		///<summary>
@@ -795,7 +795,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsApiEnabled")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsApiEnabled { get; set; }
 
 		///<summary>
@@ -805,7 +805,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageCustomReportTypes")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageCustomReportTypes { get; set; }
 
 		///<summary>
@@ -815,7 +815,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEditCaseComments")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEditCaseComments { get; set; }
 
 		///<summary>
@@ -825,7 +825,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsTransferAnyCase")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsTransferAnyCase { get; set; }
 
 		///<summary>
@@ -835,7 +835,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsContentAdministrator")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsContentAdministrator { get; set; }
 
 		///<summary>
@@ -845,7 +845,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsCreateWorkspaces")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsCreateWorkspaces { get; set; }
 
 		///<summary>
@@ -855,7 +855,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageContentPermissions")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageContentPermissions { get; set; }
 
 		///<summary>
@@ -865,7 +865,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageContentProperties")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageContentProperties { get; set; }
 
 		///<summary>
@@ -875,7 +875,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageContentTypes")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageContentTypes { get; set; }
 
 		///<summary>
@@ -885,7 +885,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageExchangeConfig")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageExchangeConfig { get; set; }
 
 		///<summary>
@@ -895,7 +895,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageAnalyticSnapshots")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageAnalyticSnapshots { get; set; }
 
 		///<summary>
@@ -905,7 +905,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsScheduleReports")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsScheduleReports { get; set; }
 
 		///<summary>
@@ -915,7 +915,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageBusinessHourHolidays")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageBusinessHourHolidays { get; set; }
 
 		///<summary>
@@ -925,7 +925,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageDynamicDashboards")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageDynamicDashboards { get; set; }
 
 		///<summary>
@@ -935,7 +935,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsCustomSidebarOnAllPages")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsCustomSidebarOnAllPages { get; set; }
 
 		///<summary>
@@ -945,7 +945,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageInteraction")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageInteraction { get; set; }
 
 		///<summary>
@@ -955,7 +955,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsViewMyTeamsDashboards")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsViewMyTeamsDashboards { get; set; }
 
 		///<summary>
@@ -965,7 +965,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsModerateChatter")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsModerateChatter { get; set; }
 
 		///<summary>
@@ -975,7 +975,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsResetPasswords")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsResetPasswords { get; set; }
 
 		///<summary>
@@ -985,7 +985,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsFlowUFLRequired")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsFlowUFLRequired { get; set; }
 
 		///<summary>
@@ -995,7 +995,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsCanInsertFeedSystemFields")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsCanInsertFeedSystemFields { get; set; }
 
 		///<summary>
@@ -1005,7 +1005,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageKnowledgeImportExport")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageKnowledgeImportExport { get; set; }
 
 		///<summary>
@@ -1015,7 +1015,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEmailTemplateManagement")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEmailTemplateManagement { get; set; }
 
 		///<summary>
@@ -1025,7 +1025,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEmailAdministration")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEmailAdministration { get; set; }
 
 		///<summary>
@@ -1035,7 +1035,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageChatterMessages")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageChatterMessages { get; set; }
 
 		///<summary>
@@ -1045,7 +1045,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsAllowEmailIC")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsAllowEmailIC { get; set; }
 
 		///<summary>
@@ -1055,7 +1055,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsChatterFileLink")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsChatterFileLink { get; set; }
 
 		///<summary>
@@ -1065,7 +1065,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsForceTwoFactor")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsForceTwoFactor { get; set; }
 
 		///<summary>
@@ -1075,7 +1075,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsViewEventLogFiles")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsViewEventLogFiles { get; set; }
 
 		///<summary>
@@ -1085,7 +1085,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageNetworks")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageNetworks { get; set; }
 
 		///<summary>
@@ -1095,7 +1095,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageAuthProviders")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageAuthProviders { get; set; }
 
 		///<summary>
@@ -1105,7 +1105,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsRunFlow")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsRunFlow { get; set; }
 
 		///<summary>
@@ -1115,7 +1115,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsCreateCustomizeDashboards")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsCreateCustomizeDashboards { get; set; }
 
 		///<summary>
@@ -1125,7 +1125,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsCreateDashboardFolders")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsCreateDashboardFolders { get; set; }
 
 		///<summary>
@@ -1135,7 +1135,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsViewPublicDashboards")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsViewPublicDashboards { get; set; }
 
 		///<summary>
@@ -1145,7 +1145,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageDashbdsInPubFolders")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageDashbdsInPubFolders { get; set; }
 
 		///<summary>
@@ -1155,7 +1155,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsCreateCustomizeReports")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsCreateCustomizeReports { get; set; }
 
 		///<summary>
@@ -1165,7 +1165,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsCreateReportFolders")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsCreateReportFolders { get; set; }
 
 		///<summary>
@@ -1175,7 +1175,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsViewPublicReports")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsViewPublicReports { get; set; }
 
 		///<summary>
@@ -1185,7 +1185,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageReportsInPubFolders")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageReportsInPubFolders { get; set; }
 
 		///<summary>
@@ -1195,7 +1195,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEditMyDashboards")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEditMyDashboards { get; set; }
 
 		///<summary>
@@ -1205,7 +1205,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEditMyReports")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEditMyReports { get; set; }
 
 		///<summary>
@@ -1215,7 +1215,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsViewAllUsers")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsViewAllUsers { get; set; }
 
 		///<summary>
@@ -1225,7 +1225,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsAllowUniversalSearch")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsAllowUniversalSearch { get; set; }
 
 		///<summary>
@@ -1235,7 +1235,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsConnectOrgToEnvironmentHub")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsConnectOrgToEnvironmentHub { get; set; }
 
 		///<summary>
@@ -1245,7 +1245,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsWorkCalibrationUser")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsWorkCalibrationUser { get; set; }
 
 		///<summary>
@@ -1255,7 +1255,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsCreateCustomizeFilters")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsCreateCustomizeFilters { get; set; }
 
 		///<summary>
@@ -1265,7 +1265,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsWorkDotComUserPerm")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsWorkDotComUserPerm { get; set; }
 
 		///<summary>
@@ -1275,7 +1275,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsGovernNetworks")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsGovernNetworks { get; set; }
 
 		///<summary>
@@ -1285,7 +1285,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsSalesConsole")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsSalesConsole { get; set; }
 
 		///<summary>
@@ -1295,7 +1295,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsTwoFactorApi")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsTwoFactorApi { get; set; }
 
 		///<summary>
@@ -1305,7 +1305,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsDeleteTopics")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsDeleteTopics { get; set; }
 
 		///<summary>
@@ -1315,7 +1315,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEditTopics")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEditTopics { get; set; }
 
 		///<summary>
@@ -1325,7 +1325,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsCreateTopics")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsCreateTopics { get; set; }
 
 		///<summary>
@@ -1335,7 +1335,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsAssignTopics")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsAssignTopics { get; set; }
 
 		///<summary>
@@ -1345,7 +1345,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsIdentityEnabled")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsIdentityEnabled { get; set; }
 
 		///<summary>
@@ -1355,7 +1355,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsIdentityConnect")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsIdentityConnect { get; set; }
 
 		///<summary>
@@ -1365,7 +1365,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsAllowViewKnowledge")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsAllowViewKnowledge { get; set; }
 
 		///<summary>
@@ -1375,7 +1375,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsContentWorkspaces")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsContentWorkspaces { get; set; }
 
 		///<summary>
@@ -1385,7 +1385,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageSearchPromotionRules")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageSearchPromotionRules { get; set; }
 
 		///<summary>
@@ -1395,7 +1395,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsCustomMobileAppsAccess")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsCustomMobileAppsAccess { get; set; }
 
 		///<summary>
@@ -1405,7 +1405,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsViewHelpLink")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsViewHelpLink { get; set; }
 
 		///<summary>
@@ -1415,7 +1415,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageProfilesPermissionsets")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageProfilesPermissionsets { get; set; }
 
 		///<summary>
@@ -1425,7 +1425,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsAssignPermissionSets")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsAssignPermissionSets { get; set; }
 
 		///<summary>
@@ -1435,7 +1435,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageRoles")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageRoles { get; set; }
 
 		///<summary>
@@ -1445,7 +1445,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageIpAddresses")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageIpAddresses { get; set; }
 
 		///<summary>
@@ -1455,7 +1455,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageSharing")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageSharing { get; set; }
 
 		///<summary>
@@ -1465,7 +1465,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageInternalUsers")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageInternalUsers { get; set; }
 
 		///<summary>
@@ -1475,7 +1475,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManagePasswordPolicies")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManagePasswordPolicies { get; set; }
 
 		///<summary>
@@ -1485,7 +1485,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageLoginAccessPolicies")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageLoginAccessPolicies { get; set; }
 
 		///<summary>
@@ -1495,7 +1495,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageCustomPermissions")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageCustomPermissions { get; set; }
 
 		///<summary>
@@ -1505,7 +1505,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsCanVerifyComment")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsCanVerifyComment { get; set; }
 
 		///<summary>
@@ -1515,7 +1515,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageUnlistedGroups")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageUnlistedGroups { get; set; }
 
 		///<summary>
@@ -1525,7 +1525,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsModifySecureAgents")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsModifySecureAgents { get; set; }
 
 		///<summary>
@@ -1535,7 +1535,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageTwoFactor")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageTwoFactor { get; set; }
 
 		///<summary>
@@ -1545,7 +1545,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsChatterForSharePoint")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsChatterForSharePoint { get; set; }
 
 		///<summary>
@@ -1555,7 +1555,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsLightningExperienceUser")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsLightningExperienceUser { get; set; }
 
 		///<summary>
@@ -1565,7 +1565,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsConfigCustomRecs")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsConfigCustomRecs { get; set; }
 
 		///<summary>
@@ -1575,7 +1575,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsSubmitMacrosAllowed")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsSubmitMacrosAllowed { get; set; }
 
 		///<summary>
@@ -1585,7 +1585,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsBulkMacrosAllowed")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsBulkMacrosAllowed { get; set; }
 
 		///<summary>
@@ -1595,7 +1595,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsShareInternalArticles")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsShareInternalArticles { get; set; }
 
 		///<summary>
@@ -1605,7 +1605,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageSessionPermissionSets")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageSessionPermissionSets { get; set; }
 
 		///<summary>
@@ -1615,7 +1615,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsSendAnnouncementEmails")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsSendAnnouncementEmails { get; set; }
 
 		///<summary>
@@ -1625,7 +1625,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsChatterEditOwnPost")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsChatterEditOwnPost { get; set; }
 
 		///<summary>
@@ -1635,7 +1635,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsChatterEditOwnRecordPost")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsChatterEditOwnRecordPost { get; set; }
 
 		///<summary>
@@ -1645,7 +1645,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsImportCustomObjects")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsImportCustomObjects { get; set; }
 
 		///<summary>
@@ -1655,7 +1655,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsDelegatedTwoFactor")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsDelegatedTwoFactor { get; set; }
 
 		///<summary>
@@ -1665,7 +1665,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsChatterComposeUiCodesnippet")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsChatterComposeUiCodesnippet { get; set; }
 
 		///<summary>
@@ -1675,7 +1675,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsSelectFilesFromSalesforce")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsSelectFilesFromSalesforce { get; set; }
 
 		///<summary>
@@ -1685,7 +1685,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsModerateNetworkUsers")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsModerateNetworkUsers { get; set; }
 
 		///<summary>
@@ -1695,7 +1695,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsMergeTopics")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsMergeTopics { get; set; }
 
 		///<summary>
@@ -1705,7 +1705,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsSubscribeToLightningReports")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsSubscribeToLightningReports { get; set; }
 
 		///<summary>
@@ -1715,7 +1715,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManagePvtRptsAndDashbds")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManagePvtRptsAndDashbds { get; set; }
 
 		///<summary>
@@ -1725,7 +1725,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsAllowLightningLogin")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsAllowLightningLogin { get; set; }
 
 		///<summary>
@@ -1735,7 +1735,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsCampaignInfluence2")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsCampaignInfluence2 { get; set; }
 
 		///<summary>
@@ -1745,7 +1745,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsViewDataAssessment")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsViewDataAssessment { get; set; }
 
 		///<summary>
@@ -1755,7 +1755,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsRemoveDirectMessageMembers")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsRemoveDirectMessageMembers { get; set; }
 
 		///<summary>
@@ -1765,7 +1765,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsCanApproveFeedPost")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsCanApproveFeedPost { get; set; }
 
 		///<summary>
@@ -1775,7 +1775,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsAddDirectMessageMembers")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsAddDirectMessageMembers { get; set; }
 
 		///<summary>
@@ -1785,7 +1785,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsAllowViewEditConvertedLeads")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsAllowViewEditConvertedLeads { get; set; }
 
 		///<summary>
@@ -1795,7 +1795,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsShowCompanyNameAsUserBadge")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsShowCompanyNameAsUserBadge { get; set; }
 
 		///<summary>
@@ -1805,7 +1805,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsAccessCMC")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsAccessCMC { get; set; }
 
 		///<summary>
@@ -1815,7 +1815,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsViewHealthCheck")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsViewHealthCheck { get; set; }
 
 		///<summary>
@@ -1825,7 +1825,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageHealthCheck")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageHealthCheck { get; set; }
 
 		///<summary>
@@ -1835,7 +1835,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsPackaging2")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsPackaging2 { get; set; }
 
 		///<summary>
@@ -1845,7 +1845,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsManageCertificates")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsManageCertificates { get; set; }
 
 		///<summary>
@@ -1855,7 +1855,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsCreateReportInLightning")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsCreateReportInLightning { get; set; }
 
 		///<summary>
@@ -1865,7 +1865,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsPreventClassicExperience")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsPreventClassicExperience { get; set; }
 
 		///<summary>
@@ -1875,7 +1875,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsHideReadByList")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsHideReadByList { get; set; }
 
 		///<summary>
@@ -1885,7 +1885,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsListEmailSend")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsListEmailSend { get; set; }
 
 		///<summary>
@@ -1895,7 +1895,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsFeedPinning")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsFeedPinning { get; set; }
 
 		///<summary>
@@ -1905,7 +1905,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsIotUser")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsIotUser { get; set; }
 
 		///<summary>
@@ -1915,7 +1915,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsUseWebLink")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsUseWebLink { get; set; }
 
 		///<summary>
@@ -1925,7 +1925,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsViewAllActivities")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsViewAllActivities { get; set; }
 
 		///<summary>
@@ -1935,7 +1935,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsSubscribeReportToOtherUsers")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsSubscribeReportToOtherUsers { get; set; }
 
 		///<summary>
@@ -1945,7 +1945,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsLightningConsoleAllowedForUser")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsLightningConsoleAllowedForUser { get; set; }
 
 		///<summary>
@@ -1955,7 +1955,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsSubscribeReportsRunAsUser")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsSubscribeReportsRunAsUser { get; set; }
 
 		///<summary>
@@ -1965,7 +1965,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "maximumPermissionsEnableCommunityAppLauncher")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public bool? MaximumPermissionsEnableCommunityAppLauncher { get; set; }
 
 		///<summary>
@@ -1975,7 +1975,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "usedLicenses")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public int? UsedLicenses { get; set; }
 
 	}

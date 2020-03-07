@@ -1,4 +1,3 @@
-using NetCoreForce.Client;
 using NetCoreForce.Client.Attributes;
 using Newtonsoft.Json;
 using Xunit;
@@ -15,11 +14,11 @@ namespace NetCoreForce.Client.Tests
 
 
         [JsonProperty(PropertyName = "createableTrue")]
-		[Createable(true)]
+		[Creatable(true)]
 		public string CreateableTrue { get; set; }
 
         [JsonProperty(PropertyName = "createableFalse")]
-		[Createable(false)]
+		[Creatable(false)]
 		public string CreateableFalse { get; set; }
         
 

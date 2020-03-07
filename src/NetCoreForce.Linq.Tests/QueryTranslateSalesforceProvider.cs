@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using NetCoreForce.Linq.Conventions.Naming;
 using NetCoreForce.Linq.Entity;
@@ -18,18 +17,18 @@ namespace NetCoreForce.Linq.Tests
         {
         }
 
-        protected override Task<int> ProduceCountAsync(string cmd)
+        protected override ValueTask<int> ProduceCountAsync(string cmd)
         {
             SOQLCalled = cmd;
 
             return base.ProduceCountAsync(cmd);
         }
 
-        protected override IAsyncEnumerator<T> ProduceAsyncEnumerator(string cmd)
+        protected override IAsyncEnumerator<T> ProduceAsyncEnumerator(string cmd, CancellationToken token)
         {
             SOQLCalled = cmd;
-            
-            return base.ProduceAsyncEnumerator(cmd);
+
+            return base.ProduceAsyncEnumerator(cmd, token);
         }
         #endregion
     }

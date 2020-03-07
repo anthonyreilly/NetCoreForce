@@ -3,8 +3,6 @@ using System.Net;
 using System.Net.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using NetCoreForce.Client;
-using Xunit;
 
 namespace NetCoreForce.Client.Tests
 {

@@ -4,7 +4,7 @@
     <AssemblyName>NetCoreForce.Models</AssemblyName>
     <Product>NetCoreForce.Models</Product>
     <OutputType>Library</OutputType>
-    <TargetFrameworks>netstandard1.6;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <VersionPrefix>$(VersionPrefix)</VersionPrefix>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <!--NuGet-->
@@ -37,6 +37,6 @@
     <ProjectReference Include="..\NetCoreForce.Client\NetCoreForce.Client.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 </Project>

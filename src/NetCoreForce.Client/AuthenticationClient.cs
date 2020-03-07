@@ -11,7 +11,12 @@ namespace NetCoreForce.Client
 {
     public class AuthenticationClient : IDisposable
     {
-        private string DefaultApiVersion { get { return "v44.0"; } }
+        private const string DefaultApiVersion = "v44.0";
+        private const string UserAgent = "netcoreforce-client";
+        private const string TokenRequestEndpointUrl = "https://login.salesforce.com/services/oauth2/token";
+
+        private readonly HttpClient _httpClient;
+
         public string ApiVersion { get; set; }
 
         /// <summary>
@@ -20,16 +25,13 @@ namespace NetCoreForce.Client
         /// <returns><see cref="AccessTokenResponse" /></returns>
         public AccessTokenResponse AccessInfo { get; private set; }
 
-        private const string UserAgent = "netcoreforce-client";
-        private const string TokenRequestEndpointUrl = "https://login.salesforce.com/services/oauth2/token";
-        private readonly HttpClient _httpClient;
-
-
         /// <summary>
-        /// Initialize the AuthenticationClient with the libary's default Salesforce API version
+        /// Initialize the AuthenticationClient with the library's default Salesforce API version
         /// <para>See the DefaultApiVersion property</para>
         /// </summary>
-        public AuthenticationClient() : this(null) { }
+        public AuthenticationClient() : this(null)
+        {
+        }
 
         /// <summary>
         /// Initialize the AuthenticationClient with the specified Salesforce API version
@@ -37,14 +39,7 @@ namespace NetCoreForce.Client
         /// <param name="apiVersion">Target Salesforce API version</param>
         public AuthenticationClient(string apiVersion)
         {
-            if (!string.IsNullOrEmpty(apiVersion))
-            {
-                ApiVersion = apiVersion;
-            }
-            else
-            {
-                ApiVersion = DefaultApiVersion;
-            }
+            ApiVersion = !string.IsNullOrEmpty(apiVersion) ? apiVersion : DefaultApiVersion;
 
             _httpClient = new HttpClient();
         }
@@ -91,7 +86,6 @@ namespace NetCoreForce.Client
                 //otherwise throw the original AggregateException as-is
                 throw ex;
             }
-
         }
 
         /// <summary>
@@ -120,14 +114,14 @@ namespace NetCoreForce.Client
         public async Task UsernamePasswordAsync(string clientId, string clientSecret, string username, string password, string tokenRequestEndpointUrl)
         {
 #if DEBUG
-            Stopwatch sw = new Stopwatch();
+            var sw = new Stopwatch();
             sw.Start();
 #endif
-            if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException("clientId", "Client ID is null or empty");
-            if (string.IsNullOrEmpty(clientSecret)) throw new ArgumentNullException("clientSecret", "Client Secret is null or empty");
-            if (string.IsNullOrEmpty(username)) throw new ArgumentNullException("username", "Username is null or empty");
-            if (string.IsNullOrEmpty(password)) throw new ArgumentNullException("password", "Password is null or empty");
-            if (string.IsNullOrEmpty(tokenRequestEndpointUrl)) throw new ArgumentNullException("tokenRequestEndpointUrl", "Token Request Endpoint is null or empty");
+            if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException(nameof(clientId), "Client ID is null or empty");
+            if (string.IsNullOrEmpty(clientSecret)) throw new ArgumentNullException(nameof(clientSecret), "Client Secret is null or empty");
+            if (string.IsNullOrEmpty(username)) throw new ArgumentNullException(nameof(username), "Username is null or empty");
+            if (string.IsNullOrEmpty(password)) throw new ArgumentNullException(nameof(password), "Password is null or empty");
+            if (string.IsNullOrEmpty(tokenRequestEndpointUrl)) throw new ArgumentNullException(nameof(tokenRequestEndpointUrl), "Token Request Endpoint is null or empty");
             if (!Uri.IsWellFormedUriString(tokenRequestEndpointUrl, UriKind.Absolute)) throw new FormatException("Invalid tokenRequestEndpointUrl");
 
             var content = new FormUrlEncodedContent(new[]
@@ -167,7 +161,7 @@ namespace NetCoreForce.Client
             }
 #if DEBUG
             sw.Stop();
-            Debug.WriteLine(string.Format("Login completed in {0}ms", sw.ElapsedMilliseconds.ToString()));
+            Debug.WriteLine($"Login completed in {sw.ElapsedMilliseconds.ToString()}ms");
 #endif
             return;
         }
@@ -184,13 +178,13 @@ namespace NetCoreForce.Client
         /// <returns><see cref="AccessTokenResponse" /></returns>
         public async Task WebServerAsync(string clientId, string clientSecret, string redirectUri, string code, string tokenRequestEndpointUrl = TokenRequestEndpointUrl)
         {
-            if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException("clientId");
-            if (string.IsNullOrEmpty(clientSecret)) throw new ArgumentNullException("clientSecret");
-            if (string.IsNullOrEmpty(redirectUri)) throw new ArgumentNullException("redirectUri");
-            if (!Uri.IsWellFormedUriString(redirectUri, UriKind.Absolute)) throw new FormatException("redirectUri");
-            if (string.IsNullOrEmpty(code)) throw new ArgumentNullException("code");
-            if (string.IsNullOrEmpty(tokenRequestEndpointUrl)) throw new ArgumentNullException("tokenRequestEndpointUrl");
-            if (!Uri.IsWellFormedUriString(tokenRequestEndpointUrl, UriKind.Absolute)) throw new FormatException("tokenRequestEndpointUrl");
+            if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException(nameof(clientId));
+            if (string.IsNullOrEmpty(clientSecret)) throw new ArgumentNullException(nameof(clientSecret));
+            if (string.IsNullOrEmpty(redirectUri)) throw new ArgumentNullException(nameof(redirectUri));
+            if (!Uri.IsWellFormedUriString(redirectUri, UriKind.Absolute)) throw new FormatException(nameof(redirectUri));
+            if (string.IsNullOrEmpty(code)) throw new ArgumentNullException(nameof(code));
+            if (string.IsNullOrEmpty(tokenRequestEndpointUrl)) throw new ArgumentNullException(nameof(tokenRequestEndpointUrl));
+            if (!Uri.IsWellFormedUriString(tokenRequestEndpointUrl, UriKind.Absolute)) throw new FormatException(nameof(tokenRequestEndpointUrl));
 
             var content = new FormUrlEncodedContent(new[]
                 {
@@ -228,7 +222,6 @@ namespace NetCoreForce.Client
                 {
                     throw new ForceAuthException("Unknown", ex.Message, responseMessage.StatusCode);
                 }
-
             }
         }
 
@@ -262,7 +255,7 @@ namespace NetCoreForce.Client
             if (responseMessage.IsSuccessStatusCode)
             {
                 this.AccessInfo = JsonConvert.DeserializeObject<AccessTokenResponse>(response);
-                this.AccessInfo.RefreshToken = refreshToken; //not included in reponse
+                this.AccessInfo.RefreshToken = refreshToken; //not included in response
             }
             else
             {

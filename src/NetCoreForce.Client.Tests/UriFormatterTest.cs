@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using Xunit;
-using NetCoreForce.Client;
 using NetCoreForce.Client.Models;
 
 namespace NetCoreForce.Client.Tests

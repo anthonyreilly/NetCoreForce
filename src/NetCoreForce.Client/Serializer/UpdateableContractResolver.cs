@@ -14,7 +14,7 @@ namespace NetCoreForce.Client.Serializer
             var updateableAttribute = member.GetCustomAttribute<UpdateableAttribute>();
             if (updateableAttribute != null)
             {
-                    property.ShouldSerialize = x => updateableAttribute.Updateable;
+                property.ShouldSerialize = x => updateableAttribute.Updateable;
             }
 
             return property;

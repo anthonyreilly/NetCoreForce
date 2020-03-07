@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
@@ -69,7 +67,7 @@ namespace NetCoreForce.FunctionalTests
         public class AccountWithContactsSub : SfAccount 
         {
             [JsonProperty(PropertyName = "contacts")]
-            [Updateable(false), Createable(false)]
+            [Updateable(false), Creatable(false)]
             public QueryResult<SfContact> Contacts { get; set; }
         }
 

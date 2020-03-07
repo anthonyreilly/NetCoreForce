@@ -1,11 +1,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
-using NetCoreForce.Client.Attributes;
-using NetCoreForce.Client.Models;
 using NetCoreForce.Linq.Providers.Extensions;
 using NetCoreForce.Models;
-using Newtonsoft.Json;
 
 namespace NetCoreForce.FunctionalTests
 {
@@ -41,7 +38,7 @@ namespace NetCoreForce.FunctionalTests
                             SystemModstamp = c.Contact.SystemModstamp
                         }
                     })
-                    .FirstOrDefault();
+                    .FirstOrDefaultAsync();
 
             Assert.False(singleCase == null);
             Assert.NotNull(singleCase.CaseNumber);
@@ -71,7 +68,7 @@ namespace NetCoreForce.FunctionalTests
                     }
                 })
                 .Where(c => c.CaseNumber == "999999")
-                .SingleOrDefault();
+                .SingleOrDefaultAsync();
 
             Assert.True(singleCase == null);
         }
@@ -99,7 +96,7 @@ namespace NetCoreForce.FunctionalTests
                         SystemModstamp = c.Contact.SystemModstamp
                     }
                 })
-                .ToList();
+                .ToListAsync();
 
             var firstCase = cases[0];
 
@@ -132,7 +129,7 @@ namespace NetCoreForce.FunctionalTests
                     }
                 })
                 .Where(c => c.CaseNumber == "999999")
-                .ToList();
+                .ToListAsync();
 
             Assert.False(cases == null);
             Assert.True(cases.Count == 0);

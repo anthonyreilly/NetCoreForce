@@ -20,26 +20,26 @@ namespace NetCoreForce.Linq
         public ISalesforceNamingConvention NamingConvention { get; }
         public SelectTypeEnum SelectType { get; }
         
-        public object Execute(Expression expression)
+        public object Execute(Expression expression, CancellationToken token)
         {
             var visitor = new SalesforceVisitor(NamingConvention, SelectType);
             var cmd = visitor.Translate(PartialEvaluator.Eval(expression));
             switch (visitor.QueryType)
             {
-                case QueryTypeEnum.FirstOrDefault:
-                    return ProduceAsyncEnumerable(cmd).FirstOrDefault();
-                case QueryTypeEnum.First:
-                    return ProduceAsyncEnumerable(cmd).First();
-                case QueryTypeEnum.Single:
-                    return ProduceAsyncEnumerable(cmd).Single();
-                case QueryTypeEnum.SingleOrDefault:
-                    return ProduceAsyncEnumerable(cmd).SingleOrDefault();
-                case QueryTypeEnum.Count:
+                case QueryTypeEnum.FirstOrDefaultAsync:
+                    return ProduceAsyncEnumerable(cmd).FirstOrDefaultAsync(token);
+                case QueryTypeEnum.FirstAsync:
+                    return ProduceAsyncEnumerable(cmd).FirstAsync(token);
+                case QueryTypeEnum.SingleAsync:
+                    return ProduceAsyncEnumerable(cmd).SingleAsync(token);
+                case QueryTypeEnum.SingleOrDefaultAsync:
+                    return ProduceAsyncEnumerable(cmd).SingleOrDefaultAsync(token);
+                case QueryTypeEnum.CountAsync:
                     return ProduceCountAsync(cmd);
-                case QueryTypeEnum.Any:
-                    return ProduceCountAsync(cmd).ContinueWith(task => task.Result > 0);
-                case QueryTypeEnum.List:
-                    return ProduceAsyncEnumerable(cmd).ToList();
+                case QueryTypeEnum.AnyAsync:
+                    return ProduceCountAsync(cmd);
+                case QueryTypeEnum.ListAsync:
+                    return ProduceAsyncEnumerable(cmd).ToListAsync(token);
 //                    var argument = typeof(TResult).GetGenericArguments()[0];
 //
 //                    var method = GetType().GetMethod("ProduceAsyncEnumerable", BindingFlags.Instance | BindingFlags.NonPublic).MakeGenericMethod(argument);
@@ -79,18 +79,17 @@ namespace NetCoreForce.Linq
 
                 case QueryTypeEnum.Enumerator:
                 default:
-                    return Task.FromResult(ProduceAsyncEnumerator(cmd));
+                    return ProduceAsyncEnumerator(cmd, token);
             }
         }
         
 
-        protected abstract Task<int> ProduceCountAsync(string cmd);
+        protected abstract ValueTask<int> ProduceCountAsync(string cmd);
 
         protected IAsyncEnumerable<T> ProduceAsyncEnumerable(string cmd)
-            => AsyncEnumerable.CreateEnumerable(() => ProduceAsyncEnumerator(cmd));
+            => AsyncEnumerable.Create(token => ProduceAsyncEnumerator(cmd, token));
 
-
-        protected abstract IAsyncEnumerator<T> ProduceAsyncEnumerator(string cmd);
+        protected abstract IAsyncEnumerator<T> ProduceAsyncEnumerator(string cmd, CancellationToken token);
 
         public string ToString(Expression expression)
         {
@@ -105,10 +104,10 @@ namespace NetCoreForce.Linq
             return new Query<TElement>(this, expression);
         }
 
-        public Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken token) 
+        public ValueTask<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken token) 
         {
-            var result = Execute(expression);
-            return (Task<TResult>) result;
+            var result = Execute(expression, token);
+            return (ValueTask<TResult>) result;
         }
         
         #endregion

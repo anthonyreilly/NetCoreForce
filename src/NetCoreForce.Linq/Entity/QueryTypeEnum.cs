@@ -2,13 +2,13 @@
 {
     public enum QueryTypeEnum
     {
-        List = 0,
-        First,
-        FirstOrDefault,
-        Single,
-        SingleOrDefault,
-        Any,
-        Count,
+        ListAsync = 0,
+        FirstAsync,
+        FirstOrDefaultAsync,
+        SingleAsync,
+        SingleOrDefaultAsync,
+        AnyAsync,
+        CountAsync,
         Enumerator
     }
 }

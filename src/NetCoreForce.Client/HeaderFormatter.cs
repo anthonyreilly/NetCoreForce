@@ -20,10 +20,12 @@ namespace NetCoreForce.Client
             //example: "If-Modified-Since: Tue, 23 Mar 2015 00:00:00 GMT"
             const string headerName = "If-Modified-Since";
 
-            string dateString = startDate.ToString("r", CultureInfo.InvariantCulture); //RFC1123 Pattern
+            var dateString = startDate.ToString("r", CultureInfo.InvariantCulture); //RFC1123 Pattern
 
-            var customHeaders = new Dictionary<string, string>(1);
-            customHeaders.Add(headerName, dateString);
+            var customHeaders = new Dictionary<string, string>(1)
+            {
+                {headerName, dateString}
+            };
 
             return customHeaders;
         }
@@ -46,10 +48,12 @@ namespace NetCoreForce.Client
             //example: "Sforce-Auto-Assign: FALSE"
             const string headerName = "Sforce-Auto-Assign";
 
-            string valueString = autoAssign.ToString().ToUpper();
+            var valueString = autoAssign.ToString().ToUpper();
 
-            var customHeaders = new Dictionary<string, string>(1);
-            customHeaders.Add(headerName, valueString);
+            var customHeaders = new Dictionary<string, string>(1)
+            {
+                {headerName, valueString}
+            };
 
             return customHeaders;
         }
@@ -65,23 +69,25 @@ namespace NetCoreForce.Client
         /// <returns>Single entry dictionary of "Sforce-Query-Options" with value of batchSize={batchSize}</returns>
         public static Dictionary<string, string> SforceQueryOptions(int batchSize)
         {
-            if(batchSize > 2000)
+            if (batchSize > 2000)
             {
-                throw new ArgumentException("Batch size can not exceed 2000", "batchSize");
+                throw new ArgumentException("Batch size can not exceed 2000", nameof(batchSize));
             }
 
-            if(batchSize < 200)
+            if (batchSize < 200)
             {
-                throw new ArgumentException("Batch size minimum is 200", "batchSize");
+                throw new ArgumentException("Batch size minimum is 200", nameof(batchSize));
             }
 
             //example: "Sforce-Query-Options: batchSize=1000"
             const string headerName = "Sforce-Query-Options";
 
-            string valueString = string.Format("batchSize={0}", batchSize.ToString(CultureInfo.InvariantCulture));
+            var valueString = $"batchSize={batchSize.ToString(CultureInfo.InvariantCulture)}";
 
-            var customHeaders = new Dictionary<string, string>(1);
-            customHeaders.Add(headerName, valueString);
+            var customHeaders = new Dictionary<string, string>(1)
+            {
+                {headerName, valueString}
+            };
 
             return customHeaders;
         }
@@ -99,18 +105,24 @@ namespace NetCoreForce.Client
         {
             //example: "Sforce-Call-Options: client=ForceClient, defaultNamespace=Test"
             const string headerName = "Sforce-Call-Options";
-            List<string> values = new List<string>();
+            var values = new List<string>();
 
             if (!string.IsNullOrEmpty(client))
-            { values.Add(string.Format("client={0}", client)); }
+            {
+                values.Add($"client={client}");
+            }
 
             if (!string.IsNullOrEmpty(defaultNamespace))
-            { values.Add(string.Format("defaultNamespace={0}", defaultNamespace)); }
+            {
+                values.Add($"defaultNamespace={defaultNamespace}");
+            }
 
-            string valueString = string.Join(", ", values);
+            var valueString = string.Join(", ", values);
 
-            var customHeaders = new Dictionary<string, string>(1);
-            customHeaders.Add(headerName, valueString);
+            var customHeaders = new Dictionary<string, string>(1)
+            {
+                {headerName, valueString}
+            };
 
             return customHeaders;
         }

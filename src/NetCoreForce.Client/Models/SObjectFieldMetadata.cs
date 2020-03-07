@@ -12,7 +12,7 @@ namespace NetCoreForce.Client.Models
         [JsonProperty(PropertyName = "calculated")]
         public bool Calculated { get; set; }
 
-        [JsonProperty(PropertyName = "createable")]
+        [JsonProperty(PropertyName = "creatable")]
         public bool Creatable { get; set; }
 
         [JsonProperty(PropertyName = "custom")]

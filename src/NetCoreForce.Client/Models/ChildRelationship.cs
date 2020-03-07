@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -31,6 +30,5 @@ namespace NetCoreForce.Client.Models
 
         [JsonProperty(PropertyName = "restrictedDelete")]
         public bool RestrictedDelete { get; set; }
-
     }
 }

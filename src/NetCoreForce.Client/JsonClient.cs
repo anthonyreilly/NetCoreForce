@@ -1,6 +1,4 @@
 using System;
-using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,8 +8,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NetCoreForce.Client.Serializer;
 using NetCoreForce.Client.Models;
 
 namespace NetCoreForce.Client
@@ -25,19 +21,14 @@ namespace NetCoreForce.Client
         //best practice is to reuse HttpClient
         //https://github.com/mspnp/performance-optimization/blob/master/ImproperInstantiation/docs/ImproperInstantiation.md
         //By default, and the ideal case, is using the static readonly HttpClient.
-        //Alternatively, for testing and special cases, a class instance instnace of an HttpClient can be used instead.
+        //Alternatively, for testing and special cases, a class instance instance of an HttpClient can be used instead.
         private static readonly HttpClient _SharedHttpClient;
-        private HttpClient _httpClient;
-        private HttpClient SharedHttpClient
-        {
-            get
-            {
-                //use the instance client when extant, otherwise use the default shared instance.
-                return _httpClient ?? _SharedHttpClient;
-            }
-        }
+        
+        private readonly HttpClient _httpClient;
+        
+        private readonly AuthenticationHeaderValue _authHeaderValue;
 
-        AuthenticationHeaderValue _authHeaderValue;
+        private HttpClient SharedHttpClient => _httpClient ?? _SharedHttpClient;
 
         /// <summary>
         /// JSON Client static constructor, initializes the default shared HttpClient instance.
@@ -66,90 +57,54 @@ namespace NetCoreForce.Client
         public async Task<T> HttpGetAsync<T>(Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
             //TODO: can this handle T = string?
-            try
-            {
-                return await HttpAsync<T>(uri, HttpMethod.Get, null, customHeaders, deserializeResponse);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return await HttpAsync<T>(uri, HttpMethod.Get, null, customHeaders, deserializeResponse);
         }
 
         public async Task<T> HttpPostAsync<T>(object inputObject, Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
             var json = JsonSerializer.SerializeForCreate(inputObject);
 
-            try
-            {
-                var content = new StringContent(json, Encoding.UTF8, JsonMimeType);
+            var content = new StringContent(json, Encoding.UTF8, JsonMimeType);
 
-                HttpRequestMessage request = new HttpRequestMessage();
-                request.Headers.Authorization = _authHeaderValue;
-                request.RequestUri = uri;
-                request.Method = HttpMethod.Post;
-                request.Content = content;
+            var request = new HttpRequestMessage();
+            request.Headers.Authorization = _authHeaderValue;
+            request.RequestUri = uri;
+            request.Method = HttpMethod.Post;
+            request.Content = content;
 
-                return await GetResponse<T>(request, customHeaders, deserializeResponse);
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return await GetResponse<T>(request, customHeaders, deserializeResponse);
         }
 
         public async Task<T> HttpPatchAsync<T>(object inputObject, Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
-            try
-            {
-                var json = JsonSerializer.SerializeForUpdate(inputObject);
-                var content = new StringContent(json, Encoding.UTF8, JsonMimeType);
+            var json = JsonSerializer.SerializeForUpdate(inputObject);
+            var content = new StringContent(json, Encoding.UTF8, JsonMimeType);
 
-                return await HttpAsync<T>(uri, new HttpMethod("PATCH"), content, customHeaders, deserializeResponse);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return await HttpAsync<T>(uri, new HttpMethod("PATCH"), content, customHeaders, deserializeResponse);
         }
 
         public async Task<T> HttpDeleteAsync<T>(Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
-            try
-            {
-                HttpRequestMessage request = new HttpRequestMessage();
-                request.Headers.Authorization = _authHeaderValue;
-                request.RequestUri = uri;
-                request.Method = HttpMethod.Delete;
+            var request = new HttpRequestMessage();
+            request.Headers.Authorization = _authHeaderValue;
+            request.RequestUri = uri;
+            request.Method = HttpMethod.Delete;
 
-                return await GetResponse<T>(request, customHeaders, deserializeResponse);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return await GetResponse<T>(request, customHeaders, deserializeResponse);
         }
 
         private async Task<T> HttpAsync<T>(Uri uri, HttpMethod httpMethod, HttpContent content = null, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
-            try
+            var request = new HttpRequestMessage();
+            request.Headers.Authorization = _authHeaderValue;
+            request.RequestUri = uri;
+            request.Method = httpMethod;
+            if (content != null)
             {
-                HttpRequestMessage request = new HttpRequestMessage();
-                request.Headers.Authorization = _authHeaderValue;
-                request.RequestUri = uri;
-                request.Method = httpMethod;
-                if (content != null)
-                {
-                    request.Content = content;
-                }
+                request.Content = content;
+            }
 
-                return await GetResponse<T>(request, customHeaders, deserializeResponse);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return await GetResponse<T>(request, customHeaders, deserializeResponse);
         }
 
         /// <summary>
@@ -166,23 +121,23 @@ namespace NetCoreForce.Client
         {
             if (customHeaders != null && customHeaders.Count > 0)
             {
-                foreach (KeyValuePair<string, string> header in customHeaders)
+                foreach (var header in customHeaders)
                 {
                     request.Headers.Add(header.Key, header.Value);
                 }
             }
 
-            HttpResponseMessage responseMessage = null;
+            HttpResponseMessage responseMessage;
             try
             {
                 responseMessage = await SharedHttpClient.SendAsync(request).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                string errMsg = "Error sending HTTP request:" + ex.Message;
+                var errMsg = "Error sending HTTP request:" + ex.Message;
                 if (ex.InnerException != null && !string.IsNullOrEmpty(ex.InnerException.Message))
                 {
-                    errMsg += " " + ex.InnerException.Message;
+                    errMsg += $" {ex.InnerException.Message}";
                 }
                 Debug.WriteLine(errMsg);
                 throw new ForceApiException(errMsg);
@@ -192,10 +147,10 @@ namespace NetCoreForce.Client
             //API usage response header
             //e.g. "Sforce-Limit-Info: api-usage=90/15000"
             const string SforceLimitInfoHeaderName = "Sforce-Limit-Info";
-            IEnumerable<string> limitValues = GetHeaderValues(responseMessage.Headers, SforceLimitInfoHeaderName);
+            var limitValues = GetHeaderValues(responseMessage.Headers, SforceLimitInfoHeaderName);
             if (limitValues != null)
             {
-                Debug.WriteLine(string.Format("{0}: {1}", SforceLimitInfoHeaderName, limitValues.FirstOrDefault() ?? "none"));
+                Debug.WriteLine($"{SforceLimitInfoHeaderName}: {limitValues.FirstOrDefault() ?? "none"}");
             }
 #endif
 
@@ -204,7 +159,7 @@ namespace NetCoreForce.Client
                 return JsonConvert.DeserializeObject<T>(string.Empty);
             }
 
-            //sucessful response, skip deserialization of response content
+            // successful response, skip deserialization of response content
             if (responseMessage.IsSuccessStatusCode && !deserializeResponse)
             {
                 return JsonConvert.DeserializeObject<T>(string.Empty);
@@ -214,7 +169,7 @@ namespace NetCoreForce.Client
             {
                 try
                 {
-                    string responseContent = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var responseContent = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                     if (responseMessage.IsSuccessStatusCode)
                     {
@@ -238,57 +193,56 @@ namespace NetCoreForce.Client
 
                         var results = JsonConvert.DeserializeObject<List<string>>(responseContent);
 
-                        var fex = new ForceApiException("Multiple matches for External ID value, see ObjectUrls");
+                        var fex = new ForceApiException("Multiple matches for External ID value, see ObjectUrls")
+                        {
+                            ObjectUrls = results
+                        };
 
-                        fex.ObjectUrls = results;
-                        
                         throw fex;
                     }
-                    else
+
+                    var msg = $"Unable to complete request, Salesforce API returned {responseMessage.StatusCode.ToString()}.";
+
+                    List<ErrorResponse> errors = null;
+
+                    try
                     {
-                        string msg = string.Format("Unable to complete request, Salesforce API returned {0}.", responseMessage.StatusCode.ToString());
+                        errors = JsonConvert.DeserializeObject<List<ErrorResponse>>(responseContent);
 
-                        List<ErrorResponse> errors = null;
-
-                        try
+                        // There will often only be one error code - append this to the message
+                        if (errors != null && errors.Count > 0)
                         {
-                            errors = JsonConvert.DeserializeObject<List<ErrorResponse>>(responseContent);
-
-                            // There will often only be one error code - append this to the message
-                            if (errors != null && errors.Count > 0)
-                            {
-                                msg += string.Format(" ErrorCode {0}: {1}.", errors[0].ErrorCode, errors[0].Message);
-                            }
-
-                            // inform if there are multiple errors that need to be checked
-                            if (errors != null && errors.Count > 1)
-                            {
-                                msg += " Additional errors returned, see Errors for complete list.";
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            msg += string.Format(" Unable to parse error details: {0}" + ex.Message);
+                            msg += $" ErrorCode {errors[0].ErrorCode}: {errors[0].Message}.";
                         }
 
-                        throw new ForceApiException(msg, errors, responseMessage.StatusCode);
+                        // inform if there are multiple errors that need to be checked
+                        if (errors != null && errors.Count > 1)
+                        {
+                            msg += " Additional errors returned, see Errors for complete list.";
+                        }
                     }
+                    catch (Exception ex)
+                    {
+                        msg += $" Unable to parse error details: {ex.Message}";
+                    }
+
+                    throw new ForceApiException(msg, errors, responseMessage.StatusCode);
                 }
-                catch(ForceApiException ex)
+                catch (ForceApiException)
                 {
-                    throw ex;
+                    throw;
                 }
                 catch (Exception ex)
                 {
-                    throw new ForceApiException(string.Format("Error parsing response content: {0}", ex.Message));
+                    throw new ForceApiException($"Error parsing response content: {ex.Message}");
                 }
             }
 
-            throw new ForceApiException(string.Format("Error processing response: returned {0} for {1}", responseMessage.ReasonPhrase, request.RequestUri.ToString()));
+            throw new ForceApiException($"Error processing response: returned {responseMessage.ReasonPhrase} for {request.RequestUri.ToString()}");
         }
 
         /// <summary>
-        /// Get values for a particular reponse header
+        /// Get values for a particular response header
         /// </summary>
         /// <param name="headers">HttpHeaders from the HttpResponseMessage</param>
         /// <param name="headerName">Header Name</param>
@@ -297,14 +251,13 @@ namespace NetCoreForce.Client
         {
             if (headers != null)
             {
-                IEnumerable<string> values;
-                if (headers.TryGetValues(headerName, out values))
+                if (headers.TryGetValues(headerName, out var values))
                 {
                     return values;
                 }
             }
 
-            Debug.WriteLine(string.Format("{0} header not found in response", headerName));
+            Debug.WriteLine($"{headerName} header not found in response");
             return null;
         }
 
@@ -314,10 +267,7 @@ namespace NetCoreForce.Client
         public void Dispose()
         {
             //only dispose instance member, if any
-            if (_httpClient != null)
-            {
-                _httpClient.Dispose();
-            }
+            _httpClient?.Dispose();
         }
     }
 }

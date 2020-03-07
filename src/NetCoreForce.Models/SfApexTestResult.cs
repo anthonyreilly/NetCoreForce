@@ -29,7 +29,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "id")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public string Id { get; set; }
 
 		///<summary>
@@ -39,7 +39,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "systemModstamp")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
@@ -74,7 +74,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: ApexClass</para>
 		///</summary>
 		[JsonProperty(PropertyName = "apexClass")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfApexClass ApexClass { get; set; }
 
 		///<summary>
@@ -118,7 +118,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: AsyncApexJob</para>
 		///</summary>
 		[JsonProperty(PropertyName = "asyncApexJob")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfAsyncApexJob AsyncApexJob { get; set; }
 
 		///<summary>
@@ -135,7 +135,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: QueueItem</para>
 		///</summary>
 		[JsonProperty(PropertyName = "queueItem")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfApexTestQueueItem QueueItem { get; set; }
 
 		///<summary>
@@ -152,7 +152,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: ApexLog</para>
 		///</summary>
 		[JsonProperty(PropertyName = "apexLog")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfApexLog ApexLog { get; set; }
 
 		///<summary>
@@ -169,7 +169,7 @@ namespace NetCoreForce.Models
 		/// <para>RelationshipName: ApexTestRunResult</para>
 		///</summary>
 		[JsonProperty(PropertyName = "apexTestRunResult")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Creatable(false)]
 		public SfApexTestRunResult ApexTestRunResult { get; set; }
 
 		///<summary>

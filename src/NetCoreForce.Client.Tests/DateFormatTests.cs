@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using NetCoreForce.Client;
 using NetCoreForce.Client.Models;
 using Xunit;
 
