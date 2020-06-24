@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿extern alias rxasync;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 using NetCoreForce.Linq.Helper;
+using rxasync.System.Collections.Generic;
 
 namespace NetCoreForce.Linq
 {

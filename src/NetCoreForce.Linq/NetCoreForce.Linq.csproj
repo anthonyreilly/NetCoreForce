@@ -43,4 +43,11 @@
   <ItemGroup>
     <Folder Include="Extensions\" />
   </ItemGroup>
+  <Target Name="ChangeAliasesOfReactiveExtensions" BeforeTargets="FindReferenceAssembliesForReferences;ResolveReferences">
+    <ItemGroup>
+      <ReferencePath Condition="'%(FileName)' == 'System.Interactive.Async'">
+        <Aliases>rxasync</Aliases>
+      </ReferencePath>
+    </ItemGroup>
+  </Target>
 </Project>

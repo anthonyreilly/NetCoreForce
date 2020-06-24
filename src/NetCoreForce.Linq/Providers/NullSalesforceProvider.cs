@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿extern alias rxasync;
 using System.Threading.Tasks;
 using NetCoreForce.Linq.Conventions.Naming;
 using NetCoreForce.Linq.Entity;
+using rxasync.System.Collections.Generic;
+using rxasync.System.Linq;
 
 namespace NetCoreForce.Linq.Providers
 {

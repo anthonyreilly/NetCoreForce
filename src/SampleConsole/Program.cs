@@ -1,16 +1,11 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.IO;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using NetCoreForce.Client;
+﻿using NetCoreForce.Client;
 using NetCoreForce.Client.Models;
 using NetCoreForce.Models;
-using System.Dynamic;
-using System.Diagnostics;
 using Newtonsoft.Json;
+using System;
+using System.Dynamic;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace SampleConsole
 {
@@ -55,9 +50,9 @@ namespace SampleConsole
             {
                 ForceClient client = new ForceClient(auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken);
 
-                List<SfContact> contacts = await client.Query<SfContact>("SELECT Id, Name, SystemModstamp, Account.Id, Account.Name, Account.SystemModstamp FROM Contact", false);
+                var contacts = await client.Query<SfContact>("SELECT Id, Name, SystemModstamp, Account.Id, Account.Name, Account.SystemModstamp FROM Contact", false);
 
-                List<CustomAccount> customAccounts = await client.Query<CustomAccount>("SELECT Id, CustomerPriority__c FROM Account", false);
+                var customAccounts = await client.Query<CustomAccount>("SELECT Id, CustomerPriority__c FROM Account", false);
 
                 //Using a dynamic object
                 dynamic dynoObject = new ExpandoObject();
@@ -71,14 +66,14 @@ namespace SampleConsole
 
                 // First create the async enumerable. At this point, no query has been executed.
                 // batchSize can be omitted to use the default (usually 2000), or given a custom value between 200 and 2000.
-                IAsyncEnumerable<SfContact> contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id, Name FROM Contact ", batchSize: 200);
+                var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id, Name FROM Contact ", batchSize: 200);
 
                 // Get the enumerator, in a using block for proper disposal
-                using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+                await using (var contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
                 {
                     // MoveNext() will execute the query and get the first batch of results.
                     // Once the inital result batch has been exhausted, the remaining batches, if any, will be retrieved.
-                    while (await contactsEnumerator.MoveNext())
+                    while (await contactsEnumerator.MoveNextAsync())
                     {
                         SfContact contact = contactsEnumerator.Current;
                         // process your results

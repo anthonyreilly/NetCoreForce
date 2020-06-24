@@ -1,11 +1,9 @@
+using NetCoreForce.Models;
 using System;
 using System.Net;
 using System.Net.Http;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using NetCoreForce.Client;
 using Xunit;
-using NetCoreForce.Models;
 
 namespace NetCoreForce.Client.Tests
 {
@@ -21,9 +19,9 @@ namespace NetCoreForce.Client.Tests
 
             ArgumentException ex = await Assert.ThrowsAsync<ArgumentException>(async () =>
             {
-                using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+                await using (var contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
                 {
-                    while (await contactsEnumerator.MoveNext())
+                    while (await contactsEnumerator.MoveNextAsync())
                     {
                         var result = contactsEnumerator.Current;
                     }
@@ -61,10 +59,10 @@ namespace NetCoreForce.Client.Tests
 
             var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 800", batchSize: 200);
 
-            List<SfContact> contacts = new List<SfContact>(800);
-            using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+            var contacts = new System.Collections.Generic.List<SfContact>(800);
+            await using (var contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
             {
-                while (await contactsEnumerator.MoveNext())
+                while (await contactsEnumerator.MoveNextAsync())
                 {
                     contacts.Add(contactsEnumerator.Current);
                 }

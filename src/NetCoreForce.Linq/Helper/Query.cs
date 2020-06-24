@@ -1,16 +1,17 @@
 ﻿// Copyright (c) Microsoft Corporation.  All rights reserved.
 // This source code is made available under the terms of the Microsoft Public License (MS-PL)
 
+extern alias rxasync;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading;
+using rxasync.System.Collections.Generic;
 
 namespace NetCoreForce.Linq.Helper
 {
-   
+
     /// <summary>
     /// A default implementation of IQueryable for use with QueryProvider
     /// </summary>

@@ -1,11 +1,14 @@
-﻿using System;
+﻿extern alias rxasync;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using NetCoreForce.Client.Models;
+using rxLinq = rxasync.System.Linq;
+using rxGen = rxasync.System.Collections.Generic;
+
 
 namespace NetCoreForce.Client
 {
@@ -207,28 +210,88 @@ namespace NetCoreForce.Client
             return default(T);
         }
 
+#if NETSTANDARD2_0
+
         /// <summary>
-        /// Retrieve a <see cref="IAsyncEnumerable{T}"/> using a SOQL query. Batches will be retrieved asynchronously.
+        /// Retrieve a <see cref="rxGen.IAsyncEnumerable{T}"/> using a SOQL query. Batches will be retrieved asynchronously.
         /// <para>When using the iterator, the initial result batch will be returned as soon as it is received. The additional result batches will be retrieved only as needed.</para>
         /// </summary>
         /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
         /// <param name="queryAll">Optional. True if deleted records are to be included.await Defaults to false.</param>
         /// <param name="batchSize">Optional. Size of result batches between 200 and 2000</param>
-        /// <returns><see cref="IAsyncEnumerable{T}"/> of results</returns>
-        public IAsyncEnumerable<T> QueryAsync<T>(string queryString, bool queryAll = false, int? batchSize = null)
+        /// <returns><see cref="rxGen.IAsyncEnumerable{T}"/> of results</returns>
+        public async IAsyncEnumerable<T> QueryAsync<T>(string queryString, bool queryAll = false, int? batchSize = null)
         {
-            return AsyncEnumerable.CreateEnumerable(() => QueryAsyncEnumerator<T>(queryString, queryAll, batchSize));
+            using var enumerator = QueryAsyncEnumeratorInternal<T>(queryString, queryAll, batchSize);
+            while (await enumerator.MoveNext(default))
+                yield return enumerator.Current;
         }
 
         /// <summary>
-        /// Retrieve a <see cref="IAsyncEnumerator{T}"/> using a SOQL query. Batches will be retrieved asynchronously.
+        /// Retrieve a <see cref="rxGen.IAsyncEnumerator{T}"/> using a SOQL query. Batches will be retrieved asynchronously.
         /// <para>When using the iterator, the initial result batch will be returned as soon as it is received. The additional result batches will be retrieved only as needed.</para>
         /// </summary>
         /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
         /// <param name="queryAll">Optional. True if deleted records are to be included.await Defaults to false.</param>
         /// <param name="batchSize">Optional. Size of result batches between 200 and 2000</param>
-        /// <returns><see cref="IAsyncEnumerator{T}"/> of results</returns>
+        /// <returns><see cref="rxGen.IAsyncEnumerator{T}"/> of results</returns>
         public IAsyncEnumerator<T> QueryAsyncEnumerator<T>(string queryString, bool queryAll = false, int? batchSize = null)
+        {
+            return QueryAsync<T>(queryString, queryAll, batchSize).GetAsyncEnumerator();
+        }
+
+#elif NETSTANDARD1_6
+
+        /// <summary>
+        /// Retrieve a <see cref="rxGen.IAsyncEnumerable{T}"/> using a SOQL query. Batches will be retrieved asynchronously.
+        /// <para>When using the iterator, the initial result batch will be returned as soon as it is received. The additional result batches will be retrieved only as needed.</para>
+        /// </summary>
+        /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
+        /// <param name="queryAll">Optional. True if deleted records are to be included.await Defaults to false.</param>
+        /// <param name="batchSize">Optional. Size of result batches between 200 and 2000</param>
+        /// <returns><see cref="rxGen.IAsyncEnumerable{T}"/> of results</returns>
+        public rxGen.IAsyncEnumerable<T> QueryAsync<T>(string queryString, bool queryAll = false, int? batchSize = null)
+        {
+            return QueryAsyncInternal<T>(queryString, queryAll, batchSize);
+        }
+
+        /// <summary>
+        /// Retrieve a <see cref="rxGen.IAsyncEnumerator{T}"/> using a SOQL query. Batches will be retrieved asynchronously.
+        /// <para>When using the iterator, the initial result batch will be returned as soon as it is received. The additional result batches will be retrieved only as needed.</para>
+        /// </summary>
+        /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
+        /// <param name="queryAll">Optional. True if deleted records are to be included.await Defaults to false.</param>
+        /// <param name="batchSize">Optional. Size of result batches between 200 and 2000</param>
+        /// <returns><see cref="rxGen.IAsyncEnumerator{T}"/> of results</returns>
+        public rxGen.IAsyncEnumerator<T> QueryAsyncEnumerator<T>(string queryString, bool queryAll = false, int? batchSize = null)
+        {
+            return QueryAsyncEnumeratorInternal<T>(queryString, queryAll, batchSize);
+        }
+
+#endif
+
+        /// <summary>
+        /// Retrieve a <see cref="rxGen.IAsyncEnumerable{T}"/> using a SOQL query. Batches will be retrieved asynchronously.
+        /// <para>When using the iterator, the initial result batch will be returned as soon as it is received. The additional result batches will be retrieved only as needed.</para>
+        /// </summary>
+        /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
+        /// <param name="queryAll">Optional. True if deleted records are to be included.await Defaults to false.</param>
+        /// <param name="batchSize">Optional. Size of result batches between 200 and 2000</param>
+        /// <returns><see cref="rxGen.IAsyncEnumerable{T}"/> of results</returns>
+        internal rxGen.IAsyncEnumerable<T> QueryAsyncInternal<T>(string queryString, bool queryAll = false, int? batchSize = null)
+        {
+            return rxLinq.AsyncEnumerable.CreateEnumerable(() => QueryAsyncEnumeratorInternal<T>(queryString, queryAll, batchSize));
+        }
+
+        /// <summary>
+        /// Retrieve a <see cref="rxGen.IAsyncEnumerator{T}"/> using a SOQL query. Batches will be retrieved asynchronously.
+        /// <para>When using the iterator, the initial result batch will be returned as soon as it is received. The additional result batches will be retrieved only as needed.</para>
+        /// </summary>
+        /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
+        /// <param name="queryAll">Optional. True if deleted records are to be included.await Defaults to false.</param>
+        /// <param name="batchSize">Optional. Size of result batches between 200 and 2000</param>
+        /// <returns><see cref="rxGen.IAsyncEnumerator{T}"/> of results</returns>
+        internal rxGen.IAsyncEnumerator<T> QueryAsyncEnumeratorInternal<T>(string queryString, bool queryAll = false, int? batchSize = null)
         {
             Dictionary<string, string> headers = new Dictionary<string, string>();
 
@@ -250,7 +313,7 @@ namespace NetCoreForce.Client
             var done = false;
             var nextRecordsUri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString, queryAll);
 
-            return AsyncEnumerable.CreateEnumerator(MoveNextAsync, Current, Dispose);
+            return rxLinq.AsyncEnumerable.CreateEnumerator(MoveNextAsync, Current, Dispose);
 
             async Task<bool> MoveNextAsync(CancellationToken token)
             {
@@ -512,7 +575,7 @@ namespace NetCoreForce.Client
             return;
         }
 
-        #region metadata
+#region metadata
 
         /// <summary>
         /// Lists information about limits in your org.
@@ -620,7 +683,7 @@ namespace NetCoreForce.Client
             return await client.HttpGetAsync<DescribeGlobal>(uri);
         }
 
-        #endregion
+#endregion
 
     }
 }

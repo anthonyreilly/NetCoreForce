@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿extern alias rxasync;
 using System.Threading.Tasks;
 using NetCoreForce.Client;
 using NetCoreForce.Linq.Conventions.Naming;
 using NetCoreForce.Linq.Entity;
+using rxasync.System.Collections.Generic;
 
 namespace NetCoreForce.Linq.Providers
 {
@@ -22,7 +23,7 @@ namespace NetCoreForce.Linq.Providers
 
         protected override IAsyncEnumerator<T> ProduceAsyncEnumerator(string cmd)
         {
-            return this.ForceClient.QueryAsyncEnumerator<T>(cmd, queryAll:false);
+            return this.ForceClient.QueryAsyncEnumeratorInternal<T>(cmd, queryAll:false);
         }
     }
 }

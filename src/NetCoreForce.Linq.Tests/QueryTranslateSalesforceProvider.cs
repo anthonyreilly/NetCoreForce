@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿extern alias rxasync;
 using NetCoreForce.Linq.Conventions.Naming;
 using NetCoreForce.Linq.Entity;
 using NetCoreForce.Linq.Providers;
+using rxasync.System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace NetCoreForce.Linq.Tests
 {
