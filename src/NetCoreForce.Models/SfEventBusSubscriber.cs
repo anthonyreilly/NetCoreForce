@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -91,6 +91,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "tip")]
 		[Updateable(false), Createable(false)]
 		public int? Tip { get; set; }
+
+		///<summary>
+		/// Retry Attempts
+		/// <para>Name: Retries</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "retries")]
+		[Updateable(false), Createable(false)]
+		public int? Retries { get; set; }
+
+		///<summary>
+		/// Last Error Message
+		/// <para>Name: LastError</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastError")]
+		[Updateable(false), Createable(false)]
+		public string LastError { get; set; }
 
 		///<summary>
 		/// Status

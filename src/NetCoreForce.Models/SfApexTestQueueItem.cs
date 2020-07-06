@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -127,6 +127,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "testRunResultId")]
 		[Updateable(false), Createable(false)]
 		public string TestRunResultId { get; set; }
+
+		///<summary>
+		/// Should Skip Code Coverage
+		/// <para>Name: ShouldSkipCodeCoverage</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "shouldSkipCodeCoverage")]
+		public bool? ShouldSkipCodeCoverage { get; set; }
 
 	}
 }

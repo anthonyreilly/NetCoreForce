@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -197,6 +197,16 @@ namespace NetCoreForce.Models
 		public bool? IsVerified { get; set; }
 
 		///<summary>
+		/// Has entity links
+		/// <para>Name: HasEntityLinks</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "hasEntityLinks")]
+		[Updateable(false), Createable(false)]
+		public bool? HasEntityLinks { get; set; }
+
+		///<summary>
 		/// Status
 		/// <para>Name: Status</para>
 		/// <para>SF Type: picklist</para>
@@ -204,6 +214,54 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "status")]
 		public string Status { get; set; }
+
+		///<summary>
+		/// Feed Comment ID
+		/// <para>Name: ThreadParentId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "threadParentId")]
+		[Updateable(false), Createable(true)]
+		public string ThreadParentId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: FeedComment
+		/// <para>RelationshipName: ThreadParent</para>
+		///</summary>
+		[JsonProperty(PropertyName = "threadParent")]
+		[Updateable(false), Createable(false)]
+		public SfFeedComment ThreadParent { get; set; }
+
+		///<summary>
+		/// Thread Level
+		/// <para>Name: ThreadLevel</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "threadLevel")]
+		[Updateable(false), Createable(true)]
+		public int? ThreadLevel { get; set; }
+
+		///<summary>
+		/// Thread Children Count
+		/// <para>Name: ThreadChildrenCount</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "threadChildrenCount")]
+		[Updateable(false), Createable(true)]
+		public int? ThreadChildrenCount { get; set; }
+
+		///<summary>
+		/// Thread Last Updated Date
+		/// <para>Name: ThreadLastUpdatedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "threadLastUpdatedDate")]
+		[Updateable(false), Createable(true)]
+		public DateTimeOffset? ThreadLastUpdatedDate { get; set; }
 
 	}
 }

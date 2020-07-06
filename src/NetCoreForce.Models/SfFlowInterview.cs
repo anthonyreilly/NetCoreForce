@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -150,7 +150,7 @@ namespace NetCoreForce.Models
 		public string InterviewLabel { get; set; }
 
 		///<summary>
-		/// Why Paused
+		/// Pause Reason
 		/// <para>Name: PauseLabel</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>

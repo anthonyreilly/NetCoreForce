@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -451,7 +451,7 @@ namespace NetCoreForce.Models
 		public string BusinessOwnerId { get; set; }
 
 		///<summary>
-		/// Business Status
+		/// Field Usage
 		/// <para>Name: BusinessStatus</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
@@ -461,7 +461,7 @@ namespace NetCoreForce.Models
 		public string BusinessStatus { get; set; }
 
 		///<summary>
-		/// Security Classification
+		/// Data Sensitivity Level
 		/// <para>Name: SecurityClassification</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>

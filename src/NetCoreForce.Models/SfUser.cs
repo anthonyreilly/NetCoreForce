@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -296,7 +296,7 @@ namespace NetCoreForce.Models
 		public string Fax { get; set; }
 
 		///<summary>
-		/// Cell
+		/// Mobile
 		/// <para>Name: MobilePhone</para>
 		/// <para>SF Type: phone</para>
 		/// <para>Nillable: True</para>
@@ -635,7 +635,7 @@ namespace NetCoreForce.Models
 		public bool? UserPermissionsKnowledgeUser { get; set; }
 
 		///<summary>
-		/// Force.com Flow User
+		/// Flow User
 		/// <para>Name: UserPermissionsInteractionUser</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -1121,6 +1121,15 @@ namespace NetCoreForce.Models
 		public bool? UserPreferencesDisableWorkEmail { get; set; }
 
 		///<summary>
+		/// PipelineViewHideHelpPopover
+		/// <para>Name: UserPreferencesPipelineViewHideHelpPopover</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesPipelineViewHideHelpPopover")]
+		public bool? UserPreferencesPipelineViewHideHelpPopover { get; set; }
+
+		///<summary>
 		/// HideS1BrowserUI
 		/// <para>Name: UserPreferencesHideS1BrowserUI</para>
 		/// <para>SF Type: boolean</para>
@@ -1337,13 +1346,66 @@ namespace NetCoreForce.Models
 		public bool? UserPreferencesExcludeMailAppAttachments { get; set; }
 
 		///<summary>
+		/// SuppressTaskSFXReminders
+		/// <para>Name: UserPreferencesSuppressTaskSFXReminders</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesSuppressTaskSFXReminders")]
+		public bool? UserPreferencesSuppressTaskSFXReminders { get; set; }
+
+		///<summary>
+		/// SuppressEventSFXReminders
+		/// <para>Name: UserPreferencesSuppressEventSFXReminders</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesSuppressEventSFXReminders")]
+		public bool? UserPreferencesSuppressEventSFXReminders { get; set; }
+
+		///<summary>
+		/// PreviewCustomTheme
+		/// <para>Name: UserPreferencesPreviewCustomTheme</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesPreviewCustomTheme")]
+		public bool? UserPreferencesPreviewCustomTheme { get; set; }
+
+		///<summary>
+		/// HasCelebrationBadge
+		/// <para>Name: UserPreferencesHasCelebrationBadge</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesHasCelebrationBadge")]
+		public bool? UserPreferencesHasCelebrationBadge { get; set; }
+
+		///<summary>
+		/// UserDebugModePref
+		/// <para>Name: UserPreferencesUserDebugModePref</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesUserDebugModePref")]
+		public bool? UserPreferencesUserDebugModePref { get; set; }
+
+		///<summary>
+		/// NewLightningReportRunPageEnabled
+		/// <para>Name: UserPreferencesNewLightningReportRunPageEnabled</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesNewLightningReportRunPageEnabled")]
+		public bool? UserPreferencesNewLightningReportRunPageEnabled { get; set; }
+
+		///<summary>
 		/// Contact ID
 		/// <para>Name: ContactId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "contactId")]
-		[Updateable(false), Createable(true)]
 		public string ContactId { get; set; }
 
 		///<summary>
@@ -1544,6 +1606,23 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isProfilePhotoActive")]
 		[Updateable(false), Createable(false)]
 		public bool? IsProfilePhotoActive { get; set; }
+
+		///<summary>
+		/// Individual ID
+		/// <para>Name: IndividualId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "individualId")]
+		public string IndividualId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Individual
+		/// <para>RelationshipName: Individual</para>
+		///</summary>
+		[JsonProperty(PropertyName = "individual")]
+		[Updateable(false), Createable(false)]
+		public SfIndividual Individual { get; set; }
 
 	}
 }

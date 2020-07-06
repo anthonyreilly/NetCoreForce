@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -91,6 +91,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "defaultValue")]
 		[Updateable(false), Createable(false)]
 		public bool? DefaultValue { get; set; }
+
+		///<summary>
+		/// Change Owner Option ID
+		/// <para>Name: ParentId</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "parentId")]
+		[Updateable(false), Createable(false)]
+		public string ParentId { get; set; }
 
 	}
 }

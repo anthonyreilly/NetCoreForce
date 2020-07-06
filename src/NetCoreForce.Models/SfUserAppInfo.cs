@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -134,6 +134,23 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "formFactor")]
 		public string FormFactor { get; set; }
+
+		///<summary>
+		/// App Definition ID
+		/// <para>Name: AppDefinitionId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "appDefinitionId")]
+		public string AppDefinitionId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: AppDefinition
+		/// <para>RelationshipName: AppDefinition</para>
+		///</summary>
+		[JsonProperty(PropertyName = "appDefinition")]
+		[Updateable(false), Createable(false)]
+		public SfAppDefinition AppDefinition { get; set; }
 
 	}
 }

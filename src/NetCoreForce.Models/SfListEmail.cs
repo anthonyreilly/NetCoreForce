@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -229,6 +229,33 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "totalSent")]
 		[Updateable(false), Createable(false)]
 		public int? TotalSent { get; set; }
+
+		///<summary>
+		/// Campaign ID
+		/// <para>Name: CampaignId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "campaignId")]
+		public string CampaignId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Campaign
+		/// <para>RelationshipName: Campaign</para>
+		///</summary>
+		[JsonProperty(PropertyName = "campaign")]
+		[Updateable(false), Createable(false)]
+		public SfCampaign Campaign { get; set; }
+
+		///<summary>
+		/// Is Tracked
+		/// <para>Name: IsTracked</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isTracked")]
+		[Updateable(false), Createable(false)]
+		public bool? IsTracked { get; set; }
 
 	}
 }

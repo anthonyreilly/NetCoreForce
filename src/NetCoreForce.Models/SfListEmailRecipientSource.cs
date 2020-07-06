@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -145,14 +145,6 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "sourceListId")]
 		public string SourceListId { get; set; }
-
-		///<summary>
-		/// ReferenceTo: ListView
-		/// <para>RelationshipName: SourceList</para>
-		///</summary>
-		[JsonProperty(PropertyName = "sourceList")]
-		[Updateable(false), Createable(false)]
-		public SfListView SourceList { get; set; }
 
 		///<summary>
 		/// Type

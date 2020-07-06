@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -39,7 +39,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "opportunityId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Createable(true)]
 		public string OpportunityId { get; set; }
 
 		///<summary>
@@ -57,7 +57,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "accountToId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Createable(true)]
 		public string AccountToId { get; set; }
 
 		///<summary>
@@ -75,7 +75,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "role")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Createable(true)]
 		public string Role { get; set; }
 
 		///<summary>
@@ -85,7 +85,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isPrimary")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Createable(true)]
 		public bool? IsPrimary { get; set; }
 
 		///<summary>

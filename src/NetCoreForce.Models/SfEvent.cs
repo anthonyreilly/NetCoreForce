@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -21,24 +21,6 @@ namespace NetCoreForce.Models
 		{
 			get { return "Event"; }
 		}
-
-		///<summary>
-		/// Activity Extension ID
-		/// <para>Name: ActivityExtensionId</para>
-		/// <para>SF Type: reference</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "activityExtensionId")]
-		[Updateable(false), Createable(false)]
-		public string ActivityExtensionId { get; set; }
-
-		///<summary>
-		/// ReferenceTo: ActivityExtension
-		/// <para>RelationshipName: ActivityExtension</para>
-		///</summary>
-		[JsonProperty(PropertyName = "activityExtension")]
-		[Updateable(false), Createable(false)]
-		public SfActivityExtension ActivityExtension { get; set; }
 
 		///<summary>
 		/// Activity ID
@@ -446,6 +428,76 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "eventSubtype")]
 		[Updateable(false), Createable(true)]
 		public string EventSubtype { get; set; }
+
+		///<summary>
+		/// Historical Event, Not Following Recurrence
+		/// <para>Name: IsRecurrence2Exclusion</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isRecurrence2Exclusion")]
+		[Updateable(false), Createable(false)]
+		public bool? IsRecurrence2Exclusion { get; set; }
+
+		///<summary>
+		/// Recurrence Pattern
+		/// <para>Name: Recurrence2PatternText</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "recurrence2PatternText")]
+		[Updateable(false), Createable(false)]
+		public string Recurrence2PatternText { get; set; }
+
+		///<summary>
+		/// Pattern Version
+		/// <para>Name: Recurrence2PatternVersion</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "recurrence2PatternVersion")]
+		[Updateable(false), Createable(false)]
+		public string Recurrence2PatternVersion { get; set; }
+
+		///<summary>
+		/// Repeat
+		/// <para>Name: IsRecurrence2</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isRecurrence2")]
+		[Updateable(false), Createable(false)]
+		public bool? IsRecurrence2 { get; set; }
+
+		///<summary>
+		/// Is Exception
+		/// <para>Name: IsRecurrence2Exception</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isRecurrence2Exception")]
+		[Updateable(false), Createable(false)]
+		public bool? IsRecurrence2Exception { get; set; }
+
+		///<summary>
+		/// Recurrence Pattern Start Date
+		/// <para>Name: Recurrence2PatternStartDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "recurrence2PatternStartDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? Recurrence2PatternStartDate { get; set; }
+
+		///<summary>
+		/// Recurrence Pattern Time Zone Reference
+		/// <para>Name: Recurrence2PatternTimeZone</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "recurrence2PatternTimeZone")]
+		[Updateable(false), Createable(false)]
+		public string Recurrence2PatternTimeZone { get; set; }
 
 	}
 }

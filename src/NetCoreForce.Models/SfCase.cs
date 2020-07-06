@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -363,6 +363,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "contactFax")]
 		[Updateable(false), Createable(false)]
 		public string ContactFax { get; set; }
+
+		///<summary>
+		/// Internal Comments
+		/// <para>Name: Comments</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "comments")]
+		public string Comments { get; set; }
 
 		///<summary>
 		/// Last Viewed Date

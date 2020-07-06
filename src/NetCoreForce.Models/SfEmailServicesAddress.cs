@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -94,6 +94,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "function")]
 		[Updateable(false), Createable(false)]
 		public SfEmailServicesFunction Function { get; set; }
+
+		///<summary>
+		/// Email Address Name
+		/// <para>Name: DeveloperName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "developerName")]
+		public string DeveloperName { get; set; }
 
 		///<summary>
 		/// Created By ID

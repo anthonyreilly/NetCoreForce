@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -187,7 +187,6 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "validatedFromAddress")]
-		[Updateable(false), Createable(true)]
 		public string ValidatedFromAddress { get; set; }
 
 		///<summary>
@@ -330,6 +329,52 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "relatedToId")]
 		[Updateable(false), Createable(true)]
 		public string RelatedToId { get; set; }
+
+		///<summary>
+		/// Is Tracked
+		/// <para>Name: IsTracked</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isTracked")]
+		public bool? IsTracked { get; set; }
+
+		///<summary>
+		/// Opened?
+		/// <para>Name: IsOpened</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isOpened")]
+		[Updateable(false), Createable(false)]
+		public bool? IsOpened { get; set; }
+
+		///<summary>
+		/// First Opened
+		/// <para>Name: FirstOpenedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "firstOpenedDate")]
+		public DateTimeOffset? FirstOpenedDate { get; set; }
+
+		///<summary>
+		/// Last Opened
+		/// <para>Name: LastOpenedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastOpenedDate")]
+		public DateTimeOffset? LastOpenedDate { get; set; }
+
+		///<summary>
+		/// Bounced?
+		/// <para>Name: IsBounced</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isBounced")]
+		public bool? IsBounced { get; set; }
 
 	}
 }

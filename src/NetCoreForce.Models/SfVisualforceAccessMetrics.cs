@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -61,6 +61,24 @@ namespace NetCoreForce.Models
 		public SfApexPage ApexPage { get; set; }
 
 		///<summary>
+		/// Profile ID
+		/// <para>Name: ProfileId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "profileId")]
+		[Updateable(false), Createable(false)]
+		public string ProfileId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Profile
+		/// <para>RelationshipName: Profile</para>
+		///</summary>
+		[JsonProperty(PropertyName = "profile")]
+		[Updateable(false), Createable(false)]
+		public SfProfile Profile { get; set; }
+
+		///<summary>
 		/// System Modstamp
 		/// <para>Name: SystemModstamp</para>
 		/// <para>SF Type: datetime</para>
@@ -79,6 +97,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "dailyPageViewCount")]
 		[Updateable(false), Createable(false)]
 		public int? DailyPageViewCount { get; set; }
+
+		///<summary>
+		/// Log Date
+		/// <para>Name: LogDate</para>
+		/// <para>SF Type: date</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "logDate")]
+		[Updateable(false), Createable(false)]
+		public DateTime? LogDate { get; set; }
 
 	}
 }

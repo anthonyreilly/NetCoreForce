@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -222,6 +222,36 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "customMetadataTypeRecord")]
 		public string CustomMetadataTypeRecord { get; set; }
+
+		///<summary>
+		/// Single Sign-On Initialization URL
+		/// <para>Name: SsoKickoffUrl</para>
+		/// <para>SF Type: url</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "ssoKickoffUrl")]
+		[Updateable(false), Createable(false)]
+		public string SsoKickoffUrl { get; set; }
+
+		///<summary>
+		/// Existing User Linking URL
+		/// <para>Name: LinkKickoffUrl</para>
+		/// <para>SF Type: url</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "linkKickoffUrl")]
+		[Updateable(false), Createable(false)]
+		public string LinkKickoffUrl { get; set; }
+
+		///<summary>
+		/// OAuth-Only Initialization URL
+		/// <para>Name: OauthKickoffUrl</para>
+		/// <para>SF Type: url</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "oauthKickoffUrl")]
+		[Updateable(false), Createable(false)]
+		public string OauthKickoffUrl { get; set; }
 
 	}
 }

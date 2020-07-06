@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -171,6 +171,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "isActive")]
 		public bool? IsActive { get; set; }
+
+		///<summary>
+		/// Context
+		/// <para>Name: Context</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "context")]
+		public string Context { get; set; }
 
 	}
 }

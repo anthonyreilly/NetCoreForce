@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -61,6 +61,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "optionsExternalHttps")]
 		[Updateable(false), Createable(false)]
 		public bool? OptionsExternalHttps { get; set; }
+
+		///<summary>
+		/// CNAME Target
+		/// <para>Name: CnameTarget</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "cnameTarget")]
+		[Updateable(false), Createable(false)]
+		public string CnameTarget { get; set; }
 
 		///<summary>
 		/// Created Date

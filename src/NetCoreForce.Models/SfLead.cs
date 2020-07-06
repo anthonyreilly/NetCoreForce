@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -576,6 +576,23 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "emailBouncedDate")]
 		[Updateable(true), Createable(false)]
 		public DateTimeOffset? EmailBouncedDate { get; set; }
+
+		///<summary>
+		/// Individual ID
+		/// <para>Name: IndividualId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "individualId")]
+		public string IndividualId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Individual
+		/// <para>RelationshipName: Individual</para>
+		///</summary>
+		[JsonProperty(PropertyName = "individual")]
+		[Updateable(false), Createable(false)]
+		public SfIndividual Individual { get; set; }
 
 	}
 }

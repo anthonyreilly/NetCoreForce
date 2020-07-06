@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -157,6 +157,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "apiVersion")]
 		[Updateable(false), Createable(false)]
 		public double? ApiVersion { get; set; }
+
+		///<summary>
+		/// Sequence
+		/// <para>Name: Sequence</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "sequence")]
+		[Updateable(false), Createable(false)]
+		public int? Sequence { get; set; }
+
+		///<summary>
+		/// Interval
+		/// <para>Name: Interval</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "interval")]
+		[Updateable(false), Createable(false)]
+		public string Interval { get; set; }
 
 		///<summary>
 		/// Log File Field Names

@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -145,6 +145,45 @@ namespace NetCoreForce.Models
 		public bool? IsActive { get; set; }
 
 		///<summary>
+		/// Alternate Selector
+		/// <para>Name: AlternateSelector</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "alternateSelector")]
+		public string AlternateSelector { get; set; }
+
+		///<summary>
+		/// TXT Record Name
+		/// <para>Name: TxtRecordName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "txtRecordName")]
+		[Updateable(false), Createable(false)]
+		public string TxtRecordName { get; set; }
+
+		///<summary>
+		/// Alternate TXT Record Name
+		/// <para>Name: AlternateTxtRecordName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "alternateTxtRecordName")]
+		[Updateable(false), Createable(false)]
+		public string AlternateTxtRecordName { get; set; }
+
+		///<summary>
+		/// TXT Record Status
+		/// <para>Name: TxtRecordsPublishState</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "txtRecordsPublishState")]
+		[Updateable(false), Createable(false)]
+		public string TxtRecordsPublishState { get; set; }
+
+		///<summary>
 		/// Public Key
 		/// <para>Name: PublicKey</para>
 		/// <para>SF Type: textarea</para>
@@ -154,13 +193,14 @@ namespace NetCoreForce.Models
 		public string PublicKey { get; set; }
 
 		///<summary>
-		/// Private Key
-		/// <para>Name: PrivateKey</para>
+		/// Alternate Public Key
+		/// <para>Name: AlternatePublicKey</para>
 		/// <para>SF Type: textarea</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "privateKey")]
-		public string PrivateKey { get; set; }
+		[JsonProperty(PropertyName = "alternatePublicKey")]
+		[Updateable(false), Createable(false)]
+		public string AlternatePublicKey { get; set; }
 
 	}
 }

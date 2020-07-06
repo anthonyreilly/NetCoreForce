@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v48.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -148,7 +148,7 @@ namespace NetCoreForce.Models
 		public string Status { get; set; }
 
 		///<summary>
-		/// Internal Comments
+		/// Description
 		/// <para>Name: Description</para>
 		/// <para>SF Type: textarea</para>
 		/// <para>Nillable: True</para>
