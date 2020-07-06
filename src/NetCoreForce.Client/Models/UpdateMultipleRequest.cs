@@ -12,7 +12,7 @@ namespace NetCoreForce.Client.Models
         /// </summary>
         /// <param name="records"></param>
         /// <param name="allOrNone"></param>
-        public UpdateMultipleRequest(List<object> records, bool allOrNone = false)
+        public UpdateMultipleRequest(List<SObject> records, bool allOrNone = false)
         {
             Records = records;
             AllOrNone = allOrNone;
@@ -23,7 +23,7 @@ namespace NetCoreForce.Client.Models
         /// set the type attribute for each object, but don’t set the id field for any object.
         /// </summary>
         [JsonProperty(PropertyName = "records")]
-        public List<object> Records { get; set; }
+        public List<SObject> Records { get; set; }
 
         /// <summary>
         /// Optional. Indicates whether to roll back the entire request when the update of any object fails (true) or

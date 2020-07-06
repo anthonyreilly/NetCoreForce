@@ -480,16 +480,33 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
-        /// Updates
+        /// Update multiple reocrds.
+        /// The list can contain up to 200 objects.
+        /// The list can contain objects of different types, including custom objects.
+        /// Each object must contain an attributes map. The map must contain a value for type.
+        /// Each object must contain an id field with a valid ID value.
         /// </summary>
-        /// <param name="sfObjects">Objects to update</param>
+        /// <param name="sObjects">Objects to update</param>
         /// <param name="allOrNone">Rollback if all updates were not successful</param>
         /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
         /// <returns>List of UpdateMultipleResponse objects, includes response for each object (id, success, errors)</returns>
         /// <exception cref="ArgumentException">Thrown when missing required information</exception>
         /// <exception cref="ForceApiException">Thrown when update fails</exception>
-        public async Task<List<UpdateMultipleResponse>> UpdateRecords(List<object> sfObjects, bool allOrNone = false, Dictionary<string, string> customHeaders = null)
+        public async Task<List<UpdateMultipleResponse>> UpdateRecords(List<SObject> sObjects, bool allOrNone = false, Dictionary<string, string> customHeaders = null)
         {
+            if(sObjects == null)
+            {
+                throw new ArgumentNullException("sObjects");
+            }
+
+            foreach(SObject sObject in sObjects)
+            {
+                if(sObject.Attributes == null || string.IsNullOrEmpty(sObject.Attributes.Type))
+                {
+                    throw new ForceApiException("Objects are missing Type property in Attributes map");
+                }
+            }
+
             Dictionary<string, string> headers = new Dictionary<string, string>();
 
             //Add call options
@@ -506,9 +523,9 @@ namespace NetCoreForce.Client
 
             JsonClient client = new JsonClient(AccessToken, _httpClient);
 
-            UpdateMultipleRequest updateMultipleRequest = new UpdateMultipleRequest(sfObjects, allOrNone);
+            UpdateMultipleRequest updateMultipleRequest = new UpdateMultipleRequest(sObjects, allOrNone);
 
-            return await client.HttpPatchAsync<List<UpdateMultipleResponse>>(updateMultipleRequest, uri, headers, true, true);
+            return await client.HttpPatchAsync<List<UpdateMultipleResponse>>(updateMultipleRequest, uri, headers, includeSObjectId: true);
             
         }
 
