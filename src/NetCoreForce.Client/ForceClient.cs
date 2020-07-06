@@ -487,7 +487,7 @@ namespace NetCoreForce.Client
         /// Each object must contain an id field with a valid ID value.
         /// </summary>
         /// <param name="sObjects">Objects to update</param>
-        /// <param name="allOrNone">Rollback if all updates were not successful</param>
+        /// <param name="allOrNone">Optional. Indicates whether to roll back the entire request when the update of any object fails (true) or to continue with the independent update of other objects in the request. The default is false.</param>
         /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
         /// <returns>List of UpdateMultipleResponse objects, includes response for each object (id, success, errors)</returns>
         /// <exception cref="ArgumentException">Thrown when missing required information</exception>
