@@ -335,7 +335,7 @@ namespace NetCoreForce.ModelGenerator
         private static async Task<ForceClient> Login(GenConfig config)
         {
 
-            AuthenticationClient auth = new AuthenticationClient();
+            AuthenticationClient auth = new AuthenticationClient(config.AuthInfo.ApiVersion);
             try
             {
                 await auth.UsernamePasswordAsync(config.AuthInfo.ClientId, config.AuthInfo.ClientSecret,
