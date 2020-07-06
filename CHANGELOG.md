@@ -1,5 +1,11 @@
 # Changelog
 
+### 2020-07-06 v2.7.0
+
+* Client: Added support for updating multiple objects + tests
+* Linq: Added support for filtering on booleans
+* Client/Linq: Added support for NetStandard2.1 (netcoreapp3.x)
+
 ### 2019-12-17 v2.6.0
 
 * Fix: Failure to handle/parse HTTP 300 - multiple choices response when update finds multiple external IDs
