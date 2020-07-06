@@ -191,5 +191,15 @@ namespace NetCoreForce.Models
 		[Updateable(false), Createable(false)]
 		public bool? IsDeleted { get; set; }
 
+		///<summary>
+		/// Archived
+		/// <para>Name: IsArchived</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isArchived")]
+		[Updateable(false), Createable(false)]
+		public bool? IsArchived { get; set; }
+
 	}
 }

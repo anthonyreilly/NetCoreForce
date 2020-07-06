@@ -184,6 +184,16 @@ namespace NetCoreForce.Models
 		public string TxtRecordsPublishState { get; set; }
 
 		///<summary>
+		/// Key Size
+		/// <para>Name: KeySize</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "keySize")]
+		[Updateable(false), Createable(true)]
+		public int? KeySize { get; set; }
+
+		///<summary>
 		/// Public Key
 		/// <para>Name: PublicKey</para>
 		/// <para>SF Type: textarea</para>

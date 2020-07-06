@@ -178,6 +178,69 @@ namespace NetCoreForce.Models
 		public DateTime? BirthDate { get; set; }
 
 		///<summary>
+		/// Death Date
+		/// <para>Name: DeathDate</para>
+		/// <para>SF Type: date</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "deathDate")]
+		public DateTime? DeathDate { get; set; }
+
+		///<summary>
+		/// Conviction Count
+		/// <para>Name: ConvictionsCount</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "convictionsCount")]
+		public int? ConvictionsCount { get; set; }
+
+		///<summary>
+		/// Number of Children
+		/// <para>Name: ChildrenCount</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "childrenCount")]
+		public int? ChildrenCount { get; set; }
+
+		///<summary>
+		/// Military Service
+		/// <para>Name: MilitaryService</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "militaryService")]
+		public string MilitaryService { get; set; }
+
+		///<summary>
+		/// Is Homeowner
+		/// <para>Name: IsHomeOwner</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isHomeOwner")]
+		public bool? IsHomeOwner { get; set; }
+
+		///<summary>
+		/// Occupation
+		/// <para>Name: Occupation</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "occupation")]
+		public string Occupation { get; set; }
+
+		///<summary>
+		/// Website
+		/// <para>Name: Website</para>
+		/// <para>SF Type: url</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "website")]
+		public string Website { get; set; }
+
+		///<summary>
 		/// Individual&#39;s Age
 		/// <para>Name: IndividualsAge</para>
 		/// <para>SF Type: picklist</para>
@@ -195,6 +258,51 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "lastViewedDate")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? LastViewedDate { get; set; }
+
+		///<summary>
+		/// Master Record ID
+		/// <para>Name: MasterRecordId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "masterRecordId")]
+		[Updateable(false), Createable(false)]
+		public string MasterRecordId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Individual
+		/// <para>RelationshipName: MasterRecord</para>
+		///</summary>
+		[JsonProperty(PropertyName = "masterRecord")]
+		[Updateable(false), Createable(false)]
+		public SfIndividual MasterRecord { get; set; }
+
+		///<summary>
+		/// Consumer Credit Score
+		/// <para>Name: ConsumerCreditScore</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "consumerCreditScore")]
+		public int? ConsumerCreditScore { get; set; }
+
+		///<summary>
+		/// Consumer Credit Score Provider Name
+		/// <para>Name: ConsumerCreditScoreProviderName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "consumerCreditScoreProviderName")]
+		public string ConsumerCreditScoreProviderName { get; set; }
+
+		///<summary>
+		/// Influencer Rating
+		/// <para>Name: InfluencerRating</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "influencerRating")]
+		public int? InfluencerRating { get; set; }
 
 		///<summary>
 		/// Created Date

@@ -43,6 +43,24 @@ namespace NetCoreForce.Models
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
+		/// Master Record ID
+		/// <para>Name: MasterRecordId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "masterRecordId")]
+		[Updateable(false), Createable(false)]
+		public string MasterRecordId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Case
+		/// <para>RelationshipName: MasterRecord</para>
+		///</summary>
+		[JsonProperty(PropertyName = "masterRecord")]
+		[Updateable(false), Createable(false)]
+		public SfCase MasterRecord { get; set; }
+
+		///<summary>
 		/// Case Number
 		/// <para>Name: CaseNumber</para>
 		/// <para>SF Type: string</para>

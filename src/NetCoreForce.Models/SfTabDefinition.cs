@@ -112,5 +112,35 @@ namespace NetCoreForce.Models
 		[Updateable(false), Createable(false)]
 		public bool? IsAvailableInLightning { get; set; }
 
+		///<summary>
+		/// Is Available In Mobile
+		/// <para>Name: IsAvailableInMobile</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isAvailableInMobile")]
+		[Updateable(false), Createable(false)]
+		public bool? IsAvailableInMobile { get; set; }
+
+		///<summary>
+		/// Is Available In Desktop
+		/// <para>Name: IsAvailableInDesktop</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isAvailableInDesktop")]
+		[Updateable(false), Createable(false)]
+		public bool? IsAvailableInDesktop { get; set; }
+
+		///<summary>
+		/// Mobile URL
+		/// <para>Name: MobileUrl</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "mobileUrl")]
+		[Updateable(false), Createable(false)]
+		public string MobileUrl { get; set; }
+
 	}
 }

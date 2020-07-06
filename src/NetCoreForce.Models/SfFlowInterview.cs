@@ -169,5 +169,15 @@ namespace NetCoreForce.Models
 		[Updateable(false), Createable(false)]
 		public string Guid { get; set; }
 
+		///<summary>
+		/// Was Paused From Screen
+		/// <para>Name: WasPausedFromScreen</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "wasPausedFromScreen")]
+		[Updateable(false), Createable(false)]
+		public bool? WasPausedFromScreen { get; set; }
+
 	}
 }

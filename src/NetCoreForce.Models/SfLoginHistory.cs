@@ -131,6 +131,26 @@ namespace NetCoreForce.Models
 		public string CipherSuite { get; set; }
 
 		///<summary>
+		/// Login via GET
+		/// <para>Name: OptionsIsGet</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsGet")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsIsGet { get; set; }
+
+		///<summary>
+		/// Login via POST
+		/// <para>Name: OptionsIsPost</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsPost")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsIsPost { get; set; }
+
+		///<summary>
 		/// Browser
 		/// <para>Name: Browser</para>
 		/// <para>SF Type: string</para>

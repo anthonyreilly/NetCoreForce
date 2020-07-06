@@ -191,6 +191,16 @@ namespace NetCoreForce.Models
 		public bool? IsCompactLayoutable { get; set; }
 
 		///<summary>
+		/// Deployment Status
+		/// <para>Name: DeploymentStatus</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "deploymentStatus")]
+		[Updateable(false), Createable(false)]
+		public string DeploymentStatus { get; set; }
+
+		///<summary>
 		/// Key Prefix
 		/// <para>Name: KeyPrefix</para>
 		/// <para>SF Type: string</para>
@@ -491,14 +501,64 @@ namespace NetCoreForce.Models
 		public bool? IsAutoActivityCaptureEnabled { get; set; }
 
 		///<summary>
-		/// Data Steward ID
-		/// <para>Name: DataStewardId</para>
-		/// <para>SF Type: reference</para>
+		/// Is Interface?
+		/// <para>Name: IsInterface</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isInterface")]
+		[Updateable(false), Createable(false)]
+		public bool? IsInterface { get; set; }
+
+		///<summary>
+		/// Interfaces Implemented
+		/// <para>Name: ImplementsInterfaces</para>
+		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "dataStewardId")]
+		[JsonProperty(PropertyName = "implementsInterfaces")]
 		[Updateable(false), Createable(false)]
-		public string DataStewardId { get; set; }
+		public string ImplementsInterfaces { get; set; }
+
+		///<summary>
+		/// Implemented By
+		/// <para>Name: ImplementedBy</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "implementedBy")]
+		[Updateable(false), Createable(false)]
+		public string ImplementedBy { get; set; }
+
+		///<summary>
+		/// Interfaces Extended
+		/// <para>Name: ExtendsInterfaces</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "extendsInterfaces")]
+		[Updateable(false), Createable(false)]
+		public string ExtendsInterfaces { get; set; }
+
+		///<summary>
+		/// Extended By
+		/// <para>Name: ExtendedBy</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "extendedBy")]
+		[Updateable(false), Createable(false)]
+		public string ExtendedBy { get; set; }
+
+		///<summary>
+		/// Default Implementation
+		/// <para>Name: DefaultImplementation</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "defaultImplementation")]
+		[Updateable(false), Createable(false)]
+		public string DefaultImplementation { get; set; }
 
 	}
 }

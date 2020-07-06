@@ -57,7 +57,6 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "sortOrder")]
-		[Updateable(false), Createable(false)]
 		public int? SortOrder { get; set; }
 
 		///<summary>

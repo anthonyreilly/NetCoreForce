@@ -376,5 +376,22 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isBounced")]
 		public bool? IsBounced { get; set; }
 
+		///<summary>
+		/// Email Template ID
+		/// <para>Name: EmailTemplateId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "emailTemplateId")]
+		public string EmailTemplateId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: EmailTemplate
+		/// <para>RelationshipName: EmailTemplate</para>
+		///</summary>
+		[JsonProperty(PropertyName = "emailTemplate")]
+		[Updateable(false), Createable(false)]
+		public SfEmailTemplate EmailTemplate { get; set; }
+
 	}
 }

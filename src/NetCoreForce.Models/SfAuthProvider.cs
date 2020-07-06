@@ -188,6 +188,15 @@ namespace NetCoreForce.Models
 		public bool? OptionsIncludeOrgIdInId { get; set; }
 
 		///<summary>
+		/// Include Consumer Secret in API Responses
+		/// <para>Name: OptionsSendSecretInApis</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsSendSecretInApis")]
+		public bool? OptionsSendSecretInApis { get; set; }
+
+		///<summary>
 		/// Icon URL
 		/// <para>Name: IconUrl</para>
 		/// <para>SF Type: url</para>
@@ -222,6 +231,24 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "customMetadataTypeRecord")]
 		public string CustomMetadataTypeRecord { get; set; }
+
+		///<summary>
+		/// Elliptic Curve Key
+		/// <para>Name: EcKey</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "ecKey")]
+		public string EcKey { get; set; }
+
+		///<summary>
+		/// Apple Team
+		/// <para>Name: AppleTeam</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "appleTeam")]
+		public string AppleTeam { get; set; }
 
 		///<summary>
 		/// Single Sign-On Initialization URL

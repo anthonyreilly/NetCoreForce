@@ -197,5 +197,14 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isMandatory")]
 		public bool? IsMandatory { get; set; }
 
+		///<summary>
+		/// Hide Remove Action in UI
+		/// <para>Name: IsUiRemoveHidden</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isUiRemoveHidden")]
+		public bool? IsUiRemoveHidden { get; set; }
+
 	}
 }

@@ -87,6 +87,16 @@ namespace NetCoreForce.Models
 		public string FolderId { get; set; }
 
 		///<summary>
+		/// Folder Name
+		/// <para>Name: FolderName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "folderName")]
+		[Updateable(false), Createable(false)]
+		public string FolderName { get; set; }
+
+		///<summary>
 		/// Letterhead ID
 		/// <para>Name: BrandTemplateId</para>
 		/// <para>SF Type: reference</para>
@@ -94,6 +104,23 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "brandTemplateId")]
 		public string BrandTemplateId { get; set; }
+
+		///<summary>
+		/// Enhanced Letterhead ID
+		/// <para>Name: EnhancedLetterheadId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "enhancedLetterheadId")]
+		public string EnhancedLetterheadId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: EnhancedLetterhead
+		/// <para>RelationshipName: EnhancedLetterhead</para>
+		///</summary>
+		[JsonProperty(PropertyName = "enhancedLetterhead")]
+		[Updateable(false), Createable(false)]
+		public SfEnhancedLetterhead EnhancedLetterhead { get; set; }
 
 		///<summary>
 		/// Style

@@ -471,6 +471,16 @@ namespace NetCoreForce.Models
 		public string SecurityClassification { get; set; }
 
 		///<summary>
+		/// Compliance Categorization
+		/// <para>Name: ComplianceGroup</para>
+		/// <para>SF Type: multipicklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "complianceGroup")]
+		[Updateable(false), Createable(false)]
+		public string ComplianceGroup { get; set; }
+
+		///<summary>
 		/// Description
 		/// <para>Name: Description</para>
 		/// <para>SF Type: textarea</para>

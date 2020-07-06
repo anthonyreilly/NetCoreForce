@@ -123,6 +123,16 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? EndDateTime { get; set; }
 
 		///<summary>
+		/// End Date
+		/// <para>Name: EndDate</para>
+		/// <para>SF Type: date</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "endDate")]
+		[Updateable(false), Createable(false)]
+		public DateTime? EndDate { get; set; }
+
+		///<summary>
 		/// Description
 		/// <para>Name: Description</para>
 		/// <para>SF Type: textarea</para>
@@ -157,14 +167,6 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "ownerId")]
 		public string OwnerId { get; set; }
-
-		///<summary>
-		/// ReferenceTo: User
-		/// <para>RelationshipName: Owner</para>
-		///</summary>
-		[JsonProperty(PropertyName = "owner")]
-		[Updateable(false), Createable(false)]
-		public SfUser Owner { get; set; }
 
 		///<summary>
 		/// Private

@@ -239,6 +239,86 @@ namespace NetCoreForce.Models
 		public string Browser { get; set; }
 
 		///<summary>
+		/// HTTP Method
+		/// <para>Name: HttpMethod</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "httpMethod")]
+		[Updateable(false), Createable(false)]
+		public string HttpMethod { get; set; }
+
+		///<summary>
+		/// Country Code
+		/// <para>Name: CountryIso</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "countryIso")]
+		[Updateable(false), Createable(false)]
+		public string CountryIso { get; set; }
+
+		///<summary>
+		/// Latitude
+		/// <para>Name: LoginLatitude</para>
+		/// <para>SF Type: double</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "loginLatitude")]
+		[Updateable(false), Createable(false)]
+		public double? LoginLatitude { get; set; }
+
+		///<summary>
+		/// Longitude
+		/// <para>Name: LoginLongitude</para>
+		/// <para>SF Type: double</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "loginLongitude")]
+		[Updateable(false), Createable(false)]
+		public double? LoginLongitude { get; set; }
+
+		///<summary>
+		/// Country
+		/// <para>Name: Country</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "country")]
+		[Updateable(false), Createable(false)]
+		public string Country { get; set; }
+
+		///<summary>
+		/// City
+		/// <para>Name: City</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "city")]
+		[Updateable(false), Createable(false)]
+		public string City { get; set; }
+
+		///<summary>
+		/// PostalCode
+		/// <para>Name: PostalCode</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "postalCode")]
+		[Updateable(false), Createable(false)]
+		public string PostalCode { get; set; }
+
+		///<summary>
+		/// Subdivision
+		/// <para>Name: Subdivision</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "subdivision")]
+		[Updateable(false), Createable(false)]
+		public string Subdivision { get; set; }
+
+		///<summary>
 		/// TLS Cipher Suite
 		/// <para>Name: CipherSuite</para>
 		/// <para>SF Type: picklist</para>

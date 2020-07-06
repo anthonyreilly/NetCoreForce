@@ -120,5 +120,35 @@ namespace NetCoreForce.Models
 		[Updateable(false), Createable(false)]
 		public string ButtonsDisplayed { get; set; }
 
+		///<summary>
+		/// Profile ID
+		/// <para>Name: Profile</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "profile")]
+		[Updateable(false), Createable(false)]
+		public string Profile { get; set; }
+
+		///<summary>
+		/// Profile Name
+		/// <para>Name: ProfileName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "profileName")]
+		[Updateable(false), Createable(false)]
+		public string ProfileName { get; set; }
+
+		///<summary>
+		/// List Layout
+		/// <para>Name: ListLayout</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "listLayout")]
+		[Updateable(false), Createable(false)]
+		public string ListLayout { get; set; }
+
 	}
 }

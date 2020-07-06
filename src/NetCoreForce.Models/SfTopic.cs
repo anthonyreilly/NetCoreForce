@@ -89,6 +89,16 @@ namespace NetCoreForce.Models
 		public int? TalkingAbout { get; set; }
 
 		///<summary>
+		/// Enabled For
+		/// <para>Name: ManagedTopicType</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "managedTopicType")]
+		[Updateable(false), Createable(false)]
+		public string ManagedTopicType { get; set; }
+
+		///<summary>
 		/// System Modstamp
 		/// <para>Name: SystemModstamp</para>
 		/// <para>SF Type: datetime</para>

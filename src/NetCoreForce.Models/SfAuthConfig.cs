@@ -189,6 +189,16 @@ namespace NetCoreForce.Models
 		public bool? AuthOptionsAuthProvider { get; set; }
 
 		///<summary>
+		/// Certificate
+		/// <para>Name: AuthOptionsCertificate</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "authOptionsCertificate")]
+		[Updateable(false), Createable(false)]
+		public bool? AuthOptionsCertificate { get; set; }
+
+		///<summary>
 		/// Is Active
 		/// <para>Name: IsActive</para>
 		/// <para>SF Type: boolean</para>

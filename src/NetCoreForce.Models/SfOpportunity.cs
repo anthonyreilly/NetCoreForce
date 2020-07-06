@@ -375,6 +375,16 @@ namespace NetCoreForce.Models
 		public string Fiscal { get; set; }
 
 		///<summary>
+		/// Contact ID
+		/// <para>Name: ContactId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "contactId")]
+		[Updateable(false), Createable(true)]
+		public string ContactId { get; set; }
+
+		///<summary>
 		/// Last Viewed Date
 		/// <para>Name: LastViewedDate</para>
 		/// <para>SF Type: datetime</para>

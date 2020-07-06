@@ -189,6 +189,16 @@ namespace NetCoreForce.Models
 		public bool? OptionsUserProvisioning { get; set; }
 
 		///<summary>
+		/// UseConfigRequestMethod
+		/// <para>Name: OptionsUseConfigRequestMethod</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsUseConfigRequestMethod")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsUseConfigRequestMethod { get; set; }
+
+		///<summary>
 		/// Name ID Format
 		/// <para>Name: AttributeFormat</para>
 		/// <para>SF Type: string</para>

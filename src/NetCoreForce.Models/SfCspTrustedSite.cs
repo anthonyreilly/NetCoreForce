@@ -181,5 +181,59 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "context")]
 		public string Context { get; set; }
 
+		///<summary>
+		/// Whitelist site for connect-src
+		/// <para>Name: IsApplicableToConnectSrc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isApplicableToConnectSrc")]
+		public bool? IsApplicableToConnectSrc { get; set; }
+
+		///<summary>
+		/// Whitelist site for frame-src
+		/// <para>Name: IsApplicableToFrameSrc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isApplicableToFrameSrc")]
+		public bool? IsApplicableToFrameSrc { get; set; }
+
+		///<summary>
+		/// Whitelist site for img-src
+		/// <para>Name: IsApplicableToImgSrc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isApplicableToImgSrc")]
+		public bool? IsApplicableToImgSrc { get; set; }
+
+		///<summary>
+		/// Whitelist site for style-src
+		/// <para>Name: IsApplicableToStyleSrc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isApplicableToStyleSrc")]
+		public bool? IsApplicableToStyleSrc { get; set; }
+
+		///<summary>
+		/// Whitelist site for font-src
+		/// <para>Name: IsApplicableToFontSrc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isApplicableToFontSrc")]
+		public bool? IsApplicableToFontSrc { get; set; }
+
+		///<summary>
+		/// Whitelist site for media-src
+		/// <para>Name: IsApplicableToMediaSrc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isApplicableToMediaSrc")]
+		public bool? IsApplicableToMediaSrc { get; set; }
+
 	}
 }

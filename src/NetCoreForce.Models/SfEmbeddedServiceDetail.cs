@@ -283,36 +283,6 @@ namespace NetCoreForce.Models
 		public bool? ShouldShowExistingAppointment { get; set; }
 
 		///<summary>
-		/// Appointment Booking Flow Name Flow Definition
-		/// <para>Name: FlowDeveloperName</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "flowDeveloperName")]
-		[Updateable(false), Createable(false)]
-		public string FlowDeveloperName { get; set; }
-
-		///<summary>
-		/// Modify Appointment Booking Flow Name Flow Definition
-		/// <para>Name: ModifyApptBookingFlowName</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "modifyApptBookingFlowName")]
-		[Updateable(false), Createable(false)]
-		public string ModifyApptBookingFlowName { get; set; }
-
-		///<summary>
-		/// Cancel Appointment Booking Flow Name Flow Definition
-		/// <para>Name: CancelApptBookingFlowName</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "cancelApptBookingFlowName")]
-		[Updateable(false), Createable(false)]
-		public string CancelApptBookingFlowName { get; set; }
-
-		///<summary>
 		/// Field Service Home Image URL
 		/// <para>Name: FieldServiceHomeImg</para>
 		/// <para>SF Type: string</para>

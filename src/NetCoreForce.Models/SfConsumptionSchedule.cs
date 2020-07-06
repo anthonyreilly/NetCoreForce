@@ -218,5 +218,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "matchingAttribute")]
 		public string MatchingAttribute { get; set; }
 
+		///<summary>
+		/// Number of Consumption Rates
+		/// <para>Name: NumberOfRates</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "numberOfRates")]
+		[Updateable(false), Createable(false)]
+		public int? NumberOfRates { get; set; }
+
 	}
 }

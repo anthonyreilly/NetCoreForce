@@ -320,5 +320,15 @@ namespace NetCoreForce.Models
 		[Updateable(false), Createable(false)]
 		public string TargetObject { get; set; }
 
+		///<summary>
+		/// Open Type
+		/// <para>Name: OpenType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "openType")]
+		[Updateable(false), Createable(false)]
+		public string OpenType { get; set; }
+
 	}
 }

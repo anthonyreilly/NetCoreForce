@@ -106,14 +106,6 @@ namespace NetCoreForce.Models
 		public string OwnerId { get; set; }
 
 		///<summary>
-		/// ReferenceTo: User
-		/// <para>RelationshipName: Owner</para>
-		///</summary>
-		[JsonProperty(PropertyName = "owner")]
-		[Updateable(false), Createable(false)]
-		public SfUser Owner { get; set; }
-
-		///<summary>
 		/// Description
 		/// <para>Name: Description</para>
 		/// <para>SF Type: textarea</para>
@@ -409,6 +401,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "taskSubtype")]
 		[Updateable(false), Createable(true)]
 		public string TaskSubtype { get; set; }
+
+		///<summary>
+		/// Completed Date
+		/// <para>Name: CompletedDateTime</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "completedDateTime")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? CompletedDateTime { get; set; }
 
 	}
 }

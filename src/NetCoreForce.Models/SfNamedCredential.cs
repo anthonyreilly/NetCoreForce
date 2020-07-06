@@ -216,5 +216,65 @@ namespace NetCoreForce.Models
 		[Updateable(false), Createable(false)]
 		public SfAuthProvider AuthProvider { get; set; }
 
+		///<summary>
+		/// JWT Issuer
+		/// <para>Name: JwtIssuer</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "jwtIssuer")]
+		[Updateable(false), Createable(false)]
+		public string JwtIssuer { get; set; }
+
+		///<summary>
+		/// JWT Formula Subject
+		/// <para>Name: JwtFormulaSubject</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "jwtFormulaSubject")]
+		[Updateable(false), Createable(false)]
+		public string JwtFormulaSubject { get; set; }
+
+		///<summary>
+		/// JWT Text Subject
+		/// <para>Name: JwtTextSubject</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "jwtTextSubject")]
+		[Updateable(false), Createable(false)]
+		public string JwtTextSubject { get; set; }
+
+		///<summary>
+		/// JWT Validity Period in Seconds
+		/// <para>Name: JwtValidityPeriodSeconds</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "jwtValidityPeriodSeconds")]
+		[Updateable(false), Createable(false)]
+		public int? JwtValidityPeriodSeconds { get; set; }
+
+		///<summary>
+		/// JWT Audience(s)
+		/// <para>Name: JwtAudience</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "jwtAudience")]
+		[Updateable(false), Createable(false)]
+		public string JwtAudience { get; set; }
+
+		///<summary>
+		/// Auth Token Endpoint URL
+		/// <para>Name: AuthTokenEndpointUrl</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "authTokenEndpointUrl")]
+		[Updateable(false), Createable(false)]
+		public string AuthTokenEndpointUrl { get; set; }
+
 	}
 }

@@ -108,14 +108,6 @@ namespace NetCoreForce.Models
 		public string OwnerId { get; set; }
 
 		///<summary>
-		/// ReferenceTo: User
-		/// <para>RelationshipName: Owner</para>
-		///</summary>
-		[JsonProperty(PropertyName = "owner")]
-		[Updateable(false), Createable(false)]
-		public SfUser Owner { get; set; }
-
-		///<summary>
 		/// Created Date
 		/// <para>Name: CreatedDate</para>
 		/// <para>SF Type: datetime</para>

@@ -404,5 +404,23 @@ namespace NetCoreForce.Models
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? SystemModstamp { get; set; }
 
+		///<summary>
+		/// User ID
+		/// <para>Name: GuestRecordDefaultOwnerId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "guestRecordDefaultOwnerId")]
+		[Updateable(false), Createable(false)]
+		public string GuestRecordDefaultOwnerId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: User
+		/// <para>RelationshipName: GuestRecordDefaultOwner</para>
+		///</summary>
+		[JsonProperty(PropertyName = "guestRecordDefaultOwner")]
+		[Updateable(false), Createable(false)]
+		public SfUser GuestRecordDefaultOwner { get; set; }
+
 	}
 }
