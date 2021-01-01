@@ -11,7 +11,7 @@ namespace NetCoreForce.Client
 {
     public class AuthenticationClient : IDisposable
     {
-        private string DefaultApiVersion { get { return "v48.0"; } }
+        private string DefaultApiVersion { get { return "v50.0"; } }
         public string ApiVersion { get; set; }
 
         /// <summary>

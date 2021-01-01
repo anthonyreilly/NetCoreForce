@@ -19,7 +19,7 @@ namespace NetCoreForce.ModelGenerator
         {
             this.AuthInfo = new AuthInfo(){
                 TokenRequestEndpoint = "https://login.salesforce.com/services/oauth2/token",
-                ApiVersion = "v48.0"
+                ApiVersion = "v50.0"
             };
         }
     }
