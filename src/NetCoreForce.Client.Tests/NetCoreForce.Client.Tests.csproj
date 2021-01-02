@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.props))\build.props" />
   <PropertyGroup>    
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFrameworks>$(AppTargetFrameworks)</TargetFrameworks>
     <IsPackable>false</IsPackable>
 
     <!-- Ignore warnings about referencing obsolete methods -->
