@@ -4,7 +4,7 @@
     <AssemblyName>dotnet-modelgenerator</AssemblyName>
     <Product>NetCoreForce.ModelGenerator</Product>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>$(LibTargetFrameworks)</TargetFrameworks>
+    <TargetFrameworks>$(AppTargetFrameworks)</TargetFrameworks>
     <VersionPrefix>$(VersionPrefix)</VersionPrefix>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <!--NuGet-->

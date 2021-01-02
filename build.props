@@ -6,7 +6,7 @@
 
     <!-- Targets -->
     <LibTargetFrameworks>netstandard1.6;netstandard2.0;netstandard2.1</LibTargetFrameworks>
-    <AppTargetFrameworks>netcoreapp2.0</AppTargetFrameworks>
+    <AppTargetFrameworks>netcoreapp1.1;netcoreapp2.0</AppTargetFrameworks>
 
     <!--NuGet-->
     <Authors>Anthony Reilly</Authors>
