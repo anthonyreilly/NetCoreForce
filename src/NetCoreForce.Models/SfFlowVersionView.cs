@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -131,6 +131,36 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "lastModifiedDate")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? LastModifiedDate { get; set; }
+
+		///<summary>
+		/// Is Swing Flow
+		/// <para>Name: IsSwingFlow</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isSwingFlow")]
+		[Updateable(false), Createable(false)]
+		public bool? IsSwingFlow { get; set; }
+
+		///<summary>
+		/// Api Version
+		/// <para>Name: ApiVersion</para>
+		/// <para>SF Type: double</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "apiVersion")]
+		[Updateable(false), Createable(false)]
+		public double? ApiVersion { get; set; }
+
+		///<summary>
+		/// Api Version Runtime
+		/// <para>Name: ApiVersionRuntime</para>
+		/// <para>SF Type: double</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "apiVersionRuntime")]
+		[Updateable(false), Createable(false)]
+		public double? ApiVersionRuntime { get; set; }
 
 	}
 }

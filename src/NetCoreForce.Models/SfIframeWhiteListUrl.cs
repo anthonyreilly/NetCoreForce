@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Whitelisted Domain for Visualforce Inline Frames
+	/// Trusted Domain for Visualforce and Survey Inline Frames
 	///<para>SObject Name: IframeWhiteListUrl</para>
 	///<para>Custom Object: False</para>
 	///</summary>
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// Iframe WhiteList Url ID
+		/// Iframe Trusted Url ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -116,6 +116,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "url")]
 		public string Url { get; set; }
+
+		///<summary>
+		/// IFrame Type
+		/// <para>Name: Context</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "context")]
+		public string Context { get; set; }
 
 	}
 }

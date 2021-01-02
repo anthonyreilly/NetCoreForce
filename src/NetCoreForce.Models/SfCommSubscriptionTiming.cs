@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// ActivityRecurrence
-	///<para>SObject Name: ActivityRecurrence</para>
+	/// Communication Subscription Timing
+	///<para>SObject Name: CommSubscriptionTiming</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfActivityRecurrence : SObject
+	public class SfCommSubscriptionTiming : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "ActivityRecurrence"; }
+			get { return "CommSubscriptionTiming"; }
 		}
 
 		///<summary>
-		/// Activity Recurrence ID
+		/// Communication Subscription Timing ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -46,9 +46,11 @@ namespace NetCoreForce.Models
 		/// Name
 		/// <para>Name: Name</para>
 		/// <para>SF Type: string</para>
+		/// <para>AutoNumber field</para>
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "name")]
+		[Updateable(false), Createable(false)]
 		public string Name { get; set; }
 
 		///<summary>
@@ -118,129 +120,51 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Start DateTime
-		/// <para>Name: StartDateTime</para>
+		/// Last Viewed Date
+		/// <para>Name: LastViewedDate</para>
 		/// <para>SF Type: datetime</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "startDateTime")]
-		public DateTimeOffset? StartDateTime { get; set; }
-
-		///<summary>
-		/// End DateTime
-		/// <para>Name: EndDateTime</para>
-		/// <para>SF Type: datetime</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "endDateTime")]
-		public DateTimeOffset? EndDateTime { get; set; }
-
-		///<summary>
-		/// Duration Minutes
-		/// <para>Name: DurationMinutes</para>
-		/// <para>SF Type: int</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "durationMinutes")]
-		public int? DurationMinutes { get; set; }
-
-		///<summary>
-		/// Recurrence Pattern
-		/// <para>Name: RecurrencePatternText</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "recurrencePatternText")]
-		public string RecurrencePatternText { get; set; }
-
-		///<summary>
-		/// Pattern Version
-		/// <para>Name: PatternVersion</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "patternVersion")]
-		public string PatternVersion { get; set; }
-
-		///<summary>
-		/// Location
-		/// <para>Name: Location</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "location")]
-		public string Location { get; set; }
-
-		///<summary>
-		/// Subject
-		/// <para>Name: Subject</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "subject")]
-		public string Subject { get; set; }
-
-		///<summary>
-		/// Summary
-		/// <para>Name: Summary</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "summary")]
-		public string Summary { get; set; }
-
-		///<summary>
-		/// Reminder Minutes
-		/// <para>Name: ReminderMinutes</para>
-		/// <para>SF Type: int</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "reminderMinutes")]
-		public int? ReminderMinutes { get; set; }
-
-		///<summary>
-		/// RecurrenceFieldJson
-		/// <para>Name: RecurrenceFieldJson</para>
-		/// <para>SF Type: textarea</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "recurrenceFieldJson")]
-		public string RecurrenceFieldJson { get; set; }
-
-		///<summary>
-		/// Attendees
-		/// <para>Name: Attendees</para>
-		/// <para>SF Type: textarea</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "attendees")]
-		public string Attendees { get; set; }
-
-		///<summary>
-		/// Activity Recurrence ID
-		/// <para>Name: ParentId</para>
-		/// <para>SF Type: reference</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "parentId")]
-		public string ParentId { get; set; }
-
-		///<summary>
-		/// ReferenceTo: ActivityRecurrence
-		/// <para>RelationshipName: Parent</para>
-		///</summary>
-		[JsonProperty(PropertyName = "parent")]
+		[JsonProperty(PropertyName = "lastViewedDate")]
 		[Updateable(false), Createable(false)]
-		public SfActivityRecurrence Parent { get; set; }
+		public DateTimeOffset? LastViewedDate { get; set; }
 
 		///<summary>
-		/// Last Projected Date
-		/// <para>Name: LastProjectedDate</para>
+		/// Last Referenced Date
+		/// <para>Name: LastReferencedDate</para>
 		/// <para>SF Type: datetime</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "lastProjectedDate")]
-		public DateTimeOffset? LastProjectedDate { get; set; }
+		[JsonProperty(PropertyName = "lastReferencedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastReferencedDate { get; set; }
+
+		///<summary>
+		/// Communication Subscription Consent ID
+		/// <para>Name: CommSubscriptionConsentId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "commSubscriptionConsentId")]
+		[Updateable(false), Createable(true)]
+		public string CommSubscriptionConsentId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: CommSubscriptionConsent
+		/// <para>RelationshipName: CommSubscriptionConsent</para>
+		///</summary>
+		[JsonProperty(PropertyName = "commSubscriptionConsent")]
+		[Updateable(false), Createable(false)]
+		public SfCommSubscriptionConsent CommSubscriptionConsent { get; set; }
+
+		///<summary>
+		/// Unit
+		/// <para>Name: Unit</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "unit")]
+		public string Unit { get; set; }
 
 	}
 }

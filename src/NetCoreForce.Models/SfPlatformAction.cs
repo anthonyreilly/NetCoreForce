@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -209,6 +209,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "deviceFormat")]
 		[Updateable(false), Createable(false)]
 		public string DeviceFormat { get; set; }
+
+		///<summary>
+		/// Retrieval Mode
+		/// <para>Name: RetrievalMode</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "retrievalMode")]
+		[Updateable(false), Createable(false)]
+		public string RetrievalMode { get; set; }
 
 		///<summary>
 		/// Icon Content Type

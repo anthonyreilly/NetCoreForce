@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -228,6 +228,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "organizationIds")]
 		[Updateable(false), Createable(true)]
 		public string OrganizationIds { get; set; }
+
+		///<summary>
+		/// Download File Size
+		/// <para>Name: DownloadSize</para>
+		/// <para>SF Type: long</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "downloadSize")]
+		[Updateable(false), Createable(false)]
+		public string DownloadSize { get; set; }
 
 	}
 }

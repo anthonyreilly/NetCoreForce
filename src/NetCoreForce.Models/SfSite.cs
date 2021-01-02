@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -127,6 +127,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "optionsRequireHttps")]
 		[Updateable(false), Createable(false)]
 		public bool? OptionsRequireHttps { get; set; }
+
+		///<summary>
+		/// Guest Access to the Payments API
+		/// <para>Name: OptionsAllowGuestPaymentsApi</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsAllowGuestPaymentsApi")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsAllowGuestPaymentsApi { get; set; }
+
+		///<summary>
+		/// HasStoredPathPrefix
+		/// <para>Name: OptionsHasStoredPathPrefix</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsHasStoredPathPrefix")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsHasStoredPathPrefix { get; set; }
 
 		///<summary>
 		/// Enable Standard Home Page

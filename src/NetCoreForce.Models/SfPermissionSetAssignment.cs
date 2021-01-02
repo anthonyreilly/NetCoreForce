@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -49,6 +49,24 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "permissionSet")]
 		[Updateable(false), Createable(false)]
 		public SfPermissionSet PermissionSet { get; set; }
+
+		///<summary>
+		/// PermissionSetGroup ID
+		/// <para>Name: PermissionSetGroupId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionSetGroupId")]
+		[Updateable(false), Createable(true)]
+		public string PermissionSetGroupId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: PermissionSetGroup
+		/// <para>RelationshipName: PermissionSetGroup</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionSetGroup")]
+		[Updateable(false), Createable(false)]
+		public SfPermissionSetGroup PermissionSetGroup { get; set; }
 
 		///<summary>
 		/// Assignee ID

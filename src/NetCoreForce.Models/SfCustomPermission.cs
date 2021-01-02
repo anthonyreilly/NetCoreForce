@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -167,6 +167,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "description")]
 		[Updateable(false), Createable(false)]
 		public string Description { get; set; }
+
+		///<summary>
+		/// License Required
+		/// <para>Name: IsLicensed</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isLicensed")]
+		[Updateable(false), Createable(false)]
+		public bool? IsLicensed { get; set; }
 
 	}
 }

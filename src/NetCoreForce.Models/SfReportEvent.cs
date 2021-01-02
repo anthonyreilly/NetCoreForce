@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -315,6 +315,16 @@ namespace NetCoreForce.Models
 		public string ColumnHeaders { get; set; }
 
 		///<summary>
+		/// Name of Grouped Columns
+		/// <para>Name: GroupedColumnHeaders</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "groupedColumnHeaders")]
+		[Updateable(false), Createable(false)]
+		public string GroupedColumnHeaders { get; set; }
+
+		///<summary>
 		/// Description
 		/// <para>Name: Description</para>
 		/// <para>SF Type: string</para>
@@ -401,6 +411,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "sequence")]
 		[Updateable(false), Createable(false)]
 		public int? Sequence { get; set; }
+
+		///<summary>
+		/// Displayed Field Entities
+		/// <para>Name: DisplayedFieldEntities</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "displayedFieldEntities")]
+		[Updateable(false), Createable(false)]
+		public string DisplayedFieldEntities { get; set; }
 
 	}
 }

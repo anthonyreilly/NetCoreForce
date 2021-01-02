@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// SearchActivity
-	///<para>SObject Name: SearchActivity</para>
+	/// Wave Auto Install Request
+	///<para>SObject Name: WaveAutoInstallRequest</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfSearchActivity : SObject
+	public class SfWaveAutoInstallRequest : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "SearchActivity"; }
+			get { return "WaveAutoInstallRequest"; }
 		}
 
 		///<summary>
-		/// Search Activity Id
+		/// Request Id
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -43,14 +43,12 @@ namespace NetCoreForce.Models
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
-		/// Search Activity Name
+		/// Request Name
 		/// <para>Name: Name</para>
 		/// <para>SF Type: string</para>
-		/// <para>AutoNumber field</para>
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "name")]
-		[Updateable(false), Createable(false)]
 		public string Name { get; set; }
 
 		///<summary>
@@ -120,104 +118,90 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Search Term
-		/// <para>Name: SearchTerm</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "searchTerm")]
-		[Updateable(false), Createable(false)]
-		public string SearchTerm { get; set; }
-
-		///<summary>
-		/// Search Date
-		/// <para>Name: QueryDate</para>
-		/// <para>SF Type: date</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "queryDate")]
-		[Updateable(false), Createable(false)]
-		public DateTime? QueryDate { get; set; }
-
-		///<summary>
-		/// Number of Searches
-		/// <para>Name: CountQueries</para>
-		/// <para>SF Type: int</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "countQueries")]
-		[Updateable(false), Createable(false)]
-		public int? CountQueries { get; set; }
-
-		///<summary>
-		/// Number of Users
-		/// <para>Name: CountUsers</para>
-		/// <para>SF Type: int</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "countUsers")]
-		[Updateable(false), Createable(false)]
-		public int? CountUsers { get; set; }
-
-		///<summary>
-		/// Number of Results
-		/// <para>Name: AvgNumResults</para>
-		/// <para>SF Type: double</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "avgNumResults")]
-		[Updateable(false), Createable(false)]
-		public double? AvgNumResults { get; set; }
-
-		///<summary>
-		/// Channel
-		/// <para>Name: KbChannel</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "kbChannel")]
-		[Updateable(false), Createable(false)]
-		public string KbChannel { get; set; }
-
-		///<summary>
-		/// Duration
-		/// <para>Name: Period</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "period")]
-		[Updateable(false), Createable(false)]
-		public string Period { get; set; }
-
-		///<summary>
-		/// Average Click Rank
-		/// <para>Name: ClickRank</para>
-		/// <para>SF Type: double</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "clickRank")]
-		[Updateable(false), Createable(false)]
-		public double? ClickRank { get; set; }
-
-		///<summary>
-		/// Language
-		/// <para>Name: QueryLanguage</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "queryLanguage")]
-		[Updateable(false), Createable(false)]
-		public string QueryLanguage { get; set; }
-
-		///<summary>
-		/// Clicked Article Title
-		/// <para>Name: ClickedRecordName</para>
+		/// Wave Template Api Name
+		/// <para>Name: TemplateApiName</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "clickedRecordName")]
+		[JsonProperty(PropertyName = "templateApiName")]
+		[Updateable(false), Createable(true)]
+		public string TemplateApiName { get; set; }
+
+		///<summary>
+		/// Wave Template Version
+		/// <para>Name: TemplateVersion</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "templateVersion")]
+		[Updateable(false), Createable(true)]
+		public string TemplateVersion { get; set; }
+
+		///<summary>
+		/// Folder ID
+		/// <para>Name: FolderId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "folderId")]
+		[Updateable(false), Createable(true)]
+		public string FolderId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Folder
+		/// <para>RelationshipName: Folder</para>
+		///</summary>
+		[JsonProperty(PropertyName = "folder")]
 		[Updateable(false), Createable(false)]
-		public string ClickedRecordName { get; set; }
+		public SfFolder Folder { get; set; }
+
+		///<summary>
+		/// Request Type
+		/// <para>Name: RequestType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "requestType")]
+		[Updateable(false), Createable(true)]
+		public string RequestType { get; set; }
+
+		///<summary>
+		/// Request Status
+		/// <para>Name: RequestStatus</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "requestStatus")]
+		public string RequestStatus { get; set; }
+
+		///<summary>
+		/// Failed Reason
+		/// <para>Name: FailedReason</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "failedReason")]
+		[Updateable(false), Createable(false)]
+		public string FailedReason { get; set; }
+
+		///<summary>
+		/// Configuration
+		/// <para>Name: Configuration</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "configuration")]
+		[Updateable(false), Createable(true)]
+		public string Configuration { get; set; }
+
+		///<summary>
+		/// Request Log
+		/// <para>Name: RequestLog</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "requestLog")]
+		public string RequestLog { get; set; }
 
 	}
 }

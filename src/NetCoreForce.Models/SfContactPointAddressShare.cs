@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Forecast Share
-	///<para>SObject Name: ForecastShare</para>
+	/// Contact Point Address Share
+	///<para>SObject Name: ContactPointAddressShare</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfForecastShare : SObject
+	public class SfContactPointAddressShare : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "ForecastShare"; }
+			get { return "ContactPointAddressShare"; }
 		}
 
 		///<summary>
-		/// Forecast Share ID
+		/// Custom Object Share ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -33,14 +33,22 @@ namespace NetCoreForce.Models
 		public string Id { get; set; }
 
 		///<summary>
-		/// User Role ID
-		/// <para>Name: UserRoleId</para>
+		/// Parent ID
+		/// <para>Name: ParentId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "userRoleId")]
+		[JsonProperty(PropertyName = "parentId")]
+		[Updateable(false), Createable(true)]
+		public string ParentId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: ContactPointAddress
+		/// <para>RelationshipName: Parent</para>
+		///</summary>
+		[JsonProperty(PropertyName = "parent")]
 		[Updateable(false), Createable(false)]
-		public string UserRoleId { get; set; }
+		public SfContactPointAddress Parent { get; set; }
 
 		///<summary>
 		/// User/Group ID
@@ -49,37 +57,26 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "userOrGroupId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Createable(true)]
 		public string UserOrGroupId { get; set; }
 
 		///<summary>
-		/// Forecast Access
+		/// Custom Object Access
 		/// <para>Name: AccessLevel</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "accessLevel")]
-		[Updateable(false), Createable(false)]
 		public string AccessLevel { get; set; }
-
-		///<summary>
-		/// Submit Allowed
-		/// <para>Name: CanSubmit</para>
-		/// <para>SF Type: boolean</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "canSubmit")]
-		[Updateable(false), Createable(false)]
-		public bool? CanSubmit { get; set; }
 
 		///<summary>
 		/// Row Cause
 		/// <para>Name: RowCause</para>
 		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "rowCause")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Createable(true)]
 		public string RowCause { get; set; }
 
 		///<summary>
@@ -109,6 +106,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "lastModifiedBy")]
 		[Updateable(false), Createable(false)]
 		public SfUser LastModifiedBy { get; set; }
+
+		///<summary>
+		/// Deleted
+		/// <para>Name: IsDeleted</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isDeleted")]
+		[Updateable(false), Createable(false)]
+		public bool? IsDeleted { get; set; }
 
 	}
 }

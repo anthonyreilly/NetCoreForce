@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -127,6 +127,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "rowsProcessed")]
 		[Updateable(false), Createable(false)]
 		public double? RowsProcessed { get; set; }
+
+		///<summary>
+		/// Rows Returned
+		/// <para>Name: RowsReturned</para>
+		/// <para>SF Type: double</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "rowsReturned")]
+		[Updateable(false), Createable(false)]
+		public double? RowsReturned { get; set; }
 
 		///<summary>
 		/// Operation

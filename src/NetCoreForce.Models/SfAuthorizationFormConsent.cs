@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -176,7 +176,7 @@ namespace NetCoreForce.Models
 		/// Consent Captured Source
 		/// <para>Name: ConsentCapturedSource</para>
 		/// <para>SF Type: string</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "consentCapturedSource")]
 		public string ConsentCapturedSource { get; set; }
@@ -185,7 +185,7 @@ namespace NetCoreForce.Models
 		/// Consent Captured Source Type
 		/// <para>Name: ConsentCapturedSourceType</para>
 		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "consentCapturedSourceType")]
 		public string ConsentCapturedSourceType { get; set; }
@@ -194,7 +194,7 @@ namespace NetCoreForce.Models
 		/// Consent Captured Date Time
 		/// <para>Name: ConsentCapturedDateTime</para>
 		/// <para>SF Type: datetime</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "consentCapturedDateTime")]
 		public DateTimeOffset? ConsentCapturedDateTime { get; set; }
@@ -224,6 +224,23 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "documentVersion")]
 		[Updateable(false), Createable(false)]
 		public SfContentVersion DocumentVersion { get; set; }
+
+		///<summary>
+		/// Related Record ID
+		/// <para>Name: RelatedRecordId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "relatedRecordId")]
+		public string RelatedRecordId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Account
+		/// <para>RelationshipName: RelatedRecord</para>
+		///</summary>
+		[JsonProperty(PropertyName = "relatedRecord")]
+		[Updateable(false), Createable(false)]
+		public SfAccount RelatedRecord { get; set; }
 
 	}
 }

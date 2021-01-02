@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -179,7 +179,7 @@ namespace NetCoreForce.Models
 		public bool? OptionsSendClientCredentialsInHeader { get; set; }
 
 		///<summary>
-		/// Include identity organization&#39;s organization ID for third-party account linkage
+		/// Include identity organization&#39;s Organization ID for third-party account linkage
 		/// <para>Name: OptionsIncludeOrgIdInId</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>

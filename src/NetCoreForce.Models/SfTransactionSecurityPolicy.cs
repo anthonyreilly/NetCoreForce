@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -241,6 +241,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "eventName")]
 		public string EventName { get; set; }
+
+		///<summary>
+		/// Block Message
+		/// <para>Name: BlockMessage</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "blockMessage")]
+		public string BlockMessage { get; set; }
 
 	}
 }

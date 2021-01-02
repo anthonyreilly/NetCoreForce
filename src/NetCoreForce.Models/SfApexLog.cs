@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -149,6 +149,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "location")]
 		[Updateable(false), Createable(false)]
 		public string Location { get; set; }
+
+		///<summary>
+		/// Request ID
+		/// <para>Name: RequestIdentifier</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "requestIdentifier")]
+		[Updateable(false), Createable(false)]
+		public string RequestIdentifier { get; set; }
 
 	}
 }

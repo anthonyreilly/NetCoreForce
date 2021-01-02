@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -191,7 +191,7 @@ namespace NetCoreForce.Models
 		public SfAuthorizationFormText DefaultAuthFormText { get; set; }
 
 		///<summary>
-		/// Signature Required
+		/// Is Signature Required
 		/// <para>Name: IsSignatureRequired</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>

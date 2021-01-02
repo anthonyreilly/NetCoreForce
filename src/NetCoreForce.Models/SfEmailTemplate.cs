@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -317,6 +317,16 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "relatedEntityType")]
 		public string RelatedEntityType { get; set; }
+
+		///<summary>
+		/// Made in Email Template Builder
+		/// <para>Name: IsBuilderContent</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isBuilderContent")]
+		[Updateable(false), Createable(false)]
+		public bool? IsBuilderContent { get; set; }
 
 	}
 }

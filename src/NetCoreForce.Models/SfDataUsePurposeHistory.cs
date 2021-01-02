@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -97,6 +97,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "field")]
 		[Updateable(false), Createable(false)]
 		public string Field { get; set; }
+
+		///<summary>
+		/// Datatype
+		/// <para>Name: DataType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "dataType")]
+		[Updateable(false), Createable(false)]
+		public string DataType { get; set; }
 
 		///<summary>
 		/// Old Value

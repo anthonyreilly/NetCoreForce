@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -149,7 +149,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "listPrice")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Createable(true)]
 		public decimal? ListPrice { get; set; }
 
 		///<summary>

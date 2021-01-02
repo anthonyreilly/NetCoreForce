@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -166,7 +166,7 @@ namespace NetCoreForce.Models
 		/// Number Of Times To Repeat
 		/// <para>Name: TimesToDisplay</para>
 		/// <para>SF Type: int</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "timesToDisplay")]
 		public int? TimesToDisplay { get; set; }
@@ -175,7 +175,7 @@ namespace NetCoreForce.Models
 		/// Days In Between Displays
 		/// <para>Name: DelayDays</para>
 		/// <para>SF Type: int</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "delayDays")]
 		public int? DelayDays { get; set; }
@@ -184,7 +184,7 @@ namespace NetCoreForce.Models
 		/// Start Date
 		/// <para>Name: StartDate</para>
 		/// <para>SF Type: date</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "startDate")]
 		public DateTime? StartDate { get; set; }
@@ -202,7 +202,7 @@ namespace NetCoreForce.Models
 		/// Access Permissions
 		/// <para>Name: UserAccess</para>
 		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "userAccess")]
 		public string UserAccess { get; set; }
@@ -385,6 +385,33 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "videoLink")]
 		public string VideoLink { get; set; }
+
+		///<summary>
+		/// Step Number
+		/// <para>Name: StepNumber</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "stepNumber")]
+		public int? StepNumber { get; set; }
+
+		///<summary>
+		/// Theme Color
+		/// <para>Name: ThemeColor</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "themeColor")]
+		public string ThemeColor { get; set; }
+
+		///<summary>
+		/// Theme Saturation
+		/// <para>Name: ThemeSaturation</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "themeSaturation")]
+		public string ThemeSaturation { get; set; }
 
 		///<summary>
 		/// Index Formula Field With Is Published Data

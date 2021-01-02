@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -172,6 +172,24 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "channel")]
 		public string Channel { get; set; }
+
+		///<summary>
+		/// Include in selected channels
+		/// <para>Name: IsInsertable</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isInsertable")]
+		public bool? IsInsertable { get; set; }
+
+		///<summary>
+		/// Source Entity Type
+		/// <para>Name: SourceType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "sourceType")]
+		public string SourceType { get; set; }
 
 	}
 }

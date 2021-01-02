@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// Contact Point Consent ID
+		/// Contact Point Type Consent ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -167,7 +167,7 @@ namespace NetCoreForce.Models
 		/// Contact Point Type ID
 		/// <para>Name: ContactPointType</para>
 		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "contactPointType")]
 		public string ContactPointType { get; set; }
@@ -220,7 +220,7 @@ namespace NetCoreForce.Models
 		/// Capture Date
 		/// <para>Name: CaptureDate</para>
 		/// <para>SF Type: datetime</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "captureDate")]
 		public DateTimeOffset? CaptureDate { get; set; }
@@ -229,7 +229,7 @@ namespace NetCoreForce.Models
 		/// Capture Contact Point Type
 		/// <para>Name: CaptureContactPointType</para>
 		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "captureContactPointType")]
 		public string CaptureContactPointType { get; set; }
@@ -238,7 +238,7 @@ namespace NetCoreForce.Models
 		/// Capture Source
 		/// <para>Name: CaptureSource</para>
 		/// <para>SF Type: string</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "captureSource")]
 		public string CaptureSource { get; set; }

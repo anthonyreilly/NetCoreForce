@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -681,7 +681,7 @@ namespace NetCoreForce.Models
 		public bool? UserPermissionsSiteforcePublisherUser { get; set; }
 
 		///<summary>
-		/// Work.com User
+		/// WDC User
 		/// <para>Name: UserPermissionsWorkDotComUserFeature</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -1147,15 +1147,6 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "userPreferencesDisableWorkEmail")]
 		public bool? UserPreferencesDisableWorkEmail { get; set; }
-
-		///<summary>
-		/// PipelineViewHideHelpPopover
-		/// <para>Name: UserPreferencesPipelineViewHideHelpPopover</para>
-		/// <para>SF Type: boolean</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "userPreferencesPipelineViewHideHelpPopover")]
-		public bool? UserPreferencesPipelineViewHideHelpPopover { get; set; }
 
 		///<summary>
 		/// HideS1BrowserUI

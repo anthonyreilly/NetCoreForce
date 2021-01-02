@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -173,6 +173,16 @@ namespace NetCoreForce.Models
 		public bool? IsTemplate { get; set; }
 
 		///<summary>
+		/// Is Swing Flow
+		/// <para>Name: IsSwingFlow</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isSwingFlow")]
+		[Updateable(false), Createable(false)]
+		public bool? IsSwingFlow { get; set; }
+
+		///<summary>
 		/// Built with
 		/// <para>Name: Builder</para>
 		/// <para>SF Type: string</para>
@@ -201,6 +211,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "installedPackageName")]
 		[Updateable(false), Createable(false)]
 		public string InstalledPackageName { get; set; }
+
+		///<summary>
+		/// Preview Label
+		/// <para>Name: GuestMasterLabel</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "guestMasterLabel")]
+		[Updateable(false), Createable(false)]
+		public string GuestMasterLabel { get; set; }
 
 	}
 }

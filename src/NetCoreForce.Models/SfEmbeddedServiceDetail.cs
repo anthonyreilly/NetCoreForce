@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -103,6 +103,26 @@ namespace NetCoreForce.Models
 		public string NavBarColor { get; set; }
 
 		///<summary>
+		/// NavBar Text Color
+		/// <para>Name: NavBarTextColor</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "navBarTextColor")]
+		[Updateable(false), Createable(false)]
+		public string NavBarTextColor { get; set; }
+
+		///<summary>
+		/// Secondary NavBar Color
+		/// <para>Name: SecondaryNavBarColor</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "secondaryNavBarColor")]
+		[Updateable(false), Createable(false)]
+		public string SecondaryNavBarColor { get; set; }
+
+		///<summary>
 		/// Font
 		/// <para>Name: Font</para>
 		/// <para>SF Type: string</para>
@@ -193,7 +213,7 @@ namespace NetCoreForce.Models
 		public string SmallCompanyLogoImg { get; set; }
 
 		///<summary>
-		/// Prechat Background Image URL
+		/// Pre-Chat Background Image URL
 		/// <para>Name: PrechatBackgroundImg</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -211,16 +231,6 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "waitingStateBackgroundImg")]
 		[Updateable(false), Createable(false)]
 		public string WaitingStateBackgroundImg { get; set; }
-
-		///<summary>
-		/// Header Background Image URL
-		/// <para>Name: HeaderBackgroundImg</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "headerBackgroundImg")]
-		[Updateable(false), Createable(false)]
-		public string HeaderBackgroundImg { get; set; }
 
 		///<summary>
 		/// Font Size

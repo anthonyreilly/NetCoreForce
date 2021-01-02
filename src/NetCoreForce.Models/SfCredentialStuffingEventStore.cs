@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -33,6 +33,17 @@ namespace NetCoreForce.Models
 		public string Id { get; set; }
 
 		///<summary>
+		/// Event Name
+		/// <para>Name: CredentialStuffingEventNumber</para>
+		/// <para>SF Type: string</para>
+		/// <para>AutoNumber field</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "credentialStuffingEventNumber")]
+		[Updateable(false), Createable(false)]
+		public string CredentialStuffingEventNumber { get; set; }
+
+		///<summary>
 		/// Created Date
 		/// <para>Name: CreatedDate</para>
 		/// <para>SF Type: datetime</para>
@@ -43,7 +54,47 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? CreatedDate { get; set; }
 
 		///<summary>
-		/// Event Identifier
+		/// Last Modified Date
+		/// <para>Name: LastModifiedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastModifiedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastModifiedDate { get; set; }
+
+		///<summary>
+		/// System Modstamp
+		/// <para>Name: SystemModstamp</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "systemModstamp")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? SystemModstamp { get; set; }
+
+		///<summary>
+		/// Last Viewed Date
+		/// <para>Name: LastViewedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastViewedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastViewedDate { get; set; }
+
+		///<summary>
+		/// Last Referenced Date
+		/// <para>Name: LastReferencedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastReferencedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastReferencedDate { get; set; }
+
+		///<summary>
+		/// Event ID
 		/// <para>Name: EventIdentifier</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: False</para>
@@ -111,7 +162,7 @@ namespace NetCoreForce.Models
 		public string LoginKey { get; set; }
 
 		///<summary>
-		/// Source IP
+		/// Source IP Address
 		/// <para>Name: SourceIp</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -121,7 +172,45 @@ namespace NetCoreForce.Models
 		public string SourceIp { get; set; }
 
 		///<summary>
-		/// Accept Language
+		/// Transaction Security Policy ID
+		/// <para>Name: PolicyId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "policyId")]
+		[Updateable(false), Createable(false)]
+		public string PolicyId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: TransactionSecurityPolicy
+		/// <para>RelationshipName: Policy</para>
+		///</summary>
+		[JsonProperty(PropertyName = "policy")]
+		[Updateable(false), Createable(false)]
+		public SfTransactionSecurityPolicy Policy { get; set; }
+
+		///<summary>
+		/// Policy Outcome
+		/// <para>Name: PolicyOutcome</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "policyOutcome")]
+		[Updateable(false), Createable(false)]
+		public string PolicyOutcome { get; set; }
+
+		///<summary>
+		/// Evaluation Time
+		/// <para>Name: EvaluationTime</para>
+		/// <para>SF Type: double</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "evaluationTime")]
+		[Updateable(false), Createable(false)]
+		public double? EvaluationTime { get; set; }
+
+		///<summary>
+		/// Accept-Language Header
 		/// <para>Name: AcceptLanguage</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -161,9 +250,19 @@ namespace NetCoreForce.Models
 		public double? Score { get; set; }
 
 		///<summary>
+		/// Summary
+		/// <para>Name: Summary</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "summary")]
+		[Updateable(false), Createable(false)]
+		public string Summary { get; set; }
+
+		///<summary>
 		/// User Agent
 		/// <para>Name: UserAgent</para>
-		/// <para>SF Type: string</para>
+		/// <para>SF Type: textarea</para>
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "userAgent")]

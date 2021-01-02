@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// ActivityRecurrenceException
-	///<para>SObject Name: ActivityRecurrenceException</para>
+	/// Contact Point Email
+	///<para>SObject Name: ContactPointEmail</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfActivityRecurrenceException : SObject
+	public class SfContactPointEmail : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "ActivityRecurrenceException"; }
+			get { return "ContactPointEmail"; }
 		}
 
 		///<summary>
-		/// Activity Recurrence Exception ID
+		/// Contact Point Email ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -31,6 +31,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "id")]
 		[Updateable(false), Createable(false)]
 		public string Id { get; set; }
+
+		///<summary>
+		/// Owner ID
+		/// <para>Name: OwnerId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "ownerId")]
+		public string OwnerId { get; set; }
 
 		///<summary>
 		/// Deleted
@@ -46,9 +55,10 @@ namespace NetCoreForce.Models
 		/// Name
 		/// <para>Name: Name</para>
 		/// <para>SF Type: string</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "name")]
+		[Updateable(false), Createable(false)]
 		public string Name { get; set; }
 
 		///<summary>
@@ -118,111 +128,132 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Start DateTime
-		/// <para>Name: StartDateTime</para>
+		/// Last Viewed Date
+		/// <para>Name: LastViewedDate</para>
 		/// <para>SF Type: datetime</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "startDateTime")]
-		public DateTimeOffset? StartDateTime { get; set; }
+		[JsonProperty(PropertyName = "lastViewedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastViewedDate { get; set; }
 
 		///<summary>
-		/// End DateTime
-		/// <para>Name: EndDateTime</para>
+		/// Last Referenced Date
+		/// <para>Name: LastReferencedDate</para>
 		/// <para>SF Type: datetime</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "endDateTime")]
-		public DateTimeOffset? EndDateTime { get; set; }
+		[JsonProperty(PropertyName = "lastReferencedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastReferencedDate { get; set; }
 
 		///<summary>
-		/// Duration Minutes
-		/// <para>Name: DurationMinutes</para>
-		/// <para>SF Type: int</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "durationMinutes")]
-		public int? DurationMinutes { get; set; }
-
-		///<summary>
-		/// Location
-		/// <para>Name: Location</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "location")]
-		public string Location { get; set; }
-
-		///<summary>
-		/// Subject
-		/// <para>Name: Subject</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "subject")]
-		public string Subject { get; set; }
-
-		///<summary>
-		/// Summary
-		/// <para>Name: Summary</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "summary")]
-		public string Summary { get; set; }
-
-		///<summary>
-		/// Reminder Minutes
-		/// <para>Name: ReminderMinutes</para>
-		/// <para>SF Type: int</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "reminderMinutes")]
-		public int? ReminderMinutes { get; set; }
-
-		///<summary>
-		/// RecurrenceFieldJson
-		/// <para>Name: RecurrenceFieldJson</para>
-		/// <para>SF Type: textarea</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "recurrenceFieldJson")]
-		public string RecurrenceFieldJson { get; set; }
-
-		///<summary>
-		/// Attendees
-		/// <para>Name: Attendees</para>
-		/// <para>SF Type: textarea</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "attendees")]
-		public string Attendees { get; set; }
-
-		///<summary>
-		/// Is Excluded
-		/// <para>Name: IsExcluded</para>
-		/// <para>SF Type: boolean</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "isExcluded")]
-		public bool? IsExcluded { get; set; }
-
-		///<summary>
-		/// Recurrence ID
-		/// <para>Name: RecurrenceId</para>
+		/// Parent ID
+		/// <para>Name: ParentId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "recurrenceId")]
-		public string RecurrenceId { get; set; }
+		[JsonProperty(PropertyName = "parentId")]
+		public string ParentId { get; set; }
 
 		///<summary>
-		/// ReferenceTo: ActivityRecurrence
-		/// <para>RelationshipName: Recurrence</para>
+		/// Active from Date
+		/// <para>Name: ActiveFromDate</para>
+		/// <para>SF Type: date</para>
+		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "recurrence")]
-		[Updateable(false), Createable(false)]
-		public SfActivityRecurrence Recurrence { get; set; }
+		[JsonProperty(PropertyName = "activeFromDate")]
+		public DateTime? ActiveFromDate { get; set; }
+
+		///<summary>
+		/// Active to Date
+		/// <para>Name: ActiveToDate</para>
+		/// <para>SF Type: date</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "activeToDate")]
+		public DateTime? ActiveToDate { get; set; }
+
+		///<summary>
+		/// Best time to contact end time
+		/// <para>Name: BestTimeToContactEndTime</para>
+		/// <para>SF Type: time</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "bestTimeToContactEndTime")]
+		public string BestTimeToContactEndTime { get; set; }
+
+		///<summary>
+		/// Best time to contact start time
+		/// <para>Name: BestTimeToContactStartTime</para>
+		/// <para>SF Type: time</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "bestTimeToContactStartTime")]
+		public string BestTimeToContactStartTime { get; set; }
+
+		///<summary>
+		/// Best time to contact time zone
+		/// <para>Name: BestTimeToContactTimezone</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "bestTimeToContactTimezone")]
+		public string BestTimeToContactTimezone { get; set; }
+
+		///<summary>
+		/// Is Primary
+		/// <para>Name: IsPrimary</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isPrimary")]
+		public bool? IsPrimary { get; set; }
+
+		///<summary>
+		/// Email address
+		/// <para>Name: EmailAddress</para>
+		/// <para>SF Type: email</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "emailAddress")]
+		public string EmailAddress { get; set; }
+
+		///<summary>
+		/// Email mail box
+		/// <para>Name: EmailMailBox</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "emailMailBox")]
+		public string EmailMailBox { get; set; }
+
+		///<summary>
+		/// Email domain
+		/// <para>Name: EmailDomain</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "emailDomain")]
+		public string EmailDomain { get; set; }
+
+		///<summary>
+		/// Email latest bounce date time
+		/// <para>Name: EmailLatestBounceDateTime</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "emailLatestBounceDateTime")]
+		public DateTimeOffset? EmailLatestBounceDateTime { get; set; }
+
+		///<summary>
+		/// Email latest bounce reason text
+		/// <para>Name: EmailLatestBounceReasonText</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "emailLatestBounceReasonText")]
+		public string EmailLatestBounceReasonText { get; set; }
 
 	}
 }

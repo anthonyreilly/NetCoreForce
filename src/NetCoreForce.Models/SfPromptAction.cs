@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -213,6 +213,24 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "lastResultDate")]
 		public DateTimeOffset? LastResultDate { get; set; }
+
+		///<summary>
+		/// Step Number
+		/// <para>Name: StepNumber</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "stepNumber")]
+		public int? StepNumber { get; set; }
+
+		///<summary>
+		/// Step Count
+		/// <para>Name: StepCount</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "stepCount")]
+		public int? StepCount { get; set; }
 
 	}
 }

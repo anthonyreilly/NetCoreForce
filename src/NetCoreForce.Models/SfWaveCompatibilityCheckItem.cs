@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -167,6 +167,24 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "payload")]
 		[Updateable(false), Createable(false)]
 		public string Payload { get; set; }
+
+		///<summary>
+		/// Auto Install Request ID
+		/// <para>Name: WaveAutoInstallRequestId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "waveAutoInstallRequestId")]
+		[Updateable(false), Createable(false)]
+		public string WaveAutoInstallRequestId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: WaveAutoInstallRequest
+		/// <para>RelationshipName: WaveAutoInstallRequest</para>
+		///</summary>
+		[JsonProperty(PropertyName = "waveAutoInstallRequest")]
+		[Updateable(false), Createable(false)]
+		public SfWaveAutoInstallRequest WaveAutoInstallRequest { get; set; }
 
 	}
 }

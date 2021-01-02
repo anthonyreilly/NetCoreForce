@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -261,16 +261,6 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "preferencesConsentManagementEnabled")]
 		[Updateable(true), Createable(false)]
 		public bool? PreferencesConsentManagementEnabled { get; set; }
-
-		///<summary>
-		/// IndividualAutoCreateEnabled
-		/// <para>Name: PreferencesIndividualAutoCreateEnabled</para>
-		/// <para>SF Type: boolean</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "preferencesIndividualAutoCreateEnabled")]
-		[Updateable(true), Createable(false)]
-		public bool? PreferencesIndividualAutoCreateEnabled { get; set; }
 
 		///<summary>
 		/// AutoSelectIndividualOnMerge

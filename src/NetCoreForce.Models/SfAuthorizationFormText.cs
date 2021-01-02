@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -156,7 +156,7 @@ namespace NetCoreForce.Models
 		public SfAuthorizationForm AuthorizationForm { get; set; }
 
 		///<summary>
-		/// Full Authorization Form URL
+		/// Full Authorization Form Url
 		/// <para>Name: FullAuthorizationFormUrl</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -165,7 +165,7 @@ namespace NetCoreForce.Models
 		public string FullAuthorizationFormUrl { get; set; }
 
 		///<summary>
-		/// Summary Of Authorization Form Text
+		/// Summary Auth Form Text
 		/// <para>Name: SummaryAuthFormText</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -192,7 +192,7 @@ namespace NetCoreForce.Models
 		public string LocaleSelection { get; set; }
 
 		///<summary>
-		/// ContentDocument ID
+		/// Content Document ID
 		/// <para>Name: ContentDocumentId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>

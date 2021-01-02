@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -182,7 +182,7 @@ namespace NetCoreForce.Models
 		public string Context { get; set; }
 
 		///<summary>
-		/// Whitelist site for connect-src
+		/// Allow site for connect-src
 		/// <para>Name: IsApplicableToConnectSrc</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -191,7 +191,7 @@ namespace NetCoreForce.Models
 		public bool? IsApplicableToConnectSrc { get; set; }
 
 		///<summary>
-		/// Whitelist site for frame-src
+		/// Allow site for frame-src
 		/// <para>Name: IsApplicableToFrameSrc</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -200,7 +200,7 @@ namespace NetCoreForce.Models
 		public bool? IsApplicableToFrameSrc { get; set; }
 
 		///<summary>
-		/// Whitelist site for img-src
+		/// Allow site for img-src
 		/// <para>Name: IsApplicableToImgSrc</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -209,7 +209,7 @@ namespace NetCoreForce.Models
 		public bool? IsApplicableToImgSrc { get; set; }
 
 		///<summary>
-		/// Whitelist site for style-src
+		/// Allow site for style-src
 		/// <para>Name: IsApplicableToStyleSrc</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -218,7 +218,7 @@ namespace NetCoreForce.Models
 		public bool? IsApplicableToStyleSrc { get; set; }
 
 		///<summary>
-		/// Whitelist site for font-src
+		/// Allow site for font-src
 		/// <para>Name: IsApplicableToFontSrc</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -227,7 +227,7 @@ namespace NetCoreForce.Models
 		public bool? IsApplicableToFontSrc { get; set; }
 
 		///<summary>
-		/// Whitelist site for media-src
+		/// Allow site for media-src
 		/// <para>Name: IsApplicableToMediaSrc</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>

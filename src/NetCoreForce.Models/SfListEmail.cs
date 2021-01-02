@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -217,7 +217,6 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "scheduledDate")]
-		[Updateable(false), Createable(false)]
 		public DateTimeOffset? ScheduledDate { get; set; }
 
 		///<summary>

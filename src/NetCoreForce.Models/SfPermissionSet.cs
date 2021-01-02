@@ -1,4 +1,4 @@
-// SF API version v48.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -918,7 +918,7 @@ namespace NetCoreForce.Models
 		public bool? PermissionsChatterFileLink { get; set; }
 
 		///<summary>
-		/// Two-Factor Authentication for User Interface Logins
+		/// Multi-Factor Authentication for User Interface Logins
 		/// <para>Name: PermissionsForceTwoFactor</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -1080,7 +1080,7 @@ namespace NetCoreForce.Models
 		public bool? PermissionsConnectOrgToEnvironmentHub { get; set; }
 
 		///<summary>
-		/// Enable Work.com Calibration
+		/// Enable WDC Calibration
 		/// <para>Name: PermissionsWorkCalibrationUser</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -1098,7 +1098,7 @@ namespace NetCoreForce.Models
 		public bool? PermissionsCreateCustomizeFilters { get; set; }
 
 		///<summary>
-		/// Enable Work.com
+		/// Enable WDC
 		/// <para>Name: PermissionsWorkDotComUserPerm</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -1134,7 +1134,7 @@ namespace NetCoreForce.Models
 		public bool? PermissionsSalesConsole { get; set; }
 
 		///<summary>
-		/// Two-Factor Authentication for API Logins
+		/// Multi-Factor Authentication for API Logins
 		/// <para>Name: PermissionsTwoFactorApi</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -1314,6 +1314,15 @@ namespace NetCoreForce.Models
 		public bool? PermissionsManageLoginAccessPolicies { get; set; }
 
 		///<summary>
+		/// View Login Forensics Events
+		/// <para>Name: PermissionsViewPlatformEvents</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewPlatformEvents")]
+		public bool? PermissionsViewPlatformEvents { get; set; }
+
+		///<summary>
 		/// Manage Custom Permissions
 		/// <para>Name: PermissionsManageCustomPermissions</para>
 		/// <para>SF Type: boolean</para>
@@ -1341,6 +1350,15 @@ namespace NetCoreForce.Models
 		public bool? PermissionsManageUnlistedGroups { get; set; }
 
 		///<summary>
+		/// Use Einstein Activity Capture Standard
+		/// <para>Name: PermissionsStdAutomaticActivityCapture</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsStdAutomaticActivityCapture")]
+		public bool? PermissionsStdAutomaticActivityCapture { get; set; }
+
+		///<summary>
 		/// Modify Secure Agents
 		/// <para>Name: PermissionsModifySecureAgents</para>
 		/// <para>SF Type: boolean</para>
@@ -1350,13 +1368,67 @@ namespace NetCoreForce.Models
 		public bool? PermissionsModifySecureAgents { get; set; }
 
 		///<summary>
-		/// Manage Two-Factor Authentication in API
+		/// Create and Edit Analytics Dashboards
+		/// <para>Name: PermissionsInsightsAppDashboardEditor</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsInsightsAppDashboardEditor")]
+		public bool? PermissionsInsightsAppDashboardEditor { get; set; }
+
+		///<summary>
+		/// Manage Multi-Factor Authentication in API
 		/// <para>Name: PermissionsManageTwoFactor</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "permissionsManageTwoFactor")]
 		public bool? PermissionsManageTwoFactor { get; set; }
+
+		///<summary>
+		/// Use Analytics
+		/// <para>Name: PermissionsInsightsAppUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsInsightsAppUser")]
+		public bool? PermissionsInsightsAppUser { get; set; }
+
+		///<summary>
+		/// Manage Analytics
+		/// <para>Name: PermissionsInsightsAppAdmin</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsInsightsAppAdmin")]
+		public bool? PermissionsInsightsAppAdmin { get; set; }
+
+		///<summary>
+		/// Edit Analytics Dataflows
+		/// <para>Name: PermissionsInsightsAppEltEditor</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsInsightsAppEltEditor")]
+		public bool? PermissionsInsightsAppEltEditor { get; set; }
+
+		///<summary>
+		/// Upload External Data to Analytics
+		/// <para>Name: PermissionsInsightsAppUploadUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsInsightsAppUploadUser")]
+		public bool? PermissionsInsightsAppUploadUser { get; set; }
+
+		///<summary>
+		/// Create Analytics Apps
+		/// <para>Name: PermissionsInsightsCreateApplication</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsInsightsCreateApplication")]
+		public bool? PermissionsInsightsCreateApplication { get; set; }
 
 		///<summary>
 		/// Lightning Experience User
@@ -1368,7 +1440,7 @@ namespace NetCoreForce.Models
 		public bool? PermissionsLightningExperienceUser { get; set; }
 
 		///<summary>
-		/// View Data Leakage Detection Events
+		/// View Real-Time Event Monitoring Data
 		/// <para>Name: PermissionsViewDataLeakageEvents</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -1422,6 +1494,24 @@ namespace NetCoreForce.Models
 		public bool? PermissionsManageSessionPermissionSets { get; set; }
 
 		///<summary>
+		/// Manage Analytics Templated Apps
+		/// <para>Name: PermissionsManageTemplatedApp</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsManageTemplatedApp")]
+		public bool? PermissionsManageTemplatedApp { get; set; }
+
+		///<summary>
+		/// Use Analytics Templated Apps
+		/// <para>Name: PermissionsUseTemplatedApp</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsUseTemplatedApp")]
+		public bool? PermissionsUseTemplatedApp { get; set; }
+
+		///<summary>
 		/// Send announcement emails
 		/// <para>Name: PermissionsSendAnnouncementEmails</para>
 		/// <para>SF Type: boolean</para>
@@ -1449,6 +1539,24 @@ namespace NetCoreForce.Models
 		public bool? PermissionsChatterEditOwnRecordPost { get; set; }
 
 		///<summary>
+		/// Download Analytics Data
+		/// <para>Name: PermissionsWaveTabularDownload</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsWaveTabularDownload")]
+		public bool? PermissionsWaveTabularDownload { get; set; }
+
+		///<summary>
+		/// Use Einstein Activity Capture
+		/// <para>Name: PermissionsAutomaticActivityCapture</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsAutomaticActivityCapture")]
+		public bool? PermissionsAutomaticActivityCapture { get; set; }
+
+		///<summary>
 		/// Import Custom Objects
 		/// <para>Name: PermissionsImportCustomObjects</para>
 		/// <para>SF Type: boolean</para>
@@ -1458,7 +1566,7 @@ namespace NetCoreForce.Models
 		public bool? PermissionsImportCustomObjects { get; set; }
 
 		///<summary>
-		/// Manage Two-Factor Authentication in User Interface
+		/// Manage Multi-Factor Authentication in User Interface
 		/// <para>Name: PermissionsDelegatedTwoFactor</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -1764,6 +1872,15 @@ namespace NetCoreForce.Models
 		public bool? PermissionsHasUnlimitedNBAExecutions { get; set; }
 
 		///<summary>
+		/// Access to View-Only Licensed Templates and Apps
+		/// <para>Name: PermissionsViewOnlyEmbeddedAppUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewOnlyEmbeddedAppUser")]
+		public bool? PermissionsViewOnlyEmbeddedAppUser { get; set; }
+
+		///<summary>
 		/// View All Activities
 		/// <para>Name: PermissionsViewAllActivities</para>
 		/// <para>SF Type: boolean</para>
@@ -1899,6 +2016,33 @@ namespace NetCoreForce.Models
 		public bool? PermissionsManageSubscriptions { get; set; }
 
 		///<summary>
+		/// Manage Analytics Private Assets
+		/// <para>Name: PermissionsWaveManagePrivateAssetsUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsWaveManagePrivateAssetsUser")]
+		public bool? PermissionsWaveManagePrivateAssetsUser { get; set; }
+
+		///<summary>
+		/// Edit Dataset Recipes
+		/// <para>Name: PermissionsCanEditDataPrepRecipe</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsCanEditDataPrepRecipe")]
+		public bool? PermissionsCanEditDataPrepRecipe { get; set; }
+
+		///<summary>
+		/// Add Analytics Remote Connections
+		/// <para>Name: PermissionsAddAnalyticsRemoteConnections</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsAddAnalyticsRemoteConnections")]
+		public bool? PermissionsAddAnalyticsRemoteConnections { get; set; }
+
+		///<summary>
 		/// Manage Surveys
 		/// <para>Name: PermissionsManageSurveys</para>
 		/// <para>SF Type: boolean</para>
@@ -1915,6 +2059,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "permissionsViewRoles")]
 		public bool? PermissionsViewRoles { get; set; }
+
+		///<summary>
+		/// Manage Analytics Custom Maps
+		/// <para>Name: PermissionsCanManageMaps</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsCanManageMaps")]
+		public bool? PermissionsCanManageMaps { get; set; }
 
 		///<summary>
 		/// New Salesforce Mobile App - Customizable Navigation (Winter &#39;20 Pilot Only)
@@ -1971,7 +2124,7 @@ namespace NetCoreForce.Models
 		public bool? PermissionsModifyMetadata { get; set; }
 
 		///<summary>
-		/// Manage CMS Workspaces and Channels
+		/// Create CMS Workspaces and Channels
 		/// <para>Name: PermissionsManageCMS</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -2043,6 +2196,24 @@ namespace NetCoreForce.Models
 		public bool? PermissionsTraceXdsQueries { get; set; }
 
 		///<summary>
+		/// View Security Center pages
+		/// <para>Name: PermissionsViewSecurityCommandCenter</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewSecurityCommandCenter")]
+		public bool? PermissionsViewSecurityCommandCenter { get; set; }
+
+		///<summary>
+		/// Manage Security Center
+		/// <para>Name: PermissionsManageSecurityCommandCenter</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsManageSecurityCommandCenter")]
+		public bool? PermissionsManageSecurityCommandCenter { get; set; }
+
+		///<summary>
 		/// View All Custom Settings
 		/// <para>Name: PermissionsViewAllCustomSettings</para>
 		/// <para>SF Type: boolean</para>
@@ -2061,6 +2232,15 @@ namespace NetCoreForce.Models
 		public bool? PermissionsViewAllForeignKeyNames { get; set; }
 
 		///<summary>
+		/// Notification Emails: Add Recipients
+		/// <para>Name: PermissionsAddWaveNotificationRecipients</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsAddWaveNotificationRecipients")]
+		public bool? PermissionsAddWaveNotificationRecipients { get; set; }
+
+		///<summary>
 		/// Enable Salesforce CMS Integration
 		/// <para>Name: PermissionsHeadlessCMSAccess</para>
 		/// <para>SF Type: boolean</para>
@@ -2070,6 +2250,15 @@ namespace NetCoreForce.Models
 		public bool? PermissionsHeadlessCMSAccess { get; set; }
 
 		///<summary>
+		/// End Messaging Session
+		/// <para>Name: PermissionsLMEndMessagingSessionUserPerm</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsLMEndMessagingSessionUserPerm")]
+		public bool? PermissionsLMEndMessagingSessionUserPerm { get; set; }
+
+		///<summary>
 		/// Update Consent Preferences Using REST API
 		/// <para>Name: PermissionsConsentApiUpdate</para>
 		/// <para>SF Type: boolean</para>
@@ -2077,6 +2266,204 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "permissionsConsentApiUpdate")]
 		public bool? PermissionsConsentApiUpdate { get; set; }
+
+		///<summary>
+		/// Access drag-and-drop content builder
+		/// <para>Name: PermissionsAccessContentBuilder</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsAccessContentBuilder")]
+		public bool? PermissionsAccessContentBuilder { get; set; }
+
+		///<summary>
+		/// Account Switcher User
+		/// <para>Name: PermissionsAccountSwitcherUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsAccountSwitcherUser")]
+		public bool? PermissionsAccountSwitcherUser { get; set; }
+
+		///<summary>
+		/// Manage your Clearbit Integration
+		/// <para>Name: PermissionsManageClearbitIntegration</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsManageClearbitIntegration")]
+		public bool? PermissionsManageClearbitIntegration { get; set; }
+
+		///<summary>
+		/// View Threat Detection Events
+		/// <para>Name: PermissionsViewAnomalyEvents</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewAnomalyEvents")]
+		public bool? PermissionsViewAnomalyEvents { get; set; }
+
+		///<summary>
+		/// Connect Org to Customer 360 Audiences
+		/// <para>Name: PermissionsManageC360AConnections</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsManageC360AConnections")]
+		public bool? PermissionsManageC360AConnections { get; set; }
+
+		///<summary>
+		/// Manage your Zapier Integration
+		/// <para>Name: PermissionsManageZapierIntegration</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsManageZapierIntegration")]
+		public bool? PermissionsManageZapierIntegration { get; set; }
+
+		///<summary>
+		/// Manage Release Updates
+		/// <para>Name: PermissionsManageReleaseUpdates</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsManageReleaseUpdates")]
+		public bool? PermissionsManageReleaseUpdates { get; set; }
+
+		///<summary>
+		/// View All Profiles
+		/// <para>Name: PermissionsViewAllProfiles</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewAllProfiles")]
+		public bool? PermissionsViewAllProfiles { get; set; }
+
+		///<summary>
+		/// Skip Identity Confirmation at Login
+		/// <para>Name: PermissionsSkipIdentityConfirmation</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsSkipIdentityConfirmation")]
+		public bool? PermissionsSkipIdentityConfirmation { get; set; }
+
+		///<summary>
+		/// Send Custom Notifications
+		/// <para>Name: PermissionsSendCustomNotifications</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsSendCustomNotifications")]
+		public bool? PermissionsSendCustomNotifications { get; set; }
+
+		///<summary>
+		/// Delete Second-Generation Packages
+		/// <para>Name: PermissionsPackaging2Delete</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsPackaging2Delete")]
+		public bool? PermissionsPackaging2Delete { get; set; }
+
+		///<summary>
+		/// User license to access Lightning components and features delivered in Financial Services Cloud.
+		/// <para>Name: PermissionsFSCComprehensiveUserAccess</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsFSCComprehensiveUserAccess")]
+		public bool? PermissionsFSCComprehensiveUserAccess { get; set; }
+
+		///<summary>
+		/// Manage Bots
+		/// <para>Name: PermissionsBotManageBots</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsBotManageBots")]
+		public bool? PermissionsBotManageBots { get; set; }
+
+		///<summary>
+		/// Manage Bots Training Data
+		/// <para>Name: PermissionsBotManageBotsTrainingData</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsBotManageBotsTrainingData")]
+		public bool? PermissionsBotManageBotsTrainingData { get; set; }
+
+		///<summary>
+		/// Salesforce Anywhere Integration Access
+		/// <para>Name: PermissionsIsotopeCToCUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsIsotopeCToCUser")]
+		public bool? PermissionsIsotopeCToCUser { get; set; }
+
+		///<summary>
+		/// Salesforce Anywhere on Mobile
+		/// <para>Name: PermissionsIsotopeAccess</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsIsotopeAccess")]
+		public bool? PermissionsIsotopeAccess { get; set; }
+
+		///<summary>
+		/// Salesforce Anywhere in Lightning Experience
+		/// <para>Name: PermissionsIsotopeLEX</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsIsotopeLEX")]
+		public bool? PermissionsIsotopeLEX { get; set; }
+
+		///<summary>
+		/// Quip Metrics
+		/// <para>Name: PermissionsQuipMetricsAccess</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsQuipMetricsAccess")]
+		public bool? PermissionsQuipMetricsAccess { get; set; }
+
+		///<summary>
+		/// Quip User Engagement Metrics
+		/// <para>Name: PermissionsQuipUserEngagementMetrics</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsQuipUserEngagementMetrics")]
+		public bool? PermissionsQuipUserEngagementMetrics { get; set; }
+
+		///<summary>
+		/// Allow user to modify Private Connections
+		/// <para>Name: PermissionsManageExternalConnections</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsManageExternalConnections")]
+		public bool? PermissionsManageExternalConnections { get; set; }
+
+		///<summary>
+		/// Use Subscription Emails
+		/// <para>Name: PermissionsUseSubscriptionEmails</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsUseSubscriptionEmails")]
+		public bool? PermissionsUseSubscriptionEmails { get; set; }
+
+		///<summary>
+		/// Salesforce Mobile App: Native scrolling on webviews
+		/// <para>Name: PermissionsNativeWebviewScrolling</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsNativeWebviewScrolling")]
+		public bool? PermissionsNativeWebviewScrolling { get; set; }
 
 		///<summary>
 		/// Description
@@ -2171,6 +2558,24 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "hasActivationRequired")]
 		public bool? HasActivationRequired { get; set; }
+
+		///<summary>
+		/// PermissionSetGroup ID
+		/// <para>Name: PermissionSetGroupId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionSetGroupId")]
+		[Updateable(false), Createable(false)]
+		public string PermissionSetGroupId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: PermissionSetGroup
+		/// <para>RelationshipName: PermissionSetGroup</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionSetGroup")]
+		[Updateable(false), Createable(false)]
+		public SfPermissionSetGroup PermissionSetGroup { get; set; }
 
 		///<summary>
 		/// Permission Set Type
