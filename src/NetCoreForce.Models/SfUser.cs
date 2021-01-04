@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -296,7 +296,7 @@ namespace NetCoreForce.Models
 		public string Fax { get; set; }
 
 		///<summary>
-		/// Cell
+		/// Mobile
 		/// <para>Name: MobilePhone</para>
 		/// <para>SF Type: phone</para>
 		/// <para>Nillable: True</para>
@@ -561,6 +561,16 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
+		/// Failed Login Attempts
+		/// <para>Name: NumberOfFailedLogins</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "numberOfFailedLogins")]
+		[Updateable(false), Createable(false)]
+		public int? NumberOfFailedLogins { get; set; }
+
+		///<summary>
 		/// Offline Edition Trial Expiration Date
 		/// <para>Name: OfflineTrialExpirationDate</para>
 		/// <para>SF Type: datetime</para>
@@ -608,15 +618,6 @@ namespace NetCoreForce.Models
 		public bool? UserPermissionsCallCenterAutoLogin { get; set; }
 
 		///<summary>
-		/// Apex Mobile User
-		/// <para>Name: UserPermissionsMobileUser</para>
-		/// <para>SF Type: boolean</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "userPermissionsMobileUser")]
-		public bool? UserPermissionsMobileUser { get; set; }
-
-		///<summary>
 		/// Salesforce CRM Content User
 		/// <para>Name: UserPermissionsSFContentUser</para>
 		/// <para>SF Type: boolean</para>
@@ -635,7 +636,7 @@ namespace NetCoreForce.Models
 		public bool? UserPermissionsKnowledgeUser { get; set; }
 
 		///<summary>
-		/// Force.com Flow User
+		/// Flow User
 		/// <para>Name: UserPermissionsInteractionUser</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -680,7 +681,7 @@ namespace NetCoreForce.Models
 		public bool? UserPermissionsSiteforcePublisherUser { get; set; }
 
 		///<summary>
-		/// Work.com User
+		/// WDC User
 		/// <para>Name: UserPermissionsWorkDotComUserFeature</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -815,6 +816,24 @@ namespace NetCoreForce.Models
 		public bool? UserPreferencesApexPagesDeveloperMode { get; set; }
 
 		///<summary>
+		/// ReceiveNoNotificationsAsApprover
+		/// <para>Name: UserPreferencesReceiveNoNotificationsAsApprover</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesReceiveNoNotificationsAsApprover")]
+		public bool? UserPreferencesReceiveNoNotificationsAsApprover { get; set; }
+
+		///<summary>
+		/// ReceiveNotificationsAsDelegatedApprover
+		/// <para>Name: UserPreferencesReceiveNotificationsAsDelegatedApprover</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesReceiveNotificationsAsDelegatedApprover")]
+		public bool? UserPreferencesReceiveNotificationsAsDelegatedApprover { get; set; }
+
+		///<summary>
 		/// HideCSNGetChatterMobileTask
 		/// <para>Name: UserPreferencesHideCSNGetChatterMobileTask</para>
 		/// <para>SF Type: boolean</para>
@@ -903,6 +922,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "userPreferencesDisableMessageEmail")]
 		public bool? UserPreferencesDisableMessageEmail { get; set; }
+
+		///<summary>
+		/// HideLegacyRetirementModal
+		/// <para>Name: UserPreferencesHideLegacyRetirementModal</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesHideLegacyRetirementModal")]
+		public bool? UserPreferencesHideLegacyRetirementModal { get; set; }
 
 		///<summary>
 		/// JigsawListUser
@@ -1337,13 +1365,84 @@ namespace NetCoreForce.Models
 		public bool? UserPreferencesExcludeMailAppAttachments { get; set; }
 
 		///<summary>
+		/// SuppressTaskSFXReminders
+		/// <para>Name: UserPreferencesSuppressTaskSFXReminders</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesSuppressTaskSFXReminders")]
+		public bool? UserPreferencesSuppressTaskSFXReminders { get; set; }
+
+		///<summary>
+		/// SuppressEventSFXReminders
+		/// <para>Name: UserPreferencesSuppressEventSFXReminders</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesSuppressEventSFXReminders")]
+		public bool? UserPreferencesSuppressEventSFXReminders { get; set; }
+
+		///<summary>
+		/// PreviewCustomTheme
+		/// <para>Name: UserPreferencesPreviewCustomTheme</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesPreviewCustomTheme")]
+		public bool? UserPreferencesPreviewCustomTheme { get; set; }
+
+		///<summary>
+		/// HasCelebrationBadge
+		/// <para>Name: UserPreferencesHasCelebrationBadge</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesHasCelebrationBadge")]
+		public bool? UserPreferencesHasCelebrationBadge { get; set; }
+
+		///<summary>
+		/// UserDebugModePref
+		/// <para>Name: UserPreferencesUserDebugModePref</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesUserDebugModePref")]
+		public bool? UserPreferencesUserDebugModePref { get; set; }
+
+		///<summary>
+		/// SRHOverrideActivities
+		/// <para>Name: UserPreferencesSRHOverrideActivities</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesSRHOverrideActivities")]
+		public bool? UserPreferencesSRHOverrideActivities { get; set; }
+
+		///<summary>
+		/// NewLightningReportRunPageEnabled
+		/// <para>Name: UserPreferencesNewLightningReportRunPageEnabled</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesNewLightningReportRunPageEnabled")]
+		public bool? UserPreferencesNewLightningReportRunPageEnabled { get; set; }
+
+		///<summary>
+		/// NativeEmailClient
+		/// <para>Name: UserPreferencesNativeEmailClient</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesNativeEmailClient")]
+		public bool? UserPreferencesNativeEmailClient { get; set; }
+
+		///<summary>
 		/// Contact ID
 		/// <para>Name: ContactId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "contactId")]
-		[Updateable(false), Createable(true)]
 		public string ContactId { get; set; }
 
 		///<summary>
@@ -1544,6 +1643,23 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isProfilePhotoActive")]
 		[Updateable(false), Createable(false)]
 		public bool? IsProfilePhotoActive { get; set; }
+
+		///<summary>
+		/// Individual ID
+		/// <para>Name: IndividualId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "individualId")]
+		public string IndividualId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Individual
+		/// <para>RelationshipName: Individual</para>
+		///</summary>
+		[JsonProperty(PropertyName = "individual")]
+		[Updateable(false), Createable(false)]
+		public SfIndividual Individual { get; set; }
 
 	}
 }

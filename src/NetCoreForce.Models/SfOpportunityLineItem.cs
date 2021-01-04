@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -57,7 +57,6 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "sortOrder")]
-		[Updateable(false), Createable(false)]
 		public int? SortOrder { get; set; }
 
 		///<summary>
@@ -246,6 +245,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isDeleted")]
 		[Updateable(false), Createable(false)]
 		public bool? IsDeleted { get; set; }
+
+		///<summary>
+		/// Last Viewed Date
+		/// <para>Name: LastViewedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastViewedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastViewedDate { get; set; }
+
+		///<summary>
+		/// Last Referenced Date
+		/// <para>Name: LastReferencedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastReferencedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastReferencedDate { get; set; }
 
 	}
 }

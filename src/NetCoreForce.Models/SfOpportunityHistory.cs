@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -157,6 +157,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isDeleted")]
 		[Updateable(false), Createable(false)]
 		public bool? IsDeleted { get; set; }
+
+		///<summary>
+		/// Previous Amount
+		/// <para>Name: PrevAmount</para>
+		/// <para>SF Type: currency</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "prevAmount")]
+		[Updateable(false), Createable(false)]
+		public decimal? PrevAmount { get; set; }
+
+		///<summary>
+		/// Previous Close Date
+		/// <para>Name: PrevCloseDate</para>
+		/// <para>SF Type: date</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "prevCloseDate")]
+		[Updateable(false), Createable(false)]
+		public DateTime? PrevCloseDate { get; set; }
 
 	}
 }

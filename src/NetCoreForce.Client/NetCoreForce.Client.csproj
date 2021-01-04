@@ -4,7 +4,7 @@
     <AssemblyName>NetCoreForce.Client</AssemblyName>
     <Product>NetCoreForce.Client</Product>
     <OutputType>Library</OutputType>
-    <TargetFrameworks>netstandard1.6;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>$(LibTargetFrameworks)</TargetFrameworks>
     <VersionPrefix>$(VersionPrefix)</VersionPrefix>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <!--NuGet-->
@@ -29,9 +29,12 @@
     <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
-    <GeneratePackageOnBuild >true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageOutputPath>$(SolutionDir)/packages</PackageOutputPath>
   </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
+    <PackageReference Include="System.Interactive.Async" Version="4.0.0" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Text.Encodings.Web" Version="4.4.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />

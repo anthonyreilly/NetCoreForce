@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -31,6 +31,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "id")]
 		[Updateable(false), Createable(false)]
 		public string Id { get; set; }
+
+		///<summary>
+		/// Folder ID
+		/// <para>Name: ParentId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "parentId")]
+		[Updateable(false), Createable(true)]
+		public string ParentId { get; set; }
 
 		///<summary>
 		/// Name

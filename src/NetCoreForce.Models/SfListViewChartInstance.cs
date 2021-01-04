@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -137,6 +137,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "dataQuery")]
 		[Updateable(false), Createable(false)]
 		public string DataQuery { get; set; }
+
+		///<summary>
+		/// SOQL Query for Desktop Chart Data without S1 User Filters
+		/// <para>Name: DataQueryWithoutUserFilters</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "dataQueryWithoutUserFilters")]
+		[Updateable(false), Createable(false)]
+		public string DataQueryWithoutUserFilters { get; set; }
 
 		///<summary>
 		/// Editable

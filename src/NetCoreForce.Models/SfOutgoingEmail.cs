@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -149,6 +149,36 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "emailTemplate")]
 		[Updateable(false), Createable(false)]
 		public SfEmailTemplate EmailTemplate { get; set; }
+
+		///<summary>
+		/// In Reply To
+		/// <para>Name: InReplyTo</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "inReplyTo")]
+		[Updateable(false), Createable(true)]
+		public string InReplyTo { get; set; }
+
+		///<summary>
+		/// References
+		/// <para>Name: References</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "references")]
+		[Updateable(false), Createable(true)]
+		public string References { get; set; }
+
+		///<summary>
+		/// Message Id
+		/// <para>Name: MessageId</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "messageId")]
+		[Updateable(false), Createable(true)]
+		public string MessageId { get; set; }
 
 	}
 }

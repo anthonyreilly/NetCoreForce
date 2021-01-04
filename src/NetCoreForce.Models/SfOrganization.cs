@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -183,6 +183,16 @@ namespace NetCoreForce.Models
 		public string DefaultLocaleSidKey { get; set; }
 
 		///<summary>
+		/// Time Zone
+		/// <para>Name: TimeZoneSidKey</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "timeZoneSidKey")]
+		[Updateable(true), Createable(false)]
+		public string TimeZoneSidKey { get; set; }
+
+		///<summary>
 		/// Language
 		/// <para>Name: LanguageLocaleKey</para>
 		/// <para>SF Type: picklist</para>
@@ -241,6 +251,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "preferencesTerminateOldestSession")]
 		[Updateable(true), Createable(false)]
 		public bool? PreferencesTerminateOldestSession { get; set; }
+
+		///<summary>
+		/// ConsentManagementEnabled
+		/// <para>Name: PreferencesConsentManagementEnabled</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "preferencesConsentManagementEnabled")]
+		[Updateable(true), Createable(false)]
+		public bool? PreferencesConsentManagementEnabled { get; set; }
+
+		///<summary>
+		/// AutoSelectIndividualOnMerge
+		/// <para>Name: PreferencesAutoSelectIndividualOnMerge</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "preferencesAutoSelectIndividualOnMerge")]
+		[Updateable(true), Createable(false)]
+		public bool? PreferencesAutoSelectIndividualOnMerge { get; set; }
 
 		///<summary>
 		/// LightningLoginEnabled

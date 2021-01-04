@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -451,7 +451,7 @@ namespace NetCoreForce.Models
 		public string BusinessOwnerId { get; set; }
 
 		///<summary>
-		/// Business Status
+		/// Field Usage
 		/// <para>Name: BusinessStatus</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
@@ -461,7 +461,7 @@ namespace NetCoreForce.Models
 		public string BusinessStatus { get; set; }
 
 		///<summary>
-		/// Security Classification
+		/// Data Sensitivity Level
 		/// <para>Name: SecurityClassification</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
@@ -469,6 +469,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "securityClassification")]
 		[Updateable(false), Createable(false)]
 		public string SecurityClassification { get; set; }
+
+		///<summary>
+		/// Compliance Categorization
+		/// <para>Name: ComplianceGroup</para>
+		/// <para>SF Type: multipicklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "complianceGroup")]
+		[Updateable(false), Createable(false)]
+		public string ComplianceGroup { get; set; }
 
 		///<summary>
 		/// Description

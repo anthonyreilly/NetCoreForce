@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -162,6 +162,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "contentDocument")]
 		[Updateable(false), Createable(false)]
 		public SfContentDocument ContentDocument { get; set; }
+
+		///<summary>
+		/// Let unauthenticated users see this asset file
+		/// <para>Name: IsVisibleByExternalUsers</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isVisibleByExternalUsers")]
+		public bool? IsVisibleByExternalUsers { get; set; }
 
 	}
 }

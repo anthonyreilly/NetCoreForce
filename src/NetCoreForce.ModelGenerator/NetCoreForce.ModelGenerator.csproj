@@ -4,7 +4,7 @@
     <AssemblyName>dotnet-modelgenerator</AssemblyName>
     <Product>NetCoreForce.ModelGenerator</Product>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp1.1;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>$(AppTargetFrameworks)</TargetFrameworks>
     <VersionPrefix>$(VersionPrefix)</VersionPrefix>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <!--NuGet-->
@@ -42,7 +42,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="credentials.json">
+    <None Update="modelgenerator_config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

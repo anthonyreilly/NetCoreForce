@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -96,7 +96,6 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "visibility")]
-		[Updateable(false), Createable(true)]
 		public string Visibility { get; set; }
 
 	}

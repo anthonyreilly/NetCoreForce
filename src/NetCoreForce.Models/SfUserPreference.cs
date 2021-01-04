@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -39,7 +39,6 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "userId")]
-		[Updateable(false), Createable(false)]
 		public string UserId { get; set; }
 
 		///<summary>
@@ -49,7 +48,6 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "preference")]
-		[Updateable(false), Createable(false)]
 		public string Preference { get; set; }
 
 		///<summary>
@@ -59,7 +57,6 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "value")]
-		[Updateable(false), Createable(false)]
 		public string Value { get; set; }
 
 		///<summary>

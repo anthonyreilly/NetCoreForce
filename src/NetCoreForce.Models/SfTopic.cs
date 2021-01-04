@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -87,6 +87,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "talkingAbout")]
 		[Updateable(false), Createable(false)]
 		public int? TalkingAbout { get; set; }
+
+		///<summary>
+		/// Enabled For
+		/// <para>Name: ManagedTopicType</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "managedTopicType")]
+		[Updateable(false), Createable(false)]
+		public string ManagedTopicType { get; set; }
 
 		///<summary>
 		/// System Modstamp

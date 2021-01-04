@@ -52,6 +52,26 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
+        /// Serializes an object into JSON for SObject updates, using the UpdateableContractResolver.
+        /// Includes the SObject ID for calls that require it
+        /// </summary>
+        /// <param name="inputObject">Object to serialize</param>
+        /// <returns>JSON string, unformatted</returns>
+        public static string SerializeForUpdateWithObjectId(object inputObject)
+        {
+            string serializedJson = JsonConvert.SerializeObject(inputObject,
+                   Formatting.None,
+                   new JsonSerializerSettings
+                   {
+                       NullValueHandling = NullValueHandling.Ignore,
+                       ContractResolver = new UpdateableWithIdContractResolver(),
+                       DateFormatString = DateFormats.FullDateFormatString
+                   });
+
+            return serializedJson;
+        }
+
+        /// <summary>
         /// Serializes an object into JSON for SObject creation, using the CreateableContractResolver
         /// </summary>
         /// <param name="inputObject">Object to serialize</param>

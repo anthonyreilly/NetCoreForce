@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -375,6 +375,16 @@ namespace NetCoreForce.Models
 		public string Fiscal { get; set; }
 
 		///<summary>
+		/// Contact ID
+		/// <para>Name: ContactId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "contactId")]
+		[Updateable(false), Createable(true)]
+		public string ContactId { get; set; }
+
+		///<summary>
 		/// Last Viewed Date
 		/// <para>Name: LastViewedDate</para>
 		/// <para>SF Type: datetime</para>
@@ -413,6 +423,42 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "hasOverdueTask")]
 		[Updateable(false), Createable(false)]
 		public bool? HasOverdueTask { get; set; }
+
+		///<summary>
+		/// Opportunity History ID
+		/// <para>Name: LastAmountChangedHistoryId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastAmountChangedHistoryId")]
+		[Updateable(false), Createable(false)]
+		public string LastAmountChangedHistoryId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: OpportunityHistory
+		/// <para>RelationshipName: LastAmountChangedHistory</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastAmountChangedHistory")]
+		[Updateable(false), Createable(false)]
+		public SfOpportunityHistory LastAmountChangedHistory { get; set; }
+
+		///<summary>
+		/// Opportunity History ID
+		/// <para>Name: LastCloseDateChangedHistoryId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastCloseDateChangedHistoryId")]
+		[Updateable(false), Createable(false)]
+		public string LastCloseDateChangedHistoryId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: OpportunityHistory
+		/// <para>RelationshipName: LastCloseDateChangedHistory</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastCloseDateChangedHistory")]
+		[Updateable(false), Createable(false)]
+		public SfOpportunityHistory LastCloseDateChangedHistory { get; set; }
 
 	}
 }

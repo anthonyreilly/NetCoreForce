@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -171,6 +171,69 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "isActive")]
 		public bool? IsActive { get; set; }
+
+		///<summary>
+		/// Context
+		/// <para>Name: Context</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "context")]
+		public string Context { get; set; }
+
+		///<summary>
+		/// Allow site for connect-src
+		/// <para>Name: IsApplicableToConnectSrc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isApplicableToConnectSrc")]
+		public bool? IsApplicableToConnectSrc { get; set; }
+
+		///<summary>
+		/// Allow site for frame-src
+		/// <para>Name: IsApplicableToFrameSrc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isApplicableToFrameSrc")]
+		public bool? IsApplicableToFrameSrc { get; set; }
+
+		///<summary>
+		/// Allow site for img-src
+		/// <para>Name: IsApplicableToImgSrc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isApplicableToImgSrc")]
+		public bool? IsApplicableToImgSrc { get; set; }
+
+		///<summary>
+		/// Allow site for style-src
+		/// <para>Name: IsApplicableToStyleSrc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isApplicableToStyleSrc")]
+		public bool? IsApplicableToStyleSrc { get; set; }
+
+		///<summary>
+		/// Allow site for font-src
+		/// <para>Name: IsApplicableToFontSrc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isApplicableToFontSrc")]
+		public bool? IsApplicableToFontSrc { get; set; }
+
+		///<summary>
+		/// Allow site for media-src
+		/// <para>Name: IsApplicableToMediaSrc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isApplicableToMediaSrc")]
+		public bool? IsApplicableToMediaSrc { get; set; }
 
 	}
 }

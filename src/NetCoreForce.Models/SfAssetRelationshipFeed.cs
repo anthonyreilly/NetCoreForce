@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -205,6 +205,24 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "insertedBy")]
 		[Updateable(false), Createable(false)]
 		public SfUser InsertedBy { get; set; }
+
+		///<summary>
+		/// Best Comment ID
+		/// <para>Name: BestCommentId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "bestCommentId")]
+		[Updateable(false), Createable(false)]
+		public string BestCommentId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: FeedComment
+		/// <para>RelationshipName: BestComment</para>
+		///</summary>
+		[JsonProperty(PropertyName = "bestComment")]
+		[Updateable(false), Createable(false)]
+		public SfFeedComment BestComment { get; set; }
 
 	}
 }

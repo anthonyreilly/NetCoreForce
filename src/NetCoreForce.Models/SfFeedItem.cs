@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -282,6 +282,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "hasVerifiedComment")]
 		[Updateable(false), Createable(false)]
 		public bool? HasVerifiedComment { get; set; }
+
+		///<summary>
+		/// Is Closed
+		/// <para>Name: IsClosed</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isClosed")]
+		[Updateable(false), Createable(false)]
+		public bool? IsClosed { get; set; }
 
 		///<summary>
 		/// Status

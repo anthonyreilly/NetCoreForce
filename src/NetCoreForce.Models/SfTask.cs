@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -104,14 +104,6 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "ownerId")]
 		public string OwnerId { get; set; }
-
-		///<summary>
-		/// ReferenceTo: User
-		/// <para>RelationshipName: Owner</para>
-		///</summary>
-		[JsonProperty(PropertyName = "owner")]
-		[Updateable(false), Createable(false)]
-		public SfUser Owner { get; set; }
 
 		///<summary>
 		/// Description
@@ -409,6 +401,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "taskSubtype")]
 		[Updateable(false), Createable(true)]
 		public string TaskSubtype { get; set; }
+
+		///<summary>
+		/// Completed Date
+		/// <para>Name: CompletedDateTime</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "completedDateTime")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? CompletedDateTime { get; set; }
 
 	}
 }

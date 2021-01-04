@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -87,6 +87,16 @@ namespace NetCoreForce.Models
 		public string FolderId { get; set; }
 
 		///<summary>
+		/// Folder Name
+		/// <para>Name: FolderName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "folderName")]
+		[Updateable(false), Createable(false)]
+		public string FolderName { get; set; }
+
+		///<summary>
 		/// Letterhead ID
 		/// <para>Name: BrandTemplateId</para>
 		/// <para>SF Type: reference</para>
@@ -94,6 +104,23 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "brandTemplateId")]
 		public string BrandTemplateId { get; set; }
+
+		///<summary>
+		/// Enhanced Letterhead ID
+		/// <para>Name: EnhancedLetterheadId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "enhancedLetterheadId")]
+		public string EnhancedLetterheadId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: EnhancedLetterhead
+		/// <para>RelationshipName: EnhancedLetterhead</para>
+		///</summary>
+		[JsonProperty(PropertyName = "enhancedLetterhead")]
+		[Updateable(false), Createable(false)]
+		public SfEnhancedLetterhead EnhancedLetterhead { get; set; }
 
 		///<summary>
 		/// Style
@@ -290,6 +317,16 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "relatedEntityType")]
 		public string RelatedEntityType { get; set; }
+
+		///<summary>
+		/// Made in Email Template Builder
+		/// <para>Name: IsBuilderContent</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isBuilderContent")]
+		[Updateable(false), Createable(false)]
+		public bool? IsBuilderContent { get; set; }
 
 	}
 }

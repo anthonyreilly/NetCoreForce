@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// CORS Whitelist Origin
+	/// CORS Allowed Origin List
 	///<para>SObject Name: CorsWhitelistEntry</para>
 	///<para>Custom Object: False</para>
 	///</summary>
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// CORS Whitelist Origin ID
+		/// CORS Allowed Origin List ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>

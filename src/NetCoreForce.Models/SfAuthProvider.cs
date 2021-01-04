@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -179,13 +179,22 @@ namespace NetCoreForce.Models
 		public bool? OptionsSendClientCredentialsInHeader { get; set; }
 
 		///<summary>
-		/// Include identity organization&#39;s organization ID for third-party account linkage
+		/// Include identity organization&#39;s Organization ID for third-party account linkage
 		/// <para>Name: OptionsIncludeOrgIdInId</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "optionsIncludeOrgIdInId")]
 		public bool? OptionsIncludeOrgIdInId { get; set; }
+
+		///<summary>
+		/// Include Consumer Secret in API Responses
+		/// <para>Name: OptionsSendSecretInApis</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsSendSecretInApis")]
+		public bool? OptionsSendSecretInApis { get; set; }
 
 		///<summary>
 		/// Icon URL
@@ -222,6 +231,54 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "customMetadataTypeRecord")]
 		public string CustomMetadataTypeRecord { get; set; }
+
+		///<summary>
+		/// Elliptic Curve Key
+		/// <para>Name: EcKey</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "ecKey")]
+		public string EcKey { get; set; }
+
+		///<summary>
+		/// Apple Team
+		/// <para>Name: AppleTeam</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "appleTeam")]
+		public string AppleTeam { get; set; }
+
+		///<summary>
+		/// Single Sign-On Initialization URL
+		/// <para>Name: SsoKickoffUrl</para>
+		/// <para>SF Type: url</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "ssoKickoffUrl")]
+		[Updateable(false), Createable(false)]
+		public string SsoKickoffUrl { get; set; }
+
+		///<summary>
+		/// Existing User Linking URL
+		/// <para>Name: LinkKickoffUrl</para>
+		/// <para>SF Type: url</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "linkKickoffUrl")]
+		[Updateable(false), Createable(false)]
+		public string LinkKickoffUrl { get; set; }
+
+		///<summary>
+		/// OAuth-Only Initialization URL
+		/// <para>Name: OauthKickoffUrl</para>
+		/// <para>SF Type: url</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "oauthKickoffUrl")]
+		[Updateable(false), Createable(false)]
+		public string OauthKickoffUrl { get; set; }
 
 	}
 }

@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -51,7 +51,7 @@ namespace NetCoreForce.Models
 		public SfPermissionSet Parent { get; set; }
 
 		///<summary>
-		/// Sobject Type Name
+		/// SObject Type Name
 		/// <para>Name: SobjectType</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: False</para>

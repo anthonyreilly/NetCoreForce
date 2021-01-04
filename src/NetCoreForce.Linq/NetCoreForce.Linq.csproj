@@ -4,7 +4,7 @@
     <AssemblyName>NetCoreForce.Linq</AssemblyName>
     <Product>NetCoreForce.Linq</Product>
     <OutputType>Library</OutputType>
-    <TargetFrameworks>netstandard1.6;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>$(LibTargetFrameworks)</TargetFrameworks>
     <VersionPrefix>$(VersionPrefix)</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
     <!--NuGet-->
@@ -32,10 +32,13 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageOutputPath>$(SolutionDir)/packages</PackageOutputPath>
   </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
+    <PackageReference Include="System.Interactive.Async.Providers" Version="4.0.0" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
-    <PackageReference Include="System.Interactive.Async.Providers" Version="3.2.0" />
     <PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
+    <PackageReference Include="System.Interactive.Async.Providers" Version="3.2.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NetCoreForce.Client\NetCoreForce.Client.csproj" />

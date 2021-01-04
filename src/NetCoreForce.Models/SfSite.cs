@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -127,6 +127,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "optionsRequireHttps")]
 		[Updateable(false), Createable(false)]
 		public bool? OptionsRequireHttps { get; set; }
+
+		///<summary>
+		/// Guest Access to the Payments API
+		/// <para>Name: OptionsAllowGuestPaymentsApi</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsAllowGuestPaymentsApi")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsAllowGuestPaymentsApi { get; set; }
+
+		///<summary>
+		/// HasStoredPathPrefix
+		/// <para>Name: OptionsHasStoredPathPrefix</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsHasStoredPathPrefix")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsHasStoredPathPrefix { get; set; }
 
 		///<summary>
 		/// Enable Standard Home Page
@@ -403,6 +423,24 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "systemModstamp")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? SystemModstamp { get; set; }
+
+		///<summary>
+		/// User ID
+		/// <para>Name: GuestRecordDefaultOwnerId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "guestRecordDefaultOwnerId")]
+		[Updateable(false), Createable(false)]
+		public string GuestRecordDefaultOwnerId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: User
+		/// <para>RelationshipName: GuestRecordDefaultOwner</para>
+		///</summary>
+		[JsonProperty(PropertyName = "guestRecordDefaultOwner")]
+		[Updateable(false), Createable(false)]
+		public SfUser GuestRecordDefaultOwner { get; set; }
 
 	}
 }

@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -42,7 +42,7 @@ namespace NetCoreForce.Models
 		public string CategoryNodeId { get; set; }
 
 		///<summary>
-		/// SObject ID
+		/// sObject ID
 		/// <para>Name: RelatedSobjectId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: False</para>

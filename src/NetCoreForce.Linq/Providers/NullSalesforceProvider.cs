@@ -21,8 +21,13 @@ namespace NetCoreForce.Linq.Providers
 
         protected override IAsyncEnumerator<T> ProduceAsyncEnumerator(string cmd)
         {
+#if NETSTANDARD2_1
+            return AsyncEnumerable.Empty<T>().GetAsyncEnumerator();
+#else
             return AsyncEnumerable.Empty<T>().GetEnumerator();
+#endif
         }
+
         #endregion
     }
 }

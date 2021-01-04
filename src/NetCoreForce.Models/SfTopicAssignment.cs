@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Record
+	/// Topic Assignment
 	///<para>SObject Name: TopicAssignment</para>
 	///<para>Custom Object: False</para>
 	///</summary>
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// Topic Assignment Id
+		/// Topic Assignment ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>

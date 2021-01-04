@@ -99,11 +99,35 @@ namespace NetCoreForce.Client
             }
         }
 
-        public async Task<T> HttpPatchAsync<T>(object inputObject, Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
+        /// <summary>
+        /// Submits a PATCH request
+        /// </summary>
+        /// <param name="inputObject"></param>
+        /// <param name="uri"></param>
+        /// <param name="customHeaders"></param>
+        /// <param name="deserializeResponse"></param>
+        /// <param name="serializeComplete">Serializes ALL object properties to include in the request, even those not appropriate for some update/patch calls.</param>
+        /// <param name="includeSObjectId">includes the SObject ID when serializing the request content</param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public async Task<T> HttpPatchAsync<T>(object inputObject, Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true, bool serializeComplete = false, bool includeSObjectId = false)
         {
             try
             {
-                var json = JsonSerializer.SerializeForUpdate(inputObject);
+                string json;
+                if (serializeComplete)
+                {
+                    json = JsonSerializer.SerializeComplete(inputObject, false);
+                }
+                else if (includeSObjectId)
+                {
+                    json = JsonSerializer.SerializeForUpdateWithObjectId(inputObject);
+                }
+                else
+                {
+                    json = JsonSerializer.SerializeForUpdate(inputObject);
+                }
+
                 var content = new StringContent(json, Encoding.UTF8, JsonMimeType);
 
                 return await HttpAsync<T>(uri, new HttpMethod("PATCH"), content, customHeaders, deserializeResponse);
@@ -222,7 +246,7 @@ namespace NetCoreForce.Client
                         {
                             throw new ForceApiException("Response content was empty");
                         }
-                        
+
                         return JsonConvert.DeserializeObject<T>(responseContent);
                     }
                     if (responseMessage.StatusCode == HttpStatusCode.MultipleChoices)
@@ -241,7 +265,7 @@ namespace NetCoreForce.Client
                         var fex = new ForceApiException("Multiple matches for External ID value, see ObjectUrls");
 
                         fex.ObjectUrls = results;
-                        
+
                         throw fex;
                     }
                     else
@@ -274,7 +298,7 @@ namespace NetCoreForce.Client
                         throw new ForceApiException(msg, errors, responseMessage.StatusCode);
                     }
                 }
-                catch(ForceApiException ex)
+                catch (ForceApiException ex)
                 {
                     throw ex;
                 }

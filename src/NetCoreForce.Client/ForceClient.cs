@@ -217,7 +217,11 @@ namespace NetCoreForce.Client
         /// <returns><see cref="IAsyncEnumerable{T}"/> of results</returns>
         public IAsyncEnumerable<T> QueryAsync<T>(string queryString, bool queryAll = false, int? batchSize = null)
         {
+#if NETSTANDARD2_1
+            return AsyncEnumerable.Create((token) => QueryAsyncEnumerator<T>(queryString, queryAll, batchSize));
+#else
             return AsyncEnumerable.CreateEnumerable(() => QueryAsyncEnumerator<T>(queryString, queryAll, batchSize));
+#endif
         }
 
         /// <summary>
@@ -250,15 +254,19 @@ namespace NetCoreForce.Client
             var done = false;
             var nextRecordsUri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString, queryAll);
 
+#if NETSTANDARD2_1
+            return AsyncEnumerator.Create(MoveNextAsync, Current, Dispose);
+            async ValueTask<bool> MoveNextAsync()
+            {
+#else
             return AsyncEnumerable.CreateEnumerator(MoveNextAsync, Current, Dispose);
-
             async Task<bool> MoveNextAsync(CancellationToken token)
             {
                 if (token.IsCancellationRequested)
                 {
                     return false;
                 }
-
+#endif
                 // If items remain in the current Batch enumerator, go to next item
                 if (currentBatchEnumerator?.MoveNext() == true)
                 {
@@ -301,11 +309,20 @@ namespace NetCoreForce.Client
                 return currentBatchEnumerator == null ? default(T) : currentBatchEnumerator.Current;
             }
 
+#if NETSTANDARD2_1
+            ValueTask Dispose()
+            {
+                currentBatchEnumerator?.Dispose();
+                jsonClient.Dispose();
+                return new ValueTask();
+            }
+#else
             void Dispose()
             {
                 currentBatchEnumerator?.Dispose();
                 jsonClient.Dispose();
             }
+#endif
         }
 
         /// <summary>
@@ -463,6 +480,56 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
+        /// Update multiple reocrds.
+        /// The list can contain up to 200 objects.
+        /// The list can contain objects of different types, including custom objects.
+        /// Each object must contain an attributes map. The map must contain a value for type.
+        /// Each object must contain an id field with a valid ID value.
+        /// </summary>
+        /// <param name="sObjects">Objects to update</param>
+        /// <param name="allOrNone">Optional. Indicates whether to roll back the entire request when the update of any object fails (true) or to continue with the independent update of other objects in the request. The default is false.</param>
+        /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
+        /// <returns>List of UpdateMultipleResponse objects, includes response for each object (id, success, errors)</returns>
+        /// <exception cref="ArgumentException">Thrown when missing required information</exception>
+        /// <exception cref="ForceApiException">Thrown when update fails</exception>
+        public async Task<List<UpdateMultipleResponse>> UpdateRecords(List<SObject> sObjects, bool allOrNone = false, Dictionary<string, string> customHeaders = null)
+        {
+            if(sObjects == null)
+            {
+                throw new ArgumentNullException("sObjects");
+            }
+
+            foreach(SObject sObject in sObjects)
+            {
+                if(sObject.Attributes == null || string.IsNullOrEmpty(sObject.Attributes.Type))
+                {
+                    throw new ForceApiException("Objects are missing Type property in Attributes map");
+                }
+            }
+
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+
+            //Add call options
+            Dictionary<string, string> callOptions = HeaderFormatter.SforceCallOptions(ClientName);
+            headers.AddRange(callOptions);
+
+            //Add custom headers if specified
+            if (customHeaders != null)
+            {
+                headers.AddRange(customHeaders);
+            }
+
+            var uri = UriFormatter.SObjectsComposite(InstanceUrl, ApiVersion);
+
+            JsonClient client = new JsonClient(AccessToken, _httpClient);
+
+            UpdateMultipleRequest updateMultipleRequest = new UpdateMultipleRequest(sObjects, allOrNone);
+
+            return await client.HttpPatchAsync<List<UpdateMultipleResponse>>(updateMultipleRequest, uri, headers, includeSObjectId: true);
+            
+        }
+
+        /// <summary>
         /// Inserts or Updates a records based on external id
         /// </summary>
         /// <param name="sObjectTypeName">SObject name, e.g. "Account"</param>
@@ -512,7 +579,7 @@ namespace NetCoreForce.Client
             return;
         }
 
-        #region metadata
+#region metadata
 
         /// <summary>
         /// Lists information about limits in your org.
@@ -620,7 +687,7 @@ namespace NetCoreForce.Client
             return await client.HttpGetAsync<DescribeGlobal>(uri);
         }
 
-        #endregion
+#endregion
 
     }
 }

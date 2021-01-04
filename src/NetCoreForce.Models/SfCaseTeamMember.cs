@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -94,6 +94,24 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "teamRole")]
 		[Updateable(false), Createable(false)]
 		public SfCaseTeamRole TeamRole { get; set; }
+
+		///<summary>
+		/// Team Template ID
+		/// <para>Name: TeamTemplateId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "teamTemplateId")]
+		[Updateable(false), Createable(false)]
+		public string TeamTemplateId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: CaseTeamTemplate
+		/// <para>RelationshipName: TeamTemplate</para>
+		///</summary>
+		[JsonProperty(PropertyName = "teamTemplate")]
+		[Updateable(false), Createable(false)]
+		public SfCaseTeamTemplate TeamTemplate { get; set; }
 
 		///<summary>
 		/// Created Date

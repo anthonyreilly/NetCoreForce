@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -214,6 +214,23 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "developerName")]
 		public string DeveloperName { get; set; }
+
+		///<summary>
+		/// Asset File ID
+		/// <para>Name: WorkspaceImageId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "workspaceImageId")]
+		public string WorkspaceImageId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: ContentAsset
+		/// <para>RelationshipName: WorkspaceImage</para>
+		///</summary>
+		[JsonProperty(PropertyName = "workspaceImage")]
+		[Updateable(false), Createable(false)]
+		public SfContentAsset WorkspaceImage { get; set; }
 
 	}
 }

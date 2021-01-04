@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -325,6 +325,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "dashboardResultRunningUser")]
 		[Updateable(false), Createable(false)]
 		public string DashboardResultRunningUser { get; set; }
+
+		///<summary>
+		/// Color Palette
+		/// <para>Name: ColorPalette</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "colorPalette")]
+		[Updateable(false), Createable(false)]
+		public string ColorPalette { get; set; }
+
+		///<summary>
+		/// Chart Background
+		/// <para>Name: ChartTheme</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "chartTheme")]
+		[Updateable(false), Createable(false)]
+		public string ChartTheme { get; set; }
 
 	}
 }

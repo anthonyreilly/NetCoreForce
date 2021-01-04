@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -41,6 +41,24 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isDeleted")]
 		[Updateable(false), Createable(false)]
 		public bool? IsDeleted { get; set; }
+
+		///<summary>
+		/// Master Record ID
+		/// <para>Name: MasterRecordId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "masterRecordId")]
+		[Updateable(false), Createable(false)]
+		public string MasterRecordId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Case
+		/// <para>RelationshipName: MasterRecord</para>
+		///</summary>
+		[JsonProperty(PropertyName = "masterRecord")]
+		[Updateable(false), Createable(false)]
+		public SfCase MasterRecord { get; set; }
 
 		///<summary>
 		/// Case Number
@@ -363,6 +381,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "contactFax")]
 		[Updateable(false), Createable(false)]
 		public string ContactFax { get; set; }
+
+		///<summary>
+		/// Internal Comments
+		/// <para>Name: Comments</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "comments")]
+		public string Comments { get; set; }
 
 		///<summary>
 		/// Last Viewed Date

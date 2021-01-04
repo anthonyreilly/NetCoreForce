@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -187,6 +187,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "optionsUserProvisioning")]
 		[Updateable(false), Createable(false)]
 		public bool? OptionsUserProvisioning { get; set; }
+
+		///<summary>
+		/// UseConfigRequestMethod
+		/// <para>Name: OptionsUseConfigRequestMethod</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsUseConfigRequestMethod")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsUseConfigRequestMethod { get; set; }
 
 		///<summary>
 		/// Name ID Format

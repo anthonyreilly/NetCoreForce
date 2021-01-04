@@ -1,5 +1,16 @@
 # Changelog
 
+### 2021-01-01 v2.7.0
+
+* Client: Added support for updating multiple objects
+* Client: Added backwards-compatible serialization contract resolver to allow inclusion of object ID on patch requests
+* Linq: Added support for filtering on booleans
+* Client: Added support for NetStandard2.1 (netcoreapp3.x)
+* Models: Update standard models to SF API v50 - Winter '21
+* ModelGenerator: Fixed issue where API version in config file was being ignored, and default of v44 was used instead
+* Build: streamline build targets to use variables from build.props
+
+
 ### 2019-12-17 v2.6.0
 
 * Fix: Failure to handle/parse HTTP 300 - multiple choices response when update finds multiple external IDs

@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -53,14 +53,34 @@ namespace NetCoreForce.Models
 		public string Domain { get; set; }
 
 		///<summary>
-		/// Enable External HTTPS
-		/// <para>Name: OptionsExternalHttps</para>
+		/// Enable Strict Transport Security headers
+		/// <para>Name: OptionsHstsHeaders</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "optionsExternalHttps")]
+		[JsonProperty(PropertyName = "optionsHstsHeaders")]
 		[Updateable(false), Createable(false)]
-		public bool? OptionsExternalHttps { get; set; }
+		public bool? OptionsHstsHeaders { get; set; }
+
+		///<summary>
+		/// CNAME Target
+		/// <para>Name: CnameTarget</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "cnameTarget")]
+		[Updateable(false), Createable(false)]
+		public string CnameTarget { get; set; }
+
+		///<summary>
+		/// Current HTTPS Option
+		/// <para>Name: HttpsOption</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "httpsOption")]
+		[Updateable(false), Createable(false)]
+		public string HttpsOption { get; set; }
 
 		///<summary>
 		/// Created Date

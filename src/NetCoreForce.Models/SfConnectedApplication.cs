@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -149,7 +149,17 @@ namespace NetCoreForce.Models
 		public bool? OptionsIsInternal { get; set; }
 
 		///<summary>
-		/// Require PIN after:
+		/// FullContentPushNotifications
+		/// <para>Name: OptionsFullContentPushNotifications</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsFullContentPushNotifications")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsFullContentPushNotifications { get; set; }
+
+		///<summary>
+		/// Lock App After
 		/// <para>Name: MobileSessionTimeout</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
@@ -159,7 +169,7 @@ namespace NetCoreForce.Models
 		public string MobileSessionTimeout { get; set; }
 
 		///<summary>
-		/// Pin Length
+		/// PIN Length
 		/// <para>Name: PinLength</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>

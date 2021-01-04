@@ -1,4 +1,4 @@
-// SF API version v41.0
+// SF API version v50.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -161,6 +161,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "allocatedTrialCapacity")]
 		public int? AllocatedTrialCapacity { get; set; }
+
+		///<summary>
+		/// Allocated Partner Capacity
+		/// <para>Name: AllocatedPartnerCapacity</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "allocatedPartnerCapacity")]
+		public int? AllocatedPartnerCapacity { get; set; }
 
 	}
 }
