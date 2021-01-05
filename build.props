@@ -12,8 +12,7 @@
     <!--NuGet-->
     <Authors>Anthony Reilly</Authors>
     <Copyright>2021 Anthony Reilly</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression> 
-    <PackageLicenseUrl>https://github.com/anthonyreilly/NetCoreForce/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/anthonyreilly/NetCoreForce</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>salesforce,api,forcedotcom,netstandard,netcore</PackageTags>
