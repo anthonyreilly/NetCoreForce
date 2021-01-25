@@ -6,6 +6,10 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using NetCoreForce.Client.Models;
+using System.Security.Cryptography;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace NetCoreForce.Client
 {
@@ -229,6 +233,76 @@ namespace NetCoreForce.Client
                     throw new ForceAuthException("Unknown", ex.Message, responseMessage.StatusCode);
                 }
 
+            }
+        }
+
+        /// <summary>
+        /// JWT Bearer OAuth Authentication Flow.
+        /// </summary>
+        /// <param name="privateKey">RSA private key.</param>
+        /// <param name="clientId">The Consumer Key from the connected app definition.</param>
+        /// <param name="audience">The audience identifies the authorization server as an intended audience.
+        /// The authorization server must verify that it is an intended audience for the token.
+        /// Use the authorization server's URL for the audience value: https://login.salesforce.com, https://test.salesforce.com, or https://site.force.com/customers if implementing for an Experience Cloud site.
+        /// </param>
+        /// <param name="subject">The subject must contain the username of the user if implementing for an Experience Cloud site.</param>
+        /// <param name="tokenRequestEndpointUrl">Salesforce token request endpoint.</param>
+        public async Task JwtBearerAsync(byte[] privateKey, string clientId, string audience, string subject, string tokenRequestEndpointUrl = TokenRequestEndpointUrl)
+        {
+            using RSA rsa = RSA.Create();
+            rsa.ImportPkcs8PrivateKey(privateKey, out _);
+
+            var signingCredentials = new SigningCredentials(new RsaSecurityKey(rsa), SecurityAlgorithms.RsaSha256)
+            {
+                CryptoProviderFactory = new CryptoProviderFactory { CacheSignatureProviders = false }
+            };
+
+            // The validity must be the expiration time of the assertion within 3 minutes, expressed as the number of seconds from 1970-01-01T0:0:0Z measured in UTC.
+            var expires = new DateTimeOffset(DateTime.Now.AddMinutes(1)).ToUnixTimeSeconds();
+
+            var jwt = new JwtSecurityToken(
+                signingCredentials: signingCredentials,
+                claims: new Claim[] {
+                    new Claim(JwtRegisteredClaimNames.Sub, subject),
+                    new Claim(JwtRegisteredClaimNames.Iss, clientId),
+                    new Claim(JwtRegisteredClaimNames.Aud, audience),
+                    new Claim(JwtRegisteredClaimNames.Exp, expires.ToString(), ClaimValueTypes.Integer64),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                });
+
+            var content = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("grant_type", "urn:ietf:params:oauth:grant-type:jwt-bearer"),
+                new KeyValuePair<string, string>("assertion", new JwtSecurityTokenHandler().WriteToken(jwt))
+            });
+
+            var request = new HttpRequestMessage
+            {
+                RequestUri = new Uri(tokenRequestEndpointUrl),
+                Content    = content,
+                Method     = HttpMethod.Post
+            };
+
+            request.Headers.UserAgent.ParseAdd(string.Concat(UserAgent, "/", ApiVersion));
+
+            var responseMessage = await _httpClient.SendAsync(request).ConfigureAwait(false);
+            var response        = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                this.AccessInfo = JsonConvert.DeserializeObject<AccessTokenResponse>(response);
+            }
+            else
+            {
+                try
+                {
+                    var errorResponse = JsonConvert.DeserializeObject<AuthErrorResponse>(response);
+                    throw new ForceAuthException(errorResponse.Error, errorResponse.ErrorDescription, responseMessage.StatusCode);
+                }
+                catch (Exception ex)
+                {
+                    throw new ForceAuthException("Unknown", ex.Message, responseMessage.StatusCode);
+                }
             }
         }
 

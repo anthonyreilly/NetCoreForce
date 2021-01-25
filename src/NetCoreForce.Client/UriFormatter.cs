@@ -183,6 +183,36 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
+        /// Composite
+        /// </summary>
+        /// <param name="instanceUrl">SFDC instance URL, e.g. "https://na99.salesforce.com"</param>
+        /// <param name="apiVersion">SFDC API version, e.g. "v51.0"</param>
+        /// <returns>Uri</returns>
+        public static Uri Composite(string instanceUrl, string apiVersion)
+        {
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion))  throw new ArgumentNullException("apiVersion");
+
+            return new Uri(new Uri(instanceUrl), string.Format("{0}/{1}/composite", BaseUriSegment, apiVersion));
+        }
+
+        /// <summary>
+        /// Composite Tree
+        /// </summary>
+        /// <param name="instanceUrl">SFDC instance URL, e.g. "https://na99.salesforce.com"</param>
+        /// <param name="apiVersion">SFDC API version, e.g. "v51.0"</param>
+        /// <param name="sObjectName">SObject name, e.g. "Account"</param>
+        /// <returns>Uri</returns>
+        public static Uri CompositeTree(string instanceUrl, string apiVersion, string sObjectName)
+        {
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion))  throw new ArgumentNullException("apiVersion");
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
+
+            return new Uri(new Uri(instanceUrl), string.Format("{0}/{1}/composite", BaseUriSegment, apiVersion));
+        }
+
+        /// <summary>
         /// SObject Rows by External ID
         /// Creates new records or updates existing records (upserts records) based on the value of a specified external ID field.
         /// </summary>

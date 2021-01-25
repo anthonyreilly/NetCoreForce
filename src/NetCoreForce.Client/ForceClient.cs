@@ -22,7 +22,7 @@ namespace NetCoreForce.Client
         /// </summary>
         public AccessTokenResponse AccessInfo { get; set; }
 
-        private HttpClient _httpClient;
+        protected HttpClient _httpClient;
 
         /// <summary>
         /// Login to Salesforce using the username-password authentication flow, and initialize the client

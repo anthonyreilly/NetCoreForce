@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NetCoreForce.Linq\NetCoreForce.Linq.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\NetCoreForce.Models\NetCoreForce.Models.csproj" />
   </ItemGroup>
 

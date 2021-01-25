@@ -1,23 +1,18 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreForce.Models", "src\NetCoreForce.Models\NetCoreForce.Models.csproj", "{CF9E2ECA-E820-474C-9481-E783E17175FF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreForce.Client", "src\NetCoreForce.Client\NetCoreForce.Client.csproj", "{61B7C421-3CB3-465B-8A1F-F31C551B27AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreForce.ModelGenerator", "src\NetCoreForce.ModelGenerator\NetCoreForce.ModelGenerator.csproj", "{1118E22A-57F6-4445-A893-265CAA351EE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreForce.ModelGenerator", "src\NetCoreForce.ModelGenerator\NetCoreForce.ModelGenerator.csproj", "{1118E22A-57F6-4445-A893-265CAA351EE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreForce.Client.Tests", "src\NetCoreForce.Client.Tests\NetCoreForce.Client.Tests.csproj", "{4F0B5BBE-C49F-481A-AB80-E139768CEA8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreForce.Client.Tests", "src\NetCoreForce.Client.Tests\NetCoreForce.Client.Tests.csproj", "{4F0B5BBE-C49F-481A-AB80-E139768CEA8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreForce.FunctionalTests", "src\NetCoreForce.FunctionalTests\NetCoreForce.FunctionalTests.csproj", "{B1B27588-2FE8-4866-85F6-259F3525021B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreForce.FunctionalTests", "src\NetCoreForce.FunctionalTests\NetCoreForce.FunctionalTests.csproj", "{B1B27588-2FE8-4866-85F6-259F3525021B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleConsole", "src\SampleConsole\SampleConsole.csproj", "{DECD46B3-1DE6-4029-91E0-18C1D6AFEC60}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreForce.Linq", "src\NetCoreForce.Linq\NetCoreForce.Linq.csproj", "{9013FC59-47FD-42AA-8771-19CE7ED672DA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreForce.Linq.Tests", "src\NetCoreForce.Linq.Tests\NetCoreForce.Linq.Tests.csproj", "{519CD29C-E6AB-4F6A-AC5E-7752C1C89A41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleConsole", "src\SampleConsole\SampleConsole.csproj", "{DECD46B3-1DE6-4029-91E0-18C1D6AFEC60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,16 +44,11 @@ Global
 		{DECD46B3-1DE6-4029-91E0-18C1D6AFEC60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DECD46B3-1DE6-4029-91E0-18C1D6AFEC60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DECD46B3-1DE6-4029-91E0-18C1D6AFEC60}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9013FC59-47FD-42AA-8771-19CE7ED672DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9013FC59-47FD-42AA-8771-19CE7ED672DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9013FC59-47FD-42AA-8771-19CE7ED672DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9013FC59-47FD-42AA-8771-19CE7ED672DA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{519CD29C-E6AB-4F6A-AC5E-7752C1C89A41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{519CD29C-E6AB-4F6A-AC5E-7752C1C89A41}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{519CD29C-E6AB-4F6A-AC5E-7752C1C89A41}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{519CD29C-E6AB-4F6A-AC5E-7752C1C89A41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1158CD17-93F8-40BB-AD07-BF1B591114B8}
 	EndGlobalSection
 EndGlobal
