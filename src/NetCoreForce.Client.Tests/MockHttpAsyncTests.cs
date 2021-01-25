@@ -21,14 +21,12 @@ namespace NetCoreForce.Client.Tests
 
             ArgumentException ex = await Assert.ThrowsAsync<ArgumentException>(async () =>
             {
-                using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+                await foreach (SfContact contact in contactsEnumerable)
                 {
-                    while (await contactsEnumerator.MoveNext())
-                    {
-                        var result = contactsEnumerator.Current;
-                    }
+                    var result = contact;
                 }
             });
+            
 
             // Check that the error message mentions 200 as the minimum value
             Assert.True(ex.Message.Contains("200"));
@@ -62,12 +60,9 @@ namespace NetCoreForce.Client.Tests
             var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 800", batchSize: 200);
 
             List<SfContact> contacts = new List<SfContact>(800);
-            using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+            await foreach (var contact in contactsEnumerable) 
             {
-                while (await contactsEnumerator.MoveNext())
-                {
-                    contacts.Add(contactsEnumerator.Current);
-                }
+                contacts.Add(contact);
             }
 
             Assert.Equal(800, contacts.Count);
