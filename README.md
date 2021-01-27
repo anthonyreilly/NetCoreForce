@@ -8,7 +8,9 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/sum0prwnfgnv8e7s/branch/master?svg=true&passingText=master&failingText=master&pendingText=master%20pending)](https://ci.appveyor.com/project/anthonyreilly/netcoreforce/branch/master)
 [![Build status](https://ci.appveyor.com/api/projects/status/sum0prwnfgnv8e7s/branch/dev?svg=true&passingText=dev&failingText=dev&pendingText=dev%20pending)](https://ci.appveyor.com/project/anthonyreilly/netcoreforce/branch/dev)
 
-Currently targeting [.NET Standard 1.6 and 2.0](https://docs.microsoft.com/en-us/dotnet/articles/standard/library)
+NetCoreForce v3 currently targeting netstandard 2.0 & 2.1, supports .NET Core 2.1 & 3.1 apps.
+
+For .NET Core 1.x support, use NetCoreForce v2.7
 
 ### Projects in this solution:
 * [NetCoreForce.Client](src/NetCoreForce.Client) - Main library  
@@ -18,20 +20,24 @@ Currently targeting [.NET Standard 1.6 and 2.0](https://docs.microsoft.com/en-us
 * [NetCoreForce.Models](src/NetCoreForce.Models) [(ReadMe)](src/NetCoreForce.Models/README.md) - Optional library with a set of pre-generated standard models  
 * [SampleConsole](src/SampleConsole) - A simple .NET Core console app to demonstrate the library.
 
-### Pre-Release Projects:
-* [NetCoreForce.Linq](src/NetCoreForce.Linq) - an experimental LINQ-to-SOQL query provider
-* [NetCoreForce.Linq.Tests](src/NetCoreForce.Linq.Tests) - LINQ Unit tests (offline/mocked) 
-
 ### NuGet Packages
 * [NetCoreForce.Client](https://www.nuget.org/packages/NetCoreForce.Client/)
 * [NetCoreForce.Models](https://www.nuget.org/packages/NetCoreForce.Models/)
 * [NetCoreForce.ModelGenerator](https://www.nuget.org/packages/NetCoreForce.ModelGenerator/)
 
+### Experimental Projects:
+* [NetCoreForce.Linq](src/NetCoreForce.Linq) - an experimental LINQ-to-SOQL query provider
+* [NetCoreForce.Linq.Tests](src/NetCoreForce.Linq.Tests) - LINQ Unit tests (offline/mocked)
+* NuGet package: [NetCoreForce.Linq](https://www.nuget.org/packages/NetCoreForce.Linq/)
+
 ### An effort is made to minimize the dependencies:
-* [NETStandard.Library](https://www.nuget.org/packages/NETStandard.Library/) (For 1.x)
 * [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json) (JSON Serialization)
 * [System.Text.Encodings.Web](https://www.nuget.org/packages/System.Text.Encodings.Web) (URL formatting)
-* [System.Interactive.Async](https://www.nuget.org/packages/System.Interactive.Async/) (Asynchronous query batch result processing)
+* [System.Interactive.Async](https://www.nuget.org/packages/System.Interactive.Async/) (Asynchronous query batch result 
+processing)
+* [Microsoft.Bcl.AsyncInterfaces](https://www.nuget.org/packages/Microsoft.Bcl.AsyncInterfaces/)
+    - Only included in .netstandard2.0, .netcoreapp2.0 targets
+    - Provides await using, async disposables
 
 Using [semantic versioning](http://semver.org)
 
@@ -89,7 +95,7 @@ Nested queries are not fully supported - the subquery results will not be comple
 ### Asynchronous Batch Processing
 
 Query<T> method will retrieve the full result set before returning. By default, results are returned in batches of 2000.
-In cases where you are working with large result sets, you may want to retrieve the batches asynchronously for better performance.
+In cases where you are working with large result sets, you may want to use QueryAsync<T> to retrieve the batches asynchronously for better performance.
 
 ```csharp
 // First create the async enumerable. At this point, no query has been executed.
@@ -97,11 +103,11 @@ In cases where you are working with large result sets, you may want to retrieve 
 IAsyncEnumerable<SfContact> contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id, Name FROM Contact ", batchSize: 200);
 
 // Get the enumerator, in a using block for proper disposal
-using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
 {
     // MoveNext() will execute the query and get the first batch of results.
     // Once the inital result batch has been exhausted, the remaining batches, if any, will be retrieved.
-    while (await contactsEnumerator.MoveNext())
+    while (await contactsEnumerator.MoveNextAsync())
     {
         SfContact contact = contactsEnumerator.Current;
         // process your results

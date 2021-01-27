@@ -73,7 +73,6 @@ namespace SampleConsole
                 // batchSize can be omitted to use the default (usually 2000), or given a custom value between 200 and 2000.
                 IAsyncEnumerable<SfContact> contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id, Name FROM Contact ", batchSize: 200);
 
-
                 // Get the enumerator, in a using block for proper disposal
                 await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
                 {

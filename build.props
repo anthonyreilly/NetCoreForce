@@ -1,8 +1,8 @@
 <Project>
   <PropertyGroup>
     <!--Versioning-->
-    <VersionPrefix>2.7.0</VersionPrefix>
-    <VersionSuffix></VersionSuffix>
+    <VersionPrefix>3.0.0</VersionPrefix>
+    <VersionSuffix>Beta</VersionSuffix>
 
     <!-- Targets -->
     <LangVersion>8.0</LangVersion>
