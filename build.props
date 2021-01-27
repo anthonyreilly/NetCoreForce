@@ -5,6 +5,7 @@
     <VersionSuffix></VersionSuffix>
 
     <!-- Targets -->
+    <LangVersion>8.0</LangVersion>
     <LibTargetFrameworks>netstandard2.0;netstandard2.1</LibTargetFrameworks>
     <AppTargetFrameworks>netcoreapp2.1;netcoreapp3.1</AppTargetFrameworks>
     <TestTargetFrameworks>netcoreapp2.1;netcoreapp3.1</TestTargetFrameworks>
