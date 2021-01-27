@@ -5,9 +5,9 @@
     <VersionSuffix></VersionSuffix>
 
     <!-- Targets -->
-    <LibTargetFrameworks>netstandard1.6;netstandard2.0;netstandard2.1</LibTargetFrameworks>
-    <AppTargetFrameworks>netcoreapp1.1;netcoreapp2.0</AppTargetFrameworks>
-    <TestTargetFrameworks>netcoreapp2.0</TestTargetFrameworks>
+    <LibTargetFrameworks>netstandard2.0;netstandard2.1</LibTargetFrameworks>
+    <AppTargetFrameworks>netcoreapp2.1;netcoreapp3.1</AppTargetFrameworks>
+    <TestTargetFrameworks>netcoreapp2.1;netcoreapp3.1</TestTargetFrameworks>
 
     <!--NuGet-->
     <Authors>Anthony Reilly</Authors>
