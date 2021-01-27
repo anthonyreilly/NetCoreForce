@@ -22,8 +22,8 @@ namespace NetCoreForce.Client.Tests
             var response1 = await httpClient.GetAsync("http://example.org/notthere");
             var response2 = await httpClient.GetAsync("http://example.org/test");
 
-            Assert.Equal(response1.StatusCode, HttpStatusCode.NotFound);
-            Assert.Equal(response2.StatusCode, HttpStatusCode.OK);
+            Assert.Equal(HttpStatusCode.NotFound, response1.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, response2.StatusCode);
         }
     }
 }

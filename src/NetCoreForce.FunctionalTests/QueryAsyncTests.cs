@@ -30,9 +30,9 @@ namespace NetCoreForce.FunctionalTests
 
             int count = 0;
             SfContact contact = null;
-            using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+            await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
             {
-                while (await contactsEnumerator.MoveNext())
+                while (await contactsEnumerator.MoveNextAsync())
                 {
                     contact = contactsEnumerator.Current;
                     count++;
@@ -54,11 +54,11 @@ namespace NetCoreForce.FunctionalTests
 
             int count = 0;
             SfContact contact = null;
-            using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+            await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
             {
                 // Assert.NotNull(contactsEnumerator);
 
-                while (await contactsEnumerator.MoveNext())
+                while (await contactsEnumerator.MoveNextAsync())
                 {
                     contact = contactsEnumerator.Current;
                     count++;
@@ -86,9 +86,9 @@ namespace NetCoreForce.FunctionalTests
 
             int count = 0;
             SfContact contact = null;
-            using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+            await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
             {
-                while (await contactsEnumerator.MoveNext())
+                while (await contactsEnumerator.MoveNextAsync())
                 {
                     contact = contactsEnumerator.Current;
                     count++;
@@ -107,9 +107,9 @@ namespace NetCoreForce.FunctionalTests
             var enumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact");
 
             int count = 0;
-            using (var enumerator = enumerable.GetEnumerator())
+            await using (var enumerator = enumerable.GetAsyncEnumerator())
             {
-                while (await enumerator.MoveNext())
+                while (await enumerator.MoveNextAsync())
                 {
                     var currentItem = enumerator.Current;
                     count++;
@@ -133,9 +133,9 @@ namespace NetCoreForce.FunctionalTests
             var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 3000", batchSize: 200);
 
             int count = 0;
-            using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+            await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
             {
-                while (await contactsEnumerator.MoveNext())
+                while (await contactsEnumerator.MoveNextAsync())
                 {
                     SfContact contact = contactsEnumerator.Current;
                     count++;
@@ -154,14 +154,14 @@ namespace NetCoreForce.FunctionalTests
 
             Assert.Throws<ArgumentException>(() =>
             {
-                IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator();
+                IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator();
             });
 
             await Assert.ThrowsAsync<ArgumentException>(async () =>
             {
-                using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+                await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
                 {
-                    await contactsEnumerator.MoveNext();
+                    await contactsEnumerator.MoveNextAsync();
                 }
             });
         }
@@ -174,9 +174,9 @@ namespace NetCoreForce.FunctionalTests
             var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact WHERE Name='xyz123foobar'");
 
             SfContact contact = null;
-            using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetEnumerator())
+            await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
             {
-                while (await contactsEnumerator.MoveNext())
+                while (await contactsEnumerator.MoveNextAsync())
                 {
                     contact = contactsEnumerator.Current;
                 }
@@ -185,11 +185,12 @@ namespace NetCoreForce.FunctionalTests
             Assert.Null(contact);
         }
 
+        [Fact]
         public async Task QueryAsyncToList()
         {
             ForceClient client = await forceClientFixture.GetForceClient();
 
-            List<SfContact> contacts = await client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 1000", batchSize: 200).ToList();
+            List<SfContact> contacts = await client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 1000", batchSize: 200).ToListAsync();
 
             Assert.NotNull(contacts);
             Assert.NotEmpty(contacts);

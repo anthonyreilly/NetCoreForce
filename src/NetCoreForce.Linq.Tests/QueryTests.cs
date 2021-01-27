@@ -22,7 +22,7 @@ namespace NetCoreForce.Linq.Tests
         {
             await
                 Query<SfCase>(SelectTypeEnum.SelectIdAndUseAttachModel, out var provider)
-                    .ToList();
+                    .ToListAsync();
             
             Assert.Equal("SELECT id FROM Case", provider.SOQLCalled);
         }
@@ -32,7 +32,7 @@ namespace NetCoreForce.Linq.Tests
         {
             await
                 Query<SfCase>(SelectTypeEnum.SelectIdAndUseAttachModel, out var provider)
-                    .FirstOrDefault();
+                    .FirstOrDefaultAsync();
             
             Assert.Equal("SELECT id FROM Case LIMIT 2", provider.SOQLCalled);
         }
@@ -43,7 +43,7 @@ namespace NetCoreForce.Linq.Tests
         {
             await
                 Query<SfCase>(SelectTypeEnum.SelectIdAndUseAttachModel, out var provider)
-                    .SingleOrDefault();
+                    .SingleOrDefaultAsync();
             
             Assert.Equal("SELECT id FROM Case LIMIT 2", provider.SOQLCalled);
         }
@@ -53,7 +53,7 @@ namespace NetCoreForce.Linq.Tests
         {
             await
                 Query<SfCase>(SelectTypeEnum.SelectIdAndUseAttachModel, out var provider)
-                    .Count();
+                    .CountAsync();
             
             Assert.Equal("SELECT COUNT() FROM Case", provider.SOQLCalled);
         }
@@ -201,7 +201,7 @@ namespace NetCoreForce.Linq.Tests
             var soql =
                 Query<SfCase>(SelectTypeEnum.SelectIdAndUseAttachModel, out var provider)
                     .Take(20)
-                    .Single();
+                    .SingleAsync();
 
             //Assert.Equal("SELECT id FROM Case LIMIT 2", soql);
         }

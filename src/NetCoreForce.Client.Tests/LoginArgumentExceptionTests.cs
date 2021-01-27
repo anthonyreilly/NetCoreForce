@@ -22,7 +22,7 @@ namespace NetCoreForce.FunctionalTests
                 auth.UsernamePassword("ClientId", "ClientSecret", "username", "badpassword", "malformed_tokenRequestEndpoint")
             );
 
-            Assert.True(ex.Message.Contains("tokenRequestEndpointUrl"));
+            Assert.Contains("tokenRequestEndpointUrl", ex.Message);
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace NetCoreForce.FunctionalTests
                 var client = new ForceClient(null, "ClientSecret", "username", "password", DefaultTokenRequestEndpoint);
             });
 
-            Assert.True(ex.Message.ToLower().Contains("clientid"));
+            Assert.Contains("clientid", ex.Message.ToLower());
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace NetCoreForce.FunctionalTests
                 var client = new ForceClient("ClientId", null, "username", "password", DefaultTokenRequestEndpoint);
             });
 
-            Assert.True(ex.Message.ToLower().Contains("clientsecret"));
+            Assert.Contains("clientsecret", ex.Message.ToLower());
         }
 
         [Fact]
@@ -74,7 +74,7 @@ namespace NetCoreForce.FunctionalTests
                 var client = new ForceClient("ClientId", "ClientSecret", null, "password", DefaultTokenRequestEndpoint);
             });
 
-            Assert.True(ex.Message.ToLower().Contains("username"));
+            Assert.Contains("username", ex.Message.ToLower());
         }
 
         [Fact]
@@ -85,7 +85,7 @@ namespace NetCoreForce.FunctionalTests
                 var client = new ForceClient("ClientId", "ClientSecret", "username", null, DefaultTokenRequestEndpoint);
             });
 
-            Assert.True(ex.Message.ToLower().Contains("password"));
+            Assert.Contains("password", ex.Message.ToLower());
         }
 
 

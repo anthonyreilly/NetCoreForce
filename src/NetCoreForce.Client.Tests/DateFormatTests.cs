@@ -24,7 +24,7 @@ namespace NetCoreForce.Client.Tests
 
             string serialized = JsonSerializer.SerializeComplete(obj, false);         
 
-            Assert.True(serialized.Contains(_expectedDate));
+            Assert.Contains(_expectedDate, serialized);
         }
 
         [Fact]

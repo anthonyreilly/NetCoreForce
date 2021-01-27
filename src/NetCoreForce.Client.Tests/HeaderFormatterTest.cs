@@ -15,7 +15,7 @@ namespace NetCoreForce.Client.Tests
 
             Dictionary<string, string> customHeaders = HeaderFormatter.IfModifiedSince(date);
 
-            Assert.Equal(1, customHeaders.Count);
+            Assert.Single(customHeaders);
 
             var header = customHeaders.First();
 
@@ -29,7 +29,7 @@ namespace NetCoreForce.Client.Tests
         {
             Dictionary<string, string> customHeaders = HeaderFormatter.SforceQueryOptions(1000);
 
-            Assert.Equal(1, customHeaders.Count);
+            Assert.Single(customHeaders);
 
             var header = customHeaders.First();
 
@@ -61,7 +61,7 @@ namespace NetCoreForce.Client.Tests
         {
             Dictionary<string, string> customHeaders = HeaderFormatter.SforceCallOptions();
 
-            Assert.Equal(1, customHeaders.Count);
+            Assert.Single(customHeaders);
 
             var header = customHeaders.First();
 
@@ -75,7 +75,7 @@ namespace NetCoreForce.Client.Tests
         {
             Dictionary<string, string> customHeaders = HeaderFormatter.SforceCallOptions("Test");
 
-            Assert.Equal(1, customHeaders.Count);
+            Assert.Single(customHeaders);
 
             var header = customHeaders.First();
 
@@ -89,7 +89,7 @@ namespace NetCoreForce.Client.Tests
         {
             Dictionary<string, string> customHeaders = HeaderFormatter.SforceCallOptions(defaultNamespace: "Test");
 
-            Assert.Equal(1, customHeaders.Count);
+            Assert.Single(customHeaders);
 
             var header = customHeaders.First();
 
@@ -103,7 +103,7 @@ namespace NetCoreForce.Client.Tests
         {
             Dictionary<string, string> customHeaders = HeaderFormatter.SforceAutoAssign(false);
 
-            Assert.Equal(1, customHeaders.Count);
+            Assert.Single(customHeaders);
 
             var header = customHeaders.First();
 

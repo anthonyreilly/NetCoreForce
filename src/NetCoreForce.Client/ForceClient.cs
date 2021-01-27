@@ -217,11 +217,9 @@ namespace NetCoreForce.Client
         /// <returns><see cref="IAsyncEnumerable{T}"/> of results</returns>
         public IAsyncEnumerable<T> QueryAsync<T>(string queryString, bool queryAll = false, int? batchSize = null)
         {
-#if NETSTANDARD2_1
+            // return AsyncEnumerable.Create<T>((token) => QueryAsyncEnumerator<T>(queryString, queryAll, batchSize));
             return AsyncEnumerable.Create((token) => QueryAsyncEnumerator<T>(queryString, queryAll, batchSize));
-#else
-            return AsyncEnumerable.CreateEnumerable(() => QueryAsyncEnumerator<T>(queryString, queryAll, batchSize));
-#endif
+            //return AsyncEnumerable.CreateEnumerable(() => QueryAsyncEnumerator<T>(queryString, queryAll, batchSize));
         }
 
         /// <summary>
@@ -254,19 +252,19 @@ namespace NetCoreForce.Client
             var done = false;
             var nextRecordsUri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString, queryAll);
 
-#if NETSTANDARD2_1
+// #if NETSTANDARD2_1
             return AsyncEnumerator.Create(MoveNextAsync, Current, Dispose);
             async ValueTask<bool> MoveNextAsync()
             {
-#else
-            return AsyncEnumerable.CreateEnumerator(MoveNextAsync, Current, Dispose);
-            async Task<bool> MoveNextAsync(CancellationToken token)
-            {
-                if (token.IsCancellationRequested)
-                {
-                    return false;
-                }
-#endif
+// #else
+//             return AsyncEnumerable.CreateEnumerator(MoveNextAsync, Current, Dispose);
+//             async Task<bool> MoveNextAsync(CancellationToken token)
+//             {
+//                 if (token.IsCancellationRequested)
+//                 {
+//                     return false;
+//                 }
+// #endif
                 // If items remain in the current Batch enumerator, go to next item
                 if (currentBatchEnumerator?.MoveNext() == true)
                 {
@@ -309,20 +307,20 @@ namespace NetCoreForce.Client
                 return currentBatchEnumerator == null ? default(T) : currentBatchEnumerator.Current;
             }
 
-#if NETSTANDARD2_1
+// #if NETSTANDARD2_1
             ValueTask Dispose()
             {
                 currentBatchEnumerator?.Dispose();
                 jsonClient.Dispose();
                 return new ValueTask();
             }
-#else
-            void Dispose()
-            {
-                currentBatchEnumerator?.Dispose();
-                jsonClient.Dispose();
-            }
-#endif
+// #else
+//             void Dispose()
+//             {
+//                 currentBatchEnumerator?.Dispose();
+//                 jsonClient.Dispose();
+//             }
+// #endif
         }
 
         /// <summary>

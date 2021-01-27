@@ -56,10 +56,10 @@ namespace NetCoreForce.Client.Tests
         {
             string serialized = JsonSerializer.SerializeForCreate(new SampleObject());
 
-            Assert.False(serialized.Contains(IdPropertyTestString));
-            Assert.True(serialized.Contains("noAttributes"));
-            Assert.True(serialized.Contains("createableTrue"));
-            Assert.False(serialized.Contains("createableFalse"));
+            Assert.DoesNotContain(IdPropertyTestString, serialized);
+            Assert.Contains("noAttributes", serialized);
+            Assert.Contains("createableTrue", serialized);
+            Assert.DoesNotContain("createableFalse", serialized);
         }
 
         [Fact]
@@ -67,10 +67,10 @@ namespace NetCoreForce.Client.Tests
         {
             string serialized = JsonSerializer.SerializeForUpdate(new SampleObject());
 
-            Assert.False(serialized.Contains(IdPropertyTestString));
-            Assert.True(serialized.Contains("noAttributes"));
-            Assert.True(serialized.Contains("updateableTrue"));
-            Assert.False(serialized.Contains("updateableFalse"));
+            Assert.DoesNotContain(IdPropertyTestString, serialized);
+            Assert.Contains("noAttributes", serialized);
+            Assert.Contains("updateableTrue", serialized);
+            Assert.DoesNotContain("updateableFalse", serialized);
         }
 
         [Fact]
@@ -78,10 +78,10 @@ namespace NetCoreForce.Client.Tests
         {
             string serialized = JsonSerializer.SerializeForUpdateWithObjectId(new SampleObject());
 
-            Assert.True(serialized.Contains(IdPropertyTestString));
-            Assert.True(serialized.Contains("noAttributes"));
-            Assert.True(serialized.Contains("updateableTrue"));
-            Assert.False(serialized.Contains("updateableFalse"));
+            Assert.Contains(IdPropertyTestString, serialized);
+            Assert.Contains("noAttributes", serialized);
+            Assert.Contains("updateableTrue", serialized);
+            Assert.DoesNotContain("updateableFalse", serialized);
         }
 
         [Fact]
@@ -89,7 +89,7 @@ namespace NetCoreForce.Client.Tests
         {
             string serialized = JsonSerializer.SerializeForUpdate(new SampleObject());
 
-            Assert.False(serialized.Contains("nullProperty"));
+            Assert.DoesNotContain("nullProperty", serialized);
         }
 
         [Fact]
@@ -97,7 +97,7 @@ namespace NetCoreForce.Client.Tests
         {
             string serialized = JsonSerializer.SerializeForUpdateWithObjectId(new SampleObject());
 
-            Assert.False(serialized.Contains("nullProperty"));
+            Assert.DoesNotContain("nullProperty", serialized);
         }
 
         [Fact]
@@ -105,7 +105,7 @@ namespace NetCoreForce.Client.Tests
         {
             string serialized = JsonSerializer.SerializeForCreate(new SampleObject());
 
-            Assert.False(serialized.Contains("nullProperty"));
+            Assert.DoesNotContain("nullProperty", serialized);
         }
 
         //TODO: test deserialize
