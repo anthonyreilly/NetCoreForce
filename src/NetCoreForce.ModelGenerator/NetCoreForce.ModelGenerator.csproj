@@ -17,19 +17,20 @@
     <PackageProjectUrl>$(PackageProjectUrl)</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>$(PackageRequireLicenseAcceptance)</PackageRequireLicenseAcceptance>
     <PackageTags>$(PackageTags)</PackageTags>
-    <PackageType>DotNetCliTool</PackageType>
     <RepositoryType>$(RepositoryType)</RepositoryType>
     <RepositoryUrl>$(RepositoryUrl)</RepositoryUrl>
     <PackageReleaseNotes>$(PackageReleaseNotes)</PackageReleaseNotes>
+
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>NetCoreForce.ModelGenerator</ToolCommandName>
   </PropertyGroup>
+
   <PropertyGroup>
-    <!-- Documentation -->
-    <!-- <GenerateDocumentationFile>true</GenerateDocumentationFile> -->
-    <!-- <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile> -->
-    <!-- warning CS1591: Missing XML comment for publicly visible type or member -->
-    <!-- warning CS1701: Assuming assembly reference 'System.Runtime [...] 4.0/4.1 mismatch when enabling doc output-->
-    <!-- <NoWarn>CS1591,CS1701</NoWarn> -->
+
   </PropertyGroup>
+
+
+
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageOutputPath>$(SolutionDir)/packages</PackageOutputPath>

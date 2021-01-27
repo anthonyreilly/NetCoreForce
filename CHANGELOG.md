@@ -17,6 +17,9 @@ This a major update, and introduces several breaking changes. It resolves severa
     - When upgrading, you'll get a clear compiler error that the method isn't available, and switching to the one that has "async" in the method name should then compile.
 * Added Microsoft.Bcl.AsyncInterfaces to provide async disposable support for .netstandard2.0 targets
 
+* Converted NetCoreForce.ModelGenerator to be packaged as a global .NET CLI tool.
+    - See the [ReadMe](src/NetCoreForce.Models/README.md) for additional details.
+
 ### 2021-01-01 v2.7.0
 
 * Client: Added support for updating multiple objects

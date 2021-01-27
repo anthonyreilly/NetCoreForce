@@ -2,21 +2,23 @@
 
 Generates model classes according to your enviroment, optionally including any custom objects or fields. One file per class, named [ClassName].cs
 
-This is packaged as a custom dotnet CLI tool. You can add it via
+This is packaged as a custom .NET CLI tool. You can add it via
 ```
-dotnet add package NetCoreForce.ModelGenerator
-```
-However, you may need to manually update your csproj to add it as a DotNetCliToolReference like other CLI tools, since currently the add package commands will incorrectly add it as a dependency:
-
-```xml
-<ItemGroup>
-  <DotNetCliToolReference Include="NetCoreForce.ModelGenerator" Version="X.X.X" />
-</ItemGroup>
+dotnet tool install --global NetCoreForce.ModelGenerator
 ```
 
-Then you will be able to use the tool by invoking it as a dotnet command:
+----
+By default, .Net tools are installed in these locations:
+
+OS|Location
+----|----
+Linux/MacOS | ~/.dotnet/tools
+Windows | %USERPROFILE%\\.dotnet\tools
+----
+
+Then you will be able to use the tool by invoking it as a global dotnet command:
 ```
-dotnet modelgenerator generate --help
+NetCoreForce.ModelGenerator generate --help
 
 Usage: modelgenerator generate [options]
 
@@ -37,7 +39,10 @@ Options:
   -r|--include-references            Include referenced objects as properties
 
 You can supply the API credentials either in the config file, the command parameters, or wait to be interactively prompted for that information.
-If you choose to save the config file, be careful with it as it may contain your API credentials.
+
+using --save-config can be very useful so you do not need to re-enter your auth info and options after your first interactive session.
+
+However, if you choose to save the config file, be careful with it as it does contain your API credentials.
 ```
 
   There are a few SObjects that either have reserved names (e.g. Namespace, Domain), or may otherwise cause confustion with other C# objects (e.g. Task).
@@ -51,7 +56,7 @@ No configuration file is required, however you can include the --save-config opt
 
 ## Example usage
   ```
-  dotnet modelgenerator generate -p Sf -r -c -n MyProject.Models -d ~/git/myproject.models 
+  NetCoreForce.ModelGenerator generate -p Sf -r -c -n MyProject.Models -d ~/git/myproject.models 
   ```
   * Prefix classes with "Sf"
   * Include referenced objects
@@ -68,7 +73,7 @@ No configuration file is required, however you can include the --save-config opt
     "clientSecret": "your_client_secret",
     "username": "username",
     "password": "password",
-    "apiVersion": "v41.0",
+    "apiVersion": "v50.0",
     "authorizationEndpoint": "https://login.salesforce.com/services/oauth2/authorize",
     "tokenRequestEndpoint": "https://login.salesforce.com/services/oauth2/token",
     "tokenRevocationEndpoint": "https://login.salesforce.com/services/oauth2/revoke"
