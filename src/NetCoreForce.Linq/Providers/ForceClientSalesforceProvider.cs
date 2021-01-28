@@ -22,7 +22,7 @@ namespace NetCoreForce.Linq.Providers
 
         protected override IAsyncEnumerator<T> ProduceAsyncEnumerator(string cmd)
         {
-            return this.ForceClient.QueryAsyncEnumerator<T>(cmd, queryAll:false);
+            return this.ForceClient.QueryAsync<T>(cmd, queryAll:false).GetAsyncEnumerator();
         }
     }
 }

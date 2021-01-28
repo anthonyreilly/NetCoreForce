@@ -62,15 +62,11 @@ namespace NetCoreForce.Linq.Tests
         [Fact]
         public void SimpleAllQuery()
         {
-            var soql =
-                Query<SfCase>(SelectTypeEnum.SelectAllAndUseAttachModel, out var provider)
-                    .ToString();
+            string soql = Query<SfTopic>(SelectTypeEnum.SelectAllAndUseAttachModel, out var provider).ToString();
 
-            Assert.Equal("SELECT " +
-                         "id,caseNumber,contactId,accountId,assetId,parentId,suppliedName,suppliedEmail,suppliedPhone,suppliedCompany," +
-                         "type,status,reason,origin,subject,priority,description,ownerId,createdById,lastModifiedById," +
-                         "contactPhone,contactMobile,contactEmail,contactFax " +
-                         "FROM Case", soql);
+            //currently returning "SELECT id,name,description,createdById,managedTopicType FROM Topic"
+
+            Assert.Equal("SELECT id,name,description,createdById,createdBy,createdDate,talkingAbout,managedTopicType,systemModstamp FROM Topic", soql);
         }
 
         [Fact]
