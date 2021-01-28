@@ -17,7 +17,7 @@ For .NET Core 1.x support, use NetCoreForce v2.7
 * [NetCoreForce.Client.Tests](src/NetCoreForce.Client.Tests) - Unit tests (offline/mocked)  
 * [NetCoreForce.FunctionalTests](src/NetCoreForce.FunctionalTests) - Online Unit tests (Needs valid login credentials)  
 * [NetCoreForce.ModelGenerator](src/NetCoreForce.ModelGenerator) - Optional custom dotnet-cli tool for code generation of custom objects/fields.  
-* [NetCoreForce.Models](src/NetCoreForce.Models) [(ReadMe)](src/NetCoreForce.Models/README.md) - Optional library with a set of pre-generated standard models  
+* [NetCoreForce.Models](src/NetCoreForce.Models) [(ReadMe)](src/NetCoreForce.ModelGenerator/README.md) - Optional library with a set of pre-generated standard models  
 * [SampleConsole](src/SampleConsole) - A simple .NET Core console app to demonstrate the library.
 
 ### NuGet Packages
@@ -25,19 +25,19 @@ For .NET Core 1.x support, use NetCoreForce v2.7
 * [NetCoreForce.Models](https://www.nuget.org/packages/NetCoreForce.Models/)
 * [NetCoreForce.ModelGenerator](https://www.nuget.org/packages/NetCoreForce.ModelGenerator/)
 
-### Experimental Projects:
-* [NetCoreForce.Linq](src/NetCoreForce.Linq) - an experimental LINQ-to-SOQL query provider
-* [NetCoreForce.Linq.Tests](src/NetCoreForce.Linq.Tests) - LINQ Unit tests (offline/mocked)
-* NuGet package: [NetCoreForce.Linq](https://www.nuget.org/packages/NetCoreForce.Linq/)
-
 ### An effort is made to minimize the dependencies:
 * [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json) (JSON Serialization)
 * [System.Text.Encodings.Web](https://www.nuget.org/packages/System.Text.Encodings.Web) (URL formatting)
-* [System.Interactive.Async](https://www.nuget.org/packages/System.Interactive.Async/) (Asynchronous query batch result 
-processing)
 * [Microsoft.Bcl.AsyncInterfaces](https://www.nuget.org/packages/Microsoft.Bcl.AsyncInterfaces/)
     - Only included in .netstandard2.0, .netcoreapp2.0 targets
     - Provides await using, async disposables
+
+### Experimental Projects:
+* Please note: The LINQ library has barely been tested, and is not recommended for production use. Consider it an alpha release.
+* [NetCoreForce.Linq](src/NetCoreForce.Linq) - an experimental LINQ-to-SOQL query provider
+* [NetCoreForce.Linq.Tests](src/NetCoreForce.Linq.Tests) - LINQ Unit tests (offline/mocked)
+* NuGet package: [NetCoreForce.Linq](https://www.nuget.org/packages/NetCoreForce.Linq/)
+* Retains a dependency on [System.Interactive.Async](https://www.nuget.org/packages/System.Interactive.Async/)
 
 Using [semantic versioning](http://semver.org)
 

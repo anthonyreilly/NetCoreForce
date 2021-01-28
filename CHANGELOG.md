@@ -1,5 +1,12 @@
 # Changelog
 
+### 2021-01-28 v3.0.0 Beta2
+
+* NetCoreForce.Client: Removed System.Interactive.Async dependency
+    - Migrated to use native async streams
+    - netstandard2.0 client support via Microsoft.Bcl.AsyncInterfaces
+* NetCoreForce.Client: QueryAsyncEnumerator(), can be replaced by calling GetAsyncEnumerator() on the results of QueryAsync()
+
 ### 2021-01-27 v3.0.0 Beta
 
 This a major update, and introduces several breaking changes. It resolves several compatibilty issues with newer .net core versions.

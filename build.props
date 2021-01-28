@@ -2,7 +2,7 @@
   <PropertyGroup>
     <!--Versioning-->
     <VersionPrefix>3.0.0</VersionPrefix>
-    <VersionSuffix>Beta</VersionSuffix>
+    <VersionSuffix>Beta2</VersionSuffix>
 
     <!-- Targets -->
     <LangVersion>8.0</LangVersion>
