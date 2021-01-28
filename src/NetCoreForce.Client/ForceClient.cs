@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using NetCoreForce.Client.Models;
@@ -214,31 +214,17 @@ namespace NetCoreForce.Client
         /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
         /// <param name="queryAll">Optional. True if deleted records are to be included.await Defaults to false.</param>
         /// <param name="batchSize">Optional. Size of result batches between 200 and 2000</param>
+        /// <param name="cancellationToken">Optional. Cancellation token</param>
         /// <returns><see cref="IAsyncEnumerable{T}"/> of results</returns>
-        public IAsyncEnumerable<T> QueryAsync<T>(string queryString, bool queryAll = false, int? batchSize = null)
-        {
-            // return AsyncEnumerable.Create<T>((token) => QueryAsyncEnumerator<T>(queryString, queryAll, batchSize));
-            return AsyncEnumerable.Create((token) => QueryAsyncEnumerator<T>(queryString, queryAll, batchSize));
-            //return AsyncEnumerable.CreateEnumerable(() => QueryAsyncEnumerator<T>(queryString, queryAll, batchSize));
-        }
-
-        /// <summary>
-        /// Retrieve a <see cref="IAsyncEnumerator{T}"/> using a SOQL query. Batches will be retrieved asynchronously.
-        /// <para>When using the iterator, the initial result batch will be returned as soon as it is received. The additional result batches will be retrieved only as needed.</para>
-        /// </summary>
-        /// <param name="queryString">SOQL query string, without any URL escaping/encoding</param>
-        /// <param name="queryAll">Optional. True if deleted records are to be included.await Defaults to false.</param>
-        /// <param name="batchSize">Optional. Size of result batches between 200 and 2000</param>
-        /// <returns><see cref="IAsyncEnumerator{T}"/> of results</returns>
-        public IAsyncEnumerator<T> QueryAsyncEnumerator<T>(string queryString, bool queryAll = false, int? batchSize = null)
+        public async IAsyncEnumerable<T> QueryAsync<T>(string queryString, bool queryAll = false, int? batchSize = null, [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
             Dictionary<string, string> headers = new Dictionary<string, string>();
 
-            //Add call options
+            // Add call options
             Dictionary<string, string> callOptions = HeaderFormatter.SforceCallOptions(ClientName);
             headers.AddRange(callOptions);
 
-            //Add query options headers if batch size specified
+            // Add query options headers if batch size specified
             if (batchSize.HasValue)
             {
                 Dictionary<string, string> queryOptions = HeaderFormatter.SforceQueryOptions(batchSize.Value);
@@ -247,80 +233,34 @@ namespace NetCoreForce.Client
 
             var jsonClient = new JsonClient(AccessToken, _httpClient);
 
-            // Enumerator on the current batch items
-            IEnumerator<T> currentBatchEnumerator = null;
-            var done = false;
             var nextRecordsUri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString, queryAll);
+            bool hasMoreRecords = true;
 
-// #if NETSTANDARD2_1
-            return AsyncEnumerator.Create(MoveNextAsync, Current, Dispose);
-            async ValueTask<bool> MoveNextAsync()
+            while (hasMoreRecords)
             {
-// #else
-//             return AsyncEnumerable.CreateEnumerator(MoveNextAsync, Current, Dispose);
-//             async Task<bool> MoveNextAsync(CancellationToken token)
-//             {
-//                 if (token.IsCancellationRequested)
-//                 {
-//                     return false;
-//                 }
-// #endif
-                // If items remain in the current Batch enumerator, go to next item
-                if (currentBatchEnumerator?.MoveNext() == true)
-                {
-                    return true;
-                }
-
-                // if done, no more items.
-                if (done)
-                {
-                    return false;
-                }
-
-                // else : no enumerator or currentBatchEnumerator ended
-                // so get the next batch
                 var qr = await jsonClient.HttpGetAsync<QueryResult<T>>(nextRecordsUri, headers);
 
 #if DEBUG
                 Debug.WriteLine($"Got query resuts, {qr.TotalSize} totalSize, {qr.Records.Count} in this batch, final batch: {qr.Done}");
 #endif
 
-                currentBatchEnumerator = qr.Records.GetEnumerator();
-
                 if (!string.IsNullOrEmpty(qr.NextRecordsUrl))
                 {
                     nextRecordsUri = new Uri(new Uri(InstanceUrl), qr.NextRecordsUrl);
-                    done = false;
+                    hasMoreRecords = true;
                 }
                 else
                 {
-                    //Normally if query has remaining batches, NextRecordsUrl will have a value, and Done will be false.
-                    //In case of some unforseen error, flag the result as done if we're missing the NextRecordsURL
-                    done = true;
+                    // Normally if a query has remaining batches, NextRecordsUrl will have a value, and Done will be false.
+                    // In case of some unforseen error, consider the results done if we're missing the NextRecordsURL
+                    hasMoreRecords = false;
                 }
 
-                return currentBatchEnumerator.MoveNext();
+                foreach (T record in qr.Records)
+                {
+                    yield return record;
+                }
             }
-
-            T Current()
-            {
-                return currentBatchEnumerator == null ? default(T) : currentBatchEnumerator.Current;
-            }
-
-// #if NETSTANDARD2_1
-            ValueTask Dispose()
-            {
-                currentBatchEnumerator?.Dispose();
-                jsonClient.Dispose();
-                return new ValueTask();
-            }
-// #else
-//             void Dispose()
-//             {
-//                 currentBatchEnumerator?.Dispose();
-//                 jsonClient.Dispose();
-//             }
-// #endif
         }
 
         /// <summary>
