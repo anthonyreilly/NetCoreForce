@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      config: "Release"
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET Core 2.1
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 2.1.x
+
+      - name: Setup .NET Core 3.1
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.x
+
+      # - name: Setup .NET Core 5.0
+      #   uses: actions/setup-dotnet@v1
+      #   with:
+      #     dotnet-version: 5.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration $config --no-restore
+
+      - name: Test
+        run: dotnet test src/NetCoreForce.Client.Tests --configuration $config --no-restore --no-build --verbosity normal
+      
+      - name: Upload nuget artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: nuget-package
+          path: ${{github.workspace}}/packages/NetCoreForce.*.nupkg

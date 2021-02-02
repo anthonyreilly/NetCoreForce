@@ -5,8 +5,10 @@
 
 ### [Changelog](CHANGELOG.md)  
 
-[![Build status](https://ci.appveyor.com/api/projects/status/sum0prwnfgnv8e7s/branch/master?svg=true&passingText=master&failingText=master&pendingText=master%20pending)](https://ci.appveyor.com/project/anthonyreilly/netcoreforce/branch/master)
-[![Build status](https://ci.appveyor.com/api/projects/status/sum0prwnfgnv8e7s/branch/dev?svg=true&passingText=dev&failingText=dev&pendingText=dev%20pending)](https://ci.appveyor.com/project/anthonyreilly/netcoreforce/branch/dev)
+CI main:  
+[![](https://github.com/anthonyreilly/NetCoreForce/workflows/CI/badge.svg?branch=main)](https://github.com/anthonyreilly/NetCoreForce/actions?query=workflow%3ACI+branch%3Amain)  
+CI dev:  
+[![](https://github.com/anthonyreilly/NetCoreForce/workflows/CI/badge.svg?branch=dev)](https://github.com/anthonyreilly/NetCoreForce/actions?query=workflow%3ACI+branch%3Adev)  
 
 NetCoreForce v3 currently targeting netstandard 2.0 & 2.1, supports .NET Core 2.1 & 3.1 apps.
 
