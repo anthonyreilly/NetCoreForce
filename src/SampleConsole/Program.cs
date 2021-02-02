@@ -84,33 +84,6 @@ namespace SampleConsole
                         // process your results
                     }
                 }
-
-// #if NETSTANDARD2_1
-//                 // Get the enumerator, in a using block for proper disposal
-//                 await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
-//                 {
-//                     // MoveNext() will execute the query and get the first batch of results.
-//                     // Once the inital result batch has been exhausted, the remaining batches, if any, will be retrieved.
-//                     while (await contactsEnumerator.MoveNextAsync())
-//                     {
-//                         SfContact contact = contactsEnumerator.Current;
-//                         // process your results
-//                     }
-//                 }
-// #else
-//                 // Get the enumerator
-//                 IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator();
-//                 // MoveNext() will execute the query and get the first batch of results.
-//                 // Once the inital result batch has been exhausted, the remaining batches, if any, will be retrieved.
-//                 while (await contactsEnumerator.MoveNextAsync())
-//                 {
-//                     SfContact contact = contactsEnumerator.Current;
-//                     // process your results
-//                 }
-
-//                 // Dispose the enumerator
-//                 await contactsEnumerator.DisposeAsync();
-// #endif
             }
             catch (ForceApiException ex)
             {
