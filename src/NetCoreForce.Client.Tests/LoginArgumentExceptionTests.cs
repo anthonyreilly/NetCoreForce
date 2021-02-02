@@ -1,13 +1,7 @@
 using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Xunit;
-using NetCoreForce.Client;
-using NetCoreForce.Client.Models;
-using Newtonsoft.Json;
 
-namespace NetCoreForce.FunctionalTests
+namespace NetCoreForce.Client.Tests
 {
     public class LoginArgumentExceptionTests
     {
@@ -87,7 +81,5 @@ namespace NetCoreForce.FunctionalTests
 
             Assert.Contains("password", ex.Message.ToLower());
         }
-
-
     }
 }
