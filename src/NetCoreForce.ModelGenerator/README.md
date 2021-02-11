@@ -37,22 +37,23 @@ Options:
   -n|--namespace <namespace>         Namespace to use for generated classes
   -c|--include-custom                Include custom objects and fields
   -r|--include-references            Include referenced objects as properties
-
+```
 You can supply the API credentials either in the config file, the command parameters, or wait to be interactively prompted for that information.
 
-using --save-config can be very useful so you do not need to re-enter your auth info and options after your first interactive session.
+## Object Naming
 
-However, if you choose to save the config file, be careful with it as it does contain your API credentials.
-```
-
-  There are a few SObjects that either have reserved names (e.g. Namespace, Domain), or may otherwise cause confustion with other C# objects (e.g. Task).
-  To avoid this, the prefix/suffix option can append a prefix/suffix to the class names, e.g use a "Sf" prefix to end up with SfTask instead of Task.
-  Using the prefix is recommended - it is safer, and it makes intellisense easier since you can start with "Sf" to filter the SF object models.
-  the triple-slash Summary documentation tags on the generated classes will specify the original SObject name, and is exposed by the static SObjectTypeName property.
+There are a few SObjects that either have reserved names (e.g.Namespace, Domain), or may otherwise cause confustion with other C#objects (e.g. Task).
+To avoid this, the prefix/suffix option can append a prefix/suffix tothe class names, e.g use a "Sf" prefix to end up with SfTask insteadof Task.
+Using the prefix is recommended - it is safer, and it makesintellisense easier since you can start with "Sf" to filter the SFobject models.
+the triple-slash Summary documentation tags on the generated classeswill specify the original SObject name, and is exposed by the staticSObjectTypeName property.
 
 ## Configuration
 
-No configuration file is required, however you can include the --save-config option with an optional filename or file path to save the API credentials and generation options to. the filename will default to modelgenerator-config.json in the local directory for saving and loading if not otherwise specified.
+No configuration file is required, however you can include the --save-config option with an optional filename or file path to save the API credentials and generation options to. the filename will default to modelgenerator-config.json in the local directory for saving and loading if not otherwise specified.  
+
+Using --save-config can be very useful so you do not need to re-enter your auth info and options after your first interactive session.
+
+However, if you choose to save the config file, be careful with it as it does contain your API credentials.
 
 ## Example usage
   ```

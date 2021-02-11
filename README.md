@@ -3,7 +3,7 @@
 ## A .NET Standard and .NET Core Salesforce REST API toolkit and API wrapper
 *This project is not offered, sponsored, or endorsed by Salesforce.*
 
-### [Changelog](CHANGELOG.md)  
+### [CHANGELOG](CHANGELOG.md)  
 
 CI main:  
 [![](https://github.com/anthonyreilly/NetCoreForce/workflows/CI/badge.svg?branch=main)](https://github.com/anthonyreilly/NetCoreForce/actions?query=workflow%3ACI+branch%3Amain)  
@@ -15,12 +15,20 @@ NetCoreForce v3 currently targeting netstandard 2.0 & 2.1, supports .NET Core 2.
 For .NET Core 1.x support, use NetCoreForce v2.7
 
 ### Projects in this solution:
-* [NetCoreForce.Client](src/NetCoreForce.Client) - Main library  
-* [NetCoreForce.Client.Tests](src/NetCoreForce.Client.Tests) - Unit tests (offline/mocked)  
-* [NetCoreForce.FunctionalTests](src/NetCoreForce.FunctionalTests) - Online Unit tests (Needs valid login credentials)  
-* [NetCoreForce.ModelGenerator](src/NetCoreForce.ModelGenerator) - Optional custom dotnet-cli tool for code generation of custom objects/fields.  
-* [NetCoreForce.Models](src/NetCoreForce.Models) [(ReadMe)](src/NetCoreForce.ModelGenerator/README.md) - Optional library with a set of pre-generated standard models  
-* [SampleConsole](src/SampleConsole) - A simple .NET Core console app to demonstrate the library.
+* [NetCoreForce.Client](src/NetCoreForce.Client)
+    - Main library  
+* [NetCoreForce.Client.Tests](src/NetCoreForce.Client.Tests)
+    - Unit tests (offline/mocked)  
+* [NetCoreForce.FunctionalTests](src/NetCoreForce.FunctionalTests)
+    - Online Unit tests (Needs valid login credentials)  
+* [NetCoreForce.ModelGenerator](src/NetCoreForce.ModelGenerator)
+    - Check [README](src/NetCoreForce.ModelGenerator/README.md) for docs
+    - Optional custom dotnet-cli tool for code generation of custom objects/fields.  
+* [NetCoreForce.Models](src/NetCoreForce.Models)
+    - Check [README](src/NetCoreForce.Models/README.md) for docs
+    - Optional library with a set of pre-generated standard models  
+* [SampleConsole](src/SampleConsole)
+    - A simple .NET Core console app to demonstrate the library.
 
 ### NuGet Packages
 * [NetCoreForce.Client](https://www.nuget.org/packages/NetCoreForce.Client/)
@@ -41,7 +49,6 @@ For .NET Core 1.x support, use NetCoreForce v2.7
 * NuGet package: [NetCoreForce.Linq](https://www.nuget.org/packages/NetCoreForce.Linq/)
 * Retains a dependency on [System.Interactive.Async](https://www.nuget.org/packages/System.Interactive.Async/)
 
-Using [semantic versioning](http://semver.org)
 
 Feedback and suggestions welcome.
 
@@ -116,4 +123,3 @@ await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable
     }
 }
 ```
-

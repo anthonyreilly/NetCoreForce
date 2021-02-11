@@ -1,5 +1,9 @@
 # Changelog
 
+### 2021-02-09 v3.0.0
+
+* v3 release, no changes from Beta2
+
 ### 2021-01-28 v3.0.0 Beta2
 
 * NetCoreForce.Client: Removed System.Interactive.Async dependency

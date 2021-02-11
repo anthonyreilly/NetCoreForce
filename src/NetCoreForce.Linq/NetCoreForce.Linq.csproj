@@ -6,7 +6,7 @@
     <OutputType>Library</OutputType>
     <TargetFrameworks>$(LibTargetFrameworks)</TargetFrameworks>
     <VersionPrefix>$(VersionPrefix)</VersionPrefix>
-    <VersionSuffix>alpha2</VersionSuffix>
+    <VersionSuffix>alpha3</VersionSuffix>
     <!--NuGet-->
     <Authors>$(Authors)</Authors>
     <Copyright>$(Copyright)</Copyright>
