@@ -1,5 +1,11 @@
 # Changelog
 
+### 2021-05-07 v3.0.1
+
+* Fix: incorrect URI when calling organization limits, make URI formatting more consistent
+* ci: Add missing URI formatting tests
+* Dependabot: Bump System.Text.Encodings.Web from 5.0.0 -> 5.0.1
+
 ### 2021-02-09 v3.0.0
 
 * v3 release, no changes from Beta2

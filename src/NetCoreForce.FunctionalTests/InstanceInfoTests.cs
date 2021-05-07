@@ -64,5 +64,18 @@ namespace NetCoreForce.FunctionalTests
                 async () => await client.GetAvailableRestApiVersions("https://badurl")
             );
         }
+
+        [Fact]
+        public async Task GetLimits()
+        {
+            AuthInfo authInfo = forceClientFixture.AuthInfo;            
+            ForceClient client = new ForceClient(authInfo);
+
+            OrganizationLimits orgLimits = await client.GetOrganizationLimits();
+
+            Assert.NotNull(orgLimits);
+            Assert.NotNull(orgLimits.DailyApiRequests);
+            Assert.True(orgLimits.DailyApiRequests.Max > 0);
+        }
     }
 }

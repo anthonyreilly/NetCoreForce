@@ -8,10 +8,10 @@ namespace NetCoreForce.Client.Tests
 {
     public class UriFormatterTest
     {
-        const string apiVersion = "v41.0";
-        const string instanceUrl = "https://xxx.salesforce.com";
-        const string SObjectName = "Account";
-        const string ObjectId = "001XXXXXXXXXXXXXXX";
+        const string _apiVersion = "v41.0";
+        const string _instanceUrl = "https://xxx.salesforce.com";
+        const string _sObjectName = "Account";
+        const string _objectId = "001XXXXXXXXXXXXXXX";
 
         //Note: Uri.AbsoluteUri is fully escaped/URL encoded. UriToString() will leave some chars like spaces as is
 
@@ -21,6 +21,22 @@ namespace NetCoreForce.Client.Tests
             string result = UriFormatter.SObjectRows("https://xxx.salesforce.com", "v41.0", "Account", "001XXXXXXXXXXXXXXX").AbsoluteUri;
 
             Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/sobjects/Account/001XXXXXXXXXXXXXXX", result);
+        }
+
+        [Fact]
+        public void SObjectRowsByExternalId()
+        {
+            string result = UriFormatter.SObjectRowsByExternalId(_instanceUrl, _apiVersion, _sObjectName, "externalfield", "externalvalue").AbsoluteUri;
+
+            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/sobjects/Account/externalfield/externalvalue", result);
+        }
+
+        [Fact]
+        public void SObjectBlobRetrieve()
+        {
+            string result = UriFormatter.SObjectBlobRetrieve(_instanceUrl, _apiVersion, _sObjectName, _objectId).AbsoluteUri;
+
+            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/sobjects/Account/001XXXXXXXXXXXXXXX/body", result);
         }
 
         [Fact]
@@ -58,6 +74,64 @@ namespace NetCoreForce.Client.Tests
         }
 
         [Fact]
+        public void SObjectDescribe()
+        {
+            string result = UriFormatter.SObjectDescribe("https://xxx.salesforce.com", "v41.0", "Account").AbsoluteUri;
+
+            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/sobjects/Account/describe", result);
+        }
+
+        [Fact]
+        public void BaseUri()
+        {
+            string result = UriFormatter.BaseUri(_instanceUrl).AbsoluteUri;
+
+            string expected = $"{_instanceUrl}/services/data/";
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void Versions()
+        {
+            string result = UriFormatter.Versions(_instanceUrl).AbsoluteUri;
+
+            string expected = $"{_instanceUrl}/services/data";
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void DescribeGlobal()
+        {
+            string result = UriFormatter.DescribeGlobal(_instanceUrl, _apiVersion).AbsoluteUri;
+
+            string expected = $"{_instanceUrl}/services/data/{_apiVersion}/sobjects";
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void Limits()
+        {
+            string result = UriFormatter.Limits(_instanceUrl, _apiVersion).AbsoluteUri;
+
+            string expected = $"{_instanceUrl}/services/data/{_apiVersion}/limits";
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void LimitsResource()
+        {
+            Uri result = UriFormatter.LimitsResource(_apiVersion);
+
+            Uri expected = new Uri($"{_apiVersion}/limits", UriKind.Relative);
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
         public void Query()
         {
             string result = UriFormatter.Query(
@@ -81,6 +155,24 @@ namespace NetCoreForce.Client.Tests
 
             Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/queryAll?q=SELECT%20Id,%20Name%20FROM%20Account%20WHERE%20Id%20%3D%20%27001XXXXXXXXXXXXXXX%27",
                 result);
+        }
+
+        [Fact]
+        public void Search()
+        {
+            //TODO: add actual SOSL syntax
+            string result = UriFormatter.Search( _instanceUrl, _apiVersion, "X Y").AbsoluteUri;
+
+            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/search?q=X%20Y", result);
+        }
+
+        [Fact]
+        public void Batch()
+        {
+            //TODO: add actual SOSL syntax
+            string result = UriFormatter.Batch( _instanceUrl, _apiVersion).AbsoluteUri;
+
+            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/composite/batch", result);
         }
 
         //TODO: Auth URLs

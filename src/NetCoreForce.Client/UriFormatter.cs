@@ -5,23 +5,24 @@ using NetCoreForce.Client.Models;
 namespace NetCoreForce.Client
 {
     /*
-    In each case, the URI for the resource 
-    follows the base URI, which you retrieve from the authentication service: http://domain/services/data.  
+    In each case, the URI for the resource follows the base URI,
+    which you retrieve from the authentication service: http://domain/services/data 
     https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_list.htm
     */
     public static class UriFormatter
     {
-        const string BaseUriSegment = "services/data";
-
         /// <summary>
         /// SF Base URI
         /// </summary>
         /// <param name="instanceUrl"></param>
         public static Uri BaseUri(string instanceUrl)
         {
-            // e.g. https://na99.salesforce.com/services/data
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
-            return new Uri(new Uri(instanceUrl), BaseUriSegment);
+
+            // e.g. https://na99.salesforce.com/services/data
+
+            // trailing slash required in services/data/ so that URI combinations work as expected
+            return new Uri(new Uri(instanceUrl), "services/data/");
         }
 
         /// <summary>
@@ -34,7 +35,7 @@ namespace NetCoreForce.Client
 
             // format: /
 
-            Uri uri = new Uri(new Uri(instanceUrl), BaseUriSegment);
+            Uri uri = new Uri(new Uri(instanceUrl), "services/data");
 
             return uri;
         }
@@ -52,10 +53,7 @@ namespace NetCoreForce.Client
 
             //format: /vXX.X/limits/
 
-            // return new Uri(new Uri(instanceUrl), string.Format("services/data/{0}/limits", apiVersion));
-
             return new Uri(BaseUri(instanceUrl), LimitsResource(apiVersion));
-
         }
 
         //split off full URL formatter and resource relative url formatters?
@@ -70,7 +68,7 @@ namespace NetCoreForce.Client
         {
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
 
-            return new Uri(string.Format("/{0}/limits/", apiVersion), UriKind.Relative);
+            return new Uri($"{apiVersion}/limits", UriKind.Relative);
         }
 
         /// <summary>
@@ -85,7 +83,7 @@ namespace NetCoreForce.Client
 
             //format: /vXX.X/sobjects/
 
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("{0}/{1}/sobjects", BaseUriSegment, apiVersion));
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/sobjects");
 
             return uri;
         }
@@ -102,7 +100,7 @@ namespace NetCoreForce.Client
 
             //format: /vXX.X/sobjects/SObjectName/
 
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("{0}/{1}/sobjects/{2}", BaseUriSegment, apiVersion, sObjectName));
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/sobjects/{sObjectName}");
 
             return uri;
         }
@@ -119,7 +117,7 @@ namespace NetCoreForce.Client
 
             //format: /vXX.X/sobjects/SObjectName/describe/
 
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("services/data/{0}/sobjects/{1}/describe", apiVersion, sObjectName));
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/sobjects/{sObjectName}/describe");
 
             return uri;
         }
@@ -152,7 +150,7 @@ namespace NetCoreForce.Client
             // format: /vXX.X/sobjects/SObjectName/id/
             // example with field parameter: services/data/v20.0/sobjects/Account/001D000000INjVe?fields=AccountNumber,BillingPostalCode            
 
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("services/data/{0}/sobjects/{1}/{2}", apiVersion, sObjectName, objectId));
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/sobjects/{sObjectName}/{objectId}");
 
             if (fields != null && fields.Count > 0)
             {
@@ -177,7 +175,7 @@ namespace NetCoreForce.Client
 
             //format: /vXX.X/composite/sobjects
 
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("{0}/{1}/composite/sobjects", BaseUriSegment, apiVersion));
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/composite/sobjects");
 
             return uri;
         }
@@ -190,7 +188,7 @@ namespace NetCoreForce.Client
         {
             //format: /vXX.X/sobjects/SObjectName/fieldName/fieldValue
 
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("services/data/{0}/sobjects/{1}/{2}/{3}", apiVersion, sObjectName, fieldName, fieldValue));
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/sobjects/{sObjectName}/{fieldName}/{fieldValue}");
 
             return uri;
         }
@@ -216,7 +214,7 @@ namespace NetCoreForce.Client
             // https://yourInstance.salesforce.com/services/data/v20.0/sobjects/Attachment/001D000000INjVe/body
             // https://yourInstance.salesforce.com/services/data/v20.0/sobjects/Document/015D0000000NdJOIA0/body
 
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("services/data/{0}/sobjects/{1}/{2}/{3}", apiVersion, sObjectName, objectId, blobField));
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/sobjects/{sObjectName}/{objectId}/{blobField}");
 
             return uri;
         }        
@@ -234,7 +232,7 @@ namespace NetCoreForce.Client
 
             //Uri uri = new Uri(new Uri(instanceUrl), string.Format("/services/data/{0}/{1}/?q={2}", apiVersion, queryType, query));
 
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("/services/data/{0}/{1}", apiVersion, queryType));
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/{queryType}");
             string queryUri = QueryHelpers.AddQueryString(uri.ToString(), "q", query);
 
             return new Uri(queryUri);
@@ -245,7 +243,7 @@ namespace NetCoreForce.Client
         /// </summary>
         public static Uri Search(string instanceUrl, string apiVersion, string query)
         {
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("/services/data/{0}/search", apiVersion));
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/search");
             string searchUri = QueryHelpers.AddQueryString(uri.ToString(), "q", query);
 
             return new Uri(searchUri);
@@ -263,7 +261,7 @@ namespace NetCoreForce.Client
 
             //format: /vXX.X/composite/batch
 
-            Uri uri = new Uri(new Uri(instanceUrl), string.Format("services/data/{0}/composite/batch", apiVersion));
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/composite/batch");
 
             return uri;
         }
