@@ -32,7 +32,7 @@ namespace NetCoreForce.Client.Tests
             catch (Exception ex)
             {
                 Console.WriteLine(string.Format("Error reading file [{0}]: {1}", filename, ex.Message));
-                throw ex;
+                throw;
             }
         }
 

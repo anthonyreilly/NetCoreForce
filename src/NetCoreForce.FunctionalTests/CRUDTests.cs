@@ -90,15 +90,8 @@ namespace NetCoreForce.FunctionalTests
             firstAccount.Description = firstUpdatedDescription;
             secondAccount.Description = secondUpdatedDescription;
 
-            try
-            {
-                List<UpdateMultipleResponse> responses = await client.UpdateRecords(new List<SObject>() { firstAccount, secondAccount }, true);
-                Assert.True(responses.All(r => r.Success), "Failed to update multiple objects");
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            List<UpdateMultipleResponse> responses = await client.UpdateRecords(new List<SObject>() { firstAccount, secondAccount }, true);
+            Assert.True(responses.All(r => r.Success), "Failed to update multiple objects");
 
             //get newly updated objects
             string secondNewAccountId = secondCreateResp.Id;

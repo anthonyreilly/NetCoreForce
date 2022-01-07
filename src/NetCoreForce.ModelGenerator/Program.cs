@@ -346,7 +346,7 @@ namespace NetCoreForce.ModelGenerator
             catch (ForceAuthException ex)
             {
                 Console.WriteLine("Error authenticating: " + ex.Message);
-                throw ex;
+                throw;
             }
 
             ForceClient client = new ForceClient(auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken);
@@ -588,7 +588,7 @@ namespace NetCoreForce.ModelGenerator
                 catch (Exception ex)
                 {
                     Console.WriteLine("Exception generating models: " + ex.Message);
-                    throw ex;
+                    throw;
                 }
             }
 
