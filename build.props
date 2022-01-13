@@ -1,5 +1,6 @@
 <Project>
   <PropertyGroup>
+  
     <!--Versioning-->
     <VersionPrefix>3.0.1</VersionPrefix>
     <VersionSuffix></VersionSuffix>
@@ -7,16 +8,6 @@
     <!-- Targets -->
     <LangVersion>8.0</LangVersion>
     <LibTargetFrameworks>netstandard2.0;netstandard2.1</LibTargetFrameworks>
-
-    <PropertyGroup Condition="!$([MSBuild]::IsOSPlatform('OSX'))">
-      <AppTargetFrameworks>netcoreapp2.1;netcoreapp3.1;net6.0</AppTargetFrameworks>
-      <TestTargetFrameworks>netcoreapp2.1;netcoreapp3.1;net6.0</TestTargetFrameworks>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
-      <AppTargetFrameworks>net6.0</AppTargetFrameworks>
-      <TestTargetFrameworks>net6.0</TestTargetFrameworks>
-    </PropertyGroup>
 
     <!--NuGet-->
     <Authors>Anthony Reilly</Authors>
@@ -31,6 +22,17 @@
 
     <!--Project Root-->
     <SolutionDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), *.sln))</SolutionDir>
+  </PropertyGroup>
+
+  <!-- Targets -->
+  <PropertyGroup Condition="!$([MSBuild]::IsOSPlatform('OSX'))">
+    <AppTargetFrameworks>netcoreapp2.1;netcoreapp3.1;net6.0</AppTargetFrameworks>
+    <TestTargetFrameworks>netcoreapp2.1;netcoreapp3.1;net6.0</TestTargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+    <AppTargetFrameworks>net6.0</AppTargetFrameworks>
+    <TestTargetFrameworks>net6.0</TestTargetFrameworks>
   </PropertyGroup>
 
 </Project>
