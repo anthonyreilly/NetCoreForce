@@ -1,5 +1,12 @@
 # Changelog
 
+### 2022-01-13 v3.1.0
+
+* feat: add .NET 6 support
+* build: add net6.0 build and test targets
+* build: on MacOS only target .net6.0 (Workaround for issues developing muti-arch on M1 processor machines)
+* chore: remove unnecessary exception catching and re-throws
+
 ### 2021-05-07 v3.0.1
 
 * Fix: incorrect URI when calling organization limits, make URI formatting more consistent

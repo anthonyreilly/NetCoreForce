@@ -124,7 +124,7 @@ namespace SampleConsole
             catch (Exception ex)
             {
                 Console.WriteLine("Error reading credentials file: " + ex.Message);
-                throw ex;
+                throw;
             }
         }
     }

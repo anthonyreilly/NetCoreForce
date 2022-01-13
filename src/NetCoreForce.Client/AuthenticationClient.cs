@@ -89,7 +89,7 @@ namespace NetCoreForce.Client
                 }
 
                 //otherwise throw the original AggregateException as-is
-                throw ex;
+                throw;
             }
 
         }

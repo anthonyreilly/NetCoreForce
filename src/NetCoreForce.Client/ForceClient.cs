@@ -52,10 +52,6 @@ namespace NetCoreForce.Client
             {
                 throw ax.InnerException;
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
 
         /// <summary>
@@ -179,7 +175,7 @@ namespace NetCoreForce.Client
             catch (Exception ex)
             {
                 Debug.WriteLine("Error querying: " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -311,7 +307,7 @@ namespace NetCoreForce.Client
             catch (Exception ex)
             {
                 Debug.WriteLine("Error searching: " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -336,7 +332,7 @@ namespace NetCoreForce.Client
             catch (Exception ex)
             {
                 Debug.WriteLine("Error searching: " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 

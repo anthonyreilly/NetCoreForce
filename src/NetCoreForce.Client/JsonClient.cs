@@ -66,37 +66,22 @@ namespace NetCoreForce.Client
         public async Task<T> HttpGetAsync<T>(Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
             //TODO: can this handle T = string?
-            try
-            {
-                return await HttpAsync<T>(uri, HttpMethod.Get, null, customHeaders, deserializeResponse);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return await HttpAsync<T>(uri, HttpMethod.Get, null, customHeaders, deserializeResponse);
         }
 
         public async Task<T> HttpPostAsync<T>(object inputObject, Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
             var json = JsonSerializer.SerializeForCreate(inputObject);
 
-            try
-            {
-                var content = new StringContent(json, Encoding.UTF8, JsonMimeType);
+            var content = new StringContent(json, Encoding.UTF8, JsonMimeType);
 
-                HttpRequestMessage request = new HttpRequestMessage();
-                request.Headers.Authorization = _authHeaderValue;
-                request.RequestUri = uri;
-                request.Method = HttpMethod.Post;
-                request.Content = content;
+            HttpRequestMessage request = new HttpRequestMessage();
+            request.Headers.Authorization = _authHeaderValue;
+            request.RequestUri = uri;
+            request.Method = HttpMethod.Post;
+            request.Content = content;
 
-                return await GetResponse<T>(request, customHeaders, deserializeResponse);
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return await GetResponse<T>(request, customHeaders, deserializeResponse);
         }
 
         /// <summary>
@@ -112,68 +97,47 @@ namespace NetCoreForce.Client
         /// <returns></returns>
         public async Task<T> HttpPatchAsync<T>(object inputObject, Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true, bool serializeComplete = false, bool includeSObjectId = false)
         {
-            try
+            string json;
+            if (serializeComplete)
             {
-                string json;
-                if (serializeComplete)
-                {
-                    json = JsonSerializer.SerializeComplete(inputObject, false);
-                }
-                else if (includeSObjectId)
-                {
-                    json = JsonSerializer.SerializeForUpdateWithObjectId(inputObject);
-                }
-                else
-                {
-                    json = JsonSerializer.SerializeForUpdate(inputObject);
-                }
-
-                var content = new StringContent(json, Encoding.UTF8, JsonMimeType);
-
-                return await HttpAsync<T>(uri, new HttpMethod("PATCH"), content, customHeaders, deserializeResponse);
+                json = JsonSerializer.SerializeComplete(inputObject, false);
             }
-            catch (Exception ex)
+            else if (includeSObjectId)
             {
-                throw ex;
+                json = JsonSerializer.SerializeForUpdateWithObjectId(inputObject);
             }
+            else
+            {
+                json = JsonSerializer.SerializeForUpdate(inputObject);
+            }
+
+            var content = new StringContent(json, Encoding.UTF8, JsonMimeType);
+
+            return await HttpAsync<T>(uri, new HttpMethod("PATCH"), content, customHeaders, deserializeResponse);
         }
 
         public async Task<T> HttpDeleteAsync<T>(Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
-            try
-            {
-                HttpRequestMessage request = new HttpRequestMessage();
-                request.Headers.Authorization = _authHeaderValue;
-                request.RequestUri = uri;
-                request.Method = HttpMethod.Delete;
+            HttpRequestMessage request = new HttpRequestMessage();
+            request.Headers.Authorization = _authHeaderValue;
+            request.RequestUri = uri;
+            request.Method = HttpMethod.Delete;
 
-                return await GetResponse<T>(request, customHeaders, deserializeResponse);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return await GetResponse<T>(request, customHeaders, deserializeResponse);
         }
 
         private async Task<T> HttpAsync<T>(Uri uri, HttpMethod httpMethod, HttpContent content = null, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
-            try
+            HttpRequestMessage request = new HttpRequestMessage();
+            request.Headers.Authorization = _authHeaderValue;
+            request.RequestUri = uri;
+            request.Method = httpMethod;
+            if (content != null)
             {
-                HttpRequestMessage request = new HttpRequestMessage();
-                request.Headers.Authorization = _authHeaderValue;
-                request.RequestUri = uri;
-                request.Method = httpMethod;
-                if (content != null)
-                {
-                    request.Content = content;
-                }
+                request.Content = content;
+            }
 
-                return await GetResponse<T>(request, customHeaders, deserializeResponse);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return await GetResponse<T>(request, customHeaders, deserializeResponse);
         }
 
         /// <summary>
@@ -298,9 +262,9 @@ namespace NetCoreForce.Client
                         throw new ForceApiException(msg, errors, responseMessage.StatusCode);
                     }
                 }
-                catch (ForceApiException ex)
+                catch (ForceApiException)
                 {
-                    throw ex;
+                    throw;
                 }
                 catch (Exception ex)
                 {
