@@ -10,11 +10,7 @@ namespace NetCoreForce.Client
         /// </summary>
         public static string ToSfDateString(this DateTimeOffset value)
         {
-            if (value != null)
-            {
-                return value.ToString("yyyy-MM-ddTHH:mm:sszzz");
-            }
-            return null;
+            return value.ToString("yyyy-MM-ddTHH:mm:sszzz");
         }
 
         /// <summary>
