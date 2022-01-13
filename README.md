@@ -10,7 +10,7 @@ CI main:
 CI dev:  
 [![](https://github.com/anthonyreilly/NetCoreForce/workflows/CI/badge.svg?branch=dev)](https://github.com/anthonyreilly/NetCoreForce/actions?query=workflow%3ACI+branch%3Adev)  
 
-NetCoreForce v3 currently targeting netstandard 2.0 & 2.1, supports .NET Core 2.1 & 3.1 apps.
+NetCoreForce v3 currently targeting netstandard 2.0 & 2.1, supports .NET Core 2.1,3.1, and 6.0 apps.
 
 For .NET Core 1.x support, use NetCoreForce v2.7
 
