@@ -7,7 +7,6 @@
 
     <!-- Targets -->
     <LangVersion>8.0</LangVersion>
-    <LibTargetFrameworks>netstandard2.0;netstandard2.1</LibTargetFrameworks>
 
     <!--NuGet-->
     <Authors>Anthony Reilly</Authors>
@@ -26,11 +25,13 @@
 
   <!-- Targets -->
   <PropertyGroup Condition="!$([MSBuild]::IsOSPlatform('OSX'))">
+    <LibTargetFrameworks>netstandard2.0;netstandard2.1;net6.0</LibTargetFrameworks>
     <AppTargetFrameworks>netcoreapp2.1;netcoreapp3.1;net6.0</AppTargetFrameworks>
     <TestTargetFrameworks>netcoreapp2.1;netcoreapp3.1;net6.0</TestTargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+    <LibTargetFrameworks>netstandard2.0;netstandard2.1;net6.0</LibTargetFrameworks>
     <AppTargetFrameworks>net6.0</AppTargetFrameworks>
     <TestTargetFrameworks>net6.0</TestTargetFrameworks>
   </PropertyGroup>
