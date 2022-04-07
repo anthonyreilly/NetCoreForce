@@ -256,7 +256,7 @@ namespace NetCoreForce.Client
                         }
                         catch (Exception ex)
                         {
-                            msg += string.Format(" Unable to parse error details: {0}" + ex.Message);
+                            msg += string.Format(" Unable to parse error details: {0}", ex.Message);
                         }
 
                         throw new ForceApiException(msg, errors, responseMessage.StatusCode);
