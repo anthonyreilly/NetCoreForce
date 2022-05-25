@@ -428,14 +428,14 @@ namespace NetCoreForce.Client
         /// <exception cref="ForceApiException">Thrown when update fails</exception>
         public async Task<List<UpdateMultipleResponse>> UpdateRecords(List<SObject> sObjects, bool allOrNone = false, Dictionary<string, string> customHeaders = null)
         {
-            if(sObjects == null)
+            if (sObjects == null)
             {
                 throw new ArgumentNullException("sObjects");
             }
 
-            foreach(SObject sObject in sObjects)
+            foreach (SObject sObject in sObjects)
             {
-                if(sObject.Attributes == null || string.IsNullOrEmpty(sObject.Attributes.Type))
+                if (sObject.Attributes == null || string.IsNullOrEmpty(sObject.Attributes.Type))
                 {
                     throw new ForceApiException("Objects are missing Type property in Attributes map");
                 }
@@ -460,7 +460,59 @@ namespace NetCoreForce.Client
             UpdateMultipleRequest updateMultipleRequest = new UpdateMultipleRequest(sObjects, allOrNone);
 
             return await client.HttpPatchAsync<List<UpdateMultipleResponse>>(updateMultipleRequest, uri, headers, includeSObjectId: true);
-            
+
+        }
+
+        /// <summary>
+        /// Update multiple records based on external field id
+        /// The list can contain up to 200 objects.
+        /// The list can contain objects of different types, including custom objects.
+        /// Each object must contain an attributes map. The map must contain a value for type.
+        /// Each object must contain the external field id
+        /// </summary>
+        /// <param name="sObjectTypeName">SObject name, e.g. "Account"</param>
+        /// <param name="sObjects">Objects to update</param>
+        /// <param name="fieldName">External ID field name</param>
+        /// <param name="allOrNone">Optional. Indicates whether to roll back the entire request when the update of any object fails (true) or to continue with the independent update of other objects in the request. The default is false.</param>
+        /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
+        /// <returns>List of UpdateMultipleResponse objects, includes response for each object (id, success, errors)</returns>
+        /// <exception cref="ArgumentException">Thrown when missing required information</exception>
+        /// <exception cref="ForceApiException">Thrown when update fails</exception>
+        public async Task<List<UpdateMultipleResponse>> UpdateRecords(string sObjectTypeName, List<SObject> sObjects, string fieldName, bool allOrNone = false, Dictionary<string, string> customHeaders = null)
+        {
+            if (sObjects == null)
+            {
+                throw new ArgumentNullException("sObjects");
+            }
+
+            foreach (SObject sObject in sObjects)
+            {
+                if (sObject.Attributes == null || string.IsNullOrEmpty(sObject.Attributes.Type))
+                {
+                    throw new ForceApiException("Objects are missing Type property in Attributes map");
+                }
+            }
+
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+
+            //Add call options
+            Dictionary<string, string> callOptions = HeaderFormatter.SforceCallOptions(ClientName);
+            headers.AddRange(callOptions);
+
+            //Add custom headers if specified
+            if (customHeaders != null)
+            {
+                headers.AddRange(customHeaders);
+            }
+
+            var uri = UriFormatter.SObjectsComposite(InstanceUrl, ApiVersion, sObjectTypeName, fieldName);
+
+            JsonClient client = new JsonClient(AccessToken, _httpClient);
+
+            UpdateMultipleRequest updateMultipleRequest = new UpdateMultipleRequest(sObjects, allOrNone);
+
+            return await client.HttpPatchAsync<List<UpdateMultipleResponse>>(updateMultipleRequest, uri, headers);
+
         }
 
         /// <summary>
@@ -513,7 +565,7 @@ namespace NetCoreForce.Client
             return;
         }
 
-#region metadata
+        #region metadata
 
         /// <summary>
         /// Lists information about limits in your org.
@@ -621,7 +673,7 @@ namespace NetCoreForce.Client
             return await client.HttpGetAsync<DescribeGlobal>(uri);
         }
 
-#endregion
+        #endregion
 
     }
 }

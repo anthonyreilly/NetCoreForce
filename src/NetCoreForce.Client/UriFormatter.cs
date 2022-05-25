@@ -181,6 +181,30 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
+        /// SObject Composite
+        /// Used for: Update multiple by external field
+        /// </summary>
+        /// <param name="instanceUrl">SFDC instance URL, e.g. "https://na99.salesforce.com"</param>
+        /// <param name="apiVersion">SFDC API version, e.g. "v41.0"</param>
+        /// <param name="sObjectName"></param>
+        /// <param name="fieldName"></param>
+        /// <returns></returns>
+        public static Uri SObjectsComposite(string instanceUrl, string apiVersion, string sObjectName, string fieldName)
+        {
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
+            if (string.IsNullOrEmpty(fieldName)) throw new ArgumentNullException("fieldName");
+
+            //format: /vXX.X/composite/sobjects/SObjectName/fieldName
+
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/composite/sobjects/{sObjectName}/{fieldName}");
+
+            return uri;
+        }
+
+
+        /// <summary>
         /// SObject Rows by External ID
         /// Creates new records or updates existing records (upserts records) based on the value of a specified external ID field.
         /// </summary>
@@ -217,7 +241,7 @@ namespace NetCoreForce.Client
             Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/sobjects/{sObjectName}/{objectId}/{blobField}");
 
             return uri;
-        }        
+        }
 
         /// <summary>
         /// SOQL Query
@@ -303,7 +327,7 @@ namespace NetCoreForce.Client
             if (!string.IsNullOrEmpty(state))
             {
                 prms.Add("state", state);
-            }            
+            }
 
             string url = QueryHelpers.AddQueryString(loginUrl, prms);
 
@@ -355,7 +379,7 @@ namespace NetCoreForce.Client
             if (!string.IsNullOrEmpty(state))
             {
                 prms.Add("state", state);
-            }            
+            }
 
             string url = QueryHelpers.AddQueryString(loginUrl, prms);
 
@@ -373,21 +397,21 @@ namespace NetCoreForce.Client
         public static Uri RefreshTokenUrl(
             string tokenRefreshUrl,
             string refreshToken,
-            string clientId,            
+            string clientId,
             string clientSecret = "")
         {
             if (tokenRefreshUrl == null) throw new ArgumentNullException("tokenRefreshUrl");
             if (refreshToken == null) throw new ArgumentNullException("refreshToken");
-            if (clientId == null) throw new ArgumentNullException("clientId");            
+            if (clientId == null) throw new ArgumentNullException("clientId");
 
             Dictionary<string, string> prms = new Dictionary<string, string>();
             prms.Add("grant_type", "refresh_token");
             prms.Add("refresh_token", refreshToken);
             prms.Add("client_id", clientId);
-            if(!string.IsNullOrEmpty(clientSecret))
+            if (!string.IsNullOrEmpty(clientSecret))
             {
                 prms.Add("client_secret", clientSecret);
-            }            
+            }
             prms.Add("format", "json");
 
             string url = QueryHelpers.AddQueryString(tokenRefreshUrl, prms);
