@@ -181,6 +181,27 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
+        /// sObject Tree
+        /// Used for: Create multiple
+        /// </summary>
+        /// <param name="instanceUrl">SFDC instance URL, e.g. "https://na99.salesforce.com"</param>
+        /// <param name="apiVersion">SFDC API version, e.g. "v41.0"</param>
+        /// <param name="sObjectName">sObject name, e.g. "Account"</param>
+        /// <returns></returns>
+        public static Uri SObjectTree(string instanceUrl, string apiVersion, string sObjectName)
+        {
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
+
+            //format: /vXX.X/composite/tree/sObjectName
+
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/composite/tree/{sObjectName}");
+
+            return uri;
+        }
+
+        /// <summary>
         /// SObject Rows by External ID
         /// Creates new records or updates existing records (upserts records) based on the value of a specified external ID field.
         /// </summary>

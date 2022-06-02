@@ -382,6 +382,70 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
+        /// Create mlutiple records
+        /// </summary>
+        /// <param name="sObjectTypeName">SObject name, e.g. "Account"</param>
+        /// <param name="sObjects">Objects to create. Each sObject must have the entity type and reference id in the attributes property object.</param>
+        /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
+        /// <param name="autoFillAttributes">Automatically create attribute object property, reference Id will be the zero-based index of the array</param>
+        /// <returns>SObjectTreeResponse object, includes new object IDs, and errors if any</returns>
+        /// <exception cref="ForceApiException">Thrown when creation fails</exception>
+        public async Task<SObjectTreeResponse> CreateMultipleRecords(string sObjectTypeName, List<SObject> sObjects, bool autoFillAttributes = true, Dictionary<string, string> customHeaders = null)
+        {
+            if(sObjects == null)
+            {
+                throw new ArgumentNullException("sObjects");
+            }
+
+            if(sObjects.Count > 200)
+            {
+                throw new ForceApiException($"A maximum of 200 records can be created in a single request - request included {sObjects.Count} records.");
+            }
+
+            if(autoFillAttributes)
+            {
+                for(int i = 0; i < sObjects.Count; i++)
+                {
+                    sObjects[i].Attributes = new SObjectAttributes()
+                    {
+                        ReferenceId = i.ToString(),
+                        Type = sObjectTypeName
+                    };
+                }
+            }
+            else
+            {
+                foreach(SObject obj in sObjects)
+                {
+                    if(obj.Attributes == null || string.IsNullOrEmpty(obj.Attributes.ReferenceId) || string.IsNullOrEmpty(obj.Attributes.Type))
+                    {
+                        throw new ArgumentException("All objects in request must include a reference id and sObject type name in the attributes");
+                    }
+                }
+            }
+
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+
+            //Add call options
+            Dictionary<string, string> callOptions = HeaderFormatter.SforceCallOptions(ClientName);
+            headers.AddRange(callOptions);
+
+            //Add custom headers if specified
+            if (customHeaders != null)
+            {
+                headers.AddRange(customHeaders);
+            }
+
+            var uri = UriFormatter.SObjectTree(InstanceUrl, ApiVersion, sObjectTypeName);
+
+            JsonClient client = new JsonClient(AccessToken, _httpClient);
+
+            SObjectTreeRequest treeRequest = new SObjectTreeRequest(sObjects);
+
+            return await client.HttpPostAsync<SObjectTreeResponse>(treeRequest, uri, headers);
+        }
+
+        /// <summary>
         /// Updates
         /// </summary>
         /// <param name="sObjectTypeName">SObject name, e.g. "Account"</param>
@@ -471,9 +535,9 @@ namespace NetCoreForce.Client
         /// <param name="fieldValue">External ID field value</param>
         /// <param name="sObject">Object to update</param>
         /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
-        /// <returns>CreateResponse object, includes new object's ID if record was created and no value if object was updated</returns>
+        /// <returns>InsertOrUpdateResponse object, includes new object's ID if record was created and no value if object was updated</returns>
         /// <exception cref="ForceApiException">Thrown when request fails</exception>
-        public async Task<CreateResponse> InsertOrUpdateRecord<T>(string sObjectTypeName, string fieldName, string fieldValue, T sObject, Dictionary<string, string> customHeaders = null)
+        public async Task<InsertOrUpdateResponse> InsertOrUpdateRecord<T>(string sObjectTypeName, string fieldName, string fieldValue, T sObject, Dictionary<string, string> customHeaders = null)
         {
             Dictionary<string, string> headers = new Dictionary<string, string>();
 
@@ -491,7 +555,7 @@ namespace NetCoreForce.Client
 
             JsonClient client = new JsonClient(AccessToken, _httpClient);
 
-            return await client.HttpPatchAsync<CreateResponse>(sObject, uri, headers);
+            return await client.HttpPatchAsync<InsertOrUpdateResponse>(sObject, uri, headers);
         }
 
         /// <summary>

@@ -66,6 +66,14 @@ namespace NetCoreForce.Client.Tests
         }
 
         [Fact]
+        public void SObjectTree()
+        {
+            string result = UriFormatter.SObjectTree("https://xxx.salesforce.com", "v41.0", "Account").AbsoluteUri;
+
+            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/composite/tree/Account", result);
+        }
+
+        [Fact]
         public void SObjectBasicInformation()
         {
             string result = UriFormatter.SObjectBasicInformation("https://xxx.salesforce.com", "v41.0", "Account").AbsoluteUri;

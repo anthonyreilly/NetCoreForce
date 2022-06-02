@@ -234,6 +234,21 @@ namespace NetCoreForce.Client
                     }
                     else
                     {
+                        try
+                        {
+                            // Check if error response is from tree request
+                            if (typeof(T) == typeof(SObjectTreeResponse))
+                            {
+                                T errorReponse = JsonConvert.DeserializeObject<T>(responseContent);
+                                return errorReponse;
+                            }
+                        }
+                        catch
+                        {   
+                            // swallow error and continue to parse as generic error response instead
+                        }                       
+
+                        // Parse generic API error response
                         string msg = string.Format("Unable to complete request, Salesforce API returned {0}.", responseMessage.StatusCode.ToString());
 
                         List<ErrorResponse> errors = null;

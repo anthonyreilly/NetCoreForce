@@ -24,18 +24,18 @@ namespace NetCoreForce.Client
         private const string TokenRequestEndpointUrl = "https://login.salesforce.com/services/oauth2/token";
         private readonly HttpClient _httpClient;
 
-
         /// <summary>
-        /// Initialize the AuthenticationClient with the libary's default Salesforce API version
+        /// Initialize the AuthenticationClient with the libary's default Salesforce API version, and default HttpClient
         /// <para>See the DefaultApiVersion property</para>
         /// </summary>
-        public AuthenticationClient() : this(null) { }
+        public AuthenticationClient() : this(null, null) { }
 
         /// <summary>
-        /// Initialize the AuthenticationClient with the specified Salesforce API version
+        /// Initialize the AuthenticationClient with the specified Salesforce API version and/or HttpClient
         /// </summary>
         /// <param name="apiVersion">Target Salesforce API version</param>
-        public AuthenticationClient(string apiVersion)
+        /// <param name="httpClient">Custom HttpClient (Optional)</param>
+        public AuthenticationClient(string apiVersion = null, HttpClient httpClient = null)
         {
             if (!string.IsNullOrEmpty(apiVersion))
             {
@@ -46,7 +46,7 @@ namespace NetCoreForce.Client
                 ApiVersion = DefaultApiVersion;
             }
 
-            _httpClient = new HttpClient();
+            _httpClient = httpClient ?? new HttpClient();
         }
 
         /// <summary>
