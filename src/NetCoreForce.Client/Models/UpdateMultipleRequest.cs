@@ -32,4 +32,24 @@ namespace NetCoreForce.Client.Models
         [JsonProperty(PropertyName = "allOrNone")]
         public bool AllOrNone { get; set; }
     }
+
+    public class InsertMultipleRequest
+    {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="records"></param>
+        public InsertMultipleRequest(List<SObject> records)
+        {
+            Records = records;
+        }
+
+        /// <summary>
+        /// Required. A list of sObjects. In a POST request using sObject Collections,
+        /// set the type attribute for each object, but don’t set the id field for any object.
+        /// </summary>
+        [JsonProperty(PropertyName = "records")]
+        public List<SObject> Records { get; set; }
+
+    }
 }

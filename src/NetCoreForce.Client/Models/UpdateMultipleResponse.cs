@@ -37,4 +37,28 @@ namespace NetCoreForce.Client.Models
         [JsonProperty(PropertyName = "fields")]
         public List<string> Fields { get; set; }
     }
+
+    public class InsertMultipleResponse
+    {
+        /// <summary>
+        /// results
+        /// </summary>
+        [JsonProperty(PropertyName = "hasErrors")]
+        public bool HasErrors { get; set; }
+        /// <summary>
+        /// results
+        /// </summary>
+        [JsonProperty(PropertyName = "results")]
+        public List<InsertMultipleResult> Results { get; set; }
+    }
+
+    public class InsertMultipleResult
+    {
+        [JsonProperty(PropertyName = "referenceId")]
+        public string ReferenceId { get; set; }
+
+        [JsonProperty(PropertyName = "id")]
+        public string Id { get; set; }
+    }
+
 }
