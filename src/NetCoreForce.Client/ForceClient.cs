@@ -597,14 +597,15 @@ namespace NetCoreForce.Client
         /// <para>Use the SObject Describe resource to retrieve all the metadata for an object, including information about each field, URLs, and child relationships.</para>
         /// </summary>
         /// <param name="objectTypeName">SObject name, e.g. Account</param>
+        /// <param name="customHeaders">Example If-Modified-Since: Wed, 3 Jul 2013 19:43:31 GMT</param>
         /// <returns>Returns SObjectMetadataAll with full object meta including field metadata</returns>
-        public async Task<SObjectDescribeFull> GetObjectDescribe(string objectTypeName)
+        public async Task<SObjectDescribeFull> GetObjectDescribe(string objectTypeName, Dictionary<string, string> customHeaders = null)
         {
             var uri = UriFormatter.SObjectDescribe(InstanceUrl, ApiVersion, objectTypeName);
 
             JsonClient client = new JsonClient(AccessToken, _httpClient);
 
-            return await client.HttpGetAsync<SObjectDescribeFull>(uri);
+            return await client.HttpGetAsync<SObjectDescribeFull>(uri, customHeaders);
         }
 
         /// <summary>
