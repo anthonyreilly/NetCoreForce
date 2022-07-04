@@ -69,6 +69,47 @@ namespace NetCoreForce.Client
             return await HttpAsync<T>(uri, HttpMethod.Get, null, customHeaders, deserializeResponse);
         }
 
+        public async Task<Stream> HttpGetStreamAsync(Uri uri, Dictionary<string, string> customHeaders = null)
+        {
+            HttpRequestMessage request = new HttpRequestMessage();
+            request.Headers.Authorization = _authHeaderValue;
+            request.RequestUri = uri;
+            request.Method = HttpMethod.Get;
+            if (customHeaders != null && customHeaders.Count > 0)
+            {
+                foreach (KeyValuePair<string, string> header in customHeaders)
+                {
+                    request.Headers.Add(header.Key, header.Value);
+                }
+            }
+
+            HttpResponseMessage responseMessage = null;
+            try
+            {
+                responseMessage = await SharedHttpClient.SendAsync(request).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                string errMsg = "Error sending HTTP request:" + ex.Message;
+                if (ex.InnerException != null && !string.IsNullOrEmpty(ex.InnerException.Message))
+                {
+                    errMsg += " " + ex.InnerException.Message;
+                }
+                Debug.WriteLine(errMsg);
+                throw new ForceApiException(errMsg);
+            }
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return await responseMessage.Content.ReadAsStreamAsync();
+            }
+            else
+            {
+                throw new ForceApiException(string.Format("Error processing response: returned {0} for {1}", responseMessage.ReasonPhrase, request.RequestUri.ToString()));
+
+            }
+        }
+
         public async Task<T> HttpPostAsync<T>(object inputObject, Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
             var json = JsonSerializer.SerializeForCreate(inputObject);
@@ -186,7 +227,6 @@ namespace NetCoreForce.Client
                 Debug.WriteLine(string.Format("{0}: {1}", SforceLimitInfoHeaderName, limitValues.FirstOrDefault() ?? "none"));
             }
 #endif
-
             if (responseMessage.StatusCode == HttpStatusCode.NoContent)
             {
                 return JsonConvert.DeserializeObject<T>(string.Empty);
@@ -202,6 +242,7 @@ namespace NetCoreForce.Client
             {
                 try
                 {
+
                     string responseContent = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                     if (responseMessage.IsSuccessStatusCode)
@@ -261,6 +302,7 @@ namespace NetCoreForce.Client
 
                         throw new ForceApiException(msg, errors, responseMessage.StatusCode);
                     }
+
                 }
                 catch (ForceApiException)
                 {

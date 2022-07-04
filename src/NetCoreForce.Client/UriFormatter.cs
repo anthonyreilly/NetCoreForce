@@ -106,6 +106,22 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
+        /// VersionData for  given version Id
+        /// Can be used to retrieve the stream associated to a contentversion
+        /// </summary>
+        public static Uri ContentVersion(string instanceUrl, string apiVersion, string versionId)
+        {
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+            if (string.IsNullOrEmpty(versionId)) throw new ArgumentNullException("versionId");
+
+
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/sobjects/ContentVersion/{versionId}/VersionData");
+
+            return uri;
+        }
+
+        /// <summary>
         /// SObject Describe
         /// Completely describes the individual metadata at all levels for the specified object.
         /// </summary>

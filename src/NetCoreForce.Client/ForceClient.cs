@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -721,6 +722,20 @@ namespace NetCoreForce.Client
             JsonClient client = new JsonClient(AccessToken, _httpClient);
 
             return await client.HttpGetAsync<DescribeGlobal>(uri);
+        }
+
+        /// <summary>
+        /// Returns a stream with the given content version
+        /// </summary>
+        /// <param name="versionId"></param>
+        /// <returns></returns>
+        public async Task<Stream> GetContentVersionAsync(string versionId)
+        {
+            var uri = UriFormatter.ContentVersion(InstanceUrl, ApiVersion, versionId);
+
+            JsonClient client = new JsonClient(AccessToken, _httpClient);
+
+            return await client.HttpGetStreamAsync(uri);
         }
 
         #endregion
