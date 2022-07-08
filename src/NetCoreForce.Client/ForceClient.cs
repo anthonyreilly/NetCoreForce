@@ -465,6 +465,43 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
+        /// Delete multiple reocrds.
+        /// The list can contain up to 200 ids.
+        /// </summary>
+        /// <param name="allOrNone">Optional. Indicates whether to roll back the entire request when the update of any object fails (true) or to continue with the independent update of other objects in the request. The default is false.</param>
+        /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
+        /// <returns>List of UpdateMultipleResponse objects, includes response for each object (id, success, errors)</returns>
+        /// <exception cref="ArgumentException">Thrown when missing required information</exception>
+        /// <exception cref="ForceApiException">Thrown when update fails</exception>
+        public async Task<List<UpdateMultipleResponse>> DeleteRecords(IEnumerable<string> ids, bool allOrNone = false, Dictionary<string, string> customHeaders = null)
+        {
+            if (ids == null)
+            {
+                throw new ArgumentNullException("ids");
+            }
+
+
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+
+            //Add call options
+            Dictionary<string, string> callOptions = HeaderFormatter.SforceCallOptions(ClientName);
+            headers.AddRange(callOptions);
+
+            //Add custom headers if specified
+            if (customHeaders != null)
+            {
+                headers.AddRange(customHeaders);
+            }
+
+            var uri = UriFormatter.SObjectsCompositeDelete(InstanceUrl, ApiVersion, ids);
+
+            JsonClient client = new JsonClient(AccessToken, _httpClient);
+
+            return await client.HttpDeleteAsync<List<UpdateMultipleResponse>>(uri, headers);
+
+        }
+
+        /// <summary>
         /// Insert multiple reocrds.
         /// The list can contain up to 200 objects.
         /// Each object must contain an attributes map. The map must contain a value for type.

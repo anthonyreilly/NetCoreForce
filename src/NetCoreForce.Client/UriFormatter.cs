@@ -218,6 +218,28 @@ namespace NetCoreForce.Client
 
         /// <summary>
         /// SObject Composite
+        /// Used for: Delete multiple
+        /// </summary>
+        /// <param name="instanceUrl">SFDC instance URL, e.g. "https://na99.salesforce.com"</param>
+        /// <param name="apiVersion">SFDC API version, e.g. "v41.0"</param>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public static Uri SObjectsCompositeDelete(string instanceUrl, string apiVersion, IEnumerable<string> ids)
+        {
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+
+            //format: /vXX.X/composite/sobjects
+
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/composite/sobjects");
+
+            string uriwithIds = QueryHelpers.AddQueryString(uri.ToString(), "ids", string.Join(",", ids));
+
+            return new Uri(uriwithIds);
+        }
+
+        /// <summary>
+        /// SObject Composite
         /// Used for: Update multiple by external field
         /// </summary>
         /// <param name="instanceUrl">SFDC instance URL, e.g. "https://na99.salesforce.com"</param>
