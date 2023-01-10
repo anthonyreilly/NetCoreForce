@@ -13,6 +13,8 @@ namespace NetCoreForce.FunctionalTests
     {
         public AuthInfo AuthInfo { get; private set; }
 
+        private ForceClient _forceClient;
+
         public ForceClientFixture()
         {
             string filePath = null;
@@ -41,18 +43,36 @@ namespace NetCoreForce.FunctionalTests
 
         public async Task<ForceClient> GetForceClient(string proxyUrl = null)
         {
-            System.Net.Http.HttpClient proxyClient = null;
-
-            if(!string.IsNullOrEmpty(proxyUrl))
+            if (_forceClient == null)
             {
-                proxyClient  = HttpClientFactory.CreateHttpClient(true, proxyUrl);
-            }
+                System.Net.Http.HttpClient proxyClient = null;
 
-            AuthenticationClient auth = new AuthenticationClient();
-            await auth.UsernamePasswordAsync(AuthInfo.ClientId, AuthInfo.ClientSecret,
-                    AuthInfo.Username, AuthInfo.Password, AuthInfo.TokenRequestEndpoint);
-            ForceClient client = new ForceClient(auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken, proxyClient);
-            return client;
+                if (!string.IsNullOrEmpty(proxyUrl))
+                {
+                    proxyClient = HttpClientFactory.CreateHttpClient(true, proxyUrl);
+                }
+
+                AuthenticationClient auth = new AuthenticationClient();
+                await auth.UsernamePasswordAsync(AuthInfo.ClientId, AuthInfo.ClientSecret,
+                        AuthInfo.Username, AuthInfo.Password, AuthInfo.TokenRequestEndpoint);
+                _forceClient = new ForceClient(auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken, proxyClient);
+            }
+            return _forceClient;
+        }
+
+        /// <summary>
+        /// Create and retreive sObject - to test any changes to object after creation and storage in SF
+        /// </summary>
+        /// <param name="sObjectTypeName"></param>
+        /// <param name="sObject"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public async Task<T> CreateAndRetrieveRecord<T>(string sObjectTypeName, T sObject)
+        {
+            ForceClient client = await GetForceClient();
+            CreateResponse createResp = await client.CreateRecord<T>(sObjectTypeName, sObject);
+            T retrievedObject = await client.GetObjectById<T>(sObjectTypeName, createResp.Id);
+            return retrievedObject;
         }
 
         public void Dispose()
