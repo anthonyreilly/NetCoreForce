@@ -7,6 +7,7 @@
     - see https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_composite_sobject_tree_flat.htm
 * feat: updated ExternalIdInsertAndUpdate to return new InsertOrUpdateResponse object that adds the Created flag
     - this includes a minor breaking change, as this method originally returned a CreateResponse object. Calls can be updated to use the InsertOrUpdateResponse object without any further breaking changes as it is inherited from the CreateResponse object.
+* fix: update Newtonsoft.json to v13 
 
 ### 2022-01-13 v3.1.0
 
