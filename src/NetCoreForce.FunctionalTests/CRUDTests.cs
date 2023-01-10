@@ -52,11 +52,11 @@ namespace NetCoreForce.FunctionalTests
             //delete
             await client.DeleteRecord(SfAccount.SObjectTypeName, newAccountId);
 
-            //use queryall to find deleted record
+            //use queryall to find deleted record?
         }
 
         [Fact]
-        public async Task CreateAnUpdateMultiple()
+        public async Task CreateAndUpdateMultiple()
         {
             ForceClient client = await forceClientFixture.GetForceClient();
 
@@ -90,7 +90,7 @@ namespace NetCoreForce.FunctionalTests
             firstAccount.Description = firstUpdatedDescription;
             secondAccount.Description = secondUpdatedDescription;
 
-            List<UpdateMultipleResponse> responses = await client.UpdateRecords(new List<SObject>() { firstAccount, secondAccount }, true);
+            List<UpsertResponse> responses = await client.UpdateRecords(new List<SObject>() { firstAccount, secondAccount }, true);
             Assert.True(responses.All(r => r.Success), "Failed to update multiple objects");
 
             //get newly updated objects
@@ -104,8 +104,45 @@ namespace NetCoreForce.FunctionalTests
             //delete
             await client.DeleteRecord(SfAccount.SObjectTypeName, firstAccountId);
             await client.DeleteRecord(SfAccount.SObjectTypeName, secondNewAccountId);
+        }
 
-            //use queryall to find deleted record
+        [Fact]
+        public async Task CreateMultiple()
+        {
+            ForceClient client = await forceClientFixture.GetForceClient();
+
+            //create new objects
+            SfAccount firstAccount = new SfAccount() { };
+            string firstAccountRefId = Guid.NewGuid().ToString();
+            string firstAccountName = string.Format("Test Object refId {0}", firstAccountRefId);
+            firstAccount.Name = firstAccountName;
+            // firstAccount.Attributes = new SObjectAttributes() { ReferenceId = firstAccountRefId };
+            // firstAccount.Attributes.ReferenceId = firstAccountRefId;
+
+            SfAccount secondAccount = new SfAccount();
+            string secondAccountRefId = Guid.NewGuid().ToString();
+            string secondAccountName = string.Format("Test Object refId {0}", secondAccountRefId);
+            secondAccount.Name = secondAccountName;
+            // secondAccount.Attributes = new SObjectAttributes() { ReferenceId = secondAccountRefId };
+            // secondAccount.Attributes.ReferenceId = secondAccountRefId;
+
+            List<SObject> objects = new List<SObject>() { firstAccount, secondAccount };
+
+            SObjectTreeResponse response = await client.CreateMultipleRecords(SfAccount.SObjectTypeName, objects);
+
+            Assert.True(response.HasErrors == "false", "Create multiple failed");
+            Assert.True(response.Results.All(r => r.Errors == null), "Create multiple failed");
+
+            // get newly created objects
+            SfAccount firstCreatedAccount = await client.GetObjectById<SfAccount>(SfAccount.SObjectTypeName, response.Results[0].Id);
+            SfAccount secondCreatedAccount = await client.GetObjectById<SfAccount>(SfAccount.SObjectTypeName, response.Results[1].Id);
+            Assert.True(firstCreatedAccount != null && secondCreatedAccount != null, "Failed to retrieve multiple updated objects");
+            Assert.Equal(firstAccountName, firstCreatedAccount.Name);
+            Assert.Equal(secondAccountName, secondCreatedAccount.Name);
+
+            //delete
+            await client.DeleteRecord(SfAccount.SObjectTypeName, firstCreatedAccount.Id);
+            await client.DeleteRecord(SfAccount.SObjectTypeName, secondCreatedAccount.Id);
         }
     }
 }

@@ -203,13 +203,53 @@ namespace NetCoreForce.Client
 
         /// <summary>
         /// SObject Rows by External ID
-        /// Creates new records or updates existing records (upserts records) based on the value of a specified external ID field.
+        /// Used for:
+        /// Retrieve Records Using sObject Rows by External ID
+        /// Upsert Records Using sObject Rows by External ID
+        /// Delete Records Using sObject Rows by External ID
+        /// Return Headers Using sObject Rows by External ID 
         /// </summary>
+        /// <param name="instanceUrl">SFDC instance URL, e.g. "https://na99.salesforce.com"</param>
+        /// <param name="apiVersion">SFDC API version, e.g. "v41.0"</param>
+        /// <param name="sObjectName">sObject name, e.g. "Account"</param>
+        /// <param name="fieldName"></param>
+        /// <param name="fieldValue"></param>
+        /// <returns></returns>
         public static Uri SObjectRowsByExternalId(string instanceUrl, string apiVersion, string sObjectName, string fieldName, string fieldValue)
         {
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
+            if (string.IsNullOrEmpty(fieldName)) throw new ArgumentNullException("fieldName");
+            if (string.IsNullOrEmpty(fieldName)) throw new ArgumentNullException("fieldValue");
+
             //format: /vXX.X/sobjects/SObjectName/fieldName/fieldValue
 
             Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/sobjects/{sObjectName}/{fieldName}/{fieldValue}");
+
+            return uri;
+        }
+
+        /// <summary>
+        /// SObjectCollections Upsert
+        /// </summary>
+        /// <param name="instanceUrl">SFDC instance URL, e.g. "https://na99.salesforce.com"</param>
+        /// <param name="apiVersion">SFDC API version, e.g. "v41.0"</param>
+        /// <param name="sObjectName">sObject name, e.g. "Account"</param>
+        /// <param name="fieldName"></param>
+        /// <returns></returns>
+        public static Uri SObjectCollectionsUpsert(string instanceUrl, string apiVersion, string sObjectName, string fieldName)
+        {
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
+            if (string.IsNullOrEmpty(fieldName)) throw new ArgumentNullException("fieldName");
+
+            //format: /vXX.X/sobjects/SObjectName/fieldName/fieldValue
+
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/sobjects/{sObjectName}/{fieldName}");
 
             return uri;
         }

@@ -1,11 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+
+using Newtonsoft.Json;
 
 namespace NetCoreForce.Client.Models
 {
     /// <summary>
-    /// Success response after creating new record
+    /// Upsert Result
     /// </summary>
-    public class InsertOrUpdateResponse : CreateResponse
+    public class UpsertResponse: CreateResponse
     {
         /// <summary>
         /// Whether or not the object was created, as part of an Insert or Update action
@@ -15,4 +18,3 @@ namespace NetCoreForce.Client.Models
         public bool Created { get; set; }
     }
 }
-

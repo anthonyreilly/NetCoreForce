@@ -5,14 +5,14 @@ using Newtonsoft.Json;
 
 namespace NetCoreForce.Client.Models
 {
-    public class UpdateMultipleRequest
+    public class UpsertRequest
     {
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="records"></param>
         /// <param name="allOrNone"></param>
-        public UpdateMultipleRequest(List<SObject> records, bool allOrNone = false)
+        public UpsertRequest(List<SObject> records, bool allOrNone = false)
         {
             Records = records;
             AllOrNone = allOrNone;

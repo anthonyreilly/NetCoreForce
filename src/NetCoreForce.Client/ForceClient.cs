@@ -487,10 +487,10 @@ namespace NetCoreForce.Client
         /// <param name="sObjects">Objects to update</param>
         /// <param name="allOrNone">Optional. Indicates whether to roll back the entire request when the update of any object fails (true) or to continue with the independent update of other objects in the request. The default is false.</param>
         /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
-        /// <returns>List of UpdateMultipleResponse objects, includes response for each object (id, success, errors)</returns>
+        /// <returns>List of UpsertResponse objects, includes response for each object (id, success, errors)</returns>
         /// <exception cref="ArgumentException">Thrown when missing required information</exception>
         /// <exception cref="ForceApiException">Thrown when update fails</exception>
-        public async Task<List<UpdateMultipleResponse>> UpdateRecords(List<SObject> sObjects, bool allOrNone = false, Dictionary<string, string> customHeaders = null)
+        public async Task<List<UpsertResponse>> UpdateRecords(List<SObject> sObjects, bool allOrNone = false, Dictionary<string, string> customHeaders = null)
         {
             if(sObjects == null)
             {
@@ -521,9 +521,9 @@ namespace NetCoreForce.Client
 
             JsonClient client = new JsonClient(AccessToken, _httpClient);
 
-            UpdateMultipleRequest updateMultipleRequest = new UpdateMultipleRequest(sObjects, allOrNone);
+            UpsertRequest upsertRequest = new UpsertRequest(sObjects, allOrNone);
 
-            return await client.HttpPatchAsync<List<UpdateMultipleResponse>>(updateMultipleRequest, uri, headers, includeSObjectId: true);
+            return await client.HttpPatchAsync<List<UpsertResponse>>(upsertRequest, uri, headers, includeSObjectId: true);
             
         }
 
@@ -535,9 +535,9 @@ namespace NetCoreForce.Client
         /// <param name="fieldValue">External ID field value</param>
         /// <param name="sObject">Object to update</param>
         /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
-        /// <returns>InsertOrUpdateResponse object, includes new object's ID if record was created and no value if object was updated</returns>
+        /// <returns>UpsertResponse object, includes new object's ID if record was created and no value if object was updated</returns>
         /// <exception cref="ForceApiException">Thrown when request fails</exception>
-        public async Task<InsertOrUpdateResponse> InsertOrUpdateRecord<T>(string sObjectTypeName, string fieldName, string fieldValue, T sObject, Dictionary<string, string> customHeaders = null)
+        public async Task<UpsertResponse> InsertOrUpdateRecord<T>(string sObjectTypeName, string fieldName, string fieldValue, T sObject, Dictionary<string, string> customHeaders = null)
         {
             Dictionary<string, string> headers = new Dictionary<string, string>();
 
@@ -555,7 +555,7 @@ namespace NetCoreForce.Client
 
             JsonClient client = new JsonClient(AccessToken, _httpClient);
 
-            return await client.HttpPatchAsync<InsertOrUpdateResponse>(sObject, uri, headers);
+            return await client.HttpPatchAsync<UpsertResponse>(sObject, uri, headers);
         }
 
         /// <summary>
