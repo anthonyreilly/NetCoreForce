@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using NetCoreForce.Client.Models;
@@ -594,7 +596,93 @@ namespace NetCoreForce.Client
             return;
         }
 
-#region metadata
+        const string blobUrlRegexString = @"^.+sobjects\/(\w+)\/(\w+)\/(\w+)$";
+        /// <summary>
+        /// Retrieve blob data at the specified URL.
+        /// Assumes a relative URL - If a full URL is used, the instance portion will be ignored.
+        /// </summary>
+        /// <param name="blobUrl">relative blob URL</param>
+        /// <returns>binary content stream</returns>
+        public async Task<Stream> BlobRetrieveStream(string blobUrl)
+        {
+            Regex regex = new Regex(blobUrlRegexString);
+            Match match = regex.Match(blobUrl);
+            if (!match.Success)
+            {
+                throw new ForceApiException("Unable to parse blob URL");
+            }
+
+            string sObjectTypeName = match.Groups[1].Value;
+            string objectId = match.Groups[2].Value;
+            string blobField = match.Groups[3].Value;
+
+            return await BlobRetrieveStream(sObjectTypeName, objectId, blobField);
+        }
+
+        public async Task<Stream> BlobRetrieveStream(string sObjectTypeName, string objectId, string blobField)
+        {
+            HttpResponseMessage response = await BlobRetrieveResponse(sObjectTypeName, objectId, blobField);
+            return await response.Content.ReadAsStreamAsync();
+        }
+
+        // public async Task<byte[]> BlobRetrieveBytes(string blobUrl)
+        // {
+        //     Regex regex = new Regex(blobUrlRegexString);
+        //     Match match = regex.Match(blobUrl);
+        //     if (!match.Success)
+        //     {
+        //         throw new ForceApiException("Unable to parse blob URL");
+        //     }
+
+        //     string sObjectTypeName = match.Groups[1].Value;
+        //     string objectId = match.Groups[2].Value;
+        //     string blobField = match.Groups[3].Value;
+
+        //     return await BlobRetrieveBytes(sObjectTypeName, objectId, blobField);
+        // }
+
+        // public async Task<byte[]> BlobRetrieveBytes(string sObjectTypeName, string objectId, string blobField)
+        // {
+        //     HttpResponseMessage response = await BlobRetrieveResponse(sObjectTypeName, objectId, blobField);
+        //     return await response.Content.ReadAsByteArrayAsync();
+        // }
+
+        private async Task<HttpResponseMessage> BlobRetrieveResponse(string sObjectTypeName, string objectId, string blobField)
+        {
+            HttpResponseMessage responseMessage = null;
+            try
+            {
+                var uri = UriFormatter.SObjectBlobRetrieve(InstanceUrl, ApiVersion, sObjectTypeName, objectId, blobField);
+
+                var authHeaderValue = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", AccessToken);
+
+                HttpRequestMessage request = new HttpRequestMessage();
+                request.Headers.Authorization = authHeaderValue;
+                request.RequestUri = uri;
+                request.Method = HttpMethod.Get;
+
+                //ResponseHeadersRead = do not buffer binary content immediately to memory
+                HttpCompletionOption completionOption = HttpCompletionOption.ResponseHeadersRead;
+
+                responseMessage = await SharedHttpClient.SendAsync(request, completionOption).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                string errMsg = "Error retrieving blob data:" + ex.Message;
+                if (ex.InnerException != null && !string.IsNullOrEmpty(ex.InnerException.Message))
+                {
+                    errMsg += " " + ex.InnerException.Message;
+                }
+                throw new ForceApiException(errMsg);
+            }
+
+            if (responseMessage.IsSuccessStatusCode)
+                return responseMessage;
+
+            throw new ForceApiException($"Failed to download blob data, request returned {responseMessage.StatusCode} {responseMessage.ReasonPhrase}");
+        }
+
+        #region metadata
 
         /// <summary>
         /// Lists information about limits in your org.
