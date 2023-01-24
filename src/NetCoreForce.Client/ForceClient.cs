@@ -22,7 +22,21 @@ namespace NetCoreForce.Client
         /// </summary>
         public AccessTokenResponse AccessInfo { get; set; }
 
+        private static readonly HttpClient _SharedHttpClient;
         private HttpClient _httpClient;
+        private HttpClient SharedHttpClient
+        {
+            get
+            {
+                //use the instance client when extant, otherwise use the default shared instance.
+                return _httpClient ?? _SharedHttpClient;
+            }
+        }
+
+        static ForceClient()
+        {
+            _SharedHttpClient = HttpClientFactory.CreateHttpClient();
+        }
 
         /// <summary>
         /// Login to Salesforce using the username-password authentication flow, and initialize the client
@@ -82,7 +96,10 @@ namespace NetCoreForce.Client
             this.AccessToken = accessToken;
             this.AccessInfo = accessInfo;
 
-            _httpClient = httpClient;
+            if (httpClient != null)
+            {
+                _httpClient = httpClient;
+            }
         }
 
         /// <summary>
@@ -126,7 +143,7 @@ namespace NetCoreForce.Client
                 Dictionary<string, string> headers = HeaderFormatter.SforceCallOptions(ClientName);
                 var queryUri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString, queryAll);
 
-                JsonClient client = new JsonClient(AccessToken, _httpClient);
+                JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
                 List<T> results = new List<T>();
 
@@ -227,7 +244,7 @@ namespace NetCoreForce.Client
                 headers.AddRange(queryOptions);
             }
 
-            var jsonClient = new JsonClient(AccessToken, _httpClient);
+            var jsonClient = new JsonClient(AccessToken, SharedHttpClient);
 
             var nextRecordsUri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString, queryAll);
             bool hasMoreRecords = true;
@@ -278,7 +295,7 @@ namespace NetCoreForce.Client
                 throw new ForceApiException("CountQueryAsync may only be used with a query starting with SELECT COUNT() FROM");
             }
 
-            var jsonClient = new JsonClient(AccessToken, _httpClient);
+            var jsonClient = new JsonClient(AccessToken, SharedHttpClient);
             var uri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString);
             var qr = await jsonClient.HttpGetAsync<QueryResult<object>>(uri, headers);
 
@@ -298,7 +315,7 @@ namespace NetCoreForce.Client
                 Dictionary<string, string> headers = HeaderFormatter.SforceCallOptions(ClientName);
                 var uri = UriFormatter.Search(InstanceUrl, ApiVersion, searchString);
 
-                JsonClient client = new JsonClient(AccessToken, _httpClient);
+                JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
                 SearchResult<T> searchResult = await client.HttpGetAsync<SearchResult<T>>(uri, headers);
 
@@ -323,7 +340,7 @@ namespace NetCoreForce.Client
                 Dictionary<string, string> headers = HeaderFormatter.SforceCallOptions(ClientName);
                 var uri = UriFormatter.Search(InstanceUrl, ApiVersion, searchString);
 
-                JsonClient client = new JsonClient(AccessToken, _httpClient);
+                JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
                 SearchResult<SObjectGeneric> searchResult = await client.HttpGetAsync<SearchResult<SObjectGeneric>>(uri, headers);
 
@@ -347,7 +364,7 @@ namespace NetCoreForce.Client
             Dictionary<string, string> headers = HeaderFormatter.SforceCallOptions(ClientName);
             var uri = UriFormatter.SObjectRows(InstanceUrl, ApiVersion, sObjectTypeName, objectId, fields);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
             return await client.HttpGetAsync<T>(uri, headers);
         }
@@ -376,7 +393,7 @@ namespace NetCoreForce.Client
 
             var uri = UriFormatter.SObjectBasicInformation(InstanceUrl, ApiVersion, sObjectTypeName);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
             return await client.HttpPostAsync<CreateResponse>(sObject, uri, headers);
         }
@@ -438,7 +455,7 @@ namespace NetCoreForce.Client
 
             var uri = UriFormatter.SObjectTree(InstanceUrl, ApiVersion, sObjectTypeName);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
             SObjectTreeRequest treeRequest = new SObjectTreeRequest(sObjects);
 
@@ -470,7 +487,7 @@ namespace NetCoreForce.Client
 
             var uri = UriFormatter.SObjectRows(InstanceUrl, ApiVersion, sObjectTypeName, objectId);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
             await client.HttpPatchAsync<object>(sObject, uri, headers);
 
@@ -519,12 +536,12 @@ namespace NetCoreForce.Client
 
             var uri = UriFormatter.SObjectsComposite(InstanceUrl, ApiVersion);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
             UpsertRequest upsertRequest = new UpsertRequest(sObjects, allOrNone);
 
             return await client.HttpPatchAsync<List<UpsertResponse>>(upsertRequest, uri, headers, includeSObjectId: true);
-            
+
         }
 
         /// <summary>
@@ -553,7 +570,7 @@ namespace NetCoreForce.Client
 
             var uri = UriFormatter.SObjectRowsByExternalId(InstanceUrl, ApiVersion, sObjectTypeName, fieldName, fieldValue);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
             return await client.HttpPatchAsync<UpsertResponse>(sObject, uri, headers);
         }
@@ -570,7 +587,7 @@ namespace NetCoreForce.Client
             Dictionary<string, string> headers = HeaderFormatter.SforceCallOptions(ClientName);
             var uri = UriFormatter.SObjectRows(InstanceUrl, ApiVersion, sObjectTypeName, objectId);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
             await client.HttpDeleteAsync<object>(uri, headers);
 
@@ -587,7 +604,7 @@ namespace NetCoreForce.Client
         {
             var uri = UriFormatter.Limits(InstanceUrl, ApiVersion);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
             return await client.HttpGetAsync<OrganizationLimits>(uri);
         }
@@ -622,7 +639,7 @@ namespace NetCoreForce.Client
 
             var uri = UriFormatter.Versions(currentInstanceUrl);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
             return await client.HttpGetAsync<List<SalesforceVersion>>(uri: uri, deserializeResponse: deserializeResponse);
         }
@@ -635,7 +652,7 @@ namespace NetCoreForce.Client
         /// <returns>UserInfo</returns>
         public async Task<UserInfo> GetUserInfo(string identityUrl)
         {
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
             return await client.HttpGetAsync<UserInfo>(new Uri(identityUrl));
         }
@@ -651,7 +668,7 @@ namespace NetCoreForce.Client
             Dictionary<string, string> headers = HeaderFormatter.SforceCallOptions(ClientName);
             var uri = UriFormatter.SObjectBasicInformation(InstanceUrl, ApiVersion, objectTypeName);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
             return await client.HttpGetAsync<SObjectBasicInfo>(uri, headers);
         }
@@ -666,7 +683,7 @@ namespace NetCoreForce.Client
         {
             var uri = UriFormatter.SObjectDescribe(InstanceUrl, ApiVersion, objectTypeName);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
             return await client.HttpGetAsync<SObjectDescribeFull>(uri);
         }
@@ -680,12 +697,23 @@ namespace NetCoreForce.Client
         {
             var uri = UriFormatter.DescribeGlobal(InstanceUrl, ApiVersion);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
             return await client.HttpGetAsync<DescribeGlobal>(uri);
         }
 
-#endregion
+        #endregion
 
+        /// <summary>
+        /// Dispose client - only disposes instance HttpClient, if any. Shared static HttpClient is left as-is.
+        /// </summary>
+        public void Dispose()
+        {
+            //only dispose instance member, if any
+            if (_httpClient != null)
+            {
+                _httpClient.Dispose();
+            }
+        }
     }
 }
