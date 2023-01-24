@@ -1,13 +1,16 @@
 # Changelog
 
-### 2022-04-07 v4.0.0
+### 2023-01-24 v4.0.0 Beta
 
-* fix: Syntax error in error message generator
 * feat: Partial sObjectTree API resource support - added CreateMultipleRecords to create multiple records in a single request
     - see https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_composite_sobject_tree_flat.htm
 * feat: updated ExternalIdInsertAndUpdate to return new UpsertResponse object that adds the Created flag
     - this includes a minor breaking change, as this method originally returned a CreateResponse object. Calls can be updated to use the UpsertResponse object without any further breaking changes as it is inherited from the CreateResponse object.
+* feat: added .net 7 build and test target
+* feat: added BlobRetrieveStream() to download blob data attached to records
 * fix: update Newtonsoft.json to v13 
+* fix: Syntax error in error message generator
+* feat: Update ForceClient to use static shared HttpClient by default, unless custom instance is specified
 
 ### 2022-01-13 v3.1.0
 

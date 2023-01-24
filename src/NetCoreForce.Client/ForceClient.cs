@@ -411,19 +411,19 @@ namespace NetCoreForce.Client
         /// <exception cref="ForceApiException">Thrown when creation fails</exception>
         public async Task<SObjectTreeResponse> CreateMultipleRecords(string sObjectTypeName, List<SObject> sObjects, bool autoFillAttributes = true, Dictionary<string, string> customHeaders = null)
         {
-            if(sObjects == null)
+            if (sObjects == null)
             {
                 throw new ArgumentNullException("sObjects");
             }
 
-            if(sObjects.Count > 200)
+            if (sObjects.Count > 200)
             {
                 throw new ForceApiException($"A maximum of 200 records can be created in a single request - request included {sObjects.Count} records.");
             }
 
-            if(autoFillAttributes)
+            if (autoFillAttributes)
             {
-                for(int i = 0; i < sObjects.Count; i++)
+                for (int i = 0; i < sObjects.Count; i++)
                 {
                     sObjects[i].Attributes = new SObjectAttributes()
                     {
@@ -434,9 +434,9 @@ namespace NetCoreForce.Client
             }
             else
             {
-                foreach(SObject obj in sObjects)
+                foreach (SObject obj in sObjects)
                 {
-                    if(obj.Attributes == null || string.IsNullOrEmpty(obj.Attributes.ReferenceId) || string.IsNullOrEmpty(obj.Attributes.Type))
+                    if (obj.Attributes == null || string.IsNullOrEmpty(obj.Attributes.ReferenceId) || string.IsNullOrEmpty(obj.Attributes.Type))
                     {
                         throw new ArgumentException("All objects in request must include a reference id and sObject type name in the attributes");
                     }
@@ -511,14 +511,14 @@ namespace NetCoreForce.Client
         /// <exception cref="ForceApiException">Thrown when update fails</exception>
         public async Task<List<UpsertResponse>> UpdateRecords(List<SObject> sObjects, bool allOrNone = false, Dictionary<string, string> customHeaders = null)
         {
-            if(sObjects == null)
+            if (sObjects == null)
             {
                 throw new ArgumentNullException("sObjects");
             }
 
-            foreach(SObject sObject in sObjects)
+            foreach (SObject sObject in sObjects)
             {
-                if(sObject.Attributes == null || string.IsNullOrEmpty(sObject.Attributes.Type))
+                if (sObject.Attributes == null || string.IsNullOrEmpty(sObject.Attributes.Type))
                 {
                     throw new ForceApiException("Objects are missing Type property in Attributes map");
                 }
