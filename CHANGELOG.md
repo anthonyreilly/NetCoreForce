@@ -1,6 +1,6 @@
 # Changelog
 
-### 2023-01-24 v4.0.0 Beta
+### 2023-01-26 v4.0.0 Beta2
 
 * feat: Partial sObjectTree API resource support - added CreateMultipleRecords to create multiple records in a single request
     - see https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_composite_sobject_tree_flat.htm
@@ -11,6 +11,7 @@
 * fix: update Newtonsoft.json to v13 
 * fix: Syntax error in error message generator
 * feat: Update ForceClient to use static shared HttpClient by default, unless custom instance is specified
+* feat: Add FieldsToNull parameter to updates to allow explicitly setting fields to null. (Note: this requries both setting the value itself to null, in addition to adding the property name to the list)
 
 ### 2022-01-13 v3.1.0
 

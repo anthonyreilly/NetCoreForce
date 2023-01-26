@@ -63,15 +63,40 @@ namespace NetCoreForce.Client
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="customHeaders"></param>
+        /// <param name="deserializeResponse"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public async Task<T> HttpGetAsync<T>(Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
             //TODO: can this handle T = string?
             return await HttpAsync<T>(uri, HttpMethod.Get, null, customHeaders, deserializeResponse);
         }
 
-        public async Task<T> HttpPostAsync<T>(object inputObject, Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inputObject"></param>
+        /// <param name="uri"></param>
+        /// <param name="customHeaders"></param>
+        /// <param name="deserializeResponse"></param>
+        /// <param name="fieldsToNull"></param>
+        /// <param name="ignoreNulls"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public async Task<T> HttpPostAsync<T>(
+            object inputObject,
+            Uri uri,
+            Dictionary<string, string> customHeaders = null,
+            bool deserializeResponse = true,
+            List<string> fieldsToNull = null,
+            bool ignoreNulls = true)
         {
-            var json = JsonSerializer.SerializeForCreate(inputObject);
+            var json = JsonSerializer.SerializeForCreate(inputObject, fieldsToNull, ignoreNulls);
 
             var content = new StringContent(json, Encoding.UTF8, JsonMimeType);
 
@@ -93,22 +118,32 @@ namespace NetCoreForce.Client
         /// <param name="deserializeResponse"></param>
         /// <param name="serializeComplete">Serializes ALL object properties to include in the request, even those not appropriate for some update/patch calls.</param>
         /// <param name="includeSObjectId">includes the SObject ID when serializing the request content</param>
+        /// <param name="fieldsToNull">A list of properties that should be set to null, but inclusing the null values in the serialized output</param>
+        /// <param name="ignoreNulls">Use with caution. By default null values are not serialized, this will serialize all explicitly nulled or missing properties as null</param>  
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public async Task<T> HttpPatchAsync<T>(object inputObject, Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true, bool serializeComplete = false, bool includeSObjectId = false)
+        public async Task<T> HttpPatchAsync<T>(
+            object inputObject,
+            Uri uri,
+            Dictionary<string, string> customHeaders = null,
+            bool deserializeResponse = true,
+            bool serializeComplete = false,
+            bool includeSObjectId = false,
+            List<string> fieldsToNull = null,
+            bool ignoreNulls = true)
         {
             string json;
             if (serializeComplete)
             {
-                json = JsonSerializer.SerializeComplete(inputObject, false);
+                json = JsonSerializer.SerializeComplete(inputObject, false, fieldsToNull: fieldsToNull, ignoreNulls: ignoreNulls);
             }
             else if (includeSObjectId)
             {
-                json = JsonSerializer.SerializeForUpdateWithObjectId(inputObject);
+                json = JsonSerializer.SerializeForUpdateWithObjectId(inputObject, fieldsToNull: fieldsToNull, ignoreNulls: ignoreNulls);
             }
             else
             {
-                json = JsonSerializer.SerializeForUpdate(inputObject);
+                json = JsonSerializer.SerializeForUpdate(inputObject, fieldsToNull: fieldsToNull, ignoreNulls: ignoreNulls);
             }
 
             var content = new StringContent(json, Encoding.UTF8, JsonMimeType);
@@ -116,6 +151,14 @@ namespace NetCoreForce.Client
             return await HttpAsync<T>(uri, new HttpMethod("PATCH"), content, customHeaders, deserializeResponse);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="customHeaders"></param>
+        /// <param name="deserializeResponse"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public async Task<T> HttpDeleteAsync<T>(Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
             HttpRequestMessage request = new HttpRequestMessage();

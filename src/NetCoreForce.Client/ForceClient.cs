@@ -377,9 +377,16 @@ namespace NetCoreForce.Client
         /// <param name="sObjectTypeName">SObject name, e.g. "Account"</param>
         /// <param name="sObject">Object to create</param>
         /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
+        /// <param name="fieldsToNull">A list of properties that should be set to null, but inclusing the null values in the serialized output</param>
+        /// <param name="ignoreNulls">Use with caution. By default null values are not serialized, this will serialize all explicitly nulled or missing properties as null</param>
         /// <returns>CreateResponse object, includes new object's ID</returns>
         /// <exception cref="ForceApiException">Thrown when creation fails</exception>
-        public async Task<CreateResponse> CreateRecord<T>(string sObjectTypeName, T sObject, Dictionary<string, string> customHeaders = null)
+        public async Task<CreateResponse> CreateRecord<T>(
+            string sObjectTypeName,
+            T sObject,
+            Dictionary<string, string> customHeaders = null,
+            List<string> fieldsToNull = null,
+            bool ignoreNulls = true)
         {
             Dictionary<string, string> headers = new Dictionary<string, string>();
 
@@ -397,7 +404,7 @@ namespace NetCoreForce.Client
 
             JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-            return await client.HttpPostAsync<CreateResponse>(sObject, uri, headers);
+            return await client.HttpPostAsync<CreateResponse>(sObject, uri, headers, fieldsToNull: fieldsToNull, ignoreNulls: ignoreNulls);
         }
 
         /// <summary>
@@ -407,9 +414,17 @@ namespace NetCoreForce.Client
         /// <param name="sObjects">Objects to create. Each sObject must have the entity type and reference id in the attributes property object.</param>
         /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
         /// <param name="autoFillAttributes">Automatically create attribute object property, reference Id will be the zero-based index of the array</param>
+        /// <param name="fieldsToNull">A list of properties that should be set to null, but inclusing the null values in the serialized output</param>
+        /// <param name="ignoreNulls">Use with caution. By default null values are not serialized, this will serialize all explicitly nulled or missing properties as null</param>
         /// <returns>SObjectTreeResponse object, includes new object IDs, and errors if any</returns>
         /// <exception cref="ForceApiException">Thrown when creation fails</exception>
-        public async Task<SObjectTreeResponse> CreateMultipleRecords(string sObjectTypeName, List<SObject> sObjects, bool autoFillAttributes = true, Dictionary<string, string> customHeaders = null)
+        public async Task<SObjectTreeResponse> CreateMultiple(
+            string sObjectTypeName,
+            List<SObject> sObjects,
+            bool autoFillAttributes = true,
+            Dictionary<string, string> customHeaders = null,
+            List<string> fieldsToNull = null,
+            bool ignoreNulls = true)
         {
             if (sObjects == null)
             {
@@ -461,19 +476,28 @@ namespace NetCoreForce.Client
 
             SObjectTreeRequest treeRequest = new SObjectTreeRequest(sObjects);
 
-            return await client.HttpPostAsync<SObjectTreeResponse>(treeRequest, uri, headers);
+            return await client.HttpPostAsync<SObjectTreeResponse>(treeRequest, uri, headers, fieldsToNull: fieldsToNull, ignoreNulls: ignoreNulls);
         }
 
         /// <summary>
-        /// Updates
+        /// Update single record
         /// </summary>
         /// <param name="sObjectTypeName">SObject name, e.g. "Account"</param>
         /// <param name="objectId">Id of Object to update</param>
         /// <param name="sObject">Object to update</param>
         /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
+        /// <param name="fieldsToNull">A list of properties that should be set to null, but inclusing the null values in the serialized output</param>
+        /// <param name="ignoreNulls">Use with caution. By default null values are not serialized, this will serialize all explicitly nulled or missing properties as null</param>
+        /// <typeparam name="T"></typeparam>
         /// <returns>void, API returns 204/NoContent</returns>
         /// <exception cref="ForceApiException">Thrown when update fails</exception>
-        public async Task UpdateRecord<T>(string sObjectTypeName, string objectId, T sObject, Dictionary<string, string> customHeaders = null)
+        public async Task UpdateRecord<T>(
+            string sObjectTypeName,
+            string objectId,
+            T sObject,
+            Dictionary<string, string> customHeaders = null,
+            List<string> fieldsToNull = null,
+            bool ignoreNulls = true)
         {
             Dictionary<string, string> headers = new Dictionary<string, string>();
 
@@ -491,7 +515,7 @@ namespace NetCoreForce.Client
 
             JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-            await client.HttpPatchAsync<object>(sObject, uri, headers);
+            await client.HttpPatchAsync<object>(sObject, uri, headers, ignoreNulls: ignoreNulls, fieldsToNull: fieldsToNull);
 
             return;
         }
@@ -506,10 +530,17 @@ namespace NetCoreForce.Client
         /// <param name="sObjects">Objects to update</param>
         /// <param name="allOrNone">Optional. Indicates whether to roll back the entire request when the update of any object fails (true) or to continue with the independent update of other objects in the request. The default is false.</param>
         /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
+        /// <param name="fieldsToNull">A list of properties that should be set to null, but inclusing the null values in the serialized output</param>
+        /// <param name="ignoreNulls">Use with caution. By default null values are not serialized, this will serialize all explicitly nulled or missing properties as null</param>
         /// <returns>List of UpsertResponse objects, includes response for each object (id, success, errors)</returns>
         /// <exception cref="ArgumentException">Thrown when missing required information</exception>
         /// <exception cref="ForceApiException">Thrown when update fails</exception>
-        public async Task<List<UpsertResponse>> UpdateRecords(List<SObject> sObjects, bool allOrNone = false, Dictionary<string, string> customHeaders = null)
+        public async Task<List<UpsertResponse>> UpdateRecords(
+            List<SObject> sObjects,
+            bool allOrNone = false,
+            Dictionary<string, string> customHeaders = null,
+            List<string> fieldsToNull = null,
+            bool ignoreNulls = true)
         {
             if (sObjects == null)
             {
@@ -542,7 +573,7 @@ namespace NetCoreForce.Client
 
             UpsertRequest upsertRequest = new UpsertRequest(sObjects, allOrNone);
 
-            return await client.HttpPatchAsync<List<UpsertResponse>>(upsertRequest, uri, headers, includeSObjectId: true);
+            return await client.HttpPatchAsync<List<UpsertResponse>>(upsertRequest, uri, headers, includeSObjectId: true, fieldsToNull: fieldsToNull, ignoreNulls: ignoreNulls);
 
         }
 
@@ -554,9 +585,18 @@ namespace NetCoreForce.Client
         /// <param name="fieldValue">External ID field value</param>
         /// <param name="sObject">Object to update</param>
         /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
+        /// <param name="fieldsToNull">A list of properties that should be set to null, but inclusing the null values in the serialized output</param>
+        /// <param name="ignoreNulls">Use with caution. By default null values are not serialized, this will serialize all explicitly nulled or missing properties as null</param>
         /// <returns>UpsertResponse object, includes new object's ID if record was created and no value if object was updated</returns>
         /// <exception cref="ForceApiException">Thrown when request fails</exception>
-        public async Task<UpsertResponse> InsertOrUpdateRecord<T>(string sObjectTypeName, string fieldName, string fieldValue, T sObject, Dictionary<string, string> customHeaders = null)
+        public async Task<UpsertResponse> InsertOrUpdateRecord<T>(
+            string sObjectTypeName,
+            string fieldName,
+            string fieldValue,
+            T sObject,
+            Dictionary<string, string> customHeaders = null,
+            List<string> fieldsToNull = null,
+            bool ignoreNulls = true)
         {
             Dictionary<string, string> headers = new Dictionary<string, string>();
 
@@ -574,7 +614,7 @@ namespace NetCoreForce.Client
 
             JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-            return await client.HttpPatchAsync<UpsertResponse>(sObject, uri, headers);
+            return await client.HttpPatchAsync<UpsertResponse>(sObject, uri, headers, fieldsToNull: fieldsToNull, ignoreNulls: ignoreNulls);
         }
 
         /// <summary>

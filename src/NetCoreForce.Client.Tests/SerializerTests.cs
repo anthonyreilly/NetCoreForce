@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using NetCoreForce.Client;
 using NetCoreForce.Client.Attributes;
 using Newtonsoft.Json;
@@ -106,6 +107,32 @@ namespace NetCoreForce.Client.Tests
             string serialized = JsonSerializer.SerializeForCreate(new SampleObject());
 
             Assert.DoesNotContain("nullProperty", serialized);
+        }
+
+        [Fact]
+        public void NullValueHandling_WithFieldsToNull_ForUpdate()
+        {
+            List<string> fieldsToNull = new List<string>(){ "nullProperty"};
+            string serialized = JsonSerializer.SerializeForUpdate(new SampleObject(), fieldsToNull);
+
+            Assert.Contains("nullProperty", serialized);
+        }
+
+        [Fact]
+        public void NullValueHandling_WithIgnoreNulls_ForUpdate()
+        {
+            string serialized = JsonSerializer.SerializeForUpdate(new SampleObject(), ignoreNulls: false);
+
+            Assert.Contains("nullProperty", serialized);
+        }
+
+        [Fact]
+        public void NullValueHandling_WithFieldsToNull_MixedCase_ForUpdate()
+        {
+            List<string> fieldsToNull = new List<string>(){ "NullProPertY"};
+            string serialized = JsonSerializer.SerializeForUpdate(new SampleObject(), fieldsToNull);
+
+            Assert.Contains("nullProperty", serialized);
         }
 
         //TODO: test deserialize
