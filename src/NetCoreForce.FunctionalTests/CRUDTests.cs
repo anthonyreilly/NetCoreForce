@@ -128,7 +128,7 @@ namespace NetCoreForce.FunctionalTests
 
             List<SObject> objects = new List<SObject>() { firstAccount, secondAccount };
 
-            SObjectTreeResponse response = await client.CreateMultipleRecords(SfAccount.SObjectTypeName, objects);
+            SObjectTreeResponse response = await client.CreateMultiple(SfAccount.SObjectTypeName, objects);
 
             Assert.True(response.HasErrors == "false", "Create multiple failed");
             Assert.True(response.Results.All(r => r.Errors == null), "Create multiple failed");
@@ -144,5 +144,64 @@ namespace NetCoreForce.FunctionalTests
             await client.DeleteRecord(SfAccount.SObjectTypeName, firstCreatedAccount.Id);
             await client.DeleteRecord(SfAccount.SObjectTypeName, secondCreatedAccount.Id);
         }
+
+        [Fact]
+        public async Task CreateMultipleWithReferenceIds()
+        {
+            ForceClient client = await forceClientFixture.GetForceClient();
+
+            //create new objects
+            SfAccount firstAccount = new SfAccount() { };
+            string firstAccountRefId = Guid.NewGuid().ToString();
+            string firstAccountName = string.Format("Test Object refId {0}", firstAccountRefId);
+            firstAccount.Name = firstAccountName;
+            firstAccount.Attributes = new SObjectAttributes() { ReferenceId = firstAccountRefId, Type = SfAccount.SObjectTypeName };
+
+
+            SfAccount secondAccount = new SfAccount();
+            string secondAccountRefId = Guid.NewGuid().ToString();
+            string secondAccountName = string.Format("Test Object refId {0}", secondAccountRefId);
+            secondAccount.Name = secondAccountName;
+            secondAccount.Attributes = new SObjectAttributes() { ReferenceId = secondAccountRefId, Type = SfAccount.SObjectTypeName };
+
+            List<SObject> objects = new List<SObject>() { firstAccount, secondAccount };
+
+            SObjectTreeResponse response = await client.CreateMultiple(SfAccount.SObjectTypeName, objects, autoFillAttributes: false);
+
+            Assert.True(response.HasErrors == "false", "Create multiple failed");
+            Assert.True(response.Results.All(r => r.Errors == null), "Create multiple failed");
+
+            // check for matching reference IDs in results
+            Assert.Equal(firstAccountRefId, response.Results[0].ReferenceId);
+            Assert.Equal(secondAccountRefId, response.Results[1].ReferenceId);
+
+            //delete
+            await client.DeleteRecord(SfAccount.SObjectTypeName, response.Results[0].Id);
+            await client.DeleteRecord(SfAccount.SObjectTypeName, response.Results[1].Id);
+        }
+
+        // [Fact]
+        // public async Task DeleteMultiple()
+        // {
+        //     ForceClient client = await forceClientFixture.GetForceClient();
+
+        //     //create new objects
+        //     SfAccount firstAccount = new SfAccount() { Name = string.Format("Test Object {0}", Guid.NewGuid().ToString()) };
+        //     SfAccount secondAccount = new SfAccount() { Name = string.Format("Test Object {0}", Guid.NewGuid().ToString()) };
+
+        //     List<SObject> objects = new List<SObject>() { firstAccount, secondAccount };
+
+        //     SObjectTreeResponse createResponse = await client.CreateMultiple(SfAccount.SObjectTypeName, objects);
+
+        //     Assert.True(createResponse.HasErrors == "false", "Create multiple failed");
+        //     Assert.True(createResponse.Results.All(r => r.Errors == null), "Create multiple failed");
+
+        //     // get newly created objects
+            
+
+        //     //delete
+        //     // await client.DeleteRecord(SfAccount.SObjectTypeName, firstCreatedAccount.Id);
+        //     // await client.DeleteRecord(SfAccount.SObjectTypeName, secondCreatedAccount.Id);
+        // }
     }
 }
