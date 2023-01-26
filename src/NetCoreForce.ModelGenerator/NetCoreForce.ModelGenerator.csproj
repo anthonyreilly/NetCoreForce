@@ -20,16 +20,10 @@
     <RepositoryType>$(RepositoryType)</RepositoryType>
     <RepositoryUrl>$(RepositoryUrl)</RepositoryUrl>
     <PackageReleaseNotes>$(PackageReleaseNotes)</PackageReleaseNotes>
-
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>NetCoreForce.ModelGenerator</ToolCommandName>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
-
-  <PropertyGroup>
-
-  </PropertyGroup>
-
-
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -40,7 +34,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="2.6.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
   <ItemGroup>
     <None Update="modelgenerator_config.json">

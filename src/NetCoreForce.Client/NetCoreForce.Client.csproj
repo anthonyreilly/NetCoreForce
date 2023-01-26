@@ -27,17 +27,35 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
     <!-- warning CS1591: Missing XML comment for publicly visible type or member -->
     <NoWarn>CS1591</NoWarn>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageOutputPath>$(SolutionDir)/packages</PackageOutputPath>
   </PropertyGroup>
+
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'net461' ">
     <!-- Adds async support for .netstandard2.0 clients -->
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
   </ItemGroup>
+
+  <Choose>
+
+    <When Condition=" '$(TargetFramework)' == 'NET6_0_OR_GREATER'">
+      <ItemGroup>
+        <PackageReference Include="System.Text.Encodings.Web" Version="7.0.0" />
+      </ItemGroup>
+    </When>
+
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Include="System.Text.Encodings.Web" Version="5.0.0" />
+      </ItemGroup>
+    </Otherwise>
+
+  </Choose>
+
   <ItemGroup>
-    <PackageReference Include="System.Text.Encodings.Web" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 </Project>
