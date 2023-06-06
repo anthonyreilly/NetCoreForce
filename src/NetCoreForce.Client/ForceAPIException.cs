@@ -15,7 +15,7 @@ namespace NetCoreForce.Client
 
         /// <summary>
         /// Returned when an external ID exists in more than one record
-        /// Lists matching objects in object url format, e.g. "/services/data/v48.0/sobjects/Account/001XXXXXXXXXXXXXXX"
+        /// Lists matching objects in object url format, e.g. "/services/data/v57.0/sobjects/Account/001XXXXXXXXXXXXXXX"
         /// </summary>
         public List<string> ObjectUrls { get; set; }
 

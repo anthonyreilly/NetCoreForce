@@ -15,7 +15,7 @@ namespace NetCoreForce.Client.Tests
         public async Task QueryAsyncInvalidBatchSize()
         {
             HttpClient httpClient = new HttpClient(new MockHttpClientHandler());
-            ForceClient client = new ForceClient("https://na15.salesforce.com", "v41.0", "dummyToken", httpClient);
+            ForceClient client = new ForceClient("https://na15.salesforce.com", "v57.0", "dummyToken", httpClient);
 
             var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 1000", batchSize: 100);
 
@@ -40,24 +40,24 @@ namespace NetCoreForce.Client.Tests
             var mockHandler = new MockHttpClientHandler();
 
             HttpResponseMessage respMsg = MockResponse.GetResponse("querybatch/batch-1.json", HttpStatusCode.OK);
-            Uri requestUri = new Uri(@"https://na15.salesforce.com/services/data/v41.0/query?q=SELECT%20Id%20FROM%20Contact%20LIMIT%20800");
+            Uri requestUri = new Uri(@"https://na15.salesforce.com/services/data/v57.0/query?q=SELECT%20Id%20FROM%20Contact%20LIMIT%20800");
             mockHandler.AddMockResponse(requestUri, respMsg);
 
             HttpResponseMessage respMsg2 = MockResponse.GetResponse("querybatch/batch-2.json", HttpStatusCode.OK);
-            Uri requestUri2 = new Uri(@"https://na15.salesforce.com/services/data/v41.0/query/01gC000006QJJ7fIAH-200");
+            Uri requestUri2 = new Uri(@"https://na15.salesforce.com/services/data/v57.0/query/01gC000006QJJ7fIAH-200");
             mockHandler.AddMockResponse(requestUri2, respMsg2);
 
             HttpResponseMessage respMsg3 = MockResponse.GetResponse("querybatch/batch-3.json", HttpStatusCode.OK);
-            Uri requestUri3 = new Uri(@"https://na15.salesforce.com/services/data/v41.0/query/01gC000006QJJ7fIAH-400");
+            Uri requestUri3 = new Uri(@"https://na15.salesforce.com/services/data/v57.0/query/01gC000006QJJ7fIAH-400");
             mockHandler.AddMockResponse(requestUri3, respMsg3);
 
             HttpResponseMessage respMsg4 = MockResponse.GetResponse("querybatch/batch-4.json", HttpStatusCode.OK);
-            Uri requestUri4 = new Uri(@"https://na15.salesforce.com/services/data/v41.0/query/01gC000006QJJ7fIAH-600");
+            Uri requestUri4 = new Uri(@"https://na15.salesforce.com/services/data/v57.0/query/01gC000006QJJ7fIAH-600");
             mockHandler.AddMockResponse(requestUri4, respMsg4);
 
             HttpClient httpClient = new HttpClient(mockHandler);
 
-            ForceClient client = new ForceClient("https://na15.salesforce.com", "v41.0", "dummyToken", httpClient);
+            ForceClient client = new ForceClient("https://na15.salesforce.com", "v57.0", "dummyToken", httpClient);
 
             var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 800", batchSize: 200);
 

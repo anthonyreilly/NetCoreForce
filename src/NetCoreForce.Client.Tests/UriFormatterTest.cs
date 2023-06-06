@@ -8,7 +8,7 @@ namespace NetCoreForce.Client.Tests
 {
     public class UriFormatterTest
     {
-        const string _apiVersion = "v41.0";
+        const string _apiVersion = "v57.0";
         const string _instanceUrl = "https://xxx.salesforce.com";
         const string _sObjectName = "Account";
         const string _objectId = "001XXXXXXXXXXXXXXX";
@@ -18,9 +18,9 @@ namespace NetCoreForce.Client.Tests
         [Fact]
         public void SObjectRows()
         {
-            string result = UriFormatter.SObjectRows("https://xxx.salesforce.com", "v41.0", "Account", "001XXXXXXXXXXXXXXX").AbsoluteUri;
+            string result = UriFormatter.SObjectRows("https://xxx.salesforce.com", "v57.0", "Account", "001XXXXXXXXXXXXXXX").AbsoluteUri;
 
-            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/sobjects/Account/001XXXXXXXXXXXXXXX", result);
+            Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/sobjects/Account/001XXXXXXXXXXXXXXX", result);
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace NetCoreForce.Client.Tests
         {
             string result = UriFormatter.SObjectRowsByExternalId(_instanceUrl, _apiVersion, _sObjectName, "externalfield", "externalvalue").AbsoluteUri;
 
-            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/sobjects/Account/externalfield/externalvalue", result);
+            Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/sobjects/Account/externalfield/externalvalue", result);
         }
 
         [Fact]
@@ -36,57 +36,57 @@ namespace NetCoreForce.Client.Tests
         {
             string result = UriFormatter.SObjectBlobRetrieve(_instanceUrl, _apiVersion, _sObjectName, _objectId).AbsoluteUri;
 
-            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/sobjects/Account/001XXXXXXXXXXXXXXX/body", result);
+            Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/sobjects/Account/001XXXXXXXXXXXXXXX/body", result);
         }
 
         [Fact]
         public void SObjectRowsWithSingleField()
         {
             List<string> fields = new List<string>() { "AccountNumber" };
-            string result = UriFormatter.SObjectRows("https://xxx.salesforce.com", "v41.0", "Account", "001XXXXXXXXXXXXXXX", fields).AbsoluteUri;
+            string result = UriFormatter.SObjectRows("https://xxx.salesforce.com", "v57.0", "Account", "001XXXXXXXXXXXXXXX", fields).AbsoluteUri;
 
-            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/sobjects/Account/001XXXXXXXXXXXXXXX?fields=AccountNumber", result);
+            Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/sobjects/Account/001XXXXXXXXXXXXXXX?fields=AccountNumber", result);
         }
 
         [Fact]
         public void SObjectRowsWithFields()
         {
             List<string> fields = new List<string>() { "AccountNumber", "BillingPostalCode" };
-            string result = UriFormatter.SObjectRows("https://xxx.salesforce.com", "v41.0", "Account", "001XXXXXXXXXXXXXXX", fields).AbsoluteUri;
+            string result = UriFormatter.SObjectRows("https://xxx.salesforce.com", "v57.0", "Account", "001XXXXXXXXXXXXXXX", fields).AbsoluteUri;
 
-            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/sobjects/Account/001XXXXXXXXXXXXXXX?fields=AccountNumber,BillingPostalCode", result);
+            Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/sobjects/Account/001XXXXXXXXXXXXXXX?fields=AccountNumber,BillingPostalCode", result);
         }
 
         [Fact]
         public void SObjectsComposite()
         {
-            string result = UriFormatter.SObjectsComposite("https://xxx.salesforce.com", "v41.0").AbsoluteUri;
+            string result = UriFormatter.SObjectsComposite("https://xxx.salesforce.com", "v57.0").AbsoluteUri;
 
-            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/composite/sobjects", result);
+            Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/composite/sobjects", result);
         }
 
         [Fact]
         public void SObjectTree()
         {
-            string result = UriFormatter.SObjectTree("https://xxx.salesforce.com", "v41.0", "Account").AbsoluteUri;
+            string result = UriFormatter.SObjectTree("https://xxx.salesforce.com", "v57.0", "Account").AbsoluteUri;
 
-            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/composite/tree/Account", result);
+            Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/composite/tree/Account", result);
         }
 
         [Fact]
         public void SObjectBasicInformation()
         {
-            string result = UriFormatter.SObjectBasicInformation("https://xxx.salesforce.com", "v41.0", "Account").AbsoluteUri;
+            string result = UriFormatter.SObjectBasicInformation("https://xxx.salesforce.com", "v57.0", "Account").AbsoluteUri;
 
-            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/sobjects/Account", result);
+            Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/sobjects/Account", result);
         }
 
         [Fact]
         public void SObjectDescribe()
         {
-            string result = UriFormatter.SObjectDescribe("https://xxx.salesforce.com", "v41.0", "Account").AbsoluteUri;
+            string result = UriFormatter.SObjectDescribe("https://xxx.salesforce.com", "v57.0", "Account").AbsoluteUri;
 
-            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/sobjects/Account/describe", result);
+            Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/sobjects/Account/describe", result);
         }
 
         [Fact]
@@ -144,11 +144,11 @@ namespace NetCoreForce.Client.Tests
         {
             string result = UriFormatter.Query(
                 "https://xxx.salesforce.com",
-                "v41.0",
+                "v57.0",
                 "SELECT Id, Name FROM Account WHERE Id = '001XXXXXXXXXXXXXXX'",
                 false).AbsoluteUri;
 
-            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/query?q=SELECT%20Id,%20Name%20FROM%20Account%20WHERE%20Id%20%3D%20%27001XXXXXXXXXXXXXXX%27",
+            Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/query?q=SELECT%20Id,%20Name%20FROM%20Account%20WHERE%20Id%20%3D%20%27001XXXXXXXXXXXXXXX%27",
                 result);
         }
 
@@ -157,11 +157,11 @@ namespace NetCoreForce.Client.Tests
         {
             string result = UriFormatter.Query(
                 "https://xxx.salesforce.com",
-                "v41.0",
+                "v57.0",
                 "SELECT Id, Name FROM Account WHERE Id = '001XXXXXXXXXXXXXXX'",
                 true).AbsoluteUri;            
 
-            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/queryAll?q=SELECT%20Id,%20Name%20FROM%20Account%20WHERE%20Id%20%3D%20%27001XXXXXXXXXXXXXXX%27",
+            Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/queryAll?q=SELECT%20Id,%20Name%20FROM%20Account%20WHERE%20Id%20%3D%20%27001XXXXXXXXXXXXXXX%27",
                 result);
         }
 
@@ -171,7 +171,7 @@ namespace NetCoreForce.Client.Tests
             //TODO: add actual SOSL syntax
             string result = UriFormatter.Search( _instanceUrl, _apiVersion, "X Y").AbsoluteUri;
 
-            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/search?q=X%20Y", result);
+            Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/search?q=X%20Y", result);
         }
 
         [Fact]
@@ -180,7 +180,7 @@ namespace NetCoreForce.Client.Tests
             //TODO: add actual SOSL syntax
             string result = UriFormatter.Batch( _instanceUrl, _apiVersion).AbsoluteUri;
 
-            Assert.Equal("https://xxx.salesforce.com/services/data/v41.0/composite/batch", result);
+            Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/composite/batch", result);
         }
 
         //TODO: Auth URLs

@@ -40,7 +40,7 @@ namespace NetCoreForce.Client
         /// <summary>
         /// SObject URI
         /// </summary>
-        /// <param name="apiVersion">SFDC API version, e.g. "v48.0"</param>
+        /// <param name="apiVersion">SFDC API version, e.g. "v57.0"</param>
         /// <param name="sObjectName">SObject name, e.g. "Account"</param>
         /// <param name="objectId">SObject ID</param>
         /// <returns></returns>

@@ -16,7 +16,7 @@ namespace NetCoreForce.Client.Models
         public string Version { get; set; }
 
         /// <summary>
-        /// Base URL of the version's root, e.g. "/services/data/v48.0"
+        /// Base URL of the version's root, e.g. "/services/data/v57.0"
         /// </summary>
         /// <value></value>
         [JsonProperty(PropertyName = "url")]

@@ -133,7 +133,7 @@ namespace NetCoreForce.Client
         /// Used for: Update, Delete, Field values
         /// </summary>
         /// <param name="instanceUrl">SFDC instance URL, e.g. "https://na99.salesforce.com"</param>
-        /// <param name="apiVersion">SFDC API version, e.g. "v41.0"</param>
+        /// <param name="apiVersion">SFDC API version, e.g. "v57.0"</param>
         /// <param name="sObjectName">SObject name, e.g. "Account"</param>
         /// <param name="objectId">SObject ID</param>
         /// <param name="fields">(optional) "fields" parameter, a list of object fields for GET requests</param>
@@ -166,7 +166,7 @@ namespace NetCoreForce.Client
         /// Used for: Update multiple
         /// </summary>
         /// <param name="instanceUrl">SFDC instance URL, e.g. "https://na99.salesforce.com"</param>
-        /// <param name="apiVersion">SFDC API version, e.g. "v41.0"</param>
+        /// <param name="apiVersion">SFDC API version, e.g. "v57.0"</param>
         /// <returns></returns>
         public static Uri SObjectsComposite(string instanceUrl, string apiVersion)
         {
@@ -185,7 +185,7 @@ namespace NetCoreForce.Client
         /// Used for: Create multiple
         /// </summary>
         /// <param name="instanceUrl">SFDC instance URL, e.g. "https://na99.salesforce.com"</param>
-        /// <param name="apiVersion">SFDC API version, e.g. "v41.0"</param>
+        /// <param name="apiVersion">SFDC API version, e.g. "v57.0"</param>
         /// <param name="sObjectName">sObject name, e.g. "Account"</param>
         /// <returns></returns>
         public static Uri SObjectTree(string instanceUrl, string apiVersion, string sObjectName)
@@ -210,7 +210,7 @@ namespace NetCoreForce.Client
         /// Return Headers Using sObject Rows by External ID 
         /// </summary>
         /// <param name="instanceUrl">SFDC instance URL, e.g. "https://na99.salesforce.com"</param>
-        /// <param name="apiVersion">SFDC API version, e.g. "v41.0"</param>
+        /// <param name="apiVersion">SFDC API version, e.g. "v57.0"</param>
         /// <param name="sObjectName">sObject name, e.g. "Account"</param>
         /// <param name="fieldName"></param>
         /// <param name="fieldValue"></param>
@@ -235,7 +235,7 @@ namespace NetCoreForce.Client
         /// SObjectCollections Upsert
         /// </summary>
         /// <param name="instanceUrl">SFDC instance URL, e.g. "https://na99.salesforce.com"</param>
-        /// <param name="apiVersion">SFDC API version, e.g. "v41.0"</param>
+        /// <param name="apiVersion">SFDC API version, e.g. "v57.0"</param>
         /// <param name="sObjectName">sObject name, e.g. "Account"</param>
         /// <param name="fieldName"></param>
         /// <returns></returns>

@@ -3,7 +3,7 @@
 
     <!--Versioning-->
     <VersionPrefix>4.0.0</VersionPrefix>
-    <VersionSuffix>beta2</VersionSuffix>
+    <VersionSuffix></VersionSuffix>
 
     <!-- Targets -->
     <LangVersion>8.0</LangVersion>
@@ -30,10 +30,10 @@
     <TestTargetFrameworks>netcoreapp2.1;netcoreapp3.1;net6.0;net7.0</TestTargetFrameworks>
   </PropertyGroup>
 
-  <!-- <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
     <LibTargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net7.0</LibTargetFrameworks>
     <AppTargetFrameworks>net6.0;net7.0</AppTargetFrameworks>
     <TestTargetFrameworks>net6.0;net7.0</TestTargetFrameworks>
-  </PropertyGroup> -->
+  </PropertyGroup>
 
 </Project>

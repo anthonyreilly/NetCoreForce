@@ -1,5 +1,15 @@
 # Changelog
 
+### 2023-06-06 v4.0.0
+
+* feat: add FieldsToNull and IngoreNulls options to control null field serialization and to allow explicitly setting fields to null
+* chore: updated older API references to v57.0
+* feat: updated pregenerated models to API v57.0
+* test: updated CreateMultiple test
+* build: updated package references to latest
+* build: update GitHub actions to latest
+* build: clean up EOL framework warnings, add conditional includes for .net6.0 and older builds
+
 ### 2023-01-26 v4.0.0 Beta2
 
 * feat: Partial sObjectTree API resource support - added CreateMultipleRecords to create multiple records in a single request
@@ -156,9 +166,9 @@ This a major update, and introduces several breaking changes. It resolves severa
 
 ### 2017-10-25 v1.2.0
 * ModelGenerator: Fixed ability to generate all objects at once, and clarified option in console prompts - specifying "all" as the object name will include all available objects in the output.
-* Client: Update default client SFDC API version to v41.0
-* Models: Regenerated sample models againt SFDC API v41.0
-* Update SFDC API references in test cases and documentation to v41.0
+* Client: Update default client SFDC API version to v57.0
+* Models: Regenerated sample models againt SFDC API v57.0
+* Update SFDC API references in test cases and documentation to v57.0
 
 ### 2017-10-11 v1.1.0
 * Update ModelGenerator from netcoreapp1.0 to netcoreapp1.1, fixes crash with 1.0 runtime on MacOS 10.13

@@ -8,14 +8,14 @@ namespace NetCoreForce.Client.Tests
 {
     public class SObjectUriTests
     {
-        const string ApiVersion = "v50.0";
+        const string ApiVersion = "v57.0";
         const string SObjectName = "Account";
         const string ObjectId = "001XXXXXXXXXXXXXXX";
 
         [Fact]
         public void SObjectRows()
         {
-            string uriString = "/services/data/v50.0/sobjects/Account/001XXXXXXXXXXXXXXX";
+            string uriString = "/services/data/v57.0/sobjects/Account/001XXXXXXXXXXXXXXX";
             SObjectUri soi = new SObjectUri(uriString);
 
             Assert.Equal(uriString, soi.UriString);

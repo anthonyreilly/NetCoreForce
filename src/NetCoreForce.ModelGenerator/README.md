@@ -74,7 +74,7 @@ However, if you choose to save the config file, be careful with it as it does co
     "clientSecret": "your_client_secret",
     "username": "username",
     "password": "password",
-    "apiVersion": "v50.0",
+    "apiVersion": "v57.0",
     "authorizationEndpoint": "https://login.salesforce.com/services/oauth2/authorize",
     "tokenRequestEndpoint": "https://login.salesforce.com/services/oauth2/token",
     "tokenRevocationEndpoint": "https://login.salesforce.com/services/oauth2/revoke"

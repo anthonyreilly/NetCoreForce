@@ -13,7 +13,7 @@ namespace NetCoreForce.Client.Models
 
         /// <summary>
         /// Object URL
-        /// e.g. "/services/data/v41.0/sobjects/Account/001XXXXXXXXXXXXXXX"
+        /// e.g. "/services/data/v57.0/sobjects/Account/001XXXXXXXXXXXXXXX"
         /// </summary>
         /// <returns></returns>
         [JsonProperty(PropertyName = "url")]
