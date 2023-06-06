@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -161,6 +161,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "password")]
 		public string Password { get; set; }
+
+		///<summary>
+		/// Auth Type
+		/// <para>Name: AuthType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "authType")]
+		public string AuthType { get; set; }
 
 	}
 }

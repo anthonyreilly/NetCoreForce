@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -417,6 +417,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "userType")]
 		[Updateable(false), Createable(false)]
 		public string UserType { get; set; }
+
+		///<summary>
+		/// Authentication Method Reference
+		/// <para>Name: AuthMethodReference</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "authMethodReference")]
+		[Updateable(false), Createable(false)]
+		public string AuthMethodReference { get; set; }
 
 	}
 }

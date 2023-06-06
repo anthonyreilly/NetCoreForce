@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -95,6 +95,25 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "systemModstamp")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? SystemModstamp { get; set; }
+
+		///<summary>
+		/// Expires On
+		/// <para>Name: ExpirationDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "expirationDate")]
+		public DateTimeOffset? ExpirationDate { get; set; }
+
+		///<summary>
+		/// Is Active
+		/// <para>Name: IsActive</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isActive")]
+		[Updateable(false), Createable(false)]
+		public bool? IsActive { get; set; }
 
 	}
 }

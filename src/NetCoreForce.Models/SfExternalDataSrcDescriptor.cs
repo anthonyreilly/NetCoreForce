@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Secure Agent Plug-in Property
-	///<para>SObject Name: SecureAgentPluginProperty</para>
+	/// External Data Source Descriptor
+	///<para>SObject Name: ExternalDataSrcDescriptor</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfSecureAgentPluginProperty : SObject
+	public class SfExternalDataSrcDescriptor : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "SecureAgentPluginProperty"; }
+			get { return "ExternalDataSrcDescriptor"; }
 		}
 
 		///<summary>
-		/// Secure Agent Plug-in Property ID
+		/// External Data Source Descriptor ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -41,6 +41,64 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isDeleted")]
 		[Updateable(false), Createable(false)]
 		public bool? IsDeleted { get; set; }
+
+		///<summary>
+		/// External Data Source ID
+		/// <para>Name: ExternalDataSourceId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "externalDataSourceId")]
+		[Updateable(false), Createable(false)]
+		public string ExternalDataSourceId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: ExternalDataSource
+		/// <para>RelationshipName: ExternalDataSource</para>
+		///</summary>
+		[JsonProperty(PropertyName = "externalDataSource")]
+		[Updateable(false), Createable(false)]
+		public SfExternalDataSource ExternalDataSource { get; set; }
+
+		///<summary>
+		/// Object Name
+		/// <para>Name: DeveloperName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "developerName")]
+		[Updateable(false), Createable(false)]
+		public string DeveloperName { get; set; }
+
+		///<summary>
+		/// Master Language
+		/// <para>Name: Language</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "language")]
+		[Updateable(false), Createable(false)]
+		public string Language { get; set; }
+
+		///<summary>
+		/// Label
+		/// <para>Name: MasterLabel</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "masterLabel")]
+		[Updateable(false), Createable(false)]
+		public string MasterLabel { get; set; }
+
+		///<summary>
+		/// Namespace Prefix
+		/// <para>Name: NamespacePrefix</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "namespacePrefix")]
+		[Updateable(false), Createable(false)]
+		public string NamespacePrefix { get; set; }
 
 		///<summary>
 		/// Created Date
@@ -109,42 +167,44 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Secure Agent Plug-in ID
-		/// <para>Name: SecureAgentPluginId</para>
-		/// <para>SF Type: reference</para>
+		/// External Data Source Descriptor Type
+		/// <para>Name: Type</para>
+		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "secureAgentPluginId")]
+		[JsonProperty(PropertyName = "type")]
 		[Updateable(false), Createable(false)]
-		public string SecureAgentPluginId { get; set; }
+		public string Type { get; set; }
 
 		///<summary>
-		/// ReferenceTo: SecureAgentPlugin
-		/// <para>RelationshipName: SecureAgentPlugin</para>
+		/// System Version
+		/// <para>Name: SystemVersion</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "secureAgentPlugin")]
+		[JsonProperty(PropertyName = "systemVersion")]
 		[Updateable(false), Createable(false)]
-		public SfSecureAgentPlugin SecureAgentPlugin { get; set; }
+		public int? SystemVersion { get; set; }
 
 		///<summary>
-		/// Property Name
-		/// <para>Name: PropertyName</para>
+		/// Descriptor Version
+		/// <para>Name: DescriptorVersion</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "propertyName")]
+		[JsonProperty(PropertyName = "descriptorVersion")]
 		[Updateable(false), Createable(false)]
-		public string PropertyName { get; set; }
+		public string DescriptorVersion { get; set; }
 
 		///<summary>
-		/// Property Value
-		/// <para>Name: PropertyValue</para>
-		/// <para>SF Type: textarea</para>
-		/// <para>Nillable: True</para>
+		/// External Data Source Descriptor Subtype
+		/// <para>Name: Subtype</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "propertyValue")]
+		[JsonProperty(PropertyName = "subtype")]
 		[Updateable(false), Createable(false)]
-		public string PropertyValue { get; set; }
+		public string Subtype { get; set; }
 
 	}
 }

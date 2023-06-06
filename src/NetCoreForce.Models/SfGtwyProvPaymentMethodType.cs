@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -198,6 +198,23 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "gtwyProviderPaymentMethodType")]
 		public string GtwyProviderPaymentMethodType { get; set; }
+
+		///<summary>
+		/// Record Type ID
+		/// <para>Name: RecordTypeId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "recordTypeId")]
+		public string RecordTypeId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: RecordType
+		/// <para>RelationshipName: RecordType</para>
+		///</summary>
+		[JsonProperty(PropertyName = "recordType")]
+		[Updateable(false), Createable(false)]
+		public SfRecordType RecordType { get; set; }
 
 	}
 }

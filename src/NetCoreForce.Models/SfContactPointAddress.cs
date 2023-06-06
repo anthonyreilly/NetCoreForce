@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -325,6 +325,24 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "isDefault")]
 		public bool? IsDefault { get; set; }
+
+		///<summary>
+		/// Preference Rank
+		/// <para>Name: PreferenceRank</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "preferenceRank")]
+		public int? PreferenceRank { get; set; }
+
+		///<summary>
+		/// Usage Type
+		/// <para>Name: UsageType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "usageType")]
+		public string UsageType { get; set; }
 
 	}
 }

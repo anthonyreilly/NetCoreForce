@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -1131,22 +1131,13 @@ namespace NetCoreForce.Models
 		public bool? UserPreferencesShowCountryToGuestUsers { get; set; }
 
 		///<summary>
-		/// DisableFeedbackEmail
-		/// <para>Name: UserPreferencesDisableFeedbackEmail</para>
+		/// ShowForecastingChangeSignals
+		/// <para>Name: UserPreferencesShowForecastingChangeSignals</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "userPreferencesDisableFeedbackEmail")]
-		public bool? UserPreferencesDisableFeedbackEmail { get; set; }
-
-		///<summary>
-		/// DisableWorkEmail
-		/// <para>Name: UserPreferencesDisableWorkEmail</para>
-		/// <para>SF Type: boolean</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "userPreferencesDisableWorkEmail")]
-		public bool? UserPreferencesDisableWorkEmail { get; set; }
+		[JsonProperty(PropertyName = "userPreferencesShowForecastingChangeSignals")]
+		public bool? UserPreferencesShowForecastingChangeSignals { get; set; }
 
 		///<summary>
 		/// HideS1BrowserUI
@@ -1426,6 +1417,42 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "userPreferencesNewLightningReportRunPageEnabled")]
 		public bool? UserPreferencesNewLightningReportRunPageEnabled { get; set; }
+
+		///<summary>
+		/// ReverseOpenActivitiesView
+		/// <para>Name: UserPreferencesReverseOpenActivitiesView</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesReverseOpenActivitiesView")]
+		public bool? UserPreferencesReverseOpenActivitiesView { get; set; }
+
+		///<summary>
+		/// HasSentWarningEmail
+		/// <para>Name: UserPreferencesHasSentWarningEmail</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesHasSentWarningEmail")]
+		public bool? UserPreferencesHasSentWarningEmail { get; set; }
+
+		///<summary>
+		/// HasSentWarningEmail238
+		/// <para>Name: UserPreferencesHasSentWarningEmail238</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesHasSentWarningEmail238")]
+		public bool? UserPreferencesHasSentWarningEmail238 { get; set; }
+
+		///<summary>
+		/// HasSentWarningEmail240
+		/// <para>Name: UserPreferencesHasSentWarningEmail240</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesHasSentWarningEmail240")]
+		public bool? UserPreferencesHasSentWarningEmail240 { get; set; }
 
 		///<summary>
 		/// NativeEmailClient

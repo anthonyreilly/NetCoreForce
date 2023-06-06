@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -343,6 +343,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "lastActivityDate")]
 		[Updateable(false), Createable(false)]
 		public DateTime? LastActivityDate { get; set; }
+
+		///<summary>
+		/// Push Count
+		/// <para>Name: PushCount</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "pushCount")]
+		[Updateable(false), Createable(false)]
+		public int? PushCount { get; set; }
+
+		///<summary>
+		/// Last Stage Change Date
+		/// <para>Name: LastStageChangeDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastStageChangeDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastStageChangeDate { get; set; }
 
 		///<summary>
 		/// Fiscal Quarter

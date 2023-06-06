@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -402,7 +402,7 @@ namespace NetCoreForce.Models
 		public string Type { get; set; }
 
 		///<summary>
-		/// Lead/Contact ID
+		/// Related Record ID
 		/// <para>Name: LeadOrContactId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
@@ -412,7 +412,7 @@ namespace NetCoreForce.Models
 		public string LeadOrContactId { get; set; }
 
 		///<summary>
-		/// Lead/Contact Owner ID
+		/// Related Record Owner ID
 		/// <para>Name: LeadOrContactOwnerId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>

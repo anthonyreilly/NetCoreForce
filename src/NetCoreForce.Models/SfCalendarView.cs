@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -216,6 +216,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "sobjectType")]
 		[Updateable(false), Createable(true)]
 		public string SobjectType { get; set; }
+
+		///<summary>
+		/// Publisher ID
+		/// <para>Name: PublisherId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "publisherId")]
+		[Updateable(false), Createable(true)]
+		public string PublisherId { get; set; }
 
 	}
 }

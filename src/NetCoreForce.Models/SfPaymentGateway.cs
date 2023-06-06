@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -141,7 +141,7 @@ namespace NetCoreForce.Models
 		/// Payment Gateway Provider ID
 		/// <para>Name: PaymentGatewayProviderId</para>
 		/// <para>SF Type: reference</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "paymentGatewayProviderId")]
 		public string PaymentGatewayProviderId { get; set; }
@@ -158,7 +158,7 @@ namespace NetCoreForce.Models
 		/// Named Credential ID
 		/// <para>Name: MerchantCredentialId</para>
 		/// <para>SF Type: reference</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "merchantCredentialId")]
 		public string MerchantCredentialId { get; set; }
@@ -188,6 +188,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "comments")]
 		public string Comments { get; set; }
+
+		///<summary>
+		/// External Reference
+		/// <para>Name: ExternalReference</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "externalReference")]
+		public string ExternalReference { get; set; }
 
 	}
 }

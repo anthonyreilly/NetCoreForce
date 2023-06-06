@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -159,7 +159,7 @@ namespace NetCoreForce.Models
 		/// Authorization Form Text ID
 		/// <para>Name: AuthorizationFormTextId</para>
 		/// <para>SF Type: reference</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "authorizationFormTextId")]
 		public string AuthorizationFormTextId { get; set; }

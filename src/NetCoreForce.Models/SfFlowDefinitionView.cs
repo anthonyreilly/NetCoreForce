@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -173,6 +173,46 @@ namespace NetCoreForce.Models
 		public bool? IsTemplate { get; set; }
 
 		///<summary>
+		/// Overridable
+		/// <para>Name: IsOverridable</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isOverridable")]
+		[Updateable(false), Createable(false)]
+		public bool? IsOverridable { get; set; }
+
+		///<summary>
+		/// Flow Definition View ID
+		/// <para>Name: OverriddenById</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "overriddenById")]
+		[Updateable(false), Createable(false)]
+		public string OverriddenById { get; set; }
+
+		///<summary>
+		/// Flow Definition View ID
+		/// <para>Name: SourceTemplateId</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "sourceTemplateId")]
+		[Updateable(false), Createable(false)]
+		public string SourceTemplateId { get; set; }
+
+		///<summary>
+		/// Flow Definition View ID
+		/// <para>Name: OverriddenFlowId</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "overriddenFlowId")]
+		[Updateable(false), Createable(false)]
+		public string OverriddenFlowId { get; set; }
+
+		///<summary>
 		/// Is Swing Flow
 		/// <para>Name: IsSwingFlow</para>
 		/// <para>SF Type: boolean</para>
@@ -213,14 +253,74 @@ namespace NetCoreForce.Models
 		public string InstalledPackageName { get; set; }
 
 		///<summary>
-		/// Preview Label
-		/// <para>Name: GuestMasterLabel</para>
+		/// Triggering Object or Platform Event Label
+		/// <para>Name: TriggerObjectOrEventLabel</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "guestMasterLabel")]
+		[JsonProperty(PropertyName = "triggerObjectOrEventLabel")]
 		[Updateable(false), Createable(false)]
-		public string GuestMasterLabel { get; set; }
+		public string TriggerObjectOrEventLabel { get; set; }
+
+		///<summary>
+		/// Entity Definition ID
+		/// <para>Name: TriggerObjectOrEventId</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "triggerObjectOrEventId")]
+		[Updateable(false), Createable(false)]
+		public string TriggerObjectOrEventId { get; set; }
+
+		///<summary>
+		/// Record Trigger Type
+		/// <para>Name: RecordTriggerType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "recordTriggerType")]
+		[Updateable(false), Createable(false)]
+		public string RecordTriggerType { get; set; }
+
+		///<summary>
+		/// Has Asynchronous After Commit Path
+		/// <para>Name: HasAsyncAfterCommitPath</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "hasAsyncAfterCommitPath")]
+		[Updateable(false), Createable(false)]
+		public bool? HasAsyncAfterCommitPath { get; set; }
+
+		///<summary>
+		/// Version Number
+		/// <para>Name: VersionNumber</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "versionNumber")]
+		[Updateable(false), Createable(false)]
+		public int? VersionNumber { get; set; }
+
+		///<summary>
+		/// Trigger Order
+		/// <para>Name: TriggerOrder</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "triggerOrder")]
+		[Updateable(false), Createable(false)]
+		public int? TriggerOrder { get; set; }
+
+		///<summary>
+		/// Environments
+		/// <para>Name: Environments</para>
+		/// <para>SF Type: multipicklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "environments")]
+		[Updateable(false), Createable(false)]
+		public string Environments { get; set; }
 
 	}
 }

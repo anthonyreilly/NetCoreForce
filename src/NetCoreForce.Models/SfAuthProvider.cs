@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -188,13 +188,31 @@ namespace NetCoreForce.Models
 		public bool? OptionsIncludeOrgIdInId { get; set; }
 
 		///<summary>
-		/// Include Consumer Secret in API Responses
+		/// Include Consumer Secret in SOAP API Responses
 		/// <para>Name: OptionsSendSecretInApis</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "optionsSendSecretInApis")]
 		public bool? OptionsSendSecretInApis { get; set; }
+
+		///<summary>
+		/// isMuleSoftUS
+		/// <para>Name: OptionsIsMuleSoftUS</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsMuleSoftUS")]
+		public bool? OptionsIsMuleSoftUS { get; set; }
+
+		///<summary>
+		/// isMuleSoftEU
+		/// <para>Name: OptionsIsMuleSoftEU</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsMuleSoftEU")]
+		public bool? OptionsIsMuleSoftEU { get; set; }
 
 		///<summary>
 		/// Icon URL

@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Secure Agent Cluster
-	///<para>SObject Name: SecureAgentsCluster</para>
+	/// ML Prediction Definition
+	///<para>SObject Name: MLPredictionDefinition</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfSecureAgentsCluster : SObject
+	public class SfMLPredictionDefinition : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "SecureAgentsCluster"; }
+			get { return "MLPredictionDefinition"; }
 		}
 
 		///<summary>
-		/// Secure Agent Cluster ID
+		/// ML Prediction Definition ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -71,6 +71,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "masterLabel")]
 		[Updateable(false), Createable(false)]
 		public string MasterLabel { get; set; }
+
+		///<summary>
+		/// Namespace Prefix
+		/// <para>Name: NamespacePrefix</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "namespacePrefix")]
+		[Updateable(false), Createable(false)]
+		public string NamespacePrefix { get; set; }
 
 		///<summary>
 		/// Created Date
@@ -139,14 +149,62 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Description
-		/// <para>Name: Description</para>
-		/// <para>SF Type: textarea</para>
+		/// AI Application ID
+		/// <para>Name: ApplicationId</para>
+		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "description")]
+		[JsonProperty(PropertyName = "applicationId")]
 		[Updateable(false), Createable(false)]
-		public string Description { get; set; }
+		public string ApplicationId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: AIApplication
+		/// <para>RelationshipName: Application</para>
+		///</summary>
+		[JsonProperty(PropertyName = "application")]
+		[Updateable(false), Createable(false)]
+		public SfAIApplication Application { get; set; }
+
+		///<summary>
+		/// ML Prediction Type
+		/// <para>Name: Type</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "type")]
+		[Updateable(false), Createable(false)]
+		public string Type { get; set; }
+
+		///<summary>
+		/// ML Prediction Status
+		/// <para>Name: Status</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "status")]
+		[Updateable(false), Createable(false)]
+		public string Status { get; set; }
+
+		///<summary>
+		/// Prediction Field ID
+		/// <para>Name: PredictionField</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "predictionField")]
+		[Updateable(false), Createable(false)]
+		public string PredictionField { get; set; }
+
+		///<summary>
+		/// Pushback Field ID
+		/// <para>Name: PushbackField</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "pushbackField")]
+		[Updateable(false), Createable(false)]
+		public string PushbackField { get; set; }
 
 	}
 }

@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -309,7 +309,7 @@ namespace NetCoreForce.Models
 		/// Target Page Type
 		/// <para>Name: TargetPageType</para>
 		/// <para>SF Type: string</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "targetPageType")]
 		public string TargetPageType { get; set; }
@@ -318,7 +318,7 @@ namespace NetCoreForce.Models
 		/// Target Page Key 1
 		/// <para>Name: TargetPageKey1</para>
 		/// <para>SF Type: string</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "targetPageKey1")]
 		public string TargetPageKey1 { get; set; }
@@ -345,7 +345,7 @@ namespace NetCoreForce.Models
 		/// Target Application Developer Name
 		/// <para>Name: TargetAppDeveloperName</para>
 		/// <para>SF Type: string</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "targetAppDeveloperName")]
 		public string TargetAppDeveloperName { get; set; }
@@ -414,6 +414,86 @@ namespace NetCoreForce.Models
 		public string ThemeSaturation { get; set; }
 
 		///<summary>
+		/// Target Page Key 1 Reference
+		/// <para>Name: TargetPageKey1Ref</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "targetPageKey1Ref")]
+		public string TargetPageKey1Ref { get; set; }
+
+		///<summary>
+		/// Image Alt Text
+		/// <para>Name: ImageAltText</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "imageAltText")]
+		public string ImageAltText { get; set; }
+
+		///<summary>
+		/// Asset File ID
+		/// <para>Name: ImageId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "imageId")]
+		public string ImageId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: ContentAsset
+		/// <para>RelationshipName: Image</para>
+		///</summary>
+		[JsonProperty(PropertyName = "image")]
+		[Updateable(false), Createable(false)]
+		public SfContentAsset Image { get; set; }
+
+		///<summary>
+		/// Image URL
+		/// <para>Name: ImageLink</para>
+		/// <para>SF Type: url</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "imageLink")]
+		public string ImageLink { get; set; }
+
+		///<summary>
+		/// Image Location
+		/// <para>Name: ImageLocation</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "imageLocation")]
+		public string ImageLocation { get; set; }
+
+		///<summary>
+		/// Target Page Key 3
+		/// <para>Name: TargetPageKey3</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "targetPageKey3")]
+		public string TargetPageKey3 { get; set; }
+
+		///<summary>
+		/// Element Relative Position
+		/// <para>Name: ElementRelativePosition</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "elementRelativePosition")]
+		public string ElementRelativePosition { get; set; }
+
+		///<summary>
+		/// Reference Element Context
+		/// <para>Name: ReferenceElementContext</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "referenceElementContext")]
+		public string ReferenceElementContext { get; set; }
+
+		///<summary>
 		/// Index Formula Field With Is Published Data
 		/// <para>Name: IndexWithIsPublished</para>
 		/// <para>SF Type: string</para>
@@ -432,6 +512,32 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "indexWithoutIsPublished")]
 		[Updateable(false), Createable(false)]
 		public string IndexWithoutIsPublished { get; set; }
+
+		///<summary>
+		/// Target Page Key 4
+		/// <para>Name: TargetPageKey4</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "targetPageKey4")]
+		public string TargetPageKey4 { get; set; }
+
+		///<summary>
+		/// Record Type ID
+		/// <para>Name: TargetRecordTypeId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "targetRecordTypeId")]
+		public string TargetRecordTypeId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: RecordType
+		/// <para>RelationshipName: TargetRecordType</para>
+		///</summary>
+		[JsonProperty(PropertyName = "targetRecordType")]
+		[Updateable(false), Createable(false)]
+		public SfRecordType TargetRecordType { get; set; }
 
 	}
 }

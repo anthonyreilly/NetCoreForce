@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -229,6 +229,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "countryIso")]
 		[Updateable(false), Createable(false)]
 		public string CountryIso { get; set; }
+
+		///<summary>
+		/// Authentication Method Reference
+		/// <para>Name: AuthMethodReference</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "authMethodReference")]
+		[Updateable(false), Createable(false)]
+		public string AuthMethodReference { get; set; }
+
+		///<summary>
+		/// Login Subtype
+		/// <para>Name: LoginSubType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "loginSubType")]
+		[Updateable(false), Createable(false)]
+		public string LoginSubType { get; set; }
 
 	}
 }

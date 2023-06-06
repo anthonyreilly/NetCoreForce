@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -197,6 +197,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "optionsUseConfigRequestMethod")]
 		[Updateable(false), Createable(false)]
 		public bool? OptionsUseConfigRequestMethod { get; set; }
+
+		///<summary>
+		/// UseSameDigestAlgoForSigning
+		/// <para>Name: OptionsUseSameDigestAlgoForSigning</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsUseSameDigestAlgoForSigning")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsUseSameDigestAlgoForSigning { get; set; }
 
 		///<summary>
 		/// Name ID Format

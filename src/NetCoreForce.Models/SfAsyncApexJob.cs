@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -187,6 +187,24 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "lastProcessedOffset")]
 		[Updateable(false), Createable(false)]
 		public int? LastProcessedOffset { get; set; }
+
+		///<summary>
+		/// Scheduled Job ID
+		/// <para>Name: CronTriggerId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "cronTriggerId")]
+		[Updateable(false), Createable(false)]
+		public string CronTriggerId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: CronTrigger
+		/// <para>RelationshipName: CronTrigger</para>
+		///</summary>
+		[JsonProperty(PropertyName = "cronTrigger")]
+		[Updateable(false), Createable(false)]
+		public SfCronTrigger CronTrigger { get; set; }
 
 	}
 }

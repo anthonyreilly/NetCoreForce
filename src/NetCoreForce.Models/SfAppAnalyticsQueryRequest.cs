@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -153,7 +153,7 @@ namespace NetCoreForce.Models
 		/// Start Time
 		/// <para>Name: StartTime</para>
 		/// <para>SF Type: datetime</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "startTime")]
 		[Updateable(false), Createable(true)]
@@ -210,6 +210,16 @@ namespace NetCoreForce.Models
 		public string ErrorMessage { get; set; }
 
 		///<summary>
+		/// Query Submitted Time
+		/// <para>Name: QuerySubmittedTime</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "querySubmittedTime")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? QuerySubmittedTime { get; set; }
+
+		///<summary>
 		/// Package IDs
 		/// <para>Name: PackageIds</para>
 		/// <para>SF Type: string</para>
@@ -238,6 +248,36 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "downloadSize")]
 		[Updateable(false), Createable(false)]
 		public string DownloadSize { get; set; }
+
+		///<summary>
+		/// File Compression
+		/// <para>Name: FileCompression</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "fileCompression")]
+		[Updateable(false), Createable(true)]
+		public string FileCompression { get; set; }
+
+		///<summary>
+		/// Available Since
+		/// <para>Name: AvailableSince</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "availableSince")]
+		[Updateable(false), Createable(true)]
+		public DateTimeOffset? AvailableSince { get; set; }
+
+		///<summary>
+		/// File Type
+		/// <para>Name: FileType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "fileType")]
+		[Updateable(false), Createable(true)]
+		public string FileType { get; set; }
 
 	}
 }

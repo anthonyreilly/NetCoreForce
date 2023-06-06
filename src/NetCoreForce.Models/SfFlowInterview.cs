@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// Flow Interview Id
+		/// Flow Interview ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -178,6 +178,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "wasPausedFromScreen")]
 		[Updateable(false), Createable(false)]
 		public bool? WasPausedFromScreen { get; set; }
+
+		///<summary>
+		/// Flow Version View ID
+		/// <para>Name: FlowVersionViewId</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "flowVersionViewId")]
+		[Updateable(false), Createable(false)]
+		public string FlowVersionViewId { get; set; }
+
+		///<summary>
+		/// Interview Status
+		/// <para>Name: InterviewStatus</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "interviewStatus")]
+		[Updateable(false), Createable(false)]
+		public string InterviewStatus { get; set; }
 
 	}
 }

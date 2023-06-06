@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -231,6 +231,24 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "stepCount")]
 		public int? StepCount { get; set; }
+
+		///<summary>
+		/// Snooze Until
+		/// <para>Name: SnoozeUntil</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "snoozeUntil")]
+		public DateTimeOffset? SnoozeUntil { get; set; }
+
+		///<summary>
+		/// Times Snoozed
+		/// <para>Name: TimesSnoozed</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "timesSnoozed")]
+		public int? TimesSnoozed { get; set; }
 
 	}
 }

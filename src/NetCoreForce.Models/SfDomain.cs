@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -53,14 +53,14 @@ namespace NetCoreForce.Models
 		public string Domain { get; set; }
 
 		///<summary>
-		/// Enable Strict Transport Security headers
-		/// <para>Name: OptionsHstsHeaders</para>
+		/// Allow Strict Transport Security preloading
+		/// <para>Name: OptionsHstsPreload</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "optionsHstsHeaders")]
+		[JsonProperty(PropertyName = "optionsHstsPreload")]
 		[Updateable(false), Createable(false)]
-		public bool? OptionsHstsHeaders { get; set; }
+		public bool? OptionsHstsPreload { get; set; }
 
 		///<summary>
 		/// CNAME Target

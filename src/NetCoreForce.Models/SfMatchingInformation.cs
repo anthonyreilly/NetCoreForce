@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -126,6 +126,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "emailAddress")]
+		[Updateable(false), Createable(false)]
 		public string EmailAddress { get; set; }
 
 		///<summary>
@@ -135,6 +136,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "externalId")]
+		[Updateable(false), Createable(false)]
 		public string ExternalId { get; set; }
 
 		///<summary>
@@ -144,6 +146,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "sFDCIdId")]
+		[Updateable(false), Createable(false)]
 		public string SFDCIdId { get; set; }
 
 		///<summary>
@@ -161,6 +164,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isPickedAsPreferred")]
+		[Updateable(false), Createable(false)]
 		public bool? IsPickedAsPreferred { get; set; }
 
 		///<summary>
@@ -170,6 +174,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "userId")]
+		[Updateable(false), Createable(false)]
 		public string UserId { get; set; }
 
 		///<summary>
@@ -187,6 +192,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "preferenceUsed")]
+		[Updateable(false), Createable(false)]
 		public string PreferenceUsed { get; set; }
 
 	}

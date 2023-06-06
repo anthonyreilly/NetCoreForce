@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -208,6 +208,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "externalId")]
 		public string ExternalId { get; set; }
+
+		///<summary>
+		/// RecommendationResponse Identifier
+		/// <para>Name: RecommendationKey</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "recommendationKey")]
+		public string RecommendationKey { get; set; }
 
 	}
 }

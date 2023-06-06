@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -207,6 +207,93 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "commSubscriptionChannelType")]
 		[Updateable(false), Createable(false)]
 		public SfCommSubscriptionChannelType CommSubscriptionChannelType { get; set; }
+
+		///<summary>
+		/// Party Role ID
+		/// <para>Name: PartyRoleId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "partyRoleId")]
+		public string PartyRoleId { get; set; }
+
+		///<summary>
+		/// Business Brand ID
+		/// <para>Name: BusinessBrandId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "businessBrandId")]
+		public string BusinessBrandId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: BusinessBrand
+		/// <para>RelationshipName: BusinessBrand</para>
+		///</summary>
+		[JsonProperty(PropertyName = "businessBrand")]
+		[Updateable(false), Createable(false)]
+		public SfBusinessBrand BusinessBrand { get; set; }
+
+		///<summary>
+		/// Privacy Consent Status
+		/// <para>Name: PrivacyConsentStatus</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "privacyConsentStatus")]
+		public string PrivacyConsentStatus { get; set; }
+
+		///<summary>
+		/// Data Use Purpose ID
+		/// <para>Name: DataUsePurposeId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "dataUsePurposeId")]
+		public string DataUsePurposeId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: DataUsePurpose
+		/// <para>RelationshipName: DataUsePurpose</para>
+		///</summary>
+		[JsonProperty(PropertyName = "dataUsePurpose")]
+		[Updateable(false), Createable(false)]
+		public SfDataUsePurpose DataUsePurpose { get; set; }
+
+		///<summary>
+		/// Engagement Channel Type ID
+		/// <para>Name: EngagementChannelTypeId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "engagementChannelTypeId")]
+		public string EngagementChannelTypeId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: EngagementChannelType
+		/// <para>RelationshipName: EngagementChannelType</para>
+		///</summary>
+		[JsonProperty(PropertyName = "engagementChannelType")]
+		[Updateable(false), Createable(false)]
+		public SfEngagementChannelType EngagementChannelType { get; set; }
+
+		///<summary>
+		/// Individual ID
+		/// <para>Name: PartyId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "partyId")]
+		[Updateable(false), Createable(false)]
+		public string PartyId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Individual
+		/// <para>RelationshipName: Party</para>
+		///</summary>
+		[JsonProperty(PropertyName = "party")]
+		[Updateable(false), Createable(false)]
+		public SfIndividual Party { get; set; }
 
 	}
 }

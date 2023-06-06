@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Trusted Domain for Visualforce and Survey Inline Frames
+	/// Trusted Domain for Inline Frames
 	///<para>SObject Name: IframeWhiteListUrl</para>
 	///<para>Custom Object: False</para>
 	///</summary>

@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -71,6 +71,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "usedLicenses")]
 		[Updateable(false), Createable(false)]
 		public int? UsedLicenses { get; set; }
+
+		///<summary>
+		/// Enabled for Platform Integrations
+		/// <para>Name: IsAvailableForIntegrations</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isAvailableForIntegrations")]
+		[Updateable(false), Createable(false)]
+		public bool? IsAvailableForIntegrations { get; set; }
 
 		///<summary>
 		/// Expiration Date

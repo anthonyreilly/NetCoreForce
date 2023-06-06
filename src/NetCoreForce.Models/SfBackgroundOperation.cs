@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -43,7 +43,7 @@ namespace NetCoreForce.Models
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
-		/// Background Operation Name
+		/// Name
 		/// <para>Name: Name</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: False</para>
@@ -227,7 +227,7 @@ namespace NetCoreForce.Models
 		public int? Timeout { get; set; }
 
 		///<summary>
-		/// ExpiresAt
+		/// Expires
 		/// <para>Name: ExpiresAt</para>
 		/// <para>SF Type: datetime</para>
 		/// <para>Nillable: True</para>
@@ -237,7 +237,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? ExpiresAt { get; set; }
 
 		///<summary>
-		/// NumFollowers
+		/// Num Followers
 		/// <para>Name: NumFollowers</para>
 		/// <para>SF Type: int</para>
 		/// <para>Nillable: True</para>
@@ -247,7 +247,7 @@ namespace NetCoreForce.Models
 		public int? NumFollowers { get; set; }
 
 		///<summary>
-		/// ProcessAfter
+		/// Process After
 		/// <para>Name: ProcessAfter</para>
 		/// <para>SF Type: datetime</para>
 		/// <para>Nillable: True</para>
@@ -257,7 +257,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? ProcessAfter { get; set; }
 
 		///<summary>
-		/// ParentKey
+		/// Parent Key
 		/// <para>Name: ParentKey</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -267,7 +267,7 @@ namespace NetCoreForce.Models
 		public string ParentKey { get; set; }
 
 		///<summary>
-		/// RetryLimit
+		/// Retry Limit
 		/// <para>Name: RetryLimit</para>
 		/// <para>SF Type: int</para>
 		/// <para>Nillable: True</para>
@@ -277,7 +277,7 @@ namespace NetCoreForce.Models
 		public int? RetryLimit { get; set; }
 
 		///<summary>
-		/// RetryCount
+		/// Retry Count
 		/// <para>Name: RetryCount</para>
 		/// <para>SF Type: int</para>
 		/// <para>Nillable: True</para>
@@ -287,7 +287,7 @@ namespace NetCoreForce.Models
 		public int? RetryCount { get; set; }
 
 		///<summary>
-		/// RetryBackoff
+		/// Retry Backoff
 		/// <para>Name: RetryBackoff</para>
 		/// <para>SF Type: int</para>
 		/// <para>Nillable: True</para>
@@ -297,7 +297,7 @@ namespace NetCoreForce.Models
 		public int? RetryBackoff { get; set; }
 
 		///<summary>
-		/// Error
+		/// Error Message
 		/// <para>Name: Error</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -305,6 +305,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "error")]
 		[Updateable(false), Createable(false)]
 		public string Error { get; set; }
+
+		///<summary>
+		/// Type
+		/// <para>Name: Type</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "type")]
+		[Updateable(false), Createable(false)]
+		public string Type { get; set; }
 
 	}
 }

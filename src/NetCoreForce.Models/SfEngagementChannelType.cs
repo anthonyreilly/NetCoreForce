@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -145,6 +145,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "lastReferencedDate")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? LastReferencedDate { get; set; }
+
+		///<summary>
+		/// Contact Point Type
+		/// <para>Name: ContactPointType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "contactPointType")]
+		public string ContactPointType { get; set; }
 
 	}
 }

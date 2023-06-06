@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -251,6 +251,32 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "doubleConsentCaptureDate")]
 		public DateTimeOffset? DoubleConsentCaptureDate { get; set; }
+
+		///<summary>
+		/// Party Role ID
+		/// <para>Name: PartyRoleId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "partyRoleId")]
+		public string PartyRoleId { get; set; }
+
+		///<summary>
+		/// Business Brand ID
+		/// <para>Name: BusinessBrandId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "businessBrandId")]
+		public string BusinessBrandId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: BusinessBrand
+		/// <para>RelationshipName: BusinessBrand</para>
+		///</summary>
+		[JsonProperty(PropertyName = "businessBrand")]
+		[Updateable(false), Createable(false)]
+		public SfBusinessBrand BusinessBrand { get; set; }
 
 	}
 }

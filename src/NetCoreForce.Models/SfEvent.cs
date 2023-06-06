@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -448,7 +448,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "recurrence2PatternText")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Createable(true)]
 		public string Recurrence2PatternText { get; set; }
 
 		///<summary>

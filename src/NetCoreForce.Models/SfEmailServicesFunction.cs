@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -96,7 +96,7 @@ namespace NetCoreForce.Models
 		public string ApexClassId { get; set; }
 
 		///<summary>
-		/// Over Email Rate Limit Action
+		/// Over email rate limit action
 		/// <para>Name: OverLimitAction</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
@@ -123,7 +123,7 @@ namespace NetCoreForce.Models
 		public string AddressInactiveAction { get; set; }
 
 		///<summary>
-		/// Unauthenticated Sender Action
+		/// Unauthenticated sender action
 		/// <para>Name: AuthenticationFailureAction</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
@@ -132,7 +132,7 @@ namespace NetCoreForce.Models
 		public string AuthenticationFailureAction { get; set; }
 
 		///<summary>
-		/// Unauthorized Sender Action
+		/// Unauthorized sender action
 		/// <para>Name: AuthorizationFailureAction</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>

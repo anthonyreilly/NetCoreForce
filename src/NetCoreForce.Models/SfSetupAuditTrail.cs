@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -109,6 +109,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "responsibleNamespacePrefix")]
 		[Updateable(false), Createable(false)]
 		public string ResponsibleNamespacePrefix { get; set; }
+
+		///<summary>
+		/// Created By Context
+		/// <para>Name: CreatedByContext</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "createdByContext")]
+		[Updateable(false), Createable(false)]
+		public string CreatedByContext { get; set; }
+
+		///<summary>
+		/// Created By Issuer
+		/// <para>Name: CreatedByIssuer</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "createdByIssuer")]
+		[Updateable(false), Createable(false)]
+		public string CreatedByIssuer { get; set; }
 
 	}
 }

@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Secure Agent Plug-in
-	///<para>SObject Name: SecureAgentPlugin</para>
+	/// AI Insight Reason
+	///<para>SObject Name: AIInsightReason</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfSecureAgentPlugin : SObject
+	public class SfAIInsightReason : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "SecureAgentPlugin"; }
+			get { return "AIInsightReason"; }
 		}
 
 		///<summary>
-		/// Secure Agent Plug-in ID
+		/// AI Insight Reason ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -41,6 +41,17 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isDeleted")]
 		[Updateable(false), Createable(false)]
 		public bool? IsDeleted { get; set; }
+
+		///<summary>
+		/// Name
+		/// <para>Name: Name</para>
+		/// <para>SF Type: string</para>
+		/// <para>AutoNumber field</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "name")]
+		[Updateable(false), Createable(false)]
+		public string Name { get; set; }
 
 		///<summary>
 		/// Created Date
@@ -109,72 +120,140 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Secure Agent ID
-		/// <para>Name: SecureAgentId</para>
+		/// AI Insight Value ID
+		/// <para>Name: AiInsightValueId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "secureAgentId")]
+		[JsonProperty(PropertyName = "aiInsightValueId")]
 		[Updateable(false), Createable(false)]
-		public string SecureAgentId { get; set; }
+		public string AiInsightValueId { get; set; }
 
 		///<summary>
-		/// ReferenceTo: SecureAgent
-		/// <para>RelationshipName: SecureAgent</para>
+		/// ReferenceTo: AIInsightValue
+		/// <para>RelationshipName: AiInsightValue</para>
 		///</summary>
-		[JsonProperty(PropertyName = "secureAgent")]
+		[JsonProperty(PropertyName = "aiInsightValue")]
 		[Updateable(false), Createable(false)]
-		public SfSecureAgent SecureAgent { get; set; }
+		public SfAIInsightValue AiInsightValue { get; set; }
 
 		///<summary>
-		/// Name
-		/// <para>Name: PluginName</para>
+		/// Intensity
+		/// <para>Name: Intensity</para>
+		/// <para>SF Type: double</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "intensity")]
+		[Updateable(false), Createable(false)]
+		public double? Intensity { get; set; }
+
+		///<summary>
+		/// Contribution
+		/// <para>Name: Contribution</para>
+		/// <para>SF Type: double</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "contribution")]
+		[Updateable(false), Createable(false)]
+		public double? Contribution { get; set; }
+
+		///<summary>
+		/// Variance
+		/// <para>Name: Variance</para>
+		/// <para>SF Type: double</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "variance")]
+		[Updateable(false), Createable(false)]
+		public double? Variance { get; set; }
+
+		///<summary>
+		/// Field Name
+		/// <para>Name: FieldName</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "pluginName")]
+		[JsonProperty(PropertyName = "fieldName")]
 		[Updateable(false), Createable(false)]
-		public string PluginName { get; set; }
+		public string FieldName { get; set; }
 
 		///<summary>
-		/// Type
-		/// <para>Name: PluginType</para>
+		/// Operator
+		/// <para>Name: Operator</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "operator")]
+		[Updateable(false), Createable(false)]
+		public string Operator { get; set; }
+
+		///<summary>
+		/// Field Value
+		/// <para>Name: FieldValue</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "pluginType")]
+		[JsonProperty(PropertyName = "fieldValue")]
 		[Updateable(false), Createable(false)]
-		public string PluginType { get; set; }
+		public string FieldValue { get; set; }
 
 		///<summary>
-		/// Requested Version
-		/// <para>Name: RequestedVersion</para>
+		/// Feature Value
+		/// <para>Name: FeatureValue</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "requestedVersion")]
+		[JsonProperty(PropertyName = "featureValue")]
 		[Updateable(false), Createable(false)]
-		public string RequestedVersion { get; set; }
+		public string FeatureValue { get; set; }
 
 		///<summary>
-		/// Update Window Start
-		/// <para>Name: UpdateWindowStart</para>
-		/// <para>SF Type: datetime</para>
+		/// Feature Type
+		/// <para>Name: FeatureType</para>
+		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "updateWindowStart")]
+		[JsonProperty(PropertyName = "featureType")]
 		[Updateable(false), Createable(false)]
-		public DateTimeOffset? UpdateWindowStart { get; set; }
+		public string FeatureType { get; set; }
 
 		///<summary>
-		/// Update Window End
-		/// <para>Name: UpdateWindowEnd</para>
-		/// <para>SF Type: datetime</para>
+		/// AI Insight Reason ID
+		/// <para>Name: RelatedInsightReasonId</para>
+		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "updateWindowEnd")]
+		[JsonProperty(PropertyName = "relatedInsightReasonId")]
 		[Updateable(false), Createable(false)]
-		public DateTimeOffset? UpdateWindowEnd { get; set; }
+		public string RelatedInsightReasonId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: AIInsightReason
+		/// <para>RelationshipName: RelatedInsightReason</para>
+		///</summary>
+		[JsonProperty(PropertyName = "relatedInsightReason")]
+		[Updateable(false), Createable(false)]
+		public SfAIInsightReason RelatedInsightReason { get; set; }
+
+		///<summary>
+		/// Sort Order
+		/// <para>Name: SortOrder</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "sortOrder")]
+		[Updateable(false), Createable(false)]
+		public int? SortOrder { get; set; }
+
+		///<summary>
+		/// Reason Label Key
+		/// <para>Name: ReasonLabelKey</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "reasonLabelKey")]
+		[Updateable(false), Createable(false)]
+		public string ReasonLabelKey { get; set; }
 
 	}
 }

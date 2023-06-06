@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -39,7 +39,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "leadId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Createable(true)]
 		public string LeadId { get; set; }
 
 		///<summary>
@@ -57,7 +57,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "userOrGroupId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Createable(true)]
 		public string UserOrGroupId { get; set; }
 
 		///<summary>
@@ -67,7 +67,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "leadAccessLevel")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Createable(true)]
 		public string LeadAccessLevel { get; set; }
 
 		///<summary>
@@ -77,7 +77,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "rowCause")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Createable(true)]
 		public string RowCause { get; set; }
 
 		///<summary>

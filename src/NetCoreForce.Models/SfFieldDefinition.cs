@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -439,6 +439,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isPolymorphicForeignKey")]
 		[Updateable(false), Createable(false)]
 		public bool? IsPolymorphicForeignKey { get; set; }
+
+		///<summary>
+		/// Is Field AI Prediction Field?
+		/// <para>Name: IsAiPredictionField</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isAiPredictionField")]
+		[Updateable(false), Createable(false)]
+		public bool? IsAiPredictionField { get; set; }
 
 		///<summary>
 		/// Business Owner ID

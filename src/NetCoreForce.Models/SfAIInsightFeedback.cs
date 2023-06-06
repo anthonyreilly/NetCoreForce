@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Apple Domain Verification
-	///<para>SObject Name: AppleDomainVerification</para>
+	/// AI Insight Feedback
+	///<para>SObject Name: AIInsightFeedback</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfAppleDomainVerification : SObject
+	public class SfAIInsightFeedback : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "AppleDomainVerification"; }
+			get { return "AIInsightFeedback"; }
 		}
 
 		///<summary>
-		/// Apple Domain Verification ID
+		/// AI Insight Feedback ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -44,33 +44,14 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Name
-		/// <para>Name: DeveloperName</para>
+		/// <para>Name: Name</para>
 		/// <para>SF Type: string</para>
+		/// <para>AutoNumber field</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "developerName")]
+		[JsonProperty(PropertyName = "name")]
 		[Updateable(false), Createable(false)]
-		public string DeveloperName { get; set; }
-
-		///<summary>
-		/// Master Language
-		/// <para>Name: Language</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "language")]
-		[Updateable(false), Createable(false)]
-		public string Language { get; set; }
-
-		///<summary>
-		/// Label
-		/// <para>Name: MasterLabel</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "masterLabel")]
-		[Updateable(false), Createable(false)]
-		public string MasterLabel { get; set; }
+		public string Name { get; set; }
 
 		///<summary>
 		/// Created Date
@@ -139,32 +120,72 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Domain ID
-		/// <para>Name: ParentId</para>
+		/// AI Record Insight ID
+		/// <para>Name: AiRecordInsightId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "aiRecordInsightId")]
+		[Updateable(false), Createable(false)]
+		public string AiRecordInsightId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: AIRecordInsight
+		/// <para>RelationshipName: AiRecordInsight</para>
+		///</summary>
+		[JsonProperty(PropertyName = "aiRecordInsight")]
+		[Updateable(false), Createable(false)]
+		public SfAIRecordInsight AiRecordInsight { get; set; }
+
+		///<summary>
+		/// AI Insight Feedback Type
+		/// <para>Name: AiInsightFeedbackType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "aiInsightFeedbackType")]
+		[Updateable(false), Createable(false)]
+		public string AiInsightFeedbackType { get; set; }
+
+		///<summary>
+		/// AI Insight Feedback
+		/// <para>Name: AiFeedback</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "aiFeedback")]
+		[Updateable(false), Createable(false)]
+		public string AiFeedback { get; set; }
+
+		///<summary>
+		/// Rank
+		/// <para>Name: Rank</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "rank")]
+		[Updateable(false), Createable(false)]
+		public int? Rank { get; set; }
+
+		///<summary>
+		/// AI Insight Value ID or AI Insight Action ID
+		/// <para>Name: ValueId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "parentId")]
+		[JsonProperty(PropertyName = "valueId")]
 		[Updateable(false), Createable(false)]
-		public string ParentId { get; set; }
+		public string ValueId { get; set; }
 
 		///<summary>
-		/// ReferenceTo: Domain
-		/// <para>RelationshipName: Parent</para>
-		///</summary>
-		[JsonProperty(PropertyName = "parent")]
-		[Updateable(false), Createable(false)]
-		public SfDomain Parent { get; set; }
-
-		///<summary>
-		/// Domain Verification Text File
-		/// <para>Name: TextFile</para>
-		/// <para>SF Type: textarea</para>
+		/// Actual Value
+		/// <para>Name: ActualValue</para>
+		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "textFile")]
+		[JsonProperty(PropertyName = "actualValue")]
 		[Updateable(false), Createable(false)]
-		public string TextFile { get; set; }
+		public string ActualValue { get; set; }
 
 	}
 }

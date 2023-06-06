@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -477,6 +477,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isAssetEnabled")]
 		[Updateable(false), Createable(true)]
 		public bool? IsAssetEnabled { get; set; }
+
+		///<summary>
+		/// Version Data URL
+		/// <para>Name: VersionDataUrl</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "versionDataUrl")]
+		[Updateable(false), Createable(false)]
+		public string VersionDataUrl { get; set; }
 
 	}
 }

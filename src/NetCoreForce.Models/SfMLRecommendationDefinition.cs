@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Secure Agent
-	///<para>SObject Name: SecureAgent</para>
+	/// ML Recommendation Definition
+	///<para>SObject Name: MLRecommendationDefinition</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfSecureAgent : SObject
+	public class SfMLRecommendationDefinition : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "SecureAgent"; }
+			get { return "MLRecommendationDefinition"; }
 		}
 
 		///<summary>
-		/// Secure Agent ID
+		/// ML Recommendation Definition ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -71,6 +71,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "masterLabel")]
 		[Updateable(false), Createable(false)]
 		public string MasterLabel { get; set; }
+
+		///<summary>
+		/// Namespace Prefix
+		/// <para>Name: NamespacePrefix</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "namespacePrefix")]
+		[Updateable(false), Createable(false)]
+		public string NamespacePrefix { get; set; }
 
 		///<summary>
 		/// Created Date
@@ -139,60 +149,32 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Agent Key
-		/// <para>Name: AgentKey</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "agentKey")]
-		[Updateable(false), Createable(false)]
-		public string AgentKey { get; set; }
-
-		///<summary>
-		/// User ID
-		/// <para>Name: ProxyUserId</para>
+		/// AI Application ID
+		/// <para>Name: ApplicationId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "proxyUserId")]
+		[JsonProperty(PropertyName = "applicationId")]
 		[Updateable(false), Createable(false)]
-		public string ProxyUserId { get; set; }
+		public string ApplicationId { get; set; }
 
 		///<summary>
-		/// ReferenceTo: User
-		/// <para>RelationshipName: ProxyUser</para>
+		/// ReferenceTo: AIApplication
+		/// <para>RelationshipName: Application</para>
 		///</summary>
-		[JsonProperty(PropertyName = "proxyUser")]
+		[JsonProperty(PropertyName = "application")]
 		[Updateable(false), Createable(false)]
-		public SfUser ProxyUser { get; set; }
+		public SfAIApplication Application { get; set; }
 
 		///<summary>
-		/// Secure Agent Cluster ID
-		/// <para>Name: SecureAgentsClusterId</para>
-		/// <para>SF Type: reference</para>
-		/// <para>Nillable: True</para>
+		/// ML Recommendation Definition Status
+		/// <para>Name: Status</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "secureAgentsClusterId")]
+		[JsonProperty(PropertyName = "status")]
 		[Updateable(false), Createable(false)]
-		public string SecureAgentsClusterId { get; set; }
-
-		///<summary>
-		/// ReferenceTo: SecureAgentsCluster
-		/// <para>RelationshipName: SecureAgentsCluster</para>
-		///</summary>
-		[JsonProperty(PropertyName = "secureAgentsCluster")]
-		[Updateable(false), Createable(false)]
-		public SfSecureAgentsCluster SecureAgentsCluster { get; set; }
-
-		///<summary>
-		/// Priority
-		/// <para>Name: Priority</para>
-		/// <para>SF Type: int</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "priority")]
-		[Updateable(false), Createable(false)]
-		public int? Priority { get; set; }
+		public string Status { get; set; }
 
 	}
 }

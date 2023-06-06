@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -119,14 +119,14 @@ namespace NetCoreForce.Models
 		public bool? OptionsEnableFeeds { get; set; }
 
 		///<summary>
-		/// Require Secure Connections (HTTPS)
-		/// <para>Name: OptionsRequireHttps</para>
+		/// Redirect to custom domain
+		/// <para>Name: OptionsRedirectToCustomDomain</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "optionsRequireHttps")]
+		[JsonProperty(PropertyName = "optionsRedirectToCustomDomain")]
 		[Updateable(false), Createable(false)]
-		public bool? OptionsRequireHttps { get; set; }
+		public bool? OptionsRedirectToCustomDomain { get; set; }
 
 		///<summary>
 		/// Guest Access to the Payments API
@@ -147,6 +147,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "optionsHasStoredPathPrefix")]
 		[Updateable(false), Createable(false)]
 		public bool? OptionsHasStoredPathPrefix { get; set; }
+
+		///<summary>
+		/// Enforce Cookie Consent
+		/// <para>Name: OptionsCookieConsent</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsCookieConsent")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsCookieConsent { get; set; }
+
+		///<summary>
+		/// Cache public Visualforce pages
+		/// <para>Name: OptionsCachePublicVfPagesInProxies</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsCachePublicVfPagesInProxies")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsCachePublicVfPagesInProxies { get; set; }
 
 		///<summary>
 		/// Enable Standard Home Page
@@ -217,16 +237,6 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "optionsAllowStandardPortalPages")]
 		[Updateable(false), Createable(false)]
 		public bool? OptionsAllowStandardPortalPages { get; set; }
-
-		///<summary>
-		/// Upgrade all requests to HTTPS
-		/// <para>Name: OptionsCspUpgradeInsecureRequests</para>
-		/// <para>SF Type: boolean</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "optionsCspUpgradeInsecureRequests")]
-		[Updateable(false), Createable(false)]
-		public bool? OptionsCspUpgradeInsecureRequests { get; set; }
 
 		///<summary>
 		/// Enable Content Sniffing Protection

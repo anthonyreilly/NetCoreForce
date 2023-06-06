@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -163,6 +163,16 @@ namespace NetCoreForce.Models
 		public string Subject { get; set; }
 
 		///<summary>
+		/// Email Message Name
+		/// <para>Name: Name</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "name")]
+		[Updateable(false), Createable(false)]
+		public string Name { get; set; }
+
+		///<summary>
 		/// From Name
 		/// <para>Name: FromName</para>
 		/// <para>SF Type: string</para>
@@ -309,6 +319,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "threadIdentifier")]
 		public string ThreadIdentifier { get; set; }
+
+		///<summary>
+		/// Client Thread ID
+		/// <para>Name: ClientThreadIdentifier</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "clientThreadIdentifier")]
+		public string ClientThreadIdentifier { get; set; }
 
 		///<summary>
 		/// Is Client Managed

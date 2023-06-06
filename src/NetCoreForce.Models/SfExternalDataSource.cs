@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -271,6 +271,24 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "customConfiguration")]
 		[Updateable(false), Createable(false)]
 		public string CustomConfiguration { get; set; }
+
+		///<summary>
+		/// Named Credential ID
+		/// <para>Name: NamedCredentialId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "namedCredentialId")]
+		[Updateable(false), Createable(false)]
+		public string NamedCredentialId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: NamedCredential
+		/// <para>RelationshipName: NamedCredential</para>
+		///</summary>
+		[JsonProperty(PropertyName = "namedCredential")]
+		[Updateable(false), Createable(false)]
+		public SfNamedCredential NamedCredential { get; set; }
 
 	}
 }

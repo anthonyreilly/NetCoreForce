@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -61,7 +61,7 @@ namespace NetCoreForce.Models
 		public string Language { get; set; }
 
 		///<summary>
-		/// Label
+		/// Name
 		/// <para>Name: MasterLabel</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: False</para>
@@ -146,7 +146,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Policy type
+		/// Policy Type
 		/// <para>Name: Type</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: False</para>
@@ -234,7 +234,7 @@ namespace NetCoreForce.Models
 		public string Description { get; set; }
 
 		///<summary>
-		/// EventName
+		/// Event Name
 		/// <para>Name: EventName</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
@@ -250,6 +250,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "blockMessage")]
 		public string BlockMessage { get; set; }
+
+		///<summary>
+		/// Custom Email Content
+		/// <para>Name: CustomEmailContent</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "customEmailContent")]
+		public string CustomEmailContent { get; set; }
 
 	}
 }

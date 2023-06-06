@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -179,6 +179,24 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "engagementChannelType")]
 		[Updateable(false), Createable(false)]
 		public SfEngagementChannelType EngagementChannelType { get; set; }
+
+		///<summary>
+		/// Communication Subscription ID
+		/// <para>Name: DataUsePurposeId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "dataUsePurposeId")]
+		[Updateable(false), Createable(false)]
+		public string DataUsePurposeId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: CommSubscription
+		/// <para>RelationshipName: DataUsePurpose</para>
+		///</summary>
+		[JsonProperty(PropertyName = "dataUsePurpose")]
+		[Updateable(false), Createable(false)]
+		public SfCommSubscription DataUsePurpose { get; set; }
 
 	}
 }

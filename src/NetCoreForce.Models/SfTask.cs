@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -403,7 +403,7 @@ namespace NetCoreForce.Models
 		public string TaskSubtype { get; set; }
 
 		///<summary>
-		/// Completed Date
+		/// Completed Date/Time
 		/// <para>Name: CompletedDateTime</para>
 		/// <para>SF Type: datetime</para>
 		/// <para>Nillable: True</para>

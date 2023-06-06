@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -101,6 +101,16 @@ namespace NetCoreForce.Models
 		public string Comments { get; set; }
 
 		///<summary>
+		/// Auto Pay
+		/// <para>Name: IsAutoPayEnabled</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isAutoPayEnabled")]
+		[Updateable(false), Createable(false)]
+		public bool? IsAutoPayEnabled { get; set; }
+
+		///<summary>
 		/// Street
 		/// <para>Name: PaymentMethodStreet</para>
 		/// <para>SF Type: textarea</para>
@@ -191,6 +201,36 @@ namespace NetCoreForce.Models
 		public Address PaymentMethodAddress { get; set; }
 
 		///<summary>
+		/// Payment Method Type
+		/// <para>Name: PaymentMethodType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "paymentMethodType")]
+		[Updateable(false), Createable(false)]
+		public string PaymentMethodType { get; set; }
+
+		///<summary>
+		/// Payment Method SubType
+		/// <para>Name: PaymentMethodSubType</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "paymentMethodSubType")]
+		[Updateable(false), Createable(false)]
+		public string PaymentMethodSubType { get; set; }
+
+		///<summary>
+		/// Payment Method Details
+		/// <para>Name: PaymentMethodDetails</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "paymentMethodDetails")]
+		[Updateable(false), Createable(false)]
+		public string PaymentMethodDetails { get; set; }
+
+		///<summary>
 		/// User ID
 		/// <para>Name: CreatedById</para>
 		/// <para>SF Type: reference</para>
@@ -209,7 +249,7 @@ namespace NetCoreForce.Models
 		public SfUser CreatedBy { get; set; }
 
 		///<summary>
-		/// Created Date
+		/// __MISSING LABEL__ PropertyFile - val CreatedDate not found in section udd_PaymentMethod
 		/// <para>Name: CreatedDate</para>
 		/// <para>SF Type: datetime</para>
 		/// <para>Nillable: False</para>
@@ -237,7 +277,7 @@ namespace NetCoreForce.Models
 		public SfUser LastModifiedBy { get; set; }
 
 		///<summary>
-		/// Last Modified Date
+		/// __MISSING LABEL__ PropertyFile - val LastModifiedDate not found in section udd_PaymentMethod
 		/// <para>Name: LastModifiedDate</para>
 		/// <para>SF Type: datetime</para>
 		/// <para>Nillable: False</para>
@@ -247,7 +287,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? LastModifiedDate { get; set; }
 
 		///<summary>
-		/// System Modstamp
+		/// __MISSING LABEL__ PropertyFile - val SystemModstamp not found in section udd_PaymentMethod
 		/// <para>Name: SystemModstamp</para>
 		/// <para>SF Type: datetime</para>
 		/// <para>Nillable: False</para>
@@ -257,7 +297,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Deleted
+		/// __MISSING LABEL__ PropertyFile - val IsDeleted not found in section udd_PaymentMethod
 		/// <para>Name: IsDeleted</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -267,7 +307,7 @@ namespace NetCoreForce.Models
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
-		/// Name
+		/// __MISSING LABEL__ PropertyFile - val Name not found in section udd_PaymentMethod
 		/// <para>Name: Name</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: False</para>

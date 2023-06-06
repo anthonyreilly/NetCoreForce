@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -309,7 +309,7 @@ namespace NetCoreForce.Models
 		public string GatewayAuthCode { get; set; }
 
 		///<summary>
-		/// Total Auth Reversal Amount
+		/// Total Payment Auth Reversal Amount
 		/// <para>Name: TotalAuthReversalAmount</para>
 		/// <para>SF Type: currency</para>
 		/// <para>Nillable: True</para>

@@ -1,4 +1,4 @@
-// SF API version v50.0
+// SF API version v57.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -259,6 +259,26 @@ namespace NetCoreForce.Models
 		public DateTime? UsageEndDate { get; set; }
 
 		///<summary>
+		/// Lifecycle Start Date
+		/// <para>Name: LifecycleStartDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lifecycleStartDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LifecycleStartDate { get; set; }
+
+		///<summary>
+		/// Lifecycle End Date
+		/// <para>Name: LifecycleEndDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lifecycleEndDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LifecycleEndDate { get; set; }
+
+		///<summary>
 		/// Status
 		/// <para>Name: Status</para>
 		/// <para>SF Type: picklist</para>
@@ -373,6 +393,148 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "stockKeepingUnit")]
 		[Updateable(false), Createable(false)]
 		public string StockKeepingUnit { get; set; }
+
+		///<summary>
+		/// Has Lifecycle Management
+		/// <para>Name: HasLifecycleManagement</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "hasLifecycleManagement")]
+		[Updateable(false), Createable(false)]
+		public bool? HasLifecycleManagement { get; set; }
+
+		///<summary>
+		/// Current Monthly Recurring Revenue
+		/// <para>Name: CurrentMrr</para>
+		/// <para>SF Type: currency</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "currentMrr")]
+		[Updateable(false), Createable(false)]
+		public decimal? CurrentMrr { get; set; }
+
+		///<summary>
+		/// Current Lifecycle End Date
+		/// <para>Name: CurrentLifecycleEndDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "currentLifecycleEndDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? CurrentLifecycleEndDate { get; set; }
+
+		///<summary>
+		/// Current Quantity
+		/// <para>Name: CurrentQuantity</para>
+		/// <para>SF Type: double</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "currentQuantity")]
+		[Updateable(false), Createable(false)]
+		public double? CurrentQuantity { get; set; }
+
+		///<summary>
+		/// Current Amount
+		/// <para>Name: CurrentAmount</para>
+		/// <para>SF Type: currency</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "currentAmount")]
+		[Updateable(false), Createable(false)]
+		public decimal? CurrentAmount { get; set; }
+
+		///<summary>
+		/// Total Lifecycle Amount
+		/// <para>Name: TotalLifecycleAmount</para>
+		/// <para>SF Type: currency</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "totalLifecycleAmount")]
+		[Updateable(false), Createable(false)]
+		public decimal? TotalLifecycleAmount { get; set; }
+
+		///<summary>
+		/// Street
+		/// <para>Name: Street</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "street")]
+		public string Street { get; set; }
+
+		///<summary>
+		/// City
+		/// <para>Name: City</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "city")]
+		public string City { get; set; }
+
+		///<summary>
+		/// State
+		/// <para>Name: State</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "state")]
+		public string State { get; set; }
+
+		///<summary>
+		/// Postal Code
+		/// <para>Name: PostalCode</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "postalCode")]
+		public string PostalCode { get; set; }
+
+		///<summary>
+		/// Country
+		/// <para>Name: Country</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "country")]
+		public string Country { get; set; }
+
+		///<summary>
+		/// Latitude
+		/// <para>Name: Latitude</para>
+		/// <para>SF Type: double</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "latitude")]
+		public double? Latitude { get; set; }
+
+		///<summary>
+		/// Longitude
+		/// <para>Name: Longitude</para>
+		/// <para>SF Type: double</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "longitude")]
+		public double? Longitude { get; set; }
+
+		///<summary>
+		/// Geocode Accuracy
+		/// <para>Name: GeocodeAccuracy</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "geocodeAccuracy")]
+		public string GeocodeAccuracy { get; set; }
+
+		///<summary>
+		/// Address
+		/// <para>Name: Address</para>
+		/// <para>SF Type: address</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "address")]
+		[Updateable(false), Createable(false)]
+		public Address Address { get; set; }
 
 		///<summary>
 		/// Last Viewed Date
