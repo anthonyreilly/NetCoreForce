@@ -152,15 +152,15 @@ namespace NetCoreForce.FunctionalTests
 
             //create new objects
             SfAccount firstAccount = new SfAccount() { };
-            string firstAccountRefId = Guid.NewGuid().ToString();
-            string firstAccountName = string.Format("Test Object refId {0}", firstAccountRefId);
+            string firstAccountRefId = Guid.NewGuid().ToString().Replace("-", "");
+            string firstAccountName = string.Format("Test_Object_refId_{0}", firstAccountRefId);
             firstAccount.Name = firstAccountName;
             firstAccount.Attributes = new SObjectAttributes() { ReferenceId = firstAccountRefId, Type = SfAccount.SObjectTypeName };
 
 
             SfAccount secondAccount = new SfAccount();
-            string secondAccountRefId = Guid.NewGuid().ToString();
-            string secondAccountName = string.Format("Test Object refId {0}", secondAccountRefId);
+            string secondAccountRefId = Guid.NewGuid().ToString().Replace("-", "");
+            string secondAccountName = string.Format("Test_Object_refId_{0}", secondAccountRefId);
             secondAccount.Name = secondAccountName;
             secondAccount.Attributes = new SObjectAttributes() { ReferenceId = secondAccountRefId, Type = SfAccount.SObjectTypeName };
 
