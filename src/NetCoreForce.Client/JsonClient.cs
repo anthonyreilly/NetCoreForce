@@ -235,6 +235,15 @@ namespace NetCoreForce.Client
                 return JsonConvert.DeserializeObject<T>(string.Empty);
             }
 
+            // returned when header If-Modified-Since used and the object requested wasn't modified since provided date
+            if (responseMessage.StatusCode == HttpStatusCode.NotModified)
+            {
+                if (customHeaders != null && customHeaders.ContainsKey("If-Modified-Since"))
+                {
+                    return JsonConvert.DeserializeObject<T>(string.Empty);
+                }
+            }
+
             //sucessful response, skip deserialization of response content
             if (responseMessage.IsSuccessStatusCode && !deserializeResponse)
             {
