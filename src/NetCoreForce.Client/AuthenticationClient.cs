@@ -1,11 +1,11 @@
+using NetCoreForce.Client.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
-using Newtonsoft.Json;
 using System.Threading.Tasks;
-using NetCoreForce.Client.Models;
 
 namespace NetCoreForce.Client
 {
@@ -21,6 +21,7 @@ namespace NetCoreForce.Client
         public AccessTokenResponse AccessInfo { get; private set; }
 
         private const string UserAgent = "netcoreforce-client";
+        private const string IntrospectTokenEndpointUrl = "https://login.salesforce.com/services/oauth2/introspect";
         private const string TokenRequestEndpointUrl = "https://login.salesforce.com/services/oauth2/token";
         private readonly HttpClient _httpClient;
 
@@ -229,6 +230,44 @@ namespace NetCoreForce.Client
                     throw new ForceAuthException("Unknown", ex.Message, responseMessage.StatusCode);
                 }
 
+            }
+        }
+
+        /// <summary>
+        /// Introspect a access token
+        /// </summary>
+        /// <param name="token">The refresh token the client application already received.</param>
+        /// <param name="clientId">The Consumer Key from the connected app definition.</param>
+        /// <param name="clientSecret">The Consumer Secret from the connected app definition. Required unless the Require Secret for Web Server Flow setting is not enabled in the connected app definition.</param>
+        /// <param name="introspectTokenEndpointUrl"></param>
+        /// <returns></returns>
+        public async Task<IntrospectTokenResponse> IntrospectTokenAsync(string token, string clientId, string clientSecret = "", string introspectTokenEndpointUrl = IntrospectTokenEndpointUrl)
+        {
+            var uri = UriFormatter.IntrospectTokenUrl(
+                introspectTokenEndpointUrl,
+                token,
+                clientId,
+                clientSecret);
+
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = uri
+            };
+
+            request.Headers.UserAgent.ParseAdd(string.Concat(UserAgent, "/", ApiVersion));
+
+            var responseMessage = await _httpClient.SendAsync(request).ConfigureAwait(false);
+            var response = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<IntrospectTokenResponse>(response);
+            }
+            else
+            {
+                var errorResponse = JsonConvert.DeserializeObject<AuthErrorResponse>(response);
+                throw new ForceAuthException(errorResponse.Error, errorResponse.ErrorDescription, responseMessage.StatusCode);
             }
         }
 

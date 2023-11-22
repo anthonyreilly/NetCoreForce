@@ -1,8 +1,7 @@
+using NetCoreForce.Client.Models;
 using System;
 using System.Collections.Generic;
 using Xunit;
-using NetCoreForce.Client;
-using NetCoreForce.Client.Models;
 
 namespace NetCoreForce.Client.Tests
 {
@@ -63,6 +62,23 @@ namespace NetCoreForce.Client.Tests
             string result = UriFormatter.SObjectsComposite("https://xxx.salesforce.com", "v57.0").AbsoluteUri;
 
             Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/composite/sobjects", result);
+        }
+
+        [Fact]
+        public void CompositeRequest()
+        {
+            string result = UriFormatter.CompositeRequest("https://xxx.salesforce.com", "v59.0").AbsoluteUri;
+
+            Assert.Equal("https://xxx.salesforce.com/services/data/v59.0/composite", result);
+        }
+
+        [Fact]
+        public void CompositeSubRequest()
+        {
+            string guid = Guid.NewGuid().ToString();
+            string result = UriFormatter.CompositeSubRequest("v59.0", "Account", guid);
+
+            Assert.Equal($"/services/data/v59.0/sobjects/Account/{guid}", result);
         }
 
         [Fact]
@@ -159,7 +175,7 @@ namespace NetCoreForce.Client.Tests
                 "https://xxx.salesforce.com",
                 "v57.0",
                 "SELECT Id, Name FROM Account WHERE Id = '001XXXXXXXXXXXXXXX'",
-                true).AbsoluteUri;            
+                true).AbsoluteUri;
 
             Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/queryAll?q=SELECT%20Id,%20Name%20FROM%20Account%20WHERE%20Id%20%3D%20%27001XXXXXXXXXXXXXXX%27",
                 result);
@@ -169,7 +185,7 @@ namespace NetCoreForce.Client.Tests
         public void Search()
         {
             //TODO: add actual SOSL syntax
-            string result = UriFormatter.Search( _instanceUrl, _apiVersion, "X Y").AbsoluteUri;
+            string result = UriFormatter.Search(_instanceUrl, _apiVersion, "X Y").AbsoluteUri;
 
             Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/search?q=X%20Y", result);
         }
@@ -178,12 +194,20 @@ namespace NetCoreForce.Client.Tests
         public void Batch()
         {
             //TODO: add actual SOSL syntax
-            string result = UriFormatter.Batch( _instanceUrl, _apiVersion).AbsoluteUri;
+            string result = UriFormatter.Batch(_instanceUrl, _apiVersion).AbsoluteUri;
 
             Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/composite/batch", result);
         }
 
         //TODO: Auth URLs
+
+        [Fact]
+        public void OAuthAuthenticationUrl()
+        {
+            string result = UriFormatter.OAuthAuthenticationUrl("https://login.salesforce.com/services/oauth2/authorize", "CLIENTID", "CLIENTSECRET", "https://www.theredirectpage.com/callback").AbsoluteUri.ToString();
+
+            Assert.Equal("https://login.salesforce.com/services/oauth2/authorize?client_id=CLIENTID&client_secret=CLIENTSECRET&redirect_uri=https%3A%2F%2Fwww.theredirectpage.com%2Fcallback&response_type=code", result);
+        }
 
         [Fact]
         public void WebServerAuthenticationUrl()
@@ -202,6 +226,18 @@ namespace NetCoreForce.Client.Tests
             Assert.Equal("https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=CLIENTID&redirect_uri=https%3A%2F%2Fwww.theredirectpage.com%2Fcallback&display=popup&immediate=true&scope=refresh_token", result);
 
             //TODO: test with url-encoded state parameter
+        }
+
+        [Fact]
+        public void IntrospectTokenUrl()
+        {
+            string result = UriFormatter.IntrospectTokenUrl("https://login.salesforce.com/services/oauth2/introspect", "MYTOKEN", "CLIENTID").AbsoluteUri.ToString();
+
+            Assert.Equal("https://login.salesforce.com/services/oauth2/introspect?token=MYTOKEN&client_id=CLIENTID&format=json", result);
+
+            result = UriFormatter.IntrospectTokenUrl("https://login.salesforce.com/services/oauth2/introspect", "MYTOKEN", "CLIENTID", "CLIENTSECRET").AbsoluteUri.ToString();
+
+            Assert.Equal("https://login.salesforce.com/services/oauth2/introspect?token=MYTOKEN&client_id=CLIENTID&client_secret=CLIENTSECRET&format=json", result);
         }
     }
 }

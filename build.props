@@ -25,15 +25,15 @@
 
   <!-- Targets -->
   <PropertyGroup Condition="!$([MSBuild]::IsOSPlatform('OSX!'))">
-    <LibTargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net7.0</LibTargetFrameworks>
-    <AppTargetFrameworks>netcoreapp2.1;netcoreapp3.1;net6.0;net7.0</AppTargetFrameworks>
-    <TestTargetFrameworks>netcoreapp2.1;netcoreapp3.1;net6.0;net7.0</TestTargetFrameworks>
+    <LibTargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net7.0;net8.0</LibTargetFrameworks>
+    <AppTargetFrameworks>net6.0;net7.0;net8.0</AppTargetFrameworks>
+    <TestTargetFrameworks>net6.0;net7.0;net8.0</TestTargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
-    <LibTargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net7.0</LibTargetFrameworks>
-    <AppTargetFrameworks>net6.0;net7.0</AppTargetFrameworks>
-    <TestTargetFrameworks>net6.0;net7.0</TestTargetFrameworks>
+    <LibTargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net7.0;net8.0</LibTargetFrameworks>
+    <AppTargetFrameworks>net6.0;net7.0;net8.0</AppTargetFrameworks>
+    <TestTargetFrameworks>net6.0;net7.0;net8.0</TestTargetFrameworks>
   </PropertyGroup>
 
 </Project>
