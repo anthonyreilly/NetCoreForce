@@ -271,6 +271,59 @@ namespace NetCoreForce.Client
             }
         }
 
+        /// <summary>
+        /// Client credentials OAuth Authentication Flow
+        /// <para>https://help.salesforce.com/s/articleView?id=sf.remoteaccess_oauth_client_credentials_flow.htm&type=5</para>
+        /// </summary>
+        /// <param name="clientId">The Consumer Key from the connected app definition.</param>
+        /// <param name="clientSecret">The Consumer Secret from the connected app definition. Required unless the Require Secret for Web Server Flow setting is not enabled in the connected app definition.</param>
+        /// <param name="tokenRequestEndpointUrl">Salesforce token request endpoint</param>
+        /// <returns><see cref="AccessTokenResponse" /></returns>
+        public async Task ClientCredentialsAsync(string clientId, string clientSecret,string tokenRequestEndpointUrl = TokenRequestEndpointUrl)
+        {
+            if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException("clientId");
+            if (string.IsNullOrEmpty(clientSecret)) throw new ArgumentNullException("clientSecret");
+            if (string.IsNullOrEmpty(tokenRequestEndpointUrl)) throw new ArgumentNullException("tokenRequestEndpointUrl");
+            if (!Uri.IsWellFormedUriString(tokenRequestEndpointUrl, UriKind.Absolute)) throw new FormatException("tokenRequestEndpointUrl");
+
+            var content = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("grant_type", "client_credentials"),
+                    new KeyValuePair<string, string>("client_id", clientId),
+                    new KeyValuePair<string, string>("client_secret", clientSecret),
+                });
+
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(tokenRequestEndpointUrl),
+                Content = content
+            };
+
+            request.Headers.UserAgent.ParseAdd(string.Concat(UserAgent, "/", ApiVersion));
+
+            var responseMessage = await _httpClient.SendAsync(request).ConfigureAwait(false);
+            var response = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                this.AccessInfo = JsonConvert.DeserializeObject<AccessTokenResponse>(response);
+            }
+            else
+            {
+                try
+                {
+                    var errorResponse = JsonConvert.DeserializeObject<AuthErrorResponse>(response);
+                    throw new ForceAuthException(errorResponse.Error, errorResponse.ErrorDescription, responseMessage.StatusCode);
+                }
+                catch (Exception ex)
+                {
+                    throw new ForceAuthException("Unknown", ex.Message, responseMessage.StatusCode);
+                }
+
+            }
+        }
+
         public void Dispose()
         {
             _httpClient.Dispose();
