@@ -1,5 +1,11 @@
 # Changelog
 
+### 2024-03-06 v4.1.0
+
+* feat: add client credentials flow
+* fix: Add field CalculatedFormula to SObjectFieldMetadata
+* fix: Add field AdditionalData to ErrorResponse
+
 ### 2023-06-06 v4.0.0
 
 * feat: add FieldsToNull and IngoreNulls options to control null field serialization and to allow explicitly setting fields to null

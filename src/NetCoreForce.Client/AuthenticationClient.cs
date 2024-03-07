@@ -273,7 +273,7 @@ namespace NetCoreForce.Client
 
         /// <summary>
         /// Client credentials OAuth Authentication Flow
-        /// <para>https://help.salesforce.com/s/articleView?id=sf.remoteaccess_oauth_client_credentials_flow.htm&type=5</para>
+        /// <para>https://help.salesforce.com/s/articleView?id=sf.remoteaccess_oauth_client_credentials_flow.htm</para>
         /// </summary>
         /// <param name="clientId">The Consumer Key from the connected app definition.</param>
         /// <param name="clientSecret">The Consumer Secret from the connected app definition. Required unless the Require Secret for Web Server Flow setting is not enabled in the connected app definition.</param>
