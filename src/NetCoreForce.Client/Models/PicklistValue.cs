@@ -25,9 +25,11 @@ namespace NetCoreForce.Client.Models
         [JsonProperty(PropertyName = "label")]
         public string Label { get; set; }
 
-        // TODO: validate type of validFor field
-        // [JsonProperty(PropertyName = "validFor")]
-        // public string ValidFor { get; set; }
+        /// <summary>
+        /// Valid for property
+        /// </summary>
+        [JsonProperty(PropertyName = "validFor")]
+        public byte[] ValidFor { get; set; }
 
         /// <summary>
         /// Picklist item value
