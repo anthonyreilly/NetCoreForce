@@ -1,7 +1,8 @@
 # Changelog
 
-### 2024-03-06 v4.1.0
+### 2024-03-29 v4.1.0
 
+* feat: added .net8.0 build and test targets
 * feat: add client credentials flow
 * fix: Add field CalculatedFormula to SObjectFieldMetadata
 * fix: Add field AdditionalData to ErrorResponse

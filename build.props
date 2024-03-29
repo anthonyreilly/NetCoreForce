@@ -3,7 +3,7 @@
 
     <!--Versioning-->
     <VersionPrefix>4.1.0</VersionPrefix>
-    <VersionSuffix></VersionSuffix>
+    <VersionSuffix>Beta</VersionSuffix>
 
     <!-- Targets -->
     <LangVersion>8.0</LangVersion>
