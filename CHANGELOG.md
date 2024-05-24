@@ -1,6 +1,10 @@
 # Changelog
 
-### 2024-03-29 v4.1.0
+### 2024-05-24 v4.1.0
+
+* fix: Update PicklistValue.Validfor to byte[]
+
+### 2024-03-29 v4.1.0-Beta
 
 * feat: added .net8.0 build and test targets
 * feat: add client credentials flow
