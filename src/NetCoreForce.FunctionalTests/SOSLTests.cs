@@ -26,7 +26,7 @@ namespace NetCoreForce.FunctionalTests
 
             ForceClient client = await forceClientFixture.GetForceClient();
 
-            SearchResult<SObjectGeneric> result = await client.Search("FIND {cd*}");
+            SearchResult<SObjectGeneric> result = await client.Search("FIND {corp}");
 
             Assert.NotNull(result);
             Assert.NotNull(result.SearchRecords);
@@ -39,7 +39,7 @@ namespace NetCoreForce.FunctionalTests
 
             ForceClient client = await forceClientFixture.GetForceClient();
 
-            SearchResult<SfAccount> result = await client.Search<SfAccount>("FIND {cd*} IN ALL FIELDS RETURNING Account (Id, Name)");
+            SearchResult<SfAccount> result = await client.Search<SfAccount>("FIND {corp} IN ALL FIELDS RETURNING Account (Id, Name)");
 
             Assert.NotNull(result);
             Assert.NotNull(result.SearchRecords);
