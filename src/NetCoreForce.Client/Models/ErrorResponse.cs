@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace NetCoreForce.Client.Models
 {
@@ -22,5 +23,11 @@ namespace NetCoreForce.Client.Models
         /// </summary>
         [JsonProperty(PropertyName = "errorCode")]
         public string ErrorCode { get; set; }
+        
+        /// <summary>
+        /// Additional data
+        /// </summary>
+        [JsonExtensionData]
+        public Dictionary<string, JToken> AdditionalData { get; set; }
     }
 }
