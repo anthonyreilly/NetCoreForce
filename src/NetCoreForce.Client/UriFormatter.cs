@@ -29,6 +29,23 @@ namespace NetCoreForce.Client
         /// Versions
         /// </summary>
         /// <param name="instanceUrl"></param>
+        /// <param name="apexResourceUrl"></param>
+        public static Uri ApexUri(string instanceUrl, string apexResourceUrl)
+        {
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
+            if (string.IsNullOrEmpty(apexResourceUrl)) throw new ArgumentNullException(nameof(apexResourceUrl));
+
+            // format: /
+
+            Uri uri = new Uri(new Uri(instanceUrl), $"services/apexrest/{apexResourceUrl}");
+
+            return uri;
+        }
+
+        /// <summary>
+        /// Versions
+        /// </summary>
+        /// <param name="instanceUrl"></param>
         public static Uri Versions(string instanceUrl)
         {
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
@@ -206,7 +223,7 @@ namespace NetCoreForce.Client
             if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
 
-            //format: /vXX.X/sobjects/SObjectName/
+            //format: /services/data/vXX.X/sobjects/SObjectName/
 
             if (string.IsNullOrWhiteSpace(objectId))
             {
@@ -265,6 +282,20 @@ namespace NetCoreForce.Client
             Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/sobjects/{sObjectName}/{fieldName}/{fieldValue}");
 
             return uri;
+        }
+
+        /// <summary>
+        /// SObjectCollections
+        /// </summary>
+        /// <param name="apiVersion">SFDC API version, e.g. "v57.0"</param>
+        /// <returns></returns>
+        public static string CompositeSObjectCollectionsSubRequest(string apiVersion)
+        {
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+
+            //format: /services/data/vXX.X/composite/sobjects/
+
+            return $"/services/data/{apiVersion}/composite/sobjects/";
         }
 
         /// <summary>
@@ -470,12 +501,14 @@ namespace NetCoreForce.Client
 
             const ResponseTypes responseType = ResponseTypes.Code;
 
-            Dictionary<string, string> prms = new Dictionary<string, string>();
-            prms.Add("response_type", responseType.ToString().ToLower());
-            prms.Add("client_id", clientId);
-            prms.Add("redirect_uri", redirectUrl);
-            prms.Add("display", display.ToString().ToLower());
-            prms.Add("immediate", immediate.ToString().ToLower());
+            Dictionary<string, string> prms = new Dictionary<string, string>
+            {
+                { "response_type", responseType.ToString().ToLower() },
+                { "client_id", clientId },
+                { "redirect_uri", redirectUrl },
+                { "display", display.ToString().ToLower() },
+                { "immediate", immediate.ToString().ToLower() }
+            };
 
             if (!string.IsNullOrEmpty(scope))
             {
@@ -544,10 +577,12 @@ namespace NetCoreForce.Client
             if (refreshToken == null) throw new ArgumentNullException(nameof(refreshToken));
             if (clientId == null) throw new ArgumentNullException(nameof(clientId));
 
-            Dictionary<string, string> prms = new Dictionary<string, string>();
-            prms.Add("grant_type", "refresh_token");
-            prms.Add("refresh_token", refreshToken);
-            prms.Add("client_id", clientId);
+            Dictionary<string, string> prms = new Dictionary<string, string>
+            {
+                { "grant_type", "refresh_token" },
+                { "refresh_token", refreshToken },
+                { "client_id", clientId }
+            };
             if (!string.IsNullOrEmpty(clientSecret))
             {
                 prms.Add("client_secret", clientSecret);

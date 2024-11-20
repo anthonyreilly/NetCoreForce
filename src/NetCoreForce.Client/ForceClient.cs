@@ -531,6 +531,7 @@ namespace NetCoreForce.Client
         /// </summary>
         /// <param name="sObjects">Objects to update</param>
         /// <param name="allOrNone">Optional. Indicates whether to roll back the entire request when the update of any object fails (true) or to continue with the independent update of other objects in the request. The default is false.</param>
+        /// <param name="collateSubrequests">Optional. Controls whether the API collates unrelated subrequests to bulkify them (true) or not (false). When subrequests are collated, the processing speed is faster, but the order of execution is not guaranteed (unless there is an explicit dependency between the subrequests).If collation is disabled, then the subrequests are executed in the order in which they are received. The default is true.</param>
         /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
         /// <param name="fieldsToNull">A list of properties that should be set to null, but inclusing the null values in the serialized output</param>
         /// <param name="ignoreNulls">Use with caution. By default null values are not serialized, this will serialize all explicitly nulled or missing properties as null</param>
@@ -540,6 +541,7 @@ namespace NetCoreForce.Client
         public async Task<List<UpsertResponse>> UpdateRecords(
             List<SObject> sObjects,
             bool allOrNone = false,
+            bool collateSubrequests = true,
             Dictionary<string, string> customHeaders = null,
             List<string> fieldsToNull = null,
             bool ignoreNulls = true)
@@ -646,11 +648,16 @@ namespace NetCoreForce.Client
         /// </summary>
         /// <param name="sObjects">Objects to update</param>
         /// <param name="allOrNone">Optional. Indicates whether to roll back the entire request when the update of any object fails (true) or to continue with the independent update of other objects in the request. The default is false.</param>
+        /// <param name="collateSubrequests">Optional. Controls whether the API collates unrelated subrequests to bulkify them (true) or not (false). When subrequests are collated, the processing speed is faster, but the order of execution is not guaranteed (unless there is an explicit dependency between the subrequests).If collation is disabled, then the subrequests are executed in the order in which they are received. The default is true.</param>
         /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
         /// <returns>List of UpdateMultipleResponse objects, includes response for each object (id, success, errors)</returns>
         /// <exception cref="ArgumentException">Thrown when missing required information</exception>
         /// <exception cref="ForceApiException">Thrown when update fails</exception>
-        public async Task<CompositeRequestResponse> ExecuteCompositeRecords(List<CompositeSObject> sObjects, bool allOrNone = false, Dictionary<string, string> customHeaders = null)
+        public async Task<CompositeRequestResponse> ExecuteCompositeRecords(
+            List<CompositeSObject> sObjects,
+            bool allOrNone = false,
+            bool collateSubrequests = true,
+            Dictionary<string, string> customHeaders = null)
         {
             if (sObjects == null)
             {
@@ -659,7 +666,7 @@ namespace NetCoreForce.Client
 
             foreach (CompositeSObject s in sObjects)
             {
-                if (s.SObject.Attributes == null || string.IsNullOrEmpty(s.SObject.Attributes.Type))
+                if (s == null || (string.IsNullOrEmpty(s.Type) && s.CompositeType == CompositeType.SObject))
                 {
                     throw new ForceApiException("Objects are missing Type property in Attributes map");
                 }
@@ -686,14 +693,54 @@ namespace NetCoreForce.Client
                 return new CompositeSubRequest(
                     s.SObject,
                     s.Method == CompositeMethod.Write ? string.IsNullOrWhiteSpace(s.Id) ? "POST" : "PATCH" : s.Method == CompositeMethod.Delete ? "DELETE" : "GET",
-                    s.SObject.Attributes.ReferenceId,
-                    UriFormatter.CompositeSubRequest(ApiVersion, s.SObject.Attributes.Type, s.Id)
+                    s.ReferenceId,
+                    s.CompositeType == CompositeType.SObject ? UriFormatter.CompositeSubRequest(ApiVersion, s.Type, s.Id) : UriFormatter.CompositeSObjectCollectionsSubRequest(ApiVersion)
                 );
             }).ToList();
 
-            CompositeRequest createMultipleRequest = new CompositeRequest(subRequests, allOrNone);
+            CompositeRequest createMultipleRequest = new CompositeRequest(subRequests, allOrNone, collateSubrequests);
 
             return await client.HttpPostAsync<CompositeRequestResponse>(createMultipleRequest, uri, headers);
+
+        }
+
+        /// <summary>
+        /// Execute request against ApexRest custom endpoints.
+        /// </summary>
+        /// <param name="apexResourceUrl">The URL of the apex resource. Ex: /services/apexrest/DuplicateCheck should provide "DuplicateCheck"</param>
+        /// <param name="request">The custom object to include in the request</param>
+        /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
+        /// <returns>List of UpdateMultipleResponse objects, includes response for each object (id, success, errors)</returns>
+        /// <exception cref="ArgumentException">Thrown when missing required information</exception>
+        /// <exception cref="ForceApiException">Thrown when update fails</exception>
+        public async Task<T> ExecuteApexPost<Request, T>(string apexResourceUrl, Request request, Dictionary<string, string> customHeaders = null)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+            if (string.IsNullOrWhiteSpace(apexResourceUrl))
+            {
+                throw new ArgumentNullException(nameof(apexResourceUrl));
+            }
+
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+
+            //Add call options
+            Dictionary<string, string> callOptions = HeaderFormatter.SforceCallOptions(ClientName);
+            headers.AddRange(callOptions);
+
+            //Add custom headers if specified
+            if (customHeaders != null)
+            {
+                headers.AddRange(customHeaders);
+            }
+
+            var uri = UriFormatter.ApexUri(InstanceUrl, apexResourceUrl);
+
+            JsonClient client = new JsonClient(AccessToken, _httpClient);
+
+            return await client.HttpPostAsync<T>(request, uri, headers);
 
         }
 
