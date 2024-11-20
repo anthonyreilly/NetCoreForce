@@ -523,7 +523,7 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
-        /// Update multiple reocrds.
+        /// Update multiple records.
         /// The list can contain up to 200 objects.
         /// The list can contain objects of different types, including custom objects.
         /// Each object must contain an attributes map. The map must contain a value for type.
@@ -531,7 +531,6 @@ namespace NetCoreForce.Client
         /// </summary>
         /// <param name="sObjects">Objects to update</param>
         /// <param name="allOrNone">Optional. Indicates whether to roll back the entire request when the update of any object fails (true) or to continue with the independent update of other objects in the request. The default is false.</param>
-        /// <param name="collateSubrequests">Optional. Controls whether the API collates unrelated subrequests to bulkify them (true) or not (false). When subrequests are collated, the processing speed is faster, but the order of execution is not guaranteed (unless there is an explicit dependency between the subrequests).If collation is disabled, then the subrequests are executed in the order in which they are received. The default is true.</param>
         /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
         /// <param name="fieldsToNull">A list of properties that should be set to null, but inclusing the null values in the serialized output</param>
         /// <param name="ignoreNulls">Use with caution. By default null values are not serialized, this will serialize all explicitly nulled or missing properties as null</param>
@@ -541,7 +540,6 @@ namespace NetCoreForce.Client
         public async Task<List<UpsertResponse>> UpdateRecords(
             List<SObject> sObjects,
             bool allOrNone = false,
-            bool collateSubrequests = true,
             Dictionary<string, string> customHeaders = null,
             List<string> fieldsToNull = null,
             bool ignoreNulls = true)
