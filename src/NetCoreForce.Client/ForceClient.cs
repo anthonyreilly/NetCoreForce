@@ -1,13 +1,15 @@
-﻿using System;
+﻿using NetCoreForce.Client.Enumerations;
+using NetCoreForce.Client.Models;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using NetCoreForce.Client.Models;
 
 namespace NetCoreForce.Client
 {
@@ -521,7 +523,7 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
-        /// Update multiple reocrds.
+        /// Update multiple records.
         /// The list can contain up to 200 objects.
         /// The list can contain objects of different types, including custom objects.
         /// Each object must contain an attributes map. The map must contain a value for type.
@@ -636,6 +638,110 @@ namespace NetCoreForce.Client
             return;
         }
 
+        /// <summary>
+        /// Execute multiple composite records.
+        /// The list can contain up to 200 objects.
+        /// The list can contain objects of different types, including custom objects.
+        /// Each object must contain an attributes map. The map must contain a value for type.
+        /// </summary>
+        /// <param name="sObjects">Objects to update</param>
+        /// <param name="allOrNone">Optional. Indicates whether to roll back the entire request when the update of any object fails (true) or to continue with the independent update of other objects in the request. The default is false.</param>
+        /// <param name="collateSubrequests">Optional. Controls whether the API collates unrelated subrequests to bulkify them (true) or not (false). When subrequests are collated, the processing speed is faster, but the order of execution is not guaranteed (unless there is an explicit dependency between the subrequests).If collation is disabled, then the subrequests are executed in the order in which they are received. The default is true.</param>
+        /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
+        /// <returns>List of UpdateMultipleResponse objects, includes response for each object (id, success, errors)</returns>
+        /// <exception cref="ArgumentException">Thrown when missing required information</exception>
+        /// <exception cref="ForceApiException">Thrown when update fails</exception>
+        public async Task<CompositeRequestResponse> ExecuteCompositeRecords(
+            List<CompositeSObject> sObjects,
+            bool allOrNone = false,
+            bool collateSubrequests = true,
+            Dictionary<string, string> customHeaders = null)
+        {
+            if (sObjects == null)
+            {
+                throw new ArgumentNullException("sObjects");
+            }
+
+            foreach (CompositeSObject s in sObjects)
+            {
+                if (s == null || (string.IsNullOrEmpty(s.Type) && s.CompositeType == CompositeType.SObject))
+                {
+                    throw new ForceApiException("Objects are missing Type property in Attributes map");
+                }
+            }
+
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+
+            //Add call options
+            Dictionary<string, string> callOptions = HeaderFormatter.SforceCallOptions(ClientName);
+            headers.AddRange(callOptions);
+
+            //Add custom headers if specified
+            if (customHeaders != null)
+            {
+                headers.AddRange(customHeaders);
+            }
+
+            var uri = UriFormatter.CompositeRequest(InstanceUrl, ApiVersion);
+
+            JsonClient client = new JsonClient(AccessToken, _httpClient);
+
+            List<CompositeSubRequest> subRequests = sObjects.Select(s =>
+            {
+                return new CompositeSubRequest(
+                    s.SObject,
+                    s.Method == CompositeMethod.Write ? string.IsNullOrWhiteSpace(s.Id) ? "POST" : "PATCH" : s.Method == CompositeMethod.Delete ? "DELETE" : "GET",
+                    s.ReferenceId,
+                    s.CompositeType == CompositeType.SObject ? UriFormatter.CompositeSubRequest(ApiVersion, s.Type, s.Id) : UriFormatter.CompositeSObjectCollectionsSubRequest(ApiVersion)
+                );
+            }).ToList();
+
+            CompositeRequest createMultipleRequest = new CompositeRequest(subRequests, allOrNone, collateSubrequests);
+
+            return await client.HttpPostAsync<CompositeRequestResponse>(createMultipleRequest, uri, headers);
+
+        }
+
+        /// <summary>
+        /// Execute request against ApexRest custom endpoints.
+        /// </summary>
+        /// <param name="apexResourceUrl">The URL of the apex resource. Ex: /services/apexrest/DuplicateCheck should provide "DuplicateCheck"</param>
+        /// <param name="request">The custom object to include in the request</param>
+        /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
+        /// <returns>List of UpdateMultipleResponse objects, includes response for each object (id, success, errors)</returns>
+        /// <exception cref="ArgumentException">Thrown when missing required information</exception>
+        /// <exception cref="ForceApiException">Thrown when update fails</exception>
+        public async Task<T> ExecuteApexPost<Request, T>(string apexResourceUrl, Request request, Dictionary<string, string> customHeaders = null)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+            if (string.IsNullOrWhiteSpace(apexResourceUrl))
+            {
+                throw new ArgumentNullException(nameof(apexResourceUrl));
+            }
+
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+
+            //Add call options
+            Dictionary<string, string> callOptions = HeaderFormatter.SforceCallOptions(ClientName);
+            headers.AddRange(callOptions);
+
+            //Add custom headers if specified
+            if (customHeaders != null)
+            {
+                headers.AddRange(customHeaders);
+            }
+
+            var uri = UriFormatter.ApexUri(InstanceUrl, apexResourceUrl);
+
+            JsonClient client = new JsonClient(AccessToken, _httpClient);
+
+            return await client.HttpPostAsync<T>(request, uri, headers);
+
+        }
+
         const string blobUrlRegexString = @"^.+sobjects\/(\w+)\/(\w+)\/(\w+)$";
         /// <summary>
         /// Retrieve blob data at the specified URL.
@@ -739,7 +845,7 @@ namespace NetCoreForce.Client
 
         /// <summary>
         /// List summary information about each REST API version currently available, including the version, label, and a link to each version's root.
-        /// You do not need authentication to retrieve the list of versions. 
+        /// You do not need authentication to retrieve the list of versions.
         /// </summary>
         /// <param name="currentInstanceUrl">Current instance URL. If the client has been initialized, the parameter is optional and the client's current instance URL will be used</param>
         /// <returns>List of SalesforceVersion objects</returns>
