@@ -74,7 +74,7 @@ namespace NetCoreForce.Client
         public async Task<T> HttpGetAsync<T>(Uri uri, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
             //TODO: can this handle T = string?
-            return await HttpAsync<T>(uri, HttpMethod.Get, null, customHeaders, deserializeResponse);
+            return await HttpAsync<T>(uri, HttpMethod.Get, null, customHeaders, deserializeResponse).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace NetCoreForce.Client
             request.Method = HttpMethod.Post;
             request.Content = content;
 
-            return await GetResponse<T>(request, customHeaders, deserializeResponse);
+            return await GetResponse<T>(request, customHeaders, deserializeResponse).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace NetCoreForce.Client
 
             var content = new StringContent(json, Encoding.UTF8, JsonMimeType);
 
-            return await HttpAsync<T>(uri, new HttpMethod("PATCH"), content, customHeaders, deserializeResponse);
+            return await HttpAsync<T>(uri, new HttpMethod("PATCH"), content, customHeaders, deserializeResponse).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace NetCoreForce.Client
             request.RequestUri = uri;
             request.Method = HttpMethod.Delete;
 
-            return await GetResponse<T>(request, customHeaders, deserializeResponse);
+            return await GetResponse<T>(request, customHeaders, deserializeResponse).ConfigureAwait(false);
         }
 
         private async Task<T> HttpAsync<T>(Uri uri, HttpMethod httpMethod, HttpContent content = null, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
@@ -180,7 +180,7 @@ namespace NetCoreForce.Client
                 request.Content = content;
             }
 
-            return await GetResponse<T>(request, customHeaders, deserializeResponse);
+            return await GetResponse<T>(request, customHeaders, deserializeResponse).ConfigureAwait(false);
         }
 
         /// <summary>

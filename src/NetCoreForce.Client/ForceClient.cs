@@ -88,7 +88,7 @@ namespace NetCoreForce.Client
         private async Task Login(string clientId, string clientSecret, string username, string password, string tokenRequestEndpoint, string apiVersion = null, HttpClient httpClient = null)
         {
             AuthenticationClient authClient = new AuthenticationClient(apiVersion, httpClient);
-            await authClient.UsernamePasswordAsync(clientId, clientSecret, username, password, tokenRequestEndpoint);
+            await authClient.UsernamePasswordAsync(clientId, clientSecret, username, password, tokenRequestEndpoint).ConfigureAwait(false);
 
             Initialize(authClient.AccessInfo.InstanceUrl, authClient.ApiVersion, authClient.AccessInfo.AccessToken, httpClient, authClient.AccessInfo);
         }
@@ -163,7 +163,7 @@ namespace NetCoreForce.Client
                         queryUri = new Uri(new Uri(InstanceUrl), nextRecordsUrl);
                     }
 
-                    QueryResult<T> qr = await client.HttpGetAsync<QueryResult<T>>(queryUri, headers);
+                    QueryResult<T> qr = await client.HttpGetAsync<QueryResult<T>>(queryUri, headers).ConfigureAwait(false);
 
 #if DEBUG
                     Debug.WriteLine(string.Format("Got query resuts, {0} totalSize, {1} in this batch, final batch: {2}",
@@ -209,7 +209,7 @@ namespace NetCoreForce.Client
         /// <returns>result object</returns>
         public async Task<T> QuerySingle<T>(string queryString, bool queryAll = false)
         {
-            List<T> results = await Query<T>(queryString, queryAll);
+            List<T> results = await Query<T>(queryString, queryAll).ConfigureAwait(false);
 
             if (results != null && results.Count > 1)
             {
@@ -255,7 +255,7 @@ namespace NetCoreForce.Client
 
             while (hasMoreRecords)
             {
-                var qr = await jsonClient.HttpGetAsync<QueryResult<T>>(nextRecordsUri, headers);
+                var qr = await jsonClient.HttpGetAsync<QueryResult<T>>(nextRecordsUri, headers).ConfigureAwait(false);
 
 #if DEBUG
                 Debug.WriteLine($"Got query resuts, {qr.TotalSize} totalSize, {qr.Records.Count} in this batch, final batch: {qr.Done}");
@@ -301,7 +301,7 @@ namespace NetCoreForce.Client
 
             var jsonClient = new JsonClient(AccessToken, SharedHttpClient);
             var uri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString);
-            var qr = await jsonClient.HttpGetAsync<QueryResult<object>>(uri, headers);
+            var qr = await jsonClient.HttpGetAsync<QueryResult<object>>(uri, headers).ConfigureAwait(false);
 
             return qr.TotalSize;
         }
@@ -321,7 +321,7 @@ namespace NetCoreForce.Client
 
                 JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-                SearchResult<T> searchResult = await client.HttpGetAsync<SearchResult<T>>(uri, headers);
+                SearchResult<T> searchResult = await client.HttpGetAsync<SearchResult<T>>(uri, headers).ConfigureAwait(false);
 
                 return searchResult;
             }
@@ -346,7 +346,7 @@ namespace NetCoreForce.Client
 
                 JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-                SearchResult<SObjectGeneric> searchResult = await client.HttpGetAsync<SearchResult<SObjectGeneric>>(uri, headers);
+                SearchResult<SObjectGeneric> searchResult = await client.HttpGetAsync<SearchResult<SObjectGeneric>>(uri, headers).ConfigureAwait(false);
 
                 return searchResult;
             }
@@ -370,7 +370,7 @@ namespace NetCoreForce.Client
 
             JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-            return await client.HttpGetAsync<T>(uri, headers);
+            return await client.HttpGetAsync<T>(uri, headers).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -406,7 +406,7 @@ namespace NetCoreForce.Client
 
             JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-            return await client.HttpPostAsync<CreateResponse>(sObject, uri, headers, fieldsToNull: fieldsToNull, ignoreNulls: ignoreNulls);
+            return await client.HttpPostAsync<CreateResponse>(sObject, uri, headers, fieldsToNull: fieldsToNull, ignoreNulls: ignoreNulls).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -478,7 +478,7 @@ namespace NetCoreForce.Client
 
             SObjectTreeRequest treeRequest = new SObjectTreeRequest(sObjects);
 
-            return await client.HttpPostAsync<SObjectTreeResponse>(treeRequest, uri, headers, fieldsToNull: fieldsToNull, ignoreNulls: ignoreNulls);
+            return await client.HttpPostAsync<SObjectTreeResponse>(treeRequest, uri, headers, fieldsToNull: fieldsToNull, ignoreNulls: ignoreNulls).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -517,7 +517,7 @@ namespace NetCoreForce.Client
 
             JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-            await client.HttpPatchAsync<object>(sObject, uri, headers, ignoreNulls: ignoreNulls, fieldsToNull: fieldsToNull);
+            await client.HttpPatchAsync<object>(sObject, uri, headers, ignoreNulls: ignoreNulls, fieldsToNull: fieldsToNull).ConfigureAwait(false);
 
             return;
         }
@@ -575,7 +575,7 @@ namespace NetCoreForce.Client
 
             UpsertRequest upsertRequest = new UpsertRequest(sObjects, allOrNone);
 
-            return await client.HttpPatchAsync<List<UpsertResponse>>(upsertRequest, uri, headers, includeSObjectId: true, fieldsToNull: fieldsToNull, ignoreNulls: ignoreNulls);
+            return await client.HttpPatchAsync<List<UpsertResponse>>(upsertRequest, uri, headers, includeSObjectId: true, fieldsToNull: fieldsToNull, ignoreNulls: ignoreNulls).ConfigureAwait(false);
 
         }
 
@@ -616,7 +616,7 @@ namespace NetCoreForce.Client
 
             JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-            return await client.HttpPatchAsync<UpsertResponse>(sObject, uri, headers, fieldsToNull: fieldsToNull, ignoreNulls: ignoreNulls);
+            return await client.HttpPatchAsync<UpsertResponse>(sObject, uri, headers, fieldsToNull: fieldsToNull, ignoreNulls: ignoreNulls).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -633,7 +633,7 @@ namespace NetCoreForce.Client
 
             JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-            await client.HttpDeleteAsync<object>(uri, headers);
+            await client.HttpDeleteAsync<object>(uri, headers).ConfigureAwait(false);
 
             return;
         }
@@ -762,13 +762,13 @@ namespace NetCoreForce.Client
             string objectId = match.Groups[2].Value;
             string blobField = match.Groups[3].Value;
 
-            return await BlobRetrieveStream(sObjectTypeName, objectId, blobField);
+            return await BlobRetrieveStream(sObjectTypeName, objectId, blobField).ConfigureAwait(false);
         }
 
         public async Task<Stream> BlobRetrieveStream(string sObjectTypeName, string objectId, string blobField)
         {
-            HttpResponseMessage response = await BlobRetrieveResponse(sObjectTypeName, objectId, blobField);
-            return await response.Content.ReadAsStreamAsync();
+            HttpResponseMessage response = await BlobRetrieveResponse(sObjectTypeName, objectId, blobField).ConfigureAwait(false);
+            return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }
 
         // public async Task<byte[]> BlobRetrieveBytes(string blobUrl)
@@ -840,7 +840,7 @@ namespace NetCoreForce.Client
 
             JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-            return await client.HttpGetAsync<OrganizationLimits>(uri);
+            return await client.HttpGetAsync<OrganizationLimits>(uri).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -851,7 +851,7 @@ namespace NetCoreForce.Client
         /// <returns>List of SalesforceVersion objects</returns>
         public async Task<List<SalesforceVersion>> GetAvailableRestApiVersions(string currentInstanceUrl = null)
         {
-            return await GetAvailableRestApiVersions(currentInstanceUrl, true);
+            return await GetAvailableRestApiVersions(currentInstanceUrl, true).ConfigureAwait(false);
         }
 
         private async Task<List<SalesforceVersion>> GetAvailableRestApiVersions(string currentInstanceUrl = null, bool deserializeResponse = true)
@@ -875,7 +875,7 @@ namespace NetCoreForce.Client
 
             JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-            return await client.HttpGetAsync<List<SalesforceVersion>>(uri: uri, deserializeResponse: deserializeResponse);
+            return await client.HttpGetAsync<List<SalesforceVersion>>(uri: uri, deserializeResponse: deserializeResponse).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -888,7 +888,7 @@ namespace NetCoreForce.Client
         {
             JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-            return await client.HttpGetAsync<UserInfo>(new Uri(identityUrl));
+            return await client.HttpGetAsync<UserInfo>(new Uri(identityUrl)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -904,7 +904,7 @@ namespace NetCoreForce.Client
 
             JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-            return await client.HttpGetAsync<SObjectBasicInfo>(uri, headers);
+            return await client.HttpGetAsync<SObjectBasicInfo>(uri, headers).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -919,7 +919,7 @@ namespace NetCoreForce.Client
 
             JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-            return await client.HttpGetAsync<SObjectDescribeFull>(uri);
+            return await client.HttpGetAsync<SObjectDescribeFull>(uri).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -933,7 +933,7 @@ namespace NetCoreForce.Client
 
             JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-            return await client.HttpGetAsync<DescribeGlobal>(uri);
+            return await client.HttpGetAsync<DescribeGlobal>(uri).ConfigureAwait(false);
         }
 
         #endregion
