@@ -1,3 +1,4 @@
+using NetCoreForce.Client.Enumerations;
 using NetCoreForce.Client.Models;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace NetCoreForce.Client
         /// <param name="instanceUrl"></param>
         public static Uri BaseUri(string instanceUrl)
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
 
             // e.g. https://na99.salesforce.com/services/data
 
@@ -32,8 +33,8 @@ namespace NetCoreForce.Client
         /// <param name="apexResourceUrl"></param>
         public static Uri ApexUri(string instanceUrl, string apexResourceUrl)
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
-            if (string.IsNullOrEmpty(apexResourceUrl)) throw new ArgumentNullException(nameof(apexResourceUrl));
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apexResourceUrl)) throw new ArgumentNullException("apexResourceUrl");
 
             // format: /
 
@@ -48,7 +49,7 @@ namespace NetCoreForce.Client
         /// <param name="instanceUrl"></param>
         public static Uri Versions(string instanceUrl)
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
 
             // format: /
 
@@ -65,8 +66,8 @@ namespace NetCoreForce.Client
         /// </summary>
         public static Uri Limits(string instanceUrl, string apiVersion)
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
 
             //format: /vXX.X/limits/
 
@@ -83,7 +84,7 @@ namespace NetCoreForce.Client
         /// </summary>
         public static Uri LimitsResource(string apiVersion)
         {
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
 
             return new Uri($"{apiVersion}/limits", UriKind.Relative);
         }
@@ -95,8 +96,8 @@ namespace NetCoreForce.Client
         /// </summary>
         public static Uri DescribeGlobal(string instanceUrl, string apiVersion)
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
 
             //format: /vXX.X/sobjects/
 
@@ -111,9 +112,9 @@ namespace NetCoreForce.Client
         /// </summary>
         public static Uri SObjectBasicInformation(string instanceUrl, string apiVersion, string sObjectName)
         {
-            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
 
             //format: /vXX.X/sobjects/SObjectName/
 
@@ -128,9 +129,9 @@ namespace NetCoreForce.Client
         /// </summary>
         public static Uri SObjectDescribe(string instanceUrl, string apiVersion, string sObjectName)
         {
-            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
 
             //format: /vXX.X/sobjects/SObjectName/describe/
 
@@ -157,10 +158,10 @@ namespace NetCoreForce.Client
         /// <returns></returns>
         public static Uri SObjectRows(string instanceUrl, string apiVersion, string sObjectName, string objectId, List<string> fields = null)
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
-            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
-            if (string.IsNullOrEmpty(objectId)) throw new ArgumentNullException(nameof(objectId));
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
+            if (string.IsNullOrEmpty(objectId)) throw new ArgumentNullException("objectId");
 
             //https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_retrieve.htm
 
@@ -187,8 +188,8 @@ namespace NetCoreForce.Client
         /// <returns></returns>
         public static Uri SObjectsComposite(string instanceUrl, string apiVersion)
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
 
             //format: /vXX.X/composite/sobjects
 
@@ -206,8 +207,8 @@ namespace NetCoreForce.Client
         /// <returns></returns>
         public static Uri CompositeRequest(string instanceUrl, string apiVersion)
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
 
             Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/composite");
 
@@ -220,8 +221,8 @@ namespace NetCoreForce.Client
         /// </summary>
         public static string CompositeSubRequest(string apiVersion, string sObjectName, string objectId)
         {
-            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
 
             //format: /services/data/vXX.X/sobjects/SObjectName/
 
@@ -243,9 +244,9 @@ namespace NetCoreForce.Client
         /// <returns></returns>
         public static Uri SObjectTree(string instanceUrl, string apiVersion, string sObjectName)
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
-            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
 
             //format: /vXX.X/composite/tree/sObjectName
 
@@ -270,12 +271,12 @@ namespace NetCoreForce.Client
         /// <returns></returns>
         public static Uri SObjectRowsByExternalId(string instanceUrl, string apiVersion, string sObjectName, string fieldName, string fieldValue)
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
-            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
-            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
-            if (string.IsNullOrEmpty(fieldName)) throw new ArgumentNullException(nameof(fieldName));
-            if (string.IsNullOrEmpty(fieldName)) throw new ArgumentNullException(nameof(fieldValue));
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
+            if (string.IsNullOrEmpty(fieldName)) throw new ArgumentNullException("fieldName");
+            if (string.IsNullOrEmpty(fieldName)) throw new ArgumentNullException("fieldValue");
 
             //format: /vXX.X/sobjects/SObjectName/fieldName/fieldValue
 
@@ -291,7 +292,7 @@ namespace NetCoreForce.Client
         /// <returns></returns>
         public static string CompositeSObjectCollectionsSubRequest(string apiVersion)
         {
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
 
             //format: /services/data/vXX.X/composite/sobjects/
 
@@ -308,11 +309,11 @@ namespace NetCoreForce.Client
         /// <returns></returns>
         public static Uri SObjectCollectionsUpsert(string instanceUrl, string apiVersion, string sObjectName, string fieldName)
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
-            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
-            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
-            if (string.IsNullOrEmpty(fieldName)) throw new ArgumentNullException(nameof(fieldName));
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
+            if (string.IsNullOrEmpty(fieldName)) throw new ArgumentNullException("fieldName");
 
             //format: /vXX.X/sobjects/SObjectName/fieldName/fieldValue
 
@@ -331,11 +332,11 @@ namespace NetCoreForce.Client
         /// </summary>
         public static Uri SObjectBlobRetrieve(string instanceUrl, string apiVersion, string sObjectName, string objectId, string blobField = "body")
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
-            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
-            if (string.IsNullOrEmpty(objectId)) throw new ArgumentNullException(nameof(objectId));
-            if (string.IsNullOrEmpty(blobField)) throw new ArgumentNullException(nameof(blobField));
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
+            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException("sObjectName");
+            if (string.IsNullOrEmpty(objectId)) throw new ArgumentNullException("objectId");
+            if (string.IsNullOrEmpty(blobField)) throw new ArgumentNullException("blobField");
 
             //format: /vXX.X/sobjects/SObjectName/id/
 
@@ -384,12 +385,42 @@ namespace NetCoreForce.Client
         /// <param name="apiVersion"></param>
         public static Uri Batch(string instanceUrl, string apiVersion)
         {
-            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
-            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException("instanceUrl");
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException("apiVersion");
 
             //format: /vXX.X/composite/batch
 
             Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/composite/batch");
+
+            return uri;
+        }
+
+        public static Uri CreateJob(string instanceUrl, string apiVersion, JobType jobType)
+        {
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+
+            //format: /vXX.X/jobs/ingest
+
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/jobs/{(jobType == JobType.Query ? "query" : "ingest")}");
+
+            return uri;
+        }
+
+        public static Uri Job(string instanceUrl, string apiVersion, JobType jobType, string jobId, string path = "")
+        {
+            if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            if (string.IsNullOrEmpty(jobId)) throw new ArgumentNullException(nameof(jobId));
+
+            //format: /vXX.X/jobs/ingest/{{0}}
+
+            if (!string.IsNullOrEmpty(path) && !path.StartsWith("/"))
+            {
+                path = $"/{path}";
+            }
+
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/jobs/{(jobType == JobType.Query ? "query" : "ingest")}/{jobId}{path}");
 
             return uri;
         }
@@ -411,9 +442,9 @@ namespace NetCoreForce.Client
             string state = "",
             string scope = "")
         {
-            if (string.IsNullOrEmpty(loginUrl)) throw new ArgumentNullException(nameof(loginUrl));
-            if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException(nameof(clientId));
-            if (string.IsNullOrEmpty(redirectUrl)) throw new ArgumentNullException(nameof(redirectUrl));
+            if (string.IsNullOrEmpty(loginUrl)) throw new ArgumentNullException("loginUrl");
+            if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException("clientId");
+            if (string.IsNullOrEmpty(redirectUrl)) throw new ArgumentNullException("redirectUrl");
 
             const ResponseTypes responseType = ResponseTypes.Token;
 
@@ -437,6 +468,8 @@ namespace NetCoreForce.Client
 
             return new Uri(url);
         }
+
+        //TODO: parser for redirect url result
 
         /// <summary>
         /// Formats a manual authentication URL for the Web Server Authentication Flow
