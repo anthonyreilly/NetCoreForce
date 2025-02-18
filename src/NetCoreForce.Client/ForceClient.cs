@@ -85,7 +85,7 @@ namespace NetCoreForce.Client
 
         private async Task Login(string clientId, string clientSecret, string username, string password, string tokenRequestEndpoint, string apiVersion = null, HttpClient httpClient = null)
         {
-            AuthenticationClient authClient = new AuthenticationClient(apiVersion);
+            AuthenticationClient authClient = new AuthenticationClient(apiVersion, httpClient);
             await authClient.UsernamePasswordAsync(clientId, clientSecret, username, password, tokenRequestEndpoint);
 
             Initialize(authClient.AccessInfo.InstanceUrl, authClient.ApiVersion, authClient.AccessInfo.AccessToken, httpClient, authClient.AccessInfo);
