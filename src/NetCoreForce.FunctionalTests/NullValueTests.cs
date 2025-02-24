@@ -28,9 +28,9 @@ namespace NetCoreForce.FunctionalTests
             CreateResponse createResp = await client.CreateRecord<SfAccount>(SfAccount.SObjectTypeName,
             new SfAccount()
             {
-                Name = "test account",
-                Description = "test description",
-                BillingCity = "anytown"
+                Name = "test account " + Guid.NewGuid().ToString(),
+                Description = Guid.NewGuid().ToString(),
+                BillingCity = Guid.NewGuid().ToString()
             });
 
             Assert.True(!string.IsNullOrEmpty(createResp.Id), "Failed to create new object");
