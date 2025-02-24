@@ -5,6 +5,7 @@
 * feat: Add ConfigureAwait(false) to await calls (PR #71 jtsai-osa)
 * feat: Pass through HttpClient from ForceClient to AuthenticationClient (PR #76 saithis)
 * feat: Add more composite endpoints. Add token introspection. Add call for custom APEX code (PR #72 phess101)
+* build: Add .NET 9 build targets
 
 ### 2024-05-24 v4.1.0
 
