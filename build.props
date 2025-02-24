@@ -2,15 +2,15 @@
   <PropertyGroup>
 
     <!--Versioning-->
-    <VersionPrefix>4.1.0</VersionPrefix>
-    <VersionSuffix></VersionSuffix>
+    <VersionPrefix>5.0.0</VersionPrefix>
+    <VersionSuffix>Beta</VersionSuffix>
 
     <!-- Targets -->
     <LangVersion>8.0</LangVersion>
 
     <!--NuGet-->
     <Authors>Anthony Reilly</Authors>
-    <Copyright>2024 Anthony Reilly</Copyright>
+    <Copyright>2025 Anthony Reilly</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/anthonyreilly/NetCoreForce</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
