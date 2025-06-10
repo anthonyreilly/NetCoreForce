@@ -20,6 +20,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup .NET Core 2.1
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 2.1.x
+
+      - name: Setup .NET Core 3.1
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 3.1.x
+
       - name: Setup .NET Core 6.0
         uses: actions/setup-dotnet@v4
         with:
