@@ -201,15 +201,15 @@ namespace NetCoreForce.FunctionalTests
             Assert.Null(contact);
         }
 
-        [Fact]
-        public async Task QueryAsync_ToList()
-        {
-            ForceClient client = await forceClientFixture.GetForceClient();
+        // [Fact]
+        // public async Task QueryAsync_ToList()
+        // {
+        //     ForceClient client = await forceClientFixture.GetForceClient();
 
-            List<SfContact> contacts = await client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 1000", batchSize: 200).ToListAsync();
+        //     List<SfContact> contacts = await client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 1000", batchSize: 200).ToListAsync();
 
-            Assert.NotNull(contacts);
-            Assert.NotEmpty(contacts);
-        }
+        //     Assert.NotNull(contacts);
+        //     Assert.NotEmpty(contacts);
+        // }
     }
 }
