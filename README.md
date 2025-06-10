@@ -6,13 +6,11 @@
 ### [CHANGELOG](CHANGELOG.md)  
 
 CI main:  
-[![CI](https://github.com/anthonyreilly/NetCoreForce/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/anthonyreilly/NetCoreForce/actions/workflows/ci.yml)
+[![CI](https://github.com/anthonyreilly/NetCoreForce/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/anthonyreilly/NetCoreForce/actions/workflows/ci.yml)  
 CI dev:  
 [![CI](https://github.com/anthonyreilly/NetCoreForce/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/anthonyreilly/NetCoreForce/actions/workflows/ci.yml)
 
-NetCoreForce currently targeting netstandard 2.0 & 2.1, supports .NET Core 2.1 - 9.0
-
-For .NET Core 1.x support, use NetCoreForce v2.7
+NetCoreForce currently targeting netstandard 2.0 & 2.1, and .NET Core 6.0 - 9.0
 
 ### Projects in this solution:
 * [NetCoreForce.Client](src/NetCoreForce.Client)
