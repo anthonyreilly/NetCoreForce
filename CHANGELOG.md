@@ -1,5 +1,12 @@
 # Changelog
 
+### 2025-06-10 v5.0.0
+
+* feat: branched off and removed LINQ project, as it is unlikely to become production ready in the new future
+* build: remove unsupported frameworks, separately test each supported framework target
+* test: updated functional test in NullValueTests to avoid duplicate error on create
+* test: updated packages, updated deprecated async void methods
+
 ### 2025-02-24 v5.0.0-Beta
 
 * feat: Add ConfigureAwait(false) to await calls (PR #71 jtsai-osa)
