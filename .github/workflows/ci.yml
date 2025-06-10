@@ -20,16 +20,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup .NET Core 2.1
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 2.1.x
-
-      - name: Setup .NET Core 3.1
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 3.1.x
-
       - name: Setup .NET Core 6.0
         uses: actions/setup-dotnet@v4
         with:
@@ -56,8 +46,17 @@ jobs:
       - name: Build
         run: dotnet build --configuration $config --no-restore
 
-      - name: Test
-        run: dotnet test src/NetCoreForce.Client.Tests --configuration $config --no-restore --no-build --verbosity normal
+      - name: Test net6.0
+        run: dotnet test src/NetCoreForce.Client.Tests --configuration $config --no-restore --no-build --verbosity normal --framework net6.0
+
+      - name: Test net7.0
+        run: dotnet test src/NetCoreForce.Client.Tests --configuration $config --no-restore --no-build --verbosity normal --framework net7.0
+
+      - name: Test net8.0
+        run: dotnet test src/NetCoreForce.Client.Tests --configuration $config --no-restore --no-build --verbosity normal --framework net8.0
+
+      - name: Test net9.0
+        run: dotnet test src/NetCoreForce.Client.Tests --configuration $config --no-restore --no-build --verbosity normal --framework net9.0
       
       - name: Upload nuget artifact
         uses: actions/upload-artifact@v4
