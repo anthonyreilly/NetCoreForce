@@ -35,7 +35,7 @@ namespace NetCoreForce.Client.Tests
         }
 
         [Fact]
-        public async void QueryAsync()
+        public async Task QueryAsync()
         {
             var mockHandler = new MockHttpClientHandler();
 

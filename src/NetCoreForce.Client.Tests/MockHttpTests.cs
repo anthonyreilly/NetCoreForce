@@ -32,7 +32,7 @@ namespace NetCoreForce.Client.Tests
         }
 
         [Fact]
-        public async void ObjectById()
+        public async Task ObjectById()
         {
             ForceClient client = CreateMockClient(
                 "https://na15.salesforce.com",
@@ -52,7 +52,7 @@ namespace NetCoreForce.Client.Tests
         }
 
         [Fact]
-        public async void QueryNestedObjects()
+        public async Task QueryNestedObjects()
         {
             ForceClient client = CreateMockClient(
                 "https://na15.salesforce.com",
@@ -73,7 +73,7 @@ namespace NetCoreForce.Client.Tests
         }
 
         [Fact]
-        public async void QueryNoResults()
+        public async Task QueryNoResults()
         {
             ForceClient client = CreateMockClient(
                 "https://na15.salesforce.com",
@@ -89,7 +89,7 @@ namespace NetCoreForce.Client.Tests
         }
 
         [Fact]
-        public async void QuerySingleObject()
+        public async Task QuerySingleObject()
         {
             ForceClient client = CreateMockClient(
                 "https://na15.salesforce.com",
@@ -107,7 +107,7 @@ namespace NetCoreForce.Client.Tests
         }
 
         [Fact]
-        public async void QuerySingleObjectFail()
+        public async Task QuerySingleObjectFail()
         {
             ForceClient client = CreateMockClient(
                 "https://na15.salesforce.com",
@@ -124,7 +124,7 @@ namespace NetCoreForce.Client.Tests
         }
 
         [Fact]
-        public async void QuerySingleObjectNoResults()
+        public async Task QuerySingleObjectNoResults()
         {
             ForceClient client = CreateMockClient(
                 "https://na15.salesforce.com",
@@ -139,7 +139,7 @@ namespace NetCoreForce.Client.Tests
         }
 
         [Fact]
-        public async void CountQuery()
+        public async Task CountQuery()
         {
             ForceClient client = CreateMockClient(
                 "https://na15.salesforce.com",
