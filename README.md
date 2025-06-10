@@ -1,16 +1,16 @@
 # NetCoreForce 
 
-## A .NET Standard and .NET Core Salesforce REST API toolkit and API wrapper
+## A .NET Standard and .NET Core Salesforce REST API integration library
 *This project is not offered, sponsored, or endorsed by Salesforce.*
 
 ### [CHANGELOG](CHANGELOG.md)  
 
 CI main:  
-[![](https://github.com/anthonyreilly/NetCoreForce/workflows/CI/badge.svg?branch=main)](https://github.com/anthonyreilly/NetCoreForce/actions?query=workflow%3ACI+branch%3Amain)  
+[![CI](https://github.com/anthonyreilly/NetCoreForce/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/anthonyreilly/NetCoreForce/actions/workflows/ci.yml)
 CI dev:  
-[![](https://github.com/anthonyreilly/NetCoreForce/workflows/CI/badge.svg?branch=dev)](https://github.com/anthonyreilly/NetCoreForce/actions?query=workflow%3ACI+branch%3Adev)  
+[![CI](https://github.com/anthonyreilly/NetCoreForce/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/anthonyreilly/NetCoreForce/actions/workflows/ci.yml)
 
-NetCoreForce v4 currently targeting netstandard 2.0 & 2.1, supports .NET Core 2.1,3.1,6.0, and 7.0 apps.
+NetCoreForce currently targeting netstandard 2.0 & 2.1, supports .NET Core 2.1 - 9.0
 
 For .NET Core 1.x support, use NetCoreForce v2.7
 
@@ -35,20 +35,14 @@ For .NET Core 1.x support, use NetCoreForce v2.7
 * [NetCoreForce.Models](https://www.nuget.org/packages/NetCoreForce.Models/)
 * [NetCoreForce.ModelGenerator](https://www.nuget.org/packages/NetCoreForce.ModelGenerator/)
 
-### An effort is made to minimize the dependencies:
+### Designed to minimize dependencies:
 * [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json) (JSON Serialization)
 * [System.Text.Encodings.Web](https://www.nuget.org/packages/System.Text.Encodings.Web) (URL formatting)
 * [Microsoft.Bcl.AsyncInterfaces](https://www.nuget.org/packages/Microsoft.Bcl.AsyncInterfaces/)
     - Only included in .netstandard2.0, .netcoreapp2.0 targets
     - Provides await using, async disposables
 
-### Experimental Projects:
-* Please note: The LINQ library has barely been tested, and is not recommended for production use. Consider it an alpha release.
-* [NetCoreForce.Linq](src/NetCoreForce.Linq) - an experimental LINQ-to-SOQL query provider
-* [NetCoreForce.Linq.Tests](src/NetCoreForce.Linq.Tests) - LINQ Unit tests (offline/mocked)
-* NuGet package: [NetCoreForce.Linq](https://www.nuget.org/packages/NetCoreForce.Linq/)
-* Retains a dependency on [System.Interactive.Async](https://www.nuget.org/packages/System.Interactive.Async/)
-
+(Migration from Newtonsoft.Json to System.Text.Json is planned)
 
 Feedback and suggestions welcome.
 
