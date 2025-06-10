@@ -5,7 +5,7 @@ namespace NetCoreForce.Client
     //https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql_select_dateformats.htm
     
     /// <summary>
-    /// Salesforce date format strings
+    /// Provides Salesforce date format strings and methods for converting dates to those formats.
     /// </summary>
     public static class DateFormats
     {
@@ -16,6 +16,12 @@ namespace NetCoreForce.Client
         /// <summary>
         /// Date, time, and time zone offset
         /// </summary>
+        /// <remarks>
+        /// Uses the format "yyyy-MM-ddTHH:mm:sszzz" to output a date string e.g. "2023-10-01T12:34:56-07:00"
+        /// </remarks>
+        /// <returns>
+        /// A string representing the full date format used by Salesforce.
+        /// </returns>        
         public static string FullDateFormatString
         {
             get

@@ -6,7 +6,9 @@ namespace NetCoreForce.Client
 {
     /// <summary>
     /// Formats custom HTTP request and response headers used for REST API
-    /// <para>https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/headers.htm</para>
+    /// <para>
+    /// See also <see href="https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/headers.htm">Salesforce REST API Developer Guide - Headers</see>
+    /// </para>
     /// </summary>
     public static class HeaderFormatter
     {
