@@ -7,6 +7,10 @@ scratch/
 clean.sh
 TestOutput
 
+# DocFx output
+docs/_site/
+docs/api
+
 # NuGet package output
 packages/
 
