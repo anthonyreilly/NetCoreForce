@@ -11,13 +11,13 @@
 
   <Choose>
 
-    <When Condition=" '$(TargetFramework)' == 'NET6_0_OR_GREATER'">
+    <When Condition="'$(TargetFramework)' == 'NET6_0_OR_GREATER'">
       <ItemGroup>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
       </ItemGroup>
     </When>
 
-    <When Condition=" '$(TargetFramework)' == 'NET8_0_OR_GREATER'">
+    <When Condition="'$(TargetFramework)' == 'NET8_0_OR_GREATER'">
       <ItemGroup>
         <PackageReference Include="xunit.runner.visualstudio" Version="3.1.1" />
       </ItemGroup>
