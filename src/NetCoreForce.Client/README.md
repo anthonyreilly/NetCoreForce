@@ -1,22 +1,9 @@
-# NetCoreForce.Client
+# NetCoreForce 
 
-Current transactions supported:
-* Create object
-* Update object
-* Delete object
-* Get SOQL Query results
-* Get object by Id
-* SOSL Search
+## A .NET Standard and .NET Core Salesforce REST API integration library
+*This project is not offered, sponsored, or endorsed by Salesforce.*
 
-Metadata:
-* Org Limits
-* SObject Basic Information (basic object metadata)
-* SObject Describe (full object metadata)
-* Describe Global
-Metadata results have modeled/typed results
+Targets .NET Standard 2.0 - this means it will be generally compatible with .NET Framework 4.6.1+ and .NET Core 2.0+  
+For more info on .NET Standard 2.0 compatiblity [see the Microsoft documentation here](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-0)
 
-Supported Auth Flows
-* Username/Password
-* Web Server
-* User Agent
-* Refresh Token
+Full tested support is for .NET Core 6.0 - 9.0 as tooling and tests target those.
