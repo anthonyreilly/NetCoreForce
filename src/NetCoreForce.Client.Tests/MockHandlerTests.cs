@@ -12,7 +12,7 @@ namespace NetCoreForce.Client.Tests
     public class MockHandlerTests
     {
         [Fact]
-        public async void MockHandlerTest()
+        public async Task MockHandlerTest()
         {
             var mockHandler = new MockHttpClientHandler();
             mockHandler.AddMockResponse(new Uri("http://example.org/test"), new HttpResponseMessage(HttpStatusCode.OK));

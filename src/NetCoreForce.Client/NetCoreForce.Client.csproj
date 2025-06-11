@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.props))\build.props" />
+  <Import
+    Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.props))\build.props" />
   <PropertyGroup>
     <AssemblyName>NetCoreForce.Client</AssemblyName>
     <Product>NetCoreForce.Client</Product>
@@ -10,7 +11,7 @@
     <!--NuGet-->
     <Authors>$(Authors)</Authors>
     <Copyright>$(Copyright)</Copyright>
-    <Description>A .NET Standard and .NET Core Salesforce REST API toolkit and API wrapper</Description>
+    <Description>A .NET Standard and .NET Core Salesforce REST API integration library</Description>
     <IsPackable>true</IsPackable>
     <PackageId>NetCoreForce.Client</PackageId>
     <PackageLicenseExpression>$(PackageLicenseExpression)</PackageLicenseExpression>
@@ -20,7 +21,13 @@
     <RepositoryType>$(RepositoryType)</RepositoryType>
     <RepositoryUrl>$(RepositoryUrl)</RepositoryUrl>
     <PackageReleaseNotes>$(PackageReleaseNotes)</PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <!-- Documentation -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -29,6 +36,7 @@
     <NoWarn>CS1591</NoWarn>
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageOutputPath>$(SolutionDir)/packages</PackageOutputPath>
@@ -41,15 +49,15 @@
 
   <Choose>
 
-    <When Condition=" '$(TargetFramework)' == 'NET6_0_OR_GREATER'">
+    <When Condition=" '$(TargetFramework)' == 'NET8_0_OR_GREATER'">
       <ItemGroup>
-        <PackageReference Include="System.Text.Encodings.Web" Version="7.0.0" />
+        <PackageReference Include="System.Text.Encodings.Web" Version="9.0.6" />
       </ItemGroup>
     </When>
 
     <Otherwise>
       <ItemGroup>
-        <PackageReference Include="System.Text.Encodings.Web" Version="5.0.1" />
+        <PackageReference Include="System.Text.Encodings.Web" Version="8.0.0" />
       </ItemGroup>
     </Otherwise>
 

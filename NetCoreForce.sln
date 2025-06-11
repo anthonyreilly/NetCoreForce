@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.7
@@ -14,10 +14,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreForce.FunctionalTests", "src\NetCoreForce.FunctionalTests\NetCoreForce.FunctionalTests.csproj", "{B1B27588-2FE8-4866-85F6-259F3525021B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleConsole", "src\SampleConsole\SampleConsole.csproj", "{DECD46B3-1DE6-4029-91E0-18C1D6AFEC60}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreForce.Linq", "src\NetCoreForce.Linq\NetCoreForce.Linq.csproj", "{9013FC59-47FD-42AA-8771-19CE7ED672DA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreForce.Linq.Tests", "src\NetCoreForce.Linq.Tests\NetCoreForce.Linq.Tests.csproj", "{519CD29C-E6AB-4F6A-AC5E-7752C1C89A41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,14 +45,6 @@ Global
 		{DECD46B3-1DE6-4029-91E0-18C1D6AFEC60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DECD46B3-1DE6-4029-91E0-18C1D6AFEC60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DECD46B3-1DE6-4029-91E0-18C1D6AFEC60}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9013FC59-47FD-42AA-8771-19CE7ED672DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9013FC59-47FD-42AA-8771-19CE7ED672DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9013FC59-47FD-42AA-8771-19CE7ED672DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9013FC59-47FD-42AA-8771-19CE7ED672DA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{519CD29C-E6AB-4F6A-AC5E-7752C1C89A41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{519CD29C-E6AB-4F6A-AC5E-7752C1C89A41}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{519CD29C-E6AB-4F6A-AC5E-7752C1C89A41}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{519CD29C-E6AB-4F6A-AC5E-7752C1C89A41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

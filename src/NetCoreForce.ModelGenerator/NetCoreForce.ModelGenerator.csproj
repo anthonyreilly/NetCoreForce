@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.props))\build.props" />
+  <Import
+    Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.props))\build.props" />
   <PropertyGroup>
     <AssemblyName>dotnet-modelgenerator</AssemblyName>
     <Product>NetCoreForce.ModelGenerator</Product>
@@ -10,7 +11,8 @@
     <!--NuGet-->
     <Authors>$(Authors)</Authors>
     <Copyright>$(Copyright)</Copyright>
-    <Description>NetCoreForce ModelGenerator tool to generate object models against a live Salesforce org.</Description>
+    <Description>NetCoreForce ModelGenerator tool to generate object models against a live
+      Salesforce org.</Description>
     <IsPackable>true</IsPackable>
     <PackageId>NetCoreForce.ModelGenerator</PackageId>
     <PackageLicenseExpression>$(PackageLicenseExpression)</PackageLicenseExpression>
@@ -23,7 +25,12 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>NetCoreForce.ModelGenerator</ToolCommandName>
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
