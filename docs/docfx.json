@@ -6,7 +6,9 @@
         {
           "src": "../src",
           "files": [
-            "NetCoreForce.Client/*.csproj"
+            "NetCoreForce.Client/*.csproj",
+            "NetCoreForce.Models/*.csproj",
+            "NetCoreForce.ModelGenerator/*.csproj"
           ]
         }
       ],
