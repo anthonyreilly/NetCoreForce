@@ -42,28 +42,31 @@
     <PackageOutputPath>$(SolutionDir)/packages</PackageOutputPath>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'net461' ">
-    <!-- Adds async support for .netstandard2.0 clients -->
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
+  <!-- Adds async support for .NET Standard 2.0, .NET Framework, and .NET Core < 3.0 -->
+  <ItemGroup Condition=" $(TargetFramework) == 'netstandard2.0' OR $(TargetFramework.StartsWith('net4')) ">
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="9.0.6" />
   </ItemGroup>
 
   <Choose>
-
-    <When Condition=" '$(TargetFramework)' == 'NET8_0_OR_GREATER'">
+    <When Condition=" $(TargetFramework) == 'netcoreapp3.1' OR $(TargetFramework) == 'net5.0' ">
       <ItemGroup>
-        <PackageReference Include="System.Text.Encodings.Web" Version="9.0.6" />
+        <PackageReference Include="System.Text.Encodings.Web" Version="6.0.0" />
       </ItemGroup>
     </When>
-
-    <Otherwise>
+    <When Condition=" $(TargetFramework) == 'net6.0' OR $(TargetFramework) == 'net7.0'">
       <ItemGroup>
         <PackageReference Include="System.Text.Encodings.Web" Version="8.0.0" />
       </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Include="System.Text.Encodings.Web" Version="9.0.6" />
+      </ItemGroup>
     </Otherwise>
-
   </Choose>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
+
 </Project>
