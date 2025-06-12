@@ -43,9 +43,11 @@ jobs:
       with:
         dotnet-version: 9.x
 
-    - run: dotnet tool update -g docfx
+    - name: Install docfx
+      run: dotnet tool update -g docfx
 
-    - run: docfx src/docs/docfx.json
+    - name: Build DocFX 'src/docs/_site'
+      run: docfx src/docs/docfx.json
 
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v4
