@@ -5,6 +5,7 @@
 !*config_example.json
 scratch/
 clean.sh
+scrub.sh
 TestOutput
 
 # DocFx output

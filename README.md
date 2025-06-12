@@ -8,6 +8,8 @@ For more info on .NET Standard 2.0 compatiblity [see the Microsoft documentation
 
 Full tested support is for .NET Core 6.0 - 9.0 as tooling and tests target those.
 
+![NuGet Downloads](https://img.shields.io/nuget/dt/NetCoreForce.Client)  
+
 ### [CHANGELOG](CHANGELOG.md)  
 
 CI main:  
