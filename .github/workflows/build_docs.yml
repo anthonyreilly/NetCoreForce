@@ -47,13 +47,13 @@ jobs:
       run: dotnet tool update -g docfx
 
     - name: Build DocFX 'src/docs/_site'
-      run: docfx src/docs/docfx.json
+      run: docfx docs/docfx.json
 
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
         # Upload entire repository
-        path: 'src/docs/_site'
+        path: 'docs/_site'
 
     - name: Deploy to GitHub Pages
       id: deployment
