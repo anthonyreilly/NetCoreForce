@@ -2,10 +2,8 @@
 _layout: landing
 ---
 
-
-
-* [ForceClient](~/api/NetCoreForce.Client.ForceClient.yml)
-    -[NetcoreForce.Client](~/api/NetCoreForce.Client.yml)
+- [ForceClient](~/api/NetCoreForce.Client.ForceClient.yml)
+    - [NetcoreForce.Client](~/api/NetCoreForce.Client.yml)
 
 
 # NetCoreForce 
@@ -13,8 +11,31 @@ _layout: landing
 ## A .NET Salesforce REST API integration library
 *This project is not offered, sponsored, or endorsed by Salesforce.*
 
-Targets .NET Standard 2.0 - this means it will be generally compatible with .NET Framework 4.6.1+ and .NET Core 2.0+  
-For more info on .NET Standard 2.0 compatiblity [see the Microsoft documentation here](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-0)
+## Library Targets
+
+The primary target is .NET Standard 2.0 to provide the widest possible support. 
+- .NET Standard 2.0 for widest possible support including .NET Framework 4.6.1+ and .NET Core 2.0
+- .NET Standard 2.1 for newer .NET Core versions
+
+For more info on .NET Standard compatiblity [see the Microsoft documentation here](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-0)
+
+Full target list
+- .NET Standard 2.0
+- .NET Standard 2.1
+- .NET Core 3.1
+- .NET 5.0
+- .NET 6.0
+- .NET 7.0
+- .NET 8.0
+- .NET 9.0
+- .NET Framework 4.6.2
+- .NET Framework 4.7.2
+- .NET Framework 4.8
+
+All possible frameworks are specifically targeted so that conditional compilation can be done where required.
+
+Full tested support is for .NET Core 6.0 - 9.0 as tooling and tests target those.  
+Legacy .NET Frameworks are partially tested
 
 Full tested support is for .NET Core 6.0 - 9.0 as tooling and tests target those.
 

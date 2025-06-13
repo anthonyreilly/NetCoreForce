@@ -2,7 +2,7 @@
 
 
 
-### Basic Usage Example
+## Basic Usage Example
 
 ```csharp
 ///Initialize the authentication client
@@ -25,13 +25,16 @@ await client.DeleteRecord(SfAccount.SObjectTypeName, acct.Id);
 //Get the results of a SOQL query
 List<SfCase> cases = await client.Query<SfCase>("SELECT Id,CaseNumber,Account.Name,Contact.Name FROM Case");
 ```
+---
 
-### Nested Query Results
+## Nested Query Results
 
 When you include related objects in a SOQL query:
 ```
 SELECT Id,CaseNumber,Account.Name,Contact.Name FROM Case
 ```
+
+[```Query<T>```](xref:NetCoreForce.Client.ForceClient.Query``1(System.String,System.Boolean)). 
 
 And get the results via the client, you can then access the related objects and fields included in the query in a fluent manner.
 ```csharp
@@ -47,11 +50,14 @@ Nested queries are not fully supported - the subquery results will not be comple
 // *NOT* fully supported
 "SELECT Id,CaseNumber, (Select Contact.Name from Account) FROM Case"
 ```
+---
 
-### Asynchronous Batch Processing
+## Asynchronous Batch Processing
 
-Query<T> method will retrieve the full result set before returning. By default, results are returned in batches of 2000.
-In cases where you are working with large result sets, you may want to use QueryAsync<T> to retrieve the batches asynchronously for better performance.
+[```Query<T>```](xref:NetCoreForce.Client.ForceClient.Query``1(System.String,System.Boolean)) method will retrieve the full result set before returning. By default, results are returned in batches of 2000.
+In cases where you are working with large result sets, you may want to use
+[```QueryAsync<T>```](xref:NetCoreForce.Client.ForceClient.QueryAsync``1(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken))
+to retrieve the batches asynchronously for better performance.
 
 ```csharp
 // First create the async enumerable. At this point, no query has been executed.
@@ -69,4 +75,12 @@ await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable
         // process your results
     }
 }
-```
+``` 
+
+---
+
+## Multiple and Single Resultsets
+
+By defualt, the [```Query<T>```](xref:NetCoreForce.Client.ForceClient.Query``1(System.String,System.Boolean)) returns a ```List<T>```.
+When you know the result will be a single record, you can use the [```QuerySingle<T>```](xref:NetCoreForce.Client.ForceClient.QuerySingle``1(System.String,System.Boolean)) method.
+
