@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -39,7 +39,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "ownerId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string OwnerId { get; set; }
 
 		///<summary>
@@ -193,6 +193,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "label")]
 		[Updateable(false), Createable(false)]
 		public string Label { get; set; }
+
+		///<summary>
+		/// Description
+		/// <para>Name: Description</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "description")]
+		[Updateable(false), Createable(false)]
+		public string Description { get; set; }
 
 	}
 }

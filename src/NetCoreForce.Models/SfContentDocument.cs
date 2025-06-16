@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -311,6 +311,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "contentAsset")]
 		[Updateable(false), Createable(false)]
 		public SfContentAsset ContentAsset { get; set; }
+
+		///<summary>
+		/// Is Internal Only
+		/// <para>Name: IsInternalOnly</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isInternalOnly")]
+		[Updateable(true), Createable(false)]
+		public bool? IsInternalOnly { get; set; }
 
 	}
 }

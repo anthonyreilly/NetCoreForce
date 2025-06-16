@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -41,6 +41,24 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isDeleted")]
 		[Updateable(false), Createable(false)]
 		public bool? IsDeleted { get; set; }
+
+		///<summary>
+		/// Owner ID
+		/// <para>Name: OwnerId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "ownerId")]
+		[Updateable(false), Createable(false)]
+		public string OwnerId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: User
+		/// <para>RelationshipName: Owner</para>
+		///</summary>
+		[JsonProperty(PropertyName = "owner")]
+		[Updateable(false), Createable(false)]
+		public SfUser Owner { get; set; }
 
 		///<summary>
 		/// Folder ID

@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// ML Prediction Field
-	///<para>SObject Name: MLField</para>
+	/// Content Taxonomy Term Relationship Type
+	///<para>SObject Name: ContentTaxonomyTermRelationshipType</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfMLField : SObject
+	public class SfContentTaxonomyTermRelationshipType : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "MLField"; }
+			get { return "ContentTaxonomyTermRelationshipType"; }
 		}
 
 		///<summary>
-		/// ML Field Id
+		/// Content Taxonomy Term Relationship Type ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -41,6 +41,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isDeleted")]
 		[Updateable(false), Createable(false)]
 		public bool? IsDeleted { get; set; }
+
+		///<summary>
+		/// Content Taxonomy Term Relationship Type Name
+		/// <para>Name: Name</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "name")]
+		[Updateable(false), Createable(false)]
+		public string Name { get; set; }
 
 		///<summary>
 		/// Created Date
@@ -109,24 +119,24 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Custom Object Definition ID
-		/// <para>Name: Entity</para>
+		/// Content Taxonomy Term Relationship Category
+		/// <para>Name: ContentTaxonomyTrmRelaCatg</para>
 		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: True</para>
+		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "entity")]
+		[JsonProperty(PropertyName = "contentTaxonomyTrmRelaCatg")]
 		[Updateable(false), Createable(false)]
-		public string Entity { get; set; }
+		public string ContentTaxonomyTrmRelaCatg { get; set; }
 
 		///<summary>
-		/// Custom Field Definition ID
-		/// <para>Name: Field</para>
-		/// <para>SF Type: picklist</para>
+		/// Description
+		/// <para>Name: Description</para>
+		/// <para>SF Type: textarea</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "field")]
+		[JsonProperty(PropertyName = "description")]
 		[Updateable(false), Createable(false)]
-		public string Field { get; set; }
+		public string Description { get; set; }
 
 	}
 }

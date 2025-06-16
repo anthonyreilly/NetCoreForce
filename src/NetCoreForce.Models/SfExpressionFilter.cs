@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// ExpressionFilter
+	/// Expression Filter
 	///<para>SObject Name: ExpressionFilter</para>
 	///<para>Custom Object: False</para>
 	///</summary>
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// ExpressionFilter ID
+		/// Expression Filter ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -43,7 +43,7 @@ namespace NetCoreForce.Models
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
-		/// ExpressionFilter Name
+		/// Expression Filter Name
 		/// <para>Name: Name</para>
 		/// <para>SF Type: string</para>
 		/// <para>AutoNumber field</para>
@@ -120,7 +120,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// FilterConditionLogic
+		/// Filter Condition Logic
 		/// <para>Name: FilterConditionLogic</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -147,7 +147,7 @@ namespace NetCoreForce.Models
 		public SfMacroInstruction Context { get; set; }
 
 		///<summary>
-		/// FilterDescription
+		/// Filter Description
 		/// <para>Name: FilterDescription</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>

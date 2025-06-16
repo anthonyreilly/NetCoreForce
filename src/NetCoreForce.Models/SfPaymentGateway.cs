@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -197,6 +197,16 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "externalReference")]
 		public string ExternalReference { get; set; }
+
+		///<summary>
+		/// Tap To Pay Location
+		/// <para>Name: DefaultTapToPayLocation</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "defaultTapToPayLocation")]
+		[Updateable(false), Createable(false)]
+		public string DefaultTapToPayLocation { get; set; }
 
 	}
 }

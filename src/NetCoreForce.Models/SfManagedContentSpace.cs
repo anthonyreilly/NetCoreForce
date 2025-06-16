@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -157,6 +157,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "defaultLanguage")]
 		[Updateable(false), Createable(false)]
 		public string DefaultLanguage { get; set; }
+
+		///<summary>
+		/// Api Name
+		/// <para>Name: ApiName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "apiName")]
+		[Updateable(false), Createable(false)]
+		public string ApiName { get; set; }
 
 	}
 }

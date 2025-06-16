@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -364,6 +364,56 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "netPaymentsApplied")]
 		[Updateable(false), Createable(false)]
 		public decimal? NetPaymentsApplied { get; set; }
+
+		///<summary>
+		/// Invoice Locked
+		/// <para>Name: IsInvoiceLocked</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isInvoiceLocked")]
+		[Updateable(false), Createable(false)]
+		public bool? IsInvoiceLocked { get; set; }
+
+		///<summary>
+		/// Invoice Locked Date Time
+		/// <para>Name: InvoiceLockedDateTime</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "invoiceLockedDateTime")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? InvoiceLockedDateTime { get; set; }
+
+		///<summary>
+		/// Write Off Status
+		/// <para>Name: WriteOffStatus</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "writeOffStatus")]
+		[Updateable(false), Createable(false)]
+		public string WriteOffStatus { get; set; }
+
+		///<summary>
+		/// Write Off Total Charge Amount
+		/// <para>Name: WriteOffTotalChargeAmount</para>
+		/// <para>SF Type: currency</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "writeOffTotalChargeAmount")]
+		[Updateable(false), Createable(false)]
+		public decimal? WriteOffTotalChargeAmount { get; set; }
+
+		///<summary>
+		/// Write Off Total Tax Amount
+		/// <para>Name: WriteOffTotalTaxAmount</para>
+		/// <para>SF Type: currency</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "writeOffTotalTaxAmount")]
+		[Updateable(false), Createable(false)]
+		public decimal? WriteOffTotalTaxAmount { get; set; }
 
 	}
 }

@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -249,6 +249,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "loginSubType")]
 		[Updateable(false), Createable(false)]
 		public string LoginSubType { get; set; }
+
+		///<summary>
+		/// Forwarded For IP
+		/// <para>Name: ForwardedForIp</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "forwardedForIp")]
+		[Updateable(false), Createable(false)]
+		public string ForwardedForIp { get; set; }
 
 	}
 }

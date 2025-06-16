@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -394,6 +394,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "externalReferenceDataSource")]
 		[Updateable(true), Createable(false)]
 		public string ExternalReferenceDataSource { get; set; }
+
+		///<summary>
+		/// Category
+		/// <para>Name: Category</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "category")]
+		[Updateable(false), Createable(false)]
+		public string Category { get; set; }
+
+		///<summary>
+		/// Reason Code
+		/// <para>Name: ReasonCode</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "reasonCode")]
+		[Updateable(false), Createable(false)]
+		public string ReasonCode { get; set; }
 
 	}
 }

@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -239,6 +239,46 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "effectivePageTime")]
 		[Updateable(false), Createable(false)]
 		public double? EffectivePageTime { get; set; }
+
+		///<summary>
+		/// Has Effective Page Time Deviation
+		/// <para>Name: HasEffectivePageTimeDeviation</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "hasEffectivePageTimeDeviation")]
+		[Updateable(false), Createable(false)]
+		public bool? HasEffectivePageTimeDeviation { get; set; }
+
+		///<summary>
+		/// Effective Page Time Deviation Error Type
+		/// <para>Name: EffectivePageTimeDeviationErrorType</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "effectivePageTimeDeviationErrorType")]
+		[Updateable(false), Createable(false)]
+		public string EffectivePageTimeDeviationErrorType { get; set; }
+
+		///<summary>
+		/// Effective Page Time Deviation Reason
+		/// <para>Name: EffectivePageTimeDeviationReason</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "effectivePageTimeDeviationReason")]
+		[Updateable(false), Createable(false)]
+		public string EffectivePageTimeDeviationReason { get; set; }
+
+		///<summary>
+		/// User Agent
+		/// <para>Name: UserAgent</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userAgent")]
+		[Updateable(false), Createable(false)]
+		public string UserAgent { get; set; }
 
 		///<summary>
 		/// OS Name

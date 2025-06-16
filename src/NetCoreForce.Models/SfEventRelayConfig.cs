@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -149,7 +149,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Platform Event Channel ID
+		/// Relayed Event Channel
 		/// <para>Name: EventChannel</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: False</para>
@@ -187,6 +187,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "relayOption")]
 		[Updateable(false), Createable(false)]
 		public string RelayOption { get; set; }
+
+		///<summary>
+		/// Event Relay Usage Type
+		/// <para>Name: UsageType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "usageType")]
+		[Updateable(false), Createable(false)]
+		public string UsageType { get; set; }
 
 	}
 }

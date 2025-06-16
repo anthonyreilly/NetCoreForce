@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -210,6 +210,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "requestDescription")]
 		public string RequestDescription { get; set; }
+
+		///<summary>
+		/// Is Callback
+		/// <para>Name: IsCallback</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isCallback")]
+		public bool? IsCallback { get; set; }
 
 	}
 }

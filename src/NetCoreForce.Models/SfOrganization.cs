@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -233,6 +233,16 @@ namespace NetCoreForce.Models
 		public bool? PreferencesRequireOpportunityProducts { get; set; }
 
 		///<summary>
+		/// EmailSenderIdCompliance
+		/// <para>Name: PreferencesEmailSenderIdCompliance</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "preferencesEmailSenderIdCompliance")]
+		[Updateable(true), Createable(false)]
+		public bool? PreferencesEmailSenderIdCompliance { get; set; }
+
+		///<summary>
 		/// TransactionSecurityPolicy
 		/// <para>Name: PreferencesTransactionSecurityPolicy</para>
 		/// <para>SF Type: boolean</para>
@@ -241,16 +251,6 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "preferencesTransactionSecurityPolicy")]
 		[Updateable(true), Createable(false)]
 		public bool? PreferencesTransactionSecurityPolicy { get; set; }
-
-		///<summary>
-		/// TerminateOldestSession
-		/// <para>Name: PreferencesTerminateOldestSession</para>
-		/// <para>SF Type: boolean</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "preferencesTerminateOldestSession")]
-		[Updateable(true), Createable(false)]
-		public bool? PreferencesTerminateOldestSession { get; set; }
 
 		///<summary>
 		/// ConsentManagementEnabled

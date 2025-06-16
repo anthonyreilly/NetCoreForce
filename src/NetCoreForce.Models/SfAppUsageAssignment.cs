@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -127,14 +127,6 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "recordId")]
 		[Updateable(false), Createable(true)]
 		public string RecordId { get; set; }
-
-		///<summary>
-		/// ReferenceTo: Order
-		/// <para>RelationshipName: Record</para>
-		///</summary>
-		[JsonProperty(PropertyName = "record")]
-		[Updateable(false), Createable(false)]
-		public SfOrder Record { get; set; }
 
 		///<summary>
 		/// Application Usage Type

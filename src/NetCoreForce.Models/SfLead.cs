@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -593,6 +593,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "individual")]
 		[Updateable(false), Createable(false)]
 		public SfIndividual Individual { get; set; }
+
+		///<summary>
+		/// Important
+		/// <para>Name: IsPriorityRecord</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isPriorityRecord")]
+		[Updateable(false), Createable(false)]
+		public bool? IsPriorityRecord { get; set; }
 
 	}
 }

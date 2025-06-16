@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -169,14 +169,14 @@ namespace NetCoreForce.Models
 		public bool? OptionsCodeCredentialGuestEnabled { get; set; }
 
 		///<summary>
-		/// AllowExpiredUvidJWT
-		/// <para>Name: OptionsAllowExpiredUvidJWT</para>
+		/// TokenExchangeManageBitEnabled
+		/// <para>Name: OptionsTokenExchangeManageBitEnabled</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "optionsAllowExpiredUvidJWT")]
+		[JsonProperty(PropertyName = "optionsTokenExchangeManageBitEnabled")]
 		[Updateable(false), Createable(false)]
-		public bool? OptionsAllowExpiredUvidJWT { get; set; }
+		public bool? OptionsTokenExchangeManageBitEnabled { get; set; }
 
 		///<summary>
 		/// Lock App After
@@ -237,6 +237,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "uvidTimeout")]
 		[Updateable(false), Createable(false)]
 		public string UvidTimeout { get; set; }
+
+		///<summary>
+		/// Named User Uvid Timeout
+		/// <para>Name: NamedUserUvidTimeout</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "namedUserUvidTimeout")]
+		[Updateable(false), Createable(false)]
+		public string NamedUserUvidTimeout { get; set; }
 
 	}
 }

@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -119,6 +119,16 @@ namespace NetCoreForce.Models
 		public bool? OptionsEnableFeeds { get; set; }
 
 		///<summary>
+		/// isSiteGAIntegrationMigrated
+		/// <para>Name: OptionsIsSiteGAIntegrationMigrated</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsSiteGAIntegrationMigrated")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsIsSiteGAIntegrationMigrated { get; set; }
+
+		///<summary>
 		/// Redirect to custom domain
 		/// <para>Name: OptionsRedirectToCustomDomain</para>
 		/// <para>SF Type: boolean</para>
@@ -167,6 +177,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "optionsCachePublicVfPagesInProxies")]
 		[Updateable(false), Createable(false)]
 		public bool? OptionsCachePublicVfPagesInProxies { get; set; }
+
+		///<summary>
+		/// IsSiteDataCloudIntegrationEnabled
+		/// <para>Name: OptionsIsSiteDataCloudIntegrationEnabled</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsSiteDataCloudIntegrationEnabled")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsIsSiteDataCloudIntegrationEnabled { get; set; }
+
+		///<summary>
+		/// IsSiteGAIntegrationEnabled
+		/// <para>Name: OptionsIsSiteGAIntegrationEnabled</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsSiteGAIntegrationEnabled")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsIsSiteGAIntegrationEnabled { get; set; }
 
 		///<summary>
 		/// Enable Standard Home Page
@@ -267,6 +297,76 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "optionsReferrerPolicyOriginWhenCrossOrigin")]
 		[Updateable(false), Createable(false)]
 		public bool? OptionsReferrerPolicyOriginWhenCrossOrigin { get; set; }
+
+		///<summary>
+		/// Use the guest user’s language for unauthenticated users
+		/// <para>Name: OptionsUseGuestUserLanguage</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsUseGuestUserLanguage")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsUseGuestUserLanguage { get; set; }
+
+		///<summary>
+		/// IsSiteGRecaptchaIntegrationEnabled
+		/// <para>Name: OptionsIsSiteGRecaptchaIntegrationEnabled</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsSiteGRecaptchaIntegrationEnabled")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsIsSiteGRecaptchaIntegrationEnabled { get; set; }
+
+		///<summary>
+		/// IsSiteConsentBannerIntegrationEnabled
+		/// <para>Name: OptionsIsSiteConsentBannerIntegrationEnabled</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsSiteConsentBannerIntegrationEnabled")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsIsSiteConsentBannerIntegrationEnabled { get; set; }
+
+		///<summary>
+		/// isSiteGAIntegrationMigratedV2
+		/// <para>Name: OptionsIsSiteGAIntegrationMigratedV2</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsSiteGAIntegrationMigratedV2")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsIsSiteGAIntegrationMigratedV2 { get; set; }
+
+		///<summary>
+		/// isSiteDataCloudIntegrationMigrated
+		/// <para>Name: OptionsIsSiteDataCloudIntegrationMigrated</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsSiteDataCloudIntegrationMigrated")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsIsSiteDataCloudIntegrationMigrated { get; set; }
+
+		///<summary>
+		/// isSiteConsentBannerIntegrationMigrated
+		/// <para>Name: OptionsIsSiteConsentBannerIntegrationMigrated</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsSiteConsentBannerIntegrationMigrated")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsIsSiteConsentBannerIntegrationMigrated { get; set; }
+
+		///<summary>
+		/// isSlashSRemovedSite
+		/// <para>Name: OptionsIsSlashSRemovedSite</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsSlashSRemovedSite")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsIsSlashSRemovedSite { get; set; }
 
 		///<summary>
 		/// Site Description

@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -294,6 +294,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "party")]
 		[Updateable(false), Createable(false)]
 		public SfIndividual Party { get; set; }
+
+		///<summary>
+		/// Communication Subscription Consent Compliance Snapshot
+		/// <para>Name: ContactPointValue</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "contactPointValue")]
+		public string ContactPointValue { get; set; }
 
 	}
 }

@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -181,7 +181,7 @@ namespace NetCoreForce.Models
 		public double? PaymentMethodLongitude { get; set; }
 
 		///<summary>
-		/// GeoCode Accuracy
+		/// Geo Code Accuracy
 		/// <para>Name: PaymentMethodGeocodeAccuracy</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
@@ -211,7 +211,7 @@ namespace NetCoreForce.Models
 		public string PaymentMethodType { get; set; }
 
 		///<summary>
-		/// Payment Method SubType
+		/// Payment Method Sub Type
 		/// <para>Name: PaymentMethodSubType</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -277,7 +277,7 @@ namespace NetCoreForce.Models
 		public SfUser LastModifiedBy { get; set; }
 
 		///<summary>
-		/// __MISSING LABEL__ PropertyFile - val LastModifiedDate not found in section udd_PaymentMethod
+		/// Last Modified Date
 		/// <para>Name: LastModifiedDate</para>
 		/// <para>SF Type: datetime</para>
 		/// <para>Nillable: False</para>
@@ -307,7 +307,7 @@ namespace NetCoreForce.Models
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
-		/// __MISSING LABEL__ PropertyFile - val Name not found in section udd_PaymentMethod
+		/// Payment Method Name
 		/// <para>Name: Name</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: False</para>

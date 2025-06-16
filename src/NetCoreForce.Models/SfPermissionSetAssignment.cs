@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -114,6 +114,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isActive")]
 		[Updateable(false), Createable(false)]
 		public bool? IsActive { get; set; }
+
+		///<summary>
+		/// Is Revoked
+		/// <para>Name: IsRevoked</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isRevoked")]
+		[Updateable(true), Createable(false)]
+		public bool? IsRevoked { get; set; }
 
 	}
 }

@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -302,7 +302,7 @@ namespace NetCoreForce.Models
 		public double? PaymentMethodLongitude { get; set; }
 
 		///<summary>
-		/// GeoCode Accuracy
+		/// Geo Code Accuracy
 		/// <para>Name: PaymentMethodGeocodeAccuracy</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
@@ -403,7 +403,7 @@ namespace NetCoreForce.Models
 		public string PaymentMethodType { get; set; }
 
 		///<summary>
-		/// Payment Method SubType
+		/// Payment Method Sub Type
 		/// <para>Name: PaymentMethodSubType</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -421,6 +421,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "paymentMethodDetails")]
 		[Updateable(false), Createable(true)]
 		public string PaymentMethodDetails { get; set; }
+
+		///<summary>
+		/// Billing Name
+		/// <para>Name: BillingName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "billingName")]
+		public string BillingName { get; set; }
 
 	}
 }

@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -215,6 +215,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "authProvider")]
 		[Updateable(false), Createable(false)]
 		public SfAuthProvider AuthProvider { get; set; }
+
+		///<summary>
+		/// Description
+		/// <para>Name: Description</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "description")]
+		[Updateable(false), Createable(false)]
+		public string Description { get; set; }
 
 		///<summary>
 		/// JWT Issuer

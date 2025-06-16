@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -256,6 +256,23 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "description")]
 		public string Description { get; set; }
+
+		///<summary>
+		/// Asset ID
+		/// <para>Name: AssetId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "assetId")]
+		public string AssetId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Asset
+		/// <para>RelationshipName: Asset</para>
+		///</summary>
+		[JsonProperty(PropertyName = "asset")]
+		[Updateable(false), Createable(false)]
+		public SfAsset Asset { get; set; }
 
 	}
 }

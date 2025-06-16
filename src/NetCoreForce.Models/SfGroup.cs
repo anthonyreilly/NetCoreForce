@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -172,6 +172,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "systemModstamp")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? SystemModstamp { get; set; }
+
+		///<summary>
+		/// Description
+		/// <para>Name: Description</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "description")]
+		public string Description { get; set; }
 
 	}
 }

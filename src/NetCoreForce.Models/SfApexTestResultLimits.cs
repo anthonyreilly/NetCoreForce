@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -217,7 +217,7 @@ namespace NetCoreForce.Models
 		public int? MobilePush { get; set; }
 
 		///<summary>
-		/// LimitContext
+		/// Limit Context
 		/// <para>Name: LimitContext</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -226,7 +226,7 @@ namespace NetCoreForce.Models
 		public string LimitContext { get; set; }
 
 		///<summary>
-		/// LimitExceptions
+		/// Limit Exceptions
 		/// <para>Name: LimitExceptions</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>

@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -43,7 +43,7 @@ namespace NetCoreForce.Models
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
-		/// PaymentGatewayLogNumber
+		/// Payment Gateway Log Number
 		/// <para>Name: PaymentGatewayLogNumber</para>
 		/// <para>SF Type: string</para>
 		/// <para>AutoNumber field</para>
@@ -120,7 +120,27 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// ReferencedEntity ID
+		/// Last Viewed Date
+		/// <para>Name: LastViewedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastViewedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastViewedDate { get; set; }
+
+		///<summary>
+		/// Last Referenced Date
+		/// <para>Name: LastReferencedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastReferencedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastReferencedDate { get; set; }
+
+		///<summary>
+		/// Referenced Entity ID
 		/// <para>Name: ReferencedEntityId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
@@ -139,7 +159,7 @@ namespace NetCoreForce.Models
 		public string InteractionType { get; set; }
 
 		///<summary>
-		/// SalesforceReferenceNumber
+		/// Salesforce Reference Number
 		/// <para>Name: SfRefNumber</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -157,7 +177,7 @@ namespace NetCoreForce.Models
 		public string InteractionStatus { get; set; }
 
 		///<summary>
-		/// GatewayAuthCode
+		/// Gateway Auth Code
 		/// <para>Name: GatewayAuthCode</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -166,7 +186,7 @@ namespace NetCoreForce.Models
 		public string GatewayAuthCode { get; set; }
 
 		///<summary>
-		/// GatewayReferenceNumber
+		/// Gateway Reference Number
 		/// <para>Name: GatewayRefNumber</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -175,7 +195,7 @@ namespace NetCoreForce.Models
 		public string GatewayRefNumber { get; set; }
 
 		///<summary>
-		/// SalesforceResultCode
+		/// Salesforce Result Code
 		/// <para>Name: SfResultCode</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
@@ -184,7 +204,7 @@ namespace NetCoreForce.Models
 		public string SfResultCode { get; set; }
 
 		///<summary>
-		/// GatewayResultCode
+		/// Gateway Result Code
 		/// <para>Name: GatewayResultCode</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -193,7 +213,7 @@ namespace NetCoreForce.Models
 		public string GatewayResultCode { get; set; }
 
 		///<summary>
-		/// GatewayResultCode
+		/// Gateway Result Code Description
 		/// <para>Name: GatewayResultCodeDescription</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -202,7 +222,7 @@ namespace NetCoreForce.Models
 		public string GatewayResultCodeDescription { get; set; }
 
 		///<summary>
-		/// GatewayDate
+		/// Gateway Date
 		/// <para>Name: GatewayDate</para>
 		/// <para>SF Type: datetime</para>
 		/// <para>Nillable: True</para>
@@ -220,7 +240,7 @@ namespace NetCoreForce.Models
 		public string GatewayMessage { get; set; }
 
 		///<summary>
-		/// GatewayAvsCode
+		/// Gateway Avs Code
 		/// <para>Name: GatewayAvsCode</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -246,7 +266,7 @@ namespace NetCoreForce.Models
 		public SfPaymentGateway PaymentGateway { get; set; }
 
 		///<summary>
-		/// IsNotification
+		/// Is Notification
 		/// <para>Name: IsNotification</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>

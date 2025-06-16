@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -73,7 +73,7 @@ namespace NetCoreForce.Models
 		public string CnameTarget { get; set; }
 
 		///<summary>
-		/// Current HTTPS Option
+		/// Current Domain Configuration Option
 		/// <para>Name: HttpsOption</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>

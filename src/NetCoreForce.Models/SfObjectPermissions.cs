@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -113,6 +113,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "permissionsModifyAllRecords")]
 		public bool? PermissionsModifyAllRecords { get; set; }
+
+		///<summary>
+		/// ViewAllFields
+		/// <para>Name: PermissionsViewAllFields</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewAllFields")]
+		public bool? PermissionsViewAllFields { get; set; }
 
 		///<summary>
 		/// Created Date

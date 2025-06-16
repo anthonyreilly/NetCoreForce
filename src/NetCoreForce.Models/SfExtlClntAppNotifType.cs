@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Experience Property Type
-	///<para>SObject Name: ExperiencePropertyType</para>
+	/// External Client Application Notification Type
+	///<para>SObject Name: ExtlClntAppNotifType</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfExperiencePropertyType : SObject
+	public class SfExtlClntAppNotifType : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "ExperiencePropertyType"; }
+			get { return "ExtlClntAppNotifType"; }
 		}
 
 		///<summary>
-		/// Experience Property Type ID
+		/// External Client Application Notification Type ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -41,33 +41,6 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isDeleted")]
 		[Updateable(false), Createable(false)]
 		public bool? IsDeleted { get; set; }
-
-		///<summary>
-		/// Name
-		/// <para>Name: DeveloperName</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "developerName")]
-		public string DeveloperName { get; set; }
-
-		///<summary>
-		/// Master Language
-		/// <para>Name: Language</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "language")]
-		public string Language { get; set; }
-
-		///<summary>
-		/// Label
-		/// <para>Name: MasterLabel</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "masterLabel")]
-		public string MasterLabel { get; set; }
 
 		///<summary>
 		/// Created Date
@@ -136,13 +109,42 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Experience Property Type description
-		/// <para>Name: Description</para>
-		/// <para>SF Type: textarea</para>
-		/// <para>Nillable: True</para>
+		/// External Client App Notification Settings ID
+		/// <para>Name: ExtlClntAppNotifSettingsId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "description")]
-		public string Description { get; set; }
+		[JsonProperty(PropertyName = "extlClntAppNotifSettingsId")]
+		[Updateable(false), Createable(false)]
+		public string ExtlClntAppNotifSettingsId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: ExtlClntAppNotifSettings
+		/// <para>RelationshipName: ExtlClntAppNotifSettings</para>
+		///</summary>
+		[JsonProperty(PropertyName = "extlClntAppNotifSettings")]
+		[Updateable(false), Createable(false)]
+		public SfExtlClntAppNotifSettings ExtlClntAppNotifSettings { get; set; }
+
+		///<summary>
+		/// Custom Notification Type Id
+		/// <para>Name: NotificationType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "notificationType")]
+		[Updateable(false), Createable(false)]
+		public string NotificationType { get; set; }
+
+		///<summary>
+		/// Push By Default
+		/// <para>Name: IsPushByDefault</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isPushByDefault")]
+		[Updateable(false), Createable(false)]
+		public bool? IsPushByDefault { get; set; }
 
 	}
 }

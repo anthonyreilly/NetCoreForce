@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -123,7 +123,7 @@ namespace NetCoreForce.Models
 		/// AI Application ID
 		/// <para>Name: AiApplicationId</para>
 		/// <para>SF Type: reference</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "aiApplicationId")]
 		[Updateable(false), Createable(false)]
@@ -141,7 +141,7 @@ namespace NetCoreForce.Models
 		/// Target ID
 		/// <para>Name: TargetId</para>
 		/// <para>SF Type: reference</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "targetId")]
 		[Updateable(false), Createable(false)]

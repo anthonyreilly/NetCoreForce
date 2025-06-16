@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -97,6 +97,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "systemModstamp")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? SystemModstamp { get; set; }
+
+		///<summary>
+		/// Status
+		/// <para>Name: IsVerified</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isVerified")]
+		[Updateable(false), Createable(true)]
+		public bool? IsVerified { get; set; }
 
 		///<summary>
 		/// Email Address

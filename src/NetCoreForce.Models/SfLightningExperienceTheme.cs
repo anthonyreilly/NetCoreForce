@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -180,6 +180,16 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "description")]
 		public string Description { get; set; }
+
+		///<summary>
+		/// Design System Version
+		/// <para>Name: DesignSystemVersion</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "designSystemVersion")]
+		[Updateable(false), Createable(true)]
+		public string DesignSystemVersion { get; set; }
 
 	}
 }

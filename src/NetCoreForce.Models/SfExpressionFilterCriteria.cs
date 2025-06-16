@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// ExpressionFilterCriteria
+	/// Expression Filter Criteria
 	///<para>SObject Name: ExpressionFilterCriteria</para>
 	///<para>Custom Object: False</para>
 	///</summary>
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// ExpressionFilterCriteria ID
+		/// Expression Filter Criteria ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -43,7 +43,7 @@ namespace NetCoreForce.Models
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
-		/// ExpressionFilterCriteria Name
+		/// Expression Filter Criteria Name
 		/// <para>Name: Name</para>
 		/// <para>SF Type: string</para>
 		/// <para>AutoNumber field</para>
@@ -120,7 +120,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// FilterTarget
+		/// Filter Target
 		/// <para>Name: FilterTarget</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -147,7 +147,7 @@ namespace NetCoreForce.Models
 		public string Operation { get; set; }
 
 		///<summary>
-		/// SortOrder
+		/// Sort Order
 		/// <para>Name: SortOrder</para>
 		/// <para>SF Type: int</para>
 		/// <para>Nillable: True</para>
@@ -156,7 +156,7 @@ namespace NetCoreForce.Models
 		public int? SortOrder { get; set; }
 
 		///<summary>
-		/// ExpressionFilter ID
+		/// Expression Filter ID
 		/// <para>Name: ExpressionFilterId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: False</para>

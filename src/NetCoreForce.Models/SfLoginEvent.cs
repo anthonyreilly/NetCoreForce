@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -259,6 +259,16 @@ namespace NetCoreForce.Models
 		public string CountryIso { get; set; }
 
 		///<summary>
+		/// Forwarded For IP
+		/// <para>Name: ForwardedForIp</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "forwardedForIp")]
+		[Updateable(false), Createable(false)]
+		public string ForwardedForIp { get; set; }
+
+		///<summary>
 		/// Latitude
 		/// <para>Name: LoginLatitude</para>
 		/// <para>SF Type: double</para>
@@ -299,7 +309,7 @@ namespace NetCoreForce.Models
 		public string City { get; set; }
 
 		///<summary>
-		/// PostalCode
+		/// Postal Code
 		/// <para>Name: PostalCode</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -427,6 +437,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "authMethodReference")]
 		[Updateable(false), Createable(false)]
 		public string AuthMethodReference { get; set; }
+
+		///<summary>
+		/// Login Subtype
+		/// <para>Name: LoginSubType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "loginSubType")]
+		[Updateable(false), Createable(false)]
+		public string LoginSubType { get; set; }
 
 	}
 }

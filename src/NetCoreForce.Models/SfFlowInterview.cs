@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -198,6 +198,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "interviewStatus")]
 		[Updateable(false), Createable(false)]
 		public string InterviewStatus { get; set; }
+
+		///<summary>
+		/// Engine Type
+		/// <para>Name: EngineType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "engineType")]
+		[Updateable(false), Createable(false)]
+		public string EngineType { get; set; }
+
+		///<summary>
+		/// Error
+		/// <para>Name: Error</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "error")]
+		[Updateable(false), Createable(false)]
+		public string Error { get; set; }
 
 	}
 }

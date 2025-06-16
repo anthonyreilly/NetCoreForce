@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -353,6 +353,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "userAgent")]
 		[Updateable(false), Createable(false)]
 		public string UserAgent { get; set; }
+
+		///<summary>
+		/// Request Identifier
+		/// <para>Name: RequestIdentifier</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "requestIdentifier")]
+		[Updateable(false), Createable(false)]
+		public string RequestIdentifier { get; set; }
 
 	}
 }

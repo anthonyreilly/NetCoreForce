@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -349,6 +349,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "fileSource")]
 		[Updateable(false), Createable(false)]
 		public string FileSource { get; set; }
+
+		///<summary>
+		/// File Action
+		/// <para>Name: FileAction</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "fileAction")]
+		[Updateable(false), Createable(false)]
+		public string FileAction { get; set; }
 
 	}
 }

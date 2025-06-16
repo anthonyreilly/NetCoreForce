@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -255,6 +255,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isTracked")]
 		[Updateable(false), Createable(false)]
 		public bool? IsTracked { get; set; }
+
+		///<summary>
+		/// RelatedTo ID
+		/// <para>Name: RelatedToId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "relatedToId")]
+		public string RelatedToId { get; set; }
 
 	}
 }

@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -395,7 +395,7 @@ namespace NetCoreForce.Models
 		public string StockKeepingUnit { get; set; }
 
 		///<summary>
-		/// Has Lifecycle Management
+		/// Lifecycle-managed asset
 		/// <para>Name: HasLifecycleManagement</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>

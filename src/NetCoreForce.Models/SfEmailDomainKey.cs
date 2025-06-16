@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -211,6 +211,64 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "alternatePublicKey")]
 		[Updateable(false), Createable(false)]
 		public string AlternatePublicKey { get; set; }
+
+		///<summary>
+		/// Domain Match Pattern
+		/// <para>Name: DomainMatchPattern</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "domainMatchPattern")]
+		public string DomainMatchPattern { get; set; }
+
+		///<summary>
+		/// Platform Type
+		/// <para>Name: PlatformType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "platformType")]
+		[Updateable(false), Createable(true)]
+		public string PlatformType { get; set; }
+
+		///<summary>
+		/// Third Selector
+		/// <para>Name: ThirdSelector</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "thirdSelector")]
+		public string ThirdSelector { get; set; }
+
+		///<summary>
+		/// Third TXT Record Name
+		/// <para>Name: ThirdTxtRecordName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "thirdTxtRecordName")]
+		[Updateable(false), Createable(false)]
+		public string ThirdTxtRecordName { get; set; }
+
+		///<summary>
+		/// Status
+		/// <para>Name: Status</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "status")]
+		[Updateable(false), Createable(false)]
+		public string Status { get; set; }
+
+		///<summary>
+		/// Status Message
+		/// <para>Name: StatusMessage</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "statusMessage")]
+		[Updateable(false), Createable(false)]
+		public string StatusMessage { get; set; }
 
 	}
 }

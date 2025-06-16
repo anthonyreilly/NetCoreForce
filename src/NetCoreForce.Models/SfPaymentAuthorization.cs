@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -399,6 +399,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "paymentGateway")]
 		[Updateable(false), Createable(false)]
 		public SfPaymentGateway PaymentGateway { get; set; }
+
+		///<summary>
+		/// Payment Intent Guid
+		/// <para>Name: PaymentIntentGuid</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "paymentIntentGuid")]
+		[Updateable(false), Createable(true)]
+		public string PaymentIntentGuid { get; set; }
 
 	}
 }

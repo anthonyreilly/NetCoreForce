@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Expression Set View
+	/// Expression Set Template
 	///<para>SObject Name: ExpressionSetView</para>
 	///<para>Custom Object: False</para>
 	///</summary>
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// Expression Set View ID
+		/// Expression Set Template ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -63,7 +63,7 @@ namespace NetCoreForce.Models
 		public string Description { get; set; }
 
 		///<summary>
-		/// NamespacePrefix
+		/// Namespace Prefix
 		/// <para>Name: NamespacePrefix</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -73,7 +73,7 @@ namespace NetCoreForce.Models
 		public string NamespacePrefix { get; set; }
 
 		///<summary>
-		/// IsTemplate
+		/// Is Template
 		/// <para>Name: IsTemplate</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -111,6 +111,46 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "expressionSetDetails")]
 		[Updateable(false), Createable(false)]
 		public string ExpressionSetDetails { get; set; }
+
+		///<summary>
+		/// Executable
+		/// <para>Name: IsExecutable</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isExecutable")]
+		[Updateable(false), Createable(false)]
+		public bool? IsExecutable { get; set; }
+
+		///<summary>
+		/// Usage Type
+		/// <para>Name: UsageType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "usageType")]
+		[Updateable(false), Createable(false)]
+		public string UsageType { get; set; }
+
+		///<summary>
+		/// Usage Type
+		/// <para>Name: UsageTypeLabel</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "usageTypeLabel")]
+		[Updateable(false), Createable(false)]
+		public string UsageTypeLabel { get; set; }
+
+		///<summary>
+		/// Context Definition Reference
+		/// <para>Name: HasContextDefinitionRef</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "hasContextDefinitionRef")]
+		[Updateable(false), Createable(false)]
+		public bool? HasContextDefinitionRef { get; set; }
 
 	}
 }

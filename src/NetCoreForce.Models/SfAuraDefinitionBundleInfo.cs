@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// AuraDefinitionBundle Info
+	/// Aura Definition Bundle Info
 	///<para>SObject Name: AuraDefinitionBundleInfo</para>
 	///<para>Custom Object: False</para>
 	///</summary>

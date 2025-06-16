@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -74,7 +74,7 @@ namespace NetCoreForce.Models
 		/// Class ID
 		/// <para>Name: ApexClassId</para>
 		/// <para>SF Type: reference</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "apexClassId")]
 		[Updateable(false), Createable(true)]

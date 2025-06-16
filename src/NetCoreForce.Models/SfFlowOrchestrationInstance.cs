@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -186,6 +186,56 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "orchestrationDeveloperName")]
 		[Updateable(false), Createable(false)]
 		public string OrchestrationDeveloperName { get; set; }
+
+		///<summary>
+		/// Orchestration Name
+		/// <para>Name: OrchestrationLabel</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "orchestrationLabel")]
+		[Updateable(false), Createable(false)]
+		public string OrchestrationLabel { get; set; }
+
+		///<summary>
+		/// Duration
+		/// <para>Name: Duration</para>
+		/// <para>SF Type: long</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "duration")]
+		[Updateable(false), Createable(false)]
+		public string Duration { get; set; }
+
+		///<summary>
+		/// Current Stage
+		/// <para>Name: CurrentStage</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "currentStage")]
+		[Updateable(false), Createable(false)]
+		public string CurrentStage { get; set; }
+
+		///<summary>
+		/// Triggering Record ID
+		/// <para>Name: TriggeringRecord</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "triggeringRecord")]
+		[Updateable(true), Createable(false)]
+		public string TriggeringRecord { get; set; }
+
+		///<summary>
+		/// Triggering Record Type
+		/// <para>Name: TriggeringRecordType</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "triggeringRecordType")]
+		[Updateable(true), Createable(false)]
+		public string TriggeringRecordType { get; set; }
 
 	}
 }

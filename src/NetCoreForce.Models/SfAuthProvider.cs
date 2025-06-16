@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -215,6 +215,78 @@ namespace NetCoreForce.Models
 		public bool? OptionsIsMuleSoftEU { get; set; }
 
 		///<summary>
+		/// requireMfa
+		/// <para>Name: OptionsRequireMfa</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsRequireMfa")]
+		public bool? OptionsRequireMfa { get; set; }
+
+		///<summary>
+		/// IsSegmentIntelligence
+		/// <para>Name: OptionsIsSegmentIntelligence</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsSegmentIntelligence")]
+		public bool? OptionsIsSegmentIntelligence { get; set; }
+
+		///<summary>
+		/// isPkceEnabled
+		/// <para>Name: OptionsIsPkceEnabled</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsPkceEnabled")]
+		public bool? OptionsIsPkceEnabled { get; set; }
+
+		///<summary>
+		/// IsWebDataConnector
+		/// <para>Name: OptionsIsWebDataConnector</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsWebDataConnector")]
+		public bool? OptionsIsWebDataConnector { get; set; }
+
+		///<summary>
+		/// isBitbucket
+		/// <para>Name: OptionsIsBitbucket</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsBitbucket")]
+		public bool? OptionsIsBitbucket { get; set; }
+
+		///<summary>
+		/// IsEmiSnapchatAds
+		/// <para>Name: OptionsIsEmiSnapchatAds</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsEmiSnapchatAds")]
+		public bool? OptionsIsEmiSnapchatAds { get; set; }
+
+		///<summary>
+		/// IsEmi
+		/// <para>Name: OptionsIsEmi</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsEmi")]
+		public bool? OptionsIsEmi { get; set; }
+
+		///<summary>
+		/// IsEmiTikTokAds
+		/// <para>Name: OptionsIsEmiTikTokAds</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsEmiTikTokAds")]
+		public bool? OptionsIsEmiTikTokAds { get; set; }
+
+		///<summary>
 		/// Icon URL
 		/// <para>Name: IconUrl</para>
 		/// <para>SF Type: url</para>
@@ -267,6 +339,24 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "appleTeam")]
 		public string AppleTeam { get; set; }
+
+		///<summary>
+		/// Profile ID
+		/// <para>Name: FlowDefaultProfileId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "flowDefaultProfileId")]
+		public string FlowDefaultProfileId { get; set; }
+
+		///<summary>
+		/// Account ID
+		/// <para>Name: FlowDefaultAccountId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "flowDefaultAccountId")]
+		public string FlowDefaultAccountId { get; set; }
 
 		///<summary>
 		/// Single Sign-On Initialization URL

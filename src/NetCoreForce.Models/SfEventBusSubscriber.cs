@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -121,6 +121,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "status")]
 		[Updateable(false), Createable(false)]
 		public string Status { get; set; }
+
+		///<summary>
+		/// Is Partitioned
+		/// <para>Name: IsPartitioned</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isPartitioned")]
+		[Updateable(false), Createable(false)]
+		public bool? IsPartitioned { get; set; }
 
 	}
 }

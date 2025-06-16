@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -49,6 +49,14 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "parentRoleId")]
 		public string ParentRoleId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: UserRole
+		/// <para>RelationshipName: ParentRole</para>
+		///</summary>
+		[JsonProperty(PropertyName = "parentRole")]
+		[Updateable(false), Createable(false)]
+		public SfUserRole ParentRole { get; set; }
 
 		///<summary>
 		/// Description

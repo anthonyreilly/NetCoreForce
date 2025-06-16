@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -59,6 +59,14 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "userId")]
 		[Updateable(false), Createable(true)]
 		public string UserId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: User
+		/// <para>RelationshipName: User</para>
+		///</summary>
+		[JsonProperty(PropertyName = "user")]
+		[Updateable(false), Createable(false)]
+		public SfUser User { get; set; }
 
 		///<summary>
 		/// Created Date

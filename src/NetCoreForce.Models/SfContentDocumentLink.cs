@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -71,7 +71,7 @@ namespace NetCoreForce.Models
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
-		/// System Modstamp
+		/// Last Modified Date
 		/// <para>Name: SystemModstamp</para>
 		/// <para>SF Type: datetime</para>
 		/// <para>Nillable: False</para>

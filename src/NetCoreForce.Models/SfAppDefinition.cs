@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -211,6 +211,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isNavTabPersistenceDisabled")]
 		[Updateable(false), Createable(false)]
 		public bool? IsNavTabPersistenceDisabled { get; set; }
+
+		///<summary>
+		/// Is Omni-Channel Sidebar Enabled
+		/// <para>Name: IsOmniPinnedViewEnabled</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isOmniPinnedViewEnabled")]
+		[Updateable(false), Createable(false)]
+		public bool? IsOmniPinnedViewEnabled { get; set; }
 
 	}
 }

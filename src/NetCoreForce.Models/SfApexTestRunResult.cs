@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -249,6 +249,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "methodsFailed")]
 		public int? MethodsFailed { get; set; }
+
+		///<summary>
+		/// Time(ms) spent running test setup
+		/// <para>Name: TestSetupTime</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "testSetupTime")]
+		public int? TestSetupTime { get; set; }
 
 	}
 }

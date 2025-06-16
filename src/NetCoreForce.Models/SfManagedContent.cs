@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -41,6 +41,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isDeleted")]
 		[Updateable(false), Createable(false)]
 		public bool? IsDeleted { get; set; }
+
+		///<summary>
+		/// Name
+		/// <para>Name: Name</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "name")]
+		[Updateable(false), Createable(false)]
+		public string Name { get; set; }
 
 		///<summary>
 		/// Created Date
@@ -119,7 +129,7 @@ namespace NetCoreForce.Models
 		public string PrimaryLanguage { get; set; }
 
 		///<summary>
-		/// Global Identifier
+		/// Content Key
 		/// <para>Name: ContentKey</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -147,6 +157,16 @@ namespace NetCoreForce.Models
 		public SfManagedContentSpace AuthoredManagedContentSpace { get; set; }
 
 		///<summary>
+		/// Api Name
+		/// <para>Name: ApiName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "apiName")]
+		[Updateable(false), Createable(false)]
+		public string ApiName { get; set; }
+
+		///<summary>
 		/// External Id
 		/// <para>Name: ExternalId</para>
 		/// <para>SF Type: string</para>
@@ -155,6 +175,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "externalId")]
 		[Updateable(false), Createable(false)]
 		public string ExternalId { get; set; }
+
+		///<summary>
+		/// Content Type Fully Qualified Name
+		/// <para>Name: ContentTypeFullyQualifiedName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "contentTypeFullyQualifiedName")]
+		[Updateable(false), Createable(false)]
+		public string ContentTypeFullyQualifiedName { get; set; }
 
 	}
 }

@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -218,6 +218,24 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "error")]
 		[Updateable(false), Createable(false)]
 		public string Error { get; set; }
+
+		///<summary>
+		/// Related Record ID
+		/// <para>Name: RelatedRecordId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "relatedRecordId")]
+		[Updateable(false), Createable(false)]
+		public string RelatedRecordId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Asset
+		/// <para>RelationshipName: RelatedRecord</para>
+		///</summary>
+		[JsonProperty(PropertyName = "relatedRecord")]
+		[Updateable(false), Createable(false)]
+		public SfAsset RelatedRecord { get; set; }
 
 		///<summary>
 		/// Request

@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -158,6 +158,36 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "taskContext")]
 		[Updateable(false), Createable(false)]
 		public string TaskContext { get; set; }
+
+		///<summary>
+		/// Attempt Ordinal
+		/// <para>Name: AttemptOrdinal</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "attemptOrdinal")]
+		[Updateable(false), Createable(false)]
+		public int? AttemptOrdinal { get; set; }
+
+		///<summary>
+		/// Task Action
+		/// <para>Name: TaskAction</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "taskAction")]
+		[Updateable(false), Createable(false)]
+		public string TaskAction { get; set; }
+
+		///<summary>
+		/// Task Action Context
+		/// <para>Name: TaskActionContext</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "taskActionContext")]
+		[Updateable(false), Createable(false)]
+		public string TaskActionContext { get; set; }
 
 	}
 }

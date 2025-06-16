@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -167,7 +167,7 @@ namespace NetCoreForce.Models
 		public SfManagedContent ManagedContent { get; set; }
 
 		///<summary>
-		/// Ready to be Published
+		/// Ready to Publish
 		/// <para>Name: IsReady</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -185,6 +185,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "managedContentKey")]
 		[Updateable(false), Createable(false)]
 		public string ManagedContentKey { get; set; }
+
+		///<summary>
+		/// Content Type Fully Qualified Name
+		/// <para>Name: ContentTypeFullyQualifiedName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "contentTypeFullyQualifiedName")]
+		[Updateable(false), Createable(false)]
+		public string ContentTypeFullyQualifiedName { get; set; }
 
 		///<summary>
 		/// Published

@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -67,6 +67,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "commentBody")]
 		public string CommentBody { get; set; }
+
+		///<summary>
+		/// Rich-Text Body
+		/// <para>Name: CommentBodyRichtext</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "commentBodyRichtext")]
+		public string CommentBodyRichtext { get; set; }
 
 		///<summary>
 		/// Created By ID

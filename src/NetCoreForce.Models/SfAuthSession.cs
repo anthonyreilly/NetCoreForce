@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -195,6 +195,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "isCurrent")]
 		[Updateable(false), Createable(false)]
 		public bool? IsCurrent { get; set; }
+
+		///<summary>
+		/// Associated With Jwt
+		/// <para>Name: IsAssociatedWithJwtAccessToken</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isAssociatedWithJwtAccessToken")]
+		[Updateable(false), Createable(false)]
+		public bool? IsAssociatedWithJwtAccessToken { get; set; }
 
 	}
 }

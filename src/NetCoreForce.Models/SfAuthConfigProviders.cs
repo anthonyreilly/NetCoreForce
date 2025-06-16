@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -115,7 +115,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "authConfigId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Createable(true)]
 		public string AuthConfigId { get; set; }
 
 		///<summary>
@@ -133,7 +133,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "authProviderId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(false), Createable(true)]
 		public string AuthProviderId { get; set; }
 
 	}

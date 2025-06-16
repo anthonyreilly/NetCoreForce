@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -180,6 +180,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "runTime")]
 		public int? RunTime { get; set; }
+
+		///<summary>
+		/// Is Test Setup
+		/// <para>Name: IsTestSetup</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isTestSetup")]
+		public bool? IsTestSetup { get; set; }
 
 	}
 }

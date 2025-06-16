@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -301,7 +301,7 @@ namespace NetCoreForce.Models
 		public double? PaymentMethodLongitude { get; set; }
 
 		///<summary>
-		/// GeoCode Accuracy
+		/// Geo Code Accuracy
 		/// <para>Name: PaymentMethodGeocodeAccuracy</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
@@ -393,7 +393,7 @@ namespace NetCoreForce.Models
 		public string PaymentMethodType { get; set; }
 
 		///<summary>
-		/// Payment Method SubType
+		/// Payment Method Sub Type
 		/// <para>Name: PaymentMethodSubType</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -411,6 +411,63 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "paymentMethodDetails")]
 		[Updateable(false), Createable(true)]
 		public string PaymentMethodDetails { get; set; }
+
+		///<summary>
+		/// First name of the person tied to billing address
+		/// <para>Name: BillingFirstName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "billingFirstName")]
+		public string BillingFirstName { get; set; }
+
+		///<summary>
+		/// Last name of the person tied to billing address
+		/// <para>Name: BillingLastName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "billingLastName")]
+		public string BillingLastName { get; set; }
+
+		///<summary>
+		/// Name of the person tied to billing address
+		/// <para>Name: BillingName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "billingName")]
+		public string BillingName { get; set; }
+
+		///<summary>
+		/// Account Ownership Type
+		/// <para>Name: BankAccountHolderType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "bankAccountHolderType")]
+		[Updateable(false), Createable(false)]
+		public string BankAccountHolderType { get; set; }
+
+		///<summary>
+		/// Bank Account Type
+		/// <para>Name: BankAccountType</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "bankAccountType")]
+		[Updateable(false), Createable(false)]
+		public string BankAccountType { get; set; }
+
+		///<summary>
+		/// Standard Entry Class Code (ACH)
+		/// <para>Name: StandardEntryClassCode</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "standardEntryClassCode")]
+		[Updateable(false), Createable(false)]
+		public string StandardEntryClassCode { get; set; }
 
 	}
 }

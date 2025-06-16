@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -538,6 +538,32 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "targetRecordType")]
 		[Updateable(false), Createable(false)]
 		public SfRecordType TargetRecordType { get; set; }
+
+		///<summary>
+		/// ExperienceContext ID
+		/// <para>Name: ExperienceContextId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "experienceContextId")]
+		public string ExperienceContextId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Site
+		/// <para>RelationshipName: ExperienceContext</para>
+		///</summary>
+		[JsonProperty(PropertyName = "experienceContext")]
+		[Updateable(false), Createable(false)]
+		public SfSite ExperienceContext { get; set; }
+
+		///<summary>
+		/// Experience
+		/// <para>Name: Experience</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "experience")]
+		public string Experience { get; set; }
 
 	}
 }

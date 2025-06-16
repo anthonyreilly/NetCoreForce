@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Content Security Policy Trusted Site
+	/// Trusted URL
 	///<para>SObject Name: CspTrustedSite</para>
 	///<para>Custom Object: False</para>
 	///</summary>
@@ -43,7 +43,7 @@ namespace NetCoreForce.Models
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
-		/// Trusted Site Name
+		/// API Name
 		/// <para>Name: DeveloperName</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: False</para>
@@ -146,7 +146,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Trusted Site URL
+		/// URL
 		/// <para>Name: EndpointUrl</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: False</para>
@@ -173,7 +173,7 @@ namespace NetCoreForce.Models
 		public bool? IsActive { get; set; }
 
 		///<summary>
-		/// Context
+		/// CSP Context
 		/// <para>Name: Context</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: False</para>
@@ -182,7 +182,7 @@ namespace NetCoreForce.Models
 		public string Context { get; set; }
 
 		///<summary>
-		/// Allow site for connect-src
+		/// connect-src (scripts)
 		/// <para>Name: IsApplicableToConnectSrc</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -191,7 +191,7 @@ namespace NetCoreForce.Models
 		public bool? IsApplicableToConnectSrc { get; set; }
 
 		///<summary>
-		/// Allow site for frame-src
+		/// frame-src (iframe content)
 		/// <para>Name: IsApplicableToFrameSrc</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -200,7 +200,7 @@ namespace NetCoreForce.Models
 		public bool? IsApplicableToFrameSrc { get; set; }
 
 		///<summary>
-		/// Allow site for img-src
+		/// img-src (images)
 		/// <para>Name: IsApplicableToImgSrc</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -209,7 +209,7 @@ namespace NetCoreForce.Models
 		public bool? IsApplicableToImgSrc { get; set; }
 
 		///<summary>
-		/// Allow site for style-src
+		/// style-src (stylesheets)
 		/// <para>Name: IsApplicableToStyleSrc</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -218,7 +218,7 @@ namespace NetCoreForce.Models
 		public bool? IsApplicableToStyleSrc { get; set; }
 
 		///<summary>
-		/// Allow site for font-src
+		/// font-src (fonts)
 		/// <para>Name: IsApplicableToFontSrc</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -227,13 +227,31 @@ namespace NetCoreForce.Models
 		public bool? IsApplicableToFontSrc { get; set; }
 
 		///<summary>
-		/// Allow site for media-src
+		/// media-src (audio and video)
 		/// <para>Name: IsApplicableToMediaSrc</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "isApplicableToMediaSrc")]
 		public bool? IsApplicableToMediaSrc { get; set; }
+
+		///<summary>
+		/// camera
+		/// <para>Name: CanAccessCamera</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "canAccessCamera")]
+		public bool? CanAccessCamera { get; set; }
+
+		///<summary>
+		/// microphone
+		/// <para>Name: CanAccessMicrophone</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "canAccessMicrophone")]
+		public bool? CanAccessMicrophone { get; set; }
 
 	}
 }

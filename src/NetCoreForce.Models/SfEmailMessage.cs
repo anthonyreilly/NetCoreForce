@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -281,7 +281,6 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "replyToEmailMessageId")]
-		[Updateable(false), Createable(true)]
 		public string ReplyToEmailMessageId { get; set; }
 
 		///<summary>
@@ -330,6 +329,16 @@ namespace NetCoreForce.Models
 		public string ClientThreadIdentifier { get; set; }
 
 		///<summary>
+		/// From ID
+		/// <para>Name: FromId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "fromId")]
+		[Updateable(false), Createable(true)]
+		public string FromId { get; set; }
+
+		///<summary>
 		/// Is Client Managed
 		/// <para>Name: IsClientManaged</para>
 		/// <para>SF Type: boolean</para>
@@ -340,13 +349,21 @@ namespace NetCoreForce.Models
 		public bool? IsClientManaged { get; set; }
 
 		///<summary>
+		/// Attachment Ids
+		/// <para>Name: AttachmentIds</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "attachmentIds")]
+		public string AttachmentIds { get; set; }
+
+		///<summary>
 		/// Related To ID
 		/// <para>Name: RelatedToId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "relatedToId")]
-		[Updateable(false), Createable(true)]
 		public string RelatedToId { get; set; }
 
 		///<summary>
@@ -411,6 +428,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "emailTemplate")]
 		[Updateable(false), Createable(false)]
 		public SfEmailTemplate EmailTemplate { get; set; }
+
+		///<summary>
+		/// Automation Type
+		/// <para>Name: AutomationType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "automationType")]
+		[Updateable(false), Createable(true)]
+		public string AutomationType { get; set; }
 
 	}
 }

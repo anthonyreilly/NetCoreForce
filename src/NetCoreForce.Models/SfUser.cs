@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -431,6 +431,24 @@ namespace NetCoreForce.Models
 		public string UserType { get; set; }
 
 		///<summary>
+		/// Start of Day
+		/// <para>Name: StartDay</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "startDay")]
+		public string StartDay { get; set; }
+
+		///<summary>
+		/// End of Day
+		/// <para>Name: EndDay</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "endDay")]
+		public string EndDay { get; set; }
+
+		///<summary>
 		/// Language
 		/// <para>Name: LanguageLocaleKey</para>
 		/// <para>SF Type: picklist</para>
@@ -561,6 +579,16 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
+		/// Password Expiration Date
+		/// <para>Name: PasswordExpirationDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "passwordExpirationDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? PasswordExpirationDate { get; set; }
+
+		///<summary>
 		/// Failed Login Attempts
 		/// <para>Name: NumberOfFailedLogins</para>
 		/// <para>SF Type: int</para>
@@ -569,6 +597,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "numberOfFailedLogins")]
 		[Updateable(false), Createable(false)]
 		public int? NumberOfFailedLogins { get; set; }
+
+		///<summary>
+		/// SU Access Expiration Date
+		/// <para>Name: SuAccessExpirationDate</para>
+		/// <para>SF Type: date</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "suAccessExpirationDate")]
+		[Updateable(false), Createable(false)]
+		public DateTime? SuAccessExpirationDate { get; set; }
 
 		///<summary>
 		/// Offline Edition Trial Expiration Date
@@ -924,15 +962,6 @@ namespace NetCoreForce.Models
 		public bool? UserPreferencesDisableMessageEmail { get; set; }
 
 		///<summary>
-		/// HideLegacyRetirementModal
-		/// <para>Name: UserPreferencesHideLegacyRetirementModal</para>
-		/// <para>SF Type: boolean</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "userPreferencesHideLegacyRetirementModal")]
-		public bool? UserPreferencesHideLegacyRetirementModal { get; set; }
-
-		///<summary>
 		/// JigsawListUser
 		/// <para>Name: UserPreferencesJigsawListUser</para>
 		/// <para>SF Type: boolean</para>
@@ -958,6 +987,24 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "userPreferencesDisableSharePostEmail")]
 		public bool? UserPreferencesDisableSharePostEmail { get; set; }
+
+		///<summary>
+		/// ActionLauncherEinsteinGptConsent
+		/// <para>Name: UserPreferencesActionLauncherEinsteinGptConsent</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesActionLauncherEinsteinGptConsent")]
+		public bool? UserPreferencesActionLauncherEinsteinGptConsent { get; set; }
+
+		///<summary>
+		/// AssistiveActionsEnabledInActionLauncher
+		/// <para>Name: UserPreferencesAssistiveActionsEnabledInActionLauncher</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesAssistiveActionsEnabledInActionLauncher")]
+		public bool? UserPreferencesAssistiveActionsEnabledInActionLauncher { get; set; }
 
 		///<summary>
 		/// EnableAutoSubForFeeds
@@ -1138,6 +1185,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "userPreferencesShowForecastingChangeSignals")]
 		public bool? UserPreferencesShowForecastingChangeSignals { get; set; }
+
+		///<summary>
+		/// LiveAgentMiawSetupDeflection
+		/// <para>Name: UserPreferencesLiveAgentMiawSetupDeflection</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesLiveAgentMiawSetupDeflection")]
+		public bool? UserPreferencesLiveAgentMiawSetupDeflection { get; set; }
 
 		///<summary>
 		/// HideS1BrowserUI
@@ -1455,6 +1511,15 @@ namespace NetCoreForce.Models
 		public bool? UserPreferencesHasSentWarningEmail240 { get; set; }
 
 		///<summary>
+		/// DismissPersonalSpaceLegalMessage
+		/// <para>Name: UserPreferencesDismissPersonalSpaceLegalMessage</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesDismissPersonalSpaceLegalMessage")]
+		public bool? UserPreferencesDismissPersonalSpaceLegalMessage { get; set; }
+
+		///<summary>
 		/// NativeEmailClient
 		/// <para>Name: UserPreferencesNativeEmailClient</para>
 		/// <para>SF Type: boolean</para>
@@ -1462,6 +1527,44 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "userPreferencesNativeEmailClient")]
 		public bool? UserPreferencesNativeEmailClient { get; set; }
+
+		///<summary>
+		/// HideManagedEcaMobilePubModal
+		/// <para>Name: UserPreferencesHideManagedEcaMobilePubModal</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesHideManagedEcaMobilePubModal")]
+		public bool? UserPreferencesHideManagedEcaMobilePubModal { get; set; }
+
+		///<summary>
+		/// ShowForecastingRoundedAmounts
+		/// <para>Name: UserPreferencesShowForecastingRoundedAmounts</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesShowForecastingRoundedAmounts")]
+		public bool? UserPreferencesShowForecastingRoundedAmounts { get; set; }
+
+		///<summary>
+		/// User Verified Mobile Number
+		/// <para>Name: HasUserVerifiedPhone</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "hasUserVerifiedPhone")]
+		[Updateable(false), Createable(false)]
+		public bool? HasUserVerifiedPhone { get; set; }
+
+		///<summary>
+		/// User Verified Email
+		/// <para>Name: HasUserVerifiedEmail</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "hasUserVerifiedEmail")]
+		[Updateable(false), Createable(false)]
+		public bool? HasUserVerifiedEmail { get; set; }
 
 		///<summary>
 		/// Contact ID

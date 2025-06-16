@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -266,7 +266,7 @@ namespace NetCoreForce.Models
 		public string ClientContext { get; set; }
 
 		///<summary>
-		/// Gateway ResultCode
+		/// Gateway Result Code
 		/// <para>Name: GatewayResultCode</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -275,7 +275,7 @@ namespace NetCoreForce.Models
 		public string GatewayResultCode { get; set; }
 
 		///<summary>
-		/// Gateway ResultCode Description
+		/// Gateway Result Code Description
 		/// <para>Name: GatewayResultCodeDescription</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -284,7 +284,7 @@ namespace NetCoreForce.Models
 		public string GatewayResultCodeDescription { get; set; }
 
 		///<summary>
-		/// Salesforce ResultCode
+		/// Salesforce Result Code
 		/// <para>Name: SfResultCode</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
@@ -383,7 +383,7 @@ namespace NetCoreForce.Models
 		public string CancellationGatewayRefNumber { get; set; }
 
 		///<summary>
-		/// Cancellation Gateway ResultCode
+		/// Cancellation Gateway Result Code
 		/// <para>Name: CancellationGatewayResultCode</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -392,7 +392,7 @@ namespace NetCoreForce.Models
 		public string CancellationGatewayResultCode { get; set; }
 
 		///<summary>
-		/// Cancellation Salesforce ResultCode
+		/// Cancellation Salesforce Result Code
 		/// <para>Name: CancellationSfResultCode</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>

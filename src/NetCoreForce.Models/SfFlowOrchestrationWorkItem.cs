@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -236,6 +236,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "screenFlowInputs")]
 		[Updateable(false), Createable(false)]
 		public string ScreenFlowInputs { get; set; }
+
+		///<summary>
+		/// Time Since Creation
+		/// <para>Name: ElapsedTimeSinceCreationInSec</para>
+		/// <para>SF Type: long</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "elapsedTimeSinceCreationInSec")]
+		[Updateable(false), Createable(false)]
+		public string ElapsedTimeSinceCreationInSec { get; set; }
+
+		///<summary>
+		/// Time Since Assignment
+		/// <para>Name: ElapsedTimeSinceAsgntInSec</para>
+		/// <para>SF Type: long</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "elapsedTimeSinceAsgntInSec")]
+		[Updateable(false), Createable(false)]
+		public string ElapsedTimeSinceAsgntInSec { get; set; }
 
 	}
 }

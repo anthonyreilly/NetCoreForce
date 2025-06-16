@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -148,20 +148,10 @@ namespace NetCoreForce.Models
 		public string Type { get; set; }
 
 		///<summary>
-		/// Category (Deprecated)
-		/// <para>Name: Category</para>
-		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "category")]
-		[Updateable(false), Createable(false)]
-		public string Category { get; set; }
-
-		///<summary>
 		/// Business Category
 		/// <para>Name: CategoryEnum</para>
 		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: True</para>
+		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "categoryEnum")]
 		[Updateable(false), Createable(false)]

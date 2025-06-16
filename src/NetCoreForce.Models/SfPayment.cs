@@ -1,4 +1,4 @@
-// SF API version v57.0
+// SF API version v64.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -265,7 +265,7 @@ namespace NetCoreForce.Models
 		public string ClientContext { get; set; }
 
 		///<summary>
-		/// Gateway ResultCode
+		/// Gateway Result Code
 		/// <para>Name: GatewayResultCode</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -274,7 +274,7 @@ namespace NetCoreForce.Models
 		public string GatewayResultCode { get; set; }
 
 		///<summary>
-		/// Salesforce ResultCode
+		/// Salesforce Result Code
 		/// <para>Name: SfResultCode</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
@@ -301,7 +301,7 @@ namespace NetCoreForce.Models
 		public string CancellationGatewayRefNumber { get; set; }
 
 		///<summary>
-		/// Cancellation Gateway ResultCode
+		/// Cancellation Gateway Result Code
 		/// <para>Name: CancellationGatewayResultCode</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -310,7 +310,7 @@ namespace NetCoreForce.Models
 		public string CancellationGatewayResultCode { get; set; }
 
 		///<summary>
-		/// Cancellation Salesforce ResultCode
+		/// Cancellation Salesforce Result Code
 		/// <para>Name: CancellationSfResultCode</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -365,7 +365,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? CancellationEffectiveDate { get; set; }
 
 		///<summary>
-		/// Gateway ResultCode Description
+		/// Gateway Result Code Description
 		/// <para>Name: GatewayResultCodeDescription</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -521,6 +521,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "netRefundApplied")]
 		[Updateable(false), Createable(false)]
 		public decimal? NetRefundApplied { get; set; }
+
+		///<summary>
+		/// Payment Intent Guid
+		/// <para>Name: PaymentIntentGuid</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "paymentIntentGuid")]
+		[Updateable(false), Createable(true)]
+		public string PaymentIntentGuid { get; set; }
 
 	}
 }
