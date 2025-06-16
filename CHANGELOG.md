@@ -8,6 +8,7 @@
 * build, test, and target updates
     - Set library targets to .NET Standard 2.0 & 2.1, .NET Core 3.1, .NET 6.0-9.0, .NET Framework 4.6.2, 4.7.2, 4.8
     - Tests target .NET Core 6.0-9.0
+* config: update SFDC API default to v64.0
 
 ### 2025-02-24 v5.0.0-Beta
 
