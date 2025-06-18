@@ -6,17 +6,19 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/src/SampleConsole/bin/Debug/netcoreapp2.0/SampleConsole.dll",
+            "program": "${workspaceRoot}/src/SampleConsole/bin/Debug/net9.0/SampleConsole.dll",
             "args": [],
             "cwd": "${workspaceRoot}/src/SampleConsole",
             "console": "internalConsole",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "logging": {
+                "diagnosticsLog": {
+                    "protocolMessages": true
+                },
                 "exceptions": true,
                 "moduleLoad": false,
                 "programOutput": true,
-                "engineLogging": false,
                 "browserStdOut": false
             }
         },
@@ -25,7 +27,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/src/NetCoreForce.ModelGenerator/bin/Debug/netcoreapp2.0/dotnet-modelgenerator.dll",
+            "program": "${workspaceRoot}/src/NetCoreForce.ModelGenerator/bin/Debug/net9.0/dotnet-modelgenerator.dll",
             "args": ["generate"],
             "cwd": "${workspaceRoot}/src/NetCoreForce.ModelGenerator",
             "console": "internalConsole",
