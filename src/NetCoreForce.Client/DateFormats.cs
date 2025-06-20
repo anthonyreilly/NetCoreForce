@@ -54,7 +54,7 @@ namespace NetCoreForce.Client
         /// <returns></returns>
         public static string FullDateString(DateTime dt)
         {
-            return dt.ToUniversalTime().ToString(_FullFormat);
+            return dt.ToString(_FullFormat);
         }
 
         public static string FullDateString(DateTime dt, TimeSpan offset)
