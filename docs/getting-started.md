@@ -1,7 +1,5 @@
 # Getting Started
 
-
-
 ## Basic Usage Example
 
 ```csharp
@@ -45,11 +43,21 @@ string caseAccountName = firstCase.Account.Name;
 string caseContactName = firstCase.Contact.Name;
 ```
 
-Nested queries are not fully supported - the subquery results will not be complete if they exceed the batch size as the NextRecordsUrl in the subquery results is not being acted upon. Instead use the relationship syntax in the example above.
+While you can use a SOQL query such as    
+```SELECT * FROM Case```  
+this will be inefficient as it will retrieve all fields for the object. It is highly recommended to only query those fields you will need, e.g.  
+```SELECT Id, FirstName, LastName, Email, Account.Id, Account.Name FROM Contact```
+
+[Nested queries](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql_relationships_query_using.htm) are not fully supported - the subquery results will not be complete if they exceed the batch size as the NextRecordsUrl in the subquery results is not being acted upon. Instead use the relationship syntax in the examples above.
 ```
 // *NOT* fully supported
-"SELECT Id,CaseNumber, (Select Contact.Name from Account) FROM Case"
+SELECT Name, (SELECT Email FROM Contacts) FROM Account
+// Instead use:
+SELECT Email, Account.Name FROM Contact
 ```
+
+For more on SOQL queries see the Salesforce Documentation: [Salesforce Object Query Language (SOQL)](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm)
+
 ---
 
 ## Asynchronous Batch Processing
