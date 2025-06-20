@@ -9,12 +9,13 @@ namespace NetCoreForce.Client.Tests
     //https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql_select_dateformats.htm
     public class DateFormatTests
     {
+
         public class TestObject
         {
             public DateTimeOffset DateProp { get; set; }
         }
 
-        readonly DateTimeOffset _dto = new DateTimeOffset(2017,5,1,12,0,0,0,new TimeSpan(-5,0,0));
+        readonly DateTimeOffset _dto = new DateTimeOffset(2017, 5, 1, 12, 0, 0, 0, new TimeSpan(-5, 0, 0));
         readonly string _expectedDate = "2017-05-01T12:00:00-05:00";
 
         [Fact]
@@ -22,7 +23,7 @@ namespace NetCoreForce.Client.Tests
         {
             TestObject obj = new TestObject() { DateProp = _dto };
 
-            string serialized = JsonSerializer.SerializeComplete(obj, false);         
+            string serialized = JsonSerializer.SerializeComplete(obj, false);
 
             Assert.Contains(_expectedDate, serialized);
         }
@@ -43,16 +44,65 @@ namespace NetCoreForce.Client.Tests
             Assert.Equal(_expectedDate, convertedDate);
         }
 
-        [Fact]
-        public void FullDateFormatFromDateTime()
+        [Theory]
+        [InlineData(DateTimeKind.Utc)]
+        [InlineData(DateTimeKind.Local)]
+        [InlineData(DateTimeKind.Unspecified)]
+        public void FullDateFormat_From_DateTime_Kind(DateTimeKind kind)
         {
-            var dt = new DateTime(2018,1,1,0,0,0, DateTimeKind.Utc);
+            DateTime dateTimeLocal = new DateTime(2018, 1, 1, 0, 0, 0, kind);
 
-            string convertedDate = DateFormats.FullDateString(dt);
+            TimeSpan localOffset = TimeZoneInfo.Local.GetUtcOffset(dateTimeLocal);
 
-            string expected = "2018-01-01T00:00:00+00:00";
+            if(kind == DateTimeKind.Utc)
+            {
+                // for UTC DateTime, the offset is always zero
+                localOffset = TimeSpan.Zero;
+            }
 
-            Assert.Equal(expected, convertedDate);
+            string convertedDate = DateFormats.FullDateString(dateTimeLocal);
+
+            // get timespan formatting to end up with e.g. "2018-01-01T00:00:00-05:00"
+            string timeSpanFormat = GetTimeSpanFormat(localOffset);
+            string expectedConvertedDate = $"2018-01-01T00:00:00{localOffset.ToString(timeSpanFormat)}";
+
+            Assert.Equal(expectedConvertedDate, convertedDate);
+        }
+
+        private string GetTimeSpanFormat(TimeSpan ts)
+        {
+            // get timespan formatting to end up with e.g. "2018-01-01T00:00:00-05:00"
+            return (ts < TimeSpan.Zero ? "\\-" : "\\+") + "hh\\:mm";
+        }
+
+        [Theory]
+        [InlineData("America/New_York")]
+        [InlineData("America/Phoenix")]
+        [InlineData("Europe/London")]
+        [InlineData("Asia/Tokyo")]
+        [InlineData("Asia/Kathmandu")] // Nepal Time (UTC+5:45)
+        [InlineData("Pacific/Auckland")]
+        [InlineData("Europe/Moscow")]
+        [InlineData("Asia/Shanghai")]
+        public void FullDateFormat_From_Other_Timezone(string timeZoneId)
+        {
+            using (new LocalTimeZoneInfoMocker(TimeZoneInfo.FindSystemTimeZoneById(timeZoneId)))
+            {
+                DateTime dateTimeUnspecified = new DateTime(2018, 1, 1, 0, 0, 0);
+
+                // check that the DateTimeKind is Unspecified
+                Assert.Equal(DateTimeKind.Unspecified, dateTimeUnspecified.Kind);
+
+                TimeSpan localOffset = TimeZoneInfo.Local.GetUtcOffset(dateTimeUnspecified);
+
+                string convertedDate = DateFormats.FullDateString(dateTimeUnspecified);
+
+                // get timespan formatting to end up with e.g. "2018-01-01T00:00:00-05:00"
+                string timeSpanFormat = GetTimeSpanFormat(localOffset);
+                string expectedConvertedDate = $"2018-01-01T00:00:00{localOffset.ToString(timeSpanFormat)}";
+
+                Assert.Equal(expectedConvertedDate, convertedDate);
+            }
         }
 
         [Fact]
