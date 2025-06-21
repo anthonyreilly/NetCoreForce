@@ -1,27 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <Import
-    Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.props))\build.props" />
   <PropertyGroup>
     <AssemblyName>dotnet-modelgenerator</AssemblyName>
     <Product>NetCoreForce.ModelGenerator</Product>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>$(AppTargetFrameworks)</TargetFrameworks>
-    <VersionPrefix>$(VersionPrefix)</VersionPrefix>
-    <VersionSuffix>$(VersionSuffix)</VersionSuffix>
+
     <!--NuGet-->
-    <Authors>$(Authors)</Authors>
-    <Copyright>$(Copyright)</Copyright>
-    <Description>NetCoreForce ModelGenerator tool to generate object models against a live
-      Salesforce org.</Description>
+    <Description>NetCoreForce ModelGenerator tool to generate object models against a live Salesforce org.</Description>
     <IsPackable>true</IsPackable>
     <PackageId>NetCoreForce.ModelGenerator</PackageId>
-    <PackageLicenseExpression>$(PackageLicenseExpression)</PackageLicenseExpression>
-    <PackageProjectUrl>$(PackageProjectUrl)</PackageProjectUrl>
-    <PackageRequireLicenseAcceptance>$(PackageRequireLicenseAcceptance)</PackageRequireLicenseAcceptance>
-    <PackageTags>$(PackageTags)</PackageTags>
-    <RepositoryType>$(RepositoryType)</RepositoryType>
-    <RepositoryUrl>$(RepositoryUrl)</RepositoryUrl>
-    <PackageReleaseNotes>$(PackageReleaseNotes)</PackageReleaseNotes>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>NetCoreForce.ModelGenerator</ToolCommandName>
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
@@ -36,12 +23,15 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageOutputPath>$(SolutionDir)/packages</PackageOutputPath>
   </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\NetCoreForce.Client\NetCoreForce.Client.csproj" />
   </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="2.6.0" />
   </ItemGroup>
+
   <ItemGroup>
     <None Update="modelgenerator_config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

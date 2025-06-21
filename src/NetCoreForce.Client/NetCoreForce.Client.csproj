@@ -1,26 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import
-    Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.props))\build.props" />
   <PropertyGroup>
     <AssemblyName>NetCoreForce.Client</AssemblyName>
     <Product>NetCoreForce.Client</Product>
     <OutputType>Library</OutputType>
     <TargetFrameworks>$(LibTargetFrameworks)</TargetFrameworks>
-    <VersionPrefix>$(VersionPrefix)</VersionPrefix>
-    <VersionSuffix>$(VersionSuffix)</VersionSuffix>
+
     <!--NuGet-->
-    <Authors>$(Authors)</Authors>
-    <Copyright>$(Copyright)</Copyright>
     <Description>A .NET Standard and .NET Core Salesforce REST API integration library</Description>
     <IsPackable>true</IsPackable>
     <PackageId>NetCoreForce.Client</PackageId>
-    <PackageLicenseExpression>$(PackageLicenseExpression)</PackageLicenseExpression>
-    <PackageProjectUrl>$(PackageProjectUrl)</PackageProjectUrl>
-    <PackageRequireLicenseAcceptance>$(PackageRequireLicenseAcceptance)</PackageRequireLicenseAcceptance>
-    <PackageTags>$(PackageTags)</PackageTags>
-    <RepositoryType>$(RepositoryType)</RepositoryType>
-    <RepositoryUrl>$(RepositoryUrl)</RepositoryUrl>
-    <PackageReleaseNotes>$(PackageReleaseNotes)</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
@@ -34,7 +22,6 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
     <!-- warning CS1591: Missing XML comment for publicly visible type or member -->
     <NoWarn>CS1591</NoWarn>
-    <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
