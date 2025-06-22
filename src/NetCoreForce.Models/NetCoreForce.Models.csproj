@@ -1,26 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import
-    Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.props))\build.props" />
   <PropertyGroup>
     <AssemblyName>NetCoreForce.Models</AssemblyName>
     <Product>NetCoreForce.Models</Product>
     <OutputType>Library</OutputType>
     <TargetFrameworks>$(LibTargetFrameworks)</TargetFrameworks>
-    <VersionPrefix>$(VersionPrefix)</VersionPrefix>
-    <VersionSuffix>$(VersionSuffix)</VersionSuffix>
+
     <!--NuGet-->
-    <Authors>$(Authors)</Authors>
-    <Copyright>$(Copyright)</Copyright>
     <Description>NetCoreForce standard obect models package</Description>
     <IsPackable>true</IsPackable>
     <PackageId>NetCoreForce.Models</PackageId>
-    <PackageLicenseExpression>$(PackageLicenseExpression)</PackageLicenseExpression>
-    <PackageProjectUrl>$(PackageProjectUrl)</PackageProjectUrl>
-    <PackageRequireLicenseAcceptance>$(PackageRequireLicenseAcceptance)</PackageRequireLicenseAcceptance>
-    <PackageTags>$(PackageTags)</PackageTags>
-    <RepositoryType>$(RepositoryType)</RepositoryType>
-    <RepositoryUrl>$(RepositoryUrl)</RepositoryUrl>
-    <PackageReleaseNotes>$(PackageReleaseNotes)</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
@@ -35,12 +23,13 @@
     <!-- warning CS1591: Missing XML comment for publicly visible type or member -->
     <!-- warning CS1587: XML comment is not placed on a valid language element -->
     <NoWarn>CS1591,CS1587</NoWarn>
-    <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageOutputPath>$(SolutionDir)/packages</PackageOutputPath>
   </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\NetCoreForce.Client\NetCoreForce.Client.csproj" />
   </ItemGroup>

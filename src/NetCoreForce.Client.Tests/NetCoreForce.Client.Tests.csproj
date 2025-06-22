@@ -1,12 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.props))\build.props" />
   <PropertyGroup>
     <TargetFrameworks>$(TestTargetFrameworks)</TargetFrameworks>
-    <LangVersion>$(LangVersion)</LangVersion>
     <IsPackable>false</IsPackable>
-    <!-- Ignore warnings about referencing obsolete methods -->
-    <!-- <NoWarn>CS0618</NoWarn> -->
-    <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
 
   <Choose>

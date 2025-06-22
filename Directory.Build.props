@@ -19,6 +19,9 @@
     <RepositoryUrl>https://github.com/anthonyreilly/NetCoreForce</RepositoryUrl>
     <PackageReleaseNotes>Release notes and documentation can be found on the project site: https://github.com/anthonyreilly/NetCoreForce</PackageReleaseNotes>
 
+    <!-- Intentionally targeting EOL frameworks -->
+     <CheckEolTargetFramework>false</CheckEolTargetFramework>
+
     <!--Project Root-->
     <SolutionDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), *.sln))</SolutionDir>
   </PropertyGroup>

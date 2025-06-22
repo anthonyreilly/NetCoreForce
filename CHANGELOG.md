@@ -10,6 +10,11 @@
     - Tests target .NET Core 6.0-9.0
 * config: update SFDC API default to v64.0
 * content: Updated default SFDC object models in NetCoreForce.Models to SF API v64.0
+* fix: remove forced UTC conversion for DateTimeKind.Unspecified DateTimes.  
+        this caused inconsistent behavior between Windows and other platforms as under Windows it would end up adding a utc offset to the date.  
+        NetCoreForce.Client.Tests.DateFormatTests.FullDateFormatFromDateTime  
+        Expected: "2018-01-01T00:00:00+00:00"  
+        Actual:   "2018-01-01T00:00:00-05:00" (under Windows)  
 
 ### 2025-02-24 v5.0.0-Beta
 
