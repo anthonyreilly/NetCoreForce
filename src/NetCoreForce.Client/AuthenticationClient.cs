@@ -120,6 +120,24 @@ namespace NetCoreForce.Client
         /// <exception cref="ForceAuthException">Thrown if the authentication fails</exception>
         public async Task UsernamePasswordAsync(string clientId, string clientSecret, string username, string password, string tokenRequestEndpointUrl)
         {
+            await UsernamePasswordAsync(clientId, clientSecret, username, password, tokenRequestEndpointUrl,
+                response => JsonConvert.DeserializeObject<AccessTokenResponse>(response),
+                response => JsonConvert.DeserializeObject<AuthErrorResponse>(response));
+        }
+
+        /// <summary>
+        /// Authenticate using the "Username and Password" auth flow
+        /// </summary>
+        /// <param name="clientId">Client ID, a.k.a. Consumer Key</param>
+        /// <param name="clientSecret">Client Secret, a.k.a. Consumer Secret</param>
+        /// <param name="username">Username</param>
+        /// <param name="password">Password</param>
+        /// <param name="tokenRequestEndpointUrl">Token request endpoint URL, e.g. https://login.salesforce.com/services/oauth2/token</param>
+        /// <param name="DeserializeAccessToken">Function to deserialize the access token response</param>
+        /// <param name="DeserializeAuthError">Function to deserialize the auth error response</param>
+        /// <exception cref="ForceAuthException">Thrown if the authentication fails</exception>
+        public async Task UsernamePasswordAsync(string clientId, string clientSecret, string username, string password, string tokenRequestEndpointUrl, Func<string, AccessTokenResponse> DeserializeAccessToken, Func<string, AuthErrorResponse> DeserializeAuthError)
+        {
 #if DEBUG
             Stopwatch sw = new Stopwatch();
             sw.Start();
@@ -154,7 +172,7 @@ namespace NetCoreForce.Client
 
             if (responseMessage.IsSuccessStatusCode)
             {
-                this.AccessInfo = JsonConvert.DeserializeObject<AccessTokenResponse>(response);
+                this.AccessInfo = DeserializeAccessToken(response);
             }
             else if (responseMessage.StatusCode == HttpStatusCode.NotFound)
             {
@@ -163,7 +181,7 @@ namespace NetCoreForce.Client
             }
             else
             {
-                var errorResponse = JsonConvert.DeserializeObject<AuthErrorResponse>(response);
+                var errorResponse = DeserializeAuthError(response);
                 throw new ForceAuthException(errorResponse.Error, errorResponse.ErrorDescription, responseMessage.StatusCode);
             }
 #if DEBUG
