@@ -68,7 +68,7 @@ However, if you choose to save the config file, be careful with it as it does co
 ### Example config file
 ```json
 {
-  "comment": "Example config file - Make a copy of this file named modegenerator_config.json with your login info",
+  "comment": "Example config file - Make a copy of this file named modelgenerator_config.json with your login info",
   "AuthInfo": {    
     "clientId": "your_client_id",
     "clientSecret": "your_client_secret",
