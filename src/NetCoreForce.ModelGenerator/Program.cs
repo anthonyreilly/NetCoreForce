@@ -150,7 +150,7 @@ namespace NetCoreForce.ModelGenerator
                         config.ClassSuffix = suffixOption.Value();
                     }
 
-                    if (suffixOption.HasValue())
+                    if (namespaceName.HasValue())
                     {
                         config.ClassNamespace = namespaceName.Value();
                     }
