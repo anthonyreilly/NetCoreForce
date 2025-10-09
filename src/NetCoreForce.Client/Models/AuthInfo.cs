@@ -32,6 +32,20 @@ namespace NetCoreForce.Client.Models
         public string Password { get; set; }
 
         /// <summary>
+        /// Current supported auth methods
+        /// </summary>
+        public enum AuthMethodType {
+            UsernamePassword = 1,
+            ClientCredentials = 2,
+        }
+
+        /// <summary>
+        /// Auth type
+        /// </summary>
+        [JsonProperty(PropertyName = "authMethod")]
+        public AuthMethodType? AuthMethod { get; set; }
+
+        /// <summary>
         /// Salesforce API version
         /// </summary>
         [JsonProperty(PropertyName = "apiVersion")]
