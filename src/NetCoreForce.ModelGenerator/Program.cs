@@ -73,6 +73,10 @@ namespace NetCoreForce.ModelGenerator
                     $"Auth Method, Valid inputs: {ValidAuthTypesInputString}",
                     CommandOptionType.SingleValue);
 
+                var tokenRequestEndpointOption = command.Option("--token-request-endpoint",
+                    $"Token Request endpoint default: {GenConfig.DefaultTokenRequestEndpoint}",
+                    CommandOptionType.SingleValue);
+
                 //Config options
                 var configFileOption = command.Option("--config-file",
                     "Config file path",
@@ -151,6 +155,11 @@ namespace NetCoreForce.ModelGenerator
                             Console.WriteLine($"Invalid auth method input, valid inputs: {ValidAuthTypesInputString}");
                             return -1;
                         }
+                    }
+
+                    if (tokenRequestEndpointOption.HasValue())
+                    {
+                        config.AuthInfo.TokenRequestEndpoint = tokenRequestEndpointOption.Value();
                     }
 
                     if (customOption.HasValue())
