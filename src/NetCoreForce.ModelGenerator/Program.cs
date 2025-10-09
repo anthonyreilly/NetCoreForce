@@ -144,7 +144,7 @@ namespace NetCoreForce.ModelGenerator
 
                     if (authMethodOption.HasValue())
                     {
-                        if (Enum.TryParse(authMethodOption.Value(), out AuthInfo.AuthMethodType authMethod))
+                        if (Enum.TryParse(authMethodOption.Value(), ignoreCase: true, out AuthInfo.AuthMethodType authMethod))
                             config.AuthInfo.AuthMethod = authMethod;
                         else
                         {
@@ -237,7 +237,7 @@ namespace NetCoreForce.ModelGenerator
                 Console.WriteLine("Enter Auth Method:");
                 string consoleReadLine = Console.ReadLine();
 
-                if (Enum.TryParse(consoleReadLine, out AuthInfo.AuthMethodType authMethod))
+                if (Enum.TryParse(consoleReadLine, ignoreCase: true, out AuthInfo.AuthMethodType authMethod))
                     config.AuthInfo.AuthMethod = authMethod;
                 else
                     Console.WriteLine($"Invalid input, valid inputs: {ValidAuthTypesInputString}");
