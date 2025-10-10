@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using NetCoreForce.Client.Models;
+using Newtonsoft.Json;
 
 namespace NetCoreForce.ModelGenerator
 {
@@ -15,10 +16,13 @@ namespace NetCoreForce.ModelGenerator
         public bool IncludeCustom { get; set; }
         public bool IncludeReferences { get; set; }
 
+        [JsonIgnore]
+        public const string DefaultTokenRequestEndpoint = "https://login.salesforce.com/services/oauth2/token";
+
         public GenConfig()
         {
             this.AuthInfo = new AuthInfo(){
-                TokenRequestEndpoint = "https://login.salesforce.com/services/oauth2/token",
+                TokenRequestEndpoint = DefaultTokenRequestEndpoint,
                 ApiVersion = "v64.0"
             };
         }

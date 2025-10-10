@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Dynamic;
 using System.Reflection;
 using System.IO;
 using System.Linq;
@@ -17,6 +15,15 @@ namespace NetCoreForce.ModelGenerator
 {
     class Program
     {
+        /// <summary>
+        /// Gets a human-readable string for which value maps to which auth method type
+        /// </summary>
+        /// <returns>
+        /// For example: <c>1 = UsernamePassword, 2 = ClientCredentials</c>
+        /// </returns>>
+        private static string ValidAuthTypesInputString =>
+            string.Join(", ", Enum.GetValues(typeof(AuthInfo.AuthMethodType)).Cast<AuthInfo.AuthMethodType>().Select(v => $"{(int)v} = {v}"));
+
         const string defaultConfigFilename = "modelgenerator_config.json";
 
         static void Main(string[] args)
@@ -45,7 +52,7 @@ namespace NetCoreForce.ModelGenerator
                 "You can supply the API credentials either in the config file, the command parameters, or wait to be prompted for that information." + Environment.NewLine +
                 "If you choose to save the config file, be careful with it as it may contain your API credentials.";
 
-                //Authentication
+                //Authentication options
                 var clientIdOption = command.Option("--client-id",
                     "API Client ID, a.k.a. Consumer Key",
                     CommandOptionType.SingleValue);
@@ -62,6 +69,15 @@ namespace NetCoreForce.ModelGenerator
                     "API Password",
                     CommandOptionType.SingleValue);
 
+                var authMethodOption = command.Option("--auth-method",
+                    $"Auth Method, Valid inputs: {ValidAuthTypesInputString}",
+                    CommandOptionType.SingleValue);
+
+                var tokenRequestEndpointOption = command.Option("--token-request-endpoint",
+                    $"Token Request endpoint default: {GenConfig.DefaultTokenRequestEndpoint}",
+                    CommandOptionType.SingleValue);
+
+                //Config options
                 var configFileOption = command.Option("--config-file",
                     "Config file path",
                     CommandOptionType.SingleValue);
@@ -130,6 +146,22 @@ namespace NetCoreForce.ModelGenerator
                         config.AuthInfo.Password = passwordOption.Value();
                     }
 
+                    if (authMethodOption.HasValue())
+                    {
+                        if (Enum.TryParse(authMethodOption.Value(), ignoreCase: true, out AuthInfo.AuthMethodType authMethod))
+                            config.AuthInfo.AuthMethod = authMethod;
+                        else
+                        {
+                            Console.WriteLine($"Invalid auth method input, valid inputs: {ValidAuthTypesInputString}");
+                            return -1;
+                        }
+                    }
+
+                    if (tokenRequestEndpointOption.HasValue())
+                    {
+                        config.AuthInfo.TokenRequestEndpoint = tokenRequestEndpointOption.Value();
+                    }
+
                     if (customOption.HasValue())
                     {
                         config.IncludeCustom = customOption.HasValue();
@@ -150,7 +182,7 @@ namespace NetCoreForce.ModelGenerator
                         config.ClassSuffix = suffixOption.Value();
                     }
 
-                    if (suffixOption.HasValue())
+                    if (namespaceName.HasValue())
                     {
                         config.ClassNamespace = namespaceName.Value();
                     }
@@ -209,6 +241,30 @@ namespace NetCoreForce.ModelGenerator
         private static GenConfig CheckOptions(GenConfig config)
         {
             //check required auth options
+            while (config.AuthInfo.AuthMethod == null)
+            {
+                Console.WriteLine("Enter Auth Method:");
+                string consoleReadLine = Console.ReadLine();
+
+                if (Enum.TryParse(consoleReadLine, ignoreCase: true, out AuthInfo.AuthMethodType authMethod))
+                    config.AuthInfo.AuthMethod = authMethod;
+                else
+                    Console.WriteLine($"Invalid input, valid inputs: {ValidAuthTypesInputString}");
+
+                Console.WriteLine();
+            }
+
+            while ((
+                       string.IsNullOrEmpty(config.AuthInfo.TokenRequestEndpoint) ||
+                       config.AuthInfo.TokenRequestEndpoint == GenConfig.DefaultTokenRequestEndpoint
+                   ) &&
+                   config.AuthInfo.AuthMethod == AuthInfo.AuthMethodType.ClientCredentials)
+            {
+                Console.WriteLine("Enter Token Request Endpoint:");
+                config.AuthInfo.TokenRequestEndpoint = Console.ReadLine();
+                Console.WriteLine();
+            }
+
             while (string.IsNullOrEmpty(config.AuthInfo.ClientId))
             {
                 Console.WriteLine("Enter API Client ID:");
@@ -223,14 +279,14 @@ namespace NetCoreForce.ModelGenerator
                 Console.WriteLine();
             }
 
-            while (string.IsNullOrEmpty(config.AuthInfo.Username))
+            while (string.IsNullOrEmpty(config.AuthInfo.Username) && config.AuthInfo.AuthMethod == AuthInfo.AuthMethodType.UsernamePassword)
             {
                 Console.WriteLine("Enter API username:");
                 config.AuthInfo.Username = Console.ReadLine();
                 Console.WriteLine();
             }
 
-            while (string.IsNullOrEmpty(config.AuthInfo.Password))
+            while (string.IsNullOrEmpty(config.AuthInfo.Password) && config.AuthInfo.AuthMethod == AuthInfo.AuthMethodType.UsernamePassword)
             {
                 Console.WriteLine("Enter API password:");
                 config.AuthInfo.Password = Console.ReadLine();
@@ -338,8 +394,19 @@ namespace NetCoreForce.ModelGenerator
             AuthenticationClient auth = new AuthenticationClient(config.AuthInfo.ApiVersion);
             try
             {
-                await auth.UsernamePasswordAsync(config.AuthInfo.ClientId, config.AuthInfo.ClientSecret,
-                    config.AuthInfo.Username, config.AuthInfo.Password, config.AuthInfo.TokenRequestEndpoint);
+                switch (config.AuthInfo.AuthMethod)
+                {
+                    case AuthInfo.AuthMethodType.UsernamePassword:
+                        await auth.UsernamePasswordAsync(config.AuthInfo.ClientId, config.AuthInfo.ClientSecret,
+                            config.AuthInfo.Username, config.AuthInfo.Password, config.AuthInfo.TokenRequestEndpoint);
+                        break;
+                    case AuthInfo.AuthMethodType.ClientCredentials:
+                        await auth.ClientCredentialsAsync(config.AuthInfo.ClientId, config.AuthInfo.ClientSecret,
+                            config.AuthInfo.TokenRequestEndpoint);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(config.AuthInfo.AuthMethod), $"authMethodInt is out of range, value: {(int)config.AuthInfo.AuthMethod}");
+                }
 
                 Console.WriteLine("Connected to Salesforce");
             }
@@ -499,7 +566,7 @@ namespace NetCoreForce.ModelGenerator
                     if (field.Custom && !config.IncludeCustom)
                     {
                         continue;
-                    }                    
+                    }
 
                     gen.AppendLine("\t\t///<summary>");
                     gen.AppendLine("\t\t/// " + WebUtility.HtmlEncode(field.Label));
