@@ -75,7 +75,7 @@ namespace NetCoreForce.Client.Tests
             return (ts < TimeSpan.Zero ? "\\-" : "\\+") + "hh\\:mm";
         }
 
-        [Theory]
+        [Theory(Skip = "Disabled due to TZ mocker issues")]
         [InlineData("America/New_York")]
         [InlineData("America/Phoenix")]
         [InlineData("Europe/London")]
