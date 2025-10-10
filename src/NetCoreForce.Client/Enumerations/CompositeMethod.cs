@@ -4,6 +4,8 @@
     {
         Read,
         Write,
-        Delete
+        Delete,
+        Create,
+        Update
     }
 }

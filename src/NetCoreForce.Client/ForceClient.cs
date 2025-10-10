@@ -1,4 +1,5 @@
 ﻿using NetCoreForce.Client.Enumerations;
+using NetCoreForce.Client.Extensions;
 using NetCoreForce.Client.Models;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -688,9 +690,17 @@ namespace NetCoreForce.Client
 
             List<CompositeSubRequest> subRequests = sObjects.Select(s =>
             {
+                var method = s.Method switch
+                {
+                    CompositeMethod.Write => string.IsNullOrWhiteSpace(s.Id) ? "POST" : "PATCH",
+                    CompositeMethod.Delete => "DELETE",
+                    CompositeMethod.Create => "POST",
+                    CompositeMethod.Update => "PATCH",
+                    _ => "GET",
+                };
                 return new CompositeSubRequest(
                     s.SObject,
-                    s.Method == CompositeMethod.Write ? string.IsNullOrWhiteSpace(s.Id) ? "POST" : "PATCH" : s.Method == CompositeMethod.Delete ? "DELETE" : "GET",
+                    method,
                     s.ReferenceId,
                     s.CompositeType == CompositeType.SObject ? UriFormatter.CompositeSubRequest(ApiVersion, s.Type, s.Id) : UriFormatter.CompositeSObjectCollectionsSubRequest(ApiVersion)
                 );
@@ -827,6 +837,182 @@ namespace NetCoreForce.Client
 
             throw new ForceApiException($"Failed to download blob data, request returned {responseMessage.StatusCode} {responseMessage.ReasonPhrase}");
         }
+
+        #region bulk methods
+
+        // BULK METHODS
+
+        public async Task<QueryJobInfoResult> CreateQueryJobAsync(string queryString, bool queryAll = false)
+        {
+            if (string.IsNullOrEmpty(queryString)) throw new ArgumentNullException(nameof(queryString));
+
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
+
+            var jobInfo = new QueryJobInfo
+            {
+                Operation = queryAll ? "queryAll" : "query",
+                Query = queryString
+            };
+
+            var uri = UriFormatter.CreateJob(InstanceUrl, ApiVersion, JobType.Query);
+
+            return await client.HttpPostAsync<QueryJobInfoResult>(jobInfo, uri);
+        }
+
+        public async Task<QueryJobInfoResult> GetQueryJobInfoResultAsync(string jobId)
+        {
+            if (string.IsNullOrEmpty(jobId)) throw new ArgumentNullException(nameof(jobId));
+
+            var uri = UriFormatter.Job(InstanceUrl, ApiVersion, JobType.Query, jobId);
+
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
+
+            return await client.HttpGetAsync<QueryJobInfoResult>(uri);
+        }
+
+        public async Task<QueryJobResult<T>> GetQueryJobResultAsync<T>(string jobId, Func<string, List<T>> converter, string locator = null, int? maxRecords = null)
+        {
+            if (string.IsNullOrEmpty(jobId)) throw new ArgumentNullException(nameof(jobId));
+
+            var uri = UriFormatter.Job(InstanceUrl, ApiVersion, JobType.Query, jobId, "results");
+
+            if (!string.IsNullOrEmpty(locator))
+            {
+                uri = uri.AddQueryParameter("locator", locator);
+            }
+
+            if (maxRecords.HasValue)
+            {
+                uri = uri.AddQueryParameter("maxRecords", maxRecords.ToString());
+            }
+
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
+
+            var result = await client.HttpGetAsync<QueryJobResult>(uri);
+            QueryJobResult<T> response;
+
+            response = new QueryJobResult<T>(result)
+            {
+                Items = converter(result.Items)
+            };
+
+            return response;
+        }
+
+        public async Task<IngestJobInfoResult> CreateIngestJobAsync(IngestJobInfo jobInfo)
+        {
+            if (jobInfo == null) throw new ArgumentNullException(nameof(jobInfo));
+
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
+
+            var uri = UriFormatter.CreateJob(InstanceUrl, ApiVersion, JobType.Ingest);
+
+            return await client.HttpPostAsync<IngestJobInfoResult>(jobInfo, uri);
+        }
+
+        public async Task<IngestJobInfoResult> IngestJobAbortAsync(string jobId)
+        {
+            if (string.IsNullOrEmpty(jobId)) throw new ArgumentNullException(nameof(jobId));
+
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
+
+            var jobInfoUpdate = new IngestJobInfoUpdate
+            {
+                State = "Aborted"
+            };
+
+            var uri = UriFormatter.Job(InstanceUrl, ApiVersion, JobType.Ingest, jobId);
+
+            return await client.HttpPatchAsync<IngestJobInfoResult>(jobInfoUpdate, uri);
+        }
+
+        public async Task<bool> IngestJobDeleteAsync(string jobId)
+        {
+            if (string.IsNullOrEmpty(jobId)) throw new ArgumentNullException(nameof(jobId));
+
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
+
+            var uri = UriFormatter.Job(InstanceUrl, ApiVersion, JobType.Ingest, jobId);
+
+            return await client.HttpDeleteAsync<bool>(uri);
+        }
+
+        public async Task<bool> IngestJobUploadAsync(string jobId, string data)
+        {
+            if (string.IsNullOrEmpty(jobId)) throw new ArgumentNullException(nameof(jobId));
+            if (data == null) throw new ArgumentNullException(nameof(data));
+
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
+
+            var uri = UriFormatter.Job(InstanceUrl, ApiVersion, JobType.Ingest, jobId, "batches");
+
+            await client.HttpAsync<object>(uri, HttpMethod.Put, new StringContent(data, Encoding.UTF8, "text/csv"), deserializeResponse: false);
+
+            return true;
+        }
+
+        public async Task<IngestJobInfoResult> IngestJobUploadCompleteAsync(string jobId)
+        {
+            if (string.IsNullOrEmpty(jobId)) throw new ArgumentNullException(nameof(jobId));
+
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
+
+            var jobInfoUpdate = new IngestJobInfoUpdate
+            {
+                State = "UploadComplete"
+            };
+
+            var uri = UriFormatter.Job(InstanceUrl, ApiVersion, JobType.Ingest, jobId);
+
+            return await client.HttpPatchAsync<IngestJobInfoResult>(jobInfoUpdate, uri);
+        }
+
+        public async Task<IngestJobInfoResult> GetIngestJobInfoResultAsync(string jobId)
+        {
+            if (string.IsNullOrEmpty(jobId)) throw new ArgumentNullException(nameof(jobId));
+
+            var uri = UriFormatter.Job(InstanceUrl, ApiVersion, JobType.Ingest, jobId);
+
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
+
+            return await client.HttpGetAsync<IngestJobInfoResult>(uri);
+        }
+
+        public async Task<IngestJobResult<T>> GetIngestJobResultAsync<T>(string jobId, IngestJobResultType ingestJobResultType, Func<string, List<T>> converter)
+        {
+            if (string.IsNullOrEmpty(jobId)) throw new ArgumentNullException(nameof(jobId));
+
+            var path = "";
+
+            switch (ingestJobResultType)
+            {
+                case IngestJobResultType.Successful:
+                    path = "successfulResults";
+                    break;
+                case IngestJobResultType.Failed:
+                    path = "failedResults";
+                    break;
+                case IngestJobResultType.Unprocessed:
+                    path = "unprocessedrecords";
+                    break; ;
+            }
+
+            var uri = UriFormatter.Job(InstanceUrl, ApiVersion, JobType.Ingest, jobId, path);
+
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
+
+            var result = await client.HttpGetAsync<string>(uri);
+            IngestJobResult<T> response;
+
+            response = new IngestJobResult<T>
+            {
+                Items = converter(result)
+            };
+
+            return response;
+        }
+
+        #endregion
 
         #region metadata
 

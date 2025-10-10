@@ -1,18 +1,14 @@
+using NetCoreForce.Client.Models;
+using Newtonsoft.Json;
 using System;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NetCoreForce.Client.Serializer;
-using NetCoreForce.Client.Models;
 
 namespace NetCoreForce.Client
 {
@@ -64,7 +60,7 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="uri"></param>
         /// <param name="customHeaders"></param>
@@ -78,7 +74,7 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="inputObject"></param>
         /// <param name="uri"></param>
@@ -119,7 +115,7 @@ namespace NetCoreForce.Client
         /// <param name="serializeComplete">Serializes ALL object properties to include in the request, even those not appropriate for some update/patch calls.</param>
         /// <param name="includeSObjectId">includes the SObject ID when serializing the request content</param>
         /// <param name="fieldsToNull">A list of properties that should be set to null, but inclusing the null values in the serialized output</param>
-        /// <param name="ignoreNulls">Use with caution. By default null values are not serialized, this will serialize all explicitly nulled or missing properties as null</param>  
+        /// <param name="ignoreNulls">Use with caution. By default null values are not serialized, this will serialize all explicitly nulled or missing properties as null</param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         public async Task<T> HttpPatchAsync<T>(
@@ -152,7 +148,7 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="uri"></param>
         /// <param name="customHeaders"></param>
@@ -169,7 +165,7 @@ namespace NetCoreForce.Client
             return await GetResponse<T>(request, customHeaders, deserializeResponse).ConfigureAwait(false);
         }
 
-        private async Task<T> HttpAsync<T>(Uri uri, HttpMethod httpMethod, HttpContent content = null, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
+        public async Task<T> HttpAsync<T>(Uri uri, HttpMethod httpMethod, HttpContent content = null, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
             HttpRequestMessage request = new HttpRequestMessage();
             request.Headers.Authorization = _authHeaderValue;
@@ -254,6 +250,16 @@ namespace NetCoreForce.Client
                             throw new ForceApiException("Response content was empty");
                         }
 
+                        if (typeof(T) == typeof(QueryJobResult))
+                        {
+                            return GetBulkResponse<T>(responseMessage, responseContent);
+                        }
+
+                        if (typeof(T) == typeof(string))
+                        {
+                            return (T)(object)responseContent;
+                        }
+
                         return JsonConvert.DeserializeObject<T>(responseContent);
                     }
                     if (responseMessage.StatusCode == HttpStatusCode.MultipleChoices)
@@ -287,9 +293,9 @@ namespace NetCoreForce.Client
                             }
                         }
                         catch
-                        {   
+                        {
                             // swallow error and continue to parse as generic error response instead
-                        }                       
+                        }
 
                         // Parse generic API error response
                         string msg = string.Format("Unable to complete request, Salesforce API returned {0}.", responseMessage.StatusCode.ToString());
@@ -331,6 +337,21 @@ namespace NetCoreForce.Client
             }
 
             throw new ForceApiException(string.Format("Error processing response: returned {0} for {1}", responseMessage.ReasonPhrase, request.RequestUri.ToString()));
+        }
+
+        private T GetBulkResponse<T>(HttpResponseMessage responseMessage, string responseContent)
+        {
+            var locator = GetHeaderValues(responseMessage.Headers, "Sforce-Locator").FirstOrDefault();
+            if (locator == "null")
+            {
+                locator = null;
+            }
+            return (T)(object)new QueryJobResult
+            {
+                NumberOfRecords = int.TryParse(GetHeaderValues(responseMessage.Headers, "Sforce-NumberOfRecords").FirstOrDefault(), out var tempNumberOfRecords) ? tempNumberOfRecords : 0,
+                Locator = locator,
+                Items = responseContent,
+            };
         }
 
         /// <summary>
