@@ -1,6 +1,6 @@
 # NetCoreForce.ModelGenerator  
 
-Generates model classes according to your enviroment, optionally including any custom objects or fields. One file per class, named [ClassName].cs
+Generates model classes according to your environment, optionally including any custom objects or fields. One file per class, named [ClassName].cs
 
 This is packaged as a custom .NET CLI tool. You can add it via
 ```
@@ -69,15 +69,16 @@ However, if you choose to save the config file, be careful with it as it does co
 ```json
 {
   "comment": "Example config file - Make a copy of this file named modegenerator_config.json with your login info",
-  "AuthInfo": {    
+  "AuthInfo": {
     "clientId": "your_client_id",
     "clientSecret": "your_client_secret",
     "username": "username",
     "password": "password",
-    "apiVersion": "v57.0",
+    "apiVersion": "v64.0",
     "authorizationEndpoint": "https://login.salesforce.com/services/oauth2/authorize",
     "tokenRequestEndpoint": "https://login.salesforce.com/services/oauth2/token",
-    "tokenRevocationEndpoint": "https://login.salesforce.com/services/oauth2/revoke"
+    "tokenRevocationEndpoint": "https://login.salesforce.com/services/oauth2/revoke",
+    "authMethod": 1
   },
   "OutputDirectory": null,
   "Objects": [
