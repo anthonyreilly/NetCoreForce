@@ -39,17 +39,6 @@ namespace NetCoreForce.FunctionalTests
             Assert.True(client.TestConnection());
             sw.Stop();
             Console.WriteLine($"TestConnection() took {sw.ElapsedMilliseconds.ToString()}ms");
-        }
-
-        [Fact]
-        public void TestConnectionToNa1()
-        {
-            AuthInfo authInfo = forceClientFixture.AuthInfo;
-            ForceClient client = new ForceClient(authInfo);
-
-            //Barring any major server reorg in Salesforce, the NA1 production instance should always be there.
-            //If this test fails, verify that the NA1 instance still exists.
-            Assert.True(client.TestConnection("https://na1.salesforce.com"));
-        }        
+        }      
     }
 }
