@@ -27,7 +27,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <LibTargetFrameworks>netstandard2.0;netstandard2.1;net8.0;net9.0;net10.0;net462;net472;net48</LibTargetFrameworks>
+    <LibTargetFrameworks>netstandard2.0;netstandard2.1;net8.0;net9.0;net10.0;net462;net472;net48;net481</LibTargetFrameworks>
     <AppTargetFrameworks>net8.0;net9.0;net10.0</AppTargetFrameworks>
   </PropertyGroup>
 
@@ -39,7 +39,7 @@
     </When>
     <Otherwise>
       <PropertyGroup>
-        <TestTargetFrameworks>net8.0;net9.0;net10.0;net462;net472;net48</TestTargetFrameworks>
+        <TestTargetFrameworks>net8.0;net9.0;net10.0;net462;net472;net48;net481</TestTargetFrameworks>
       </PropertyGroup>
     </Otherwise>
   </Choose>

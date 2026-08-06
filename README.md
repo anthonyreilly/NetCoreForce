@@ -22,7 +22,7 @@ Full target list
 - .NET 9.0
 - .NET Framework 4.6.2
 - .NET Framework 4.7.2
-- .NET Framework 4.8
+- .NET Framework 4.8 & 4.8.1
 
 All possible frameworks are specifically targeted so that conditional compilation can be done where required.
 
