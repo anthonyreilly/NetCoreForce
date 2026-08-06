@@ -23,7 +23,7 @@ namespace NetCoreForce.ModelGenerator
         {
             this.AuthInfo = new AuthInfo(){
                 TokenRequestEndpoint = DefaultTokenRequestEndpoint,
-                ApiVersion = "v64.0"
+                ApiVersion = "v67.0"
             };
         }
     }

@@ -8,6 +8,7 @@
     - since library still targets .netstandard2.0, the library should still run under these old frameworks, but will not be actively tested
 * feat: add Client Credentials login flow
 * fix: fix class namespace option in model generator
+* config: update SFDC API default to v67.0
 
 ### 2025-06-10 v5.0.0
 
