@@ -1,5 +1,14 @@
 # Changelog
 
+### 2026-08-01 v6.0.0
+
+* feat: add net10.0 support
+* Remove EOL frameworks
+    - remove build and test targets for netcoreapp3.1, net5.0, net6.0, and .net7.0
+    - since library still targets .netstandard2.0, the library should still run under these old frameworks, but will not be actively tested
+* feat: add Client Credentials login flow
+* fix: fix class namespace option in model generator
+
 ### 2025-06-10 v5.0.0
 
 * feat: branched off and removed LINQ project, as it is unlikely to become production ready in the new future
