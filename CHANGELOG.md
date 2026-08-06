@@ -10,6 +10,9 @@
 * fix: fix class namespace option in model generator
 * test: add additional offline unit tests
 * config: update SFDC API default to v67.0
+* fix: fix tx offset formatting in DateFormats.cs when converting dates running under .NET framework 4.x.
+    - switched from using the zzz custom format specifier to logic based on DateTime.Kind instead
+    - .NET Core/8+ were unaffected
 
 ### 2025-06-10 v5.0.0
 

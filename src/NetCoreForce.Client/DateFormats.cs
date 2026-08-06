@@ -54,7 +54,10 @@ namespace NetCoreForce.Client
         /// <returns></returns>
         public static string FullDateString(DateTime dt)
         {
-            return dt.ToString(_FullFormat);
+            // the "zzz" format specifier ignores DateTime.Kind on .NET Framework, always using the local
+            // system offset even for Kind.Utc values, so the offset is computed explicitly instead
+            TimeSpan offset = dt.Kind == DateTimeKind.Utc ? TimeSpan.Zero : TimeZoneInfo.Local.GetUtcOffset(dt);
+            return FullDateString(dt, offset);
         }
 
         public static string FullDateString(DateTime dt, TimeSpan offset)
