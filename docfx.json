@@ -4,19 +4,20 @@
     {
       "src": [
         {
-          "src": "../src",
+          "src": "src",
           "files": [
             "NetCoreForce.Client/*.csproj",
             "NetCoreForce.Models/*.csproj"
           ]
         }
       ],
-      "dest": "api"
+      "dest": "docs/api"
     }
   ],
   "build": {
     "content": [
       {
+        "src": "docs",
         "files": [
           "**/*.{md,yml}"
         ],
@@ -27,12 +28,13 @@
     ],
     "resource": [
       {
+        "src": "docs",
         "files": [
           "images/**"
         ]
       }
     ],
-    "output": "_site",
+    "output": "docs/_site",
     "template": [
       "default",
       "modern"

@@ -2,8 +2,8 @@
 _layout: landing
 ---
 
-- [ForceClient](~/api/NetCoreForce.Client.ForceClient.yml)
-    - [NetcoreForce.Client](~/api/NetCoreForce.Client.yml)
+- [ForceClient](~/docs/api/NetCoreForce.Client.ForceClient.yml)
+    - [NetcoreForce.Client](~/docs/api/NetCoreForce.Client.yml)
 
 
 # NetCoreForce 
