@@ -43,12 +43,29 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
-        /// Login to Salesforce using the username-password authentication flow, and initialize the client
+        /// Login to Salesforce and initialize the client, using the flow specified by <see cref="AuthInfo.AuthMethod" />
+        /// (username-password if not set, for backward compatibility).
+        /// <para>Client Credentials flow may require the org's specific My Domain token endpoint rather than the generic login.salesforce.com one.</para>
         /// </summary>
         /// <param name="authInfo"></param>
         public ForceClient(AuthInfo authInfo)
-        : this(authInfo.ClientId, authInfo.ClientSecret, authInfo.Username, authInfo.Password, authInfo.TokenRequestEndpoint, authInfo.ApiVersion)
-        { }
+        {
+            try
+            {
+                if (authInfo.AuthMethod == AuthInfo.AuthMethodType.ClientCredentials)
+                {
+                    LoginClientCredentials(authInfo.ClientId, authInfo.ClientSecret, authInfo.TokenRequestEndpoint, authInfo.ApiVersion).Wait();
+                }
+                else
+                {
+                    Login(authInfo.ClientId, authInfo.ClientSecret, authInfo.Username, authInfo.Password, authInfo.TokenRequestEndpoint, authInfo.ApiVersion).Wait();
+                }
+            }
+            catch (AggregateException ax)
+            {
+                throw ax.InnerException;
+            }
+        }
 
         /// <summary>
         /// Login to Salesforce using the username-password authentication flow, and initialize the client
@@ -85,10 +102,34 @@ namespace NetCoreForce.Client
             Initialize(instanceUrl, apiVersion, accessToken, httpClient, accessInfo);
         }
 
+        /// <summary>
+        /// Login to Salesforce using the Client Credentials OAuth flow, and initialize the client
+        /// <para>May require the org's specific My Domain token endpoint rather than the generic login.salesforce.com one.</para>
+        /// </summary>
+        /// <param name="clientId">The Consumer Key from the connected app definition.</param>
+        /// <param name="clientSecret">The Consumer Secret from the connected app definition.</param>
+        /// <param name="tokenRequestEndpoint">Salesforce token request endpoint</param>
+        /// <param name="apiVersion">Salesforce API version</param>
+        /// <param name="httpClient">Optional HttpClient object. Defaults to a shared static instance for best performance, but a custom HttpClient can be specified when custom properties are needed e.g. proxy settings.</param>
+        public static async Task<ForceClient> FromClientCredentialsAsync(string clientId, string clientSecret, string tokenRequestEndpoint, string apiVersion = null, HttpClient httpClient = null)
+        {
+            AuthenticationClient authClient = new AuthenticationClient(apiVersion, httpClient);
+            await authClient.ClientCredentialsAsync(clientId, clientSecret, tokenRequestEndpoint).ConfigureAwait(false);
+            return new ForceClient(authClient.AccessInfo.InstanceUrl, authClient.ApiVersion, authClient.AccessInfo.AccessToken, httpClient, authClient.AccessInfo);
+        }
+
         private async Task Login(string clientId, string clientSecret, string username, string password, string tokenRequestEndpoint, string apiVersion = null, HttpClient httpClient = null)
         {
             AuthenticationClient authClient = new AuthenticationClient(apiVersion, httpClient);
             await authClient.UsernamePasswordAsync(clientId, clientSecret, username, password, tokenRequestEndpoint).ConfigureAwait(false);
+
+            Initialize(authClient.AccessInfo.InstanceUrl, authClient.ApiVersion, authClient.AccessInfo.AccessToken, httpClient, authClient.AccessInfo);
+        }
+
+        private async Task LoginClientCredentials(string clientId, string clientSecret, string tokenRequestEndpoint, string apiVersion = null, HttpClient httpClient = null)
+        {
+            AuthenticationClient authClient = new AuthenticationClient(apiVersion, httpClient);
+            await authClient.ClientCredentialsAsync(clientId, clientSecret, tokenRequestEndpoint).ConfigureAwait(false);
 
             Initialize(authClient.AccessInfo.InstanceUrl, authClient.ApiVersion, authClient.AccessInfo.AccessToken, httpClient, authClient.AccessInfo);
         }
