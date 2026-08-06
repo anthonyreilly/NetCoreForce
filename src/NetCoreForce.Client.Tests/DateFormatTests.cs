@@ -141,5 +141,42 @@ namespace NetCoreForce.Client.Tests
 
             Assert.Equal(expected, token.IssuedAtDateTime);
         }
+
+        [Fact]
+        public void AccessTokenTimestampConversion_NullWhenNotSet()
+        {
+            AccessTokenResponse token = new AccessTokenResponse();
+
+            Assert.Null(token.IssuedAtDateTime);
+        }
+
+        [Fact]
+        public void DateOnlyString_FromDateTimeOffset()
+        {
+            string result = DateFormats.DateOnlyString(_dto);
+
+            Assert.Equal("2017-05-01", result);
+        }
+
+        [Fact]
+        public void DateOnlyString_FromDateTime()
+        {
+            DateTime dt = new DateTime(2017, 5, 1);
+
+            string result = DateFormats.DateOnlyString(dt);
+
+            Assert.Equal("2017-05-01", result);
+        }
+
+        [Fact]
+        public void FullDateString_FromDateTimeWithOffset()
+        {
+            DateTime dt = new DateTime(2017, 5, 1, 12, 0, 0);
+            TimeSpan offset = new TimeSpan(-5, 0, 0);
+
+            string result = DateFormats.FullDateString(dt, offset);
+
+            Assert.Equal(_expectedDate, result);
+        }
     }
 }

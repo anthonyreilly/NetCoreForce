@@ -135,6 +135,23 @@ namespace NetCoreForce.Client.Tests
             Assert.Contains("nullProperty", serialized);
         }
 
-        //TODO: test deserialize
+        [Fact]
+        public void Deserialize_RoundTripsProperties()
+        {
+            string json = "{\"noAttributes\":\"deserialized value\",\"createableTrue\":\"another value\"}";
+
+            SampleObject obj = JsonSerializer.Deserialize<SampleObject>(json);
+
+            Assert.Equal("deserialized value", obj.NoAttributes);
+            Assert.Equal("another value", obj.CreateableTrue);
+        }
+
+        [Fact]
+        public void Deserialize_NullJson_ReturnsDefault()
+        {
+            SampleObject obj = JsonSerializer.Deserialize<SampleObject>("null");
+
+            Assert.Null(obj);
+        }
     }
 }
