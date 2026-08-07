@@ -75,15 +75,10 @@ namespace NetCoreForce.Client.Tests
             return (ts < TimeSpan.Zero ? "\\-" : "\\+") + "hh\\:mm";
         }
 
-        [Theory(Skip = "Disabled due to TZ mocker issues")]
-        [InlineData("America/New_York")]
-        [InlineData("America/Phoenix")]
-        [InlineData("Europe/London")]
-        [InlineData("Asia/Tokyo")]
-        [InlineData("Asia/Kathmandu")] // Nepal Time (UTC+5:45)
-        [InlineData("Pacific/Auckland")]
-        [InlineData("Europe/Moscow")]
-        [InlineData("Asia/Shanghai")]
+        public static TheoryData<string> TimeZoneIdData => new TheoryData<string>(TimeZoneIds.All);
+        
+        [Theory]
+        [MemberData(nameof(TimeZoneIdData))]
         public void FullDateFormat_From_Other_Timezone(string timeZoneId)
         {
             using (new LocalTimeZoneInfoMocker(TimeZoneInfo.FindSystemTimeZoneById(timeZoneId)))
