@@ -73,6 +73,13 @@ namespace NetCoreForce.Client.Models
         public string TokenRevocationEndpoint { get; set; }
 
         /// <summary>
+        /// Optional refresh token, for testing <see cref="AuthenticationClient.TokenRefreshAsync" />.
+        /// <para>The username-password auth flow does not return a refresh token, so this must be obtained separately (e.g. via the Web Server OAuth flow) and set manually.</para>
+        /// </summary>
+        [JsonProperty(PropertyName = "refreshToken")]
+        public string RefreshToken { get; set; }
+
+        /// <summary>
         /// OAuth 2.0 token introspection endpoint URL
         /// <para>e.g. https://login.salesforce.com/services/oauth2/introspect </para>
         /// </summary>
