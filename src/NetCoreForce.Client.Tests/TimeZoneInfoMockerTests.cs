@@ -10,15 +10,10 @@ namespace NetCoreForce.Client.Tests
 {
     public class TimeZoneInfoMockerTests
     {
+        public static TheoryData<string> TimeZoneIdData => new TheoryData<string>(TimeZoneIds.All);
+
         [Theory]
-        [InlineData("America/New_York")]
-        [InlineData("America/Phoenix")]
-        [InlineData("Europe/London")]
-        [InlineData("Asia/Tokyo")]
-        [InlineData("Asia/Kathmandu")] // Nepal Time (UTC+5:45)
-        [InlineData("Pacific/Auckland")]
-        [InlineData("Europe/Moscow")]
-        [InlineData("Asia/Shanghai")]
+        [MemberData(nameof(TimeZoneIdData))]
         public void TestLocalTimeZoneInfoMocker(string timeZoneId)
         {
             TimeZoneInfo localTimeZoneInfo = TimeZoneInfo.Local;
