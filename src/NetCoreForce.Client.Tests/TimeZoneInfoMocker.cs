@@ -1,10 +1,20 @@
 using System;
 using System.Reflection;
+using Xunit;
 
 namespace NetCoreForce.Client.Tests
 {
+    // LocalTimeZoneInfoMocker mutates TimeZoneInfo's process-wide static cache via reflection.
+    // xunit runs different test classes in parallel by default, so any test class using this mocker
+    // must be tagged with [Collection(LocalTimeZoneInfoMocker.CollectionName)] - collections run
+    // sequentially internally, which prevents concurrent tests from racing on that shared state.
+    [CollectionDefinition(LocalTimeZoneInfoMocker.CollectionName, DisableParallelization = true)]
+    public class TimeZoneMockingCollection { }
+
     public class LocalTimeZoneInfoMocker : IDisposable
     {
+        public const string CollectionName = "TimeZoneInfo Mocking";
+
         private readonly TimeZoneInfo _actualLocalTimeZoneInfo;
 
         public LocalTimeZoneInfoMocker(TimeZoneInfo mockTimeZoneInfo)

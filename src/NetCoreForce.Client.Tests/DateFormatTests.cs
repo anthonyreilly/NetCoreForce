@@ -7,6 +7,7 @@ using Xunit;
 namespace NetCoreForce.Client.Tests
 {
     //https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql_select_dateformats.htm
+    [Collection(LocalTimeZoneInfoMocker.CollectionName)]
     public class DateFormatTests
     {
 

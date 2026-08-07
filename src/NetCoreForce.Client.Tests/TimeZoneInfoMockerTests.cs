@@ -8,6 +8,7 @@ using System.Text;
 
 namespace NetCoreForce.Client.Tests
 {
+    [Collection(LocalTimeZoneInfoMocker.CollectionName)]
     public class TimeZoneInfoMockerTests
     {
         public static TheoryData<string> TimeZoneIdData => new TheoryData<string>(TimeZoneIds.All);
