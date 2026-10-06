@@ -1,0 +1,8 @@
+/* custom styles, layered on top of the docfx modern template */
+
+/* scale the 128px logo down to fit the navbar */
+#logo {
+  height: 40px;
+  width: auto;
+  margin-right: 0.5rem;
+}

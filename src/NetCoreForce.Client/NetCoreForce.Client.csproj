@@ -6,7 +6,9 @@
     <TargetFrameworks>$(LibTargetFrameworks)</TargetFrameworks>
 
     <!--NuGet-->
-    <Description>A .NET Standard and .NET Core Salesforce REST API integration library</Description>
+    <Title>NetCoreForce Salesforce REST API Client</Title>
+    <Description>Salesforce REST API client library for .NET and C#. OAuth 2.0 login (Client Credentials, Web Server, refresh token), SOQL and SOSL queries, CRUD and upsert, composite requests, and file downloads. Supports .NET 8-10, .NET Standard 2.0/2.1 and .NET Framework 4.6.2+.</Description>
+    <PackageTags>$(PackageTags);soql;sosl;oauth</PackageTags>
     <IsPackable>true</IsPackable>
     <PackageId>NetCoreForce.Client</PackageId>
     <PackageReadmeFile>README.md</PackageReadmeFile>

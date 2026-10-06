@@ -1,3 +1,8 @@
+---
+title: "Salesforce REST API Examples in C#"
+_description: "C# examples for the Salesforce REST API with NetCoreForce: CRUD, SOQL queries, upsert by external ID, composite requests, SOSL search, file downloads, and metadata."
+---
+
 # Examples
 
 Usage examples for common tasks, starting with everyday CRUD and query operations and moving on to less common ones. For other ways to log in and initialize the client, see [Authentication](auth.md).

@@ -6,7 +6,9 @@
     <TargetFrameworks>$(LibTargetFrameworks)</TargetFrameworks>
 
     <!--NuGet-->
-    <Description>NetCoreForce standard obect models package</Description>
+    <Title>NetCoreForce Salesforce Object Models</Title>
+    <Description>Strongly typed C# models for standard Salesforce objects (Account, Contact, Opportunity, Case and more) for use with NetCoreForce.Client.</Description>
+    <PackageTags>$(PackageTags);models;sobjects</PackageTags>
     <IsPackable>true</IsPackable>
     <PackageId>NetCoreForce.Models</PackageId>
     <PackageReadmeFile>README.md</PackageReadmeFile>

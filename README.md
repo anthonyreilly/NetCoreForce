@@ -1,11 +1,33 @@
 # NetCoreForce 
 
-## A .NET Standard and .NET Core Salesforce REST API integration library
+## A Salesforce REST API client library for .NET and C#
 *This project is not offered, sponsored, or endorsed by Salesforce.*
 
-![NuGet Downloads](https://img.shields.io/nuget/dt/NetCoreForce.Client)  
+NetCoreForce lets .NET applications query, create, update and delete Salesforce records through the Salesforce REST API, with OAuth 2.0 login, SOQL and SOSL queries, composite requests, and strongly typed models for Salesforce objects.
 
-[Documentation](https://anthonyreilly.github.io/NetCoreForce/)  
+[![NuGet Version](https://img.shields.io/nuget/v/NetCoreForce.Client)](https://www.nuget.org/packages/NetCoreForce.Client/) [![NuGet Downloads](https://img.shields.io/nuget/dt/NetCoreForce.Client)](https://www.nuget.org/packages/NetCoreForce.Client/)
+
+[Documentation](https://netcoreforce.com/)  
+
+## Install
+
+```
+dotnet add package NetCoreForce.Client
+dotnet add package NetCoreForce.Models
+```
+
+## Quick Start
+
+```csharp
+// Log in with the OAuth Client Credentials flow
+ForceClient client = await ForceClient.FromClientCredentialsAsync(
+    "your-client-id", "your-client-secret", "https://your-domain.my.salesforce.com/services/oauth2/token");
+
+// Query records
+List<SfAccount> accounts = await client.Query<SfAccount>("SELECT Id, Name FROM Account LIMIT 10");
+```
+
+See the [Authentication](https://netcoreforce.com/auth.html) and [Examples](https://netcoreforce.com/examples.html) docs for other login flows and more usage examples.
 
 ## Changes in v6
 
@@ -27,13 +49,14 @@ The primary target is .NET Standard 2.0 to provide the widest possible support.
 - .NET Standard 2.0 for widest possible support including .NET Framework 4.6.2+
 - .NET Standard 2.1 for newer .NET Core versions
 
-For more info on .NET Standard compatiblity [see the Microsoft documentation here](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-0)
+For more info on .NET Standard compatibility [see the Microsoft documentation here](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-0)
 
 Full target list
 - .NET Standard 2.0
 - .NET Standard 2.1
 - .NET 8.0
 - .NET 9.0
+- .NET 10.0
 - .NET Framework 4.6.2
 - .NET Framework 4.7.2
 - .NET Framework 4.8 & 4.8.1

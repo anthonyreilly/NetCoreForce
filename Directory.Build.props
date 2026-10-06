@@ -12,12 +12,14 @@
     <Authors>Anthony Reilly</Authors>
     <Copyright>2026 Anthony Reilly</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/anthonyreilly/NetCoreForce</PackageProjectUrl>
+    <PackageProjectUrl>https://netcoreforce.com/</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageTags>salesforce,api,forcedotcom,netstandard,netcore</PackageTags>
+    <!-- shared tags - projects append their own package-specific tags -->
+    <PackageTags>salesforce;salesforce-api;sfdc;force.com;rest;crm;dotnet;csharp;netstandard</PackageTags>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/anthonyreilly/NetCoreForce</RepositoryUrl>
-    <PackageReleaseNotes>Release notes and documentation can be found on the project site: https://github.com/anthonyreilly/NetCoreForce</PackageReleaseNotes>
+    <PackageReleaseNotes>v6.0.0 adds .NET 10 and Client Credentials login, and removes EOL .NET Core 3.1 - 7.0 targets. See the CHANGELOG for full details and breaking changes: https://github.com/anthonyreilly/NetCoreForce/blob/main/CHANGELOG.md</PackageReleaseNotes>
+    <PackageIcon>netcoreforce_logo_128px.png</PackageIcon>
 
     <!-- Intentionally targeting EOL frameworks -->
      <CheckEolTargetFramework>false</CheckEolTargetFramework>
@@ -25,6 +27,11 @@
     <!--Project Root-->
     <SolutionDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), *.sln))</SolutionDir>
   </PropertyGroup>
+
+  <!-- NuGet package icon, included in packable projects only -->
+  <ItemGroup Condition=" '$(IsPackable)' == 'true' ">
+    <None Include="$(MSBuildThisFileDirectory)netcoreforce_logo_128px.png" Pack="true" PackagePath="\" Visible="false" />
+  </ItemGroup>
 
   <PropertyGroup>
     <LibTargetFrameworks>netstandard2.0;netstandard2.1;net8.0;net9.0;net10.0;net462;net472;net48;net481</LibTargetFrameworks>

@@ -6,7 +6,9 @@
     <TargetFrameworks>$(AppTargetFrameworks)</TargetFrameworks>
 
     <!--NuGet-->
-    <Description>NetCoreForce ModelGenerator tool to generate object models against a live Salesforce org.</Description>
+    <Title>NetCoreForce Salesforce Model Generator</Title>
+    <Description>.NET CLI tool that generates strongly typed C# classes from your Salesforce org, including custom objects and fields, for use with NetCoreForce.Client.</Description>
+    <PackageTags>$(PackageTags);codegen;code-generator;dotnet-tool</PackageTags>
     <IsPackable>true</IsPackable>
     <PackageId>NetCoreForce.ModelGenerator</PackageId>
     <PackAsTool>true</PackAsTool>

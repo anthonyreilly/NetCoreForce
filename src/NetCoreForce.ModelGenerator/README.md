@@ -1,6 +1,6 @@
 # NetCoreForce.ModelGenerator
 
-A .NET CLI tool that generates C# model classes from your Salesforce org, optionally including custom objects and custom fields. It generates one file per class, named `[ClassName].cs`, for use with [NetCoreForce.Client](https://www.nuget.org/packages/NetCoreForce.Client/).
+A .NET CLI tool that generates strongly typed C# model classes from your Salesforce org, optionally including custom objects and custom fields. It generates one file per class, named `[ClassName].cs`, for use with the [NetCoreForce.Client](https://www.nuget.org/packages/NetCoreForce.Client/) Salesforce REST API library for .NET.
 
 Documentation: [https://netcoreforce.com/](https://netcoreforce.com/)
 

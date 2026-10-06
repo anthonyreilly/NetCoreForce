@@ -1,3 +1,8 @@
+---
+title: "Salesforce OAuth Authentication in .NET"
+_description: "How to log in to the Salesforce REST API from .NET and C# with NetCoreForce, using the OAuth 2.0 Client Credentials, Web Server, refresh token, and Username-Password flows."
+---
+
 # Authentication
 
 NetCoreForce supports several Salesforce OAuth 2.0 flows. There are two ways to use them:

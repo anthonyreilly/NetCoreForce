@@ -1,6 +1,6 @@
 # NetCoreForce.Client
 
-A .NET Salesforce REST API client library.
+NetCoreForce.Client is a Salesforce REST API client library for .NET and C#, for querying, creating, updating and deleting Salesforce records from .NET 8-10, .NET Standard and .NET Framework applications.
 
 Documentation: [https://netcoreforce.com/](https://netcoreforce.com/)
 

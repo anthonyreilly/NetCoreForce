@@ -1,6 +1,6 @@
 # NetCoreForce.Models
 
-Pre-generated model classes for the standard Salesforce objects, for use with [NetCoreForce.Client](https://www.nuget.org/packages/NetCoreForce.Client/).
+Strongly typed C# model classes for the standard Salesforce objects, such as Account, Contact, Opportunity and Case, for use with the [NetCoreForce.Client](https://www.nuget.org/packages/NetCoreForce.Client/) Salesforce REST API library for .NET.
 
 The models were generated from a standard Salesforce org using Salesforce API v67.0. They don't include any custom objects or custom fields.
 
