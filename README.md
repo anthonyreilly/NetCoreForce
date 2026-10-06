@@ -16,6 +16,7 @@
 - Added `SoqlHelpers` for escaping untrusted values in SOQL and SOSL queries
 - External ID values are now URL-encoded in upserts
 - Default Salesforce API version is now v67.0
+- Fixed `TokenRefreshAsync` discarding the new refresh token when refresh token rotation is enabled
 - Fixed timezone offset formatting under .NET Framework 4.x
 
 ### [CHANGELOG](CHANGELOG.md)  

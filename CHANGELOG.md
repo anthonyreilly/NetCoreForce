@@ -20,6 +20,7 @@
 * config: update default SFDC API version to v67.0 in AuthenticationClient and ModelGenerator
 * fix: external ID values are now URL-encoded in upsert requests, so values containing characters such as `/ ? # %` or spaces work correctly
 * fix: SObjectRowsByExternalId now validates that the external ID value is not null or empty
+* fix: TokenRefreshAsync now returns the new refresh token when refresh token rotation is enabled, instead of overwriting it with the previous token (fixes #94, PR #95)
 * fix: timezone offset formatting in DateFormats when converting dates under .NET Framework 4.x
     - switched from the zzz custom format specifier to logic based on DateTime.Kind
     - .NET Core/.NET 8+ were unaffected
@@ -30,7 +31,7 @@
     - functional tests use xUnit v3 on .NET 8+ and .NET Framework 4.7.2+, and xUnit v2 on .NET Framework 4.6.2
     - SOSL tests create and clean up their own sample records, and are manual only (Explicit) due to long search indexing times
     - new functional tests for composite requests, external ID special characters, SOQL escaping, and GetUserInfo
-    - additional offline unit tests, including URL path injection and SOQL/SOSL escaping
+    - additional offline unit tests, including URL path injection, SOQL/SOSL escaping, and token refresh
     - timezone test fixes for different TZ IDs on Windows and Linux, the TZ mocker under .NET Framework 4.x, parallel test execution, and runners in the GMT/UTC timezone
     - removed a test that is no longer valid due to the retirement of legacy instance URLs
 
