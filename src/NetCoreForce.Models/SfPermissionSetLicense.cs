@@ -4140,7 +4140,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// View Change Request Dashboard
-        
 		/// <para>Name: MaximumPermissionsViewChangeRequestDshbrd</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4151,7 +4150,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// View Incident Fulfiller Dashboard
-        
 		/// <para>Name: MaximumPermissionsViewIncidentFulfrDshbrd</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4162,7 +4160,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// View Problem Fulfiller Dashboard
-        
 		/// <para>Name: MaximumPermissionsViewProblemFulfrDshbrd</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4173,7 +4170,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// View Problem Manager Dashboard
-        
 		/// <para>Name: MaximumPermissionsViewProblemMgrDshbrd</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4184,7 +4180,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// View IT Leader Analytics Dashboard
-        
 		/// <para>Name: MaximumPermissionsViewItLeaderAnlytDshbrd</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4195,7 +4190,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// View Incident Analytics Dashboard
-        
 		/// <para>Name: MaximumPermissionsViewIncidentAnlytDshbrd</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4206,7 +4200,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// View Change Request Analytics Dashboard
-        
 		/// <para>Name: MaximumPermissionsViewChangeRequestAnlytDshbrd</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4217,7 +4210,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// View Case Analytics Dashboard
-        
 		/// <para>Name: MaximumPermissionsViewCaseAnlytDshbrd</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4228,7 +4220,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Propose Major Incidents
-        
 		/// <para>Name: MaximumPermissionsProposeMajorIncidents</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4239,7 +4230,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Delete Incident
-        
 		/// <para>Name: MaximumPermissionsDeleteIncident</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4250,7 +4240,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Accept Risk For Problems
-        
 		/// <para>Name: MaximumPermissionsAcceptRiskForProblems</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4261,7 +4250,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Reopen Problems
-        
 		/// <para>Name: MaximumPermissionsReopenProblems</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4272,7 +4260,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Associate Incidents and Problems
-        
 		/// <para>Name: MaximumPermissionsAssocIncAndProb</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4283,7 +4270,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Associate Incidents and Change Requests
-        
 		/// <para>Name: MaximumPermissionsAssocIncAndChgRqst</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4294,7 +4280,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Delete Problem
-        
 		/// <para>Name: MaximumPermissionsDeleteProblem</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4315,7 +4300,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Delete Change Request
-        
 		/// <para>Name: MaximumPermissionsDeleteChangeRequest</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4326,7 +4310,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Allows user to read CMDB associations details.
-        
 		/// <para>Name: MaximumPermissionsReadConfigurationItemInformation</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4337,7 +4320,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// View Agentic IT Service Desk App Home Page
-        
 		/// <para>Name: MaximumPermissionsViewItsmConsoleHmpg</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4348,7 +4330,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// View Agentic IT Service Desk App as Fulfillers
-        
 		/// <para>Name: MaximumPermissionsViewItsmConsoleAsFulfr</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4359,7 +4340,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// View Omnichannel Analytics Dashboard
-        
 		/// <para>Name: MaximumPermissionsViewOmnichnlAnlytDshbrd</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4370,7 +4350,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// View Knowledge Analytics Dashboard
-        
 		/// <para>Name: MaximumPermissionsViewKnwlgAnlytDshbrd</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4381,7 +4360,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// View Agentforce Analytics Dashboard
-        
 		/// <para>Name: MaximumPermissionsViewAgtfrceAnlytDshbrd</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4392,7 +4370,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// View Incident Manager Dashboard
-        
 		/// <para>Name: MaximumPermissionsViewIncidentMgrDshbrd</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4423,7 +4400,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Associate Change Requests and Problems
-        
 		/// <para>Name: MaximumPermissionsAssocChgRqstAndProb</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4434,7 +4410,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Associate Releases and Problems
-        
 		/// <para>Name: MaximumPermissionsAssocRelAndProb</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4445,7 +4420,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Associate Releases and Incidents
-        
 		/// <para>Name: MaximumPermissionsAssocRelAndInc</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4456,7 +4430,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Associate Releases and Change Requests
-        
 		/// <para>Name: MaximumPermissionsAssocRelAndChgRqst</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4467,7 +4440,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Resolve Incident Associations
-        
 		/// <para>Name: MaximumPermissionsResolveIncAssoc</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4478,7 +4450,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Resolve Problem Associations
-        
 		/// <para>Name: MaximumPermissionsResolveProbAssoc</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -4489,7 +4460,6 @@ namespace NetCoreForce.Models
 
 		///<summary>
 		/// Resolve Change Request Associations
-        
 		/// <para>Name: MaximumPermissionsResolveChgRqstAssoc</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>

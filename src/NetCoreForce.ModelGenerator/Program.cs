@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using McMaster.Extensions.CommandLineUtils;
 using NetCoreForce.Client;
@@ -585,7 +586,7 @@ namespace NetCoreForce.ModelGenerator
                 gen.AppendLine("{");
             }
             gen.AppendLine("\t///<summary>");
-            gen.AppendLine($"\t/// {WebUtility.HtmlEncode(data.Label)}");
+            gen.AppendLine($"\t/// {DocCommentText(data.Label)}");
             gen.AppendLine($"\t///<para>SObject Name: {data.Name}</para>");
             gen.AppendLine($"\t///<para>Custom Object: {data.Custom.ToString()}</para>");
             gen.AppendLine("\t///</summary>");
@@ -614,7 +615,7 @@ namespace NetCoreForce.ModelGenerator
                     }
 
                     gen.AppendLine("\t\t///<summary>");
-                    gen.AppendLine("\t\t/// " + WebUtility.HtmlEncode(field.Label));
+                    gen.AppendLine("\t\t/// " + DocCommentText(field.Label));
                     gen.AppendLine("\t\t/// <para>Name: " + field.Name + "</para>");
                     gen.AppendLine("\t\t/// <para>SF Type: " + field.Type + "</para>");
                     if (field.AutoNumber)
@@ -718,6 +719,21 @@ namespace NetCoreForce.ModelGenerator
         private static string GetPrefixedSuffixed(GenConfig config, string name)
         {
             return string.Format("{0}{1}{2}", config.ClassPrefix ?? string.Empty, name, config.ClassSuffix ?? string.Empty);
+        }
+
+        /// <summary>
+        /// Formats text for a single line XML doc comment - collapses line breaks and repeated whitespace, and encodes XML characters.
+        /// <para>Some Salesforce labels contain line breaks, which would otherwise end the doc comment early and produce badly formed XML.</para>
+        /// </summary>
+        private static string DocCommentText(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return string.Empty;
+            }
+
+            string singleLine = Regex.Replace(text, @"\s+", " ").Trim();
+            return WebUtility.HtmlEncode(singleLine);
         }
 
         private static string JsonName(string fieldName)
