@@ -8,6 +8,7 @@
   <!-- xUnit v3 for .NET 8+ and .NET Framework 4.7.2+ - v3 test projects must be executables. -->
   <PropertyGroup Condition=" '$(UseXunitV3)' == 'true' ">
     <OutputType>Exe</OutputType>
+    <DefineConstants>$(DefineConstants);XUNIT_V3</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(UseXunitV3)' == 'true' ">

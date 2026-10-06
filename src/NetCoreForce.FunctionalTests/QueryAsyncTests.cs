@@ -26,11 +26,11 @@ namespace NetCoreForce.FunctionalTests
         {
             ForceClient client = await forceClientFixture.GetForceClient();
 
-            var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 3000");
+            var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 3000", cancellationToken: TestCancellation.Token);
 
             int count = 0;
             SfContact contact = null;
-            await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
+            await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator(TestCancellation.Token))
             {
                 while (await contactsEnumerator.MoveNextAsync())
                 {
@@ -50,11 +50,11 @@ namespace NetCoreForce.FunctionalTests
         {
             ForceClient client = await forceClientFixture.GetForceClient();
 
-            var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 1000", batchSize: 200);
+            var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 1000", batchSize: 200, cancellationToken: TestCancellation.Token);
 
             int count = 0;
             SfContact contact = null;
-            await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
+            await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator(TestCancellation.Token))
             {
                 // Assert.NotNull(contactsEnumerator);
 
@@ -82,11 +82,11 @@ namespace NetCoreForce.FunctionalTests
         {
             ForceClient client = await forceClientFixture.GetForceClient();
 
-            var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 1");
+            var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 1", cancellationToken: TestCancellation.Token);
 
             int count = 0;
             SfContact contact = null;
-            await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
+            await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator(TestCancellation.Token))
             {
                 while (await contactsEnumerator.MoveNextAsync())
                 {
@@ -104,10 +104,10 @@ namespace NetCoreForce.FunctionalTests
         {
             ForceClient client = await forceClientFixture.GetForceClient();
 
-            var enumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact");
+            var enumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact", cancellationToken: TestCancellation.Token);
 
             int count = 0;
-            await using (var enumerator = enumerable.GetAsyncEnumerator())
+            await using (var enumerator = enumerable.GetAsyncEnumerator(TestCancellation.Token))
             {
                 while (await enumerator.MoveNextAsync())
                 {
@@ -130,11 +130,11 @@ namespace NetCoreForce.FunctionalTests
         {
             ForceClient client = await forceClientFixture.GetForceClient();
 
-            var enumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact limit 450", batchSize: 200);
+            var enumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact limit 450", batchSize: 200, cancellationToken: TestCancellation.Token);
 
             List<SfContact> results = new List<SfContact>();
 
-            await using (var enumerator = enumerable.GetAsyncEnumerator())
+            await using (var enumerator = enumerable.GetAsyncEnumerator(TestCancellation.Token))
             {
                 while (await enumerator.MoveNextAsync())
                 {
@@ -151,10 +151,10 @@ namespace NetCoreForce.FunctionalTests
         {
             ForceClient client = await forceClientFixture.GetForceClient();
 
-            var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 3000", batchSize: 200);
+            var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 3000", batchSize: 200, cancellationToken: TestCancellation.Token);
 
             int count = 0;
-            await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
+            await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator(TestCancellation.Token))
             {
                 while (await contactsEnumerator.MoveNextAsync())
                 {
@@ -171,11 +171,11 @@ namespace NetCoreForce.FunctionalTests
         {
             ForceClient client = await forceClientFixture.GetForceClient();
 
-            var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 1000", batchSize: 100);
+            var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact LIMIT 1000", batchSize: 100, cancellationToken: TestCancellation.Token);
 
             await Assert.ThrowsAsync<ArgumentException>(async () =>
             {
-                await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
+                await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator(TestCancellation.Token))
                 {
                     await contactsEnumerator.MoveNextAsync();
                 }
@@ -187,10 +187,10 @@ namespace NetCoreForce.FunctionalTests
         {
             ForceClient client = await forceClientFixture.GetForceClient();
 
-            var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact WHERE Name='xyz123foobar'");
+            var contactsEnumerable = client.QueryAsync<SfContact>("SELECT Id FROM Contact WHERE Name='xyz123foobar'", cancellationToken: TestCancellation.Token);
 
             SfContact contact = null;
-            await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator())
+            await using (IAsyncEnumerator<SfContact> contactsEnumerator = contactsEnumerable.GetAsyncEnumerator(TestCancellation.Token))
             {
                 while (await contactsEnumerator.MoveNextAsync())
                 {

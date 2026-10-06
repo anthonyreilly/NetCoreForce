@@ -46,37 +46,37 @@ jobs:
 
       - name: Test net8.0
         id: test-net8_0
-        continue-on-error: true
+        continue-on-error: false
         run: dotnet test src/NetCoreForce.Client.Tests --configuration $config --no-restore --no-build --verbosity normal --framework net8.0
 
       - name: Test net9.0
         id: test-net9_0
-        continue-on-error: true
+        continue-on-error: false
         run: dotnet test src/NetCoreForce.Client.Tests --configuration $config --no-restore --no-build --verbosity normal --framework net9.0
 
       - name: Test net10.0
         id: test-net10_0
-        continue-on-error: true
+        continue-on-error: false
         run: dotnet test src/NetCoreForce.Client.Tests --configuration $config --no-restore --no-build --verbosity normal --framework net10.0
 
       - name: Test net462
         id: test-net462
-        continue-on-error: true
+        continue-on-error: false
         run: dotnet test src/NetCoreForce.Client.Tests --configuration $config --no-restore --no-build --verbosity normal --framework net462
 
       - name: Test net472
         id: test-net472
-        continue-on-error: true
+        continue-on-error: false
         run: dotnet test src/NetCoreForce.Client.Tests --configuration $config --no-restore --no-build --verbosity normal --framework net472
 
       - name: Test net48
         id: test-net48
-        continue-on-error: true
+        continue-on-error: false
         run: dotnet test src/NetCoreForce.Client.Tests --configuration $config --no-restore --no-build --verbosity normal --framework net48
 
       - name: Test net481
         id: test-net481
-        continue-on-error: true
+        continue-on-error: false
         run: dotnet test src/NetCoreForce.Client.Tests --configuration $config --no-restore --no-build --verbosity normal --framework net481
 
       - name: Upload nuget artifact

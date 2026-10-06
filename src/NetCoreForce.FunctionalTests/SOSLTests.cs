@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
-#if !(NET8_0_OR_GREATER || NET472_OR_GREATER)
+#if !XUNIT_V3
 using Xunit.Abstractions;
 #endif
 using NetCoreForce.Client;
@@ -43,7 +43,7 @@ namespace NetCoreForce.FunctionalTests
         }
 
         //manual only, see class summary
-#if NET8_0_OR_GREATER || NET472_OR_GREATER
+#if XUNIT_V3
         [Fact(Explicit = true)]
 #else
         [Fact(Skip = ManualOnlyReason)]
@@ -78,7 +78,7 @@ namespace NetCoreForce.FunctionalTests
         }
 
         //manual only, see class summary
-#if NET8_0_OR_GREATER || NET472_OR_GREATER
+#if XUNIT_V3
         [Fact(Explicit = true)]
 #else
         [Fact(Skip = ManualOnlyReason)]
