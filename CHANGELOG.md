@@ -4,6 +4,10 @@
 
 * fix: ForceClient, JsonClient and AuthenticationClient no longer dispose an HttpClient passed in by the caller - the caller owns it
 * fix: AuthenticationClient now uses a shared static HttpClient by default, like ForceClient and JsonClient, instead of creating a new HttpClient (and connection pool) per instance - repeated logins no longer leak sockets
+* fix: HttpClients created by HttpClientFactory.CreateHttpClient (including the shared static clients) now replace pooled connections every 2 minutes, so long-running processes pick up DNS changes
+    - .NET 8+: uses SocketsHttpHandler with PooledConnectionLifetime (except on browser and mobile platforms, which keep their native handler)
+    - .NET Framework: sets ServicePoint.ConnectionLeaseTimeout for each request's host
+    - .NET Standard builds are unchanged
 
 ### 2026-10-06 v6.0.0
 
