@@ -1,6 +1,6 @@
 # Changelog
 
-### 2026-08-01 v6.0.0
+### 2026-10-01 v6.0.0
 
 * feat: add net10.0 and .net481 support
 * Remove EOL frameworks

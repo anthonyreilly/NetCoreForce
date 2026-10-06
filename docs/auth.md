@@ -9,44 +9,6 @@ All `AuthenticationClient` flow methods throw a [`ForceAuthException`](xref:NetC
 
 ---
 
-## Username-Password Flow
-
-The simplest flow for server-to-server integrations where the application can hold the user's credentials directly.
-
-One-step, via the [`ForceClient(AuthInfo)`](xref:NetCoreForce.Client.ForceClient.%23ctor(NetCoreForce.Client.Models.AuthInfo)) constructor:
-```csharp
-AuthInfo authInfo = new AuthInfo
-{
-    ClientId = "your-client-id",
-    ClientSecret = "your-client-secret",
-    Username = "your-username",
-    Password = "your-password",
-    TokenRequestEndpoint = "https://login.salesforce.com/services/oauth2/token"
-};
-
-ForceClient client = new ForceClient(authInfo);
-```
-
-Or without building an [`AuthInfo`](xref:NetCoreForce.Client.Models.AuthInfo) object:
-```csharp
-ForceClient client = new ForceClient("your-client-id", "your-client-secret", "your-username", "your-password", "https://login.salesforce.com/services/oauth2/token");
-```
-
-If you need the raw token response first (e.g. to inspect or persist it), use [`AuthenticationClient.UsernamePasswordAsync`](xref:NetCoreForce.Client.AuthenticationClient.UsernamePasswordAsync(System.String,System.String,System.String,System.String,System.String)) and build the client from the result:
-```csharp
-AuthenticationClient auth = new AuthenticationClient();
-await auth.UsernamePasswordAsync("your-client-id", "your-client-secret", "your-username", "your-password", "https://login.salesforce.com/services/oauth2/token");
-
-ForceClient client = new ForceClient(auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken);
-```
-
-A synchronous [`UsernamePassword`](xref:NetCoreForce.Client.AuthenticationClient.UsernamePassword(System.String,System.String,System.String,System.String,System.String)) overload is also available if you can't use `async`/`await`.
-
-> [!NOTE]
-> This flow does not return a refresh token — see [Refreshing an Access Token](#refreshing-an-access-token) below.
-
----
-
 ## Client Credentials Flow
 
 Server-to-server authentication with no end user involved, using only the connected app's Consumer Key/Secret.
@@ -171,3 +133,44 @@ catch (ForceAuthException ex)
     Console.WriteLine($"{ex.ErrorCode}: {ex.Message}");
 }
 ```
+
+---
+
+## Username-Password Flow
+
+> [!WARNING]
+> The OAuth Username-Password flow is deprecated and Salesforce recommends against using it. It is blocked by default in orgs created in Summer '23 or later, and admins can disable it in any org (Setup > OAuth and OpenID Connect Settings > *Allow OAuth Username-Password Flows*), so it may not be available in your org. For new integrations, use the [Client Credentials Flow](#client-credentials-flow) for server-to-server access, or the [Web Server Flow](#web-server-authorization-code-flow) when a user logs in.
+
+The application holds the user's credentials directly and exchanges them for an access token.
+
+One-step, via the [`ForceClient(AuthInfo)`](xref:NetCoreForce.Client.ForceClient.%23ctor(NetCoreForce.Client.Models.AuthInfo)) constructor:
+```csharp
+AuthInfo authInfo = new AuthInfo
+{
+    ClientId = "your-client-id",
+    ClientSecret = "your-client-secret",
+    Username = "your-username",
+    Password = "your-password",
+    TokenRequestEndpoint = "https://login.salesforce.com/services/oauth2/token"
+};
+
+ForceClient client = new ForceClient(authInfo);
+```
+
+Or without building an [`AuthInfo`](xref:NetCoreForce.Client.Models.AuthInfo) object:
+```csharp
+ForceClient client = new ForceClient("your-client-id", "your-client-secret", "your-username", "your-password", "https://login.salesforce.com/services/oauth2/token");
+```
+
+If you need the raw token response first (e.g. to inspect or persist it), use [`AuthenticationClient.UsernamePasswordAsync`](xref:NetCoreForce.Client.AuthenticationClient.UsernamePasswordAsync(System.String,System.String,System.String,System.String,System.String)) and build the client from the result:
+```csharp
+AuthenticationClient auth = new AuthenticationClient();
+await auth.UsernamePasswordAsync("your-client-id", "your-client-secret", "your-username", "your-password", "https://login.salesforce.com/services/oauth2/token");
+
+ForceClient client = new ForceClient(auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken);
+```
+
+A synchronous [`UsernamePassword`](xref:NetCoreForce.Client.AuthenticationClient.UsernamePassword(System.String,System.String,System.String,System.String,System.String)) overload is also available if you can't use `async`/`await`.
+
+> [!NOTE]
+> This flow does not return a refresh token — see [Refreshing an Access Token](#refreshing-an-access-token).
