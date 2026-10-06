@@ -1,29 +1,38 @@
 # Changelog
 
-### Unreleased
+### 2026-10-06 v6.0.0
 
-* security: prevent URL path injection via record IDs and object/field names
+* **breaking** build: remove EOL target frameworks
+    - removed build and test targets for .NET Core 3.1, .NET 5.0, .NET 6.0, and .NET 7.0
+    - the library still targets .NET Standard 2.0, so it should still run under these frameworks, but they are no longer built or tested
+    - the NetCoreForce.ModelGenerator tool now requires .NET 8.0 or later
+* **breaking** security: prevent URL path injection via record IDs and object/field names
     - object and field API names (e.g. sObjectTypeName, external ID field name, blob field) must be valid API names, otherwise an ArgumentException is thrown
     - record IDs containing `/ \ ? # %`, or equal to `.` or `..`, now throw an ArgumentException - previously a value such as `../Contact/003XXXXXXXXXXXXXXX` could redirect a request to a different object or resource
     - Apex REST resource URLs containing `.` or `..` path segments now throw an ArgumentException
+* security: GetUserInfo now requires an absolute HTTPS identity URL, since the access token is sent to that URL
+* feat: add .NET 10.0 and .NET Framework 4.8.1 targets
+* feat: add Client Credentials login flow (fixes #90)
+    - ForceClient: new FromClientCredentialsAsync factory method, and ClientCredentials AuthMethod option for the ForceClient(AuthInfo) constructor
+    - ModelGenerator: Client Credentials login support
+* feat: add SoqlHelpers with EscapeString, EscapeLike, and EscapeSosl, for safely including untrusted values in SOQL and SOSL queries
+* feat: add optional RefreshToken property to AuthInfo
+* config: update default SFDC API version to v67.0 in AuthenticationClient and ModelGenerator
 * fix: external ID values are now URL-encoded in upsert requests, so values containing characters such as `/ ? # %` or spaces work correctly
 * fix: SObjectRowsByExternalId now validates that the external ID value is not null or empty
-* feat: add SoqlHelpers with EscapeString, EscapeLike, and EscapeSosl, for safely including untrusted values in SOQL and SOSL queries
-* security: GetUserInfo now requires an absolute HTTPS identity URL, since the access token is sent to that URL
-
-### 2026-10-01 v6.0.0
-
-* feat: add net10.0 and .net481 support
-* Remove EOL frameworks
-    - remove build and test targets for netcoreapp3.1, net5.0, net6.0, and .net7.0
-    - since library still targets .netstandard2.0, the library should still run under these old frameworks, but will not be actively tested
-* feat: add Client Credentials login flow, with additonal method in ForceClient
-* fix: fix class namespace option in model generator
-* test: add additional offline unit tests
-* config: update SFDC API default to v67.0
-* fix: fix tx offset formatting in DateFormats.cs when converting dates running under .NET framework 4.x.
-    - switched from using the zzz custom format specifier to logic based on DateTime.Kind instead
-    - .NET Core/8+ were unaffected
+* fix: timezone offset formatting in DateFormats when converting dates under .NET Framework 4.x
+    - switched from the zzz custom format specifier to logic based on DateTime.Kind
+    - .NET Core/.NET 8+ were unaffected
+* fix: ModelGenerator namespace option was not being applied to generated classes
+* docs: new documentation pages for authentication flows and usage examples, docfx config moved to project root
+* build: update GitHub Actions to latest versions
+* test: test updates
+    - functional tests use xUnit v3 on .NET 8+ and .NET Framework 4.7.2+, and xUnit v2 on .NET Framework 4.6.2
+    - SOSL tests create and clean up their own sample records, and are manual only (Explicit) due to long search indexing times
+    - new functional tests for composite requests, external ID special characters, SOQL escaping, and GetUserInfo
+    - additional offline unit tests, including URL path injection and SOQL/SOSL escaping
+    - timezone test fixes for different TZ IDs on Windows and Linux, the TZ mocker under .NET Framework 4.x, parallel test execution, and runners in the GMT/UTC timezone
+    - removed a test that is no longer valid due to the retirement of legacy instance URLs
 
 ### 2025-06-10 v5.0.0
 

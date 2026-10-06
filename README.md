@@ -7,6 +7,19 @@
 
 [Documentation](https://anthonyreilly.github.io/NetCoreForce/)  
 
+## Changes in v6
+
+- **Breaking:** removed .NET Core 3.1 and .NET 5.0 - 7.0 targets. These may still work via .NET Standard 2.0, but are no longer tested. The ModelGenerator tool now requires .NET 8.0+.
+- **Breaking:** record IDs and object/field names are validated to prevent URL path injection. Invalid values throw an `ArgumentException`.
+- Added .NET 10.0 and .NET Framework 4.8.1 targets
+- Added Client Credentials login flow, via `ForceClient.FromClientCredentialsAsync` and in the ModelGenerator
+- Added `SoqlHelpers` for escaping untrusted values in SOQL and SOSL queries
+- External ID values are now URL-encoded in upserts
+- Default Salesforce API version is now v67.0
+- Fixed timezone offset formatting under .NET Framework 4.x
+
+### [CHANGELOG](CHANGELOG.md)  
+
 ## Library Targets
 
 The primary target is .NET Standard 2.0 to provide the widest possible support. 
@@ -27,9 +40,8 @@ Full target list
 All possible frameworks are specifically targeted so that conditional compilation can be done where required.
 
 Full tested support is for .NET Core 8.0 - 10.0 as tooling and tests target those.  
-Legacy .NET Frameworks are partially tested
 
-### [CHANGELOG](CHANGELOG.md)  
+
 
 CI main:  
 [![CI](https://github.com/anthonyreilly/NetCoreForce/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/anthonyreilly/NetCoreForce/actions/workflows/ci.yml)  
