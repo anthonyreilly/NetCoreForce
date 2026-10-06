@@ -19,10 +19,10 @@ namespace NetCoreForce.ModelGenerator
         /// Gets a human-readable string for which value maps to which auth method type
         /// </summary>
         /// <returns>
-        /// For example: <c>1 = UsernamePassword, 2 = ClientCredentials</c>
-        /// </returns>>
+        /// For example: <c>1 or UsernamePassword, 2 or ClientCredentials</c>
+        /// </returns>
         private static string ValidAuthTypesInputString =>
-            string.Join(", ", Enum.GetValues(typeof(AuthInfo.AuthMethodType)).Cast<AuthInfo.AuthMethodType>().Select(v => $"{(int)v} = {v}"));
+            string.Join(", ", Enum.GetValues(typeof(AuthInfo.AuthMethodType)).Cast<AuthInfo.AuthMethodType>().Select(v => $"{(int)v} or {v}"));
 
         const string defaultConfigFilename = "modelgenerator_config.json";
 
@@ -50,6 +50,7 @@ namespace NetCoreForce.ModelGenerator
 
                 command.ExtendedHelpText = Environment.NewLine +
                 "You can supply the API credentials either in the config file, the command parameters, or wait to be prompted for that information." + Environment.NewLine +
+                "Client Credentials is the recommended auth method - Salesforce has deprecated the Username-Password flow, and it may be disabled in your org." + Environment.NewLine +
                 "If you choose to save the config file, be careful with it as it may contain your API credentials.";
 
                 //Authentication options
@@ -62,33 +63,33 @@ namespace NetCoreForce.ModelGenerator
                     CommandOptionType.SingleValue);
 
                 var usernameOption = command.Option("--username",
-                    "API Username",
+                    "API Username (UsernamePassword auth method only)",
                     CommandOptionType.SingleValue);
 
                 var passwordOption = command.Option("--password",
-                    "API Password",
+                    "API Password (UsernamePassword auth method only)",
                     CommandOptionType.SingleValue);
 
                 var authMethodOption = command.Option("--auth-method",
-                    $"Auth Method, Valid inputs: {ValidAuthTypesInputString}",
+                    $"Auth method, valid inputs: {ValidAuthTypesInputString}",
                     CommandOptionType.SingleValue);
 
                 var tokenRequestEndpointOption = command.Option("--token-request-endpoint",
-                    $"Token Request endpoint default: {GenConfig.DefaultTokenRequestEndpoint}",
+                    $"Token request endpoint, default: {GenConfig.DefaultTokenRequestEndpoint}. The ClientCredentials auth method requires your org's My Domain token endpoint, e.g. https://your-domain.my.salesforce.com/services/oauth2/token",
                     CommandOptionType.SingleValue);
 
                 //Config options
                 var configFileOption = command.Option("--config-file",
-                    "Config file path",
+                    $"Config file path, default: {defaultConfigFilename} in the current directory",
                     CommandOptionType.SingleValue);
 
                 var saveConfigOption = command.Option("--save-config",
-                    "Save options to config file, uses filename from --config-file option",
+                    "Save options to the config file, using the --config-file path if specified",
                     CommandOptionType.NoValue);
 
                 //generation options
                 var includeOption = command.Option("-o|--objects <objects>",
-                    "Object models to generate, if omitted all objects will be generated",
+                    "Object model to generate. Repeat for multiple objects, or use 'all' to generate all objects. If omitted, you will be prompted",
                     CommandOptionType.MultipleValue);
 
                 var outputDirectory = command.Option("-d|--output-directory <directory>",
@@ -100,7 +101,7 @@ namespace NetCoreForce.ModelGenerator
                     CommandOptionType.SingleValue);
 
                 var prefixOption = command.Option("-p|--prefix <prefix>",
-                    "Prefix to for object names, e.g. 'Sf' for 'SfAccount'",
+                    "Prefix to prepend to object names, e.g. 'Sf' for 'SfAccount'",
                     CommandOptionType.SingleValue);
 
                 var namespaceName = command.Option("-n|--namespace <namespace>",

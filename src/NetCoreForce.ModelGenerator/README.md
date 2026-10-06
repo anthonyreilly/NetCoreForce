@@ -1,98 +1,134 @@
-# NetCoreForce.ModelGenerator  
+# NetCoreForce.ModelGenerator
 
-Generates model classes according to your environment, optionally including any custom objects or fields. One file per class, named [ClassName].cs
+A .NET CLI tool that generates C# model classes from your Salesforce org, optionally including custom objects and custom fields. It generates one file per class, named `[ClassName].cs`, for use with [NetCoreForce.Client](https://www.nuget.org/packages/NetCoreForce.Client/).
 
-This is packaged as a custom .NET CLI tool. You can add it via
+Documentation: [https://netcoreforce.com/](https://netcoreforce.com/)
+
+## Install
+
+Requires .NET 8.0 or later.
+
 ```
 dotnet tool install --global NetCoreForce.ModelGenerator
 ```
 
-----
-By default, .Net tools are installed in these locations:
+To update an existing install:
+```
+dotnet tool update --global NetCoreForce.ModelGenerator
+```
 
-OS|Location
-----|----
-Linux/MacOS | ~/.dotnet/tools
-Windows | %USERPROFILE%\\.dotnet\tools
-----
-
-Then you will be able to use the tool by invoking it as a global dotnet command:
+The tool is then available as a global command:
 ```
 NetCoreForce.ModelGenerator generate --help
-
-Usage: modelgenerator generate [options]
-
-Options:
-  -?|-h|--help                       Show help information
-  --client-id                        API Client ID, a.k.a. Consumer Key
-  --client-secret                    API Client Secret, a.k.a. Consumer Secret
-  --username                         API Username
-  --password                         API Password
-  --config-file                      Config file path
-  --save-config                      Save options to config file, uses filename from --config-file option
-  -o|--objects <objects>             Object models to generate, if omitted all objects will be generated
-  -d|--output-directory <directory>  Destination directory for generated file(s)
-  -s|--suffix <suffix>               Suffix to append to object names, e.g. 'Sf' for 'AccountSf'
-  -p|--prefix <prefix>               Prefix to for object names, e.g. 'Sf' for 'SfAccount'
-  -n|--namespace <namespace>         Namespace to use for generated classes
-  -c|--include-custom                Include custom objects and fields
-  -r|--include-references            Include referenced objects as properties
 ```
-You can supply the API credentials either in the config file, the command parameters, or wait to be interactively prompted for that information.
 
-## Object Naming
+## Authentication
 
-There are a few SObjects that either have reserved names (e.g.Namespace, Domain), or may otherwise cause confustion with other C#objects (e.g. Task).
-To avoid this, the prefix/suffix option can append a prefix/suffix tothe class names, e.g use a "Sf" prefix to end up with SfTask insteadof Task.
-Using the prefix is recommended - it is safer, and it makesintellisense easier since you can start with "Sf" to filter the SFobject models.
-the triple-slash Summary documentation tags on the generated classeswill specify the original SObject name, and is exposed by the staticSObjectTypeName property.
+The generator logs in to Salesforce using an OAuth 2.0 flow, set with the `--auth-method` option or the `authMethod` config file setting:
+
+| Auth method | Value | Required settings |
+|---|---|---|
+| Client Credentials (recommended) | `2` or `ClientCredentials` | Client ID, client secret, and your org's My Domain token endpoint |
+| Username-Password | `1` or `UsernamePassword` | Client ID, client secret, username, and password |
+
+The client ID and secret are the Consumer Key and Consumer Secret from your org's connected app or external client app.
+
+**Client Credentials** requires your org's My Domain token endpoint, e.g. `https://your-domain.my.salesforce.com/services/oauth2/token`, rather than the default `https://login.salesforce.com/services/oauth2/token`. The connected app must have the Client Credentials flow enabled, with a run-as user assigned. If no token endpoint is given, the generator prompts for one.
+
+**Username-Password** is deprecated by Salesforce. It's blocked by default in orgs created in Summer '23 or later, and admins can disable it in any org, so it may not be available in your org. Use Client Credentials where possible.
+
+## Usage
+
+Generate models for Account and Contact using Client Credentials:
+```
+NetCoreForce.ModelGenerator generate --auth-method ClientCredentials --client-id your_client_id --client-secret your_client_secret --token-request-endpoint https://your-domain.my.salesforce.com/services/oauth2/token -o Account -o Contact -p Sf -n MyProject.Models -d ./Models
+```
+
+Generate models including custom objects and referenced objects:
+```
+NetCoreForce.ModelGenerator generate -p Sf -r -c -n MyProject.Models -d ~/git/myproject.models
+```
+* Prefix classes with "Sf"
+* Include referenced objects
+* Include custom objects and fields
+* Use the "MyProject.Models" namespace
+* Place the generated classes in ~/git/myproject.models
+
+Any required settings not given as options or in a config file are prompted for interactively, including the auth method, credentials, objects to generate, and namespace.
+
+### Options
+
+| Option | Description |
+|---|---|
+| `--auth-method` | Auth method: `1` / `UsernamePassword` or `2` / `ClientCredentials` |
+| `--client-id` | API client ID, a.k.a. Consumer Key |
+| `--client-secret` | API client secret, a.k.a. Consumer Secret |
+| `--username` | API username (Username-Password only) |
+| `--password` | API password (Username-Password only) |
+| `--token-request-endpoint` | Token request endpoint, default `https://login.salesforce.com/services/oauth2/token`. Required for Client Credentials. |
+| `--config-file` | Config file path |
+| `--save-config` | Save the options to the config file given by `--config-file`, or `modelgenerator_config.json` by default |
+| `-o\|--objects <objects>` | Object to generate. Repeat for multiple objects, or use `all` |
+| `-d\|--output-directory <directory>` | Destination directory for the generated files |
+| `-p\|--prefix <prefix>` | Prefix for class names, e.g. `Sf` for `SfAccount` |
+| `-s\|--suffix <suffix>` | Suffix for class names, e.g. `Sf` for `AccountSf` |
+| `-n\|--namespace <namespace>` | Namespace for the generated classes |
+| `-c\|--include-custom` | Include custom objects and fields |
+| `-r\|--include-references` | Include referenced objects as properties |
+| `-?\|-h\|--help` | Show help |
+
+**Generating all objects:** to generate all queryable objects, use `-o all`, add `"all"` as the first or only item in the `Objects` array of the config file, or enter `all` when prompted.
+
+**Referenced objects:** with the `-r`/`--include-references` option, the generated classes may not compile if a referenced object wasn't also generated. For instance, the Salesforce User object is referenced by many objects. Either generate the referenced objects too, or remove those properties from the generated classes.
 
 ## Configuration
 
-No configuration file is required, however you can include the --save-config option with an optional filename or file path to save the API credentials and generation options to. the filename will default to modelgenerator-config.json in the local directory for saving and loading if not otherwise specified.  
+A config file is optional. Settings given as command options override those in the config file.
 
-Using --save-config can be very useful so you do not need to re-enter your auth info and options after your first interactive session.
+By default the generator looks for `modelgenerator_config.json` in the current directory. Use `--config-file` to load a different file, and `--save-config` to save the current options, including any values entered at the prompts, so you don't need to re-enter them next time.
 
-However, if you choose to save the config file, be careful with it as it does contain your API credentials.
+The config file can contain your API credentials, so keep it secure and out of source control.
 
-## Example usage
-  ```
-  NetCoreForce.ModelGenerator generate -p Sf -r -c -n MyProject.Models -d ~/git/myproject.models 
-  ```
-  * Prefix classes with "Sf"
-  * Include referenced objects
-  * Include custom objects
-  * Use the "MyProject.Models" namespace
-  * Place the generated classes in ~/git/myproject.models
+The `apiVersion` setting controls the Salesforce API version used to generate the models, and defaults to `v67.0`.
 
 ### Example config file
+
+Client Credentials:
 ```json
 {
-  "comment": "Example config file - Make a copy of this file named modegenerator_config.json with your login info",
   "AuthInfo": {
+    "authMethod": 2,
     "clientId": "your_client_id",
     "clientSecret": "your_client_secret",
-    "username": "username",
-    "password": "password",
-    "apiVersion": "v64.0",
-    "authorizationEndpoint": "https://login.salesforce.com/services/oauth2/authorize",
-    "tokenRequestEndpoint": "https://login.salesforce.com/services/oauth2/token",
-    "tokenRevocationEndpoint": "https://login.salesforce.com/services/oauth2/revoke",
-    "authMethod": 1
+    "tokenRequestEndpoint": "https://your-domain.my.salesforce.com/services/oauth2/token",
+    "apiVersion": "v67.0"
   },
-  "OutputDirectory": null,
+  "OutputDirectory": "Models",
   "Objects": [
     "Account",
     "Contact"
   ],
   "ClassPrefix": "Sf",
   "ClassSuffix": null,
-  "ClassNamespace": "NetCoreForce.Models",
+  "ClassNamespace": "MyProject.Models",
   "IncludeCustom": true,
   "IncludeReferences": true
 }
 ```
 
-**Generating all objects at once:** If you wish to generate all queryable objects in the generated output, add "all" as the first or only item in the "Objects" array in the config file, or enter "all" (without quotes) when prompted in the console.
+For Username-Password, set `"authMethod": 1` and add `"username"` and `"password"` to `AuthInfo`.
 
-**Note:** if you use the -r/--include-references option, you may run into compile errors with missing classes. For instance, the Salesforce "User" object appears on many objects - if you didnt include this in your list of models to generate, you will either need to include it, or manually remove those properties from the generated classes.
+## Object Naming
+
+A few Salesforce objects have names that are reserved or easily confused in C#, such as **Namespace**, **Domain**, **Case**, and **Task**. Use the prefix or suffix option to avoid this, e.g. a "Sf" prefix generates `SfTask` instead of `Task`.
+
+Using a prefix is recommended. It avoids naming conflicts, and makes the models easy to find in IntelliSense by typing the prefix. Each generated class records the original Salesforce object name in its summary documentation, and exposes it through the static `SObjectTypeName` property.
+
+## Links
+
+- [Documentation](https://netcoreforce.com/)
+- [NetCoreForce.Client](https://www.nuget.org/packages/NetCoreForce.Client/)
+- [NetCoreForce.Models](https://www.nuget.org/packages/NetCoreForce.Models/) - pre-generated models for standard objects
+- [GitHub repository](https://github.com/anthonyreilly/NetCoreForce)
+
+Licensed under the MIT license.
