@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -109,6 +109,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "loginType")]
 		[Updateable(false), Createable(false)]
 		public string LoginType { get; set; }
+
+		///<summary>
+		/// Login Subtype
+		/// <para>Name: LoginSubType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "loginSubType")]
+		[Updateable(false), Createable(false)]
+		public string LoginSubType { get; set; }
 
 		///<summary>
 		/// Session Type

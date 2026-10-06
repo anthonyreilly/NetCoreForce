@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Auth. Provider
+	/// Authentication Provider
 	///<para>SObject Name: AuthProvider</para>
 	///<para>Custom Object: False</para>
 	///</summary>
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// Auth. Provider ID
+		/// Authentication Provider ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -285,6 +285,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "optionsIsEmiTikTokAds")]
 		public bool? OptionsIsEmiTikTokAds { get; set; }
+
+		///<summary>
+		/// IsLinkedInV2
+		/// <para>Name: OptionsIsLinkedInV2</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsIsLinkedInV2")]
+		public bool? OptionsIsLinkedInV2 { get; set; }
 
 		///<summary>
 		/// Icon URL

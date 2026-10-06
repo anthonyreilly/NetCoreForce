@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// ContentVersion ID
+		/// Content Version ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -33,7 +33,7 @@ namespace NetCoreForce.Models
 		public string Id { get; set; }
 
 		///<summary>
-		/// ContentDocument ID
+		/// Content Document ID
 		/// <para>Name: ContentDocumentId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: False</para>
@@ -364,6 +364,16 @@ namespace NetCoreForce.Models
 		public int? ContentSize { get; set; }
 
 		///<summary>
+		/// Size
+		/// <para>Name: ContentSizeLong</para>
+		/// <para>SF Type: long</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "contentSizeLong")]
+		[Updateable(false), Createable(false)]
+		public string ContentSizeLong { get; set; }
+
+		///<summary>
 		/// File Extension
 		/// <para>Name: FileExtension</para>
 		/// <para>SF Type: string</para>
@@ -487,6 +497,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "versionDataUrl")]
 		[Updateable(false), Createable(false)]
 		public string VersionDataUrl { get; set; }
+
+		///<summary>
+		/// Malware Scan Status
+		/// <para>Name: MalwareScanStatus</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "malwareScanStatus")]
+		[Updateable(false), Createable(false)]
+		public string MalwareScanStatus { get; set; }
+
+		///<summary>
+		/// Malware Scan Date
+		/// <para>Name: MalwareScanDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "malwareScanDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? MalwareScanDate { get; set; }
 
 	}
 }

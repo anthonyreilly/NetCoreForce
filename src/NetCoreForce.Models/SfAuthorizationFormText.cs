@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -156,7 +156,7 @@ namespace NetCoreForce.Models
 		public SfAuthorizationForm AuthorizationForm { get; set; }
 
 		///<summary>
-		/// Full Authorization Form Url
+		/// Full Authorization Form URL
 		/// <para>Name: FullAuthorizationFormUrl</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>

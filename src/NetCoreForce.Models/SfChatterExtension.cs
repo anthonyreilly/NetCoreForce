@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -199,7 +199,7 @@ namespace NetCoreForce.Models
 		public string Description { get; set; }
 
 		///<summary>
-		/// Lightning Definition Bundle ID
+		/// Aura Component Bundle ID
 		/// <para>Name: CompositionComponentEnumOrId</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
@@ -208,7 +208,7 @@ namespace NetCoreForce.Models
 		public string CompositionComponentEnumOrId { get; set; }
 
 		///<summary>
-		/// Lightning Definition Bundle ID
+		/// Aura Component Bundle ID
 		/// <para>Name: RenderComponentEnumOrId</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>

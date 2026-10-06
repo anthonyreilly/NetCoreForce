@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// External Client Application Mobile Setting ID
+		/// External Client Application Mobile Settings ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -149,7 +149,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// External App ID
+		/// External Client Application ID
 		/// <para>Name: ExternalClientApplicationId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>

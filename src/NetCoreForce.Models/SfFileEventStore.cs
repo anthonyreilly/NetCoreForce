@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -235,7 +235,7 @@ namespace NetCoreForce.Models
 		public string SourceIp { get; set; }
 
 		///<summary>
-		/// ContentDocument ID
+		/// Content Document ID
 		/// <para>Name: DocumentId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
@@ -253,7 +253,7 @@ namespace NetCoreForce.Models
 		public SfContentDocument Document { get; set; }
 
 		///<summary>
-		/// ContentVersion ID
+		/// Content Version ID
 		/// <para>Name: VersionId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
@@ -359,6 +359,42 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "fileAction")]
 		[Updateable(false), Createable(false)]
 		public string FileAction { get; set; }
+
+		///<summary>
+		/// Profile ID
+		/// <para>Name: ProfileId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "profileId")]
+		[Updateable(false), Createable(false)]
+		public string ProfileId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Profile
+		/// <para>RelationshipName: Profile</para>
+		///</summary>
+		[JsonProperty(PropertyName = "profile")]
+		[Updateable(false), Createable(false)]
+		public SfProfile Profile { get; set; }
+
+		///<summary>
+		/// Role ID
+		/// <para>Name: RoleId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "roleId")]
+		[Updateable(false), Createable(false)]
+		public string RoleId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: UserRole
+		/// <para>RelationshipName: Role</para>
+		///</summary>
+		[JsonProperty(PropertyName = "role")]
+		[Updateable(false), Createable(false)]
+		public SfUserRole Role { get; set; }
 
 	}
 }

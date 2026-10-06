@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -120,6 +120,26 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
+		/// Last Viewed Date
+		/// <para>Name: LastViewedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastViewedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastViewedDate { get; set; }
+
+		///<summary>
+		/// Last Referenced Date
+		/// <para>Name: LastReferencedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastReferencedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastReferencedDate { get; set; }
+
+		///<summary>
 		/// Approval Submission ID
 		/// <para>Name: ApprovalSubmissionId</para>
 		/// <para>SF Type: reference</para>
@@ -144,7 +164,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "approvalWorkItemId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string ApprovalWorkItemId { get; set; }
 
 		///<summary>
@@ -162,7 +182,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "actionName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string ActionName { get; set; }
 
 		///<summary>
@@ -172,7 +192,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "actionContext")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string ActionContext { get; set; }
 
 		///<summary>
@@ -182,7 +202,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "actionPerformedById")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string ActionPerformedById { get; set; }
 
 		///<summary>
@@ -200,7 +220,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "actionPerformerRole")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string ActionPerformerRole { get; set; }
 
 		///<summary>
@@ -210,7 +230,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "comments")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string Comments { get; set; }
 
 		///<summary>
@@ -220,7 +240,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "actionChannelName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string ActionChannelName { get; set; }
 
 	}

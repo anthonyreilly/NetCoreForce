@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -39,7 +39,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "ownerId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string OwnerId { get; set; }
 
 		///<summary>
@@ -130,13 +130,33 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
+		/// Last Viewed Date
+		/// <para>Name: LastViewedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastViewedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastViewedDate { get; set; }
+
+		///<summary>
+		/// Last Referenced Date
+		/// <para>Name: LastReferencedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastReferencedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastReferencedDate { get; set; }
+
+		///<summary>
 		/// Related Record ID
 		/// <para>Name: RelatedRecordId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "relatedRecordId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string RelatedRecordId { get; set; }
 
 		///<summary>
@@ -146,7 +166,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "flowOrchestrationInstanceId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string FlowOrchestrationInstanceId { get; set; }
 
 		///<summary>
@@ -164,7 +184,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "status")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string Status { get; set; }
 
 		///<summary>
@@ -174,7 +194,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "submittedById")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string SubmittedById { get; set; }
 
 		///<summary>
@@ -192,7 +212,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "comments")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string Comments { get; set; }
 
 		///<summary>
@@ -202,7 +222,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "relatedRecordObjectName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string RelatedRecordObjectName { get; set; }
 
 		///<summary>
@@ -212,7 +232,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "doesSendApprovalEmail")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public bool? DoesSendApprovalEmail { get; set; }
 
 	}

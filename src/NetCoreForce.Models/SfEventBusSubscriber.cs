@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -83,6 +83,16 @@ namespace NetCoreForce.Models
 		public int? Position { get; set; }
 
 		///<summary>
+		/// Last Processed
+		/// <para>Name: LastProcessed</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastProcessed")]
+		[Updateable(false), Createable(false)]
+		public string LastProcessed { get; set; }
+
+		///<summary>
 		/// Tip
 		/// <para>Name: Tip</para>
 		/// <para>SF Type: int</para>
@@ -91,6 +101,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "tip")]
 		[Updateable(false), Createable(false)]
 		public int? Tip { get; set; }
+
+		///<summary>
+		/// Last Published
+		/// <para>Name: LastPublished</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastPublished")]
+		[Updateable(false), Createable(false)]
+		public string LastPublished { get; set; }
 
 		///<summary>
 		/// Retry Attempts

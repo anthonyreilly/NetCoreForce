@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// PermissionSetAssignment ID
+		/// Permission Set Assignment ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -33,7 +33,7 @@ namespace NetCoreForce.Models
 		public string Id { get; set; }
 
 		///<summary>
-		/// PermissionSet ID
+		/// Permission Set ID
 		/// <para>Name: PermissionSetId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
@@ -51,7 +51,7 @@ namespace NetCoreForce.Models
 		public SfPermissionSet PermissionSet { get; set; }
 
 		///<summary>
-		/// PermissionSetGroup ID
+		/// Permission Set Group ID
 		/// <para>Name: PermissionSetGroupId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>

@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -194,6 +194,56 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "scheduledDate")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? ScheduledDate { get; set; }
+
+		///<summary>
+		/// Completed Date
+		/// <para>Name: CompletedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "completedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? CompletedDate { get; set; }
+
+		///<summary>
+		/// Entries
+		/// <para>Name: Entries</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "entries")]
+		[Updateable(false), Createable(false)]
+		public int? Entries { get; set; }
+
+		///<summary>
+		/// Exits
+		/// <para>Name: Exits</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "exits")]
+		[Updateable(false), Createable(false)]
+		public int? Exits { get; set; }
+
+		///<summary>
+		/// Errors
+		/// <para>Name: Errors</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "errors")]
+		[Updateable(false), Createable(false)]
+		public int? Errors { get; set; }
+
+		///<summary>
+		/// Enqueued
+		/// <para>Name: Enqueued</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "enqueued")]
+		[Updateable(false), Createable(false)]
+		public int? Enqueued { get; set; }
 
 		///<summary>
 		/// Error Details

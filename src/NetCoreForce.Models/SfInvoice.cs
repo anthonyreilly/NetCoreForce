@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -414,6 +414,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "writeOffTotalTaxAmount")]
 		[Updateable(false), Createable(false)]
 		public decimal? WriteOffTotalTaxAmount { get; set; }
+
+		///<summary>
+		/// Total Taxes Captured at Header
+		/// <para>Name: TotalTaxesCapturedAtHeader</para>
+		/// <para>SF Type: currency</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "totalTaxesCapturedAtHeader")]
+		[Updateable(true), Createable(false)]
+		public decimal? TotalTaxesCapturedAtHeader { get; set; }
 
 	}
 }

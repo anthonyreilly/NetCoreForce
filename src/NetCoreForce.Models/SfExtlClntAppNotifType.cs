@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -109,7 +109,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// External Client App Notification Settings ID
+		/// External Client Application Notification Settings ID
 		/// <para>Name: ExtlClntAppNotifSettingsId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: False</para>
@@ -127,7 +127,7 @@ namespace NetCoreForce.Models
 		public SfExtlClntAppNotifSettings ExtlClntAppNotifSettings { get; set; }
 
 		///<summary>
-		/// Custom Notification Type Id
+		/// Custom Notification Type ID
 		/// <para>Name: NotificationType</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: False</para>

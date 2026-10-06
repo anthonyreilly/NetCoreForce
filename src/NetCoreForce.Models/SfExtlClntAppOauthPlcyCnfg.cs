@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// External Client App OAuth Policy Config
+	/// External Client App OAuth Policy Configuration
 	///<para>SObject Name: ExtlClntAppOauthPlcyCnfg</para>
 	///<para>Custom Object: False</para>
 	///</summary>
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// External Client App OAuth Policy Config ID
+		/// External Client App OAuth Policy Configuration ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -139,7 +139,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// External App ID
+		/// External Client Application ID
 		/// <para>Name: ExternalClientApplicationId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: False</para>
@@ -237,7 +237,7 @@ namespace NetCoreForce.Models
 		public string PolicyAction { get; set; }
 
 		///<summary>
-		/// External Client Application OAuth Settings ID
+		/// External Client App Oauth Settings ID
 		/// <para>Name: ExtlClntAppOauthSettingsId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: False</para>
@@ -311,7 +311,7 @@ namespace NetCoreForce.Models
 		public SfUser ExecuteHandlerAs { get; set; }
 
 		///<summary>
-		/// Single Logout Url
+		/// Single Logout URL
 		/// <para>Name: SingleLogoutUrl</para>
 		/// <para>SF Type: url</para>
 		/// <para>Nillable: True</para>
@@ -321,7 +321,7 @@ namespace NetCoreForce.Models
 		public string SingleLogoutUrl { get; set; }
 
 		///<summary>
-		/// Start Url
+		/// Start URL
 		/// <para>Name: StartUrl</para>
 		/// <para>SF Type: url</para>
 		/// <para>Nillable: True</para>
@@ -379,6 +379,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "namedUserJwtTimeout")]
 		[Updateable(false), Createable(false)]
 		public string NamedUserJwtTimeout { get; set; }
+
+		///<summary>
+		/// Named User JWT-Based Access Token Timeout
+		/// <para>Name: NamedUserJwtSessionTimeoutType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "namedUserJwtSessionTimeoutType")]
+		[Updateable(false), Createable(false)]
+		public string NamedUserJwtSessionTimeoutType { get; set; }
+
+		///<summary>
+		/// Guest JWT-Based Access Token Timeout
+		/// <para>Name: GuestJwtSessionTimeoutType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "guestJwtSessionTimeoutType")]
+		[Updateable(false), Createable(false)]
+		public string GuestJwtSessionTimeoutType { get; set; }
 
 	}
 }

@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -962,6 +962,15 @@ namespace NetCoreForce.Models
 		public bool? UserPreferencesDisableMessageEmail { get; set; }
 
 		///<summary>
+		/// DismissRecordChannelsSuggestedObjects
+		/// <para>Name: UserPreferencesDismissRecordChannelsSuggestedObjects</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesDismissRecordChannelsSuggestedObjects")]
+		public bool? UserPreferencesDismissRecordChannelsSuggestedObjects { get; set; }
+
+		///<summary>
 		/// JigsawListUser
 		/// <para>Name: UserPreferencesJigsawListUser</para>
 		/// <para>SF Type: boolean</para>
@@ -1023,6 +1032,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "userPreferencesDisableFileShareNotificationsForApi")]
 		public bool? UserPreferencesDisableFileShareNotificationsForApi { get; set; }
+
+		///<summary>
+		/// EnableLwrLexPilot
+		/// <para>Name: UserPreferencesEnableLwrLexPilot</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesEnableLwrLexPilot")]
+		public bool? UserPreferencesEnableLwrLexPilot { get; set; }
 
 		///<summary>
 		/// ShowTitleToExternalUsers
@@ -1529,6 +1547,15 @@ namespace NetCoreForce.Models
 		public bool? UserPreferencesNativeEmailClient { get; set; }
 
 		///<summary>
+		/// DismissReuseUpdateReminderModal
+		/// <para>Name: UserPreferencesDismissReuseUpdateReminderModal</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "userPreferencesDismissReuseUpdateReminderModal")]
+		public bool? UserPreferencesDismissReuseUpdateReminderModal { get; set; }
+
+		///<summary>
 		/// HideManagedEcaMobilePubModal
 		/// <para>Name: UserPreferencesHideManagedEcaMobilePubModal</para>
 		/// <para>SF Type: boolean</para>
@@ -1678,7 +1705,7 @@ namespace NetCoreForce.Models
 		public string OutOfOfficeMessage { get; set; }
 
 		///<summary>
-		/// Url for medium profile photo
+		/// URL for medium profile photo
 		/// <para>Name: MediumPhotoUrl</para>
 		/// <para>SF Type: url</para>
 		/// <para>Nillable: True</para>
@@ -1735,7 +1762,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? LastReferencedDate { get; set; }
 
 		///<summary>
-		/// Url for banner photo
+		/// URL for banner photo
 		/// <para>Name: BannerPhotoUrl</para>
 		/// <para>SF Type: url</para>
 		/// <para>Nillable: True</para>
@@ -1745,7 +1772,7 @@ namespace NetCoreForce.Models
 		public string BannerPhotoUrl { get; set; }
 
 		///<summary>
-		/// Url for IOS banner photo
+		/// URL for IOS banner photo
 		/// <para>Name: SmallBannerPhotoUrl</para>
 		/// <para>SF Type: url</para>
 		/// <para>Nillable: True</para>
@@ -1755,7 +1782,7 @@ namespace NetCoreForce.Models
 		public string SmallBannerPhotoUrl { get; set; }
 
 		///<summary>
-		/// Url for Android banner photo
+		/// URL for Android banner photo
 		/// <para>Name: MediumBannerPhotoUrl</para>
 		/// <para>SF Type: url</para>
 		/// <para>Nillable: True</para>

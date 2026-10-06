@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// RecordAction
+	/// Record Action
 	///<para>SObject Name: RecordAction</para>
 	///<para>Custom Object: False</para>
 	///</summary>
@@ -118,7 +118,7 @@ namespace NetCoreForce.Models
 		public string RecordId { get; set; }
 
 		///<summary>
-		/// Interaction Definition ID
+		/// Flow Definition ID
 		/// <para>Name: FlowDefinition</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
@@ -127,7 +127,7 @@ namespace NetCoreForce.Models
 		public string FlowDefinition { get; set; }
 
 		///<summary>
-		/// FlowInterview ID
+		/// Flow Interview ID
 		/// <para>Name: FlowInterviewId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>

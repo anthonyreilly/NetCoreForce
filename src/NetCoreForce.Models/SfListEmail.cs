@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -192,6 +192,33 @@ namespace NetCoreForce.Models
 		public string FromAddress { get; set; }
 
 		///<summary>
+		/// Reply To Name
+		/// <para>Name: ReplyToName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "replyToName")]
+		public string ReplyToName { get; set; }
+
+		///<summary>
+		/// CC Address
+		/// <para>Name: CcAddress</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "ccAddress")]
+		public string CcAddress { get; set; }
+
+		///<summary>
+		/// Synthetic CC Enabled
+		/// <para>Name: IsSyntheticCcEnabled</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isSyntheticCcEnabled")]
+		public bool? IsSyntheticCcEnabled { get; set; }
+
+		///<summary>
 		/// Status
 		/// <para>Name: Status</para>
 		/// <para>SF Type: picklist</para>
@@ -264,6 +291,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "relatedToId")]
 		public string RelatedToId { get; set; }
+
+		///<summary>
+		/// Is Email Archive Required
+		/// <para>Name: IsEmailArchiveRequired</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isEmailArchiveRequired")]
+		public bool? IsEmailArchiveRequired { get; set; }
 
 	}
 }

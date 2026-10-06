@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Credit Memo Invoice Application  History
-	///<para>SObject Name: CreditMemoInvApplicationHistory</para>
+	/// User History
+	///<para>SObject Name: UserHistory</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfCreditMemoInvApplicationHistory : SObject
+	public class SfUserHistory : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "CreditMemoInvApplicationHistory"; }
+			get { return "UserHistory"; }
 		}
 
 		///<summary>
-		/// Credit Memo Invoice Application  History ID
+		/// User History ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -43,22 +43,22 @@ namespace NetCoreForce.Models
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
-		/// Credit Memo Invoice Application ID
-		/// <para>Name: CreditMemoInvApplicationId</para>
+		/// User ID
+		/// <para>Name: UserId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "creditMemoInvApplicationId")]
+		[JsonProperty(PropertyName = "userId")]
 		[Updateable(false), Createable(false)]
-		public string CreditMemoInvApplicationId { get; set; }
+		public string UserId { get; set; }
 
 		///<summary>
-		/// ReferenceTo: CreditMemoInvApplication
-		/// <para>RelationshipName: CreditMemoInvApplication</para>
+		/// ReferenceTo: User
+		/// <para>RelationshipName: User</para>
 		///</summary>
-		[JsonProperty(PropertyName = "creditMemoInvApplication")]
+		[JsonProperty(PropertyName = "user")]
 		[Updateable(false), Createable(false)]
-		public SfCreditMemoInvApplication CreditMemoInvApplication { get; set; }
+		public SfUser User { get; set; }
 
 		///<summary>
 		/// Created By ID

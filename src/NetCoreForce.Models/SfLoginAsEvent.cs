@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -89,6 +89,44 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "eventDate")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? EventDate { get; set; }
+
+		///<summary>
+		/// Transaction Security Policy ID
+		/// <para>Name: PolicyId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "policyId")]
+		[Updateable(false), Createable(false)]
+		public string PolicyId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: TransactionSecurityPolicy
+		/// <para>RelationshipName: Policy</para>
+		///</summary>
+		[JsonProperty(PropertyName = "policy")]
+		[Updateable(false), Createable(false)]
+		public SfTransactionSecurityPolicy Policy { get; set; }
+
+		///<summary>
+		/// Policy Outcome
+		/// <para>Name: PolicyOutcome</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "policyOutcome")]
+		[Updateable(false), Createable(false)]
+		public string PolicyOutcome { get; set; }
+
+		///<summary>
+		/// Evaluation Time
+		/// <para>Name: EvaluationTime</para>
+		/// <para>SF Type: double</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "evaluationTime")]
+		[Updateable(false), Createable(false)]
+		public double? EvaluationTime { get; set; }
 
 		///<summary>
 		/// Session Key
@@ -229,6 +267,72 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "loginAsCategory")]
 		[Updateable(false), Createable(false)]
 		public string LoginAsCategory { get; set; }
+
+		///<summary>
+		/// Login Access Change Grantee Name
+		/// <para>Name: LoginAccessChangeGranteeName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "loginAccessChangeGranteeName")]
+		[Updateable(false), Createable(false)]
+		public string LoginAccessChangeGranteeName { get; set; }
+
+		///<summary>
+		/// Login Access Change Grantee Type
+		/// <para>Name: LoginAccessChangeGranteeType</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "loginAccessChangeGranteeType")]
+		[Updateable(false), Createable(false)]
+		public string LoginAccessChangeGranteeType { get; set; }
+
+		///<summary>
+		/// Login Access Change Expiration Date
+		/// <para>Name: LoginAccessChangeExpDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "loginAccessChangeExpDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LoginAccessChangeExpDate { get; set; }
+
+		///<summary>
+		/// Profile ID
+		/// <para>Name: ProfileId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "profileId")]
+		[Updateable(false), Createable(false)]
+		public string ProfileId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Profile
+		/// <para>RelationshipName: Profile</para>
+		///</summary>
+		[JsonProperty(PropertyName = "profile")]
+		[Updateable(false), Createable(false)]
+		public SfProfile Profile { get; set; }
+
+		///<summary>
+		/// Role ID
+		/// <para>Name: RoleId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "roleId")]
+		[Updateable(false), Createable(false)]
+		public string RoleId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: UserRole
+		/// <para>RelationshipName: Role</para>
+		///</summary>
+		[JsonProperty(PropertyName = "role")]
+		[Updateable(false), Createable(false)]
+		public SfUserRole Role { get; set; }
 
 	}
 }

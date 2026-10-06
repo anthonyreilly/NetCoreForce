@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -159,7 +159,7 @@ namespace NetCoreForce.Models
 		public string Description { get; set; }
 
 		///<summary>
-		/// Start Url
+		/// Start URL
 		/// <para>Name: StartUrl</para>
 		/// <para>SF Type: url</para>
 		/// <para>Nillable: True</para>
@@ -169,7 +169,7 @@ namespace NetCoreForce.Models
 		public string StartUrl { get; set; }
 
 		///<summary>
-		/// Mobile Start Url
+		/// Mobile Start URL
 		/// <para>Name: MobileStartUrl</para>
 		/// <para>SF Type: url</para>
 		/// <para>Nillable: True</para>
@@ -189,7 +189,7 @@ namespace NetCoreForce.Models
 		public string LogoUrl { get; set; }
 
 		///<summary>
-		/// Icon Url
+		/// Icon URL
 		/// <para>Name: IconUrl</para>
 		/// <para>SF Type: url</para>
 		/// <para>Nillable: True</para>
@@ -329,7 +329,7 @@ namespace NetCoreForce.Models
 		public string CanvasReferenceId { get; set; }
 
 		///<summary>
-		/// The canvas url for the canvas application
+		/// The canvas URL for the canvas application
 		/// <para>Name: CanvasUrl</para>
 		/// <para>SF Type: url</para>
 		/// <para>Nillable: True</para>

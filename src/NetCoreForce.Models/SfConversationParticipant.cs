@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -36,7 +36,6 @@ namespace NetCoreForce.Models
 		/// Conversation Participant Name
 		/// <para>Name: Name</para>
 		/// <para>SF Type: string</para>
-		/// <para>AutoNumber field</para>
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "name")]
@@ -140,6 +139,16 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? JoinedTime { get; set; }
 
 		///<summary>
+		/// Milliseconds portion of Joined Time
+		/// <para>Name: JoinedTimeMilliSecs</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "joinedTimeMilliSecs")]
+		[Updateable(false), Createable(false)]
+		public int? JoinedTimeMilliSecs { get; set; }
+
+		///<summary>
 		/// ParticipantEntity ID
 		/// <para>Name: ParticipantEntityId</para>
 		/// <para>SF Type: reference</para>
@@ -200,6 +209,16 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? LeftTime { get; set; }
 
 		///<summary>
+		/// Milliseconds portion of Left Time
+		/// <para>Name: LeftTimeMilliSecs</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "leftTimeMilliSecs")]
+		[Updateable(false), Createable(false)]
+		public int? LeftTimeMilliSecs { get; set; }
+
+		///<summary>
 		/// Last Active Time
 		/// <para>Name: LastActiveTime</para>
 		/// <para>SF Type: datetime</para>
@@ -208,6 +227,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "lastActiveTime")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? LastActiveTime { get; set; }
+
+		///<summary>
+		/// Milliseconds portion of Last Active Time
+		/// <para>Name: LastActiveTimeMilliSecs</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastActiveTimeMilliSecs")]
+		[Updateable(false), Createable(false)]
+		public int? LastActiveTimeMilliSecs { get; set; }
 
 	}
 }

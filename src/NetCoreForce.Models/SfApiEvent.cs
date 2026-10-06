@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -363,6 +363,72 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "requestIdentifier")]
 		[Updateable(false), Createable(false)]
 		public string RequestIdentifier { get; set; }
+
+		///<summary>
+		/// Bot Session Identifier
+		/// <para>Name: BotSessionIdentifier</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "botSessionIdentifier")]
+		[Updateable(false), Createable(false)]
+		public string BotSessionIdentifier { get; set; }
+
+		///<summary>
+		/// Action Name
+		/// <para>Name: ActionName</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "actionName")]
+		[Updateable(false), Createable(false)]
+		public string ActionName { get; set; }
+
+		///<summary>
+		/// Operation Status
+		/// <para>Name: OperationStatus</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "operationStatus")]
+		[Updateable(false), Createable(false)]
+		public string OperationStatus { get; set; }
+
+		///<summary>
+		/// Profile ID
+		/// <para>Name: ProfileId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "profileId")]
+		[Updateable(false), Createable(false)]
+		public string ProfileId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Profile
+		/// <para>RelationshipName: Profile</para>
+		///</summary>
+		[JsonProperty(PropertyName = "profile")]
+		[Updateable(false), Createable(false)]
+		public SfProfile Profile { get; set; }
+
+		///<summary>
+		/// Role ID
+		/// <para>Name: RoleId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "roleId")]
+		[Updateable(false), Createable(false)]
+		public string RoleId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: UserRole
+		/// <para>RelationshipName: Role</para>
+		///</summary>
+		[JsonProperty(PropertyName = "role")]
+		[Updateable(false), Createable(false)]
+		public SfUserRole Role { get; set; }
 
 	}
 }

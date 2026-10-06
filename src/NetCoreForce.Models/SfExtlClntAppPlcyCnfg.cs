@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -139,7 +139,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// External App ID
+		/// External Client Application ID
 		/// <para>Name: ExternalClientApplicationId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: False</para>
@@ -227,7 +227,17 @@ namespace NetCoreForce.Models
 		public string SamlPluginStatus { get; set; }
 
 		///<summary>
-		/// Start Url
+		/// Canvas Plugin Status
+		/// <para>Name: CanvasPluginStatus</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "canvasPluginStatus")]
+		[Updateable(false), Createable(false)]
+		public string CanvasPluginStatus { get; set; }
+
+		///<summary>
+		/// Start URL
 		/// <para>Name: StartUrl</para>
 		/// <para>SF Type: url</para>
 		/// <para>Nillable: True</para>

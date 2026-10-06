@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -143,7 +143,7 @@ namespace NetCoreForce.Models
 		public bool? IsSwingFlow { get; set; }
 
 		///<summary>
-		/// Api Version
+		/// API Version
 		/// <para>Name: ApiVersion</para>
 		/// <para>SF Type: double</para>
 		/// <para>Nillable: True</para>
@@ -153,7 +153,7 @@ namespace NetCoreForce.Models
 		public double? ApiVersion { get; set; }
 
 		///<summary>
-		/// Api Version Runtime
+		/// API Version Runtime
 		/// <para>Name: ApiVersionRuntime</para>
 		/// <para>SF Type: double</para>
 		/// <para>Nillable: True</para>

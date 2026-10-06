@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -128,7 +128,7 @@ namespace NetCoreForce.Models
 		public bool? IsHtml { get; set; }
 
 		///<summary>
-		/// Url of Creator&#39;s Profile Photo
+		/// URL of Creator&#39;s Profile Photo
 		/// <para>Name: CreatorFullPhotoUrl</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>
@@ -138,7 +138,7 @@ namespace NetCoreForce.Models
 		public string CreatorFullPhotoUrl { get; set; }
 
 		///<summary>
-		/// Url of Creator&#39;s Thumbnail Photo
+		/// URL of Creator&#39;s Thumbnail Photo
 		/// <para>Name: CreatorSmallPhotoUrl</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>

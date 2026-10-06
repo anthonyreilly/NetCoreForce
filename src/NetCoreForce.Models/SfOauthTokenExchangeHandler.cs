@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -233,6 +233,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "tokenHandlerApex")]
 		[Updateable(false), Createable(false)]
 		public SfApexClass TokenHandlerApex { get; set; }
+
+		///<summary>
+		/// Allow contact creation
+		/// <para>Name: IsContactCreationAllowed</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isContactCreationAllowed")]
+		public bool? IsContactCreationAllowed { get; set; }
 
 	}
 }

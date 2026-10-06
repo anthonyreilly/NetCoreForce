@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -163,7 +163,7 @@ namespace NetCoreForce.Models
 		public string FullPhotoUrl { get; set; }
 
 		///<summary>
-		/// Url for medium profile photo
+		/// URL for medium profile photo
 		/// <para>Name: MediumPhotoUrl</para>
 		/// <para>SF Type: url</para>
 		/// <para>Nillable: True</para>
@@ -295,7 +295,7 @@ namespace NetCoreForce.Models
 		public string GroupEmail { get; set; }
 
 		///<summary>
-		/// Banner Photo Url
+		/// Banner Photo URL
 		/// <para>Name: BannerPhotoUrl</para>
 		/// <para>SF Type: url</para>
 		/// <para>Nillable: True</para>

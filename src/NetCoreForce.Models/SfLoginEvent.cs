@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -429,6 +429,42 @@ namespace NetCoreForce.Models
 		public string UserType { get; set; }
 
 		///<summary>
+		/// Profile ID
+		/// <para>Name: ProfileId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "profileId")]
+		[Updateable(false), Createable(false)]
+		public string ProfileId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Profile
+		/// <para>RelationshipName: Profile</para>
+		///</summary>
+		[JsonProperty(PropertyName = "profile")]
+		[Updateable(false), Createable(false)]
+		public SfProfile Profile { get; set; }
+
+		///<summary>
+		/// Role ID
+		/// <para>Name: RoleId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "roleId")]
+		[Updateable(false), Createable(false)]
+		public string RoleId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: UserRole
+		/// <para>RelationshipName: Role</para>
+		///</summary>
+		[JsonProperty(PropertyName = "role")]
+		[Updateable(false), Createable(false)]
+		public SfUserRole Role { get; set; }
+
+		///<summary>
 		/// Authentication Method Reference
 		/// <para>Name: AuthMethodReference</para>
 		/// <para>SF Type: string</para>
@@ -447,6 +483,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "loginSubType")]
 		[Updateable(false), Createable(false)]
 		public string LoginSubType { get; set; }
+
+		///<summary>
+		/// Authentication Context Class Reference
+		/// <para>Name: AuthContextClassRef</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "authContextClassRef")]
+		[Updateable(false), Createable(false)]
+		public string AuthContextClassRef { get; set; }
 
 	}
 }

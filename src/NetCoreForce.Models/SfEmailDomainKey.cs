@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -269,6 +269,24 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "statusMessage")]
 		[Updateable(false), Createable(false)]
 		public string StatusMessage { get; set; }
+
+		///<summary>
+		/// Is MCE Shared
+		/// <para>Name: IsMceShared</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isMceShared")]
+		public bool? IsMceShared { get; set; }
+
+		///<summary>
+		/// Is DNS Delegated
+		/// <para>Name: IsDnsDelegated</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isDnsDelegated")]
+		public bool? IsDnsDelegated { get; set; }
 
 	}
 }

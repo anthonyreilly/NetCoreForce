@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -119,7 +119,7 @@ namespace NetCoreForce.Models
 		public string ParentJobId { get; set; }
 
 		///<summary>
-		/// ApexTestRunResult ID
+		/// Apex Test Run Result ID
 		/// <para>Name: TestRunResultId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>

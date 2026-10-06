@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -413,6 +413,15 @@ namespace NetCoreForce.Models
 		public string PaymentMethodDetails { get; set; }
 
 		///<summary>
+		/// Extended Payment Method Type
+		/// <para>Name: ExtendedPaymentMethodType</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "extendedPaymentMethodType")]
+		public string ExtendedPaymentMethodType { get; set; }
+
+		///<summary>
 		/// First name of the person tied to billing address
 		/// <para>Name: BillingFirstName</para>
 		/// <para>SF Type: string</para>
@@ -468,6 +477,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "standardEntryClassCode")]
 		[Updateable(false), Createable(false)]
 		public string StandardEntryClassCode { get; set; }
+
+		///<summary>
+		/// Bank Code
+		/// <para>Name: BankCode</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "bankCode")]
+		[Updateable(false), Createable(false)]
+		public string BankCode { get; set; }
+
+		///<summary>
+		/// Mandate Text
+		/// <para>Name: Mandate</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "mandate")]
+		[Updateable(false), Createable(false)]
+		public string Mandate { get; set; }
 
 	}
 }

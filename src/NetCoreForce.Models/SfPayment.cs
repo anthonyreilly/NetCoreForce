@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -531,6 +531,36 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "paymentIntentGuid")]
 		[Updateable(false), Createable(true)]
 		public string PaymentIntentGuid { get; set; }
+
+		///<summary>
+		/// Total Payment Credit Applied
+		/// <para>Name: TotalPaymentCreditApplied</para>
+		/// <para>SF Type: currency</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "totalPaymentCreditApplied")]
+		[Updateable(false), Createable(false)]
+		public decimal? TotalPaymentCreditApplied { get; set; }
+
+		///<summary>
+		/// Total Payment Credit Unapplied
+		/// <para>Name: TotalPaymentCreditUnapplied</para>
+		/// <para>SF Type: currency</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "totalPaymentCreditUnapplied")]
+		[Updateable(false), Createable(false)]
+		public decimal? TotalPaymentCreditUnapplied { get; set; }
+
+		///<summary>
+		/// Net Payment Credit Applied
+		/// <para>Name: NetPaymentCreditApplied</para>
+		/// <para>SF Type: currency</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "netPaymentCreditApplied")]
+		[Updateable(false), Createable(false)]
+		public decimal? NetPaymentCreditApplied { get; set; }
 
 	}
 }

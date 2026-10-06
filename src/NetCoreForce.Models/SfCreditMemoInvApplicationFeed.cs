@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// __MISSING LABEL__ PropertyFile - val CreditMemoInvApplication not found in section StandardFeedLabel
+	/// Credit Memo Invoice Application Feed
 	///<para>SObject Name: CreditMemoInvApplicationFeed</para>
 	///<para>Custom Object: False</para>
 	///</summary>
@@ -159,7 +159,7 @@ namespace NetCoreForce.Models
 		public string Body { get; set; }
 
 		///<summary>
-		/// Link Url
+		/// Link URL
 		/// <para>Name: LinkUrl</para>
 		/// <para>SF Type: url</para>
 		/// <para>Nillable: True</para>

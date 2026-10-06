@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -181,6 +181,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "consentType")]
 		public string ConsentType { get; set; }
+
+		///<summary>
+		/// Error Details
+		/// <para>Name: ErrorDetails</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "errorDetails")]
+		public string ErrorDetails { get; set; }
 
 	}
 }

@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -338,6 +338,36 @@ namespace NetCoreForce.Models
 		public decimal? TotalOtherAmount { get; set; }
 
 		///<summary>
+		/// Total Swaps Amount
+		/// <para>Name: TotalSwapsAmount</para>
+		/// <para>SF Type: currency</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "totalSwapsAmount")]
+		[Updateable(false), Createable(false)]
+		public decimal? TotalSwapsAmount { get; set; }
+
+		///<summary>
+		/// Total Upgrades Amount
+		/// <para>Name: TotalUpgradesAmount</para>
+		/// <para>SF Type: currency</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "totalUpgradesAmount")]
+		[Updateable(false), Createable(false)]
+		public decimal? TotalUpgradesAmount { get; set; }
+
+		///<summary>
+		/// Total Downgrades Amount
+		/// <para>Name: TotalDowngradesAmount</para>
+		/// <para>SF Type: currency</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "totalDowngradesAmount")]
+		[Updateable(false), Createable(false)]
+		public decimal? TotalDowngradesAmount { get; set; }
+
+		///<summary>
 		/// Total Amount
 		/// <para>Name: TotalAmount</para>
 		/// <para>SF Type: currency</para>
@@ -366,6 +396,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "totalMrr")]
 		[Updateable(false), Createable(false)]
 		public decimal? TotalMrr { get; set; }
+
+		///<summary>
+		/// Subtype
+		/// <para>Name: Subtype</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "subtype")]
+		[Updateable(false), Createable(false)]
+		public string Subtype { get; set; }
 
 	}
 }

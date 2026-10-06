@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -236,6 +236,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "triggeringRecordType")]
 		[Updateable(true), Createable(false)]
 		public string TriggeringRecordType { get; set; }
+
+		///<summary>
+		/// Auxiliary Triggering Record
+		/// <para>Name: AuxiliaryTriggeringRecord</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "auxiliaryTriggeringRecord")]
+		[Updateable(true), Createable(false)]
+		public string AuxiliaryTriggeringRecord { get; set; }
+
+		///<summary>
+		/// Debug Run
+		/// <para>Name: IsDebugRun</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isDebugRun")]
+		[Updateable(true), Createable(false)]
+		public bool? IsDebugRun { get; set; }
 
 	}
 }

@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -198,6 +198,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "testEndDateTime")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? TestEndDateTime { get; set; }
+
+		///<summary>
+		/// Error from Last Test Run
+		/// <para>Name: Error</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "error")]
+		[Updateable(false), Createable(false)]
+		public string Error { get; set; }
+
+		///<summary>
+		/// Failed Assertions from Last Test Run
+		/// <para>Name: FailedAssertions</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "failedAssertions")]
+		[Updateable(false), Createable(false)]
+		public string FailedAssertions { get; set; }
 
 	}
 }

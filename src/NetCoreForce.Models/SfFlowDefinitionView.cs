@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -323,7 +323,7 @@ namespace NetCoreForce.Models
 		public string Environments { get; set; }
 
 		///<summary>
-		/// Api Version
+		/// API Version
 		/// <para>Name: ApiVersion</para>
 		/// <para>SF Type: int</para>
 		/// <para>Nillable: True</para>

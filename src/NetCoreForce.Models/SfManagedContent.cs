@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -157,7 +157,7 @@ namespace NetCoreForce.Models
 		public SfManagedContentSpace AuthoredManagedContentSpace { get; set; }
 
 		///<summary>
-		/// Api Name
+		/// API Name
 		/// <para>Name: ApiName</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>

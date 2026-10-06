@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -130,7 +130,17 @@ namespace NetCoreForce.Models
 		public string MessageDefinition { get; set; }
 
 		///<summary>
-		/// Request Type
+		/// Message Definition Parameters
+		/// <para>Name: MessageDefinitionParameters</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "messageDefinitionParameters")]
+		[Updateable(false), Createable(false)]
+		public string MessageDefinitionParameters { get; set; }
+
+		///<summary>
+		/// Send Message Type
 		/// <para>Name: RequestType</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: False</para>
@@ -140,7 +150,7 @@ namespace NetCoreForce.Models
 		public string RequestType { get; set; }
 
 		///<summary>
-		/// Request Status
+		/// Send Status
 		/// <para>Name: RequestStatus</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: False</para>
@@ -160,7 +170,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? CompletedDate { get; set; }
 
 		///<summary>
-		/// Should Enforce Channel Consent
+		/// Enforce Channel Consent
 		/// <para>Name: ShouldEnforceChannelConsent</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -170,7 +180,7 @@ namespace NetCoreForce.Models
 		public bool? ShouldEnforceChannelConsent { get; set; }
 
 		///<summary>
-		/// Allow Existing Session Status
+		/// Send Condition
 		/// <para>Name: AllowExistingSessionStatus</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: False</para>
@@ -210,6 +220,26 @@ namespace NetCoreForce.Models
 		public string PendingMessageIdentifiers { get; set; }
 
 		///<summary>
+		/// Pending Messaging User Ids
+		/// <para>Name: PendingMessagingEndUserIds</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "pendingMessagingEndUserIds")]
+		[Updateable(false), Createable(false)]
+		public string PendingMessagingEndUserIds { get; set; }
+
+		///<summary>
+		/// Pending Messaging User Platform Keys
+		/// <para>Name: PendingMeuPlatformKeys</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "pendingMeuPlatformKeys")]
+		[Updateable(false), Createable(false)]
+		public string PendingMeuPlatformKeys { get; set; }
+
+		///<summary>
 		/// In Progress Message Count
 		/// <para>Name: InProgressMessageCount</para>
 		/// <para>SF Type: int</para>
@@ -228,6 +258,36 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "inProgressMessageIdentifiers")]
 		[Updateable(false), Createable(false)]
 		public string InProgressMessageIdentifiers { get; set; }
+
+		///<summary>
+		/// In Progress Messaging User Ids
+		/// <para>Name: InProgressMessagingEndUserIds</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "inProgressMessagingEndUserIds")]
+		[Updateable(false), Createable(false)]
+		public string InProgressMessagingEndUserIds { get; set; }
+
+		///<summary>
+		/// In Progress Messaging Session Ids
+		/// <para>Name: InProgressMessagingSessionIds</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "inProgressMessagingSessionIds")]
+		[Updateable(false), Createable(false)]
+		public string InProgressMessagingSessionIds { get; set; }
+
+		///<summary>
+		/// In Progress Messaging Session Platform Keys
+		/// <para>Name: InProgressMeuPlatformKeys</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "inProgressMeuPlatformKeys")]
+		[Updateable(false), Createable(false)]
+		public string InProgressMeuPlatformKeys { get; set; }
 
 		///<summary>
 		/// Success Message Count
@@ -250,6 +310,16 @@ namespace NetCoreForce.Models
 		public string SuccessMessageIdentifiers { get; set; }
 
 		///<summary>
+		/// Success Message Platform Keys
+		/// <para>Name: SuccessMeuPlatformKeys</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "successMeuPlatformKeys")]
+		[Updateable(false), Createable(false)]
+		public string SuccessMeuPlatformKeys { get; set; }
+
+		///<summary>
 		/// Failed Message Count
 		/// <para>Name: FailedMessageCount</para>
 		/// <para>SF Type: int</para>
@@ -270,6 +340,16 @@ namespace NetCoreForce.Models
 		public string FailedMessageIdentifiers { get; set; }
 
 		///<summary>
+		/// Failed Message Platform Keys
+		/// <para>Name: FailedMeuPlatformKeys</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "failedMeuPlatformKeys")]
+		[Updateable(false), Createable(false)]
+		public string FailedMeuPlatformKeys { get; set; }
+
+		///<summary>
 		/// Failed Message Error Reasons
 		/// <para>Name: FailedMessageErrorReasons</para>
 		/// <para>SF Type: textarea</para>
@@ -280,7 +360,7 @@ namespace NetCoreForce.Models
 		public string FailedMessageErrorReasons { get; set; }
 
 		///<summary>
-		/// Type of Channel Consent to Enforce
+		/// Consent Type
 		/// <para>Name: RequestConsentType</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>

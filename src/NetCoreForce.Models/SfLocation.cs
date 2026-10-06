@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -225,6 +225,42 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "logo")]
 		[Updateable(false), Createable(false)]
 		public SfContentAsset Logo { get; set; }
+
+		///<summary>
+		/// Email
+		/// <para>Name: Email</para>
+		/// <para>SF Type: email</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "email")]
+		public string Email { get; set; }
+
+		///<summary>
+		/// Fax
+		/// <para>Name: Fax</para>
+		/// <para>SF Type: phone</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "fax")]
+		public string Fax { get; set; }
+
+		///<summary>
+		/// Mobile
+		/// <para>Name: Mobile</para>
+		/// <para>SF Type: phone</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "mobile")]
+		public string Mobile { get; set; }
+
+		///<summary>
+		/// Phone
+		/// <para>Name: Phone</para>
+		/// <para>SF Type: phone</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "phone")]
+		public string Phone { get; set; }
 
 	}
 }

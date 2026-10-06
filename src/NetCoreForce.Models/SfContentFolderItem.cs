@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -99,6 +99,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "contentSize")]
 		[Updateable(false), Createable(false)]
 		public int? ContentSize { get; set; }
+
+		///<summary>
+		/// Size
+		/// <para>Name: ContentSizeLong</para>
+		/// <para>SF Type: long</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "contentSizeLong")]
+		[Updateable(false), Createable(false)]
+		public string ContentSizeLong { get; set; }
 
 		///<summary>
 		/// File Extension

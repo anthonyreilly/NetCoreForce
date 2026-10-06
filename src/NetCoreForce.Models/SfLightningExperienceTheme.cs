@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// Theme ID
+		/// Lightning Experience Theme ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -190,6 +190,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "designSystemVersion")]
 		[Updateable(false), Createable(true)]
 		public string DesignSystemVersion { get; set; }
+
+		///<summary>
+		/// Is Dark Mode Enabled
+		/// <para>Name: IsDarkModeEnabled</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "isDarkModeEnabled")]
+		public bool? IsDarkModeEnabled { get; set; }
 
 	}
 }

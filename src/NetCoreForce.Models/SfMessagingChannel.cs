@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -288,6 +288,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "isRequireDoubleOptIn")]
 		public bool? IsRequireDoubleOptIn { get; set; }
+
+		///<summary>
+		/// Default Response Text
+		/// <para>Name: DefaultResponse</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "defaultResponse")]
+		public string DefaultResponse { get; set; }
 
 		///<summary>
 		/// Conversation Acknowledgement

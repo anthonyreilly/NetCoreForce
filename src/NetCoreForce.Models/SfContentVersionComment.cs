@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -33,7 +33,7 @@ namespace NetCoreForce.Models
 		public string Id { get; set; }
 
 		///<summary>
-		/// ContentDocument ID
+		/// Content Document ID
 		/// <para>Name: ContentDocumentId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: False</para>
@@ -51,7 +51,7 @@ namespace NetCoreForce.Models
 		public SfContentDocument ContentDocument { get; set; }
 
 		///<summary>
-		/// ContentVersion ID
+		/// Content Version ID
 		/// <para>Name: ContentVersionId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: False</para>

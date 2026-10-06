@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -189,7 +189,7 @@ namespace NetCoreForce.Models
 		public string Type { get; set; }
 
 		///<summary>
-		/// Progress Status
+		/// Status
 		/// <para>Name: ProgressStatus</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
@@ -479,6 +479,64 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "areMetricsLoggedToDataCloud")]
 		[Updateable(false), Createable(false)]
 		public bool? AreMetricsLoggedToDataCloud { get; set; }
+
+		///<summary>
+		/// Flow Version with Logs Enabled
+		/// <para>Name: LogsEnabledFlowVersion</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "logsEnabledFlowVersion")]
+		[Updateable(false), Createable(false)]
+		public int? LogsEnabledFlowVersion { get; set; }
+
+		///<summary>
+		/// Element Error Rate
+		/// <para>Name: Health</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "health")]
+		[Updateable(false), Createable(false)]
+		public int? Health { get; set; }
+
+		///<summary>
+		/// Element Runs
+		/// <para>Name: ElementEntries</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "elementEntries")]
+		[Updateable(false), Createable(false)]
+		public int? ElementEntries { get; set; }
+
+		///<summary>
+		/// Element Errors
+		/// <para>Name: ElementErrors</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "elementErrors")]
+		[Updateable(false), Createable(false)]
+		public int? ElementErrors { get; set; }
+
+		///<summary>
+		/// List ID
+		/// <para>Name: ListId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "listId")]
+		[Updateable(false), Createable(false)]
+		public string ListId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: Campaign
+		/// <para>RelationshipName: List</para>
+		///</summary>
+		[JsonProperty(PropertyName = "list")]
+		[Updateable(false), Createable(false)]
+		public SfCampaign List { get; set; }
 
 	}
 }

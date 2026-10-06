@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -120,6 +120,26 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
+		/// Last Viewed Date
+		/// <para>Name: LastViewedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastViewedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastViewedDate { get; set; }
+
+		///<summary>
+		/// Last Referenced Date
+		/// <para>Name: LastReferencedDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "lastReferencedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastReferencedDate { get; set; }
+
+		///<summary>
 		/// Approval Submission ID
 		/// <para>Name: ApprovalSubmissionId</para>
 		/// <para>SF Type: reference</para>
@@ -144,7 +164,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "relatedRecordId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string RelatedRecordId { get; set; }
 
 		///<summary>
@@ -154,7 +174,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "flowOrchestrationWorkItemId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string FlowOrchestrationWorkItemId { get; set; }
 
 		///<summary>
@@ -172,7 +192,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "status")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string Status { get; set; }
 
 		///<summary>
@@ -182,7 +202,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "assignedToId")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string AssignedToId { get; set; }
 
 		///<summary>
@@ -192,7 +212,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "reviewedById")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string ReviewedById { get; set; }
 
 		///<summary>
@@ -210,7 +230,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "comments")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string Comments { get; set; }
 
 		///<summary>
@@ -220,7 +240,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "relatedRecordObjectName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string RelatedRecordObjectName { get; set; }
 
 		///<summary>
@@ -230,7 +250,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "approvalConditionName")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public string ApprovalConditionName { get; set; }
 
 		///<summary>
@@ -240,7 +260,7 @@ namespace NetCoreForce.Models
 		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "reviewedDate")]
-		[Updateable(false), Createable(false)]
+		[Updateable(true), Createable(false)]
 		public DateTimeOffset? ReviewedDate { get; set; }
 
 	}

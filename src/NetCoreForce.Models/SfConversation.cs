@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -36,7 +36,6 @@ namespace NetCoreForce.Models
 		/// Conversation Name
 		/// <para>Name: Name</para>
 		/// <para>SF Type: string</para>
-		/// <para>AutoNumber field</para>
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "name")]
@@ -130,6 +129,16 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? StartTime { get; set; }
 
 		///<summary>
+		/// Milliseconds portion of Conversation Start time
+		/// <para>Name: StartTimeMilliSecs</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "startTimeMilliSecs")]
+		[Updateable(false), Createable(false)]
+		public int? StartTimeMilliSecs { get; set; }
+
+		///<summary>
 		/// Conversation End time
 		/// <para>Name: EndTime</para>
 		/// <para>SF Type: datetime</para>
@@ -138,6 +147,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "endTime")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? EndTime { get; set; }
+
+		///<summary>
+		/// Milliseconds portion of Conversation End time
+		/// <para>Name: EndTimeMilliSecs</para>
+		/// <para>SF Type: int</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "endTimeMilliSecs")]
+		[Updateable(false), Createable(false)]
+		public int? EndTimeMilliSecs { get; set; }
 
 		///<summary>
 		/// Conversation Channel ID

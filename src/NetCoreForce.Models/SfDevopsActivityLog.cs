@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,20 +10,20 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// Org Metric Scan Result
-	///<para>SObject Name: OrgMetricScanResult</para>
+	/// Activity History
+	///<para>SObject Name: DevopsActivityLog</para>
 	///<para>Custom Object: False</para>
 	///</summary>
-	public class SfOrgMetricScanResult : SObject
+	public class SfDevopsActivityLog : SObject
 	{
 		[JsonIgnore]
 		public static string SObjectTypeName
 		{
-			get { return "OrgMetricScanResult"; }
+			get { return "DevopsActivityLog"; }
 		}
 
 		///<summary>
-		/// Org Metric Scan Result ID
+		/// DevOps Activity Log ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -31,6 +31,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "id")]
 		[Updateable(false), Createable(false)]
 		public string Id { get; set; }
+
+		///<summary>
+		/// Owner ID
+		/// <para>Name: OwnerId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "ownerId")]
+		public string OwnerId { get; set; }
 
 		///<summary>
 		/// Deleted
@@ -43,13 +52,14 @@ namespace NetCoreForce.Models
 		public bool? IsDeleted { get; set; }
 
 		///<summary>
-		/// Org Metric Scan Result
+		/// Name
 		/// <para>Name: Name</para>
 		/// <para>SF Type: string</para>
+		/// <para>AutoNumber field</para>
 		/// <para>Nillable: False</para>
 		///</summary>
 		[JsonProperty(PropertyName = "name")]
-		[Updateable(false), Createable(true)]
+		[Updateable(false), Createable(false)]
 		public string Name { get; set; }
 
 		///<summary>
@@ -119,112 +129,131 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Org Metric Scan ID
-		/// <para>Name: OrgMetricScanSummaryId</para>
-		/// <para>SF Type: reference</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "orgMetricScanSummaryId")]
-		[Updateable(false), Createable(true)]
-		public string OrgMetricScanSummaryId { get; set; }
-
-		///<summary>
-		/// ReferenceTo: OrgMetricScanSummary
-		/// <para>RelationshipName: OrgMetricScanSummary</para>
-		///</summary>
-		[JsonProperty(PropertyName = "orgMetricScanSummary")]
-		[Updateable(false), Createable(false)]
-		public SfOrgMetricScanSummary OrgMetricScanSummary { get; set; }
-
-		///<summary>
-		/// Url
-		/// <para>Name: Url</para>
-		/// <para>SF Type: url</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "url")]
-		[Updateable(false), Createable(true)]
-		public string Url { get; set; }
-
-		///<summary>
-		/// Object
-		/// <para>Name: Object</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
-		///</summary>
-		[JsonProperty(PropertyName = "object")]
-		[Updateable(false), Createable(true)]
-		public string Object { get; set; }
-
-		///<summary>
-		/// Date
-		/// <para>Name: Date</para>
+		/// Last Viewed Date
+		/// <para>Name: LastViewedDate</para>
 		/// <para>SF Type: datetime</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "date")]
-		[Updateable(false), Createable(true)]
-		public DateTimeOffset? Date { get; set; }
+		[JsonProperty(PropertyName = "lastViewedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastViewedDate { get; set; }
 
 		///<summary>
-		/// Type
-		/// <para>Name: Type</para>
-		/// <para>SF Type: string</para>
+		/// Last Referenced Date
+		/// <para>Name: LastReferencedDate</para>
+		/// <para>SF Type: datetime</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "type")]
-		[Updateable(false), Createable(true)]
-		public string Type { get; set; }
+		[JsonProperty(PropertyName = "lastReferencedDate")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? LastReferencedDate { get; set; }
 
 		///<summary>
-		/// Profile
-		/// <para>Name: Profile</para>
-		/// <para>SF Type: int</para>
-		/// <para>Nillable: True</para>
+		/// Activity Date
+		/// <para>Name: ActivityDate</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "profile")]
-		[Updateable(false), Createable(true)]
-		public int? Profile { get; set; }
+		[JsonProperty(PropertyName = "activityDate")]
+		public DateTimeOffset? ActivityDate { get; set; }
 
 		///<summary>
-		/// User
-		/// <para>Name: User</para>
-		/// <para>SF Type: string</para>
-		/// <para>Nillable: True</para>
+		/// Activity Type
+		/// <para>Name: ActivityType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "user")]
-		[Updateable(false), Createable(true)]
-		public string User { get; set; }
+		[JsonProperty(PropertyName = "activityType")]
+		public string ActivityType { get; set; }
 
 		///<summary>
-		/// Quantity
-		/// <para>Name: Quantity</para>
-		/// <para>SF Type: int</para>
+		/// Description
+		/// <para>Name: Description</para>
+		/// <para>SF Type: textarea</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "quantity")]
-		[Updateable(false), Createable(true)]
-		public int? Quantity { get; set; }
+		[JsonProperty(PropertyName = "description")]
+		public string Description { get; set; }
 
 		///<summary>
 		/// Status
-		/// <para>Name: ItemStatus</para>
+		/// <para>Name: Status</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "itemStatus")]
-		[Updateable(false), Createable(true)]
-		public string ItemStatus { get; set; }
+		[JsonProperty(PropertyName = "status")]
+		public string Status { get; set; }
 
 		///<summary>
-		/// Flags
-		/// <para>Name: Flags</para>
-		/// <para>SF Type: int</para>
+		/// DevOps Activity Log ID
+		/// <para>Name: ParentActivityId</para>
+		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>
 		///</summary>
-		[JsonProperty(PropertyName = "flags")]
-		[Updateable(false), Createable(true)]
-		public int? Flags { get; set; }
+		[JsonProperty(PropertyName = "parentActivityId")]
+		public string ParentActivityId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: DevopsActivityLog
+		/// <para>RelationshipName: ParentActivity</para>
+		///</summary>
+		[JsonProperty(PropertyName = "parentActivity")]
+		[Updateable(false), Createable(false)]
+		public SfDevopsActivityLog ParentActivity { get; set; }
+
+		///<summary>
+		/// User ID
+		/// <para>Name: PerformedById</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "performedById")]
+		public string PerformedById { get; set; }
+
+		///<summary>
+		/// ReferenceTo: User
+		/// <para>RelationshipName: PerformedBy</para>
+		///</summary>
+		[JsonProperty(PropertyName = "performedBy")]
+		[Updateable(false), Createable(false)]
+		public SfUser PerformedBy { get; set; }
+
+		///<summary>
+		/// DevOps Request Info ID
+		/// <para>Name: DevopsRequestInfoId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "devopsRequestInfoId")]
+		public string DevopsRequestInfoId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: DevopsRequestInfo
+		/// <para>RelationshipName: DevopsRequestInfo</para>
+		///</summary>
+		[JsonProperty(PropertyName = "devopsRequestInfo")]
+		[Updateable(false), Createable(false)]
+		public SfDevopsRequestInfo DevopsRequestInfo { get; set; }
+
+		///<summary>
+		/// Activity
+		/// <para>Name: Activity</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "activity")]
+		[Updateable(false), Createable(false)]
+		public string Activity { get; set; }
+
+		///<summary>
+		/// Error Details
+		/// <para>Name: RequestInfoErrorDetails</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "requestInfoErrorDetails")]
+		[Updateable(false), Createable(false)]
+		public string RequestInfoErrorDetails { get; set; }
 
 	}
 }

@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -296,6 +296,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "optionsErrorBypassOccurred")]
 		[Updateable(false), Createable(false)]
 		public bool? OptionsErrorBypassOccurred { get; set; }
+
+		///<summary>
+		/// TopLevelErrorBypass
+		/// <para>Name: OptionsTopLevelErrorBypass</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsTopLevelErrorBypass")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsTopLevelErrorBypass { get; set; }
 
 		///<summary>
 		/// Policy Name

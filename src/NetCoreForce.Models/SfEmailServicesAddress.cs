@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// Address ID
+		/// Email Services Address ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -79,7 +79,7 @@ namespace NetCoreForce.Models
 		public string RunAsUserId { get; set; }
 
 		///<summary>
-		/// Service ID
+		/// Email Service ID
 		/// <para>Name: FunctionId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: False</para>
@@ -169,6 +169,15 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "systemModstamp")]
 		[Updateable(false), Createable(false)]
 		public DateTimeOffset? SystemModstamp { get; set; }
+
+		///<summary>
+		/// DKIM Required Domains
+		/// <para>Name: DkimRequiredDomains</para>
+		/// <para>SF Type: textarea</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "dkimRequiredDomains")]
+		public string DkimRequiredDomains { get; set; }
 
 	}
 }

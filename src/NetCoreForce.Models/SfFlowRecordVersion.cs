@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -195,7 +195,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? ActivatedDate { get; set; }
 
 		///<summary>
-		/// Progress Status
+		/// Status
 		/// <para>Name: ProgressStatus</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: True</para>
@@ -453,6 +453,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "areMetricsLoggedToDataCloud")]
 		[Updateable(false), Createable(false)]
 		public bool? AreMetricsLoggedToDataCloud { get; set; }
+
+		///<summary>
+		/// Access Type
+		/// <para>Name: AccessType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "accessType")]
+		[Updateable(false), Createable(false)]
+		public string AccessType { get; set; }
 
 	}
 }

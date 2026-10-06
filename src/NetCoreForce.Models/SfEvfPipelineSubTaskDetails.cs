@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -136,7 +136,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// Evf Pipeline Sub Task DetailsSub Task Name
+		/// Evf Pipeline Sub Task Details Sub Task Name
 		/// <para>Name: SubTaskName</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: False</para>
@@ -145,7 +145,7 @@ namespace NetCoreForce.Models
 		public string SubTaskName { get; set; }
 
 		///<summary>
-		/// Evf Pipeline Sub Task DetailsSub Task Status
+		/// Evf Pipeline Sub Task Details Sub Task Status
 		/// <para>Name: SubTaskStatus</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: False</para>

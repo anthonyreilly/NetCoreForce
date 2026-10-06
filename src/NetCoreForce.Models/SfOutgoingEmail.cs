@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -151,7 +151,7 @@ namespace NetCoreForce.Models
 		public SfEmailTemplate EmailTemplate { get; set; }
 
 		///<summary>
-		/// In Reply To
+		/// In-Reply-To
 		/// <para>Name: InReplyTo</para>
 		/// <para>SF Type: string</para>
 		/// <para>Nillable: True</para>

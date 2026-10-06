@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -186,6 +186,74 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "mrr")]
 		[Updateable(false), Createable(false)]
 		public decimal? Mrr { get; set; }
+
+		///<summary>
+		/// Billing Frequency
+		/// <para>Name: BillingFrequency</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "billingFrequency")]
+		[Updateable(false), Createable(false)]
+		public string BillingFrequency { get; set; }
+
+		///<summary>
+		/// Legal Entity ID
+		/// <para>Name: LegalEntityId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "legalEntityId")]
+		[Updateable(false), Createable(false)]
+		public string LegalEntityId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: LegalEntity
+		/// <para>RelationshipName: LegalEntity</para>
+		///</summary>
+		[JsonProperty(PropertyName = "legalEntity")]
+		[Updateable(false), Createable(false)]
+		public SfLegalEntity LegalEntity { get; set; }
+
+		///<summary>
+		/// Unit Price Uplift
+		/// <para>Name: UnitPriceUplift</para>
+		/// <para>SF Type: percent</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "unitPriceUplift")]
+		[Updateable(false), Createable(false)]
+		public double? UnitPriceUplift { get; set; }
+
+		///<summary>
+		/// Discount
+		/// <para>Name: Discount</para>
+		/// <para>SF Type: percent</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "discount")]
+		[Updateable(false), Createable(false)]
+		public double? Discount { get; set; }
+
+		///<summary>
+		/// Discount Amount
+		/// <para>Name: DiscountAmount</para>
+		/// <para>SF Type: currency</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "discountAmount")]
+		[Updateable(false), Createable(false)]
+		public decimal? DiscountAmount { get; set; }
+
+		///<summary>
+		/// Unit Price
+		/// <para>Name: UnitPrice</para>
+		/// <para>SF Type: currency</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "unitPrice")]
+		[Updateable(false), Createable(false)]
+		public decimal? UnitPrice { get; set; }
 
 	}
 }

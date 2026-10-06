@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -43,7 +43,7 @@ namespace NetCoreForce.Models
 		public DateTime? MetricsDate { get; set; }
 
 		///<summary>
-		/// Page ID
+		/// Visualforce Page ID
 		/// <para>Name: ApexPageId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: False</para>

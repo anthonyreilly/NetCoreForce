@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// MutingPermissionSet ID
+		/// Muting Permission Set ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -478,7 +478,7 @@ namespace NetCoreForce.Models
 		public bool? PermissionsSendSitRequests { get; set; }
 
 		///<summary>
-		/// Api Only User
+		/// API Only User
 		/// <para>Name: PermissionsApiUserOnly</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -917,6 +917,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "permissionsManageKnowledgeImportExport")]
 		public bool? PermissionsManageKnowledgeImportExport { get; set; }
+
+		///<summary>
+		/// Inbox Scheduling Proxy User
+		/// <para>Name: PermissionsUseInboxSchedulingOnBehalfOf</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsUseInboxSchedulingOnBehalfOf")]
+		public bool? PermissionsUseInboxSchedulingOnBehalfOf { get; set; }
 
 		///<summary>
 		/// Manage Email Templates
@@ -2359,7 +2368,7 @@ namespace NetCoreForce.Models
 		public bool? PermissionsConsentApiUpdate { get; set; }
 
 		///<summary>
-		/// Payments Api User
+		/// Payments API User
 		/// <para>Name: PermissionsPaymentsAPIUser</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -2656,15 +2665,6 @@ namespace NetCoreForce.Models
 		public bool? PermissionsViewDeveloperName { get; set; }
 
 		///<summary>
-		/// Waive Multi-Factor Authentication for Exempt Users
-		/// <para>Name: PermissionsBypassMFAForUiLogins</para>
-		/// <para>SF Type: boolean</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "permissionsBypassMFAForUiLogins")]
-		public bool? PermissionsBypassMFAForUiLogins { get; set; }
-
-		///<summary>
 		/// Allow consumer key and secret rotation
 		/// <para>Name: PermissionsClientSecretRotation</para>
 		/// <para>SF Type: boolean</para>
@@ -2800,7 +2800,7 @@ namespace NetCoreForce.Models
 		public bool? PermissionsDeleteCrMemoAndInvoice { get; set; }
 
 		///<summary>
-		/// Messaging for In-App and Web Agent
+		/// Enhanced Chat Rep
 		/// <para>Name: PermissionsEmbeddedMessagingAgent</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -3457,6 +3457,24 @@ namespace NetCoreForce.Models
 		public bool? PermissionsManageAgentforceServiceAgent { get; set; }
 
 		///<summary>
+		/// Gives employee users the ability to use Microsoft Teams to manage and resolve IT issues and service requests
+		/// <para>Name: PermissionsUseTeamsForEmployee</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsUseTeamsForEmployee")]
+		public bool? PermissionsUseTeamsForEmployee { get; set; }
+
+		///<summary>
+		/// Translate Enhanced Conversations
+		/// <para>Name: PermissionsCanTranslateScrt2Conversation</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsCanTranslateScrt2Conversation")]
+		public bool? PermissionsCanTranslateScrt2Conversation { get; set; }
+
+		///<summary>
 		/// Access Banking Service Agent
 		/// <para>Name: PermissionsAccessBankingServiceAgent</para>
 		/// <para>SF Type: boolean</para>
@@ -3466,13 +3484,22 @@ namespace NetCoreForce.Models
 		public bool? PermissionsAccessBankingServiceAgent { get; set; }
 
 		///<summary>
-		/// Prism Backoffice User
-		/// <para>Name: PermissionsPrismBackofficeUser</para>
+		/// Use Omnichannel Inventory Availability APIs
+		/// <para>Name: PermissionsAllowOCIAvailabilityAPIs</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "permissionsPrismBackofficeUser")]
-		public bool? PermissionsPrismBackofficeUser { get; set; }
+		[JsonProperty(PropertyName = "permissionsAllowOCIAvailabilityAPIs")]
+		public bool? PermissionsAllowOCIAvailabilityAPIs { get; set; }
+
+		///<summary>
+		/// Manage Omnichannel Inventory Records
+		/// <para>Name: PermissionsManageOCIRecords</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsManageOCIRecords")]
+		public bool? PermissionsManageOCIRecords { get; set; }
 
 		///<summary>
 		/// Provides users access to the Personalization Decisions invocable action.
@@ -3529,6 +3556,15 @@ namespace NetCoreForce.Models
 		public bool? PermissionsAccessPolicyAgent { get; set; }
 
 		///<summary>
+		/// MCPMetadataApi
+		/// <para>Name: PermissionsMCPMetadataApi</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsMCPMetadataApi")]
+		public bool? PermissionsMCPMetadataApi { get; set; }
+
+		///<summary>
 		/// Access to manage the template framework templates
 		/// <para>Name: PermissionsAppFrameworkManageTemplate</para>
 		/// <para>SF Type: boolean</para>
@@ -3538,6 +3574,42 @@ namespace NetCoreForce.Models
 		public bool? PermissionsAppFrameworkManageTemplate { get; set; }
 
 		///<summary>
+		/// Manage ITSM Teams
+		/// <para>Name: PermissionsUseTeamsForItSrvcs</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsUseTeamsForItSrvcs")]
+		public bool? PermissionsUseTeamsForItSrvcs { get; set; }
+
+		///<summary>
+		/// Allows users to view Named Query records
+		/// <para>Name: PermissionsViewApiNamedQueries</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewApiNamedQueries")]
+		public bool? PermissionsViewApiNamedQueries { get; set; }
+
+		///<summary>
+		/// Allows users to create, read, update and delete Named Query records
+		/// <para>Name: PermissionsManageApiNamedQueries</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsManageApiNamedQueries")]
+		public bool? PermissionsManageApiNamedQueries { get; set; }
+
+		///<summary>
+		/// Prism Backoffice User
+		/// <para>Name: PermissionsPrismBackofficeUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsPrismBackofficeUser")]
+		public bool? PermissionsPrismBackofficeUser { get; set; }
+
+		///<summary>
 		/// Financial Advisor Assistance Agent
 		/// <para>Name: PermissionsAccessWealthAdvisorAgent</para>
 		/// <para>SF Type: boolean</para>
@@ -3545,6 +3617,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "permissionsAccessWealthAdvisorAgent")]
 		public bool? PermissionsAccessWealthAdvisorAgent { get; set; }
+
+		///<summary>
+		/// Approve Uninstalled Connected Apps
+		/// <para>Name: PermissionsCanApproveUninstalledApps</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsCanApproveUninstalledApps")]
+		public bool? PermissionsCanApproveUninstalledApps { get; set; }
 
 		///<summary>
 		/// Users can perform the deployment operation on a store.
@@ -3608,6 +3689,558 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "permissionsTerritoryOperations")]
 		public bool? PermissionsTerritoryOperations { get; set; }
+
+		///<summary>
+		/// Access Orchestration Objects
+		/// <para>Name: PermissionsAccessOrchestrationObjects</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsAccessOrchestrationObjects")]
+		public bool? PermissionsAccessOrchestrationObjects { get; set; }
+
+		///<summary>
+		/// View Change Request Dashboard
+        
+		/// <para>Name: PermissionsViewChangeRequestDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewChangeRequestDshbrd")]
+		public bool? PermissionsViewChangeRequestDshbrd { get; set; }
+
+		///<summary>
+		/// View Incident Fulfiller Dashboard
+        
+		/// <para>Name: PermissionsViewIncidentFulfrDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewIncidentFulfrDshbrd")]
+		public bool? PermissionsViewIncidentFulfrDshbrd { get; set; }
+
+		///<summary>
+		/// View Problem Fulfiller Dashboard
+        
+		/// <para>Name: PermissionsViewProblemFulfrDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewProblemFulfrDshbrd")]
+		public bool? PermissionsViewProblemFulfrDshbrd { get; set; }
+
+		///<summary>
+		/// View Problem Manager Dashboard
+        
+		/// <para>Name: PermissionsViewProblemMgrDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewProblemMgrDshbrd")]
+		public bool? PermissionsViewProblemMgrDshbrd { get; set; }
+
+		///<summary>
+		/// View IT Leader Analytics Dashboard
+        
+		/// <para>Name: PermissionsViewItLeaderAnlytDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewItLeaderAnlytDshbrd")]
+		public bool? PermissionsViewItLeaderAnlytDshbrd { get; set; }
+
+		///<summary>
+		/// View Incident Analytics Dashboard
+        
+		/// <para>Name: PermissionsViewIncidentAnlytDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewIncidentAnlytDshbrd")]
+		public bool? PermissionsViewIncidentAnlytDshbrd { get; set; }
+
+		///<summary>
+		/// View Change Request Analytics Dashboard
+        
+		/// <para>Name: PermissionsViewChangeRequestAnlytDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewChangeRequestAnlytDshbrd")]
+		public bool? PermissionsViewChangeRequestAnlytDshbrd { get; set; }
+
+		///<summary>
+		/// View Case Analytics Dashboard
+        
+		/// <para>Name: PermissionsViewCaseAnlytDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewCaseAnlytDshbrd")]
+		public bool? PermissionsViewCaseAnlytDshbrd { get; set; }
+
+		///<summary>
+		/// Propose Major Incidents
+        
+		/// <para>Name: PermissionsProposeMajorIncidents</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsProposeMajorIncidents")]
+		public bool? PermissionsProposeMajorIncidents { get; set; }
+
+		///<summary>
+		/// Delete Incident
+        
+		/// <para>Name: PermissionsDeleteIncident</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsDeleteIncident")]
+		public bool? PermissionsDeleteIncident { get; set; }
+
+		///<summary>
+		/// Accept Risk For Problems
+        
+		/// <para>Name: PermissionsAcceptRiskForProblems</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsAcceptRiskForProblems")]
+		public bool? PermissionsAcceptRiskForProblems { get; set; }
+
+		///<summary>
+		/// Reopen Problems
+        
+		/// <para>Name: PermissionsReopenProblems</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsReopenProblems")]
+		public bool? PermissionsReopenProblems { get; set; }
+
+		///<summary>
+		/// Associate Incidents and Problems
+        
+		/// <para>Name: PermissionsAssocIncAndProb</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsAssocIncAndProb")]
+		public bool? PermissionsAssocIncAndProb { get; set; }
+
+		///<summary>
+		/// Associate Incidents and Change Requests
+        
+		/// <para>Name: PermissionsAssocIncAndChgRqst</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsAssocIncAndChgRqst")]
+		public bool? PermissionsAssocIncAndChgRqst { get; set; }
+
+		///<summary>
+		/// Delete Problem
+        
+		/// <para>Name: PermissionsDeleteProblem</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsDeleteProblem")]
+		public bool? PermissionsDeleteProblem { get; set; }
+
+		///<summary>
+		/// Sales Insights Admin
+		/// <para>Name: PermissionsSalesInsightsUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsSalesInsightsUser")]
+		public bool? PermissionsSalesInsightsUser { get; set; }
+
+		///<summary>
+		/// Delete Change Request
+        
+		/// <para>Name: PermissionsDeleteChangeRequest</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsDeleteChangeRequest")]
+		public bool? PermissionsDeleteChangeRequest { get; set; }
+
+		///<summary>
+		/// Allows user to read CMDB associations details.
+        
+		/// <para>Name: PermissionsReadConfigurationItemInformation</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsReadConfigurationItemInformation")]
+		public bool? PermissionsReadConfigurationItemInformation { get; set; }
+
+		///<summary>
+		/// View Agentic IT Service Desk App Home Page
+        
+		/// <para>Name: PermissionsViewItsmConsoleHmpg</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewItsmConsoleHmpg")]
+		public bool? PermissionsViewItsmConsoleHmpg { get; set; }
+
+		///<summary>
+		/// View Agentic IT Service Desk App as Fulfillers
+        
+		/// <para>Name: PermissionsViewItsmConsoleAsFulfr</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewItsmConsoleAsFulfr")]
+		public bool? PermissionsViewItsmConsoleAsFulfr { get; set; }
+
+		///<summary>
+		/// View Omnichannel Analytics Dashboard
+        
+		/// <para>Name: PermissionsViewOmnichnlAnlytDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewOmnichnlAnlytDshbrd")]
+		public bool? PermissionsViewOmnichnlAnlytDshbrd { get; set; }
+
+		///<summary>
+		/// View Knowledge Analytics Dashboard
+        
+		/// <para>Name: PermissionsViewKnwlgAnlytDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewKnwlgAnlytDshbrd")]
+		public bool? PermissionsViewKnwlgAnlytDshbrd { get; set; }
+
+		///<summary>
+		/// View Agentforce Analytics Dashboard
+        
+		/// <para>Name: PermissionsViewAgtfrceAnlytDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewAgtfrceAnlytDshbrd")]
+		public bool? PermissionsViewAgtfrceAnlytDshbrd { get; set; }
+
+		///<summary>
+		/// View Incident Manager Dashboard
+        
+		/// <para>Name: PermissionsViewIncidentMgrDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewIncidentMgrDshbrd")]
+		public bool? PermissionsViewIncidentMgrDshbrd { get; set; }
+
+		///<summary>
+		/// View Shield App Pages
+		/// <para>Name: PermissionsViewShieldApp</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewShieldApp")]
+		public bool? PermissionsViewShieldApp { get; set; }
+
+		///<summary>
+		/// Mobile Publisher QR Code Generator Playground User
+		/// <para>Name: PermissionsQrCodeGeneratorMobilePublisherPlayground</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsQrCodeGeneratorMobilePublisherPlayground")]
+		public bool? PermissionsQrCodeGeneratorMobilePublisherPlayground { get; set; }
+
+		///<summary>
+		/// Associate Change Requests and Problems
+        
+		/// <para>Name: PermissionsAssocChgRqstAndProb</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsAssocChgRqstAndProb")]
+		public bool? PermissionsAssocChgRqstAndProb { get; set; }
+
+		///<summary>
+		/// Associate Releases and Problems
+        
+		/// <para>Name: PermissionsAssocRelAndProb</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsAssocRelAndProb")]
+		public bool? PermissionsAssocRelAndProb { get; set; }
+
+		///<summary>
+		/// Associate Releases and Incidents
+        
+		/// <para>Name: PermissionsAssocRelAndInc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsAssocRelAndInc")]
+		public bool? PermissionsAssocRelAndInc { get; set; }
+
+		///<summary>
+		/// Associate Releases and Change Requests
+        
+		/// <para>Name: PermissionsAssocRelAndChgRqst</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsAssocRelAndChgRqst")]
+		public bool? PermissionsAssocRelAndChgRqst { get; set; }
+
+		///<summary>
+		/// Resolve Incident Associations
+        
+		/// <para>Name: PermissionsResolveIncAssoc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsResolveIncAssoc")]
+		public bool? PermissionsResolveIncAssoc { get; set; }
+
+		///<summary>
+		/// Resolve Problem Associations
+        
+		/// <para>Name: PermissionsResolveProbAssoc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsResolveProbAssoc")]
+		public bool? PermissionsResolveProbAssoc { get; set; }
+
+		///<summary>
+		/// Resolve Change Request Associations
+        
+		/// <para>Name: PermissionsResolveChgRqstAssoc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsResolveChgRqstAssoc")]
+		public bool? PermissionsResolveChgRqstAssoc { get; set; }
+
+		///<summary>
+		/// Provides user permission to access the Regrello App
+		/// <para>Name: PermissionsRegrelloUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsRegrelloUser")]
+		public bool? PermissionsRegrelloUser { get; set; }
+
+		///<summary>
+		/// Collect User Engagement Data for Insight Calculation
+		/// <para>Name: PermissionsUserInteractionInsights</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsUserInteractionInsights")]
+		public bool? PermissionsUserInteractionInsights { get; set; }
+
+		///<summary>
+		/// Delete Salesforce Files
+		/// <para>Name: PermissionsDeleteSalesforceFiles</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsDeleteSalesforceFiles")]
+		public bool? PermissionsDeleteSalesforceFiles { get; set; }
+
+		///<summary>
+		/// Manage Shared List Views
+		/// <para>Name: PermissionsManageSharedListViews</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsManageSharedListViews")]
+		public bool? PermissionsManageSharedListViews { get; set; }
+
+		///<summary>
+		/// Manage Opt Out for Customer Data Access
+		/// <para>Name: PermissionsManageCustomerDataOptOut</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsManageCustomerDataOptOut")]
+		public bool? PermissionsManageCustomerDataOptOut { get; set; }
+
+		///<summary>
+		/// Download Malicious Files
+		/// <para>Name: PermissionsDownloadMaliciousFiles</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsDownloadMaliciousFiles")]
+		public bool? PermissionsDownloadMaliciousFiles { get; set; }
+
+		///<summary>
+		/// Manage Malicious Files
+		/// <para>Name: PermissionsManageMaliciousFiles</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsManageMaliciousFiles")]
+		public bool? PermissionsManageMaliciousFiles { get; set; }
+
+		///<summary>
+		/// Enable ALM Simple Deploy User Permission 
+		/// <para>Name: PermissionsUserHasALMSimpleDeployAccess</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsUserHasALMSimpleDeployAccess")]
+		public bool? PermissionsUserHasALMSimpleDeployAccess { get; set; }
+
+		///<summary>
+		/// Provides access to Complaint Fulfilment Agent
+		/// <para>Name: PermissionsAccessToComplaintAgent</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsAccessToComplaintAgent")]
+		public bool? PermissionsAccessToComplaintAgent { get; set; }
+
+		///<summary>
+		/// Use Setup with Agentforce
+		/// <para>Name: PermissionsUseSetupWithAgentforce</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsUseSetupWithAgentforce")]
+		public bool? PermissionsUseSetupWithAgentforce { get; set; }
+
+		///<summary>
+		/// Use Any API Auth
+		/// <para>Name: PermissionsUseAnyApiAuth</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsUseAnyApiAuth")]
+		public bool? PermissionsUseAnyApiAuth { get; set; }
+
+		///<summary>
+		/// Grant Outbound Bundling
+		/// <para>Name: PermissionsGrantOutboundBundling</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsGrantOutboundBundling")]
+		public bool? PermissionsGrantOutboundBundling { get; set; }
+
+		///<summary>
+		/// Accept Inbound Bundling
+		/// <para>Name: PermissionsAcceptInboundBundling</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsAcceptInboundBundling")]
+		public bool? PermissionsAcceptInboundBundling { get; set; }
+
+		///<summary>
+		/// View Health Assessments
+		/// <para>Name: PermissionsViewHealthAssessments</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsViewHealthAssessments")]
+		public bool? PermissionsViewHealthAssessments { get; set; }
+
+		///<summary>
+		/// Manage Health Assessments
+		/// <para>Name: PermissionsManageHealthAssessments</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsManageHealthAssessments")]
+		public bool? PermissionsManageHealthAssessments { get; set; }
+
+		///<summary>
+		/// Use restricted theme
+		/// <para>Name: PermissionsUseRestrictedTheme</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsUseRestrictedTheme")]
+		public bool? PermissionsUseRestrictedTheme { get; set; }
+
+		///<summary>
+		/// Modify Transaction Security Policies
+		/// <para>Name: PermissionsModifyTransactionSecurityPolicies</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsModifyTransactionSecurityPolicies")]
+		public bool? PermissionsModifyTransactionSecurityPolicies { get; set; }
+
+		///<summary>
+		/// Suites Agent Edit Escalation
+		/// <para>Name: PermissionsSuitesAgentEscalationPerm</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsSuitesAgentEscalationPerm")]
+		public bool? PermissionsSuitesAgentEscalationPerm { get; set; }
+
+		///<summary>
+		/// Use generic Intelligent Document Processing
+		/// <para>Name: PermissionsIntelligentDocumentProcessing</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsIntelligentDocumentProcessing")]
+		public bool? PermissionsIntelligentDocumentProcessing { get; set; }
+
+		///<summary>
+		/// Manage Integration Portals
+		/// <para>Name: PermissionsManageIntegrationPortals</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsManageIntegrationPortals")]
+		public bool? PermissionsManageIntegrationPortals { get; set; }
+
+		///<summary>
+		/// Ungoverned External Table Access
+		/// <para>Name: PermissionsCanQueryForeignTables</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsCanQueryForeignTables")]
+		public bool? PermissionsCanQueryForeignTables { get; set; }
+
+		///<summary>
+		/// Run My Day User
+		/// <para>Name: PermissionsRunMyDayUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsRunMyDayUser")]
+		public bool? PermissionsRunMyDayUser { get; set; }
+
+		///<summary>
+		/// Slackbot UI
+		/// <para>Name: PermissionsSlackbotUi</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsSlackbotUi")]
+		public bool? PermissionsSlackbotUi { get; set; }
+
+		///<summary>
+		/// Agentforce Meeting Concierge User
+		/// <para>Name: PermissionsMeetingEngagementUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "permissionsMeetingEngagementUser")]
+		public bool? PermissionsMeetingEngagementUser { get; set; }
 
 	}
 }

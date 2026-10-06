@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -471,6 +471,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "endedByType")]
 		[Updateable(false), Createable(true)]
 		public string EndedByType { get; set; }
+
+		///<summary>
+		/// Suspended By Type
+		/// <para>Name: SuspendedByType</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "suspendedByType")]
+		[Updateable(false), Createable(true)]
+		public string SuspendedByType { get; set; }
 
 		///<summary>
 		/// Concatenated Messaging Channel and Messaging User

@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -167,6 +167,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "violationType")]
 		[Updateable(false), Createable(false)]
 		public string ViolationType { get; set; }
+
+		///<summary>
+		/// Impact
+		/// <para>Name: ViolationImpact</para>
+		/// <para>SF Type: picklist</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "violationImpact")]
+		[Updateable(false), Createable(false)]
+		public string ViolationImpact { get; set; }
 
 	}
 }

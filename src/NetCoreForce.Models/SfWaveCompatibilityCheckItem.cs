@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -139,7 +139,7 @@ namespace NetCoreForce.Models
 		public string TaskResult { get; set; }
 
 		///<summary>
-		/// Wave Template Api Name
+		/// Wave Template API Name
 		/// <para>Name: TemplateApiName</para>
 		/// <para>SF Type: picklist</para>
 		/// <para>Nillable: False</para>

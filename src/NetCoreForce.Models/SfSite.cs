@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -367,6 +367,26 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "optionsIsSlashSRemovedSite")]
 		[Updateable(false), Createable(false)]
 		public bool? OptionsIsSlashSRemovedSite { get; set; }
+
+		///<summary>
+		/// Allow Invitation APIs for Guest Users
+		/// <para>Name: OptionsAllowInvitationsAPI</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsAllowInvitationsAPI")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsAllowInvitationsAPI { get; set; }
+
+		///<summary>
+		/// RtlEnabled
+		/// <para>Name: OptionsRtlEnabled</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "optionsRtlEnabled")]
+		[Updateable(false), Createable(false)]
+		public bool? OptionsRtlEnabled { get; set; }
 
 		///<summary>
 		/// Site Description

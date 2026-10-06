@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -56,7 +56,7 @@ namespace NetCoreForce.Models
 		/// Language
 		/// <para>Name: Language</para>
 		/// <para>SF Type: picklist</para>
-		/// <para>Nillable: False</para>
+		/// <para>Nillable: True</para>
 		///</summary>
 		[JsonProperty(PropertyName = "language")]
 		[Updateable(false), Createable(false)]
@@ -559,7 +559,7 @@ namespace NetCoreForce.Models
 		public bool? MaximumPermissionsSendSitRequests { get; set; }
 
 		///<summary>
-		/// Api Only User
+		/// API Only User
 		/// <para>Name: MaximumPermissionsApiUserOnly</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -1047,6 +1047,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "maximumPermissionsManageKnowledgeImportExport")]
 		[Updateable(false), Createable(false)]
 		public bool? MaximumPermissionsManageKnowledgeImportExport { get; set; }
+
+		///<summary>
+		/// Inbox Scheduling Proxy User
+		/// <para>Name: MaximumPermissionsUseInboxSchedulingOnBehalfOf</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsUseInboxSchedulingOnBehalfOf")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsUseInboxSchedulingOnBehalfOf { get; set; }
 
 		///<summary>
 		/// Manage Email Templates
@@ -2649,7 +2659,7 @@ namespace NetCoreForce.Models
 		public bool? MaximumPermissionsConsentApiUpdate { get; set; }
 
 		///<summary>
-		/// Payments Api User
+		/// Payments API User
 		/// <para>Name: MaximumPermissionsPaymentsAPIUser</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -2979,16 +2989,6 @@ namespace NetCoreForce.Models
 		public bool? MaximumPermissionsViewDeveloperName { get; set; }
 
 		///<summary>
-		/// Waive Multi-Factor Authentication for Exempt Users
-		/// <para>Name: MaximumPermissionsBypassMFAForUiLogins</para>
-		/// <para>SF Type: boolean</para>
-		/// <para>Nillable: False</para>
-		///</summary>
-		[JsonProperty(PropertyName = "maximumPermissionsBypassMFAForUiLogins")]
-		[Updateable(false), Createable(false)]
-		public bool? MaximumPermissionsBypassMFAForUiLogins { get; set; }
-
-		///<summary>
 		/// Allow consumer key and secret rotation
 		/// <para>Name: MaximumPermissionsClientSecretRotation</para>
 		/// <para>SF Type: boolean</para>
@@ -3139,7 +3139,7 @@ namespace NetCoreForce.Models
 		public bool? MaximumPermissionsDeleteCrMemoAndInvoice { get; set; }
 
 		///<summary>
-		/// Messaging for In-App and Web Agent
+		/// Enhanced Chat Rep
 		/// <para>Name: MaximumPermissionsEmbeddedMessagingAgent</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
@@ -3869,6 +3869,26 @@ namespace NetCoreForce.Models
 		public bool? MaximumPermissionsManageAgentforceServiceAgent { get; set; }
 
 		///<summary>
+		/// Gives employee users the ability to use Microsoft Teams to manage and resolve IT issues and service requests
+		/// <para>Name: MaximumPermissionsUseTeamsForEmployee</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsUseTeamsForEmployee")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsUseTeamsForEmployee { get; set; }
+
+		///<summary>
+		/// Translate Enhanced Conversations
+		/// <para>Name: MaximumPermissionsCanTranslateScrt2Conversation</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsCanTranslateScrt2Conversation")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsCanTranslateScrt2Conversation { get; set; }
+
+		///<summary>
 		/// Access Banking Service Agent
 		/// <para>Name: MaximumPermissionsAccessBankingServiceAgent</para>
 		/// <para>SF Type: boolean</para>
@@ -3879,14 +3899,24 @@ namespace NetCoreForce.Models
 		public bool? MaximumPermissionsAccessBankingServiceAgent { get; set; }
 
 		///<summary>
-		/// Prism Backoffice User
-		/// <para>Name: MaximumPermissionsPrismBackofficeUser</para>
+		/// Use Omnichannel Inventory Availability APIs
+		/// <para>Name: MaximumPermissionsAllowOCIAvailabilityAPIs</para>
 		/// <para>SF Type: boolean</para>
 		/// <para>Nillable: False</para>
 		///</summary>
-		[JsonProperty(PropertyName = "maximumPermissionsPrismBackofficeUser")]
+		[JsonProperty(PropertyName = "maximumPermissionsAllowOCIAvailabilityAPIs")]
 		[Updateable(false), Createable(false)]
-		public bool? MaximumPermissionsPrismBackofficeUser { get; set; }
+		public bool? MaximumPermissionsAllowOCIAvailabilityAPIs { get; set; }
+
+		///<summary>
+		/// Manage Omnichannel Inventory Records
+		/// <para>Name: MaximumPermissionsManageOCIRecords</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsManageOCIRecords")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsManageOCIRecords { get; set; }
 
 		///<summary>
 		/// Provides users access to the Personalization Decisions invocable action.
@@ -3949,6 +3979,16 @@ namespace NetCoreForce.Models
 		public bool? MaximumPermissionsAccessPolicyAgent { get; set; }
 
 		///<summary>
+		/// MCPMetadataApi
+		/// <para>Name: MaximumPermissionsMCPMetadataApi</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsMCPMetadataApi")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsMCPMetadataApi { get; set; }
+
+		///<summary>
 		/// Access to manage the template framework templates
 		/// <para>Name: MaximumPermissionsAppFrameworkManageTemplate</para>
 		/// <para>SF Type: boolean</para>
@@ -3959,6 +3999,46 @@ namespace NetCoreForce.Models
 		public bool? MaximumPermissionsAppFrameworkManageTemplate { get; set; }
 
 		///<summary>
+		/// Manage ITSM Teams
+		/// <para>Name: MaximumPermissionsUseTeamsForItSrvcs</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsUseTeamsForItSrvcs")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsUseTeamsForItSrvcs { get; set; }
+
+		///<summary>
+		/// Allows users to view Named Query records
+		/// <para>Name: MaximumPermissionsViewApiNamedQueries</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewApiNamedQueries")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewApiNamedQueries { get; set; }
+
+		///<summary>
+		/// Allows users to create, read, update and delete Named Query records
+		/// <para>Name: MaximumPermissionsManageApiNamedQueries</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsManageApiNamedQueries")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsManageApiNamedQueries { get; set; }
+
+		///<summary>
+		/// Prism Backoffice User
+		/// <para>Name: MaximumPermissionsPrismBackofficeUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsPrismBackofficeUser")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsPrismBackofficeUser { get; set; }
+
+		///<summary>
 		/// Financial Advisor Assistance Agent
 		/// <para>Name: MaximumPermissionsAccessWealthAdvisorAgent</para>
 		/// <para>SF Type: boolean</para>
@@ -3967,6 +4047,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "maximumPermissionsAccessWealthAdvisorAgent")]
 		[Updateable(false), Createable(false)]
 		public bool? MaximumPermissionsAccessWealthAdvisorAgent { get; set; }
+
+		///<summary>
+		/// Approve Uninstalled Connected Apps
+		/// <para>Name: MaximumPermissionsCanApproveUninstalledApps</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsCanApproveUninstalledApps")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsCanApproveUninstalledApps { get; set; }
 
 		///<summary>
 		/// Users can perform the deployment operation on a store.
@@ -4037,6 +4127,616 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "maximumPermissionsTerritoryOperations")]
 		[Updateable(false), Createable(false)]
 		public bool? MaximumPermissionsTerritoryOperations { get; set; }
+
+		///<summary>
+		/// Access Orchestration Objects
+		/// <para>Name: MaximumPermissionsAccessOrchestrationObjects</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsAccessOrchestrationObjects")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsAccessOrchestrationObjects { get; set; }
+
+		///<summary>
+		/// View Change Request Dashboard
+        
+		/// <para>Name: MaximumPermissionsViewChangeRequestDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewChangeRequestDshbrd")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewChangeRequestDshbrd { get; set; }
+
+		///<summary>
+		/// View Incident Fulfiller Dashboard
+        
+		/// <para>Name: MaximumPermissionsViewIncidentFulfrDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewIncidentFulfrDshbrd")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewIncidentFulfrDshbrd { get; set; }
+
+		///<summary>
+		/// View Problem Fulfiller Dashboard
+        
+		/// <para>Name: MaximumPermissionsViewProblemFulfrDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewProblemFulfrDshbrd")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewProblemFulfrDshbrd { get; set; }
+
+		///<summary>
+		/// View Problem Manager Dashboard
+        
+		/// <para>Name: MaximumPermissionsViewProblemMgrDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewProblemMgrDshbrd")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewProblemMgrDshbrd { get; set; }
+
+		///<summary>
+		/// View IT Leader Analytics Dashboard
+        
+		/// <para>Name: MaximumPermissionsViewItLeaderAnlytDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewItLeaderAnlytDshbrd")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewItLeaderAnlytDshbrd { get; set; }
+
+		///<summary>
+		/// View Incident Analytics Dashboard
+        
+		/// <para>Name: MaximumPermissionsViewIncidentAnlytDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewIncidentAnlytDshbrd")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewIncidentAnlytDshbrd { get; set; }
+
+		///<summary>
+		/// View Change Request Analytics Dashboard
+        
+		/// <para>Name: MaximumPermissionsViewChangeRequestAnlytDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewChangeRequestAnlytDshbrd")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewChangeRequestAnlytDshbrd { get; set; }
+
+		///<summary>
+		/// View Case Analytics Dashboard
+        
+		/// <para>Name: MaximumPermissionsViewCaseAnlytDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewCaseAnlytDshbrd")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewCaseAnlytDshbrd { get; set; }
+
+		///<summary>
+		/// Propose Major Incidents
+        
+		/// <para>Name: MaximumPermissionsProposeMajorIncidents</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsProposeMajorIncidents")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsProposeMajorIncidents { get; set; }
+
+		///<summary>
+		/// Delete Incident
+        
+		/// <para>Name: MaximumPermissionsDeleteIncident</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsDeleteIncident")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsDeleteIncident { get; set; }
+
+		///<summary>
+		/// Accept Risk For Problems
+        
+		/// <para>Name: MaximumPermissionsAcceptRiskForProblems</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsAcceptRiskForProblems")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsAcceptRiskForProblems { get; set; }
+
+		///<summary>
+		/// Reopen Problems
+        
+		/// <para>Name: MaximumPermissionsReopenProblems</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsReopenProblems")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsReopenProblems { get; set; }
+
+		///<summary>
+		/// Associate Incidents and Problems
+        
+		/// <para>Name: MaximumPermissionsAssocIncAndProb</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsAssocIncAndProb")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsAssocIncAndProb { get; set; }
+
+		///<summary>
+		/// Associate Incidents and Change Requests
+        
+		/// <para>Name: MaximumPermissionsAssocIncAndChgRqst</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsAssocIncAndChgRqst")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsAssocIncAndChgRqst { get; set; }
+
+		///<summary>
+		/// Delete Problem
+        
+		/// <para>Name: MaximumPermissionsDeleteProblem</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsDeleteProblem")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsDeleteProblem { get; set; }
+
+		///<summary>
+		/// Sales Insights Admin
+		/// <para>Name: MaximumPermissionsSalesInsightsUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsSalesInsightsUser")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsSalesInsightsUser { get; set; }
+
+		///<summary>
+		/// Delete Change Request
+        
+		/// <para>Name: MaximumPermissionsDeleteChangeRequest</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsDeleteChangeRequest")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsDeleteChangeRequest { get; set; }
+
+		///<summary>
+		/// Allows user to read CMDB associations details.
+        
+		/// <para>Name: MaximumPermissionsReadConfigurationItemInformation</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsReadConfigurationItemInformation")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsReadConfigurationItemInformation { get; set; }
+
+		///<summary>
+		/// View Agentic IT Service Desk App Home Page
+        
+		/// <para>Name: MaximumPermissionsViewItsmConsoleHmpg</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewItsmConsoleHmpg")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewItsmConsoleHmpg { get; set; }
+
+		///<summary>
+		/// View Agentic IT Service Desk App as Fulfillers
+        
+		/// <para>Name: MaximumPermissionsViewItsmConsoleAsFulfr</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewItsmConsoleAsFulfr")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewItsmConsoleAsFulfr { get; set; }
+
+		///<summary>
+		/// View Omnichannel Analytics Dashboard
+        
+		/// <para>Name: MaximumPermissionsViewOmnichnlAnlytDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewOmnichnlAnlytDshbrd")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewOmnichnlAnlytDshbrd { get; set; }
+
+		///<summary>
+		/// View Knowledge Analytics Dashboard
+        
+		/// <para>Name: MaximumPermissionsViewKnwlgAnlytDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewKnwlgAnlytDshbrd")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewKnwlgAnlytDshbrd { get; set; }
+
+		///<summary>
+		/// View Agentforce Analytics Dashboard
+        
+		/// <para>Name: MaximumPermissionsViewAgtfrceAnlytDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewAgtfrceAnlytDshbrd")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewAgtfrceAnlytDshbrd { get; set; }
+
+		///<summary>
+		/// View Incident Manager Dashboard
+        
+		/// <para>Name: MaximumPermissionsViewIncidentMgrDshbrd</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewIncidentMgrDshbrd")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewIncidentMgrDshbrd { get; set; }
+
+		///<summary>
+		/// View Shield App Pages
+		/// <para>Name: MaximumPermissionsViewShieldApp</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewShieldApp")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewShieldApp { get; set; }
+
+		///<summary>
+		/// Mobile Publisher QR Code Generator Playground User
+		/// <para>Name: MaximumPermissionsQrCodeGeneratorMobilePublisherPlayground</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsQrCodeGeneratorMobilePublisherPlayground")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsQrCodeGeneratorMobilePublisherPlayground { get; set; }
+
+		///<summary>
+		/// Associate Change Requests and Problems
+        
+		/// <para>Name: MaximumPermissionsAssocChgRqstAndProb</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsAssocChgRqstAndProb")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsAssocChgRqstAndProb { get; set; }
+
+		///<summary>
+		/// Associate Releases and Problems
+        
+		/// <para>Name: MaximumPermissionsAssocRelAndProb</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsAssocRelAndProb")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsAssocRelAndProb { get; set; }
+
+		///<summary>
+		/// Associate Releases and Incidents
+        
+		/// <para>Name: MaximumPermissionsAssocRelAndInc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsAssocRelAndInc")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsAssocRelAndInc { get; set; }
+
+		///<summary>
+		/// Associate Releases and Change Requests
+        
+		/// <para>Name: MaximumPermissionsAssocRelAndChgRqst</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsAssocRelAndChgRqst")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsAssocRelAndChgRqst { get; set; }
+
+		///<summary>
+		/// Resolve Incident Associations
+        
+		/// <para>Name: MaximumPermissionsResolveIncAssoc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsResolveIncAssoc")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsResolveIncAssoc { get; set; }
+
+		///<summary>
+		/// Resolve Problem Associations
+        
+		/// <para>Name: MaximumPermissionsResolveProbAssoc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsResolveProbAssoc")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsResolveProbAssoc { get; set; }
+
+		///<summary>
+		/// Resolve Change Request Associations
+        
+		/// <para>Name: MaximumPermissionsResolveChgRqstAssoc</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsResolveChgRqstAssoc")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsResolveChgRqstAssoc { get; set; }
+
+		///<summary>
+		/// Provides user permission to access the Regrello App
+		/// <para>Name: MaximumPermissionsRegrelloUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsRegrelloUser")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsRegrelloUser { get; set; }
+
+		///<summary>
+		/// Collect User Engagement Data for Insight Calculation
+		/// <para>Name: MaximumPermissionsUserInteractionInsights</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsUserInteractionInsights")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsUserInteractionInsights { get; set; }
+
+		///<summary>
+		/// Delete Salesforce Files
+		/// <para>Name: MaximumPermissionsDeleteSalesforceFiles</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsDeleteSalesforceFiles")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsDeleteSalesforceFiles { get; set; }
+
+		///<summary>
+		/// Manage Shared List Views
+		/// <para>Name: MaximumPermissionsManageSharedListViews</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsManageSharedListViews")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsManageSharedListViews { get; set; }
+
+		///<summary>
+		/// Manage Opt Out for Customer Data Access
+		/// <para>Name: MaximumPermissionsManageCustomerDataOptOut</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsManageCustomerDataOptOut")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsManageCustomerDataOptOut { get; set; }
+
+		///<summary>
+		/// Download Malicious Files
+		/// <para>Name: MaximumPermissionsDownloadMaliciousFiles</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsDownloadMaliciousFiles")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsDownloadMaliciousFiles { get; set; }
+
+		///<summary>
+		/// Manage Malicious Files
+		/// <para>Name: MaximumPermissionsManageMaliciousFiles</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsManageMaliciousFiles")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsManageMaliciousFiles { get; set; }
+
+		///<summary>
+		/// Enable ALM Simple Deploy User Permission 
+		/// <para>Name: MaximumPermissionsUserHasALMSimpleDeployAccess</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsUserHasALMSimpleDeployAccess")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsUserHasALMSimpleDeployAccess { get; set; }
+
+		///<summary>
+		/// Provides access to Complaint Fulfilment Agent
+		/// <para>Name: MaximumPermissionsAccessToComplaintAgent</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsAccessToComplaintAgent")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsAccessToComplaintAgent { get; set; }
+
+		///<summary>
+		/// Use Setup with Agentforce
+		/// <para>Name: MaximumPermissionsUseSetupWithAgentforce</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsUseSetupWithAgentforce")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsUseSetupWithAgentforce { get; set; }
+
+		///<summary>
+		/// Use Any API Auth
+		/// <para>Name: MaximumPermissionsUseAnyApiAuth</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsUseAnyApiAuth")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsUseAnyApiAuth { get; set; }
+
+		///<summary>
+		/// Grant Outbound Bundling
+		/// <para>Name: MaximumPermissionsGrantOutboundBundling</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsGrantOutboundBundling")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsGrantOutboundBundling { get; set; }
+
+		///<summary>
+		/// Accept Inbound Bundling
+		/// <para>Name: MaximumPermissionsAcceptInboundBundling</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsAcceptInboundBundling")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsAcceptInboundBundling { get; set; }
+
+		///<summary>
+		/// View Health Assessments
+		/// <para>Name: MaximumPermissionsViewHealthAssessments</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsViewHealthAssessments")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsViewHealthAssessments { get; set; }
+
+		///<summary>
+		/// Manage Health Assessments
+		/// <para>Name: MaximumPermissionsManageHealthAssessments</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsManageHealthAssessments")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsManageHealthAssessments { get; set; }
+
+		///<summary>
+		/// Use restricted theme
+		/// <para>Name: MaximumPermissionsUseRestrictedTheme</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsUseRestrictedTheme")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsUseRestrictedTheme { get; set; }
+
+		///<summary>
+		/// Modify Transaction Security Policies
+		/// <para>Name: MaximumPermissionsModifyTransactionSecurityPolicies</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsModifyTransactionSecurityPolicies")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsModifyTransactionSecurityPolicies { get; set; }
+
+		///<summary>
+		/// Suites Agent Edit Escalation
+		/// <para>Name: MaximumPermissionsSuitesAgentEscalationPerm</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsSuitesAgentEscalationPerm")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsSuitesAgentEscalationPerm { get; set; }
+
+		///<summary>
+		/// Use generic Intelligent Document Processing
+		/// <para>Name: MaximumPermissionsIntelligentDocumentProcessing</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsIntelligentDocumentProcessing")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsIntelligentDocumentProcessing { get; set; }
+
+		///<summary>
+		/// Manage Integration Portals
+		/// <para>Name: MaximumPermissionsManageIntegrationPortals</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsManageIntegrationPortals")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsManageIntegrationPortals { get; set; }
+
+		///<summary>
+		/// Ungoverned External Table Access
+		/// <para>Name: MaximumPermissionsCanQueryForeignTables</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsCanQueryForeignTables")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsCanQueryForeignTables { get; set; }
+
+		///<summary>
+		/// Run My Day User
+		/// <para>Name: MaximumPermissionsRunMyDayUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsRunMyDayUser")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsRunMyDayUser { get; set; }
+
+		///<summary>
+		/// Slackbot UI
+		/// <para>Name: MaximumPermissionsSlackbotUi</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsSlackbotUi")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsSlackbotUi { get; set; }
+
+		///<summary>
+		/// Agentforce Meeting Concierge User
+		/// <para>Name: MaximumPermissionsMeetingEngagementUser</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "maximumPermissionsMeetingEngagementUser")]
+		[Updateable(false), Createable(false)]
+		public bool? MaximumPermissionsMeetingEngagementUser { get; set; }
 
 		///<summary>
 		/// Used Licenses

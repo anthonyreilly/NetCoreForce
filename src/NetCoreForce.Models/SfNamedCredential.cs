@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -199,7 +199,7 @@ namespace NetCoreForce.Models
 		public bool? CalloutOptionsAllowMergeFieldsInBody { get; set; }
 
 		///<summary>
-		/// Auth. Provider ID
+		/// Authentication Provider ID
 		/// <para>Name: AuthProviderId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: True</para>

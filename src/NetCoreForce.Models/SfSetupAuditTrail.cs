@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -79,6 +79,16 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "createdBy")]
 		[Updateable(false), Createable(false)]
 		public SfUser CreatedBy { get; set; }
+
+		///<summary>
+		/// System Modstamp
+		/// <para>Name: SystemModstamp</para>
+		/// <para>SF Type: datetime</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "systemModstamp")]
+		[Updateable(false), Createable(false)]
+		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
 		/// Display

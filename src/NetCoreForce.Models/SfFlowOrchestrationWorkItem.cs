@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -256,6 +256,24 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "elapsedTimeSinceAsgntInSec")]
 		[Updateable(false), Createable(false)]
 		public string ElapsedTimeSinceAsgntInSec { get; set; }
+
+		///<summary>
+		/// Orchestration Work Item ID
+		/// <para>Name: ParentWorkItemId</para>
+		/// <para>SF Type: reference</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "parentWorkItemId")]
+		[Updateable(true), Createable(false)]
+		public string ParentWorkItemId { get; set; }
+
+		///<summary>
+		/// ReferenceTo: FlowOrchestrationWorkItem
+		/// <para>RelationshipName: ParentWorkItem</para>
+		///</summary>
+		[JsonProperty(PropertyName = "parentWorkItem")]
+		[Updateable(false), Createable(false)]
+		public SfFlowOrchestrationWorkItem ParentWorkItem { get; set; }
 
 	}
 }

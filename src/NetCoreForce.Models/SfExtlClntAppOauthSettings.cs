@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace NetCoreForce.Models
 {
 	///<summary>
-	/// External Client Application OAuth Settings
+	/// External Client App Oauth Settings
 	///<para>SObject Name: ExtlClntAppOauthSettings</para>
 	///<para>Custom Object: False</para>
 	///</summary>
@@ -23,7 +23,7 @@ namespace NetCoreForce.Models
 		}
 
 		///<summary>
-		/// External Client Application OAuth Settings ID
+		/// External Client App Oauth Settings ID
 		/// <para>Name: Id</para>
 		/// <para>SF Type: id</para>
 		/// <para>Nillable: False</para>
@@ -149,7 +149,7 @@ namespace NetCoreForce.Models
 		public DateTimeOffset? SystemModstamp { get; set; }
 
 		///<summary>
-		/// External App ID
+		/// External Client Application ID
 		/// <para>Name: ExternalClientApplicationId</para>
 		/// <para>SF Type: reference</para>
 		/// <para>Nillable: False</para>
@@ -505,6 +505,36 @@ namespace NetCoreForce.Models
 		[JsonProperty(PropertyName = "oauthScopesPWDLESS_LOGIN_API")]
 		[Updateable(false), Createable(false)]
 		public bool? OauthScopesPWDLESS_LOGIN_API { get; set; }
+
+		///<summary>
+		/// MCP_API
+		/// <para>Name: OauthScopesMCP_API</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "oauthScopesMCP_API")]
+		[Updateable(false), Createable(false)]
+		public bool? OauthScopesMCP_API { get; set; }
+
+		///<summary>
+		/// SCRT_API
+		/// <para>Name: OauthScopesSCRT_API</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "oauthScopesSCRT_API")]
+		[Updateable(false), Createable(false)]
+		public bool? OauthScopesSCRT_API { get; set; }
+
+		///<summary>
+		/// DATA_CLOUD_USER_CLAIMS
+		/// <para>Name: OauthScopesDATA_CLOUD_USER_CLAIMS</para>
+		/// <para>SF Type: boolean</para>
+		/// <para>Nillable: False</para>
+		///</summary>
+		[JsonProperty(PropertyName = "oauthScopesDATA_CLOUD_USER_CLAIMS")]
+		[Updateable(false), Createable(false)]
+		public bool? OauthScopesDATA_CLOUD_USER_CLAIMS { get; set; }
 
 		///<summary>
 		/// OAuth Link

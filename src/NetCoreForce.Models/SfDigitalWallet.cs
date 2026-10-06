@@ -1,4 +1,4 @@
-// SF API version v64.0
+// SF API version v67.0
 // Custom fields included: False
 // Relationship objects included: True
 
@@ -430,6 +430,15 @@ namespace NetCoreForce.Models
 		///</summary>
 		[JsonProperty(PropertyName = "billingName")]
 		public string BillingName { get; set; }
+
+		///<summary>
+		/// Extended Payment Method Type
+		/// <para>Name: ExtendedPaymentMethodType</para>
+		/// <para>SF Type: string</para>
+		/// <para>Nillable: True</para>
+		///</summary>
+		[JsonProperty(PropertyName = "extendedPaymentMethodType")]
+		public string ExtendedPaymentMethodType { get; set; }
 
 	}
 }
