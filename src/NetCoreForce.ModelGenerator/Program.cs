@@ -26,7 +26,7 @@ namespace NetCoreForce.ModelGenerator
 
         const string defaultConfigFilename = "modelgenerator_config.json";
 
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             var app = new CommandLineApplication();
             app.Name = "modelgenerator";
@@ -93,7 +93,7 @@ namespace NetCoreForce.ModelGenerator
                     CommandOptionType.MultipleValue);
 
                 var outputDirectory = command.Option("-d|--output-directory <directory>",
-                    "Destination directory for generated file(s)",
+                    "Destination directory for generated file(s), created if it doesn't exist. Defaults to the current directory",
                     CommandOptionType.SingleValue);
 
                 var suffixOption = command.Option("-s|--suffix <suffix>",
@@ -154,7 +154,7 @@ namespace NetCoreForce.ModelGenerator
                         else
                         {
                             Console.WriteLine($"Invalid auth method input, valid inputs: {ValidAuthTypesInputString}");
-                            return -1;
+                            return 1;
                         }
                     }
 
@@ -206,6 +206,12 @@ namespace NetCoreForce.ModelGenerator
                         SaveConfig(config, configFileOption.Value());
                     }
 
+                    //check the output directory before logging in, so an invalid path fails fast
+                    if (!EnsureOutputDirectory(config))
+                    {
+                        return 1;
+                    }
+
                     Console.Write("Generate models for " + string.Join(", ", config.Objects));
 
                     if (customOption.HasValue())
@@ -224,15 +230,17 @@ namespace NetCoreForce.ModelGenerator
 
             try
             {
-                app.Execute(args);
+                return app.Execute(args);
             }
             catch (CommandParsingException ex)
             {
                 Console.WriteLine(ex.Message);
+                return 1;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Unable to execute application: {0}", ex.Message);
+                return 1;
             }
         }
 
@@ -319,6 +327,50 @@ namespace NetCoreForce.ModelGenerator
             }
 
             return config;
+        }
+
+        /// <summary>
+        /// Resolves the output directory, defaulting to the current directory, and creates it if it doesn't exist
+        /// </summary>
+        /// <returns>True if the output directory exists or was created</returns>
+        private static bool EnsureOutputDirectory(GenConfig config)
+        {
+            string outputDirectory = config.OutputDirectory;
+
+            if (string.IsNullOrEmpty(outputDirectory))
+            {
+                outputDirectory = Directory.GetCurrentDirectory();
+            }
+
+            //expand a leading ~ to the user's home directory, since it isn't expanded by the shell when set in the config file
+            if (outputDirectory == "~" || outputDirectory.StartsWith("~/") || outputDirectory.StartsWith("~\\"))
+            {
+                string homeDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                outputDirectory = Path.Combine(homeDirectory, outputDirectory.Substring(1).TrimStart('/', '\\'));
+            }
+
+            try
+            {
+                outputDirectory = Path.GetFullPath(outputDirectory);
+                config.OutputDirectory = outputDirectory;
+
+                if (Directory.Exists(outputDirectory))
+                {
+                    Console.WriteLine("Output directory: " + outputDirectory);
+                }
+                else
+                {
+                    Directory.CreateDirectory(outputDirectory);
+                    Console.WriteLine("Created output directory: " + outputDirectory);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Unable to create output directory {outputDirectory}: {ex.Message}");
+                return false;
+            }
         }
 
         private static bool SaveConfig(GenConfig config, string filePath = null)
@@ -438,14 +490,6 @@ namespace NetCoreForce.ModelGenerator
             }
 
             var global = await client.DescribeGlobal();
-
-            if (string.IsNullOrEmpty(config.OutputDirectory))
-            {
-                config.OutputDirectory = Directory.GetCurrentDirectory();
-            }
-
-            Console.WriteLine("Output directory: " + config.OutputDirectory);
-
 
             bool generateAll = false;
             if (config.Objects != null && config.Objects.Count > 0)

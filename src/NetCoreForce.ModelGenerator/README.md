@@ -69,7 +69,7 @@ Any required settings not given as options or in a config file are prompted for 
 | `--config-file` | Config file path |
 | `--save-config` | Save the options to the config file given by `--config-file`, or `modelgenerator_config.json` by default |
 | `-o\|--objects <objects>` | Object to generate. Repeat for multiple objects, or use `all` |
-| `-d\|--output-directory <directory>` | Destination directory for the generated files |
+| `-d\|--output-directory <directory>` | Destination directory for the generated files, created if it doesn't exist. Defaults to the current directory. |
 | `-p\|--prefix <prefix>` | Prefix for class names, e.g. `Sf` for `SfAccount` |
 | `-s\|--suffix <suffix>` | Suffix for class names, e.g. `Sf` for `AccountSf` |
 | `-n\|--namespace <namespace>` | Namespace for the generated classes |
