@@ -2,7 +2,7 @@
 
 Pre-generated model classes for the standard Salesforce objects, for use with [NetCoreForce.Client](https://www.nuget.org/packages/NetCoreForce.Client/).
 
-The models were generated from a standard Salesforce org using Salesforce API v64.0. They don't include any custom objects or custom fields.
+The models were generated from a standard Salesforce org using Salesforce API v67.0. They don't include any custom objects or custom fields.
 
 Documentation: [https://netcoreforce.com/](https://netcoreforce.com/)
 
