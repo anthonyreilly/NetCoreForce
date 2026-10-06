@@ -23,11 +23,17 @@ namespace NetCoreForce.Client
         private const string UserAgent = "netcoreforce-client";
         private const string IntrospectTokenEndpointUrl = "https://login.salesforce.com/services/oauth2/introspect";
         private const string TokenRequestEndpointUrl = "https://login.salesforce.com/services/oauth2/token";
+        //best practice is to reuse HttpClient - a new instance per login would mean a new connection pool per login
+        private static readonly HttpClient _SharedHttpClient;
         private readonly HttpClient _httpClient;
-        private readonly bool _disposeHttpClient;
+
+        static AuthenticationClient()
+        {
+            _SharedHttpClient = HttpClientFactory.CreateHttpClient();
+        }
 
         /// <summary>
-        /// Initialize the AuthenticationClient with the libary's default Salesforce API version, and default HttpClient
+        /// Initialize the AuthenticationClient with the libary's default Salesforce API version, and the default shared static HttpClient
         /// <para>See the DefaultApiVersion property</para>
         /// </summary>
         public AuthenticationClient() : this(null, null) { }
@@ -36,7 +42,7 @@ namespace NetCoreForce.Client
         /// Initialize the AuthenticationClient with the specified Salesforce API version and/or HttpClient
         /// </summary>
         /// <param name="apiVersion">Target Salesforce API version</param>
-        /// <param name="httpClient">Custom HttpClient (Optional). Not disposed by this client; the caller retains ownership.</param>
+        /// <param name="httpClient">Optional HttpClient object. Defaults to a shared static instance for best performance. Not disposed by this client; the caller retains ownership.</param>
         public AuthenticationClient(string apiVersion = null, HttpClient httpClient = null)
         {
             if (!string.IsNullOrEmpty(apiVersion))
@@ -48,9 +54,8 @@ namespace NetCoreForce.Client
                 ApiVersion = DefaultApiVersion;
             }
 
-            //only dispose the HttpClient if this client created it
-            _disposeHttpClient = httpClient == null;
-            _httpClient = httpClient ?? new HttpClient();
+            //use the instance client when supplied, otherwise use the default shared instance.
+            _httpClient = httpClient ?? _SharedHttpClient;
         }
 
         /// <summary>
@@ -369,15 +374,11 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
-        /// Dispose client - only disposes the HttpClient if this client created it.
-        /// <para>A caller-supplied HttpClient is owned by the caller, and is left as-is.</para>
+        /// Dispose client - does not dispose the HttpClient.
+        /// <para>A caller-supplied HttpClient is owned by the caller, and the shared static HttpClient is left as-is.</para>
         /// </summary>
         public void Dispose()
         {
-            if (_disposeHttpClient)
-            {
-                _httpClient.Dispose();
-            }
         }
     }
 }

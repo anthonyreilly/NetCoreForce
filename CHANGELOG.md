@@ -3,8 +3,7 @@
 ### 2026-10-06 v6.0.1
 
 * fix: ForceClient, JsonClient and AuthenticationClient no longer dispose an HttpClient passed in by the caller - the caller owns it
-    - AuthenticationClient still disposes the HttpClient it creates when none is passed
-    - ForceClient now disposes the AuthenticationClient it uses internally to log in
+* fix: AuthenticationClient now uses a shared static HttpClient by default, like ForceClient and JsonClient, instead of creating a new HttpClient (and connection pool) per instance - repeated logins no longer leak sockets
 
 ### 2026-10-06 v6.0.0
 

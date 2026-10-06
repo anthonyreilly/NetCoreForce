@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 using NetCoreForce.Client;
 using Xunit;
@@ -45,6 +46,32 @@ namespace NetCoreForce.Client.Tests
             client.Dispose();
 
             await AssertHttpClientUsable(httpClient);
+        }
+
+        [Fact]
+        public void AuthenticationClientDefaultUsesSharedHttpClient()
+        {
+            // a new HttpClient per instance means a new connection pool per login
+            AuthenticationClient client1 = new AuthenticationClient();
+            AuthenticationClient client2 = new AuthenticationClient();
+
+            HttpClient httpClient1 = GetHttpClient(client1);
+            HttpClient httpClient2 = GetHttpClient(client2);
+
+            Assert.Same(httpClient1, httpClient2);
+
+            client1.Dispose();
+            client2.Dispose();
+
+            // throws ObjectDisposedException if the shared HttpClient was disposed
+            httpClient1.CancelPendingRequests();
+        }
+
+        private static HttpClient GetHttpClient(AuthenticationClient client)
+        {
+            FieldInfo field = typeof(AuthenticationClient).GetField("_httpClient", BindingFlags.NonPublic | BindingFlags.Instance);
+
+            return (HttpClient)field.GetValue(client);
         }
 
         private static HttpClient CreateHttpClient()
