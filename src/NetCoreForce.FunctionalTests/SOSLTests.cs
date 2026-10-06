@@ -119,6 +119,44 @@ namespace NetCoreForce.FunctionalTests
         }
 
         /// <summary>
+        /// Search terms escaped with SoqlHelpers.EscapeSosl should match literally, without the reserved characters causing a query error
+        /// </summary>
+        //manual only, see class summary
+#if XUNIT_V3
+        [Fact(Explicit = true)]
+#else
+        [Fact(Skip = ManualOnlyReason)]
+#endif
+        public async Task EscapedSearch()
+        {
+            ForceClient client = await forceClientFixture.GetForceClient();
+
+            string searchTerm = CreateSearchTerm();
+            const string nameSuffix = " (Smith & Co)";
+            List<string> sampleIds = new List<string>();
+
+            try
+            {
+                await CreateSampleAccounts(client, searchTerm, sampleIds, nameSuffix);
+
+                string escapedTerm = SoqlHelpers.EscapeSosl(searchTerm + nameSuffix);
+
+                SearchResult<SfAccount> result = await SearchUntilFound(
+                    () => client.Search<SfAccount>(string.Format("FIND {{{0}}} IN NAME FIELDS RETURNING Account (Id, Name)", escapedTerm)),
+                    r => r.Id,
+                    sampleIds);
+
+                Assert.NotNull(result);
+                Assert.NotNull(result.SearchRecords);
+                Assert.Equal(sampleIds.OrderBy(id => id), result.SearchRecords.Select(r => r.Id).OrderBy(id => id));
+            }
+            finally
+            {
+                await DeleteSampleAccounts(client, sampleIds);
+            }
+        }
+
+        /// <summary>
         /// Create a unique, letters-only search term so the search only matches records created by the current test
         /// </summary>
         private static string CreateSearchTerm()
@@ -133,13 +171,13 @@ namespace NetCoreForce.FunctionalTests
         /// Create sample accounts containing the search term, adding each Id to createdIds as soon as it is created
         /// so that any records created before a failure are still cleaned up
         /// </summary>
-        private async Task CreateSampleAccounts(ForceClient client, string searchTerm, List<string> createdIds)
+        private async Task CreateSampleAccounts(ForceClient client, string searchTerm, List<string> createdIds, string nameSuffix = "")
         {
             for (int i = 1; i <= SampleRecordCount; i++)
             {
                 SfAccount account = new SfAccount()
                 {
-                    Name = string.Format("SOSL Test {0} {1}", searchTerm, i)
+                    Name = string.Format("SOSL Test {0} {1}{2}", searchTerm, i, nameSuffix)
                 };
 
                 CreateResponse createResp = await client.CreateRecord<SfAccount>(SfAccount.SObjectTypeName, account);
@@ -148,23 +186,9 @@ namespace NetCoreForce.FunctionalTests
             }
         }
 
-        /// <summary>
-        /// Delete sample accounts. Each delete is attempted even if a previous one fails, and failures are logged
-        /// rather than thrown so they don't hide the original test failure.
-        /// </summary>
-        private async Task DeleteSampleAccounts(ForceClient client, List<string> sampleIds)
+        private Task DeleteSampleAccounts(ForceClient client, List<string> sampleIds)
         {
-            foreach (string id in sampleIds)
-            {
-                try
-                {
-                    await client.DeleteRecord(SfAccount.SObjectTypeName, id);
-                }
-                catch (Exception ex)
-                {
-                    output.WriteLine("Failed to delete sample account {0}: {1}", id, ex.Message);
-                }
-            }
+            return TestRecords.DeleteAsync(client, SfAccount.SObjectTypeName, sampleIds, output);
         }
 
         /// <summary>

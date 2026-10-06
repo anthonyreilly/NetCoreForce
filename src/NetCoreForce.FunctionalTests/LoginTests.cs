@@ -35,6 +35,27 @@ namespace NetCoreForce.FunctionalTests
         }
 
         [Fact]
+        public async Task GetUserInfoFromIdentityUrl()
+        {
+            AuthInfo authInfo = forceClientFixture.AuthInfo;
+
+            AuthenticationClient auth = new AuthenticationClient();
+
+            await auth.UsernamePasswordAsync(authInfo.ClientId, authInfo.ClientSecret,
+                    authInfo.Username, authInfo.Password, authInfo.TokenRequestEndpoint);
+
+            ForceClient client = new ForceClient(auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken);
+
+            //the identity URL from the token response should pass GetUserInfo's HTTPS URL validation
+            UserInfo userInfo = await client.GetUserInfo(auth.AccessInfo.Id);
+
+            Assert.NotNull(userInfo);
+            Assert.False(string.IsNullOrEmpty(userInfo.UserId));
+            Assert.False(string.IsNullOrEmpty(userInfo.OrganizationId));
+            Assert.Equal(authInfo.Username, userInfo.Username, ignoreCase: true);
+        }
+
+        [Fact]
         public void UsernamePasswordLoginAuthInfo()
         {
             AuthInfo authInfo = forceClientFixture.AuthInfo;

@@ -923,13 +923,21 @@ namespace NetCoreForce.Client
         /// Get current user's info via Identity URL
         /// <para>https://developer.salesforce.com/docs/atlas.en-us.mobile_sdk.meta/mobile_sdk/oauth_using_identity_urls.htm</para>
         /// </summary>
-        /// <param name="identityUrl"></param>
+        /// <param name="identityUrl">Identity URL, from the Id property of the access token response. The access token is sent to this URL, so it must not come from an untrusted source.</param>
         /// <returns>UserInfo</returns>
+        /// <exception cref="ArgumentException">Thrown when the identity URL is not an absolute HTTPS URL</exception>
         public async Task<UserInfo> GetUserInfo(string identityUrl)
         {
+            if (string.IsNullOrEmpty(identityUrl)) throw new ArgumentNullException(nameof(identityUrl));
+
+            if (!Uri.TryCreate(identityUrl, UriKind.Absolute, out Uri identityUri) || identityUri.Scheme != Uri.UriSchemeHttps)
+            {
+                throw new ArgumentException("Identity URL must be an absolute HTTPS URL", nameof(identityUrl));
+            }
+
             JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-            return await client.HttpGetAsync<UserInfo>(new Uri(identityUrl)).ConfigureAwait(false);
+            return await client.HttpGetAsync<UserInfo>(identityUri).ConfigureAwait(false);
         }
 
         /// <summary>

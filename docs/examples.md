@@ -218,6 +218,30 @@ Authentication failures throw a [`ForceAuthException`](xref:NetCoreForce.Client.
 
 ---
 
+## Building Queries Safely
+
+`Query` and `Search` send the query string as-is. If you build a query from user input or another untrusted source, escape the values first to prevent SOQL/SOSL injection, e.g. an input of `x' OR Name != '` turning a filtered query into one that returns every record. [`SoqlHelpers`](xref:NetCoreForce.Client.SoqlHelpers) provides escaping for each context:
+
+```csharp
+// Values inside a quoted string literal
+string name = SoqlHelpers.EscapeString(userInput);
+List<SfAccount> accounts = await client.Query<SfAccount>($"SELECT Id, Name FROM Account WHERE Name = '{name}'");
+
+// Values inside a LIKE pattern - also escapes the _ and % wildcards so they are matched literally
+string prefix = SoqlHelpers.EscapeLike(userInput);
+List<SfAccount> matches = await client.Query<SfAccount>($"SELECT Id, Name FROM Account WHERE Name LIKE '{prefix}%'");
+
+// Search terms inside a SOSL FIND clause
+string term = SoqlHelpers.EscapeSosl(userInput);
+SearchResult<SfAccount> result = await client.Search<SfAccount>($"FIND {{{term}}} IN NAME FIELDS RETURNING Account (Id, Name)");
+```
+
+Values used outside of quotes, such as numbers, dates or field names, can't be made safe by escaping. Validate or parse them instead, e.g. with `int.Parse`, or by checking field names against a list of allowed values.
+
+Record IDs, object names and field names passed to methods such as `GetObjectById`, `UpdateRecord` and `DeleteRecord` are validated by the client. Values that could change the request URL, such as `../Contact/003i000001AbCdE`, throw an `ArgumentException`. External ID values passed to `InsertOrUpdateRecord` are URL-encoded.
+
+---
+
 ## Custom Objects and Fields
 
 The models in NetCoreForce.Models only include standard objects and fields. To work with custom objects and fields, generate models for your org with the [NetCoreForce.ModelGenerator](https://www.nuget.org/packages/NetCoreForce.ModelGenerator/) CLI tool:

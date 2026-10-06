@@ -199,6 +199,111 @@ namespace NetCoreForce.Client.Tests
             Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/composite/batch", result);
         }
 
+        // Injection prevention - values must not be able to change the structure of the URL,
+        // e.g. an ID of "../Contact/003XXXXXXXXXXXXXXX" would otherwise resolve to a different object
+
+        [Theory]
+        [InlineData("../Contact/003XXXXXXXXXXXXXXX")]
+        [InlineData("..\\Contact\\003XXXXXXXXXXXXXXX")]
+        [InlineData("..")]
+        [InlineData(".")]
+        [InlineData("001XXXXXXXXXXXXXXX?fields=Name")]
+        [InlineData("001XXXXXXXXXXXXXXX#fragment")]
+        [InlineData("%2e%2e")]
+        public void InvalidObjectIdThrows(string objectId)
+        {
+            Assert.Throws<ArgumentException>(() => UriFormatter.SObjectRows(_instanceUrl, _apiVersion, _sObjectName, objectId));
+            Assert.Throws<ArgumentException>(() => UriFormatter.SObjectBlobRetrieve(_instanceUrl, _apiVersion, _sObjectName, objectId));
+            Assert.Throws<ArgumentException>(() => UriFormatter.CompositeSubRequest(_apiVersion, _sObjectName, objectId));
+        }
+
+        [Theory]
+        [InlineData("Account/../User")]
+        [InlineData("../Account")]
+        [InlineData("Account?x=1")]
+        [InlineData("Account#fragment")]
+        [InlineData("Account Name")]
+        [InlineData("Acc.ount")]
+        [InlineData("1Account")]
+        public void InvalidApiNameThrows(string apiName)
+        {
+            Assert.Throws<ArgumentException>(() => UriFormatter.SObjectRows(_instanceUrl, _apiVersion, apiName, _objectId));
+            Assert.Throws<ArgumentException>(() => UriFormatter.SObjectBasicInformation(_instanceUrl, _apiVersion, apiName));
+            Assert.Throws<ArgumentException>(() => UriFormatter.SObjectDescribe(_instanceUrl, _apiVersion, apiName));
+            Assert.Throws<ArgumentException>(() => UriFormatter.SObjectTree(_instanceUrl, _apiVersion, apiName));
+            Assert.Throws<ArgumentException>(() => UriFormatter.CompositeSubRequest(_apiVersion, apiName, _objectId));
+            Assert.Throws<ArgumentException>(() => UriFormatter.SObjectRowsByExternalId(_instanceUrl, _apiVersion, _sObjectName, apiName, "externalvalue"));
+            Assert.Throws<ArgumentException>(() => UriFormatter.SObjectBlobRetrieve(_instanceUrl, _apiVersion, _sObjectName, _objectId, apiName));
+        }
+
+        [Theory]
+        [InlineData("Custom_Object__c")]
+        [InlineData("ns__Custom_Object__c")]
+        [InlineData("Custom_Event__e")]
+        [InlineData("Custom_Metadata__mdt")]
+        public void ValidApiName(string apiName)
+        {
+            string result = UriFormatter.SObjectRows(_instanceUrl, _apiVersion, apiName, _objectId).AbsoluteUri;
+
+            Assert.Equal($"https://xxx.salesforce.com/services/data/v57.0/sobjects/{apiName}/001XXXXXXXXXXXXXXX", result);
+        }
+
+        [Fact]
+        public void SObjectRowsByExternalIdEncodesValue()
+        {
+            string result = UriFormatter.SObjectRowsByExternalId(_instanceUrl, _apiVersion, _sObjectName, "externalfield", "A/B#C?D E%F").AbsoluteUri;
+
+            Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/sobjects/Account/externalfield/A%2FB%23C%3FD%20E%25F", result);
+        }
+
+        [Fact]
+        public void SObjectRowsByExternalIdEncodesTraversal()
+        {
+            string result = UriFormatter.SObjectRowsByExternalId(_instanceUrl, _apiVersion, _sObjectName, "externalfield", "../../query").AbsoluteUri;
+
+            Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/sobjects/Account/externalfield/..%2F..%2Fquery", result);
+        }
+
+        [Theory]
+        [InlineData("..")]
+        [InlineData(".")]
+        public void SObjectRowsByExternalIdRelativeValueThrows(string fieldValue)
+        {
+            Assert.Throws<ArgumentException>(() => UriFormatter.SObjectRowsByExternalId(_instanceUrl, _apiVersion, _sObjectName, "externalfield", fieldValue));
+        }
+
+        [Fact]
+        public void SObjectRowsByExternalIdNullValueThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => UriFormatter.SObjectRowsByExternalId(_instanceUrl, _apiVersion, _sObjectName, "externalfield", null));
+        }
+
+        [Fact]
+        public void CompositeSubRequestReference()
+        {
+            string result = UriFormatter.CompositeSubRequest("v59.0", "Account", "@{newAccount.id}");
+
+            Assert.Equal("/services/data/v59.0/sobjects/Account/@{newAccount.id}", result);
+        }
+
+        [Fact]
+        public void ApexUri()
+        {
+            string result = UriFormatter.ApexUri(_instanceUrl, "MyService/v1/items?status=active").AbsoluteUri;
+
+            Assert.Equal("https://xxx.salesforce.com/services/apexrest/MyService/v1/items?status=active", result);
+        }
+
+        [Theory]
+        [InlineData("../data/v57.0/query")]
+        [InlineData("MyService/../../data/v57.0/query")]
+        [InlineData("MyService\\..\\..\\data")]
+        [InlineData("%2e%2e/data/v57.0/query")]
+        public void ApexUriRelativePathThrows(string apexResourceUrl)
+        {
+            Assert.Throws<ArgumentException>(() => UriFormatter.ApexUri(_instanceUrl, apexResourceUrl));
+        }
+
         //TODO: Auth URLs
 
         [Fact]

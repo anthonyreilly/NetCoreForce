@@ -1,5 +1,16 @@
 # Changelog
 
+### Unreleased
+
+* security: prevent URL path injection via record IDs and object/field names
+    - object and field API names (e.g. sObjectTypeName, external ID field name, blob field) must be valid API names, otherwise an ArgumentException is thrown
+    - record IDs containing `/ \ ? # %`, or equal to `.` or `..`, now throw an ArgumentException - previously a value such as `../Contact/003XXXXXXXXXXXXXXX` could redirect a request to a different object or resource
+    - Apex REST resource URLs containing `.` or `..` path segments now throw an ArgumentException
+* fix: external ID values are now URL-encoded in upsert requests, so values containing characters such as `/ ? # %` or spaces work correctly
+* fix: SObjectRowsByExternalId now validates that the external ID value is not null or empty
+* feat: add SoqlHelpers with EscapeString, EscapeLike, and EscapeSosl, for safely including untrusted values in SOQL and SOSL queries
+* security: GetUserInfo now requires an absolute HTTPS identity URL, since the access token is sent to that URL
+
 ### 2026-10-01 v6.0.0
 
 * feat: add net10.0 and .net481 support

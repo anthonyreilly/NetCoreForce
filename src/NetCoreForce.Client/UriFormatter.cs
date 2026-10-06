@@ -1,6 +1,7 @@
 using NetCoreForce.Client.Models;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace NetCoreForce.Client
 {
@@ -11,6 +12,52 @@ namespace NetCoreForce.Client
     */
     public static class UriFormatter
     {
+        // API names of objects and fields, e.g. Account, Custom_Object__c, ns__Custom_Object__c
+        private static readonly Regex ApiNameRegex = new Regex(@"^[A-Za-z][A-Za-z0-9_]*$", RegexOptions.Compiled);
+
+        // characters that would change the structure of the URL if included in a path segment.
+        // backslash is included since it is treated as a path separator in http URIs.
+        private static readonly char[] UnsafePathSegmentChars = new char[] { '/', '\\', '?', '#', '%' };
+
+        /// <summary>
+        /// Validate an object or field API name before including it in a URL
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown when the value is not a valid API name</exception>
+        private static void ValidateApiName(string value, string paramName)
+        {
+            if (!ApiNameRegex.IsMatch(value))
+            {
+                throw new ArgumentException($"'{value}' is not a valid object or field API name", paramName);
+            }
+        }
+
+        /// <summary>
+        /// Validate a value such as a record ID before including it as a single URL path segment.
+        /// Prevents values like "../Contact/003XXXXXXXXXXXXXXX" from redirecting the request to a different resource.
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown when the value contains characters that would change the URL structure</exception>
+        private static void ValidatePathSegment(string value, string paramName)
+        {
+            if (value == "." || value == ".." || value.IndexOfAny(UnsafePathSegmentChars) != -1)
+            {
+                throw new ArgumentException($"'{value}' contains characters that are not allowed in a record ID", paramName);
+            }
+        }
+
+        /// <summary>
+        /// URL-encode an arbitrary value, such as an external ID value, for use as a single URL path segment
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown when the value is a relative path segment</exception>
+        private static string EscapePathSegment(string value, string paramName)
+        {
+            if (value == "." || value == "..")
+            {
+                throw new ArgumentException($"'{value}' is not allowed as a URL path segment", paramName);
+            }
+
+            return Uri.EscapeDataString(value);
+        }
+
         /// <summary>
         /// SF Base URI
         /// </summary>
@@ -36,6 +83,17 @@ namespace NetCoreForce.Client
             if (string.IsNullOrEmpty(apexResourceUrl)) throw new ArgumentNullException(nameof(apexResourceUrl));
 
             // format: /
+
+            // nested paths and query strings are allowed, but relative segments would resolve outside of services/apexrest
+            string resourcePath = apexResourceUrl.Split('?')[0];
+            foreach (string segment in resourcePath.Split('/', '\\'))
+            {
+                string unescapedSegment = Uri.UnescapeDataString(segment);
+                if (unescapedSegment == "." || unescapedSegment == "..")
+                {
+                    throw new ArgumentException($"'{apexResourceUrl}' contains relative path segments, which are not allowed", nameof(apexResourceUrl));
+                }
+            }
 
             Uri uri = new Uri(new Uri(instanceUrl), $"services/apexrest/{apexResourceUrl}");
 
@@ -114,6 +172,7 @@ namespace NetCoreForce.Client
             if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiName(sObjectName, nameof(sObjectName));
 
             //format: /vXX.X/sobjects/SObjectName/
 
@@ -131,6 +190,7 @@ namespace NetCoreForce.Client
             if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiName(sObjectName, nameof(sObjectName));
 
             //format: /vXX.X/sobjects/SObjectName/describe/
 
@@ -161,6 +221,8 @@ namespace NetCoreForce.Client
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
             if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
             if (string.IsNullOrEmpty(objectId)) throw new ArgumentNullException(nameof(objectId));
+            ValidateApiName(sObjectName, nameof(sObjectName));
+            ValidatePathSegment(objectId, nameof(objectId));
 
             //https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_retrieve.htm
 
@@ -222,6 +284,7 @@ namespace NetCoreForce.Client
         {
             if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiName(sObjectName, nameof(sObjectName));
 
             //format: /services/data/vXX.X/sobjects/SObjectName/
 
@@ -229,6 +292,9 @@ namespace NetCoreForce.Client
             {
                 return $"/services/data/{apiVersion}/sobjects/{sObjectName}";
             }
+
+            // objectId may also be a composite reference, e.g. @{refId.id}
+            ValidatePathSegment(objectId, nameof(objectId));
 
             return $"/services/data/{apiVersion}/sobjects/{sObjectName}/{objectId}";
         }
@@ -246,6 +312,7 @@ namespace NetCoreForce.Client
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
             if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
+            ValidateApiName(sObjectName, nameof(sObjectName));
 
             //format: /vXX.X/composite/tree/sObjectName
 
@@ -273,13 +340,17 @@ namespace NetCoreForce.Client
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
             if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
-            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
             if (string.IsNullOrEmpty(fieldName)) throw new ArgumentNullException(nameof(fieldName));
-            if (string.IsNullOrEmpty(fieldName)) throw new ArgumentNullException(nameof(fieldValue));
+            if (string.IsNullOrEmpty(fieldValue)) throw new ArgumentNullException(nameof(fieldValue));
+            ValidateApiName(sObjectName, nameof(sObjectName));
+            ValidateApiName(fieldName, nameof(fieldName));
 
             //format: /vXX.X/sobjects/SObjectName/fieldName/fieldValue
 
-            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/sobjects/{sObjectName}/{fieldName}/{fieldValue}");
+            // external ID values can contain any characters, so they are URL-encoded rather than validated
+            string escapedFieldValue = EscapePathSegment(fieldValue, nameof(fieldValue));
+
+            Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/sobjects/{sObjectName}/{fieldName}/{escapedFieldValue}");
 
             return uri;
         }
@@ -311,8 +382,9 @@ namespace NetCoreForce.Client
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
             if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
-            if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
             if (string.IsNullOrEmpty(fieldName)) throw new ArgumentNullException(nameof(fieldName));
+            ValidateApiName(sObjectName, nameof(sObjectName));
+            ValidateApiName(fieldName, nameof(fieldName));
 
             //format: /vXX.X/sobjects/SObjectName/fieldName/fieldValue
 
@@ -336,6 +408,9 @@ namespace NetCoreForce.Client
             if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
             if (string.IsNullOrEmpty(objectId)) throw new ArgumentNullException(nameof(objectId));
             if (string.IsNullOrEmpty(blobField)) throw new ArgumentNullException(nameof(blobField));
+            ValidateApiName(sObjectName, nameof(sObjectName));
+            ValidatePathSegment(objectId, nameof(objectId));
+            ValidateApiName(blobField, nameof(blobField));
 
             //format: /vXX.X/sobjects/SObjectName/id/
 
