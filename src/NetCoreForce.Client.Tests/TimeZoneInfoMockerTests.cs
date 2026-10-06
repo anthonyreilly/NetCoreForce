@@ -17,31 +17,26 @@ namespace NetCoreForce.Client.Tests
         [MemberData(nameof(TimeZoneIdData))]
         public void TestLocalTimeZoneInfoMocker(string timeZoneId)
         {
-            TimeZoneInfo localTimeZoneInfo = TimeZoneInfo.Local;
+            TimeZoneInfo actualLocalTimeZoneInfo = TimeZoneInfo.Local;
             TimeZoneInfo mockTimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(timeZoneId);
 
-            TimeSpan mockedUtcOffset;
-            TimeSpan actualLocalUtcOffset = localTimeZoneInfo.BaseUtcOffset;
-
-            if (localTimeZoneInfo.StandardName == mockTimeZoneInfo.StandardName)
-            {
-                // same TZ as local machine, pass test
-                return;
-            }
-
+            // compare against the expected zone rather than asserting it differs from the local zone,
+            // so the test does not depend on the runner's time zone - e.g. a UTC runner and the London
+            // sample zone have different names but the same base UTC offset
             using (new LocalTimeZoneInfoMocker(mockTimeZoneInfo))
             {
-                TimeZoneInfo currentTimeZoneInfo = TimeZoneInfo.Local;
+                TimeZoneInfo mockedLocalTimeZoneInfo = TimeZoneInfo.Local;
 
-                mockedUtcOffset = currentTimeZoneInfo.BaseUtcOffset;
-
-                Assert.Equal(mockTimeZoneInfo.StandardName, currentTimeZoneInfo.StandardName);
-                Assert.NotEqual(currentTimeZoneInfo.BaseUtcOffset, actualLocalUtcOffset);
+                Assert.Equal(mockTimeZoneInfo.Id, mockedLocalTimeZoneInfo.Id);
+                Assert.Equal(mockTimeZoneInfo.StandardName, mockedLocalTimeZoneInfo.StandardName);
+                Assert.Equal(mockTimeZoneInfo.BaseUtcOffset, mockedLocalTimeZoneInfo.BaseUtcOffset);
             }
 
-            // back to local machine's TZ
-            Assert.NotEqual(localTimeZoneInfo.StandardName, mockTimeZoneInfo.StandardName);
-            Assert.NotEqual(localTimeZoneInfo.BaseUtcOffset, mockedUtcOffset);
+            // disposing the mocker should restore the local machine's time zone
+            TimeZoneInfo restoredLocalTimeZoneInfo = TimeZoneInfo.Local;
+
+            Assert.Equal(actualLocalTimeZoneInfo.Id, restoredLocalTimeZoneInfo.Id);
+            Assert.Equal(actualLocalTimeZoneInfo.BaseUtcOffset, restoredLocalTimeZoneInfo.BaseUtcOffset);
         }
 
         [Fact]
