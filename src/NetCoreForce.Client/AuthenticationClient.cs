@@ -301,7 +301,9 @@ namespace NetCoreForce.Client
             if (responseMessage.IsSuccessStatusCode)
             {
                 this.AccessInfo = JsonConvert.DeserializeObject<AccessTokenResponse>(response);
-                this.AccessInfo.RefreshToken = refreshToken; //not included in reponse
+
+                //with refresh token rotation we get a new refresh token after exchanging the current one.
+                if (string.IsNullOrEmpty(this.AccessInfo.RefreshToken)) this.AccessInfo.RefreshToken = refreshToken; //when not included in response
             }
             else
             {
