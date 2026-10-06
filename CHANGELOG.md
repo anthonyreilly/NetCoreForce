@@ -2,6 +2,11 @@
 
 ### 2026-10-06 v6.0.1
 
+* security: TokenRefreshAsync and IntrospectTokenAsync now send the refresh/access token and client secret in the POST body instead of the URL query string, where they could be recorded by proxies, APM tools and HTTP logs
+    - both now validate their arguments like the other login flows: ArgumentNullException for a missing token, client ID or endpoint, FormatException for a non-absolute endpoint URL
+* security: UriFormatter.OAuthAuthenticationUrl no longer adds the client secret to the browser authorize URL, and is now obsolete - use WebServerAuthenticationUrl
+* UriFormatter.RefreshTokenUrl and UriFormatter.IntrospectTokenUrl are now obsolete, since they put credentials in the URL
+
 * fix: ForceClient, JsonClient and AuthenticationClient no longer dispose an HttpClient passed in by the caller - the caller owns it
 * fix: AuthenticationClient now uses a shared static HttpClient by default, like ForceClient and JsonClient, instead of creating a new HttpClient (and connection pool) per instance - repeated logins no longer leak sockets
 * fix: HttpClients created by HttpClientFactory.CreateHttpClient (including the shared static clients) now replace pooled connections every 2 minutes, so long-running processes pick up DNS changes

@@ -306,13 +306,16 @@ namespace NetCoreForce.Client.Tests
 
         //TODO: Auth URLs
 
+#pragma warning disable CS0618 // obsolete - still tested until removed
         [Fact]
         public void OAuthAuthenticationUrl()
         {
             string result = UriFormatter.OAuthAuthenticationUrl("https://login.salesforce.com/services/oauth2/authorize", "CLIENTID", "CLIENTSECRET", "https://www.theredirectpage.com/callback").AbsoluteUri.ToString();
 
-            Assert.Equal("https://login.salesforce.com/services/oauth2/authorize?client_id=CLIENTID&client_secret=CLIENTSECRET&redirect_uri=https%3A%2F%2Fwww.theredirectpage.com%2Fcallback&response_type=code", result);
+            // the client secret must not be exposed in a browser URL
+            Assert.Equal("https://login.salesforce.com/services/oauth2/authorize?client_id=CLIENTID&redirect_uri=https%3A%2F%2Fwww.theredirectpage.com%2Fcallback&response_type=code", result);
         }
+#pragma warning restore CS0618
 
         [Fact]
         public void WebServerAuthenticationUrl()
@@ -333,6 +336,7 @@ namespace NetCoreForce.Client.Tests
             //TODO: test with url-encoded state parameter
         }
 
+#pragma warning disable CS0618 // obsolete - still tested until removed
         [Fact]
         public void IntrospectTokenUrl()
         {
@@ -344,5 +348,6 @@ namespace NetCoreForce.Client.Tests
 
             Assert.Equal("https://login.salesforce.com/services/oauth2/introspect?token=MYTOKEN&client_id=CLIENTID&client_secret=CLIENTSECRET&format=json", result);
         }
+#pragma warning restore CS0618
     }
 }

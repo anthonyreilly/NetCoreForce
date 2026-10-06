@@ -251,16 +251,28 @@ namespace NetCoreForce.Client
         /// <returns></returns>
         public async Task<IntrospectTokenResponse> IntrospectTokenAsync(string token, string clientId, string clientSecret = "", string introspectTokenEndpointUrl = IntrospectTokenEndpointUrl)
         {
-            var uri = UriFormatter.IntrospectTokenUrl(
-                introspectTokenEndpointUrl,
-                token,
-                clientId,
-                clientSecret);
+            if (string.IsNullOrEmpty(token)) throw new ArgumentNullException("token");
+            if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException("clientId");
+            if (string.IsNullOrEmpty(introspectTokenEndpointUrl)) throw new ArgumentNullException("introspectTokenEndpointUrl");
+            if (!Uri.IsWellFormedUriString(introspectTokenEndpointUrl, UriKind.Absolute)) throw new FormatException("introspectTokenEndpointUrl");
+
+            //credentials go in the body, never the URL - URLs are routinely recorded by proxies and HTTP logging
+            var prms = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("token", token),
+                new KeyValuePair<string, string>("client_id", clientId)
+            };
+            if (!string.IsNullOrEmpty(clientSecret))
+            {
+                prms.Add(new KeyValuePair<string, string>("client_secret", clientSecret));
+            }
+            prms.Add(new KeyValuePair<string, string>("format", "json"));
 
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Post,
-                RequestUri = uri
+                RequestUri = new Uri(introspectTokenEndpointUrl),
+                Content = new FormUrlEncodedContent(prms)
             };
 
             request.Headers.UserAgent.ParseAdd(string.Concat(UserAgent, "/", ApiVersion));
@@ -289,16 +301,29 @@ namespace NetCoreForce.Client
         /// <returns></returns>
         public async Task TokenRefreshAsync(string refreshToken, string clientId, string clientSecret = "", string tokenRequestEndpointUrl = TokenRequestEndpointUrl)
         {
-            var uri = UriFormatter.RefreshTokenUrl(
-                tokenRequestEndpointUrl,
-                refreshToken,
-                clientId,
-                clientSecret);
+            if (string.IsNullOrEmpty(refreshToken)) throw new ArgumentNullException("refreshToken");
+            if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException("clientId");
+            if (string.IsNullOrEmpty(tokenRequestEndpointUrl)) throw new ArgumentNullException("tokenRequestEndpointUrl");
+            if (!Uri.IsWellFormedUriString(tokenRequestEndpointUrl, UriKind.Absolute)) throw new FormatException("tokenRequestEndpointUrl");
+
+            //credentials go in the body, never the URL - URLs are routinely recorded by proxies and HTTP logging
+            var prms = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("grant_type", "refresh_token"),
+                new KeyValuePair<string, string>("refresh_token", refreshToken),
+                new KeyValuePair<string, string>("client_id", clientId)
+            };
+            if (!string.IsNullOrEmpty(clientSecret))
+            {
+                prms.Add(new KeyValuePair<string, string>("client_secret", clientSecret));
+            }
+            prms.Add(new KeyValuePair<string, string>("format", "json"));
 
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Post,
-                RequestUri = uri
+                RequestUri = new Uri(tokenRequestEndpointUrl),
+                Content = new FormUrlEncodedContent(prms)
             };
 
             request.Headers.UserAgent.ParseAdd(string.Concat(UserAgent, "/", ApiVersion));

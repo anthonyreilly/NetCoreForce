@@ -518,8 +518,9 @@ namespace NetCoreForce.Client
         /// </summary>
         /// <param name="loginUrl">Required. Salesforce authorization endpoint.</param>
         /// <param name="clientId">Required. The Consumer Key from the connected app definition.</param>
-        /// <param name="clientSecret">Required. The Consumer Key from the connected app definition.</param>
+        /// <param name="clientSecret">Ignored. The authorize endpoint does not use the client secret, and it must not be exposed in a browser URL.</param>
         /// <param name="redirectUrl">Required. The Callback URL from the connected app definition.</param>
+        [Obsolete("Use WebServerAuthenticationUrl. The client secret is not used by the authorize endpoint, and is no longer added to the URL.")]
         public static Uri OAuthAuthenticationUrl(
             string loginUrl,
             string clientId,
@@ -529,7 +530,6 @@ namespace NetCoreForce.Client
         {
             if (string.IsNullOrEmpty(loginUrl)) throw new ArgumentNullException(nameof(loginUrl));
             if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException(nameof(clientId));
-            if (string.IsNullOrEmpty(clientSecret)) throw new ArgumentNullException(nameof(clientSecret));
             if (string.IsNullOrEmpty(redirectUrl)) throw new ArgumentNullException(nameof(redirectUrl));
 
             //TODO: code_challenge, login_hint, nonce, prompt params
@@ -539,7 +539,6 @@ namespace NetCoreForce.Client
             Dictionary<string, string> prms = new Dictionary<string, string>
             {
                 { "client_id", clientId },
-                { "client_secret", clientSecret },
                 { "redirect_uri", redirectUrl },
                 { "response_type", responseType.ToString().ToLower() }
             };
@@ -608,6 +607,7 @@ namespace NetCoreForce.Client
         /// <param name="clientId">The Consumer Key from the connected app definition.</param>
         /// <param name="clientSecret">The Consumer Secret from the connected app definition. Required unless the Require Secret for Web Server Flow setting is not enabled in the connected app definition.</param>
         /// <returns></returns>
+        [Obsolete("Puts the token and client secret in the URL, where they can be recorded by proxies and HTTP logging. Use AuthenticationClient.IntrospectTokenAsync, which sends them in the request body.")]
         public static Uri IntrospectTokenUrl(
             string introspectTokenUrl,
             string token,
@@ -642,6 +642,7 @@ namespace NetCoreForce.Client
         /// <param name="clientId">The Consumer Key from the connected app definition.</param>
         /// <param name="clientSecret">The Consumer Secret from the connected app definition. Required unless the Require Secret for Web Server Flow setting is not enabled in the connected app definition.</param>
         /// <returns></returns>
+        [Obsolete("Puts the refresh token and client secret in the URL, where they can be recorded by proxies and HTTP logging. Use AuthenticationClient.TokenRefreshAsync, which sends them in the request body.")]
         public static Uri RefreshTokenUrl(
             string tokenRefreshUrl,
             string refreshToken,

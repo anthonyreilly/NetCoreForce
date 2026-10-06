@@ -12,6 +12,16 @@ namespace NetCoreForce.Client.Tests
     {
         private readonly Dictionary<Uri, HttpResponseMessage> _MockResponses = new Dictionary<Uri, HttpResponseMessage>();
 
+        /// <summary>
+        /// URI of the most recent request
+        /// </summary>
+        public Uri LastRequestUri { get; private set; }
+
+        /// <summary>
+        /// Content of the most recent request, if any
+        /// </summary>
+        public string LastRequestContent { get; private set; }
+
         public void AddMockResponse(Uri uri, HttpResponseMessage responseMessage)
         {
             _MockResponses.Add(uri, responseMessage);
@@ -27,6 +37,10 @@ namespace NetCoreForce.Client.Tests
 
         protected async override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
         {
+            // read the content here - .NET Framework's HttpClient disposes request content once the request completes
+            LastRequestUri = request.RequestUri;
+            LastRequestContent = request.Content != null ? await request.Content.ReadAsStringAsync() : null;
+
             if (_MockResponses.ContainsKey(request.RequestUri))
             {
                 //return _MockResponses[request.RequestUri];
