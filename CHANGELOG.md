@@ -2,6 +2,10 @@
 
 ### 2026-10-06 v6.0.1
 
+* fix: ForceClient, JsonClient and AuthenticationClient no longer dispose an HttpClient passed in by the caller - the caller owns it
+    - AuthenticationClient still disposes the HttpClient it creates when none is passed
+    - ForceClient now disposes the AuthenticationClient it uses internally to log in
+
 ### 2026-10-06 v6.0.0
 
 * **breaking** build: remove EOL target frameworks

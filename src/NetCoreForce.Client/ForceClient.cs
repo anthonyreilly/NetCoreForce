@@ -113,25 +113,31 @@ namespace NetCoreForce.Client
         /// <param name="httpClient">Optional HttpClient object. Defaults to a shared static instance for best performance, but a custom HttpClient can be specified when custom properties are needed e.g. proxy settings.</param>
         public static async Task<ForceClient> FromClientCredentialsAsync(string clientId, string clientSecret, string tokenRequestEndpoint, string apiVersion = null, HttpClient httpClient = null)
         {
-            AuthenticationClient authClient = new AuthenticationClient(apiVersion, httpClient);
-            await authClient.ClientCredentialsAsync(clientId, clientSecret, tokenRequestEndpoint).ConfigureAwait(false);
-            return new ForceClient(authClient.AccessInfo.InstanceUrl, authClient.ApiVersion, authClient.AccessInfo.AccessToken, httpClient, authClient.AccessInfo);
+            using (AuthenticationClient authClient = new AuthenticationClient(apiVersion, httpClient))
+            {
+                await authClient.ClientCredentialsAsync(clientId, clientSecret, tokenRequestEndpoint).ConfigureAwait(false);
+                return new ForceClient(authClient.AccessInfo.InstanceUrl, authClient.ApiVersion, authClient.AccessInfo.AccessToken, httpClient, authClient.AccessInfo);
+            }
         }
 
         private async Task Login(string clientId, string clientSecret, string username, string password, string tokenRequestEndpoint, string apiVersion = null, HttpClient httpClient = null)
         {
-            AuthenticationClient authClient = new AuthenticationClient(apiVersion, httpClient);
-            await authClient.UsernamePasswordAsync(clientId, clientSecret, username, password, tokenRequestEndpoint).ConfigureAwait(false);
+            using (AuthenticationClient authClient = new AuthenticationClient(apiVersion, httpClient))
+            {
+                await authClient.UsernamePasswordAsync(clientId, clientSecret, username, password, tokenRequestEndpoint).ConfigureAwait(false);
 
-            Initialize(authClient.AccessInfo.InstanceUrl, authClient.ApiVersion, authClient.AccessInfo.AccessToken, httpClient, authClient.AccessInfo);
+                Initialize(authClient.AccessInfo.InstanceUrl, authClient.ApiVersion, authClient.AccessInfo.AccessToken, httpClient, authClient.AccessInfo);
+            }
         }
 
         private async Task LoginClientCredentials(string clientId, string clientSecret, string tokenRequestEndpoint, string apiVersion = null, HttpClient httpClient = null)
         {
-            AuthenticationClient authClient = new AuthenticationClient(apiVersion, httpClient);
-            await authClient.ClientCredentialsAsync(clientId, clientSecret, tokenRequestEndpoint).ConfigureAwait(false);
+            using (AuthenticationClient authClient = new AuthenticationClient(apiVersion, httpClient))
+            {
+                await authClient.ClientCredentialsAsync(clientId, clientSecret, tokenRequestEndpoint).ConfigureAwait(false);
 
-            Initialize(authClient.AccessInfo.InstanceUrl, authClient.ApiVersion, authClient.AccessInfo.AccessToken, httpClient, authClient.AccessInfo);
+                Initialize(authClient.AccessInfo.InstanceUrl, authClient.ApiVersion, authClient.AccessInfo.AccessToken, httpClient, authClient.AccessInfo);
+            }
         }
 
         private void Initialize(string instanceUrl, string apiVersion, string accessToken, HttpClient httpClient = null, AccessTokenResponse accessInfo = null)
@@ -988,15 +994,11 @@ namespace NetCoreForce.Client
         #endregion
 
         /// <summary>
-        /// Dispose client - only disposes instance HttpClient, if any. Shared static HttpClient is left as-is.
+        /// Dispose client - does not dispose the HttpClient.
+        /// <para>A caller-supplied HttpClient is owned by the caller, and the shared static HttpClient is left as-is.</para>
         /// </summary>
         public void Dispose()
         {
-            //only dispose instance member, if any
-            if (_httpClient != null)
-            {
-                _httpClient.Dispose();
-            }
         }
     }
 }

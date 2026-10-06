@@ -24,6 +24,7 @@ namespace NetCoreForce.Client
         private const string IntrospectTokenEndpointUrl = "https://login.salesforce.com/services/oauth2/introspect";
         private const string TokenRequestEndpointUrl = "https://login.salesforce.com/services/oauth2/token";
         private readonly HttpClient _httpClient;
+        private readonly bool _disposeHttpClient;
 
         /// <summary>
         /// Initialize the AuthenticationClient with the libary's default Salesforce API version, and default HttpClient
@@ -35,7 +36,7 @@ namespace NetCoreForce.Client
         /// Initialize the AuthenticationClient with the specified Salesforce API version and/or HttpClient
         /// </summary>
         /// <param name="apiVersion">Target Salesforce API version</param>
-        /// <param name="httpClient">Custom HttpClient (Optional)</param>
+        /// <param name="httpClient">Custom HttpClient (Optional). Not disposed by this client; the caller retains ownership.</param>
         public AuthenticationClient(string apiVersion = null, HttpClient httpClient = null)
         {
             if (!string.IsNullOrEmpty(apiVersion))
@@ -47,6 +48,8 @@ namespace NetCoreForce.Client
                 ApiVersion = DefaultApiVersion;
             }
 
+            //only dispose the HttpClient if this client created it
+            _disposeHttpClient = httpClient == null;
             _httpClient = httpClient ?? new HttpClient();
         }
 
@@ -365,9 +368,16 @@ namespace NetCoreForce.Client
             }
         }
 
+        /// <summary>
+        /// Dispose client - only disposes the HttpClient if this client created it.
+        /// <para>A caller-supplied HttpClient is owned by the caller, and is left as-is.</para>
+        /// </summary>
         public void Dispose()
         {
-            _httpClient.Dispose();
+            if (_disposeHttpClient)
+            {
+                _httpClient.Dispose();
+            }
         }
     }
 }

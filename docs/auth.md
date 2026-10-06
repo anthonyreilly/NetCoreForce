@@ -123,6 +123,8 @@ HttpClient proxyClient = HttpClientFactory.CreateHttpClient(true, "http://your-p
 ForceClient client = new ForceClient("your-client-id", "your-client-secret", "your-username", "your-password", "https://login.salesforce.com/services/oauth2/token", httpClient: proxyClient);
 ```
 
+The caller owns an `HttpClient` passed in this way - disposing `ForceClient`, `JsonClient` or `AuthenticationClient` does not dispose it, so a single long-lived instance can be shared across clients.
+
 ---
 
 ## Error Handling

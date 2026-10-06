@@ -355,15 +355,11 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
-        /// Dispose client - only disposes instance HttpClient, if any. Shared static HttpClient is left as-is.
+        /// Dispose client - does not dispose the HttpClient.
+        /// <para>A caller-supplied HttpClient is owned by the caller, and the shared static HttpClient is left as-is.</para>
         /// </summary>
         public void Dispose()
         {
-            //only dispose instance member, if any
-            if (_httpClient != null)
-            {
-                _httpClient.Dispose();
-            }
         }
     }
 }
