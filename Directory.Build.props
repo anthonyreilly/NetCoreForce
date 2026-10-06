@@ -2,7 +2,7 @@
   <PropertyGroup>
 
     <!--Versioning-->
-    <VersionPrefix>6.0.0</VersionPrefix>
+    <VersionPrefix>6.0.1</VersionPrefix>
     <VersionSuffix></VersionSuffix>
 
     <!-- Targets -->

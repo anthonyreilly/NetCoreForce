@@ -1,5 +1,7 @@
 # Changelog
 
+### 2026-10-06 v6.0.1
+
 ### 2026-10-06 v6.0.0
 
 * **breaking** build: remove EOL target frameworks

@@ -2,29 +2,18 @@
   <PropertyGroup>
     <TargetFrameworks>$(TestTargetFrameworks)</TargetFrameworks>
     <IsPackable>false</IsPackable>
+    <UseXunitRunnerV3 Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0')) OR $([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net472'))">true</UseXunitRunnerV3>
   </PropertyGroup>
 
-  <Choose>
+  <!-- xunit.runner.visualstudio 3.x requires .NET 8+ or .NET Framework 4.7.2+ -->
+  <ItemGroup Condition=" '$(UseXunitRunnerV3)' == 'true' ">
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
+  </ItemGroup>
 
-    <When Condition="'$(TargetFramework)' == 'NET6_0_OR_GREATER'">
-      <ItemGroup>
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
-      </ItemGroup>
-    </When>
-
-    <When Condition="'$(TargetFramework)' == 'NET8_0_OR_GREATER'">
-      <ItemGroup>
-        <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
-      </ItemGroup>
-    </When>
-
-    <Otherwise>
-      <ItemGroup>
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5" />
-      </ItemGroup>
-    </Otherwise>
-
-  </Choose>
+  <!-- 2.8.2 is the last runner that supports .NET Framework 4.6.2 -->
+  <ItemGroup Condition=" '$(UseXunitRunnerV3)' != 'true' ">
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
