@@ -103,6 +103,9 @@ namespace NetCoreForce.Client
             const string headerName = "Sforce-Call-Options";
             List<string> values = new List<string>();
 
+            ValidateCallOptionValue(client, nameof(client));
+            ValidateCallOptionValue(defaultNamespace, nameof(defaultNamespace));
+
             if (!string.IsNullOrEmpty(client))
             { values.Add(string.Format("client={0}", client)); }
 
@@ -115,6 +118,47 @@ namespace NetCoreForce.Client
             customHeaders.Add(headerName, valueString);
 
             return customHeaders;
+        }
+
+        /// <summary>
+        /// Call option values must not contain control characters, which can inject headers on .NET Framework,
+        /// or , and =, which would inject additional call options.
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown when the value contains a disallowed character</exception>
+        private static void ValidateCallOptionValue(string value, string paramName)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return;
+            }
+
+            foreach (char c in value)
+            {
+                if (char.IsControl(c) || c == ',' || c == '=')
+                {
+                    throw new ArgumentException($"{paramName} contains characters that are not allowed in a call option", paramName);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Header values must not contain control characters - on .NET Framework, CR or LF in a value can inject additional headers
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown when the value contains a control character</exception>
+        internal static void ValidateHeaderValue(string value, string paramName)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return;
+            }
+
+            foreach (char c in value)
+            {
+                if (char.IsControl(c))
+                {
+                    throw new ArgumentException($"{paramName} contains control characters, which are not allowed in a header value", paramName);
+                }
+            }
         }
     }
 }

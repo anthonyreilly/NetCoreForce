@@ -34,9 +34,12 @@
     <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="2.6.0" />
   </ItemGroup>
 
+  <!-- local config is copied for running from the build output only - it can contain real credentials, so it must never be published or packed -->
   <ItemGroup>
     <None Update="modelgenerator_config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+      <Pack>false</Pack>
     </None>
   </ItemGroup>
 </Project>

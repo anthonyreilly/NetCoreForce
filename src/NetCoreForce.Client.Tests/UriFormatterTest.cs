@@ -299,9 +299,99 @@ namespace NetCoreForce.Client.Tests
         [InlineData("MyService/../../data/v57.0/query")]
         [InlineData("MyService\\..\\..\\data")]
         [InlineData("%2e%2e/data/v57.0/query")]
+        [InlineData("%2e%2e%2fdata%2fv57.0%2fquery")]
+        [InlineData("%252e%252e/%252e%252e/data")]
+        [InlineData("MyService%5c..%5cdata")]
         public void ApexUriRelativePathThrows(string apexResourceUrl)
         {
             Assert.Throws<ArgumentException>(() => UriFormatter.ApexUri(_instanceUrl, apexResourceUrl));
+        }
+
+        [Fact]
+        public void ApexUriAllowsEncodedQueryValues()
+        {
+            // encoded characters are only rejected in the path - query values may legitimately contain them
+            string result = UriFormatter.ApexUri(_instanceUrl, "MyService/items?path=a%2Fb%25").AbsoluteUri;
+
+            Assert.Equal("https://xxx.salesforce.com/services/apexrest/MyService/items?path=a%2Fb%25", result);
+        }
+
+        [Fact]
+        public void ApiNameWithTrailingNewlineThrows()
+        {
+            // in .NET regex, $ also matches before a trailing newline
+            Assert.Throws<ArgumentException>(() => UriFormatter.SObjectDescribe(_instanceUrl, _apiVersion, "Account\n"));
+        }
+
+        [Theory]
+        [InlineData("https://evil.example/steal")]
+        [InlineData("//evil.example/steal")]
+        [InlineData("v57.0/../../evil")]
+        [InlineData("v57.0#")]
+        [InlineData("v57.0?")]
+        [InlineData("57.0")]
+        [InlineData("v57.0\n")]
+        public void InvalidApiVersionThrows(string apiVersion)
+        {
+            // an unvalidated API version can redirect the request, and the access token, to another host or resource
+            Assert.Throws<ArgumentException>(() => UriFormatter.DescribeGlobal(_instanceUrl, apiVersion));
+            Assert.Throws<ArgumentException>(() => UriFormatter.Limits(_instanceUrl, apiVersion));
+            Assert.Throws<ArgumentException>(() => UriFormatter.LimitsResource(apiVersion));
+            Assert.Throws<ArgumentException>(() => UriFormatter.SObjectRows(_instanceUrl, apiVersion, _sObjectName, _objectId));
+            Assert.Throws<ArgumentException>(() => UriFormatter.Query(_instanceUrl, apiVersion, "SELECT Id FROM Account"));
+            Assert.Throws<ArgumentException>(() => UriFormatter.Search(_instanceUrl, apiVersion, "FIND {test}"));
+            Assert.Throws<ArgumentException>(() => UriFormatter.CompositeSubRequest(apiVersion, _sObjectName, _objectId));
+            Assert.Throws<ArgumentException>(() => UriFormatter.CompositeRequest(_instanceUrl, apiVersion));
+        }
+
+        [Theory]
+        [InlineData("v57.0")]
+        [InlineData("v67.0")]
+        [InlineData("v100.0")]
+        public void ValidApiVersion(string apiVersion)
+        {
+            string result = UriFormatter.DescribeGlobal(_instanceUrl, apiVersion).AbsoluteUri;
+
+            Assert.Equal($"https://xxx.salesforce.com/services/data/{apiVersion}/sobjects", result);
+        }
+
+        [Theory]
+        [InlineData("http://xxx.salesforce.com")]
+        [InlineData("ftp://xxx.salesforce.com")]
+        public void NonHttpsInstanceUrlThrows(string instanceUrl)
+        {
+            // the access token must not be sent in cleartext
+            Assert.Throws<ArgumentException>(() => UriFormatter.BaseUri(instanceUrl));
+            Assert.Throws<ArgumentException>(() => UriFormatter.DescribeGlobal(instanceUrl, _apiVersion));
+            Assert.Throws<ArgumentException>(() => UriFormatter.ApexUri(instanceUrl, "MyService"));
+        }
+
+        [Theory]
+        [InlineData("not a url")]
+        [InlineData("/services/data")]
+        public void MalformedInstanceUrlThrows(string instanceUrl)
+        {
+            Assert.Throws<FormatException>(() => UriFormatter.BaseUri(instanceUrl));
+        }
+
+        [Fact]
+        public void NextRecordsUri()
+        {
+            Uri result = UriFormatter.NextRecordsUri(_instanceUrl, "/services/data/v57.0/query/01gXXXXXXXXXXXXXXX-2000");
+
+            Assert.Equal("https://xxx.salesforce.com/services/data/v57.0/query/01gXXXXXXXXXXXXXXX-2000", result.AbsoluteUri);
+        }
+
+        [Theory]
+        [InlineData("https://evil.example/services/data/v57.0/query/01gXXXXXXXXXXXXXXX-2000")]
+        [InlineData("//evil.example/services/data/v57.0/query/01gXXXXXXXXXXXXXXX-2000")]
+        [InlineData("/services/apexrest/Something")]
+        [InlineData("/services/data/../apexrest/Something")]
+        [InlineData("services/data/v57.0/query/01gXXXXXXXXXXXXXXX-2000")]
+        public void NextRecordsUriOffInstanceThrows(string nextRecordsUrl)
+        {
+            // nextRecordsUrl comes from the response - the access token must not follow it to another host or resource
+            Assert.Throws<ForceApiException>(() => UriFormatter.NextRecordsUri(_instanceUrl, nextRecordsUrl));
         }
 
         //TODO: Auth URLs

@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 using NetCoreForce.Client;
@@ -96,6 +97,47 @@ namespace NetCoreForce.FunctionalTests
             int count = await client.CountQuery("SELECT COUNT() FROM Case");
 
             Assert.True(count > 1);
+        }
+
+        [Fact]
+        public async Task QueryMultipleBatchesMatchesCount()
+        {
+            // Query<T> follows each nextRecordsUrl, which must stay on the instance under /services/data/ and must not repeat
+            ForceClient client = await forceClientFixture.GetForceClient();
+
+            int count = await client.CountQuery("SELECT COUNT() FROM Contact");
+
+            // the default batch size is 2000, so fewer records means only one batch and no nextRecordsUrl
+            if (count <= 2000)
+            {
+                string skipReason = $"Only {count} Contact records - more than 2000 are needed to exercise query paging";
+#if XUNIT_V3
+                Assert.Skip(skipReason);
+#else
+                Console.WriteLine("Skipping QueryMultipleBatchesMatchesCount - " + skipReason);
+                return;
+#endif
+            }
+
+            List<SfContact> contacts = await client.Query<SfContact>("SELECT Id FROM Contact");
+
+            Assert.Equal(count, contacts.Count);
+            Assert.Equal(count, contacts.Select(c => c.Id).Distinct().Count());
+        }
+
+        [Fact]
+        public async Task QueryWithClientName()
+        {
+            // Sforce-Call-Options values are now validated - check a valid client name is still accepted by Salesforce
+            ForceClient fixtureClient = await forceClientFixture.GetForceClient();
+
+            // separate client, so the client name doesn't affect other tests using the fixture's client
+            ForceClient client = new ForceClient(fixtureClient.InstanceUrl, fixtureClient.ApiVersion, fixtureClient.AccessToken);
+            client.ClientName = "NetCoreForce_FunctionalTests";
+
+            List<SfAccount> accounts = await client.Query<SfAccount>("SELECT Id FROM Account LIMIT 1");
+
+            Assert.NotNull(accounts);
         }
     }
 }

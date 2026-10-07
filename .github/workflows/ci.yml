@@ -11,6 +11,10 @@ on:
       - dev
   workflow_dispatch:
 
+# build and test only - no write access needed
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: windows-latest
@@ -22,7 +26,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
-      
+        with:
+          persist-credentials: false
+
       - name: Setup .NET Core 8.0
         uses: actions/setup-dotnet@v6
         with:

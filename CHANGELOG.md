@@ -6,6 +6,32 @@
     - both now validate their arguments like the other login flows: ArgumentNullException for a missing token, client ID or endpoint, FormatException for a non-absolute endpoint URL
 * security: UriFormatter.OAuthAuthenticationUrl no longer adds the client secret to the browser authorize URL, and is now obsolete - use WebServerAuthenticationUrl
 * UriFormatter.RefreshTokenUrl and UriFormatter.IntrospectTokenUrl are now obsolete, since they put credentials in the URL
+* security: token endpoints and instance URLs must now be HTTPS - credentials and the access token are no longer sent over plain http. This also applies to the `instance_url` returned in a token response
+* security: the API version is now validated (e.g. `v67.0`) - previously a value such as `//other.host/x` or `v67.0/../..` could redirect requests, and the access token, to another host or resource
+* security: query paging only follows a `nextRecordsUrl` on the same instance under `/services/data/`
+* security: GetAvailableRestApiVersions and TestConnection no longer send the access token, since the Versions resource needs no authentication and can be pointed at any instance URL
+* security: Sforce-Call-Options values (ForceClient.ClientName, defaultNamespace), custom header values and the access token are rejected if they contain control characters, which could inject headers on .NET Framework. Call option values also can't contain `,` or `=`
+* security: JSON serialization no longer picks up the host application's global JsonConvert.DefaultSettings, e.g. a global TypeNameHandling setting that would allow `$type` in a response to instantiate arbitrary types
+* security: object and field API names with a trailing newline, and Apex REST URLs with encoded path separators (`%2F`, `%5C`, `%25`), are now rejected
+* security: AuthenticationClient's default HttpClient no longer follows redirects, since a 307/308 redirect would re-send the credentials to the redirect location
+* security: ModelGenerator hardening
+    - object, field and relationship names from the org's metadata, and the class prefix/suffix and namespace, are validated before being written into generated code or used as file names
+    - new `NETCOREFORCE_CLIENT_SECRET` and `NETCOREFORCE_PASSWORD` environment variables; `--client-secret` and `--password` still work but print a warning, since command line arguments are visible in shell history and process listings
+    - the client secret and password prompts no longer echo the input
+    - `--save-config` no longer saves the client secret, password or refresh token
+    - shows the token endpoint host before logging in
+    - fix: config files given as a relative path are resolved against the current directory, as documented
+* fix: AuthenticationClient always throws ForceAuthException for a failed or unexpected token response
+    - WebServerAsync and ClientCredentialsAsync now keep the OAuth error code (e.g. `invalid_grant`) instead of replacing it with `Unknown`
+    - a non-JSON or empty response (e.g. an HTML page from a proxy) throws ForceAuthException instead of JsonReaderException or NullReferenceException
+* fix: date strings (DateFormats, ToSfDateString) are now culture-invariant - previously cultures with a different time separator (e.g. fi-FI) or calendar (e.g. th-TH) produced invalid SOQL date literals
+* fix: Query and QueryAsync stop with ForceApiException if a response repeats the previous nextRecordsUrl, instead of looping forever, and handle a response without records. QueryAsync no longer follows a nextRecordsUrl once the response is marked done
+* fix: HTTP responses are disposed once read, returning connections to the pool sooner, including a failed blob download
+* fix: ForceApiException(message, ErrorResponse, HttpStatusCode) now keeps the status code, and send failures keep the original exception as InnerException. Exceptions rethrown from the synchronous constructors and UsernamePassword keep their original stack trace
+* build: System.Text.Encodings.Web is only referenced for .NET Standard and .NET Framework - .NET 8+ uses the framework's serviced copy
+* build: CI workflows use least-privilege permissions, docs are only deployed for pushes (not pull requests), and docfx is pinned
+* build: added a repo nuget.config that restores only from nuget.org, so machine-level package feeds are not used
+* build: packages built from a project directly (not the solution) now go to the repo's `packages` folder instead of `\packages` at the drive root
 
 * fix: ForceClient, JsonClient and AuthenticationClient no longer dispose an HttpClient passed in by the caller - the caller owns it
 * fix: AuthenticationClient now uses a shared static HttpClient by default, like ForceClient and JsonClient, instead of creating a new HttpClient (and connection pool) per instance - repeated logins no longer leak sockets

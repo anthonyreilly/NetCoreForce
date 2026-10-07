@@ -39,8 +39,7 @@ namespace NetCoreForce.Client.Tests
 
             Assert.Single(ex.Errors);
             Assert.Same(error, ex.Errors[0]);
-            // current implementation does not propagate the httpStatusCode parameter through this overload
-            Assert.Equal(new HttpStatusCode(), ex.HttpStatusCode);
+            Assert.Equal(HttpStatusCode.BadRequest, ex.HttpStatusCode);
         }
 
         [Fact]

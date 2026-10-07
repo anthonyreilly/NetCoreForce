@@ -13,7 +13,14 @@ namespace NetCoreForce.Client
     public static class UriFormatter
     {
         // API names of objects and fields, e.g. Account, Custom_Object__c, ns__Custom_Object__c
-        private static readonly Regex ApiNameRegex = new Regex(@"^[A-Za-z][A-Za-z0-9_]*$", RegexOptions.Compiled);
+        // \z rather than $, since $ also matches before a trailing newline
+        private static readonly Regex ApiNameRegex = new Regex(@"^[A-Za-z][A-Za-z0-9_]*\z", RegexOptions.Compiled);
+
+        // API version, e.g. v67.0
+        private static readonly Regex ApiVersionRegex = new Regex(@"^v\d{1,3}\.\d{1,2}\z", RegexOptions.Compiled);
+
+        // nextRecordsUrl paths returned by query responses, e.g. /services/data/v67.0/query/01gXXXXXXXXXXXXXXX-2000
+        private const string DataServicesPath = "/services/data/";
 
         // characters that would change the structure of the URL if included in a path segment.
         // backslash is included since it is treated as a path separator in http URIs.
@@ -59,6 +66,65 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
+        /// Validate an API version, e.g. v67.0, before including it in a URL.
+        /// Prevents values like "//other.host/x" or "v67.0/../.." from redirecting the request, and the access token, elsewhere.
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown when the value is not a valid API version</exception>
+        internal static void ValidateApiVersion(string apiVersion, string paramName = "apiVersion")
+        {
+            if (!ApiVersionRegex.IsMatch(apiVersion))
+            {
+                throw new ArgumentException($"'{apiVersion}' is not a valid API version, expected a value such as v67.0", paramName);
+            }
+        }
+
+        /// <summary>
+        /// Validate that a URL is an absolute HTTPS URL, since it will be sent credentials or the access token
+        /// </summary>
+        /// <exception cref="FormatException">Thrown when the value is not an absolute URL</exception>
+        /// <exception cref="ArgumentException">Thrown when the URL is not HTTPS</exception>
+        internal static Uri ValidateHttpsUrl(string url, string paramName)
+        {
+            if (!Uri.TryCreate(url, UriKind.Absolute, out Uri uri) || !Uri.IsWellFormedUriString(url, UriKind.Absolute))
+            {
+                throw new FormatException($"{paramName} is not a valid absolute URL");
+            }
+
+            if (uri.Scheme != Uri.UriSchemeHttps)
+            {
+                throw new ArgumentException($"{paramName} must be an HTTPS URL", paramName);
+            }
+
+            return uri;
+        }
+
+        /// <summary>
+        /// Resolve a nextRecordsUrl from a query response against the instance URL.
+        /// The URL comes from the response, so it must stay on the instance and under services/data - otherwise the access token would be sent elsewhere.
+        /// </summary>
+        /// <exception cref="ForceApiException">Thrown when the URL would resolve to a different host or resource</exception>
+        internal static Uri NextRecordsUri(string instanceUrl, string nextRecordsUrl)
+        {
+            Uri baseUri = BaseUri(instanceUrl);
+
+            if (!nextRecordsUrl.StartsWith(DataServicesPath, StringComparison.Ordinal) ||
+                !Uri.TryCreate(nextRecordsUrl, UriKind.Relative, out _))
+            {
+                throw new ForceApiException($"Unexpected nextRecordsUrl in query response: {nextRecordsUrl}");
+            }
+
+            Uri uri = new Uri(baseUri, nextRecordsUrl);
+
+            if (uri.Scheme != baseUri.Scheme || uri.Authority != baseUri.Authority ||
+                !uri.AbsolutePath.StartsWith(DataServicesPath, StringComparison.Ordinal))
+            {
+                throw new ForceApiException($"Unexpected nextRecordsUrl in query response: {nextRecordsUrl}");
+            }
+
+            return uri;
+        }
+
+        /// <summary>
         /// SF Base URI
         /// </summary>
         /// <param name="instanceUrl"></param>
@@ -69,7 +135,7 @@ namespace NetCoreForce.Client
             // e.g. https://na99.salesforce.com/services/data
 
             // trailing slash required in services/data/ so that URI combinations work as expected
-            return new Uri(new Uri(instanceUrl), "services/data/");
+            return new Uri(ValidateHttpsUrl(instanceUrl, nameof(instanceUrl)), "services/data/");
         }
 
         /// <summary>
@@ -86,6 +152,15 @@ namespace NetCoreForce.Client
 
             // nested paths and query strings are allowed, but relative segments would resolve outside of services/apexrest
             string resourcePath = apexResourceUrl.Split('?')[0];
+
+            // encoded separators and double encoding would hide relative segments from the check below
+            if (resourcePath.IndexOf("%2f", StringComparison.OrdinalIgnoreCase) != -1 ||
+                resourcePath.IndexOf("%5c", StringComparison.OrdinalIgnoreCase) != -1 ||
+                resourcePath.IndexOf("%25", StringComparison.OrdinalIgnoreCase) != -1)
+            {
+                throw new ArgumentException($"'{apexResourceUrl}' contains encoded path separators, which are not allowed", nameof(apexResourceUrl));
+            }
+
             foreach (string segment in resourcePath.Split('/', '\\'))
             {
                 string unescapedSegment = Uri.UnescapeDataString(segment);
@@ -95,7 +170,7 @@ namespace NetCoreForce.Client
                 }
             }
 
-            Uri uri = new Uri(new Uri(instanceUrl), $"services/apexrest/{apexResourceUrl}");
+            Uri uri = new Uri(ValidateHttpsUrl(instanceUrl, nameof(instanceUrl)), $"services/apexrest/{apexResourceUrl}");
 
             return uri;
         }
@@ -110,7 +185,7 @@ namespace NetCoreForce.Client
 
             // format: /
 
-            Uri uri = new Uri(new Uri(instanceUrl), "services/data");
+            Uri uri = new Uri(ValidateHttpsUrl(instanceUrl, nameof(instanceUrl)), "services/data");
 
             return uri;
         }
@@ -125,6 +200,7 @@ namespace NetCoreForce.Client
         {
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiVersion(apiVersion);
 
             //format: /vXX.X/limits/
 
@@ -142,6 +218,7 @@ namespace NetCoreForce.Client
         public static Uri LimitsResource(string apiVersion)
         {
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiVersion(apiVersion);
 
             return new Uri($"{apiVersion}/limits", UriKind.Relative);
         }
@@ -155,6 +232,7 @@ namespace NetCoreForce.Client
         {
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiVersion(apiVersion);
 
             //format: /vXX.X/sobjects/
 
@@ -172,6 +250,7 @@ namespace NetCoreForce.Client
             if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiVersion(apiVersion);
             ValidateApiName(sObjectName, nameof(sObjectName));
 
             //format: /vXX.X/sobjects/SObjectName/
@@ -190,6 +269,7 @@ namespace NetCoreForce.Client
             if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiVersion(apiVersion);
             ValidateApiName(sObjectName, nameof(sObjectName));
 
             //format: /vXX.X/sobjects/SObjectName/describe/
@@ -219,6 +299,7 @@ namespace NetCoreForce.Client
         {
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiVersion(apiVersion);
             if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
             if (string.IsNullOrEmpty(objectId)) throw new ArgumentNullException(nameof(objectId));
             ValidateApiName(sObjectName, nameof(sObjectName));
@@ -251,6 +332,7 @@ namespace NetCoreForce.Client
         {
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiVersion(apiVersion);
 
             //format: /vXX.X/composite/sobjects
 
@@ -270,6 +352,7 @@ namespace NetCoreForce.Client
         {
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiVersion(apiVersion);
 
             Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/composite");
 
@@ -284,6 +367,7 @@ namespace NetCoreForce.Client
         {
             if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiVersion(apiVersion);
             ValidateApiName(sObjectName, nameof(sObjectName));
 
             //format: /services/data/vXX.X/sobjects/SObjectName/
@@ -311,6 +395,7 @@ namespace NetCoreForce.Client
         {
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiVersion(apiVersion);
             if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
             ValidateApiName(sObjectName, nameof(sObjectName));
 
@@ -339,6 +424,7 @@ namespace NetCoreForce.Client
         {
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiVersion(apiVersion);
             if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
             if (string.IsNullOrEmpty(fieldName)) throw new ArgumentNullException(nameof(fieldName));
             if (string.IsNullOrEmpty(fieldValue)) throw new ArgumentNullException(nameof(fieldValue));
@@ -363,6 +449,7 @@ namespace NetCoreForce.Client
         public static string CompositeSObjectCollectionsSubRequest(string apiVersion)
         {
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiVersion(apiVersion);
 
             //format: /services/data/vXX.X/composite/sobjects/
 
@@ -381,6 +468,7 @@ namespace NetCoreForce.Client
         {
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiVersion(apiVersion);
             if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
             if (string.IsNullOrEmpty(fieldName)) throw new ArgumentNullException(nameof(fieldName));
             ValidateApiName(sObjectName, nameof(sObjectName));
@@ -405,6 +493,7 @@ namespace NetCoreForce.Client
         {
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiVersion(apiVersion);
             if (string.IsNullOrEmpty(sObjectName)) throw new ArgumentNullException(nameof(sObjectName));
             if (string.IsNullOrEmpty(objectId)) throw new ArgumentNullException(nameof(objectId));
             if (string.IsNullOrEmpty(blobField)) throw new ArgumentNullException(nameof(blobField));
@@ -427,6 +516,9 @@ namespace NetCoreForce.Client
         /// </summary>
         public static Uri Query(string instanceUrl, string apiVersion, string query, bool queryAll = false)
         {
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiVersion(apiVersion);
+
             string queryType = "query";
             if (queryAll)
             {
@@ -446,6 +538,9 @@ namespace NetCoreForce.Client
         /// </summary>
         public static Uri Search(string instanceUrl, string apiVersion, string query)
         {
+            if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiVersion(apiVersion);
+
             Uri uri = new Uri(BaseUri(instanceUrl), $"{apiVersion}/search");
             string searchUri = QueryHelpers.AddQueryString(uri.ToString(), "q", query);
 
@@ -461,6 +556,7 @@ namespace NetCoreForce.Client
         {
             if (string.IsNullOrEmpty(instanceUrl)) throw new ArgumentNullException(nameof(instanceUrl));
             if (string.IsNullOrEmpty(apiVersion)) throw new ArgumentNullException(nameof(apiVersion));
+            ValidateApiVersion(apiVersion);
 
             //format: /vXX.X/composite/batch
 

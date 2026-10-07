@@ -24,7 +24,7 @@ namespace NetCoreForce.Client.Tests
         {
             // without a connection lifetime, a long-lived HttpClient never picks up DNS changes
             bool decompress;
-            HttpMessageHandler handler = HttpClientFactory.CreateHandler(true, null, out decompress);
+            HttpMessageHandler handler = HttpClientFactory.CreateHandler(true, null, true, out decompress);
 
             SocketsHttpHandler socketsHandler = Assert.IsType<SocketsHttpHandler>(handler);
             Assert.Equal(HttpClientFactory.ConnectionLifetime, socketsHandler.PooledConnectionLifetime);
@@ -36,7 +36,7 @@ namespace NetCoreForce.Client.Tests
         public void CreateHandlerSetsProxy()
         {
             bool decompress;
-            HttpMessageHandler handler = HttpClientFactory.CreateHandler(false, "http://proxy.example.org:8080", out decompress);
+            HttpMessageHandler handler = HttpClientFactory.CreateHandler(false, "http://proxy.example.org:8080", true, out decompress);
 
             SocketsHttpHandler socketsHandler = Assert.IsType<SocketsHttpHandler>(handler);
             Assert.IsType<CustomProxy>(socketsHandler.Proxy);
@@ -50,7 +50,7 @@ namespace NetCoreForce.Client.Tests
         public void CreateHandlerWrapsWithConnectionLeaseHandler()
         {
             bool decompress;
-            HttpMessageHandler handler = HttpClientFactory.CreateHandler(true, null, out decompress);
+            HttpMessageHandler handler = HttpClientFactory.CreateHandler(true, null, true, out decompress);
 
             Assert.IsType<HttpClientFactory.ConnectionLeaseHandler>(handler);
         }

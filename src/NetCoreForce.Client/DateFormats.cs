@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace NetCoreForce.Client
 {
@@ -43,7 +44,7 @@ namespace NetCoreForce.Client
 
         public static string FullDateString(DateTimeOffset dto)
         {
-            return dto.ToString(_FullFormat);
+            return dto.ToString(_FullFormat, CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -63,17 +64,17 @@ namespace NetCoreForce.Client
         public static string FullDateString(DateTime dt, TimeSpan offset)
         {
             DateTimeOffset dto = new DateTimeOffset(dt, offset);
-            return dto.ToString(_FullFormat);
+            return dto.ToString(_FullFormat, CultureInfo.InvariantCulture);
         }
 
         public static string DateOnlyString(DateTimeOffset dto)
         {
-            return dto.ToString(_DateOnlyFormat);
+            return dto.ToString(_DateOnlyFormat, CultureInfo.InvariantCulture);
         }
 
         public static string DateOnlyString(DateTime dt)
         {
-            return dt.ToString(_DateOnlyFormat);
+            return dt.ToString(_DateOnlyFormat, CultureInfo.InvariantCulture);
         }
     }
 

@@ -39,10 +39,12 @@ The client ID and secret are the Consumer Key and Consumer Secret from your org'
 
 ## Usage
 
-Generate models for Account and Contact using Client Credentials:
+Generate models for Account and Contact using Client Credentials, with the client secret in an environment variable:
 ```
-NetCoreForce.ModelGenerator generate --auth-method ClientCredentials --client-id your_client_id --client-secret your_client_secret --token-request-endpoint https://your-domain.my.salesforce.com/services/oauth2/token -o Account -o Contact -p Sf -n MyProject.Models -d ./Models
+export NETCOREFORCE_CLIENT_SECRET=your_client_secret
+NetCoreForce.ModelGenerator generate --auth-method ClientCredentials --client-id your_client_id --token-request-endpoint https://your-domain.my.salesforce.com/services/oauth2/token -o Account -o Contact -p Sf -n MyProject.Models -d ./Models
 ```
+(In PowerShell: `$env:NETCOREFORCE_CLIENT_SECRET = "your_client_secret"`)
 
 Generate models including custom objects and referenced objects:
 ```
@@ -54,7 +56,15 @@ NetCoreForce.ModelGenerator generate -p Sf -r -c -n MyProject.Models -d ~/git/my
 * Use the "MyProject.Models" namespace
 * Place the generated classes in ~/git/myproject.models
 
-Any required settings not given as options or in a config file are prompted for interactively, including the auth method, credentials, objects to generate, and namespace.
+Any required settings not given as options or in a config file are prompted for interactively, including the auth method, credentials, objects to generate, and namespace. The client secret and password are not echoed when entered at the prompt.
+
+### Secrets
+
+Provide the client secret and password with the `NETCOREFORCE_CLIENT_SECRET` and `NETCOREFORCE_PASSWORD` environment variables, or enter them at the prompt. The `--client-secret` and `--password` options still work, but print a warning, since command line arguments are visible in shell history and process listings.
+
+The order of precedence is: command option, then environment variable, then config file, then prompt.
+
+The token request endpoint must be HTTPS. The generator shows the host it is logging in to before sending credentials.
 
 ### Options
 
@@ -62,9 +72,9 @@ Any required settings not given as options or in a config file are prompted for 
 |---|---|
 | `--auth-method` | Auth method: `1` / `UsernamePassword` or `2` / `ClientCredentials` |
 | `--client-id` | API client ID, a.k.a. Consumer Key |
-| `--client-secret` | API client secret, a.k.a. Consumer Secret |
+| `--client-secret` | API client secret, a.k.a. Consumer Secret. Prefer the `NETCOREFORCE_CLIENT_SECRET` environment variable. |
 | `--username` | API username (Username-Password only) |
-| `--password` | API password (Username-Password only) |
+| `--password` | API password (Username-Password only). Prefer the `NETCOREFORCE_PASSWORD` environment variable. |
 | `--token-request-endpoint` | Token request endpoint, default `https://login.salesforce.com/services/oauth2/token`. Required for Client Credentials. |
 | `--config-file` | Config file path |
 | `--save-config` | Save the options to the config file given by `--config-file`, or `modelgenerator_config.json` by default |
@@ -87,7 +97,9 @@ A config file is optional. Settings given as command options override those in t
 
 By default the generator looks for `modelgenerator_config.json` in the current directory. Use `--config-file` to load a different file, and `--save-config` to save the current options, including any values entered at the prompts, so you don't need to re-enter them next time.
 
-The config file can contain your API credentials, so keep it secure and out of source control.
+`--save-config` does not save the client secret, password or refresh token. A config file you write by hand can still contain them, so keep it secure and out of source control - or leave them out and use the environment variables.
+
+Only use a config file you trust: it controls the token endpoint your credentials are sent to.
 
 The `apiVersion` setting controls the Salesforce API version used to generate the models, and defaults to `v67.0`.
 

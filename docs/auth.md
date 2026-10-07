@@ -114,6 +114,12 @@ ForceClient client = new ForceClient(instanceUrl, apiVersion, accessToken);
 
 ---
 
+## HTTPS Required
+
+Token endpoints and instance URLs must be HTTPS, including the `instance_url` returned by the token endpoint - an `http://` URL throws an `ArgumentException`, so credentials and the access token are never sent in cleartext.
+
+---
+
 ## Custom HttpClient / Proxy Support
 
 Both `AuthenticationClient` and `ForceClient` accept an optional `httpClient` parameter for scenarios needing a custom `HttpClient`, e.g. a proxy. [`HttpClientFactory.CreateHttpClient`](xref:NetCoreForce.Client.HttpClientFactory.CreateHttpClient(System.Boolean,System.String)) can build one configured for a proxy:

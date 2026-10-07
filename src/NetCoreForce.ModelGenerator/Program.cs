@@ -11,6 +11,7 @@ using McMaster.Extensions.CommandLineUtils;
 using NetCoreForce.Client;
 using NetCoreForce.Client.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace NetCoreForce.ModelGenerator
 {
@@ -26,6 +27,10 @@ namespace NetCoreForce.ModelGenerator
             string.Join(", ", Enum.GetValues(typeof(AuthInfo.AuthMethodType)).Cast<AuthInfo.AuthMethodType>().Select(v => $"{(int)v} or {v}"));
 
         const string defaultConfigFilename = "modelgenerator_config.json";
+
+        //environment variables for secrets - command line options are visible in shell history and process listings
+        const string ClientSecretEnvVar = "NETCOREFORCE_CLIENT_SECRET";
+        const string PasswordEnvVar = "NETCOREFORCE_PASSWORD";
 
         static int Main(string[] args)
         {
@@ -133,9 +138,15 @@ namespace NetCoreForce.ModelGenerator
                         config.AuthInfo.ClientId = clientIdOption.Value();
                     }
 
+                    //secrets: command line option, then environment variable, then config file, then prompt
                     if (clientSecretOption.HasValue())
                     {
+                        WarnSecretOnCommandLine("--client-secret", ClientSecretEnvVar);
                         config.AuthInfo.ClientSecret = clientSecretOption.Value();
+                    }
+                    else if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable(ClientSecretEnvVar)))
+                    {
+                        config.AuthInfo.ClientSecret = Environment.GetEnvironmentVariable(ClientSecretEnvVar);
                     }
 
                     if (usernameOption.HasValue())
@@ -145,7 +156,12 @@ namespace NetCoreForce.ModelGenerator
 
                     if (passwordOption.HasValue())
                     {
+                        WarnSecretOnCommandLine("--password", PasswordEnvVar);
                         config.AuthInfo.Password = passwordOption.Value();
+                    }
+                    else if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable(PasswordEnvVar)))
+                    {
+                        config.AuthInfo.Password = Environment.GetEnvironmentVariable(PasswordEnvVar);
                     }
 
                     if (authMethodOption.HasValue())
@@ -201,6 +217,11 @@ namespace NetCoreForce.ModelGenerator
 
                     //check for minimum needed options and prompt if necessary
                     config = CheckOptions(config);
+
+                    //these are written into the generated source
+                    CodeGenValidation.Affix(config.ClassPrefix, "Class prefix");
+                    CodeGenValidation.Affix(config.ClassSuffix, "Class suffix");
+                    CodeGenValidation.Namespace(config.ClassNamespace);
 
                     if (saveConfigOption.HasValue())
                     {
@@ -285,7 +306,7 @@ namespace NetCoreForce.ModelGenerator
             while (string.IsNullOrEmpty(config.AuthInfo.ClientSecret))
             {
                 Console.WriteLine("Enter API Client Secret:");
-                config.AuthInfo.ClientSecret = Console.ReadLine();
+                config.AuthInfo.ClientSecret = ReadSecret();
                 Console.WriteLine();
             }
 
@@ -299,7 +320,7 @@ namespace NetCoreForce.ModelGenerator
             while (string.IsNullOrEmpty(config.AuthInfo.Password) && config.AuthInfo.AuthMethod == AuthInfo.AuthMethodType.UsernamePassword)
             {
                 Console.WriteLine("Enter API password:");
-                config.AuthInfo.Password = Console.ReadLine();
+                config.AuthInfo.Password = ReadSecret();
                 Console.WriteLine();
             }
 
@@ -328,6 +349,49 @@ namespace NetCoreForce.ModelGenerator
             }
 
             return config;
+        }
+
+        /// <summary>
+        /// Read a secret from the console without echoing it. Falls back to a plain read when input is redirected.
+        /// </summary>
+        private static string ReadSecret()
+        {
+            if (Console.IsInputRedirected)
+            {
+                return Console.ReadLine();
+            }
+
+            StringBuilder secret = new StringBuilder();
+            while (true)
+            {
+                ConsoleKeyInfo key = Console.ReadKey(intercept: true);
+                if (key.Key == ConsoleKey.Enter)
+                {
+                    break;
+                }
+
+                if (key.Key == ConsoleKey.Backspace)
+                {
+                    if (secret.Length > 0)
+                    {
+                        secret.Length--;
+                    }
+                    continue;
+                }
+
+                if (!char.IsControl(key.KeyChar))
+                {
+                    secret.Append(key.KeyChar);
+                }
+            }
+
+            Console.WriteLine();
+            return secret.ToString();
+        }
+
+        private static void WarnSecretOnCommandLine(string optionName, string envVarName)
+        {
+            Console.Error.WriteLine($"Warning: {optionName} exposes the secret in shell history and process listings. Set the {envVarName} environment variable instead, or omit it to be prompted.");
         }
 
         /// <summary>
@@ -384,17 +448,25 @@ namespace NetCoreForce.ModelGenerator
                 }
 
                 //if using the default filename, or just a filename was given, set the path to the current directory
-                if (System.IO.Path.IsPathRooted(filePath))
+                if (!Path.IsPathRooted(filePath))
                 {
-                    string executabledirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-                    filePath = Path.Combine(executabledirectory, filePath);
+                    filePath = Path.Combine(Directory.GetCurrentDirectory(), filePath);
                 }
 
                 Console.WriteLine($"Saving config file to {filePath}");
 
-                string contents = JsonConvert.SerializeObject(config, Formatting.Indented);
+                //secrets are not saved - the file is easily committed or shared by mistake
+                JObject contents = JObject.FromObject(config);
+                if (contents["AuthInfo"] is JObject authInfo)
+                {
+                    authInfo.Remove("clientSecret");
+                    authInfo.Remove("password");
+                    authInfo.Remove("refreshToken");
+                }
 
-                File.WriteAllText(filePath, contents, Encoding.Unicode);
+                File.WriteAllText(filePath, contents.ToString(Formatting.Indented), Encoding.Unicode);
+
+                Console.WriteLine($"The client secret and password are not saved - set the {ClientSecretEnvVar} and {PasswordEnvVar} environment variables, or enter them when prompted.");
 
                 return true;
             }
@@ -415,10 +487,9 @@ namespace NetCoreForce.ModelGenerator
                 }
 
                 //if using the default filename, or just a filename was given, set the path to the current directory
-                if (System.IO.Path.IsPathRooted(filePath))
+                if (!Path.IsPathRooted(filePath))
                 {
-                    string executabledirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-                    filePath = Path.Combine(executabledirectory, filePath);
+                    filePath = Path.Combine(Directory.GetCurrentDirectory(), filePath);
                 }
 
                 if (!File.Exists(filePath))
@@ -446,6 +517,13 @@ namespace NetCoreForce.ModelGenerator
         {
 
             AuthenticationClient auth = new AuthenticationClient(config.AuthInfo.ApiVersion);
+
+            //show where the credentials are being sent, so a config file pointing somewhere unexpected is noticed
+            if (Uri.TryCreate(config.AuthInfo.TokenRequestEndpoint, UriKind.Absolute, out Uri tokenEndpoint))
+            {
+                Console.WriteLine($"Logging in via {tokenEndpoint.Host}");
+            }
+
             try
             {
                 switch (config.AuthInfo.AuthMethod)
@@ -536,9 +614,8 @@ namespace NetCoreForce.ModelGenerator
 
                 Console.Write("Generating model for {0} - ", obj.Name);
 
-                string className = obj.Name;
-
-                className = string.Format("{0}{1}{2}", config.ClassPrefix ?? string.Empty, className, config.ClassSuffix ?? string.Empty);
+                //the class name is also the file name, so it must not contain path characters
+                string className = CodeGenValidation.Identifier(GetPrefixedSuffixed(config, CodeGenValidation.Identifier(obj.Name, "Object name")), "Class name");
 
                 await CreateModel(client, obj.Name, className, config);
             }
@@ -562,6 +639,9 @@ namespace NetCoreForce.ModelGenerator
         public static async Task<string> GenClass(ForceClient client, string objectName, string className, GenConfig config)
         {
             SObjectDescribeFull data = await client.GetObjectDescribe(objectName);
+
+            //names from the describe response are written into the generated source
+            CodeGenValidation.Identifier(data.Name, "Object name");
 
             StringBuilder gen = new StringBuilder();
 
@@ -614,10 +694,12 @@ namespace NetCoreForce.ModelGenerator
                         continue;
                     }
 
+                    CodeGenValidation.Identifier(field.Name, $"Field name on {data.Name}");
+
                     gen.AppendLine("\t\t///<summary>");
                     gen.AppendLine("\t\t/// " + DocCommentText(field.Label));
                     gen.AppendLine("\t\t/// <para>Name: " + field.Name + "</para>");
-                    gen.AppendLine("\t\t/// <para>SF Type: " + field.Type + "</para>");
+                    gen.AppendLine("\t\t/// <para>SF Type: " + DocCommentText(field.Type) + "</para>");
                     if (field.AutoNumber)
                     {
                         gen.AppendLine("\t\t/// <para>AutoNumber field</para>");
@@ -673,11 +755,14 @@ namespace NetCoreForce.ModelGenerator
 
                     if (field.Type == "reference" && config.IncludeReferences)
                     {
-                        if (string.IsNullOrEmpty(field.RelationshipName) || field.ReferenceTo.Count > 1)
+                        if (string.IsNullOrEmpty(field.RelationshipName) || field.ReferenceTo == null || field.ReferenceTo.Count != 1)
                         {
                             //only do single-object relationships
                             continue;
                         }
+
+                        CodeGenValidation.Identifier(field.RelationshipName, $"Relationship name on {data.Name}");
+                        CodeGenValidation.Identifier(field.ReferenceTo[0], $"Referenced object name on {data.Name}");
 
                         if(field.RelationshipName == "ContentBody")
                         {

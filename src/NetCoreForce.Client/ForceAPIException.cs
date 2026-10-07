@@ -30,8 +30,14 @@ namespace NetCoreForce.Client
         }
 
         public ForceApiException(string message, ErrorResponse error, HttpStatusCode httpStatusCode)
-            : this(message, new List<ErrorResponse>() { error }, new HttpStatusCode())
+            : this(message, new List<ErrorResponse>() { error }, httpStatusCode)
         {
+        }
+
+        public ForceApiException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+            Errors = new List<ErrorResponse>();
         }
 
         public ForceApiException(string message, List<ErrorResponse> errors, HttpStatusCode httpStatusCode)

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace NetCoreForce.Client
 {
@@ -10,7 +11,7 @@ namespace NetCoreForce.Client
         /// </summary>
         public static string ToSfDateString(this DateTimeOffset value)
         {
-            return value.ToString("yyyy-MM-ddTHH:mm:sszzz");
+            return value.ToString("yyyy-MM-ddTHH:mm:sszzz", CultureInfo.InvariantCulture);
         }
 
         /// <summary>

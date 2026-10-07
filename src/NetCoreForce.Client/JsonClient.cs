@@ -51,11 +51,15 @@ namespace NetCoreForce.Client
         /// Intialize the JSON client.
         /// <para>By default, uses a shared static HttpClient instance for best performance.</para>
         /// </summary>
-        /// <param name="accessToken">API Access token</param>
+        /// <param name="accessToken">API Access token. If null or empty, requests are sent without an Authorization header.</param>
         /// <param name="httpClient">Optional custom HttpClient. Ideally this should be a shared static instance for best performance.</param>
         public JsonClient(string accessToken, HttpClient httpClient = null)
         {
-            _authHeaderValue = new AuthenticationHeaderValue("Bearer", accessToken);
+            if (!string.IsNullOrEmpty(accessToken))
+            {
+                HeaderFormatter.ValidateHeaderValue(accessToken, nameof(accessToken));
+                _authHeaderValue = new AuthenticationHeaderValue("Bearer", accessToken);
+            }
 
             if (httpClient != null)
             {
@@ -199,6 +203,7 @@ namespace NetCoreForce.Client
             {
                 foreach (KeyValuePair<string, string> header in customHeaders)
                 {
+                    HeaderFormatter.ValidateHeaderValue(header.Value, nameof(customHeaders));
                     request.Headers.Add(header.Key, header.Value);
                 }
             }
@@ -216,9 +221,18 @@ namespace NetCoreForce.Client
                     errMsg += " " + ex.InnerException.Message;
                 }
                 Debug.WriteLine(errMsg);
-                throw new ForceApiException(errMsg);
+                throw new ForceApiException(errMsg, ex);
             }
 
+            //dispose the response once processed, so its connection is returned to the pool
+            using (responseMessage)
+            {
+                return await ProcessResponse<T>(request, responseMessage, deserializeResponse).ConfigureAwait(false);
+            }
+        }
+
+        private async Task<T> ProcessResponse<T>(HttpRequestMessage request, HttpResponseMessage responseMessage, bool deserializeResponse)
+        {
 #if DEBUG
             //API usage response header
             //e.g. "Sforce-Limit-Info: api-usage=90/15000"
@@ -232,13 +246,13 @@ namespace NetCoreForce.Client
 
             if (responseMessage.StatusCode == HttpStatusCode.NoContent)
             {
-                return JsonConvert.DeserializeObject<T>(string.Empty);
+                return JsonSerializer.Deserialize<T>(string.Empty);
             }
 
             //sucessful response, skip deserialization of response content
             if (responseMessage.IsSuccessStatusCode && !deserializeResponse)
             {
-                return JsonConvert.DeserializeObject<T>(string.Empty);
+                return JsonSerializer.Deserialize<T>(string.Empty);
             }
 
             if (responseMessage.Content != null)
@@ -254,7 +268,7 @@ namespace NetCoreForce.Client
                             throw new ForceApiException("Response content was empty");
                         }
 
-                        return JsonConvert.DeserializeObject<T>(responseContent);
+                        return JsonSerializer.Deserialize<T>(responseContent);
                     }
                     if (responseMessage.StatusCode == HttpStatusCode.MultipleChoices)
                     {
@@ -267,7 +281,7 @@ namespace NetCoreForce.Client
                             throw new ForceApiException("Response content was empty");
                         }
 
-                        var results = JsonConvert.DeserializeObject<List<string>>(responseContent);
+                        var results = JsonSerializer.Deserialize<List<string>>(responseContent);
 
                         var fex = new ForceApiException("Multiple matches for External ID value, see ObjectUrls");
 
@@ -282,7 +296,7 @@ namespace NetCoreForce.Client
                             // Check if error response is from tree request
                             if (typeof(T) == typeof(SObjectTreeResponse))
                             {
-                                T errorReponse = JsonConvert.DeserializeObject<T>(responseContent);
+                                T errorReponse = JsonSerializer.Deserialize<T>(responseContent);
                                 return errorReponse;
                             }
                         }
@@ -298,7 +312,7 @@ namespace NetCoreForce.Client
 
                         try
                         {
-                            errors = JsonConvert.DeserializeObject<List<ErrorResponse>>(responseContent);
+                            errors = JsonSerializer.Deserialize<List<ErrorResponse>>(responseContent);
 
                             // There will often only be one error code - append this to the message
                             if (errors != null && errors.Count > 0)

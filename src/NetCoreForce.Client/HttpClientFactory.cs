@@ -35,8 +35,16 @@ namespace NetCoreForce.Client
         /// <param name="proxyUrl">Proxy URL (Optional)</param>
         public static HttpClient CreateHttpClient(bool useCompression = true, string proxyUrl = null)
         {
+            return CreateHttpClient(useCompression, proxyUrl, allowAutoRedirect: true);
+        }
+
+        /// <param name="useCompression">Request gzip/deflate compressed responses</param>
+        /// <param name="proxyUrl">Proxy URL (Optional)</param>
+        /// <param name="allowAutoRedirect">Follow redirect responses. Disabled for token requests, since a 307/308 redirect re-sends the request body.</param>
+        internal static HttpClient CreateHttpClient(bool useCompression, string proxyUrl, bool allowAutoRedirect)
+        {
             bool decompress;
-            HttpMessageHandler handler = CreateHandler(useCompression, proxyUrl, out decompress);
+            HttpMessageHandler handler = CreateHandler(useCompression, proxyUrl, allowAutoRedirect, out decompress);
 
             HttpClient httpClient = new HttpClient(handler);
 
@@ -49,14 +57,15 @@ namespace NetCoreForce.Client
             return httpClient;
         }
 
-        internal static HttpMessageHandler CreateHandler(bool useCompression, string proxyUrl, out bool decompress)
+        internal static HttpMessageHandler CreateHandler(bool useCompression, string proxyUrl, bool allowAutoRedirect, out bool decompress)
         {
 #if NET
             if (UseSocketsHttpHandler())
             {
                 var socketsHandler = new SocketsHttpHandler
                 {
-                    PooledConnectionLifetime = ConnectionLifetime
+                    PooledConnectionLifetime = ConnectionLifetime,
+                    AllowAutoRedirect = allowAutoRedirect
                 };
 
                 decompress = useCompression;
@@ -74,7 +83,10 @@ namespace NetCoreForce.Client
             }
 #endif
 
-            var handler = new HttpClientHandler();
+            var handler = new HttpClientHandler
+            {
+                AllowAutoRedirect = allowAutoRedirect
+            };
 
             decompress = useCompression && handler.SupportsAutomaticDecompression;
             if (decompress)

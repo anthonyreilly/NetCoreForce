@@ -136,6 +136,57 @@ namespace NetCoreForce.Client.Tests
             Assert.Equal("token=accessToken&client_id=CLIENTID&client_secret=CLIENTSECRET&format=json", mockHandler.LastRequestContent);
         }
 
+        [Fact]
+        public async Task AuthErrorKeepsErrorCode()
+        {
+            // the OAuth error code was previously replaced with "Unknown" by these flows
+            string responseContent = @"{ ""error"": ""invalid_grant"", ""error_description"": ""authentication failure"" }";
+
+            AuthenticationClient auth = CreateAuthenticationClient(HttpStatusCode.BadRequest, responseContent);
+
+            ForceAuthException webServerEx = await Assert.ThrowsAsync<ForceAuthException>(
+                () => auth.WebServerAsync(ClientId, ClientSecret, "https://example.org/callback", "code", TokenEndpoint));
+            ForceAuthException clientCredentialsEx = await Assert.ThrowsAsync<ForceAuthException>(
+                () => auth.ClientCredentialsAsync(ClientId, ClientSecret, TokenEndpoint));
+
+            Assert.Equal("invalid_grant", webServerEx.ErrorCode);
+            Assert.Equal("authentication failure", webServerEx.Message);
+            Assert.Equal(HttpStatusCode.BadRequest, webServerEx.HttpStatusCode);
+            Assert.Equal("invalid_grant", clientCredentialsEx.ErrorCode);
+        }
+
+        [Theory]
+        [InlineData("<html><body>Proxy error</body></html>")]
+        [InlineData("")]
+        [InlineData("null")]
+        [InlineData("{}")]
+        public async Task AuthUnexpectedErrorBodyThrowsForceAuthException(string responseContent)
+        {
+            // e.g. an HTML error page from a proxy - previously JsonReaderException or NullReferenceException
+            AuthenticationClient auth = CreateAuthenticationClient(HttpStatusCode.BadGateway, responseContent);
+
+            ForceAuthException ex = await Assert.ThrowsAsync<ForceAuthException>(
+                () => auth.TokenRefreshAsync(CurrentRefreshToken, ClientId, ClientSecret, TokenEndpoint));
+            await Assert.ThrowsAsync<ForceAuthException>(() => auth.UsernamePasswordAsync(ClientId, ClientSecret, "user", "password", TokenEndpoint));
+            await Assert.ThrowsAsync<ForceAuthException>(() => auth.ClientCredentialsAsync(ClientId, ClientSecret, TokenEndpoint));
+
+            Assert.Equal("Unknown", ex.ErrorCode);
+            Assert.Equal(HttpStatusCode.BadGateway, ex.HttpStatusCode);
+        }
+
+        [Theory]
+        [InlineData("<html><body>Sign in to the network</body></html>")]
+        [InlineData("")]
+        [InlineData("null")]
+        public async Task AuthUnexpectedSuccessBodyThrowsForceAuthException(string responseContent)
+        {
+            // e.g. a captive portal page returned with 200 - previously JsonReaderException, or a null AccessInfo
+            AuthenticationClient auth = CreateAuthenticationClient(HttpStatusCode.OK, responseContent);
+
+            await Assert.ThrowsAsync<ForceAuthException>(() => auth.TokenRefreshAsync(CurrentRefreshToken, ClientId, ClientSecret, TokenEndpoint));
+            await Assert.ThrowsAsync<ForceAuthException>(() => auth.ClientCredentialsAsync(ClientId, ClientSecret, TokenEndpoint));
+        }
+
         /// <summary>
         /// Create an AuthenticationClient that returns the given response for the token refresh request
         /// </summary>

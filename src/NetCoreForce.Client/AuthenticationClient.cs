@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 
 namespace NetCoreForce.Client
@@ -29,7 +30,8 @@ namespace NetCoreForce.Client
 
         static AuthenticationClient()
         {
-            _SharedHttpClient = HttpClientFactory.CreateHttpClient();
+            //token endpoints do not legitimately redirect, and a 307/308 redirect would re-send the credentials in the request body to the redirect location
+            _SharedHttpClient = HttpClientFactory.CreateHttpClient(useCompression: true, proxyUrl: null, allowAutoRedirect: false);
         }
 
         /// <summary>
@@ -94,7 +96,7 @@ namespace NetCoreForce.Client
                 // Will typically be a single ForceAuthException exception - unwrap and throw
                 if (ex.InnerException != null && ex.InnerExceptions != null && ex.InnerExceptions.Count == 1)
                 {
-                    throw ex.InnerException;
+                    ExceptionDispatchInfo.Capture(ex.InnerException).Throw();
                 }
 
                 //otherwise throw the original AggregateException as-is
@@ -137,7 +139,7 @@ namespace NetCoreForce.Client
             if (string.IsNullOrEmpty(username)) throw new ArgumentNullException("username", "Username is null or empty");
             if (string.IsNullOrEmpty(password)) throw new ArgumentNullException("password", "Password is null or empty");
             if (string.IsNullOrEmpty(tokenRequestEndpointUrl)) throw new ArgumentNullException("tokenRequestEndpointUrl", "Token Request Endpoint is null or empty");
-            if (!Uri.IsWellFormedUriString(tokenRequestEndpointUrl, UriKind.Absolute)) throw new FormatException("Invalid tokenRequestEndpointUrl");
+            UriFormatter.ValidateHttpsUrl(tokenRequestEndpointUrl, nameof(tokenRequestEndpointUrl));
 
             var content = new FormUrlEncodedContent(new[]
                 {
@@ -155,25 +157,7 @@ namespace NetCoreForce.Client
                 Content = content
             };
 
-            request.Headers.UserAgent.ParseAdd(string.Concat(UserAgent, "/", ApiVersion));
-
-            var responseMessage = await _httpClient.SendAsync(request).ConfigureAwait(false);
-            var response = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                this.AccessInfo = JsonConvert.DeserializeObject<AccessTokenResponse>(response);
-            }
-            else if (responseMessage.StatusCode == HttpStatusCode.NotFound)
-            {
-                // Unable to reach the auth/token url
-                throw new ForceAuthException(Error.Unknown.ToString(), "Error reaching Login URL", responseMessage.StatusCode);
-            }
-            else
-            {
-                var errorResponse = JsonConvert.DeserializeObject<AuthErrorResponse>(response);
-                throw new ForceAuthException(errorResponse.Error, errorResponse.ErrorDescription, responseMessage.StatusCode);
-            }
+            this.AccessInfo = await SendTokenRequestAsync<AccessTokenResponse>(request).ConfigureAwait(false);
 #if DEBUG
             sw.Stop();
             Debug.WriteLine(string.Format("Login completed in {0}ms", sw.ElapsedMilliseconds.ToString()));
@@ -199,7 +183,7 @@ namespace NetCoreForce.Client
             if (!Uri.IsWellFormedUriString(redirectUri, UriKind.Absolute)) throw new FormatException("redirectUri");
             if (string.IsNullOrEmpty(code)) throw new ArgumentNullException("code");
             if (string.IsNullOrEmpty(tokenRequestEndpointUrl)) throw new ArgumentNullException("tokenRequestEndpointUrl");
-            if (!Uri.IsWellFormedUriString(tokenRequestEndpointUrl, UriKind.Absolute)) throw new FormatException("tokenRequestEndpointUrl");
+            UriFormatter.ValidateHttpsUrl(tokenRequestEndpointUrl, nameof(tokenRequestEndpointUrl));
 
             var content = new FormUrlEncodedContent(new[]
                 {
@@ -217,28 +201,7 @@ namespace NetCoreForce.Client
                 Content = content
             };
 
-            request.Headers.UserAgent.ParseAdd(string.Concat(UserAgent, "/", ApiVersion));
-
-            var responseMessage = await _httpClient.SendAsync(request).ConfigureAwait(false);
-            var response = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                this.AccessInfo = JsonConvert.DeserializeObject<AccessTokenResponse>(response);
-            }
-            else
-            {
-                try
-                {
-                    var errorResponse = JsonConvert.DeserializeObject<AuthErrorResponse>(response);
-                    throw new ForceAuthException(errorResponse.Error, errorResponse.ErrorDescription, responseMessage.StatusCode);
-                }
-                catch (Exception ex)
-                {
-                    throw new ForceAuthException("Unknown", ex.Message, responseMessage.StatusCode);
-                }
-
-            }
+            this.AccessInfo = await SendTokenRequestAsync<AccessTokenResponse>(request).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -254,7 +217,7 @@ namespace NetCoreForce.Client
             if (string.IsNullOrEmpty(token)) throw new ArgumentNullException("token");
             if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException("clientId");
             if (string.IsNullOrEmpty(introspectTokenEndpointUrl)) throw new ArgumentNullException("introspectTokenEndpointUrl");
-            if (!Uri.IsWellFormedUriString(introspectTokenEndpointUrl, UriKind.Absolute)) throw new FormatException("introspectTokenEndpointUrl");
+            UriFormatter.ValidateHttpsUrl(introspectTokenEndpointUrl, nameof(introspectTokenEndpointUrl));
 
             //credentials go in the body, never the URL - URLs are routinely recorded by proxies and HTTP logging
             var prms = new List<KeyValuePair<string, string>>
@@ -275,20 +238,7 @@ namespace NetCoreForce.Client
                 Content = new FormUrlEncodedContent(prms)
             };
 
-            request.Headers.UserAgent.ParseAdd(string.Concat(UserAgent, "/", ApiVersion));
-
-            var responseMessage = await _httpClient.SendAsync(request).ConfigureAwait(false);
-            var response = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                return JsonConvert.DeserializeObject<IntrospectTokenResponse>(response);
-            }
-            else
-            {
-                var errorResponse = JsonConvert.DeserializeObject<AuthErrorResponse>(response);
-                throw new ForceAuthException(errorResponse.Error, errorResponse.ErrorDescription, responseMessage.StatusCode);
-            }
+            return await SendTokenRequestAsync<IntrospectTokenResponse>(request).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -304,7 +254,7 @@ namespace NetCoreForce.Client
             if (string.IsNullOrEmpty(refreshToken)) throw new ArgumentNullException("refreshToken");
             if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException("clientId");
             if (string.IsNullOrEmpty(tokenRequestEndpointUrl)) throw new ArgumentNullException("tokenRequestEndpointUrl");
-            if (!Uri.IsWellFormedUriString(tokenRequestEndpointUrl, UriKind.Absolute)) throw new FormatException("tokenRequestEndpointUrl");
+            UriFormatter.ValidateHttpsUrl(tokenRequestEndpointUrl, nameof(tokenRequestEndpointUrl));
 
             //credentials go in the body, never the URL - URLs are routinely recorded by proxies and HTTP logging
             var prms = new List<KeyValuePair<string, string>>
@@ -326,23 +276,10 @@ namespace NetCoreForce.Client
                 Content = new FormUrlEncodedContent(prms)
             };
 
-            request.Headers.UserAgent.ParseAdd(string.Concat(UserAgent, "/", ApiVersion));
+            this.AccessInfo = await SendTokenRequestAsync<AccessTokenResponse>(request).ConfigureAwait(false);
 
-            var responseMessage = await _httpClient.SendAsync(request).ConfigureAwait(false);
-            var response = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                this.AccessInfo = JsonConvert.DeserializeObject<AccessTokenResponse>(response);
-
-                //with refresh token rotation we get a new refresh token after exchanging the current one.
-                if (string.IsNullOrEmpty(this.AccessInfo.RefreshToken)) this.AccessInfo.RefreshToken = refreshToken; //when not included in response
-            }
-            else
-            {
-                var errorResponse = JsonConvert.DeserializeObject<AuthErrorResponse>(response);
-                throw new ForceAuthException(errorResponse.Error, errorResponse.ErrorDescription, responseMessage.StatusCode);
-            }
+            //with refresh token rotation we get a new refresh token after exchanging the current one.
+            if (string.IsNullOrEmpty(this.AccessInfo.RefreshToken)) this.AccessInfo.RefreshToken = refreshToken; //when not included in response
         }
 
         /// <summary>
@@ -358,7 +295,7 @@ namespace NetCoreForce.Client
             if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException("clientId");
             if (string.IsNullOrEmpty(clientSecret)) throw new ArgumentNullException("clientSecret");
             if (string.IsNullOrEmpty(tokenRequestEndpointUrl)) throw new ArgumentNullException("tokenRequestEndpointUrl");
-            if (!Uri.IsWellFormedUriString(tokenRequestEndpointUrl, UriKind.Absolute)) throw new FormatException("tokenRequestEndpointUrl");
+            UriFormatter.ValidateHttpsUrl(tokenRequestEndpointUrl, nameof(tokenRequestEndpointUrl));
 
             var content = new FormUrlEncodedContent(new[]
                 {
@@ -374,27 +311,67 @@ namespace NetCoreForce.Client
                 Content = content
             };
 
+            this.AccessInfo = await SendTokenRequestAsync<AccessTokenResponse>(request).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Send a token endpoint request and deserialize the successful response.
+        /// <para>Any unexpected response throws <see cref="ForceAuthException"/> - an OAuth error keeps its error code,
+        /// and a body that isn't the expected JSON (e.g. an HTML page from a proxy) is reported as Unknown.</para>
+        /// </summary>
+        /// <exception cref="ForceAuthException">Thrown for an error or unexpected response</exception>
+        private async Task<T> SendTokenRequestAsync<T>(HttpRequestMessage request) where T : class
+        {
             request.Headers.UserAgent.ParseAdd(string.Concat(UserAgent, "/", ApiVersion));
 
-            var responseMessage = await _httpClient.SendAsync(request).ConfigureAwait(false);
-            var response = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-            if (responseMessage.IsSuccessStatusCode)
+            using (HttpResponseMessage responseMessage = await _httpClient.SendAsync(request).ConfigureAwait(false))
             {
-                this.AccessInfo = JsonConvert.DeserializeObject<AccessTokenResponse>(response);
+                string response = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                if (!responseMessage.IsSuccessStatusCode)
+                {
+                    AuthErrorResponse errorResponse = TryDeserialize<AuthErrorResponse>(response);
+                    if (errorResponse != null && !string.IsNullOrEmpty(errorResponse.Error))
+                    {
+                        throw new ForceAuthException(errorResponse.Error, errorResponse.ErrorDescription, responseMessage.StatusCode);
+                    }
+
+                    if (responseMessage.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        // Unable to reach the auth/token url
+                        throw new ForceAuthException(Error.Unknown.ToString(), "Error reaching Login URL", responseMessage.StatusCode);
+                    }
+
+                    throw new ForceAuthException(Error.Unknown.ToString(), "Unexpected response from token endpoint", responseMessage.StatusCode);
+                }
+
+                T result = TryDeserialize<T>(response);
+                if (result == null || (result is AccessTokenResponse accessTokenResponse && string.IsNullOrEmpty(accessTokenResponse.AccessToken)))
+                {
+                    throw new ForceAuthException(Error.Unknown.ToString(), "Unexpected response from token endpoint", responseMessage.StatusCode);
+                }
+
+                return result;
             }
-            else
-            {
-                try
-                {
-                    var errorResponse = JsonConvert.DeserializeObject<AuthErrorResponse>(response);
-                    throw new ForceAuthException(errorResponse.Error, errorResponse.ErrorDescription, responseMessage.StatusCode);
-                }
-                catch (Exception ex)
-                {
-                    throw new ForceAuthException("Unknown", ex.Message, responseMessage.StatusCode);
-                }
+        }
 
+        /// <summary>
+        /// Deserialize a response body, returning null if it is empty or not valid JSON for the type
+        /// </summary>
+        private static T TryDeserialize<T>(string json) where T : class
+        {
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                return null;
+            }
+
+            try
+            {
+                return JsonSerializer.Deserialize<T>(json);
+            }
+            catch (JsonException)
+            {
+                return null;
             }
         }
 

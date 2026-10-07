@@ -1,0 +1,53 @@
+<Project>
+
+  <!--
+    Fail packing if a config or credentials file ends up in a package.
+    Local config files (gitignored) can contain real Salesforce credentials, and a file copied to the
+    output directory is included in tool packages. Patterns match .gitignore: *credentials*.json, *config*.json
+  -->
+  <UsingTask TaskName="FindSecretFilesInPackage" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <PackagePath ParameterType="System.String" Required="true" />
+      <Matches ParameterType="System.String" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System.Collections.Generic" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.IO.Compression" />
+      <Code Type="Fragment" Language="cs"><![CDATA[
+        var found = new List<string>();
+        using (var stream = File.OpenRead(PackagePath))
+        using (var zip = new ZipArchive(stream, ZipArchiveMode.Read))
+        {
+            foreach (var entry in zip.Entries)
+            {
+                string name = entry.Name.ToLowerInvariant();
+                bool isSecretFile = (name.Contains("credentials") || name.Contains("config")) && name.EndsWith(".json");
+                bool isAllowed = name.EndsWith(".runtimeconfig.json") || name.EndsWith("_example.json");
+                if (isSecretFile && !isAllowed)
+                {
+                    found.Add(entry.FullName);
+                }
+            }
+        }
+        Matches = string.Join(";", found);
+      ]]></Code>
+    </Task>
+  </UsingTask>
+
+  <Target Name="CheckPackageForSecretFiles" AfterTargets="Pack" Condition=" '$(IsPackable)' == 'true' ">
+    <ItemGroup>
+      <_PackageToCheck Include="@(NuGetPackOutput)" Condition=" '%(Extension)' == '.nupkg' " />
+    </ItemGroup>
+
+    <FindSecretFilesInPackage PackagePath="%(_PackageToCheck.FullPath)" Condition=" '@(_PackageToCheck)' != '' ">
+      <Output TaskParameter="Matches" PropertyName="_SecretFilesInPackage" />
+    </FindSecretFilesInPackage>
+
+    <!-- delete the .nuspec too, otherwise the next pack treats the package as up to date and silently produces nothing -->
+    <Delete Files="@(NuGetPackOutput)" Condition=" '$(_SecretFilesInPackage)' != '' " />
+    <Error Condition=" '$(_SecretFilesInPackage)' != '' "
+           Text="Package @(_PackageToCheck->'%(Filename)%(Extension)') contained config/credentials file(s) and has been deleted: $(_SecretFilesInPackage). These files can contain real credentials - exclude them from the package (e.g. Pack=&quot;false&quot; CopyToPublishDirectory=&quot;Never&quot;)." />
+  </Target>
+
+</Project>

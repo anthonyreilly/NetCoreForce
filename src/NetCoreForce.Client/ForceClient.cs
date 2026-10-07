@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
+using System.Runtime.ExceptionServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -63,7 +64,8 @@ namespace NetCoreForce.Client
             }
             catch (AggregateException ax)
             {
-                throw ax.InnerException;
+                //rethrow the original exception, keeping its stack trace
+                ExceptionDispatchInfo.Capture(ax.InnerException).Throw();
             }
         }
 
@@ -85,7 +87,8 @@ namespace NetCoreForce.Client
             }
             catch (AggregateException ax)
             {
-                throw ax.InnerException;
+                //rethrow the original exception, keeping its stack trace
+                ExceptionDispatchInfo.Capture(ax.InnerException).Throw();
             }
         }
 
@@ -142,6 +145,12 @@ namespace NetCoreForce.Client
 
         private void Initialize(string instanceUrl, string apiVersion, string accessToken, HttpClient httpClient = null, AccessTokenResponse accessInfo = null)
         {
+            //fail early - these are validated again when each request URL is built.
+            //instanceUrl may come from a token response, and the access token must only be sent over HTTPS
+            if (!string.IsNullOrEmpty(instanceUrl)) UriFormatter.ValidateHttpsUrl(instanceUrl, nameof(instanceUrl));
+            if (!string.IsNullOrEmpty(apiVersion)) UriFormatter.ValidateApiVersion(apiVersion, nameof(apiVersion));
+            if (!string.IsNullOrEmpty(accessToken)) HeaderFormatter.ValidateHeaderValue(accessToken, nameof(accessToken));
+
             this.ApiVersion = apiVersion;
             this.InstanceUrl = instanceUrl;
             this.AccessToken = accessToken;
@@ -207,19 +216,33 @@ namespace NetCoreForce.Client
                 {
                     if (!string.IsNullOrEmpty(nextRecordsUrl))
                     {
-                        queryUri = new Uri(new Uri(InstanceUrl), nextRecordsUrl);
+                        queryUri = UriFormatter.NextRecordsUri(InstanceUrl, nextRecordsUrl);
                     }
 
                     QueryResult<T> qr = await client.HttpGetAsync<QueryResult<T>>(queryUri, headers).ConfigureAwait(false);
 
+                    if (qr == null)
+                    {
+                        throw new ForceApiException("Query response was empty");
+                    }
+
 #if DEBUG
                     Debug.WriteLine(string.Format("Got query resuts, {0} totalSize, {1} in this batch, final batch: {2}",
-                        qr.TotalSize, qr.Records.Count.ToString(), qr.Done.ToString()));
+                        qr.TotalSize, (qr.Records?.Count ?? 0).ToString(), qr.Done.ToString()));
 #endif
 
-                    results.AddRange(qr.Records);
+                    if (qr.Records != null)
+                    {
+                        results.AddRange(qr.Records);
+                    }
 
                     done = qr.Done;
+
+                    //a repeated nextRecordsUrl would otherwise loop forever
+                    if (!done && !string.IsNullOrEmpty(qr.NextRecordsUrl) && qr.NextRecordsUrl == nextRecordsUrl)
+                    {
+                        throw new ForceApiException($"Query response repeated the previous nextRecordsUrl: {nextRecordsUrl}");
+                    }
 
                     nextRecordsUrl = qr.NextRecordsUrl;
 
@@ -298,19 +321,32 @@ namespace NetCoreForce.Client
             var jsonClient = new JsonClient(AccessToken, SharedHttpClient);
 
             var nextRecordsUri = UriFormatter.Query(InstanceUrl, ApiVersion, queryString, queryAll);
+            string previousNextRecordsUrl = null;
             bool hasMoreRecords = true;
 
             while (hasMoreRecords)
             {
                 var qr = await jsonClient.HttpGetAsync<QueryResult<T>>(nextRecordsUri, headers).ConfigureAwait(false);
 
+                if (qr == null)
+                {
+                    throw new ForceApiException("Query response was empty");
+                }
+
 #if DEBUG
-                Debug.WriteLine($"Got query resuts, {qr.TotalSize} totalSize, {qr.Records.Count} in this batch, final batch: {qr.Done}");
+                Debug.WriteLine($"Got query resuts, {qr.TotalSize} totalSize, {qr.Records?.Count ?? 0} in this batch, final batch: {qr.Done}");
 #endif
 
-                if (!string.IsNullOrEmpty(qr.NextRecordsUrl))
+                if (!qr.Done && !string.IsNullOrEmpty(qr.NextRecordsUrl))
                 {
-                    nextRecordsUri = new Uri(new Uri(InstanceUrl), qr.NextRecordsUrl);
+                    //a repeated nextRecordsUrl would otherwise loop forever
+                    if (qr.NextRecordsUrl == previousNextRecordsUrl)
+                    {
+                        throw new ForceApiException($"Query response repeated the previous nextRecordsUrl: {previousNextRecordsUrl}");
+                    }
+
+                    previousNextRecordsUrl = qr.NextRecordsUrl;
+                    nextRecordsUri = UriFormatter.NextRecordsUri(InstanceUrl, qr.NextRecordsUrl);
                     hasMoreRecords = true;
                 }
                 else
@@ -320,9 +356,12 @@ namespace NetCoreForce.Client
                     hasMoreRecords = false;
                 }
 
-                foreach (T record in qr.Records)
+                if (qr.Records != null)
                 {
-                    yield return record;
+                    foreach (T record in qr.Records)
+                    {
+                        yield return record;
+                    }
                 }
             }
         }
@@ -731,7 +770,7 @@ namespace NetCoreForce.Client
 
             var uri = UriFormatter.CompositeRequest(InstanceUrl, ApiVersion);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
             List<CompositeSubRequest> subRequests = sObjects.Select(s =>
             {
@@ -745,7 +784,7 @@ namespace NetCoreForce.Client
 
             CompositeRequest createMultipleRequest = new CompositeRequest(subRequests, allOrNone, collateSubrequests);
 
-            return await client.HttpPostAsync<CompositeRequestResponse>(createMultipleRequest, uri, headers);
+            return await client.HttpPostAsync<CompositeRequestResponse>(createMultipleRequest, uri, headers).ConfigureAwait(false);
 
         }
 
@@ -783,9 +822,9 @@ namespace NetCoreForce.Client
 
             var uri = UriFormatter.ApexUri(InstanceUrl, apexResourceUrl);
 
-            JsonClient client = new JsonClient(AccessToken, _httpClient);
+            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
 
-            return await client.HttpPostAsync<T>(request, uri, headers);
+            return await client.HttpPostAsync<T>(request, uri, headers).ConfigureAwait(false);
 
         }
 
@@ -866,13 +905,18 @@ namespace NetCoreForce.Client
                 {
                     errMsg += " " + ex.InnerException.Message;
                 }
-                throw new ForceApiException(errMsg);
+                throw new ForceApiException(errMsg, ex);
             }
 
             if (responseMessage.IsSuccessStatusCode)
                 return responseMessage;
 
-            throw new ForceApiException($"Failed to download blob data, request returned {responseMessage.StatusCode} {responseMessage.ReasonPhrase}");
+            //with ResponseHeadersRead the connection is held until the response is disposed
+            string failureMessage = $"Failed to download blob data, request returned {responseMessage.StatusCode} {responseMessage.ReasonPhrase}";
+            System.Net.HttpStatusCode statusCode = responseMessage.StatusCode;
+            responseMessage.Dispose();
+
+            throw new ForceApiException(failureMessage, new List<ErrorResponse>(), statusCode);
         }
 
         #region metadata
@@ -920,7 +964,8 @@ namespace NetCoreForce.Client
 
             var uri = UriFormatter.Versions(currentInstanceUrl);
 
-            JsonClient client = new JsonClient(AccessToken, SharedHttpClient);
+            //the Versions resource requires no authentication - don't send the access token, since currentInstanceUrl may not be this client's instance
+            JsonClient client = new JsonClient(null, SharedHttpClient);
 
             return await client.HttpGetAsync<List<SalesforceVersion>>(uri: uri, deserializeResponse: deserializeResponse).ConfigureAwait(false);
         }
