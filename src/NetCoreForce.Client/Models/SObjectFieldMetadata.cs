@@ -15,6 +15,9 @@ namespace NetCoreForce.Client.Models
         [JsonProperty(PropertyName = "calculatedFormula")]
         public string CalculatedFormula { get; set; }
 
+        [JsonProperty(PropertyName = "controllerName")]
+        public string ControllerName { get; set; }
+
         [JsonProperty(PropertyName = "createable")]
         public bool Creatable { get; set; }
 
@@ -23,6 +26,9 @@ namespace NetCoreForce.Client.Models
 
         [JsonProperty(PropertyName = "defaultValue")]
         public string DefaultValue { get; set; }
+
+        [JsonProperty(PropertyName = "dependentPicklist")]
+        public bool DependentPicklist { get; set; }
 
         [JsonProperty(PropertyName = "externalId")]
         public string ExternalId { get; set; }
