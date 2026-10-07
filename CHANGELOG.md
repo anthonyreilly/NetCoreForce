@@ -1,6 +1,6 @@
 # Changelog
 
-### 2026-10-06 v6.0.1
+### 2026-10-07 v6.1.0
 
 * security: TokenRefreshAsync and IntrospectTokenAsync now send the refresh/access token and client secret in the POST body instead of the URL query string, where they could be recorded by proxies, APM tools and HTTP logs
     - both now validate their arguments like the other login flows: ArgumentNullException for a missing token, client ID or endpoint, FormatException for a non-absolute endpoint URL
