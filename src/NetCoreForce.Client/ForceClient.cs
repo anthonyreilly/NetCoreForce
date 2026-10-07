@@ -750,6 +750,38 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
+        /// Execute multiple composite records.
+        /// The list can contain up to 200 objects.
+        /// The list can contain objects of different types, including custom objects.
+        /// </summary>
+        /// <param name="compositeRequest">The composite request</param>
+        /// <param name="customHeaders">Custom headers to include in request (Optional). await The HeaderFormatter helper class can be used to generate the custom header as needed.</param>
+        /// <returns>List of UpdateMultipleResponse objects, includes response for each object (id, success, errors)</returns>
+        /// <exception cref="ForceApiException">Thrown when request fails</exception>
+        public async Task<CompositeRequestResponse> ExecuteCompositeRecords(
+            CompositeRequest compositeRequest,
+            Dictionary<string, string> customHeaders = null)
+        {
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+
+            //Add call options
+            Dictionary<string, string> callOptions = HeaderFormatter.SforceCallOptions(ClientName);
+            headers.AddRange(callOptions);
+
+            //Add custom headers if specified
+            if (customHeaders != null)
+            {
+                headers.AddRange(customHeaders);
+            }
+
+            var uri = UriFormatter.CompositeRequest(InstanceUrl, ApiVersion);
+
+            JsonClient client = new JsonClient(AccessToken, _httpClient);
+
+            return await client.HttpPostAsync<CompositeRequestResponse>(compositeRequest, uri, headers);
+        }
+
+        /// <summary>
         /// Execute request against ApexRest custom endpoints.
         /// </summary>
         /// <param name="apexResourceUrl">The URL of the apex resource. Ex: /services/apexrest/DuplicateCheck should provide "DuplicateCheck"</param>
