@@ -43,7 +43,7 @@ namespace NetCoreForce.Client
         /// Prevents values like "../Contact/003XXXXXXXXXXXXXXX" from redirecting the request to a different resource.
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when the value contains characters that would change the URL structure</exception>
-        private static void ValidatePathSegment(string value, string paramName)
+        internal static void ValidatePathSegment(string value, string paramName)
         {
             if (value == "." || value == ".." || value.IndexOfAny(UnsafePathSegmentChars) != -1)
             {

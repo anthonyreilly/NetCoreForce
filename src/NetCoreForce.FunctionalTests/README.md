@@ -18,6 +18,7 @@ Some tests depend on the org or connected app:
 Due to their long execution times, some tests are manual only and are not run by default:
 * **SOSLTests** - each test waits for Salesforce to index its sample records for search, which can take several minutes.
 * **MetadataNameTests** - describes every queryable object in the org (hundreds of API calls), to check the ModelGenerator's name validation doesn't reject any real object, field or relationship name.
+* **BulkApiTests** - runs Bulk API 2.0 ingest and query jobs, which Salesforce processes asynchronously and can take several minutes.
 
 On .NET 8+ and .NET Framework 4.7.2+ (xUnit v3) these tests are marked `Explicit`. Run them individually from Test Explorer, or with:
 ```

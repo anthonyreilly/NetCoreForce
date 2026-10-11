@@ -29,7 +29,7 @@ namespace NetCoreForce.Client
 
         private static readonly HttpClient _SharedHttpClient;
         private HttpClient _httpClient;
-        private HttpClient SharedHttpClient
+        internal HttpClient SharedHttpClient
         {
             get
             {

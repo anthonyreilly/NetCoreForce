@@ -2,3 +2,5 @@
   href: auth.md
 - name: Examples
   href: examples.md
+- name: Bulk API 2.0
+  href: bulk-api.md

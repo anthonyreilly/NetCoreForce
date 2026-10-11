@@ -1,0 +1,21 @@
+{
+  "id": "7506g00000DhRA2AAN",
+  "operation": "insert",
+  "object": "Account",
+  "createdById": "0056g000005HQPyAAO",
+  "createdDate": "2018-12-18T22:51:36.000+0000",
+  "systemModstamp": "2018-12-18T22:52:30.000+0000",
+  "state": "JobComplete",
+  "concurrencyMode": "Parallel",
+  "contentType": "CSV",
+  "apiVersion": 62.0,
+  "jobType": "V2Ingest",
+  "lineEnding": "LF",
+  "columnDelimiter": "COMMA",
+  "numberRecordsProcessed": 3,
+  "numberRecordsFailed": 1,
+  "retries": 0,
+  "totalProcessingTime": 334,
+  "apiActiveProcessingTime": 201,
+  "apexProcessingTime": 12
+}

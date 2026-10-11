@@ -1,0 +1,8 @@
+{
+  "resultPages": [
+    { "resultUrl": "/services/data/v62.0/jobs/query/750R0000000zlh9IAA/results?locator=aBcDeFg1N" },
+    { "resultUrl": "/services/data/v62.0/jobs/query/750R0000000zlh9IAA/results?locator=aBcDeFg2N" }
+  ],
+  "nextRecordsUrl": "/services/data/v62.0/jobs/query/750R0000000zlh9IAA/resultpages?locator=YcApWm4N",
+  "done": false
+}

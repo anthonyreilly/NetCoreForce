@@ -1,0 +1,19 @@
+{
+  "id": "750R0000000zlh9IAA",
+  "operation": "query",
+  "object": "Account",
+  "createdById": "005R0000000GiwjIAC",
+  "createdDate": "2018-12-10T17:50:19.000+0000",
+  "systemModstamp": "2018-12-10T17:51:27.000+0000",
+  "state": "JobComplete",
+  "concurrencyMode": "Parallel",
+  "contentType": "CSV",
+  "apiVersion": 62.0,
+  "jobType": "V2Query",
+  "lineEnding": "LF",
+  "columnDelimiter": "COMMA",
+  "numberRecordsProcessed": 500,
+  "retries": 0,
+  "totalProcessingTime": 334,
+  "isPkChunkingSupported": true
+}

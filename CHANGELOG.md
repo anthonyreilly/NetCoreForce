@@ -1,5 +1,17 @@
 # Changelog
 
+### Unreleased
+
+* feat: Salesforce Bulk API 2.0 support, with a new `BulkApiClient` in the `NetCoreForce.Client.BulkApi` namespace, created from an existing `ForceClient`
+    - ingest jobs (insert, update, upsert, delete, hardDelete): create, upload CSV data as a string or stream, close, abort, delete, get job info and list jobs, and get the successful, failed and unprocessed record results
+    - create an ingest job with its data in a single request, for up to 100,000 characters of data
+    - query jobs (query, queryAll): create, abort, delete, get job info and list jobs, and get CSV results one set at a time, all sets with `GetAllQueryJobResultsAsync` (`IAsyncEnumerable`), or as streams
+    - parallel query results (resultPages), API version 58.0 and later
+    - `RunIngestJobAsync` and `RunQueryJobAsync` create a job and wait for it to complete, and `WaitForIngestJobAsync`/`WaitForQueryJobAsync` poll an existing job
+    - job data and results are raw CSV
+* docs: new [Bulk API 2.0](https://netcoreforce.com/bulk-api.html) page, with the supported features and usage examples
+* JsonClient internals refactored so that CSV and multipart requests share its authentication, header validation and error handling. JSON requests behave as before
+
 ### 2026-10-07 v6.1.0
 
 * security: TokenRefreshAsync and IntrospectTokenAsync now send the refresh/access token and client secret in the POST body instead of the URL query string, where they could be recorded by proxies, APM tools and HTTP logs

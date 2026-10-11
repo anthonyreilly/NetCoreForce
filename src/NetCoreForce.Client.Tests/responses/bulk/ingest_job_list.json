@@ -1,0 +1,35 @@
+{
+  "done": false,
+  "records": [
+    {
+      "id": "7506g00000DhRA2AAN",
+      "operation": "insert",
+      "object": "Account",
+      "createdById": "0056g000005HQPyAAO",
+      "createdDate": "2018-12-18T22:51:36.000+0000",
+      "systemModstamp": "2018-12-18T22:51:58.000+0000",
+      "state": "JobComplete",
+      "concurrencyMode": "Parallel",
+      "contentType": "CSV",
+      "apiVersion": 62.0,
+      "jobType": "V2Ingest",
+      "contentUrl": "services/data/v62.0/jobs/ingest/7506g00000DhRA2AAN/batches",
+      "lineEnding": "LF",
+      "columnDelimiter": "COMMA"
+    },
+    {
+      "id": "7506g00000DhRA3AAN",
+      "operation": "update",
+      "object": "Contact",
+      "createdById": "0056g000005HQPyAAO",
+      "createdDate": "2018-12-18T22:55:00.000+0000",
+      "systemModstamp": "2018-12-18T22:56:00.000+0000",
+      "state": "Closed",
+      "concurrencyMode": "Parallel",
+      "contentType": "XML",
+      "apiVersion": 62.0,
+      "jobType": "Classic"
+    }
+  ],
+  "nextRecordsUrl": "/services/data/v62.0/jobs/ingest?queryLocator=01gR0000000opRTIAY-2000"
+}

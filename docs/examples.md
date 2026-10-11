@@ -383,6 +383,29 @@ foreach (CompositeSubrequestResponse subResponse in response.CompositeResponse)
 
 ---
 
+## Bulk API 2.0
+
+For large data sets, [`BulkApiClient`](xref:NetCoreForce.Client.BulkApi.BulkApiClient) loads or queries records as CSV, using asynchronous Bulk API 2.0 jobs:
+
+```csharp
+using NetCoreForce.Client.BulkApi;
+
+BulkApiClient bulkClient = new BulkApiClient(client);
+
+IngestJobInfo job = await bulkClient.RunIngestJobAsync(
+    new CreateIngestJobRequest("Account", BulkIngestOperation.Insert),
+    "Name,Industry
+Acme,Manufacturing
+Globex,Energy
+");
+
+Console.WriteLine($"{job.State}: {job.NumberRecordsProcessed} processed, {job.NumberRecordsFailed} failed");
+```
+
+See [Bulk API 2.0](bulk-api.md) for upserts and deletes, query jobs, streamed and parallel results, and job management.
+
+---
+
 ## Custom Apex REST Endpoints
 
 Call a custom Apex REST endpoint with [```ExecuteApexPost<TRequest, TResponse>```](xref:NetCoreForce.Client.ForceClient.ExecuteApexPost``2(System.String,``0,System.Collections.Generic.Dictionary{System.String,System.String})). Pass the resource path relative to `/services/apexrest/`, e.g. `DuplicateCheck` for `/services/apexrest/DuplicateCheck`.

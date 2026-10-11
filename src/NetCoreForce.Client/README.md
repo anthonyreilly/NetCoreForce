@@ -39,6 +39,7 @@ Other login flows (Web Server, refresh token, existing access token) are covered
 - SOQL queries, including streaming large result sets with `QueryAsync` (`IAsyncEnumerable`)
 - SOSL search
 - Multiple records per request: sObject Tree, sObject Collections, and composite requests
+- Bulk API 2.0 ingest and query jobs, for loading or querying large data sets as CSV - see the [Bulk API 2.0 docs](https://netcoreforce.com/bulk-api.html)
 - Blob/file downloads, custom Apex REST endpoints, and object metadata (describe), limits and API versions
 - `SoqlHelpers` for safely escaping untrusted values in SOQL and SOSL queries
 

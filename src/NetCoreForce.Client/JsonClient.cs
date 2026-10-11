@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -199,6 +200,62 @@ namespace NetCoreForce.Client
         /// <returns></returns>
         private async Task<T> GetResponse<T>(HttpRequestMessage request, Dictionary<string, string> customHeaders = null, bool deserializeResponse = true)
         {
+            HttpResponseMessage responseMessage = await SendAsync(request, customHeaders, HttpCompletionOption.ResponseContentRead, CancellationToken.None).ConfigureAwait(false);
+
+            //dispose the response once processed, so its connection is returned to the pool
+            using (responseMessage)
+            {
+                return await ProcessResponse<T>(request, responseMessage, deserializeResponse).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary>
+        /// Send a request whose content and response are not JSON, e.g. CSV or multipart data.
+        /// <para>The caller owns the returned response and must dispose it.</para>
+        /// </summary>
+        /// <param name="request">HttpRequestMessage containing the request details. The Authorization header is set by this client.</param>
+        /// <param name="customHeaders">Custom headers, if any</param>
+        /// <param name="completionOption">Use ResponseHeadersRead to stream the response content rather than buffering it to memory</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>The successful (HTTP 2xx) response</returns>
+        /// <exception cref="ForceApiException">Thrown when the request fails, or the API returns an error response</exception>
+        internal async Task<HttpResponseMessage> HttpSendAsync(
+            HttpRequestMessage request,
+            Dictionary<string, string> customHeaders = null,
+            HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead,
+            CancellationToken cancellationToken = default)
+        {
+            HttpResponseMessage responseMessage = await SendAsync(request, customHeaders, completionOption, cancellationToken).ConfigureAwait(false);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return responseMessage;
+            }
+
+            //dispose the failed response, so its connection is returned to the pool
+            using (responseMessage)
+            {
+                string responseContent = string.Empty;
+                if (responseMessage.Content != null)
+                {
+                    try
+                    {
+                        responseContent = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ForceApiException(string.Format("Error parsing response content: {0}", ex.Message));
+                    }
+                }
+
+                throw CreateApiException(responseContent, responseMessage.StatusCode);
+            }
+        }
+
+        private async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, Dictionary<string, string> customHeaders, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+        {
+            request.Headers.Authorization = _authHeaderValue;
+
             if (customHeaders != null && customHeaders.Count > 0)
             {
                 foreach (KeyValuePair<string, string> header in customHeaders)
@@ -208,10 +265,13 @@ namespace NetCoreForce.Client
                 }
             }
 
-            HttpResponseMessage responseMessage = null;
             try
             {
-                responseMessage = await SharedHttpClient.SendAsync(request).ConfigureAwait(false);
+                return await SharedHttpClient.SendAsync(request, completionOption, cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+            {
+                throw;
             }
             catch (Exception ex)
             {
@@ -222,12 +282,6 @@ namespace NetCoreForce.Client
                 }
                 Debug.WriteLine(errMsg);
                 throw new ForceApiException(errMsg, ex);
-            }
-
-            //dispose the response once processed, so its connection is returned to the pool
-            using (responseMessage)
-            {
-                return await ProcessResponse<T>(request, responseMessage, deserializeResponse).ConfigureAwait(false);
             }
         }
 
@@ -305,33 +359,7 @@ namespace NetCoreForce.Client
                             // swallow error and continue to parse as generic error response instead
                         }                       
 
-                        // Parse generic API error response
-                        string msg = string.Format("Unable to complete request, Salesforce API returned {0}.", responseMessage.StatusCode.ToString());
-
-                        List<ErrorResponse> errors = null;
-
-                        try
-                        {
-                            errors = JsonSerializer.Deserialize<List<ErrorResponse>>(responseContent);
-
-                            // There will often only be one error code - append this to the message
-                            if (errors != null && errors.Count > 0)
-                            {
-                                msg += string.Format(" ErrorCode {0}: {1}.", errors[0].ErrorCode, errors[0].Message);
-                            }
-
-                            // inform if there are multiple errors that need to be checked
-                            if (errors != null && errors.Count > 1)
-                            {
-                                msg += " Additional errors returned, see Errors for complete list.";
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            msg += string.Format(" Unable to parse error details: {0}", ex.Message);
-                        }
-
-                        throw new ForceApiException(msg, errors, responseMessage.StatusCode);
+                        throw CreateApiException(responseContent, responseMessage.StatusCode);
                     }
                 }
                 catch (ForceApiException)
@@ -345,6 +373,41 @@ namespace NetCoreForce.Client
             }
 
             throw new ForceApiException(string.Format("Error processing response: returned {0} for {1}", responseMessage.ReasonPhrase, request.RequestUri.ToString()));
+        }
+
+        /// <summary>
+        /// Create an exception for a generic API error response
+        /// </summary>
+        /// <param name="responseContent">Error response content, expected to be a JSON list of errors</param>
+        /// <param name="statusCode">Response status code</param>
+        private static ForceApiException CreateApiException(string responseContent, HttpStatusCode statusCode)
+        {
+            string msg = string.Format("Unable to complete request, Salesforce API returned {0}.", statusCode.ToString());
+
+            List<ErrorResponse> errors = null;
+
+            try
+            {
+                errors = JsonSerializer.Deserialize<List<ErrorResponse>>(responseContent);
+
+                // There will often only be one error code - append this to the message
+                if (errors != null && errors.Count > 0)
+                {
+                    msg += string.Format(" ErrorCode {0}: {1}.", errors[0].ErrorCode, errors[0].Message);
+                }
+
+                // inform if there are multiple errors that need to be checked
+                if (errors != null && errors.Count > 1)
+                {
+                    msg += " Additional errors returned, see Errors for complete list.";
+                }
+            }
+            catch (Exception ex)
+            {
+                msg += string.Format(" Unable to parse error details: {0}", ex.Message);
+            }
+
+            return new ForceApiException(msg, errors, statusCode);
         }
 
         /// <summary>

@@ -33,6 +33,7 @@ List<SfAccount> accounts = await client.Query<SfAccount>("SELECT Id, Name FROM A
 
 - [Authentication](auth.md) - Client Credentials, Web Server, refresh token, and other login flows
 - [Examples](examples.md) - CRUD, queries, upserts, composite requests, search, metadata and more
+- [Bulk API 2.0](bulk-api.md) - load or query large data sets with asynchronous ingest and query jobs
 - [API Reference](api/NetCoreForce.Client.ForceClient.yml) - full `ForceClient` reference
 
 ## NuGet Packages
@@ -88,6 +89,7 @@ See [Examples](examples.md#nested-query-results) for nested results, [single rec
 - **Create multiple records** of one type in a single request - see [Create Multiple Records](examples.md#create-multiple-records)
 - **Update multiple records**, of one or more types, in a single request - see [Update Multiple Records](examples.md#update-multiple-records)
 - **Composite requests** - combine create, update, read and delete operations in one request, with references between them (e.g. create an Account and a Contact for it). See [Composite Requests](examples.md#composite-requests).
+- **Bulk API 2.0** - load or query large data sets as CSV, using asynchronous ingest and query jobs. See [Bulk API 2.0](bulk-api.md).
 
 ---
 
