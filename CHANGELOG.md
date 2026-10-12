@@ -1,5 +1,18 @@
 # Changelog
 
+### 2026-10-11 v6.2.0
+
+* feat: OAuth 2.0 JWT Bearer flow for server-to-server integration - log in as an approved user with a JWT signed by the private key matching the external client app's or connected app's certificate, with no client secret or password
+    - `AuthenticationClient.JwtBearerAsync` and `ForceClient.FromJwtBearerAsync` take an `RSA` private key, e.g. from a .pfx via `X509Certificate2.GetRSAPrivateKey()`
+    - new `RsaPrivateKey.FromPem` / `FromPemFile` load an unencrypted PKCS#8 or PKCS#1 PEM key on all supported frameworks, including .NET Standard 2.0 and .NET Framework
+    - new `AuthInfo.AuthMethodType.JwtBearer`, with `AuthInfo.PrivateKeyFile` and optional `AuthInfo.Audience`, for `new ForceClient(authInfo)`
+    - the audience defaults to `https://test.salesforce.com` for a test.salesforce.com or sandbox My Domain token endpoint, otherwise `https://login.salesforce.com`
+    - each JWT has a unique ID (`jti` claim), so Salesforce rejects a replayed JWT
+* feat: AccessTokenResponse.SfdcSiteUrl and SfdcSiteId, returned for Experience Cloud site users
+* ModelGenerator: `--auth-method` only accepts the supported UsernamePassword and ClientCredentials methods
+* config: `*.pem`, `*.key` and `*.p12` files are gitignored, and packing fails if a `.pem`, `.key`, `.pfx` or `.p12` file is in a package
+* docs: JWT Bearer flow setup and usage
+
 ### 2026-10-07 v6.1.0
 
 * security: TokenRefreshAsync and IntrospectTokenAsync now send the refresh/access token and client secret in the POST body instead of the URL query string, where they could be recorded by proxies, APM tools and HTTP logs

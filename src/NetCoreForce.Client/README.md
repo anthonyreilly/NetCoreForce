@@ -30,11 +30,11 @@ await client.UpdateRecord<SfAccount>(SfAccount.SObjectTypeName, created.Id, new 
 await client.DeleteRecord(SfAccount.SObjectTypeName, created.Id);
 ```
 
-Other login flows (Web Server, refresh token, existing access token) are covered in the [Authentication docs](https://netcoreforce.com/auth.html). For more usage examples, see the [Examples](https://netcoreforce.com/examples.html).
+Other login flows (JWT Bearer, Web Server, refresh token, existing access token) are covered in the [Authentication docs](https://netcoreforce.com/auth.html). For more usage examples, see the [Examples](https://netcoreforce.com/examples.html).
 
 ## Features
 
-- OAuth 2.0 login: Client Credentials, Web Server (authorization code), refresh token, Username-Password, and token introspection
+- OAuth 2.0 login: Client Credentials, JWT Bearer, Web Server (authorization code), refresh token, Username-Password, and token introspection
 - Create, read, update, delete and upsert by external ID
 - SOQL queries, including streaming large result sets with `QueryAsync` (`IAsyncEnumerable`)
 - SOSL search

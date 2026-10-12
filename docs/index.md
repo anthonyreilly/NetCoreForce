@@ -31,7 +31,7 @@ ForceClient client = await ForceClient.FromClientCredentialsAsync(
 List<SfAccount> accounts = await client.Query<SfAccount>("SELECT Id, Name FROM Account LIMIT 10");
 ```
 
-- [Authentication](auth.md) - Client Credentials, Web Server, refresh token, and other login flows
+- [Authentication](auth.md) - Client Credentials, JWT Bearer, Web Server, refresh token, and other login flows
 - [Examples](examples.md) - CRUD, queries, upserts, composite requests, search, metadata and more
 - [API Reference](api/NetCoreForce.Client.ForceClient.yml) - full `ForceClient` reference
 
@@ -52,6 +52,7 @@ List<SfAccount> accounts = await client.Query<SfAccount>("SELECT Id, Name FROM A
 Log in with the Salesforce OAuth 2.0 flows - see [Authentication](auth.md).
 
 - **Client Credentials** - server-to-server login with a connected app, in one call with [`ForceClient.FromClientCredentialsAsync`](xref:NetCoreForce.Client.ForceClient.FromClientCredentialsAsync(System.String,System.String,System.String,System.String,System.Net.Http.HttpClient))
+- **JWT Bearer** - server-to-server login as an approved user with a certificate's private key, with [`ForceClient.FromJwtBearerAsync`](xref:NetCoreForce.Client.ForceClient.FromJwtBearerAsync(System.String,System.String,System.Security.Cryptography.RSA,System.String,System.String,System.String,System.Net.Http.HttpClient)) - no client secret or password
 - **Web Server (Authorization Code)** - exchange an authorization code from the browser login for access and refresh tokens, with helpers to build the authorization URL
 - **Refresh tokens** - get a new access token without the user logging in again, including support for refresh token rotation
 - **Token introspection** - check whether an access token is still valid

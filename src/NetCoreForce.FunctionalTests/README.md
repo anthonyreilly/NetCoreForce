@@ -11,6 +11,14 @@ The tests should clean up after themselves, but a failed test may leave objects 
 Some tests depend on the org or connected app:
 * **AuthenticationClientTests.IntrospectTokenAsync_ActiveToken** - the connected app must be allowed to introspect tokens (e.g. enable "Introspect All Tokens"), otherwise Salesforce reports a valid token as inactive and the test fails. Uses `tokenIntrospectionEndpoint` from the credentials file, or the org's instance URL if not set.
 * **AuthenticationClientTests.TokenRefreshAsync** - needs a `refreshToken` in the credentials file, obtained separately (e.g. via the Web Server flow). Skipped if not set.
+* **AuthenticationClientTests.JwtBearerAsync** and **ForceClient_JwtBearer** - need a `privateKeyFile` in the credentials file (a relative path is resolved against the test output directory). Skipped if not set. To set up:
+  1. Create a key and self-signed certificate: `openssl req -x509 -newkey rsa:2048 -nodes -keyout server.key -out server.crt -days 365 -subj "/CN=netcoreforce-test"`
+  2. In the external client app (or existing connected app - new connected apps are restricted as of Spring '26), enable the JWT bearer flow and upload `server.crt`. In a connected app this is "Use digital signatures"
+  3. Make sure the app's OAuth scopes include `refresh_token` and `api` - the JWT bearer flow fails with `invalid_request` without `refresh_token`
+  4. Set the app's Permitted Users to "Admin approved users are pre-authorized", and add the test user's profile or a permission set
+  5. Set `privateKeyFile` to the path of `server.key`. Keep the key out of the repo - `*.key` and `*.pem` are gitignored
+  6. For a sandbox, set `tokenRequestEndpoint` to `https://test.salesforce.com/services/oauth2/token` (the audience defaults to match), or set `audience` explicitly
+* **AuthenticationClientTests.JwtBearerAsync_UnregisteredKey** - signs with a random key, so runs without the above setup and only checks Salesforce rejects it with an OAuth error.
 * **QueryTests.QueryMultipleBatchesMatchesCount** - needs more than 2000 Contact records to exercise query paging. Skipped otherwise.
 
 ## Manual-only tests

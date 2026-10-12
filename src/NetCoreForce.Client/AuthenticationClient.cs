@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.ExceptionServices;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace NetCoreForce.Client
@@ -302,6 +303,53 @@ namespace NetCoreForce.Client
                     new KeyValuePair<string, string>("grant_type", "client_credentials"),
                     new KeyValuePair<string, string>("client_id", clientId),
                     new KeyValuePair<string, string>("client_secret", clientSecret),
+                });
+
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(tokenRequestEndpointUrl),
+                Content = content
+            };
+
+            this.AccessInfo = await SendTokenRequestAsync<AccessTokenResponse>(request).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// OAuth 2.0 JWT Bearer Flow for server-to-server integration - logs in as an approved user with a JWT signed by the private key
+        /// matching the certificate uploaded to the external client app or connected app. No client secret or password is sent.
+        /// <para>https://help.salesforce.com/s/articleView?id=xcloud.remoteaccess_oauth_jwt_flow.htm</para>
+        /// <para>No refresh token is returned - call this again for a new access token when the current one expires.</para>
+        /// <para>The app's OAuth scopes must include refresh_token, plus at least one other standard scope such as api. Scopes can't be requested in this flow.</para>
+        /// <para>For an Experience Cloud site user, the site URL is returned in <see cref="AccessTokenResponse.SfdcSiteUrl"/>.</para>
+        /// <para>Load a PEM key with <see cref="RsaPrivateKey.FromPemFile"/>, or use a certificate with its private key, e.g. <c>new X509Certificate2(path, password).GetRSAPrivateKey()</c></para>
+        /// </summary>
+        /// <param name="clientId">The Consumer Key from the external client app or connected app definition.</param>
+        /// <param name="username">The Salesforce username to log in as. The user must be pre-authorized for the app via profile or permission set,
+        /// or, if the app allows users to self-authorize, have previously approved the app.</param>
+        /// <param name="privateKey">The RSA private key matching the certificate uploaded to the app. Not disposed by this method.</param>
+        /// <param name="tokenRequestEndpointUrl">Salesforce token request endpoint</param>
+        /// <param name="audience">Optional JWT audience (aud claim). Defaults to https://test.salesforce.com for a test.salesforce.com or sandbox My Domain endpoint,
+        /// otherwise https://login.salesforce.com. For an Experience Cloud site, use the site URL.</param>
+        public async Task JwtBearerAsync(string clientId, string username, RSA privateKey, string tokenRequestEndpointUrl = TokenRequestEndpointUrl, string audience = null)
+        {
+            if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException("clientId");
+            if (string.IsNullOrEmpty(username)) throw new ArgumentNullException("username");
+            if (privateKey == null) throw new ArgumentNullException("privateKey");
+            if (string.IsNullOrEmpty(tokenRequestEndpointUrl)) throw new ArgumentNullException("tokenRequestEndpointUrl");
+            UriFormatter.ValidateHttpsUrl(tokenRequestEndpointUrl, nameof(tokenRequestEndpointUrl));
+
+            if (string.IsNullOrEmpty(audience))
+            {
+                audience = JwtBearerAssertion.DefaultAudience(tokenRequestEndpointUrl);
+            }
+
+            string assertion = JwtBearerAssertion.Create(clientId, username, audience, privateKey, DateTimeOffset.UtcNow);
+
+            var content = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("grant_type", JwtBearerAssertion.GrantType),
+                    new KeyValuePair<string, string>("assertion", assertion),
                 });
 
             var request = new HttpRequestMessage

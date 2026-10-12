@@ -67,6 +67,19 @@ namespace NetCoreForce.Client.Models
         public long? IssuedAt { get; set; }
 
         /// <summary>
+        /// The Experience Cloud site URL, if the user is a member of an Experience Cloud site.
+        /// <para>API requests for a site user can be sent to the site URL, e.g. https://site.force.com/customers</para>
+        /// </summary>
+        [JsonProperty(PropertyName = "sfdc_site_url")]
+        public string SfdcSiteUrl { get; set; }
+
+        /// <summary>
+        /// The user's Experience Cloud site ID, if the user is a member of an Experience Cloud site. May be required in Connect REST API requests.
+        /// </summary>
+        [JsonProperty(PropertyName = "sfdc_site_id")]
+        public string SfdcSiteId { get; set; }
+
+        /// <summary>
         /// Issued At value converted to DateTime
         /// </summary>
         /// <returns></returns>

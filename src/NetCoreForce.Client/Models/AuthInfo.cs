@@ -37,6 +37,7 @@ namespace NetCoreForce.Client.Models
         public enum AuthMethodType {
             UsernamePassword = 1,
             ClientCredentials = 2,
+            JwtBearer = 3,
         }
         /// <summary>
         /// Auth type
@@ -85,5 +86,20 @@ namespace NetCoreForce.Client.Models
         /// </summary>
         [JsonProperty(PropertyName = "tokenIntrospectionEndpoint")]
         public string TokenIntrospectionEndpoint { get; set; }
+
+        /// <summary>
+        /// Path to a PEM file containing the unencrypted RSA private key, for the JWT Bearer auth method
+        /// <para>The key must match the certificate uploaded to the external client app or connected app. See <see cref="RsaPrivateKey.FromPemFile" /></para>
+        /// </summary>
+        [JsonProperty(PropertyName = "privateKeyFile")]
+        public string PrivateKeyFile { get; set; }
+
+        /// <summary>
+        /// Optional JWT audience (aud claim) for the JWT Bearer auth method
+        /// <para>Defaults to https://test.salesforce.com for a test.salesforce.com or sandbox My Domain token endpoint, otherwise https://login.salesforce.com.
+        /// For an Experience Cloud site, use the site URL.</para>
+        /// </summary>
+        [JsonProperty(PropertyName = "audience")]
+        public string Audience { get; set; }
     }
 }

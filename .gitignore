@@ -3,6 +3,10 @@
 !*credentials_example.json
 *config*.json
 !*config_example.json
+# private keys and certificates, e.g. for the JWT Bearer flow
+*.pem
+*.key
+*.p12
 scratch/
 clean.sh
 scrub.sh

@@ -24,7 +24,19 @@ namespace NetCoreForce.ModelGenerator
         /// For example: <c>1 or UsernamePassword, 2 or ClientCredentials</c>
         /// </returns>
         private static string ValidAuthTypesInputString =>
-            string.Join(", ", Enum.GetValues(typeof(AuthInfo.AuthMethodType)).Cast<AuthInfo.AuthMethodType>().Select(v => $"{(int)v} or {v}"));
+            string.Join(", ", SupportedAuthMethods.Select(v => $"{(int)v} or {v}"));
+
+        //the JWT Bearer auth method is not supported by ModelGenerator
+        private static readonly AuthInfo.AuthMethodType[] SupportedAuthMethods =
+        {
+            AuthInfo.AuthMethodType.UsernamePassword,
+            AuthInfo.AuthMethodType.ClientCredentials
+        };
+
+        private static bool TryParseAuthMethod(string input, out AuthInfo.AuthMethodType authMethod)
+        {
+            return Enum.TryParse(input, ignoreCase: true, out authMethod) && SupportedAuthMethods.Contains(authMethod);
+        }
 
         const string defaultConfigFilename = "modelgenerator_config.json";
 
@@ -166,7 +178,7 @@ namespace NetCoreForce.ModelGenerator
 
                     if (authMethodOption.HasValue())
                     {
-                        if (Enum.TryParse(authMethodOption.Value(), ignoreCase: true, out AuthInfo.AuthMethodType authMethod))
+                        if (TryParseAuthMethod(authMethodOption.Value(), out AuthInfo.AuthMethodType authMethod))
                             config.AuthInfo.AuthMethod = authMethod;
                         else
                         {
@@ -277,7 +289,7 @@ namespace NetCoreForce.ModelGenerator
                 Console.WriteLine("Enter Auth Method:");
                 string consoleReadLine = Console.ReadLine();
 
-                if (Enum.TryParse(consoleReadLine, ignoreCase: true, out AuthInfo.AuthMethodType authMethod))
+                if (TryParseAuthMethod(consoleReadLine, out AuthInfo.AuthMethodType authMethod))
                     config.AuthInfo.AuthMethod = authMethod;
                 else
                     Console.WriteLine($"Invalid input, valid inputs: {ValidAuthTypesInputString}");
@@ -537,7 +549,7 @@ namespace NetCoreForce.ModelGenerator
                             config.AuthInfo.TokenRequestEndpoint);
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException(nameof(config.AuthInfo.AuthMethod), $"authMethodInt is out of range, value: {(int)config.AuthInfo.AuthMethod}");
+                        throw new ArgumentOutOfRangeException(nameof(config.AuthInfo.AuthMethod), $"Auth method {config.AuthInfo.AuthMethod} is not supported, valid inputs: {ValidAuthTypesInputString}");
                 }
 
                 Console.WriteLine("Connected to Salesforce");

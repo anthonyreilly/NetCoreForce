@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Runtime.ExceptionServices;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -47,6 +48,7 @@ namespace NetCoreForce.Client
         /// Login to Salesforce and initialize the client, using the flow specified by <see cref="AuthInfo.AuthMethod" />
         /// (username-password if not set, for backward compatibility).
         /// <para>Client Credentials flow may require the org's specific My Domain token endpoint rather than the generic login.salesforce.com one.</para>
+        /// <para>JWT Bearer flow reads the private key from <see cref="AuthInfo.PrivateKeyFile" />.</para>
         /// </summary>
         /// <param name="authInfo"></param>
         public ForceClient(AuthInfo authInfo)
@@ -56,6 +58,10 @@ namespace NetCoreForce.Client
                 if (authInfo.AuthMethod == AuthInfo.AuthMethodType.ClientCredentials)
                 {
                     LoginClientCredentials(authInfo.ClientId, authInfo.ClientSecret, authInfo.TokenRequestEndpoint, authInfo.ApiVersion).Wait();
+                }
+                else if (authInfo.AuthMethod == AuthInfo.AuthMethodType.JwtBearer)
+                {
+                    LoginJwtBearer(authInfo.ClientId, authInfo.Username, authInfo.PrivateKeyFile, authInfo.TokenRequestEndpoint, authInfo.Audience, authInfo.ApiVersion).Wait();
                 }
                 else
                 {
@@ -123,6 +129,26 @@ namespace NetCoreForce.Client
             }
         }
 
+        /// <summary>
+        /// Login to Salesforce using the OAuth 2.0 JWT Bearer flow, and initialize the client
+        /// <para>Load a PEM key with <see cref="RsaPrivateKey.FromPemFile"/>, or use a certificate with its private key, e.g. <c>new X509Certificate2(path, password).GetRSAPrivateKey()</c></para>
+        /// </summary>
+        /// <param name="clientId">The Consumer Key from the connected app definition.</param>
+        /// <param name="username">The Salesforce username to log in as. The user must be pre-authorized for the app, or have previously approved it if the app allows users to self-authorize.</param>
+        /// <param name="privateKey">The RSA private key matching the certificate uploaded to the external client app or connected app. Not disposed by this method.</param>
+        /// <param name="tokenRequestEndpoint">Salesforce token request endpoint</param>
+        /// <param name="audience">Optional JWT audience (aud claim). Defaults to https://test.salesforce.com for a sandbox token endpoint, otherwise https://login.salesforce.com.</param>
+        /// <param name="apiVersion">Salesforce API version</param>
+        /// <param name="httpClient">Optional HttpClient object. Defaults to a shared static instance for best performance, but a custom HttpClient can be specified when custom properties are needed e.g. proxy settings.</param>
+        public static async Task<ForceClient> FromJwtBearerAsync(string clientId, string username, RSA privateKey, string tokenRequestEndpoint, string audience = null, string apiVersion = null, HttpClient httpClient = null)
+        {
+            using (AuthenticationClient authClient = new AuthenticationClient(apiVersion, httpClient))
+            {
+                await authClient.JwtBearerAsync(clientId, username, privateKey, tokenRequestEndpoint, audience).ConfigureAwait(false);
+                return new ForceClient(authClient.AccessInfo.InstanceUrl, authClient.ApiVersion, authClient.AccessInfo.AccessToken, httpClient, authClient.AccessInfo);
+            }
+        }
+
         private async Task Login(string clientId, string clientSecret, string username, string password, string tokenRequestEndpoint, string apiVersion = null, HttpClient httpClient = null)
         {
             using (AuthenticationClient authClient = new AuthenticationClient(apiVersion, httpClient))
@@ -138,6 +164,19 @@ namespace NetCoreForce.Client
             using (AuthenticationClient authClient = new AuthenticationClient(apiVersion, httpClient))
             {
                 await authClient.ClientCredentialsAsync(clientId, clientSecret, tokenRequestEndpoint).ConfigureAwait(false);
+
+                Initialize(authClient.AccessInfo.InstanceUrl, authClient.ApiVersion, authClient.AccessInfo.AccessToken, httpClient, authClient.AccessInfo);
+            }
+        }
+
+        private async Task LoginJwtBearer(string clientId, string username, string privateKeyFile, string tokenRequestEndpoint, string audience = null, string apiVersion = null, HttpClient httpClient = null)
+        {
+            if (string.IsNullOrEmpty(privateKeyFile)) throw new ArgumentNullException("privateKeyFile");
+
+            using (RSA privateKey = RsaPrivateKey.FromPemFile(privateKeyFile))
+            using (AuthenticationClient authClient = new AuthenticationClient(apiVersion, httpClient))
+            {
+                await authClient.JwtBearerAsync(clientId, username, privateKey, tokenRequestEndpoint, audience).ConfigureAwait(false);
 
                 Initialize(authClient.AccessInfo.InstanceUrl, authClient.ApiVersion, authClient.AccessInfo.AccessToken, httpClient, authClient.AccessInfo);
             }

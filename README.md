@@ -35,6 +35,7 @@ See the [Authentication](https://netcoreforce.com/auth.html) and [Examples](http
 - **Breaking:** record IDs and object/field names are validated to prevent URL path injection. Invalid values throw an `ArgumentException`.
 - Added .NET 10.0 and .NET Framework 4.8.1 targets
 - Added Client Credentials login flow, via `ForceClient.FromClientCredentialsAsync` and in the ModelGenerator
+- Added JWT Bearer login flow (v6.2), via `ForceClient.FromJwtBearerAsync`
 - Added `SoqlHelpers` for escaping untrusted values in SOQL and SOSL queries
 - External ID values are now URL-encoded in upserts
 - Default Salesforce API version is now v67.0

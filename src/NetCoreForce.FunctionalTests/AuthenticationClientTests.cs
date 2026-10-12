@@ -1,4 +1,5 @@
 using System;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Xunit;
 using NetCoreForce.Client;
@@ -203,6 +204,97 @@ namespace NetCoreForce.FunctionalTests
             // connected app - e.g. redirect_uri_mismatch is returned before the code is checked if the callback URL doesn't match
             Assert.False(string.IsNullOrEmpty(ex.ErrorCode));
             Assert.NotEqual("Unknown", ex.ErrorCode);
+        }
+
+        // The JWT Bearer flow needs the private key matching a certificate uploaded to the connected app,
+        // and the user pre-authorized for the app - see the README
+        private static bool JwtBearerConfigured(AuthInfo authInfo)
+        {
+            return !string.IsNullOrEmpty(authInfo.PrivateKeyFile) && !authInfo.PrivateKeyFile.StartsWith("optional");
+        }
+
+        private const string JwtBearerSkipReason = "No privateKeyFile configured in credentials_dev.json";
+
+        [Fact]
+        public async Task JwtBearerAsync()
+        {
+            AuthInfo authInfo = forceClientFixture.AuthInfo;
+
+            if (!JwtBearerConfigured(authInfo))
+            {
+#if XUNIT_V3
+                Assert.Skip(JwtBearerSkipReason);
+#else
+                Console.WriteLine("Skipping JwtBearerAsync - " + JwtBearerSkipReason);
+                return;
+#endif
+            }
+
+            AuthenticationClient auth = new AuthenticationClient(authInfo.ApiVersion);
+            using (RSA privateKey = RsaPrivateKey.FromPemFile(authInfo.PrivateKeyFile))
+            {
+                await auth.JwtBearerAsync(authInfo.ClientId, authInfo.Username, privateKey, authInfo.TokenRequestEndpoint, authInfo.Audience);
+            }
+
+            Assert.False(string.IsNullOrEmpty(auth.AccessInfo.AccessToken));
+            Assert.True(string.IsNullOrEmpty(auth.AccessInfo.RefreshToken)); //this flow does not return a refresh token
+
+            //the token is usable, and is for the requested user
+            ForceClient client = new ForceClient(auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken);
+            UserInfo userInfo = await client.GetUserInfo(auth.AccessInfo.Id);
+            Assert.Equal(authInfo.Username, userInfo.Username, ignoreCase: true);
+        }
+
+        [Fact]
+        public void ForceClient_JwtBearer()
+        {
+            AuthInfo authInfo = forceClientFixture.AuthInfo;
+
+            if (!JwtBearerConfigured(authInfo))
+            {
+#if XUNIT_V3
+                Assert.Skip(JwtBearerSkipReason);
+#else
+                Console.WriteLine("Skipping ForceClient_JwtBearer - " + JwtBearerSkipReason);
+                return;
+#endif
+            }
+
+            AuthInfo jwtAuthInfo = new AuthInfo
+            {
+                AuthMethod = AuthInfo.AuthMethodType.JwtBearer,
+                ClientId = authInfo.ClientId,
+                Username = authInfo.Username,
+                PrivateKeyFile = authInfo.PrivateKeyFile,
+                Audience = authInfo.Audience,
+                TokenRequestEndpoint = authInfo.TokenRequestEndpoint,
+                ApiVersion = authInfo.ApiVersion
+            };
+
+            ForceClient client = new ForceClient(jwtAuthInfo);
+
+            Assert.False(string.IsNullOrEmpty(client.AccessInfo.AccessToken));
+            Assert.False(string.IsNullOrEmpty(client.InstanceUrl));
+        }
+
+        [Fact]
+        public async Task JwtBearerAsync_UnregisteredKey()
+        {
+            AuthInfo authInfo = forceClientFixture.AuthInfo;
+
+            AuthenticationClient auth = new AuthenticationClient();
+
+            // a key that doesn't match the connected app's certificate - doesn't need the flow configured, and an error other than
+            // unsupported_grant_type shows Salesforce read grant_type and assertion from the request body
+            using (RSA privateKey = RSA.Create())
+            {
+                ForceAuthException ex = await Assert.ThrowsAsync<ForceAuthException>(
+                    async () => await auth.JwtBearerAsync(authInfo.ClientId, authInfo.Username, privateKey, authInfo.TokenRequestEndpoint, authInfo.Audience)
+                );
+
+                Assert.False(string.IsNullOrEmpty(ex.ErrorCode));
+                Assert.NotEqual("unsupported_grant_type", ex.ErrorCode);
+            }
         }
     }
 }

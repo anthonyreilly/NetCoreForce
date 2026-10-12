@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using NetCoreForce.Client;
 using NetCoreForce.Client.Models;
@@ -42,6 +43,10 @@ namespace NetCoreForce.Client.Tests
             await Assert.ThrowsAsync<ArgumentException>(() => auth.UsernamePasswordAsync("id", "secret", "user", "password", httpEndpoint));
             await Assert.ThrowsAsync<ArgumentException>(() => auth.WebServerAsync("id", "secret", "https://example.org/callback", "code", httpEndpoint));
             await Assert.ThrowsAsync<ArgumentException>(() => auth.ClientCredentialsAsync("id", "secret", httpEndpoint));
+            using (RSA key = RSA.Create())
+            {
+                await Assert.ThrowsAsync<ArgumentException>(() => auth.JwtBearerAsync("id", "user", key, httpEndpoint));
+            }
             await Assert.ThrowsAsync<ArgumentException>(() => auth.TokenRefreshAsync("refreshToken", "id", "secret", httpEndpoint));
             await Assert.ThrowsAsync<ArgumentException>(() => auth.IntrospectTokenAsync("token", "id", "secret", "http://login.salesforce.com/services/oauth2/introspect"));
         }
