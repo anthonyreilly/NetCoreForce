@@ -56,12 +56,27 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
-        /// The default aud claim for a token endpoint: https://test.salesforce.com for a sandbox, otherwise https://login.salesforce.com
-        /// <para>An Experience Cloud site must set the audience explicitly, to the site URL.</para>
+        /// The default aud claim for a token endpoint: the site URL for an Experience Cloud site (*.my.site.com),
+        /// https://test.salesforce.com for a sandbox, otherwise https://login.salesforce.com
+        /// <para>A site on a legacy *.force.com domain or a custom domain must set the audience explicitly, to the site URL.</para>
         /// </summary>
         internal static string DefaultAudience(string tokenRequestEndpointUrl)
         {
-            string host = new Uri(tokenRequestEndpointUrl).Host.ToLowerInvariant();
+            Uri endpoint = new Uri(tokenRequestEndpointUrl);
+            string host = endpoint.Host.ToLowerInvariant();
+
+            if (host.EndsWith(".my.site.com", StringComparison.Ordinal))
+            {
+                //the site URL, e.g. https://x.my.site.com/customers for https://x.my.site.com/customers/services/oauth2/token
+                string path = endpoint.AbsolutePath;
+                int servicesIndex = path.IndexOf("/services/oauth2/", StringComparison.OrdinalIgnoreCase);
+                if (servicesIndex >= 0)
+                {
+                    path = path.Substring(0, servicesIndex);
+                }
+
+                return string.Concat(endpoint.GetLeftPart(UriPartial.Authority), path.TrimEnd('/'));
+            }
 
             if (host == "test.salesforce.com" || host.EndsWith(".sandbox.my.salesforce.com", StringComparison.Ordinal))
             {

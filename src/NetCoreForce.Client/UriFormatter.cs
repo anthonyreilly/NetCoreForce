@@ -105,18 +105,29 @@ namespace NetCoreForce.Client
         /// <exception cref="ForceApiException">Thrown when the URL would resolve to a different host or resource</exception>
         internal static Uri NextRecordsUri(string instanceUrl, string nextRecordsUrl)
         {
-            Uri baseUri = BaseUri(instanceUrl);
+            Uri baseUri = InstanceBaseUri(instanceUrl);
 
-            if (!nextRecordsUrl.StartsWith(DataServicesPath, StringComparison.Ordinal) ||
-                !Uri.TryCreate(nextRecordsUrl, UriKind.Relative, out _))
+            // an Experience Cloud site instance URL has a path, e.g. /customers - requests must stay under /customers/services/data/
+            string pathPrefix = baseUri.AbsolutePath.TrimEnd('/');
+            string dataPath = pathPrefix + DataServicesPath;
+
+            // accept the URL with or without the site path
+            string path = nextRecordsUrl;
+            if (pathPrefix.Length > 0 && path.StartsWith(DataServicesPath, StringComparison.Ordinal))
+            {
+                path = pathPrefix + path;
+            }
+
+            if (!path.StartsWith(dataPath, StringComparison.Ordinal) ||
+                !Uri.TryCreate(path, UriKind.Relative, out _))
             {
                 throw new ForceApiException($"Unexpected nextRecordsUrl in query response: {nextRecordsUrl}");
             }
 
-            Uri uri = new Uri(baseUri, nextRecordsUrl);
+            Uri uri = new Uri(baseUri, path);
 
             if (uri.Scheme != baseUri.Scheme || uri.Authority != baseUri.Authority ||
-                !uri.AbsolutePath.StartsWith(DataServicesPath, StringComparison.Ordinal))
+                !uri.AbsolutePath.StartsWith(dataPath, StringComparison.Ordinal))
             {
                 throw new ForceApiException($"Unexpected nextRecordsUrl in query response: {nextRecordsUrl}");
             }
@@ -125,7 +136,20 @@ namespace NetCoreForce.Client
         }
 
         /// <summary>
+        /// The instance URL to resolve request URLs against - validated as HTTPS, without any query or fragment, and ending with a slash
+        /// <para>Keeps a path, e.g. an Experience Cloud site URL https://x.my.site.com/customers. Without the trailing slash,
+        /// resolving a relative URL would replace the last path segment.</para>
+        /// </summary>
+        internal static Uri InstanceBaseUri(string instanceUrl)
+        {
+            string baseUrl = ValidateHttpsUrl(instanceUrl, nameof(instanceUrl)).GetLeftPart(UriPartial.Path);
+
+            return new Uri(baseUrl.EndsWith("/", StringComparison.Ordinal) ? baseUrl : baseUrl + "/");
+        }
+
+        /// <summary>
         /// SF Base URI
+        /// <para>The instance URL can be an Experience Cloud site URL with a path, e.g. https://x.my.site.com/customers</para>
         /// </summary>
         /// <param name="instanceUrl"></param>
         public static Uri BaseUri(string instanceUrl)
@@ -135,7 +159,7 @@ namespace NetCoreForce.Client
             // e.g. https://na99.salesforce.com/services/data
 
             // trailing slash required in services/data/ so that URI combinations work as expected
-            return new Uri(ValidateHttpsUrl(instanceUrl, nameof(instanceUrl)), "services/data/");
+            return new Uri(InstanceBaseUri(instanceUrl), "services/data/");
         }
 
         /// <summary>
@@ -170,7 +194,7 @@ namespace NetCoreForce.Client
                 }
             }
 
-            Uri uri = new Uri(ValidateHttpsUrl(instanceUrl, nameof(instanceUrl)), $"services/apexrest/{apexResourceUrl}");
+            Uri uri = new Uri(InstanceBaseUri(instanceUrl), $"services/apexrest/{apexResourceUrl}");
 
             return uri;
         }
@@ -185,7 +209,7 @@ namespace NetCoreForce.Client
 
             // format: /
 
-            Uri uri = new Uri(ValidateHttpsUrl(instanceUrl, nameof(instanceUrl)), "services/data");
+            Uri uri = new Uri(InstanceBaseUri(instanceUrl), "services/data");
 
             return uri;
         }

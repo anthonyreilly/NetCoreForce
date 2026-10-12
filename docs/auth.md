@@ -107,9 +107,28 @@ using (RSA privateKey = certificate.GetRSAPrivateKey())
 }
 ```
 
-**Audience:** the JWT's `aud` claim defaults to `https://test.salesforce.com` when the token endpoint is `test.salesforce.com` or a sandbox My Domain (`*.sandbox.my.salesforce.com`), otherwise `https://login.salesforce.com`. For an Experience Cloud site, pass the site URL as `audience` (or set `AuthInfo.Audience`).
+**Audience:** the JWT's `aud` claim defaults to:
+- the site URL for an Experience Cloud site token endpoint (`*.my.site.com`), e.g. `https://your-domain.my.site.com/customers` for `https://your-domain.my.site.com/customers/services/oauth2/token`
+- `https://test.salesforce.com` when the token endpoint is `test.salesforce.com` or a sandbox My Domain (`*.sandbox.my.salesforce.com`)
+- otherwise `https://login.salesforce.com`
 
-For an Experience Cloud site user, the token response also includes the site URL and ID, in `auth.AccessInfo.SfdcSiteUrl` and `SfdcSiteId`.
+For a site on another domain, pass the site URL as `audience` (or set `AuthInfo.Audience`).
+
+**Experience Cloud sites:** a site user logs in through the site's token endpoint. The token response includes the site URL and ID, in `AccessInfo.SfdcSiteUrl` and `SfdcSiteId` - Connect REST API resources need the site ID. To send API requests through the site, use the site URL as the instance URL:
+```csharp
+AuthenticationClient auth = new AuthenticationClient();
+using (RSA privateKey = RsaPrivateKey.FromPemFile("server.key"))
+{
+    await auth.JwtBearerAsync("your-client-id", "site.user@example.com", privateKey, "https://your-domain.my.site.com/customers/services/oauth2/token");
+}
+
+ForceClient client = new ForceClient(auth.AccessInfo.SfdcSiteUrl ?? auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken);
+```
+
+Use the site's base URL (e.g. `https://your-domain.my.site.com/customers`), not a page URL such as `.../customers/s/`. Requests and query paging stay under the site path.
+
+> [!NOTE]
+> Query paging and composite requests through a site URL are covered by unit tests, but haven't been verified against a live Experience Cloud site.
 
 > [!NOTE]
 > This flow does not return a refresh token. Call it again for a new access token when the current one expires. Each call creates a new JWT with a unique ID (`jti` claim), which Salesforce uses to reject a replayed JWT.

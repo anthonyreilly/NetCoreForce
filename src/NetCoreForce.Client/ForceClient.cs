@@ -101,7 +101,8 @@ namespace NetCoreForce.Client
         /// <summary>
         /// Initialize the client using previously obtained access token and instance url, if using the AuthenticationClient separately.
         /// </summary>
-        /// <param name="instanceUrl">Identifies the Salesforce instance to which API calls should be sent.</param>
+        /// <param name="instanceUrl">Identifies the Salesforce instance to which API calls should be sent.
+        /// Can be an Experience Cloud site URL with a path, e.g. <see cref="AccessTokenResponse.SfdcSiteUrl"/> - use the site's base URL, not a page URL.</param>
         /// <param name="apiVersion">Salesforce API version</param>
         /// <param name="accessToken">Access token</param>
         /// <param name="httpClient">Optional HttpClient object. Defaults to a shared static instance for best performance, but a custom HttpClient can be specified when custom properties are needed e.g. proxy settings.</param>
@@ -137,7 +138,7 @@ namespace NetCoreForce.Client
         /// <param name="username">The Salesforce username to log in as. The user must be pre-authorized for the app, or have previously approved it if the app allows users to self-authorize.</param>
         /// <param name="privateKey">The RSA private key matching the certificate uploaded to the external client app or connected app. Not disposed by this method.</param>
         /// <param name="tokenRequestEndpoint">Salesforce token request endpoint</param>
-        /// <param name="audience">Optional JWT audience (aud claim). Defaults to https://test.salesforce.com for a sandbox token endpoint, otherwise https://login.salesforce.com.</param>
+        /// <param name="audience">Optional JWT audience (aud claim). Defaults to the site URL for an Experience Cloud site token endpoint (*.my.site.com), https://test.salesforce.com for a sandbox token endpoint, otherwise https://login.salesforce.com.</param>
         /// <param name="apiVersion">Salesforce API version</param>
         /// <param name="httpClient">Optional HttpClient object. Defaults to a shared static instance for best performance, but a custom HttpClient can be specified when custom properties are needed e.g. proxy settings.</param>
         public static async Task<ForceClient> FromJwtBearerAsync(string clientId, string username, RSA privateKey, string tokenRequestEndpoint, string audience = null, string apiVersion = null, HttpClient httpClient = null)

@@ -6,9 +6,12 @@
     - `AuthenticationClient.JwtBearerAsync` and `ForceClient.FromJwtBearerAsync` take an `RSA` private key, e.g. from a .pfx via `X509Certificate2.GetRSAPrivateKey()`
     - new `RsaPrivateKey.FromPem` / `FromPemFile` load an unencrypted PKCS#8 or PKCS#1 PEM key on all supported frameworks, including .NET Standard 2.0 and .NET Framework
     - new `AuthInfo.AuthMethodType.JwtBearer`, with `AuthInfo.PrivateKeyFile` and optional `AuthInfo.Audience`, for `new ForceClient(authInfo)`
-    - the audience defaults to `https://test.salesforce.com` for a test.salesforce.com or sandbox My Domain token endpoint, otherwise `https://login.salesforce.com`
+    - the audience defaults to the site URL for an Experience Cloud site token endpoint (`*.my.site.com`), `https://test.salesforce.com` for a test.salesforce.com or sandbox My Domain token endpoint, otherwise `https://login.salesforce.com`
     - each JWT has a unique ID (`jti` claim), so Salesforce rejects a replayed JWT
 * feat: AccessTokenResponse.SfdcSiteUrl and SfdcSiteId, returned for Experience Cloud site users
+* feat: an Experience Cloud site URL with a path (e.g. `https://your-domain.my.site.com/customers`) can be used as the ForceClient instance URL - all requests, including query paging, stay under the site path
+    - behavior change: a path in the instance URL is now kept. Previously the last path segment was dropped unless the URL ended with `/`. Use the site's base URL (e.g. `AccessInfo.SfdcSiteUrl`), not a page URL such as `.../customers/s`. Instance URLs without a path, e.g. `instance_url` from a token response, are unaffected
+    - composite subrequest URLs are unchanged (`/services/data/...`)
 * ModelGenerator: `--auth-method` only accepts the supported UsernamePassword and ClientCredentials methods
 * config: `*.pem`, `*.key` and `*.p12` files are gitignored, and packing fails if a `.pem`, `.key`, `.pfx` or `.p12` file is in a package
 * docs: JWT Bearer flow setup and usage

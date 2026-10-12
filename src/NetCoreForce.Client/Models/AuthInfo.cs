@@ -96,8 +96,8 @@ namespace NetCoreForce.Client.Models
 
         /// <summary>
         /// Optional JWT audience (aud claim) for the JWT Bearer auth method
-        /// <para>Defaults to https://test.salesforce.com for a test.salesforce.com or sandbox My Domain token endpoint, otherwise https://login.salesforce.com.
-        /// For an Experience Cloud site, use the site URL.</para>
+        /// <para>Defaults to the site URL for an Experience Cloud site token endpoint (*.my.site.com), https://test.salesforce.com for a test.salesforce.com or sandbox My Domain token endpoint, otherwise https://login.salesforce.com.
+        /// For a site on another domain, use the site URL.</para>
         /// </summary>
         [JsonProperty(PropertyName = "audience")]
         public string Audience { get; set; }

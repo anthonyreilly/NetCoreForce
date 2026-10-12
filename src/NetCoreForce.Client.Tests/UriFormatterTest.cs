@@ -394,6 +394,60 @@ namespace NetCoreForce.Client.Tests
             Assert.Throws<ForceApiException>(() => UriFormatter.NextRecordsUri(_instanceUrl, nextRecordsUrl));
         }
 
+        [Theory]
+        [InlineData("https://xxx.salesforce.com")]
+        [InlineData("https://xxx.salesforce.com/")]
+        [InlineData("https://xxx.salesforce.com?x=1#f")]
+        public void InstanceUrlWithoutPath(string instanceUrl)
+        {
+            Assert.Equal("https://xxx.salesforce.com/services/data/", UriFormatter.BaseUri(instanceUrl).AbsoluteUri);
+            Assert.Equal("https://xxx.salesforce.com/services/data", UriFormatter.Versions(instanceUrl).AbsoluteUri);
+            Assert.Equal("https://xxx.salesforce.com/services/apexrest/MyService", UriFormatter.ApexUri(instanceUrl, "MyService").AbsoluteUri);
+        }
+
+        [Theory]
+        [InlineData("https://example.my.site.com/customers")]
+        [InlineData("https://example.my.site.com/customers/")]
+        [InlineData("https://example.my.site.com/customers?x=1#f")]
+        public void SiteInstanceUrlKeepsPath(string instanceUrl)
+        {
+            // an Experience Cloud site URL has a path - previously the last segment was dropped unless it ended with a slash
+            const string site = "https://example.my.site.com/customers";
+
+            Assert.Equal($"{site}/services/data/", UriFormatter.BaseUri(instanceUrl).AbsoluteUri);
+            Assert.Equal($"{site}/services/data", UriFormatter.Versions(instanceUrl).AbsoluteUri);
+            Assert.Equal($"{site}/services/apexrest/MyService", UriFormatter.ApexUri(instanceUrl, "MyService").AbsoluteUri);
+            Assert.Equal($"{site}/services/data/v57.0/query?q=SELECT%20Id%20FROM%20Account", UriFormatter.Query(instanceUrl, _apiVersion, "SELECT Id FROM Account").AbsoluteUri);
+            Assert.Equal($"{site}/services/data/v57.0/sobjects/Account/001XXXXXXXXXXXXXXX", UriFormatter.SObjectRows(instanceUrl, _apiVersion, _sObjectName, _objectId).AbsoluteUri);
+            Assert.Equal($"{site}/services/data/v57.0/composite", UriFormatter.CompositeRequest(instanceUrl, _apiVersion).AbsoluteUri);
+            Assert.Equal($"{site}/services/data/v57.0/sobjects/Account/001XXXXXXXXXXXXXXX/body", UriFormatter.SObjectBlobRetrieve(instanceUrl, _apiVersion, _sObjectName, _objectId).AbsoluteUri);
+        }
+
+        [Theory]
+        [InlineData("/customers/services/data/v57.0/query/01gXXXXXXXXXXXXXXX-2000")]
+        [InlineData("/services/data/v57.0/query/01gXXXXXXXXXXXXXXX-2000")]
+        public void NextRecordsUriSiteInstance(string nextRecordsUrl)
+        {
+            // the site path is kept whether or not the response includes it
+            Uri result = UriFormatter.NextRecordsUri("https://example.my.site.com/customers", nextRecordsUrl);
+
+            Assert.Equal("https://example.my.site.com/customers/services/data/v57.0/query/01gXXXXXXXXXXXXXXX-2000", result.AbsoluteUri);
+        }
+
+        [Theory]
+        [InlineData("/other/services/data/v57.0/query/01gXXXXXXXXXXXXXXX-2000")]
+        [InlineData("/customers/../services/data/v57.0/query/01gXXXXXXXXXXXXXXX-2000")]
+        [InlineData("/customers/services/apexrest/Something")]
+        [InlineData("/customers/services/data/../apexrest/Something")]
+        [InlineData("/services/data/../apexrest/Something")]
+        [InlineData("https://evil.example/customers/services/data/v57.0/query/01gXXXXXXXXXXXXXXX-2000")]
+        [InlineData("//evil.example/customers/services/data/v57.0/query/01gXXXXXXXXXXXXXXX-2000")]
+        public void NextRecordsUriOffSiteThrows(string nextRecordsUrl)
+        {
+            // the access token must not follow the URL outside the site's services/data path
+            Assert.Throws<ForceApiException>(() => UriFormatter.NextRecordsUri("https://example.my.site.com/customers", nextRecordsUrl));
+        }
+
         //TODO: Auth URLs
 
 #pragma warning disable CS0618 // obsolete - still tested until removed

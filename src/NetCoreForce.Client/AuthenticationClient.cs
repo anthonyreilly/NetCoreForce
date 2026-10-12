@@ -329,8 +329,8 @@ namespace NetCoreForce.Client
         /// or, if the app allows users to self-authorize, have previously approved the app.</param>
         /// <param name="privateKey">The RSA private key matching the certificate uploaded to the app. Not disposed by this method.</param>
         /// <param name="tokenRequestEndpointUrl">Salesforce token request endpoint</param>
-        /// <param name="audience">Optional JWT audience (aud claim). Defaults to https://test.salesforce.com for a test.salesforce.com or sandbox My Domain endpoint,
-        /// otherwise https://login.salesforce.com. For an Experience Cloud site, use the site URL.</param>
+        /// <param name="audience">Optional JWT audience (aud claim). Defaults to the site URL for an Experience Cloud site token endpoint (*.my.site.com), https://test.salesforce.com for a test.salesforce.com or sandbox My Domain endpoint,
+        /// otherwise https://login.salesforce.com. For a site on another domain, use the site URL.</param>
         public async Task JwtBearerAsync(string clientId, string username, RSA privateKey, string tokenRequestEndpointUrl = TokenRequestEndpointUrl, string audience = null)
         {
             if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException("clientId");

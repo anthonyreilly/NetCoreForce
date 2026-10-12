@@ -116,7 +116,10 @@ namespace NetCoreForce.Client.Tests
         [InlineData("https://TEST.salesforce.com/services/oauth2/token", "https://test.salesforce.com")]
         [InlineData("https://mydomain.my.salesforce.com/services/oauth2/token", "https://login.salesforce.com")]
         [InlineData("https://mydomain--dev.sandbox.my.salesforce.com/services/oauth2/token", "https://test.salesforce.com")]
-        [InlineData("https://example.my.site.com/services/oauth2/token", "https://login.salesforce.com")]
+        [InlineData("https://example.my.site.com/services/oauth2/token", "https://example.my.site.com")]
+        [InlineData("https://example.my.site.com/customers/services/oauth2/token", "https://example.my.site.com/customers")]
+        [InlineData("https://example--dev.sandbox.my.site.com/customers/services/oauth2/token", "https://example--dev.sandbox.my.site.com/customers")]
+        [InlineData("https://example.my.site.com/customers/", "https://example.my.site.com/customers")]
         public void DefaultAudience(string tokenRequestEndpoint, string expectedAudience)
         {
             Assert.Equal(expectedAudience, JwtBearerAssertion.DefaultAudience(tokenRequestEndpoint));
