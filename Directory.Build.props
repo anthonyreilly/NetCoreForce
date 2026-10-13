@@ -18,7 +18,7 @@
     <PackageTags>salesforce;salesforce-api;sfdc;force.com;rest;crm;dotnet;csharp;netstandard</PackageTags>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/anthonyreilly/NetCoreForce</RepositoryUrl>
-    <PackageReleaseNotes>v6.2.0 adds the OAuth 2.0 JWT Bearer login flow for server-to-server integration. See the CHANGELOG for full details and breaking changes: https://github.com/anthonyreilly/NetCoreForce/blob/main/CHANGELOG.md</PackageReleaseNotes>
+    <PackageReleaseNotes>v6.2.0 adds the OAuth 2.0 JWT Bearer login flow for server-to-server integration, and PKCE for the Web Server flow. See the CHANGELOG for full details and breaking changes: https://github.com/anthonyreilly/NetCoreForce/blob/main/CHANGELOG.md</PackageReleaseNotes>
     <PackageIcon>netcoreforce_logo_128px.png</PackageIcon>
 
     <!-- Intentionally targeting EOL frameworks -->

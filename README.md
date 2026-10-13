@@ -36,6 +36,7 @@ See the [Authentication](https://netcoreforce.com/auth.html) and [Examples](http
 - Added .NET 10.0 and .NET Framework 4.8.1 targets
 - Added Client Credentials login flow, via `ForceClient.FromClientCredentialsAsync` and in the ModelGenerator
 - Added JWT Bearer login flow (v6.2), via `ForceClient.FromJwtBearerAsync`
+- Added PKCE support for the Web Server flow (v6.2), via `PkceChallenge`
 - Added `SoqlHelpers` for escaping untrusted values in SOQL and SOSL queries
 - External ID values are now URL-encoded in upserts
 - Default Salesforce API version is now v67.0

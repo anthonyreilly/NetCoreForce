@@ -1,6 +1,7 @@
 using NetCoreForce.Client.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text.RegularExpressions;
 
 namespace NetCoreForce.Client
@@ -652,7 +653,7 @@ namespace NetCoreForce.Client
             if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException(nameof(clientId));
             if (string.IsNullOrEmpty(redirectUrl)) throw new ArgumentNullException(nameof(redirectUrl));
 
-            //TODO: code_challenge, login_hint, nonce, prompt params
+            //TODO: login_hint, nonce, prompt params
 
             const ResponseTypes responseType = ResponseTypes.Code;
 
@@ -669,6 +670,26 @@ namespace NetCoreForce.Client
 
         /// <summary>
         /// Formats an authentication URL for the Web Server Authentication Flow
+        /// <para>Kept for binary compatibility - use the overload with the codeChallenge parameter.</para>
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static Uri WebServerAuthenticationUrl(
+            string loginUrl,
+            string clientId,
+            string redirectUrl,
+            DisplayTypes display,
+            bool immediate,
+            string scope,
+            string state
+            )
+        {
+            return WebServerAuthenticationUrl(loginUrl, clientId, redirectUrl, display, immediate, scope, state, null);
+        }
+
+        /// <summary>
+        /// Formats an authentication URL for the Web Server Authentication Flow
+        /// <para>For PKCE, recommended by Salesforce, create a <see cref="PkceChallenge"/> for each login and pass its <see cref="PkceChallenge.CodeChallenge"/> here,
+        /// then pass its <see cref="PkceChallenge.CodeVerifier"/> to <see cref="AuthenticationClient.WebServerAsync(string, string, string, string, string, string)"/>.</para>
         /// </summary>
         /// <param name="loginUrl">Required. Salesforce authorization endpoint.</param>
         /// <param name="clientId">Required. The Consumer Key from the connected app definition.</param>
@@ -677,6 +698,8 @@ namespace NetCoreForce.Client
         /// <param name="immediate">Determines whether the user should be prompted for login and approval. Default is false.</param>
         /// <param name="scope">OAuth scope - specifies what data your application can access</param>
         /// <param name="state">Specifies any additional URL-encoded state data to be returned in the callback URL after approval.</param>
+        /// <param name="codeChallenge">Optional PKCE code challenge, from <see cref="PkceChallenge.CodeChallenge"/>. Adds the code_challenge and code_challenge_method=S256 parameters.</param>
+        /// <exception cref="ArgumentException">The code challenge isn't base64url-encoded</exception>
         public static Uri WebServerAuthenticationUrl(
             string loginUrl,
             string clientId,
@@ -684,14 +707,16 @@ namespace NetCoreForce.Client
             DisplayTypes display = DisplayTypes.Page,
             bool immediate = false,
             string scope = "",
-            string state = ""
+            string state = "",
+            string codeChallenge = null
             )
         {
             if (string.IsNullOrEmpty(loginUrl)) throw new ArgumentNullException(nameof(loginUrl));
             if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException(nameof(clientId));
             if (string.IsNullOrEmpty(redirectUrl)) throw new ArgumentNullException(nameof(redirectUrl));
+            if (codeChallenge != null) PkceChallenge.ValidateValue(codeChallenge, nameof(codeChallenge));
 
-            //TODO: code_challenge, login_hint, nonce, prompt params
+            //TODO: login_hint, nonce, prompt params
 
             const ResponseTypes responseType = ResponseTypes.Code;
 
@@ -712,6 +737,12 @@ namespace NetCoreForce.Client
             if (!string.IsNullOrEmpty(state))
             {
                 prms.Add("state", state);
+            }
+
+            if (codeChallenge != null)
+            {
+                prms.Add("code_challenge", codeChallenge);
+                prms.Add("code_challenge_method", PkceChallenge.S256);
             }
 
             string url = QueryHelpers.AddQueryString(loginUrl, prms);

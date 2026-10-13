@@ -15,6 +15,8 @@ namespace NetCoreForce.Client.Tests
         const string ClientSecret = "CLIENTSECRET";
         const string CurrentRefreshToken = "currentRefreshToken";
         const string IntrospectEndpoint = "https://login.salesforce.com/services/oauth2/introspect";
+        const string RedirectUri = "https://example.org/callback";
+        const string CodeVerifier = "dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk";
         const string RefreshResponseContent = @"{ ""access_token"": ""newAccessToken"", ""instance_url"": ""https://na15.salesforce.com"", ""token_type"": ""Bearer"" }";
 
         [Fact]
@@ -134,6 +136,60 @@ namespace NetCoreForce.Client.Tests
             Assert.Equal(new Uri(IntrospectEndpoint), mockHandler.LastRequestUri);
             Assert.Equal("", mockHandler.LastRequestUri.Query);
             Assert.Equal("token=accessToken&client_id=CLIENTID&client_secret=CLIENTSECRET&format=json", mockHandler.LastRequestContent);
+        }
+
+        [Fact]
+        public async Task WebServerAsyncSendsCodeInBody()
+        {
+            // without PKCE the request is unchanged
+            MockHttpClientHandler mockHandler;
+            AuthenticationClient auth = CreateAuthenticationClient(TokenEndpoint, HttpStatusCode.OK, RefreshResponseContent, out mockHandler);
+
+            await auth.WebServerAsync(ClientId, ClientSecret, RedirectUri, "AUTHCODE");
+
+            Assert.Equal("newAccessToken", auth.AccessInfo.AccessToken);
+            Assert.Equal("", mockHandler.LastRequestUri.Query);
+            Assert.Equal("grant_type=authorization_code&client_id=CLIENTID&client_secret=CLIENTSECRET&redirect_uri=https%3A%2F%2Fexample.org%2Fcallback&code=AUTHCODE", mockHandler.LastRequestContent);
+        }
+
+        [Fact]
+        public async Task WebServerAsyncSendsCodeVerifier()
+        {
+            MockHttpClientHandler mockHandler;
+            AuthenticationClient auth = CreateAuthenticationClient(TokenEndpoint, HttpStatusCode.OK, RefreshResponseContent, out mockHandler);
+
+            await auth.WebServerAsync(ClientId, ClientSecret, RedirectUri, "AUTHCODE", TokenEndpoint, CodeVerifier);
+
+            Assert.Equal("grant_type=authorization_code&client_id=CLIENTID&client_secret=CLIENTSECRET&redirect_uri=https%3A%2F%2Fexample.org%2Fcallback&code=AUTHCODE&code_verifier=" + CodeVerifier, mockHandler.LastRequestContent);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        public async Task WebServerAsyncWithCodeVerifierOmitsEmptyClientSecret(string clientSecret)
+        {
+            // a public client, e.g. a desktop or mobile app, can't keep a secret and relies on PKCE instead
+            MockHttpClientHandler mockHandler;
+            AuthenticationClient auth = CreateAuthenticationClient(TokenEndpoint, HttpStatusCode.OK, RefreshResponseContent, out mockHandler);
+
+            await auth.WebServerAsync(ClientId, clientSecret, RedirectUri, "AUTHCODE", TokenEndpoint, CodeVerifier);
+
+            Assert.Equal("grant_type=authorization_code&client_id=CLIENTID&redirect_uri=https%3A%2F%2Fexample.org%2Fcallback&code=AUTHCODE&code_verifier=" + CodeVerifier, mockHandler.LastRequestContent);
+        }
+
+        [Fact]
+        public async Task WebServerAsyncValidatesArguments()
+        {
+            AuthenticationClient auth = CreateAuthenticationClient(HttpStatusCode.OK, RefreshResponseContent);
+
+            // the client secret is only optional with PKCE
+            ArgumentNullException secretEx = await Assert.ThrowsAsync<ArgumentNullException>(() => auth.WebServerAsync(ClientId, "", RedirectUri, "AUTHCODE"));
+            Assert.Equal("clientSecret", secretEx.ParamName);
+            await Assert.ThrowsAsync<ArgumentNullException>(() => auth.WebServerAsync(ClientId, "", RedirectUri, "AUTHCODE", TokenEndpoint));
+
+            ArgumentException verifierEx = await Assert.ThrowsAsync<ArgumentException>(() => auth.WebServerAsync(ClientId, ClientSecret, RedirectUri, "AUTHCODE", TokenEndpoint, "not+base64url="));
+            Assert.Equal("codeVerifier", verifierEx.ParamName);
+            await Assert.ThrowsAsync<ArgumentException>(() => auth.WebServerAsync(ClientId, ClientSecret, RedirectUri, "AUTHCODE", TokenEndpoint, ""));
         }
 
         [Fact]

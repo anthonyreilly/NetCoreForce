@@ -8,6 +8,12 @@
     - new `AuthInfo.AuthMethodType.JwtBearer`, with `AuthInfo.PrivateKeyFile` and optional `AuthInfo.Audience`, for `new ForceClient(authInfo)`
     - the audience defaults to the site URL for an Experience Cloud site token endpoint (`*.my.site.com`), `https://test.salesforce.com` for a test.salesforce.com or sandbox My Domain token endpoint, otherwise `https://login.salesforce.com`
     - each JWT has a unique ID (`jti` claim), so Salesforce rejects a replayed JWT
+* feat: PKCE (Proof Key for Code Exchange) for the Web Server flow, recommended by Salesforce for user logins - an intercepted authorization code can't be exchanged without the code verifier
+    - new `PkceChallenge.Create()` generates a random code verifier and its S256 code challenge
+    - `UriFormatter.WebServerAuthenticationUrl` has a new optional `codeChallenge` parameter, which adds `code_challenge` and `code_challenge_method=S256` to the URL
+    - `AuthenticationClient.WebServerAsync` has a new optional `codeVerifier` parameter. With a code verifier, the client secret is optional, for desktop and mobile apps that can't keep a secret
+    - the code challenge and verifier must be base64url-encoded - an `ArgumentException` is thrown for standard base64 (`+`, `/`, `=`)
+    - existing calls are unchanged. The previous signatures are kept for binary compatibility
 * feat: AccessTokenResponse.SfdcSiteUrl and SfdcSiteId, returned for Experience Cloud site users
 * feat: an Experience Cloud site URL with a path (e.g. `https://your-domain.my.site.com/customers`) can be used as the ForceClient instance URL - all requests, including query paging, stay under the site path
     - behavior change: a path in the instance URL is now kept. Previously the last path segment was dropped unless the URL ended with `/`. Use the site's base URL (e.g. `AccessInfo.SfdcSiteUrl`), not a page URL such as `.../customers/s`. Instance URLs without a path, e.g. `instance_url` from a token response, are unaffected

@@ -480,6 +480,24 @@ namespace NetCoreForce.Client.Tests
             //TODO: test with url-encoded state parameter
         }
 
+        [Fact]
+        public void WebServerAuthenticationUrlWithCodeChallenge()
+        {
+            string result = UriFormatter.WebServerAuthenticationUrl("https://login.salesforce.com/services/oauth2/authorize", "CLIENTID", "https://www.theredirectpage.com/callback",
+                codeChallenge: "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM").AbsoluteUri.ToString();
+
+            Assert.Equal("https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=CLIENTID&redirect_uri=https%3A%2F%2Fwww.theredirectpage.com%2Fcallback&display=page&immediate=false&code_challenge=E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM&code_challenge_method=S256", result);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw+cM=")] // standard base64, not base64url
+        public void WebServerAuthenticationUrlInvalidCodeChallengeThrows(string codeChallenge)
+        {
+            Assert.Throws<ArgumentException>(() => UriFormatter.WebServerAuthenticationUrl("https://login.salesforce.com/services/oauth2/authorize", "CLIENTID", "https://www.theredirectpage.com/callback",
+                codeChallenge: codeChallenge));
+        }
+
 #pragma warning disable CS0618 // obsolete - still tested until removed
         [Fact]
         public void IntrospectTokenUrl()

@@ -2,6 +2,7 @@ using NetCoreForce.Client.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
@@ -168,38 +169,61 @@ namespace NetCoreForce.Client
 
         /// <summary>
         /// Web Server OAuth Authentication Flow
-        /// <para>https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_understanding_web_server_oauth_flow.htm</para>
+        /// <para>Kept for binary compatibility - use the overload with the codeVerifier parameter.</para>
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Task WebServerAsync(string clientId, string clientSecret, string redirectUri, string code, string tokenRequestEndpointUrl)
+        {
+            return WebServerAsync(clientId, clientSecret, redirectUri, code, tokenRequestEndpointUrl, null);
+        }
+
+        /// <summary>
+        /// Web Server OAuth Authentication Flow - exchanges the authorization code from the browser login for access and refresh tokens
+        /// <para>https://help.salesforce.com/s/articleView?id=sf.remoteaccess_oauth_web_server_flow.htm</para>
+        /// <para>For PKCE, recommended by Salesforce, pass the <see cref="PkceChallenge.CodeVerifier"/> of the <see cref="PkceChallenge"/> whose code challenge
+        /// was used to build the authorization URL with <see cref="UriFormatter.WebServerAuthenticationUrl(string, string, string, DisplayTypes, bool, string, string, string)"/>.</para>
         /// </summary>
         /// <param name="clientId">The Consumer Key from the connected app definition.</param>
-        /// <param name="clientSecret">The Consumer Secret from the connected app definition. Required unless the Require Secret for Web Server Flow setting is not enabled in the connected app definition.</param>
+        /// <param name="clientSecret">The Consumer Secret from the connected app definition. Required, unless codeVerifier is set and the Require Secret for Web Server Flow setting is not enabled in the app, e.g. for a desktop or mobile app that can't keep a secret.</param>
         /// <param name="redirectUri">The Callback URL from the connected app definition.</param>
         /// <param name="code">Authorization code the consumer must use to obtain the access and refresh tokens.</param>
         /// <param name="tokenRequestEndpointUrl">Salesforce token request endpoint</param>
-        /// <returns><see cref="AccessTokenResponse" /></returns>
-        public async Task WebServerAsync(string clientId, string clientSecret, string redirectUri, string code, string tokenRequestEndpointUrl = TokenRequestEndpointUrl)
+        /// <param name="codeVerifier">Optional PKCE code verifier, from <see cref="PkceChallenge.CodeVerifier"/>. Required if a code challenge was included in the authorization URL.</param>
+        /// <exception cref="ArgumentException">The code verifier isn't base64url-encoded</exception>
+        /// <exception cref="ForceAuthException">Thrown if the authentication fails</exception>
+        public async Task WebServerAsync(string clientId, string clientSecret, string redirectUri, string code, string tokenRequestEndpointUrl = TokenRequestEndpointUrl, string codeVerifier = null)
         {
             if (string.IsNullOrEmpty(clientId)) throw new ArgumentNullException("clientId");
-            if (string.IsNullOrEmpty(clientSecret)) throw new ArgumentNullException("clientSecret");
+            //a public client using PKCE has no secret - otherwise a secret is required
+            if (string.IsNullOrEmpty(clientSecret) && codeVerifier == null) throw new ArgumentNullException("clientSecret");
             if (string.IsNullOrEmpty(redirectUri)) throw new ArgumentNullException("redirectUri");
             if (!Uri.IsWellFormedUriString(redirectUri, UriKind.Absolute)) throw new FormatException("redirectUri");
             if (string.IsNullOrEmpty(code)) throw new ArgumentNullException("code");
             if (string.IsNullOrEmpty(tokenRequestEndpointUrl)) throw new ArgumentNullException("tokenRequestEndpointUrl");
             UriFormatter.ValidateHttpsUrl(tokenRequestEndpointUrl, nameof(tokenRequestEndpointUrl));
+            if (codeVerifier != null) PkceChallenge.ValidateValue(codeVerifier, nameof(codeVerifier));
 
-            var content = new FormUrlEncodedContent(new[]
-                {
-                    new KeyValuePair<string, string>("grant_type", "authorization_code"),
-                    new KeyValuePair<string, string>("client_id", clientId),
-                    new KeyValuePair<string, string>("client_secret", clientSecret),
-                    new KeyValuePair<string, string>("redirect_uri", redirectUri),
-                    new KeyValuePair<string, string>("code", code)
-                });
+            var prms = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("grant_type", "authorization_code"),
+                new KeyValuePair<string, string>("client_id", clientId)
+            };
+            if (!string.IsNullOrEmpty(clientSecret))
+            {
+                prms.Add(new KeyValuePair<string, string>("client_secret", clientSecret));
+            }
+            prms.Add(new KeyValuePair<string, string>("redirect_uri", redirectUri));
+            prms.Add(new KeyValuePair<string, string>("code", code));
+            if (codeVerifier != null)
+            {
+                prms.Add(new KeyValuePair<string, string>("code_verifier", codeVerifier));
+            }
 
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(tokenRequestEndpointUrl),
-                Content = content
+                Content = new FormUrlEncodedContent(prms)
             };
 
             this.AccessInfo = await SendTokenRequestAsync<AccessTokenResponse>(request).ConfigureAwait(false);

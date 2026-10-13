@@ -150,25 +150,45 @@ Common errors, from the `ForceAuthException.ErrorCode`:
 
 Used when an end user needs to log in and grant consent interactively via a browser. This is a two-step flow.
 
-**Step 1:** Redirect the user to a consent URL, built with [`UriFormatter.WebServerAuthenticationUrl`](xref:NetCoreForce.Client.UriFormatter.WebServerAuthenticationUrl(System.String,System.String,System.String,NetCoreForce.Client.Models.DisplayTypes,System.Boolean,System.String,System.String)):
+Salesforce recommends using it with the Proof Key for Code Exchange (PKCE) extension, shown below. PKCE ties the authorization code to a secret code verifier that never leaves your app, so an intercepted code can't be exchanged for tokens.
+
+**Step 1:** Create a [`PkceChallenge`](xref:NetCoreForce.Client.PkceChallenge) and a random `state` value for each login, and keep both server-side, e.g. in the user's session. Then redirect the user to a consent URL, built with [`UriFormatter.WebServerAuthenticationUrl`](xref:NetCoreForce.Client.UriFormatter.WebServerAuthenticationUrl(System.String,System.String,System.String,NetCoreForce.Client.Models.DisplayTypes,System.Boolean,System.String,System.String,System.String)):
 ```csharp
+PkceChallenge pkce = PkceChallenge.Create();
+string state = Guid.NewGuid().ToString("N");
+// store pkce.CodeVerifier and state in the user's session
+
 Uri consentUrl = UriFormatter.WebServerAuthenticationUrl(
-    loginUrl: "https://login.salesforce.com/services/oauth2/authorize",
+    loginUrl: "https://your-domain.my.salesforce.com/services/oauth2/authorize",
     clientId: "your-client-id",
-    redirectUrl: "https://your-app.example.com/callback");
+    redirectUrl: "https://your-app.example.com/callback",
+    state: state,
+    codeChallenge: pkce.CodeChallenge);
 
 // redirect the user's browser to consentUrl
 ```
 
-**Step 2:** After the user approves, Salesforce redirects back to `redirectUrl` with a `code` query parameter. Exchange it for an access token with [`AuthenticationClient.WebServerAsync`](xref:NetCoreForce.Client.AuthenticationClient.WebServerAsync(System.String,System.String,System.String,System.String,System.String)):
+**Step 2:** After the user approves, Salesforce redirects back to `redirectUrl` with `code` and `state` query parameters. Check `state` matches the value stored in the session, to reject forged callbacks. Then exchange the code for an access token with [`AuthenticationClient.WebServerAsync`](xref:NetCoreForce.Client.AuthenticationClient.WebServerAsync(System.String,System.String,System.String,System.String,System.String,System.String)), passing the stored code verifier:
 ```csharp
 AuthenticationClient auth = new AuthenticationClient();
-await auth.WebServerAsync("your-client-id", "your-client-secret", "https://your-app.example.com/callback", code);
+await auth.WebServerAsync("your-client-id", "your-client-secret", "https://your-app.example.com/callback", code,
+    "https://your-domain.my.salesforce.com/services/oauth2/token", codeVerifier);
 
 ForceClient client = new ForceClient(auth.AccessInfo.InstanceUrl, auth.ApiVersion, auth.AccessInfo.AccessToken);
 ```
 
 Unlike the Username-Password flow, this flow does return a refresh token, available at `auth.AccessInfo.RefreshToken`.
+
+> [!NOTE]
+> A web app that can keep a secret should send both the client secret and the code verifier. A desktop or mobile app can't keep a secret: turn off **Require Secret for Web Server Flow** in the app, and pass an empty client secret with the code verifier. The client secret is only optional when a code verifier is passed.
+>
+> To require PKCE for every login, turn on **Require Proof Key for Code Exchange (PKCE) Extension for Supported Authorization Flows** in the external client app or connected app.
+
+PKCE is optional - to log in without it, leave out `codeChallenge` and `codeVerifier`.
+
+Common PKCE errors, from the `ForceAuthException.ErrorCode`:
+- `invalid_grant` - the authorization URL included a code challenge, but no code verifier was passed.
+- `invalid_request` - the code verifier doesn't match the code challenge, e.g. it's from a different login. Create a new `PkceChallenge` for each login, and use the verifier from the same one.
 
 ---
 

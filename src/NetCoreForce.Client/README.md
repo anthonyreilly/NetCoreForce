@@ -34,7 +34,7 @@ Other login flows (JWT Bearer, Web Server, refresh token, existing access token)
 
 ## Features
 
-- OAuth 2.0 login: Client Credentials, JWT Bearer, Web Server (authorization code), refresh token, Username-Password, and token introspection
+- OAuth 2.0 login: Client Credentials, JWT Bearer, Web Server (authorization code) with PKCE, refresh token, Username-Password, and token introspection
 - Create, read, update, delete and upsert by external ID
 - SOQL queries, including streaming large result sets with `QueryAsync` (`IAsyncEnumerable`)
 - SOSL search

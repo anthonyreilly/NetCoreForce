@@ -53,7 +53,7 @@ Log in with the Salesforce OAuth 2.0 flows - see [Authentication](auth.md).
 
 - **Client Credentials** - server-to-server login with a connected app, in one call with [`ForceClient.FromClientCredentialsAsync`](xref:NetCoreForce.Client.ForceClient.FromClientCredentialsAsync(System.String,System.String,System.String,System.String,System.Net.Http.HttpClient))
 - **JWT Bearer** - server-to-server login as an approved user with a certificate's private key, with [`ForceClient.FromJwtBearerAsync`](xref:NetCoreForce.Client.ForceClient.FromJwtBearerAsync(System.String,System.String,System.Security.Cryptography.RSA,System.String,System.String,System.String,System.Net.Http.HttpClient)) - no client secret or password
-- **Web Server (Authorization Code)** - exchange an authorization code from the browser login for access and refresh tokens, with helpers to build the authorization URL
+- **Web Server (Authorization Code)** - exchange an authorization code from the browser login for access and refresh tokens, with helpers to build the authorization URL and PKCE support via [`PkceChallenge`](xref:NetCoreForce.Client.PkceChallenge)
 - **Refresh tokens** - get a new access token without the user logging in again, including support for refresh token rotation
 - **Token introspection** - check whether an access token is still valid
 - **Existing access tokens** - create a client from a token obtained elsewhere
